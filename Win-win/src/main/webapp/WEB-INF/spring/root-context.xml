@@ -28,7 +28,7 @@
 		<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource" />
 			<property name="configLocation" value="classpath:mybatis-config.xml" /> <!-- classpath -> src/java, src/resrc 로 잡음  -->
-			<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" />
+			<property name="mapperLocations" value="classpath:/winwin/**/*DaoImpl.xml" />
 		</bean>
 		
 		<!-- MyBatis 인터페이스 설정(dao) -->
