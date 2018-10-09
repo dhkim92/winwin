@@ -4,14 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class GitTest {
+public class Seungri_test {
 
-	@RequestMapping(value="/")
-	public String gitTest() {
+	@RequestMapping(value="/seungri/test")
+	public void test() {
 		
-		return "gitTest";
 	}
-	
-	
-	
 }
