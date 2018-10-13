@@ -13,15 +13,15 @@ src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#btnLogin").click(function() {
-		location.href="/member/login";
+		location.href="/user/login";
 	});
 	
 	$("#btnLogout").click(function() {
-		location.href="/member/logout";
+		location.href="/user/logout";
 	});
 	
 	$("#btnJoin").click(function() {
-		location.href="/member/join";
+		location.href="/user/join";
 	});
 	
 	$("#timer").click(function() {
@@ -43,7 +43,7 @@ function counter_run() {
 	cnt--;
 	if(cnt < 0) {
 		clearInterval(tid);
-		self.location = "/member/logout";
+		self.location = "/user/logout";
 	}
 }
 

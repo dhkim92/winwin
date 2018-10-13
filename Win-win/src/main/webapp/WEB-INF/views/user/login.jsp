@@ -20,7 +20,7 @@
 <body>
 <h1>로그인페이지</h1>
 <hr>
-	<form action="/member/login" method="post" id="loginForm">
+	<form action="/user/login" method="post" id="loginForm">
 		아이디 : <input type="text"  id="userid" name="userid"><br>
 		 패스워드 : <input type="password" id="password" name="password" /><br>
 		 <input type="checkbox" id="rememberid" />아이디 저장
@@ -28,13 +28,13 @@
 	</form>
 	
 	<!-- 실제 서버로 전송되는 form -->
-	<form action="/member/login" method="post" id="hiddenForm">
+	<form action="/user/login" method="post" id="hiddenForm">
 	        <input type="hidden" name="userid" />
 	        <input type="hidden" name="password" />
 	</form>
 	
 	<br>
-	<a href="/member/main" role="button" aria-pressed="true">메인으로</a>
+	<a href="/user/main" role="button" aria-pressed="true">메인으로</a>
 	
 	
 	<script type="text/javascript">

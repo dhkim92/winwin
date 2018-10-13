@@ -13,41 +13,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import winwin.dto.Member;
+import winwin.dto.User;
 import winwin.dto.RSA;
-import winwin.service.MemberService;
+import winwin.service.UserService;
 import winwin.util.RSAUtil;
 
 @Controller
-public class MemberController {
+public class UserController {
 	
 	@Autowired
-	MemberService memberservice;
+	UserService userservice;
 	
 	private static final Logger logger =
-			LoggerFactory.getLogger(MemberController.class);
+			LoggerFactory.getLogger(UserController.class);
 	
 
-	@RequestMapping(value="/member/main", method=RequestMethod.GET)
+	@RequestMapping(value="/user/main", method=RequestMethod.GET)
 	public void main() {
 		logger.info("메인 페이지");
 	}
 	
-	@RequestMapping(value="/member/join", method=RequestMethod.GET)
+	@RequestMapping(value="/user/join", method=RequestMethod.GET)
 	public void join() {
 		logger.info("회원가입 페이지");
 	}
 	
-	@RequestMapping(value="/member/join", method=RequestMethod.POST)
-	public String joinProc(Member member) {
+	@RequestMapping(value="/user/join", method=RequestMethod.POST)
+	public String joinProc(User user) {
 		logger.info("회원가입 활성화");
-		logger.info(member.toString());
-		memberservice.join(member);
+		logger.info(user.toString());
+		userservice.join(user);
 		
-		return "redirect:/member/main";
+		return "redirect:/user/main";
 	}
 	
-	@RequestMapping(value="/member/login", method=RequestMethod.GET)
+	@RequestMapping(value="/user/login", method=RequestMethod.GET)
 	public void login(HttpSession session, Model model) {
 		logger.info("로그인 페이지");
 		
@@ -65,8 +65,8 @@ public class MemberController {
 		    session.setAttribute("RSAprivateKey", rsa.getPrivateKey());
 	}
 	
-	@RequestMapping(value="/member/login", method=RequestMethod.POST)
-	public String loginProc(Member member, HttpSession session,  RedirectAttributes ra) {
+	@RequestMapping(value="/user/login", method=RequestMethod.POST)
+	public String loginProc(User user, HttpSession session,  RedirectAttributes ra) {
 
 		logger.info("로그인 활성화");
 		
@@ -75,7 +75,7 @@ public class MemberController {
 				
 				if(key==null) {
 					ra.addFlashAttribute("resultMsg","비정상적인 접근입니다.");
-					return "redirect:/rsa/login";
+					return "redirect:/user/login";
 				}
 				
 				//session에 저장된 개인키 초기화
@@ -86,37 +86,37 @@ public class MemberController {
 				//아이디/비밀번호 복호화
 				try {
 		
-					String email = rsaUtil.getDecryptText(key, member.getUserid());
-					String password = rsaUtil.getDecryptText(key, member.getPassword());
+					String email = rsaUtil.getDecryptText(key, user.getUserid());
+					String password = rsaUtil.getDecryptText(key, user.getPassword());
 					
 					logger.info("복호화 한 email : " + email);
 					logger.info("복호화 한 password : " + password);
-					logger.info(member.toString());
-					member.setUserid(email);
-					member.setPassword(password);
-					boolean success = memberservice.login(member);
+					logger.info(user.toString());
+					user.setUserid(email);
+					user.setPassword(password);
+					boolean success = userservice.login(user);
 					
 					if(success==true) {
 						logger.info("email, password 일치!");
-						member = memberservice.info(member);
+						user = userservice.info(user);
 						session.setAttribute("login", true);
-						session.setAttribute("id", member.getUserid());
-						return "redirect:/member/main";
+						session.setAttribute("id", user.getUserid());
+						return "redirect:/user/main";
 					} else {
 						logger.info("email, password 불일치!");
-						return "redirect:/member/login";
+						return "redirect:/user/login";
 					}
 				} catch (Exception e) {
 					ra.addFlashAttribute("resultMsg", "비정상적인 접근입니다");
-					return "redirect:/member/login";
+					return "redirect:/user/login";
 				}
 
 	}
 
-	@RequestMapping(value="member/logout", method=RequestMethod.GET)
+	@RequestMapping(value="user/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
 		
-		return "redirect:/member/main";
+		return "redirect:/user/main";
 	}
 }
