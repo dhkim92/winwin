@@ -16,7 +16,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 
 @Autowired Apply2Dao dao;
 	
-	public JobopenBasic viewJopOpen(JobopenBasic jopopenBasic) {
+	public JobopenBasic viewJobOpen(JobopenBasic jopopenBasic) {
 		return dao.selectJobOpen(jopopenBasic);
 	}
 	
@@ -52,7 +52,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 		return dao.selectCareer(career);
 	}
 	
-	public void updateLanguage(Career career) {
+	public void updateCareer(Career career) {
 		dao.updateCareer(career);
 	}
 	
@@ -72,7 +72,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.insertExperience(experience);
 	}
 	
-	public Experience selectExperienxe(Experience experience) {
+	public Experience selectExperience(Experience experience) {
 		return dao.selectExperience(experience);
 	}
 	
@@ -103,4 +103,6 @@ public class Apply2ServiceImpl implements Apply2Service{
 	public void updateIntroduce(Introduce introduce) {
 		dao.updateIntroduce(introduce);
 	}
+
+
 }

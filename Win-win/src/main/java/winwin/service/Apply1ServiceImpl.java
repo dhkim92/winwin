@@ -1,8 +1,6 @@
 package winwin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import winwin.dao.Apply1Dao;
 import winwin.dto.Academic;
 import winwin.dto.JobopenBasic;
@@ -16,9 +14,10 @@ public class Apply1ServiceImpl implements Apply1Service {
 	@Autowired Apply1Dao dao;
 	
 
-	public JobopenBasic viewJopOpen(JobopenBasic jopopenBasic) {
+	public JobopenBasic viewJobOpen(JobopenBasic jopopenBasic) {
 		return dao.selectJobOpen(jopopenBasic);
 	}
+	
 	
 	public User viewUser(User user) {
 		return dao.selectUser(user);
@@ -58,5 +57,7 @@ public class Apply1ServiceImpl implements Apply1Service {
 	public void updateMilitary(Military military) {
 		dao.updateMilitary(military);
 	}
+
+
 	
 }
