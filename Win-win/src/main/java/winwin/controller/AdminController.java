@@ -16,6 +16,7 @@ import winwin.service.AdminService;
 @Controller
 public class AdminController {
 	// 테스트 주석
+	// 테스트 주석2
 	@Autowired
 	AdminService adminservice;
 
