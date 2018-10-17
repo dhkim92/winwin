@@ -32,7 +32,7 @@ public class Apply2Controller {
 	@RequestMapping(value="/career", method=RequestMethod.GET)
 	public void career(JobopenBasic jobopenBasic, HttpSession session, Model model) {
 		
-		apply2Service.viewJobOpen(jobopenBasic);
+//		apply2Service.viewJobOpen(jobopenBasic);
 		
 	}
 
@@ -126,7 +126,7 @@ public class Apply2Controller {
 	@RequestMapping(value="/introduce", method=RequestMethod.GET)
 	public void introduce(JobopenBasic jobopenBasic, Model model) {
 		
-		apply2Service.viewJobOpen(jobopenBasic);
+//		apply2Service.viewJobOpen(jobopenBasic);
 	}
 	
 	

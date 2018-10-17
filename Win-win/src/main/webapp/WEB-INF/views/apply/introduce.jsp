@@ -7,6 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<form>
+    <div class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12" >
+          <img src="../image/userDetail.png">
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
 </body>
 </html>
