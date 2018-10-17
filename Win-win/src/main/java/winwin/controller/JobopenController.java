@@ -1,8 +1,19 @@
 package winwin.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import winwin.dto.JobopenBasic;
+import winwin.dto.JobopenDetail;
+import winwin.service.JobopenService;
 
 /**
  * 
@@ -19,15 +30,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/jobOpen")
 public class JobopenController {
 	
+	@Autowired
+	JobopenService jobopenService;
+	
 	@RequestMapping(value="/basicInfo", method=RequestMethod.GET)
 	public void basic() {
 		
 	}
 	
 	@RequestMapping(value="/basicInfo", method=RequestMethod.POST)
-	public String basicProc(/*Basic basic*/) {
+	public String basicProc(JobopenBasic jobopenBasic) {
 		
-//		service.insert(Basic);
+		jobopenService.writeBasic(jobopenBasic);
 		
 		return "detailInfo";
 	}
@@ -38,25 +52,31 @@ public class JobopenController {
 	}
 	
 	@RequestMapping(value="/detailInfo", method=RequestMethod.POST)
-	public String detailProc(/*Basic basic, @RequestParam Detail[] detail*/) {
+	public String detailProc(JobopenBasic jobopenBasic, @RequestParam(value="jobopenDetail[]") List<JobopenDetail> jobopenDetail) {
 		
-//		service.update(Basic);
+		jobopenService.updateBasic(jobopenBasic);
 		
-//		for(int i=0;i<detail.size();i++){
-//		service.insert(detail.get(i));
-//		}
+		for(int i=0;i<jobopenDetail.size();i++){
+		jobopenService.writeDetail(jobopenDetail.get(i));
+		}
 		
 		return "register";
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public void regi(/*Model model*/) {
+	public void regi(Model model, HttpSession session) {
 		
-//		Basic basic = service.selectBasic(jobOpen);
-//		List<Detail> detail = service.selectDetail(jobOpen);
+		JobopenBasic jobopenBasic = new JobopenBasic();
+		JobopenDetail jobopenDetail = new JobopenDetail();
 		
-//		model.addAttribute("basic", basic);
-//		model.addAttribute("detail", detail);
+		jobopenBasic.setTitle((String)session.getAttribute("title"));
+		jobopenDetail.setTitle(jobopenBasic.getTitle());
+		
+		JobopenBasic basic = jobopenService.viewBasic(jobopenBasic);
+		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
+		
+		model.addAttribute("basic", basic);
+		model.addAttribute("detail", detail);
 	}
 	
 }
