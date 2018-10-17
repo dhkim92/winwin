@@ -5,58 +5,71 @@ public class Activity {
 	int activityId;
 	String userId;
 	int jobopenNo;
-	String name;
-	String startDate;
-	String endDate;
-	String content;
+	String aName;
+	String aStartDate;
+	String aEndDate;
+	String aContent;
 	
 	@Override
 	public String toString() {
-		return "Activity [activityId=" + activityId + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", name="
-				+ name + ", startDate=" + startDate + ", endDate=" + endDate + ", content=" + content + "]";
+		return "Activity [activityId=" + activityId + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", aName="
+				+ aName + ", aStartDate=" + aStartDate + ", aEndDate=" + aEndDate + ", aContent=" + aContent + "]";
 	}
-	
+
 	public int getActivityId() {
 		return activityId;
 	}
+
 	public void setActivityId(int activityId) {
 		this.activityId = activityId;
 	}
+
 	public String getUserId() {
 		return userId;
 	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getjobopenNo() {
+
+	public int getJobopenNo() {
 		return jobopenNo;
 	}
-	public void setjobopenNo(int jobopenNo) {
+
+	public void setJobopenNo(int jobopenNo) {
 		this.jobopenNo = jobopenNo;
 	}
-	public String getName() {
-		return name;
+
+	public String getaName() {
+		return aName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setaName(String aName) {
+		this.aName = aName;
 	}
-	public String getStartDate() {
-		return startDate;
+
+	public String getaStartDate() {
+		return aStartDate;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+
+	public void setaStartDate(String aStartDate) {
+		this.aStartDate = aStartDate;
 	}
-	public String getEndDate() {
-		return endDate;
+
+	public String getaEndDate() {
+		return aEndDate;
 	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+
+	public void setaEndDate(String aEndDate) {
+		this.aEndDate = aEndDate;
 	}
-	public String getContent() {
-		return content;
+
+	public String getaContent() {
+		return aContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public void setaContent(String aContent) {
+		this.aContent = aContent;
 	}
 	
 }

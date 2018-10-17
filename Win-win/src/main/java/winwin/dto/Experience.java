@@ -5,66 +5,81 @@ public class Experience {
 	int experienceNo;
 	String userId;
 	int jobopenNo;
-	String organ;
+	String eOrgan;
 	String option;
-	String startDate;
-	String endDate;
-	String content;
+	String eStartDate;
+	String eEndDate;
+	String eContent;
 	
 	@Override
 	public String toString() {
 		return "Experience [experienceNo=" + experienceNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo
-				+ ", organ=" + organ + ", option=" + option + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", content=" + content + "]";
+				+ ", eOrgan=" + eOrgan + ", option=" + option + ", eStartDate=" + eStartDate + ", eEndDate=" + eEndDate
+				+ ", eContent=" + eContent + "]";
 	}
-	
+
 	public int getExperienceNo() {
 		return experienceNo;
 	}
+
 	public void setExperienceNo(int experienceNo) {
 		this.experienceNo = experienceNo;
 	}
+
 	public String getUserId() {
 		return userId;
 	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getjobopenNo() {
+
+	public int getJobopenNo() {
 		return jobopenNo;
 	}
-	public void setjobopenNo(int jobopenNo) {
+
+	public void setJobopenNo(int jobopenNo) {
 		this.jobopenNo = jobopenNo;
 	}
-	public String getOrgan() {
-		return organ;
+
+	public String geteOrgan() {
+		return eOrgan;
 	}
-	public void setOrgan(String organ) {
-		this.organ = organ;
+
+	public void seteOrgan(String eOrgan) {
+		this.eOrgan = eOrgan;
 	}
+
 	public String getOption() {
 		return option;
 	}
+
 	public void setOption(String option) {
 		this.option = option;
 	}
-	public String getStartDate() {
-		return startDate;
+
+	public String geteStartDate() {
+		return eStartDate;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+
+	public void seteStartDate(String eStartDate) {
+		this.eStartDate = eStartDate;
 	}
-	public String getEndDate() {
-		return endDate;
+
+	public String geteEndDate() {
+		return eEndDate;
 	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+
+	public void seteEndDate(String eEndDate) {
+		this.eEndDate = eEndDate;
 	}
-	public String getContent() {
-		return content;
+
+	public String geteContent() {
+		return eContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public void seteContent(String eContent) {
+		this.eContent = eContent;
 	}
 	
 }

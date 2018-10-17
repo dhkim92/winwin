@@ -5,15 +5,15 @@ public class License {
 	int licenseNo;
 	String userId;
 	int jobopenNo;
-	String name;
+	String liName;
 	String grade;
-	String date;
-	String organ;
+	String liDate;
+	String liOrgan;
 	
 	@Override
 	public String toString() {
-		return "License [licenseNo=" + licenseNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", name=" + name
-				+ ", grade=" + grade + ", date=" + date + ", organ=" + organ + "]";
+		return "License [licenseNo=" + licenseNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", liName="
+				+ liName + ", grade=" + grade + ", liDate=" + liDate + ", liOrgan=" + liOrgan + "]";
 	}
 
 	public int getLicenseNo() {
@@ -32,20 +32,20 @@ public class License {
 		this.userId = userId;
 	}
 
-	public int getjobopenNo() {
+	public int getJobopenNo() {
 		return jobopenNo;
 	}
 
-	public void setjobopenNo(int jobopenNo) {
+	public void setJobopenNo(int jobopenNo) {
 		this.jobopenNo = jobopenNo;
 	}
 
-	public String getName() {
-		return name;
+	public String getLiName() {
+		return liName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLiName(String liName) {
+		this.liName = liName;
 	}
 
 	public String getGrade() {
@@ -56,20 +56,20 @@ public class License {
 		this.grade = grade;
 	}
 
-	public String getDate() {
-		return date;
+	public String getLiDate() {
+		return liDate;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setLiDate(String liDate) {
+		this.liDate = liDate;
 	}
 
-	public String getOrgan() {
-		return organ;
+	public String getLiOrgan() {
+		return liOrgan;
 	}
 
-	public void setOrgan(String organ) {
-		this.organ = organ;
+	public void setLiOrgan(String liOrgan) {
+		this.liOrgan = liOrgan;
 	}
-
+	
 }

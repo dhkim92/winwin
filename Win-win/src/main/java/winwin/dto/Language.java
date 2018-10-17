@@ -5,18 +5,18 @@ public class Language {
 	int languageNo;
 	String userId;
 	int jobopenNo;
-	String name;
+	String lName;
 	String level;
 	String testName;
 	String score;
-	String date;
-	String organ;
+	String lDate;
+	String lOrgan;
 	
 	@Override
 	public String toString() {
-		return "Language [languageNo=" + languageNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", name="
-				+ name + ", level=" + level + ", testName=" + testName + ", score=" + score + ", date=" + date
-				+ ", organ=" + organ + "]";
+		return "Language [languageNo=" + languageNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", lName="
+				+ lName + ", level=" + level + ", testName=" + testName + ", score=" + score + ", lDate=" + lDate
+				+ ", lOrgan=" + lOrgan + "]";
 	}
 
 	public int getLanguageNo() {
@@ -43,12 +43,12 @@ public class Language {
 		this.jobopenNo = jobopenNo;
 	}
 
-	public String getName() {
-		return name;
+	public String getlName() {
+		return lName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setlName(String lName) {
+		this.lName = lName;
 	}
 
 	public String getLevel() {
@@ -75,20 +75,20 @@ public class Language {
 		this.score = score;
 	}
 
-	public String getDate() {
-		return date;
+	public String getlDate() {
+		return lDate;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setlDate(String lDate) {
+		this.lDate = lDate;
 	}
 
-	public String getOrgan() {
-		return organ;
+	public String getlOrgan() {
+		return lOrgan;
 	}
 
-	public void setOrgan(String organ) {
-		this.organ = organ;
+	public void setlOrgan(String lOrgan) {
+		this.lOrgan = lOrgan;
 	}
 	
 }

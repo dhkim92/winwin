@@ -5,19 +5,19 @@ public class Career {
 	int careerNo;
 	String userId;
 	int jobopenNo;
-	String startDate;
-	String endDate;
-	String name;
+	String cStartDate;
+	String cEndDate;
+	String cName;
 	String position;
 	String task;
 	String salary;
-	String content;
+	String cContent;
 	
 	@Override
 	public String toString() {
-		return "Career [careerNo=" + careerNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", name=" + name + ", position=" + position + ", task=" + task
-				+ ", salary=" + salary + ", content=" + content + "]";
+		return "Career [careerNo=" + careerNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", cStartDate="
+				+ cStartDate + ", cEndDate=" + cEndDate + ", cName=" + cName + ", position=" + position + ", task="
+				+ task + ", salary=" + salary + ", cContent=" + cContent + "]";
 	}
 
 	public int getCareerNo() {
@@ -44,28 +44,28 @@ public class Career {
 		this.jobopenNo = jobopenNo;
 	}
 
-	public String getStartDate() {
-		return startDate;
+	public String getcStartDate() {
+		return cStartDate;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setcStartDate(String cStartDate) {
+		this.cStartDate = cStartDate;
 	}
 
-	public String getEndDate() {
-		return endDate;
+	public String getcEndDate() {
+		return cEndDate;
 	}
 
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setcEndDate(String cEndDate) {
+		this.cEndDate = cEndDate;
 	}
 
-	public String getName() {
-		return name;
+	public String getcName() {
+		return cName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 
 	public String getPosition() {
@@ -92,12 +92,12 @@ public class Career {
 		this.salary = salary;
 	}
 
-	public String getContent() {
-		return content;
+	public String getcContent() {
+		return cContent;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setcContent(String cContent) {
+		this.cContent = cContent;
 	}
 	
 }
