@@ -25,8 +25,8 @@ public class Apply1Controller {
 	@RequestMapping(value="/userDetail", method=RequestMethod.GET)
 	public void userDetail(JobopenBasic jobopenBasic, User user, HttpSession session, Model model) {
 		
-		apply1Service.viewJobOpen(jobopenBasic);
-		apply1Service.viewUser(user);
+//		apply1Service.viewJobOpen(jobopenBasic);
+//		apply1Service.viewUser(user);
 		
 	}
 
