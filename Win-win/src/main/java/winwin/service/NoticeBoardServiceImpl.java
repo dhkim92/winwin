@@ -3,12 +3,14 @@ package winwin.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import winwin.dao.NoticeBoardDao;
 import winwin.dto.File;
 import winwin.dto.NoticeBoard;
 import winwin.util.Paging;
 
+@Service
 public class NoticeBoardServiceImpl implements NoticeBoardService{
 
 	@Autowired NoticeBoardDao dao;

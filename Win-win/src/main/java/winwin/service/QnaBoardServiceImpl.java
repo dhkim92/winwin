@@ -3,12 +3,14 @@ package winwin.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import winwin.dao.QnaBoardDao;
 import winwin.dto.QnaBoard;
 import winwin.dto.QnaComment;
 import winwin.util.Paging;
 
+@Service
 public class QnaBoardServiceImpl implements QnaBoardService{
 
 	@Autowired QnaBoardDao dao;

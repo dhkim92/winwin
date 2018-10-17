@@ -3,10 +3,12 @@ package winwin.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import winwin.dto.ResultBoard;
 import winwin.util.Paging;
 
+@Service
 public class ResultBoardServiceImpl implements ResultBoardService{
 	
 	@Autowired ResultBoardService dao;

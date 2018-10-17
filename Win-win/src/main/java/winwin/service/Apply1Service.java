@@ -1,7 +1,5 @@
 package winwin.service;
 
-import org.springframework.stereotype.Service;
-
 import winwin.dto.Academic;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Military;

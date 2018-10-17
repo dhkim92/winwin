@@ -1,9 +1,11 @@
 package winwin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import winwin.dao.ChartDao;
 
+@Service
 public class ChartServiceImpl implements ChartService{
 
 	@Autowired ChartDao dao;

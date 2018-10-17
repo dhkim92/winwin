@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="../jobOpen/include/CSSLoader.jsp"%>
+
+<style>
+</style>
+<%@ include file="../jobOpen/include/header.jsp"%>
 
 
-
-</head>
-<body>
-<h1>회원가입 페이지</h1>
-<hr>
 <form action="/user/join" method="post">
 		한글이름 : <input type="text" name="username"><br>
 		이메일 주소 : <input type="email" name="userid">
@@ -22,5 +17,14 @@
 	</form>
 	<br>
 	<a href="/user/main" role="button" aria-pressed="true">메인으로</a>
-</body>
-</html>
+
+	
+<%@ include file="../jobOpen/include/scriptLoader.jsp"%>
+
+<script>
+
+
+
+</script>
+
+<%@ include file="../jobOpen/include/footer.jsp"%>

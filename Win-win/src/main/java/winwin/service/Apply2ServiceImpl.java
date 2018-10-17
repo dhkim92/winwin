@@ -1,6 +1,7 @@
 package winwin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import winwin.dao.Apply2Dao;
 import winwin.dto.Activity;
@@ -12,6 +13,7 @@ import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
 import winwin.dto.License;
 
+@Service
 public class Apply2ServiceImpl implements Apply2Service{
 
 @Autowired Apply2Dao dao;
