@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../jobOpen/include/CSSLoader.jsp"%>
+<%@ include file="../include/CSSLoader.jsp"%>
 
 <style>
 </style>
-<%@ include file="../jobOpen/include/header.jsp"%>
+<%@ include file="../include/header.jsp"%>
 
 
 <form action="/user/join" method="post">
@@ -19,7 +19,7 @@
 	<a href="/user/main" role="button" aria-pressed="true">메인으로</a>
 
 	
-<%@ include file="../jobOpen/include/scriptLoader.jsp"%>
+<%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
 
@@ -27,4 +27,4 @@
 
 </script>
 
-<%@ include file="../jobOpen/include/footer.jsp"%>
+<%@ include file="../include/footer.jsp"%>
