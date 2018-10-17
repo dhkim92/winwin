@@ -25,11 +25,7 @@ public class ResultBoardController {
 
 	@RequestMapping(value="/result/list")
 	public void list(Model m,HttpServletRequest req) {
-		int total = service.totalCnt();
-		int curr =Integer.parseInt(req.getParameter("curPage"));
-		Paging paging = new Paging(total, curr);
-		List<ResultBoard> list = service.list(paging);
-		m.addAttribute("list", list);
+		
 	}
 	
 	@RequestMapping(value="/result/send", method=RequestMethod.GET)
