@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="include/CSSLoader.jsp"%>
+<%@ include file="../include/CSSLoader.jsp"%>
 
 <style>
 .box{
@@ -59,12 +59,11 @@
     
 </style>
 
-<%@ include file="include/header.jsp"%>
+<%@ include file="../include/header.jsp"%>
 
 
 <div class="container">
 	<div class="row border border-secondary m-3">		
-<<<<<<< HEAD
 		<div  class="box red"></div>
 		<div class="triangle-right-red"></div>
 		<div class="box"></div>
@@ -79,7 +78,6 @@
 </div>
 
 <div class="container-fluid">
-
 	<div class="row justify-content-center">
 		<div class="col-auto">
 			<div class="border p-5">채용 공고 만들기 입니다.   채용의 목적에 맞게 내용을 작성해주세요.</div>
@@ -137,19 +135,19 @@
 			    		</div>
 			    	</div>
 			    </div>
-			    
-=======
-		<div  class="box red">기본정보</div>
-		<div class="triangle-right-red"></div>
-		<div class="box">세부정보</div>
-		<div class="line"></div>
-		<div>등록하기</div>
-	</div>
+			</form>
+			<div  class="box red">기본정보</div>
+			<div class="triangle-right-red"></div>
+			<div class="box">세부정보</div>
+			<div class="line"></div>
+			<div>등록하기</div>
+		</div>
 	
-	<div class="row clearfix m-2">
-		<div class="col-9"></div>
-		<div class="col-3"> 사원 코드 : 123456789<br>
-							사원 이름 : 김동현</div>
+		<div class="row clearfix m-2">
+			<div class="col-9"></div>
+			<div class="col-3"> 사원 코드 : 123456789<br>
+								사원 이름 : 김동현</div>
+		</div>
 	</div>
 </div>
 
@@ -241,7 +239,6 @@
 			    <div class="form-inline mr-5 d-flex justify-content-center" >
 			    	<button id="btnOk" class="btn btn-info mr-3">저장하고 계속하기</button><button type="button" id="btnCancel" class="btn btn-secondary">취소</button>
 			    </div>
->>>>>>> branch 'donghyun' of https://github.com/dhkim92/Win-win.git
 			</form>
 		</div>
 	</div>
@@ -249,7 +246,7 @@
 
 
 
-<%@ include file="include/scriptLoader.jsp"%>
+<%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
 
@@ -257,4 +254,4 @@
 
 </script>
 
-<%@ include file="include/footer.jsp"%>
+<%@ include file="../include/footer.jsp"%>

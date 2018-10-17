@@ -21,8 +21,17 @@ public interface JobopenService {
 	public void writeDetail(JobopenDetail jobopenDetail);
 	
 	//---
+	/**
+	 * 모집요강 리스트 가져오기(jsp에서 테이블로 뿌리기위함)
+	 * @param jobopenDetail
+	 * @return List
+	 */
 	public List<JobopenDetail> selectDetail(JobopenDetail jobopenDetail);
 	
+	/**
+	 * 기본정보 업데이트하기 (세부정보 페이지 것)
+	 * @param jobopenBasic
+	 */
 	public void updateBasic(JobopenBasic jobopenBasic);
 	//---
 	
