@@ -11,7 +11,7 @@
 			<a href="/user/join"><span class="badge badge-pill badge-primary mt-3" style="background-color: #376092">회원가입</span></a>
 		</div>
 		
-	    <h1><strong>WIN-WIN</strong></h1>
+	    <p class="font-weight-bold h1">WIN-WIN</p>
 		<ul class="nav justify-content-end mb-2" >	
 		  <li class="nav-item" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 		    <div class="font-weight-bold ml-3">채용정보</div>
