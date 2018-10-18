@@ -103,7 +103,7 @@
 								style="width: 456px; background-color: #fff;">공고명을 선택해
 								주십시오!</button>
 							<div class="dropdown-menu" aria-labelledby="titledrop">
-								<a class="dropdown-item" href="#!">Action</a> <a
+								<a class="dropdown-item" id="test" href="#!">Action</a> <a
 									class="dropdown-item" href="#!">Another action</a>
 							</div></td>
 
@@ -111,20 +111,8 @@
 				</tbody>
 			</table>
 
-
 		</div>
 	</div>
-
-	<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
 
 
 	<div class="row">
@@ -188,7 +176,7 @@
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
-	
+
 </script>
 
 <%@ include file="../include/footer.jsp"%>
