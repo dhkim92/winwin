@@ -154,6 +154,14 @@
 
 <script>
 
+$(document).ready(function() {
+	
+	$("#btnLogin").click(function() {
+		location.href="/user/login";
+	});
+	
+});
+
 </script>
 
 <%@ include file="../include/footer.jsp"%>

@@ -48,7 +48,7 @@
 								<strong>이메일 주소</strong>
 							</td>
 							<td>
-								<input type="text" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
+								<input type="email" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
 								id="userid" name="userid" placeholder="이메일을 입력하시오.">
 							</td>
 						</tr>
