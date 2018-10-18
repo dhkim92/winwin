@@ -59,7 +59,7 @@
 								<option>고등학교 졸업</option>
 								<option>학력 무관</option>
 						</select></td>
-						<td class="text-center" style="width: 15%"><select multiple
+						<td class="text-center" style="width: 10%"><select multiple
 							class="form-control" id="credit">
 								<option>2.0 이상</option>
 								<option>2.5 이상</option>
@@ -67,13 +67,13 @@
 								<option>3.5 이상</option>
 								<option>4.0 이상</option>
 						</select></td>
-						<td class="text-center" style="width: 10%"><select multiple
+						<td class="text-center" style="width: 15%"><select multiple
 							class="form-control" id="language">
-								<option>토익</option>
-								<option>토플</option>
-								<option>탭스</option>
-								<option>토스</option>
-								<option>오픽</option>
+								<option>TOEIC</option>
+								<option>TOEFL</option>
+								<option>TEPS</option>
+								<option>TOEIC Speaking</option>
+								<option>OPIC</option>
 						</select></td>
 						<td style="width: 12%"><select multiple class="form-control"
 							id="score">
@@ -96,17 +96,20 @@
 						<th class="text-center" colspan="1"
 							style="background-color: #eee; padding: 0px; line-height: 2.5;">
 							공고명</th>
-						<td colspan="6"><button
-								class="dropdown btn btn-secondary dropdown-toggle" type="button"
-								id="dropdowntitle" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false"
-								style="width: 456px; background-color: #fff;">공고명을 선택해
-								주십시오!</button>
-							<div class="dropdown-menu" aria-labelledby="titledrop">
-								<a class="dropdown-item" id="test" href="#!">Action</a> <a
-									class="dropdown-item" href="#!">Another action</a>
-							</div></td>
-
+						<td colspan="6"><select class="custom-select" style=width:457px;
+							id="living" name="living">
+								<option value="0" style="width: 457px">공고명을 선택해 주십시오!</option>
+								<option style=width:457px;>아파트</option>
+								<option style=width:457px;>빌라</option>
+								<option style=width:457px;>주택</option>
+								<option style=width:457px;>원룸</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td colspan="7" style="height: 80px"><button
+								class="btn float-right btn-primary	"
+								style="margin-right: 15px; margin-top: 35px">선택된 조건
+								검색하기</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -176,7 +179,7 @@
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
-
+	
 </script>
 
 <%@ include file="../include/footer.jsp"%>
