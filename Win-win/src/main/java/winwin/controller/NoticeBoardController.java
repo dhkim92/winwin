@@ -26,11 +26,11 @@ public class NoticeBoardController {
 
 	@RequestMapping(value="/notice/list")
 	public void list(Model m,HttpServletRequest req) {
-		int total = service.totalCnt();
-		int curr =Integer.parseInt(req.getParameter("curPage"));
-		Paging paging = new Paging(total, curr);
-		List<NoticeBoard> list = service.list(paging);
-		m.addAttribute("list", list);
+//		int total = service.totalCnt();
+//		int curr =Integer.parseInt(req.getParameter("curPage"));
+//		Paging paging = new Paging(total, curr);
+//		List<NoticeBoard> list = service.list(paging);
+//		m.addAttribute("list", list);
 	}
 	
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
