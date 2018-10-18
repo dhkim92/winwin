@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp"%>
 
-<!-- javascropt lib load -->
-		<script src="/resources/jsbn.js"></script>
-		<script src="/resources/rsa.js"></script>
-		<script src="/resources/prng4.js"></script>
-		<script src="/resources/rng.js"></script>	
-		<script src="/resources/login.js"></script>
 
 <style>
 .cols {
@@ -82,7 +76,7 @@
 				<div class="col-12 mt-2 text-center">
 					<button type="submit" id="login_button" class="btn btn-primary btn-sm mr-3"
 						style="width: 70px;">로그인</button>
-					<button type="button" class="btn btn-primary btn-sm ml-2"
+					<button type="button" id="btnJoin" class="btn btn-primary btn-sm ml-2"
 						style="width: 70px;">회원가입</button>
 				</div>
 			</form>
@@ -125,7 +119,24 @@
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
+<!-- javascropt lib load -->
+<script src="/resources/jsbn.js"></script>
+<script src="/resources/rsa.js"></script>
+<script src="/resources/prng4.js"></script>
+<script src="/resources/rng.js"></script>	
+<script src="/resources/login.js"></script>
+
+
 <script>
+
+$(document).ready(function() {
+	
+	$("#btnJoin").click(function() {
+		location.href="/user/join";
+	});
+	
+});
+
 var $userid = $("#hiddenForm input[name='userid']");
 var $password = $("#hiddenForm input[name='password']");
 

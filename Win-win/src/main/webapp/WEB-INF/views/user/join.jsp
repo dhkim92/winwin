@@ -1,106 +1,93 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="../include/CSSLoader.jsp"%>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="/resources/jquery.cookie.js"></script>
+<style>
+
+</style>
+
+<%@ include file="../include/header.jsp"%>
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-12 mt-5">
+			<h1 class="font-weight-bold">회원가입</h1>
+			<hr style="border: solid #376092;">
+		</div>
 		
-		<!-- javascropt lib load -->
-		<script src="/resources/jsbn.js"></script>
-		<script src="/resources/rsa.js"></script>
-		<script src="/resources/prng4.js"></script>
-		<script src="/resources/rng.js"></script>	
-		<script src="/resources/login.js"></script>
+		<div class="col-12 mt-4">
+			<p class="font-weight-bold h3" style="line-height: 200%;">신규회원가입</p>
+			<p class="font-weight-light h6" style="line-height: 200%;">본 사이트는 개인정보보호법 계정에 때라 회원가입에 
+				필요한 다음의 최소 항목만을 수집합니다.</p>
+			<p class="font-weight-light h6" style="line-height: 200%;">이메일 주소는 본인의 회원 ID로 등록되며, 전화번호는 아이디를 분실하셨을 
+				경우에 꼭 필요하니, 반드시 입력하시기 바랍니다.(필수항목)</p>
+				<hr style="background-color:#333">
+		</div>
+		
+		<div class="col-12 mt-1 mb-5 text-right">
+			<i class="fas fa-check" style="color: red;"></i> 
+			<strong>표시 항목은 필수 입력 항목입니다.</strong>
+		</div>
+		
+		
+		<div class="col-12 mt-3">
+		<p class="font-weight-bold h5" style="line-height: 200%;">회원 가입 정보</p>
+			<form action="/user/login" method="post" id="loginForm">
+				<table class="table table-sm">
+					<tbody>
+						<tr>
+							<th scope="row" class="cols align-middle">
+								<i class="fas fa-check" style="color: red;"></i>
+							</th>
+							<td class="cols2 align-middle">
+								<strong>이메일 주소</strong>
+							</td>
+							<td>
+								<input type="text" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
+								id="userid" name="userid" placeholder="이메일을 입력하시오.">
+							</td>
+						</tr>
+						<tr>
+							<th scope="row" class="cols align-middle">
+								<i class="fas fa-check" style="color: red;"></i>
+							</th>
+							<td class="cols2 align-middle">
+								<strong>비밀번호</strong>
+							</td>
+							<td><input type="password" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
+								id="password" name="password" placeholder="패스워드">
+							</td>
+						</tr>
+						<tr>
+							<th scope="row" class="text-right">
+								<input class="form-check-input" type="checkbox" id="rememberid">
+							</th>
+							<td>
+								<strong>아이디저장하기</strong>
+							</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="col-12 mt-2 text-center">
+					<button type="submit" id="login_button" class="btn btn-primary btn-sm mr-3"
+						style="width: 70px;">로그인</button>
+					<button type="button" id="btnJoin" class="btn btn-primary btn-sm ml-2"
+						style="width: 70px;">회원가입</button>
+				</div>
+			</form>
+		</div>
+		
+		
+	</div>
+</div>
 
-</head>
-<body>
-<h1>로그인페이지</h1>
-<hr>
-	<form action="/user/login" method="post" id="loginForm">
-		아이디 : <input type="text"  id="userid" name="userid"><br>
-		 패스워드 : <input type="password" id="password" name="password" /><br>
-		 <input type="checkbox" id="rememberid" />아이디 저장
-		<input type="submit" id="login_button" value="로그인" /> 
-	</form>
-	
-	<!-- 실제 서버로 전송되는 form -->
-	<form action="/user/login" method="post" id="hiddenForm">
-	        <input type="hidden" name="userid" />
-	        <input type="hidden" name="password" />
-	</form>
-	
-	<br>
-	<a href="/user/main" role="button" aria-pressed="true">메인으로</a>
-	
-	
-	<script type="text/javascript">
-    var $userid = $("#hiddenForm input[name='userid']");
-    var $password = $("#hiddenForm input[name='password']");
- 
-    // Server로부터 받은 공개키 입력
-    var rsa = new RSAKey();
-    rsa.setPublic("${modulus}", "${exponent}");
- 
-    $("#loginForm").submit(function(e) {
-        // 실제 유저 입력 form은 event 취소
-        // javascript가 작동되지 않는 환경에서는 유저 입력 form이 submit 됨
-        // -> Server 측에서 검증되므로 로그인 불가
-        e.preventDefault();
- 
-        // 아이디/비밀번호 암호화 후 hidden form으로 submit
-        var userid = $(this).find("#userid").val();
-        var password = $(this).find("#password").val();
-        $userid.val(rsa.encrypt(userid)); // 아이디 암호화
-        $password.val(rsa.encrypt(password)); // 비밀번호 암호화
-        $("#hiddenForm").submit();
-    });	
-	
 
-		$(function() {
+<%@ include file="../include/scriptLoader.jsp"%>
 
-			var userid = $.cookie('userid');
-			if (userid != undefined) {
-				$("#userid").val(userid);
-				$("#rememberid").prop("checked", true);
-			}
+<script>
 
-			//로그인 버튼 클릭시
-			$("#login_button").click(function() {
-				//아이디 미입력시
-				if ($.trim($("#userid").val()) == "") {
-					alert("아이디를 입력하세요");
-					return;
-					//아이디 입력시
-				} else if($.trim($("#password").val()) == ""){
-					alert("비밀번호를 입력하세요");
-					return;
-				} else{
-					//아이디저장 체크되어있으면 쿠키저장
-					if ($("#rememberid").prop("checked")) {
-						$.cookie('userid', $("#userid").val());
-						//아이디저장 미체크면 쿠키에 정보가 있던간에 삭제
-					} else {
-						$.removeCookie("userid");
-					}
-				}
-			})
+</script>
 
-			$.cookie('쿠키명', '쿠키값', {
-				//쿠키보관일
-				expires : 5
-				//도메인
-				,
-				domain : 'http://hellogk.tistory.com'
-				//https/http 결정
-				,
-				secure : false
-			});
-
-		});
-	</script>
-</body>
-</html>
+<%@ include file="../include/footer.jsp"%>
