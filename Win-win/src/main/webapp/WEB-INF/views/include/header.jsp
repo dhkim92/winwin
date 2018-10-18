@@ -14,13 +14,13 @@
 	    <p class="font-weight-bold h1">WIN-WIN</p>
 		<ul class="nav justify-content-end mb-2" >	
 		  <li class="nav-item" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-		    <div class="font-weight-bold ml-3">채용정보</div>
+		    <div class="font-weight-bold ml-3" style="cursor: pointer">채용정보</div>
 		  </li>
 		  <li class="nav-item" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-		    <div class="font-weight-bold ml-3">입사지원</div>
+		    <div class="font-weight-bold ml-3" style="cursor: pointer">입사지원</div>
 		  </li>
 		  <li class="nav-item" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-		    <div class="font-weight-bold ml-3">채용문의</div>
+		    <div class="font-weight-bold ml-3" style="cursor: pointer">채용문의</div>
 		  </li>
 		</ul>
 		
