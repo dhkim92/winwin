@@ -17,6 +17,7 @@
 <%@ include file="../include/header.jsp"%>
 
 <div class="container">
+<div class="container">
 	<div class="row">
 
 		<div class="col-12 mt-5">
@@ -112,7 +113,7 @@
 			</table>
 		</div>
 
-
+	</div>
 	</div>
 </div>
 
