@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp"%>
 
+</head>
+<body>
+
 <div class="container">
 	<div>
 		<div class="text-right">
@@ -42,6 +45,3 @@
 		
 	</div>	
 </div>
-
-</head>
-<body>
