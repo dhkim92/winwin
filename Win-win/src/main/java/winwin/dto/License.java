@@ -6,14 +6,13 @@ public class License {
 	String userId;
 	int jobopenNo;
 	String liName;
-	String grade;
 	String liDate;
 	String liOrgan;
 	
 	@Override
 	public String toString() {
 		return "License [licenseNo=" + licenseNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", liName="
-				+ liName + ", grade=" + grade + ", liDate=" + liDate + ", liOrgan=" + liOrgan + "]";
+				+ liName + ", liDate=" + liDate + ", liOrgan=" + liOrgan + "]";
 	}
 
 	public int getLicenseNo() {
@@ -46,14 +45,6 @@ public class License {
 
 	public void setLiName(String liName) {
 		this.liName = liName;
-	}
-
-	public String getGrade() {
-		return grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
 	}
 
 	public String getLiDate() {
