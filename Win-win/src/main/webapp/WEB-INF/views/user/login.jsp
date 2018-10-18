@@ -70,7 +70,7 @@
 						</tr>
 						<tr>
 							<th scope="row" class="text-right">
-								<input class="form-check-input" type="checkbox" id="userid">
+								<input class="form-check-input" type="checkbox" id="rememberid">
 							</th>
 							<td>
 								<strong>아이디저장하기</strong>
@@ -80,7 +80,7 @@
 					</tbody>
 				</table>
 				<div class="col-12 mt-2 text-center">
-					<button type="submit" class="btn btn-primary btn-sm mr-3"
+					<button type="submit" id="login_button" class="btn btn-primary btn-sm mr-3"
 						style="width: 70px;">로그인</button>
 					<button type="button" class="btn btn-primary btn-sm ml-2"
 						style="width: 70px;">회원가입</button>
