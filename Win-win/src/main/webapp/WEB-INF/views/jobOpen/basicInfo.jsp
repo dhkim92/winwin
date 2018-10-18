@@ -5,9 +5,18 @@
 <style>
 .box{
 	float: left;
-	width: 280px;
-	height: 134px;
+	width: 190px;
+	height: 100px;
 	display :inline-block;
+    line-height: 6.4em;
+}
+
+.boxm{
+	float:left;
+	width:160px;
+	height:100px;
+	display:inline-block;
+	line-height:6.4em;
 }
 
 .noticeBox{
@@ -19,8 +28,12 @@
 	line-height: 200px;
 	font-family: inherit;
 	color: blue;
-	
+}
 
+.size{
+	display:inline-block;
+	margin:1em;
+	border:1px solid black;
 }
 
 .enter{
@@ -30,13 +43,13 @@
 .red {
 	background-color: red;
 }
-.triangle-right-red {
+.triangle-right-primary {
 	float: left;	
       width: 0;
       height: 0;
-      border-top: 67px solid transparent;
-      border-left: 67px solid red;
-      border-bottom: 67px solid transparent;
+      border-top: 50px solid transparent;
+      border-left: 50px solid #376092;
+      border-bottom: 50px solid transparent;
 }
 .triangle-right-white {
 	float: left;
@@ -49,25 +62,28 @@
 
 .line {
 	float : left;
-	border-top : 1px solid gray;
-	border-right: 1px solid gray;
-	width:6em;
-	height:6em;
+	border-top : 1px solid #376092;
+	border-right: 1px solid #376092;
+	width:4.7em;
+	height:4.75em;
 	transform: scale(1) rotate(45deg) translateX(10px) translateY(10px);
-	margin:5px;
 }
     
+
 </style>
 
 <%@ include file="../include/header.jsp"%>
 
 
 <div class="container">
-	<div class="row border border-secondary m-3">		
-		<div  class="box red"></div>
-		<div class="triangle-right-red"></div>
-		<div class="box"></div>
-		<div class="line"></div>
+	<div class="row m-3 justify-content-center">
+		<div style="width: 680px; height: 101px; border:1px solid #376092;">
+			<div class="box text-light text-center" style="background-color: #376092"><strong>기본정보</strong></div>
+			<div class="triangle-right-primary"></div>
+			<div class="boxm text-primary text-center pl-5"><strong>세부정보</strong></div>
+			<div class="line"></div>
+			<div class="box text-primary text-center"><strong>등록하기</strong></div>
+		</div>		
 	</div>
 	
 	<div class="row clearfix m-2">
@@ -78,165 +94,124 @@
 </div>
 
 <div class="container-fluid">
+
 	<div class="row justify-content-center">
 		<div class="col-auto">
-			<div class="border p-5">채용 공고 만들기 입니다.   채용의 목적에 맞게 내용을 작성해주세요.</div>
+			<div class="border border-info text-info p-5">채용 공고 만들기 입니다.   채용의 목적에 맞게 내용을 작성해주세요.</div>
 		</div>
 	</div>
 
+			
+			
 	<div class="row justify-content-center mt-5">
-		<div class="col-8 border">
+		<div class="col-8">
 			<form action="/jobOpen/basicInfo" method="post">
 				<div class="form-inline m-3">
-				    <div class="col-4">
+				    <div class="col-2">
 				      <label for="title">공고 제목</label>
 				    </div>
-				    <div class="col-8">
-				      <input type="text" id="title" class="form-control w-100" name="title"/>
+				    <div class="col-10">
+				      <input type="text" id="title" class="form-control" style="width:680px" name="title"/>
 				    </div>
 			    </div>
 			    
 				<div class="form-inline m-3">
-				    <div class="col-4">
+				    <div class="col-2">
 				      	<label>모집 구분</label>
 				    </div>
-				    <div class="col-8">
+				    <div class="col-2">
 				    	<div class="form-check-inline">
-					    	<input type="checkbox" class="form-check-input" id="classify_new">
+					    	<input type="checkbox" class="form-check-input" id="classify_new" checked>
 							<label class="form-check-label" for="classify_new">신입</label>
 						</div>
+					</div>
+					<div class="col-2">
 						<div class="form-check-inline">
 							<input type="checkbox" class="form-check-input" id="classify_exp">
 							<label class="form-check-label" for="classify_exp">경력</label>
 						</div>
 				    </div>
+			    </div>
+			    
+			    <div class="form-inline m-3 mt-4">
+			    	<div class="col-2">
+			    		<label>고용 형태</label>
+			    	</div>
+			    	<div class="col-2">
+			    		<div class="form-check-inline">
+			    			<input type="checkbox" class="form-check-input" id="permanent" checked>
+							<label class="form-check-label" for="permanent">정규직</label>
+			    		</div>
+			    	</div>
+			    	<div class="col-2">
+			    		<div class="form-check-inline">
+			    			<input type="checkbox" class="form-check-input" id="contract">
+							<label class="form-check-label" for="contract">계약직</label>
+			    		</div>
+			    	</div>
+			    	<div class="col-2">
+			    		<div class="form-check-inline">
+			    			<input type="checkbox" class="form-check-input" id="intern">
+							<label class="form-check-label" for="intern">인턴</label>
+			    		</div>
+			    	</div>
+			    	<div class="col-2">
+			    		<div class="form-check-inline">
+			    			<input type="checkbox" class="form-check-input" id="military">
+							<label class="form-check-label" for="military">병역특례</label>
+			    		</div>
+			    	</div>
+			    </div>
+
+			    
+			    <div class="form-inline m-3">
+			    	<div class="col-2">
+			    		<label>급&emsp;&emsp;&nbsp;여</label>
+			    	</div>
+			    	<div class="col-3" >
+			    		<div class="form-check-inline">
+			    			<input type="checkbox" class="form-check-input" id="rulPay" checked>
+							<label class="form-check-label" for="rulPay">회사 내규에 따름</label>
+			    		</div>
+			    	</div>
+			    	<div class="col-7">
+			    		<div class="form-check-inline">
+			    			<a id="payCheck" style="cursor:pointer; text-decoration: underline;" class="m-2 text-black-50">급여 지정하기</a>
+			    			<!-- 급여지정 지웠다 켜졌다 하기 -->
+			    			<div id="pay" style="visibility: hidden;">
+			    				<input type="number" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
+			    				~
+			    				<input type="number" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
+			    			</div>
+			    		</div>
+			    	</div>
 			    </div>
 			    
 			    <div class="form-inline m-3">
-			    	<div class="col-4">
-			    		<label>고용 형태</label>
+			    	<div class="col-2">
+			    		<label>접수 기간</label>
 			    	</div>
-			    	<div class="col-8">
+			    	<div class="col-3" >
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="permanent">
-							<label class="form-check-label" for="permanet">정규직</label>
-			    		</div>
-			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="contract">
-							<label class="form-check-label" for="contract">계약직</label>
-			    		</div>
-			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="intern">
-							<label class="form-check-label" for="intern">인턴</label>
-			    		</div>
-			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="military">
-							<label class="form-check-label" for="military">병역특례</label>
+			    			<input type="checkbox" class="form-check-input" id="allOpen" checked>
+							<label class="form-check-label" for="allOpen">상시 채용</label>
 			    		</div>
 			    	</div>
-			    </div>
-			</form>
-			<div  class="box red">기본정보</div>
-			<div class="triangle-right-red"></div>
-			<div class="box">세부정보</div>
-			<div class="line"></div>
-			<div>등록하기</div>
-		</div>
-	
-		<div class="row clearfix m-2">
-			<div class="col-9"></div>
-			<div class="col-3"> 사원 코드 : 123456789<br>
-								사원 이름 : 김동현</div>
-		</div>
-	</div>
-</div>
-
-<div class="container-fluid">
-
-	<div class="row justify-content-center">
-		<div class="col-auto">
-			<div class="border border-info p-5"><span class="text-info">채용 공고 만들기 입니다.   채용의 목적에 맞게 내용을 작성해주세요.</span></div>
-		</div>
-	</div>
-
-	<div class="row justify-content-center mt-5">
-		<div class="col-8 border">
-			<form action="/jobOpen/basicInfo" method="post">
-				<div class="form-inline mt-3 mb-3">
-				    <div class="col-4">
-				      <label for="title">공고 제목</label>
-				    </div>
-				    <div class="col-8">
-				      <input type="text" id="title" class="form-control w-100" name="title"/>
-				    </div>
-			    </div>
-			    
-				<div class="form-inline mt-4 mb-4">
-				    <div class="col-4">
-				      	<label>모집 구분</label>
-				    </div>
-				    <div class="col-8">
-				    	<div class="form-check-inline">
-					    	<input type="checkbox" class="form-check-input" id="classify_new">
-							<label class="form-check-label" for="classify_new">신입</label>
-						</div>
-						<div class="form-check-inline">
-							<input type="checkbox" class="form-check-input" id="classify_exp">
-							<label class="form-check-label" for="classify_exp">경력</label>
-						</div>
-				    </div>
-			    </div>
-			    
-			    <div class="form-inline mt-3 mb-3">
-			    	<div class="col-4">
-			    		<label>고용 형태</label>
-			    	</div>
-			    	<div class="col-8">
+			    	<div class="col-7">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="permanent">
-							<label class="form-check-label" for="permanet">정규직</label>
-			    		</div>
-			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="contract">
-							<label class="form-check-label" for="contract">계약직</label>
-			    		</div>
-			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="intern">
-							<label class="form-check-label" for="intern">인턴</label>
-			    		</div>
-			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="military">
-							<label class="form-check-label" for="military">병역특례</label>
-			    		</div>
-			    	</div>
-			    </div>
-			    
-			    <div class="form-inline mb-3 mt-3">
-			    	<div class="col-4">
-			    		<label>급	여</label>
-			    	</div>
-			    	<div class="col-8">
-			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="rulPay">
-							<label class="form-check-label" for="rulPay">회사 내규에 따름</label>
-			    		</div>
-			    		
-			    		<div class="form-check-inline">
-			    			<a href="#" style="text-decoration: underline;" class="m-2 text-secondary">급여 지정하기</a>
-			    			<!-- 급여지정 지웠다 켜졌다 하기 -->
-			    			<div class="pay">
-			    				<input type="number" class="form-control"/> 만원
+			    			<a id="openCheck" style="cursor:pointer; text-decoration: underline;" class="m-2 text-black-50">날짜 지정하기</a>
+			    			<!-- 날짜지정 지웠다 켜졌다 하기 -->
+			    			<div id="open" style="visibility: hidden;">
+			    				<input name="startDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
 			    				~
-			    				<input type="number" class="form-control"/> 만원
+			    				<input name="endDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
 			    			</div>
-			    			
 			    		</div>
-			    		
 			    	</div>
 			    </div>
 			    
 			    
-			    <div class="form-inline mr-5 d-flex justify-content-center" >
+			    <div class="form-inline mt-5 d-flex justify-content-center" >
 			    	<button id="btnOk" class="btn btn-info mr-3">저장하고 계속하기</button><button type="button" id="btnCancel" class="btn btn-secondary">취소</button>
 			    </div>
 			</form>
@@ -250,6 +225,51 @@
 
 <script>
 
+$(document).ready(function(){
+	
+	$("#payCheck").click(function(){
+		if($('#pay').css('visibility') == 'hidden'){
+			    $('#pay').css('visibility','visible');
+			    $('#rulPay').prop("checked",false);
+			   
+		} else {
+			    $('#pay').css('visibility','hidden');
+			    $('#pay input').val("");
+			    $('#rulPay').prop("checked",true);
+		}
+	});
+	
+	$('input[type="checkbox"][id="rulPay"]').change(function(){
+		if($(this).is(":checked")){
+			$('#pay').css('visibility','hidden');
+			$('#pay input').val("");
+		}
+	});
+	
+	
+	
+	$("#openCheck").click(function(){
+		if($('#open').css('visibility') == 'hidden'){
+			    $('#open').css('visibility','visible');
+			    $('#allOpen').prop("checked",false);
+			   
+		} else {
+			    $('#open').css('visibility','hidden');
+			    $('#open input').val("");
+			    $('#allOpen').prop("checked",true);
+		}
+	});
+	
+	$('input[type="checkbox"][id="allOpen"]').change(function(){
+		if($(this).is(":checked")){
+			$('#open').css('visibility','hidden');
+			$('#open input').val("");
+		}
+	});
+	
+	
+	
+});
 
 
 </script>
