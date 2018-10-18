@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../include/CSSLoader.jsp"%>
+<%@ include file="../include/header.jsp"%>
 <div class="container">
 	<div class="row">
 	<div class="col-12">
@@ -88,12 +89,16 @@
       </select></td>
     </tr>
     <tr>
-    <th class="text-center" colspan="1"> 공고명  </th>
-    <td class="dropdown" colspan="6" style=padding:0px;><button class="btn btn-secondary dropdown-toggle"
-          type="button" id="dropdownMenu1" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-     공고 제목을 선택해 주십시오!
-  </button></td>
+    <th class="text-center" colspan="1" style="background-color:#eee; padding:0px;"> 공고명  </th>
+    <td class="dropdown" colspan="6"><button class="btn btn-secondary dropdown-toggle"
+          type="button" id="dropdowntitle" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" style=" width:456px; background-color:#fff;">
+     공고명을 선택해 주십시오!
+  </button>
+  <div class="dropdown-menu" aria-labelledby="titledrop">
+    <a class="dropdown-item" href="#!">Action</a>
+    <a class="dropdown-item" href="#!">Another action</a>
+  </div></td>
     
     </tr>
 </tbody>
@@ -161,7 +166,6 @@
 
 <style>
 </style>
-<%@ include file="../include/header.jsp"%>
 
 
 
