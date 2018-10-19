@@ -25,11 +25,11 @@ public class QnaBoardController {
 	
 	@RequestMapping(value="/qna/list")
 	public void list(Model m,HttpServletRequest req) {
-		int total = service.totalCnt();
-		int curr =Integer.parseInt(req.getParameter("curPage"));
-		Paging paging = new Paging(total, curr);
-		List<QnaBoard> list = service.list(paging);
-		m.addAttribute("list", list);
+//		int total = service.totalCnt();
+//		int curr =Integer.parseInt(req.getParameter("curPage"));
+//		Paging paging = new Paging(total, curr);
+//		List<QnaBoard> list = service.list(paging);
+//		m.addAttribute("list", list);
 	}
 	
 	@RequestMapping(value="/qna/view", method=RequestMethod.GET)
