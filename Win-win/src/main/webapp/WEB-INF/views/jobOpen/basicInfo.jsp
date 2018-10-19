@@ -72,7 +72,7 @@
 
 </style>
 
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/adminHeader.jsp"%>
 
 
 <div class="container">
