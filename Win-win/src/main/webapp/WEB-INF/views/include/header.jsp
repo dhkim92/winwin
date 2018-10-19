@@ -1,15 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 </head>
 <body>
 
 <div class="container">
 	<div>
+	
+	    <c:if test="${empty login }">
 		<div class="text-right">
 			<a href="/user/login"><span class="badge badge-pill badge-primary mt-3 " style="background-color: #376092">로그인</span></a>
 			<a href="/user/join"><span class="badge badge-pill badge-primary mt-3" style="background-color: #376092">회원가입</span></a>
 		</div>
+		</c:if>
+		
+		<c:if test="${login }">
+		<div class="text-right">
+			<a href="/user/logout"><span class="badge badge-pill badge-primary mt-3 " style="background-color: #376092">로그아웃</span></a>
+		</div>
+		</c:if>
 		
 	    <p class="font-weight-bold h1"><a href="/main/usermain" style="color:black; text-decoration: none">WIN-WIN</a></p>
 		<ul class="nav justify-content-end mb-2" >	

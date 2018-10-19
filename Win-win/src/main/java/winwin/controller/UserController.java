@@ -101,7 +101,7 @@ public class UserController {
 						user = userservice.info(user);
 						session.setAttribute("login", true);
 						session.setAttribute("id", user.getUserid());
-						return "redirect:/user/main";
+						return "redirect:/main/usermain";
 					} else {
 						logger.info("email, password 불일치!");
 						return "redirect:/user/login";
@@ -135,8 +135,8 @@ public class UserController {
 	
 	@RequestMapping(value="user/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
+		logger.info("로그아웃 성공");
 		session.invalidate();
-		
-		return "redirect:/user/main";
+		return "redirect:/user/login";
 	}
 }

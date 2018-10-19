@@ -46,7 +46,7 @@ public class AdminController {
 		return "redirect:/admin/adminLogin";
 	}
 	
-	@RequestMapping(value="/admin/adminLogout", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/adminLogout", method=RequestMethod.GET)
 	public String adminLogout(HttpSession session) {
 		logger.info("관리자 로그아웃");
 		session.invalidate();
