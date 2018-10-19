@@ -36,8 +36,8 @@
 			</div>
 				<div class="mt-1" style="height:2px; width:150px; background-color: lightgrey" ></div>
 			
-			<ul>
-				<li class="mt-3 mb-3" style="font-size: 14px">신입 IT 개발자 채용</li>
+			<ul class="mt-3">
+				<li class="mb-3" style="font-size: 14px">신입 IT 개발자 채용</li>
 				<li class="mb-3" style="font-size: 14px">경력 FRONT 디자이너 채용</li>
 				<li class="mb-3" style="font-size: 14px">인턴 채용 연계형 개발자 채용</li>
 				<li class="mb-3" style="font-size: 14px">신입 안드로이드 앱 개발자 채용</li>
@@ -55,8 +55,8 @@
 			</div>
 				<div class="mt-1" style="height:2px; width:150px; background-color: lightgrey" ></div>
 			
-			<ul>
-				<li class="mt-3 mb-3" style="font-size: 14px">2018 하반기 채용공지</li>
+			<ul class="mt-3">
+				<li class="mb-3" style="font-size: 14px">2018 하반기 채용공지</li>
 				<li class="mb-3" style="font-size: 14px">경력사원 채용 공고 안내</li>
 				<li class="mb-3" style="font-size: 14px">2018 상반기 신입 채용 결과 발표</li>
 				<li class="mb-3" style="font-size: 14px">2018 상반기 신입 채용 공고 변경사항 안내</li>
@@ -119,8 +119,8 @@
 			</div>
 				<div class="mt-1" style="height:2px; width:150px; background-color: lightgrey" ></div>
 			
-			<ul>
-				<li class="mt-3 mb-3" style="font-size: 14px">병역사항 관련 문의</li>
+			<ul class="mt-3">
+				<li class="mb-3" style="font-size: 14px">병역사항 관련 문의</li>
 				<li class="mb-3" style="font-size: 14px">학력 기준에 대해 질문 있습니다</li>
 				<li class="mb-3" style="font-size: 14px">2018 하반기 채용은 언제쯤 공지되나요</li>
 				<li class="mb-3" style="font-size: 14px">합격자 발표에 대해 문의 있습니다</li>
