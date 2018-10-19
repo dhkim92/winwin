@@ -2,12 +2,64 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp"%>
 <style>
+</style>
 
-</style>    
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	var tid;
+	var cnt = 1800;
+	
+	counter_init();
+	
+	function counter_init() {
+		tid = setInterval(function counter_run() {
+			document.all.counter.innerText = time_format(cnt);
+			cnt--;
+// 			console.log(cnt);
+			
+			if(cnt < 0) {
+				clearInterval(tid);
+// 				self.location = "logout.php";
+			}
+		}, 1000);
+	}
+	
+	$("#timer").click(function() {
+		clearInterval(tid);
+		cnt = parseInt(1800);
+		counter_init();
+	});
+	
+	function time_format(s) {
+		var nHour=0;
+		var nMin=0;
+		var nSec=0;
+		
+		if(s>0) {
+			nMin = parseInt(s/60);
+			nSec = s%60;
+			
+			if(nMin>60) {
+				nHour = parseInt(nMin/60);
+				nMin = nMin%60;
+			}
+		}
+		
+		if(nSec<10) nSec = "0"+nSec;
+		if(nMin<10) nMin = "0"+nMin;
+		
+		return ""+nHour+":"+nMin+":"+nSec;
+	}
+	
+});
+
+</script>
+   
 <%@ include file="../include/header.jsp"%>
 
 <div class="container">
-	<h4 class="mt-3 font-weight-bold">입사지원 등록</h4>
+	<h3 class="mt-5 font-weight-bold">입사지원 등록</h3>
 	<img class="img-fluid d-block" src="/resources/image/grayline.png">
 
 	<div class="col-md-12 border border-secondary mt-3 p-0">
@@ -25,8 +77,8 @@
 	      	<td class="text-center align-middle">2018-12-31 23:59</td>
 	      	<td class="text-danger text-center align-middle">(D-98일 전)</td>
 	      <th class="text-center align-middle bg-secondary">자동 로그아웃</th>
-	      	<td class="text-danger text-center align-middle">0:30:00</td>
-	      	<td><button>연장</button></td>
+	      	<td class="text-danger text-center align-middle"><span id="counter"></span></td>
+	      	<td><button id="timer">연장</button></td>
 	    </tr>    
 	  </tbody>
 	</table>
@@ -68,26 +120,24 @@
 		<th class="text-center align-middle bg-secondary">주소<span style="color : red;">*</span></th>
 		<td colspan="3">
 			<table>
-				<tr><input type="text" style="width: 80px; " /><button class="ml-1 mr-1">우편번호 찾기</button><input type="text" style="width: 230px; "></tr>
-				<tr><input type="text" style="width: 420px ;" class="mt-1"/></tr>	
+				<tr><input type="text" style="width: 80px;" name="postcode" placeholder="우편번호"  id="postcode"/><button class="ml-1 mr-1" onclick="Search()">우편번호 찾기</button><input type="text" style="width: 230px; " name="address" id="address" placeholder="주소"></tr>
+				<tr><input type="text" style="width: 420px ;" class="mt-1" name="address2" id="address2" placeholder="상세주소"/></tr>	
 			</table>
 		
 		</td>
 	</tr>
 	<tr>
 		<th class="text-center align-middle bg-secondary">긴급연락처<span style="color : red;">*</span></th>
-		<td colspan="3">
-      		<div class="dropdown">
-  				<button class="btn btn-secondary dropdown-toggle p-0" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">010</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-					<button class="dropdown-item" type="button">031</button>
-					<button class="dropdown-item" type="button">02</button>
-					<button class="dropdown-item" type="button">063</button>
-				</div>
+		<td colspan="3">  		
+			<select style="width: 70px; height: 27px" id="living" name="living">
+				<option value="0">010</option>
+				<option>02</option>
+				<option>031</option>
+				<option>063</option>
+				<option>042</option>
+			</select>
 				-<input type="text" class="ml-1 mr-1" style="width: 100px ;">-<input type="text" class="ml-1 mr-1" style="width: 100px ;" />
-			</div>
 		</td>
-		
 	</tr>
 	
 	<tr>
@@ -155,9 +205,50 @@
 		<input class="btn btn-primary text-white" type="submit" value="저장하고 계속하기"/>
 	</div>
       
-      
 </div>
 
+<%@ include file="../include/scriptLoader.jsp"%>
+<script>
+function Search() {
+	new daum.Postcode({
+		oncomplete: function(data) {
+			//팝업에서 검색결과 항목을 클릭했을 때 실행할 코드 작성하는 부분
+			
+			var fullAddr = ''; //최종 주소 변수
+			var extraAddr= ''; //조합형 주소 변수
+			
+			if(data.userSeletedType === 'R') { //사용자가 도로명 주소를 선택했을 경우
+				fullAddr = data.roadAddress;
+			} else { //사용자가 지번 주소를 선택했을 경우
+				fullAddr = data.jibunAddress;
+			}
+			
+			
+			//사용자가 선택한 주소가 도로명 타입일때 조합한다
+			if(data.userSelectedType === 'R') {
+				//법정동명이 있을 경우 추가한다.
+				if(data.bname !== '') {
+					extraAddr += data.bname;
+				}
+				
+				//건물명이 있을 경우 추가한다.
+				if(data.buildingName !== '') {
+					extraAddr += (extraAddr !== '' ?','+data.buildingName : data.buildingName);
+				}
+				
+				//조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종주소를 만든다
+				fullAddr += (extraAddr !== ''?'('+extraAddr+')':'');
+			}
+			
+			//우편번호와 주소 정보를 해당필드에 넣는다.
+			document.getElementById('postcode').value = data.zonecode;
+			document.getElementById('address').value = fullAddr;
+			
+			//커서를 상세주소 필드로 이동한다.
+			document.getElementById('address2').focus();
+		}
+	}).open();
+}
 
-</body>
-</html>
+</script>
+<%@ include file="../include/footer.jsp"%>

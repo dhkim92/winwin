@@ -29,6 +29,14 @@ public class Apply1Controller {
 //		apply1Service.viewUser(user);
 		
 	}
+	
+	@RequestMapping(value="/timer", method=RequestMethod.GET)
+	public void timer(JobopenBasic jobopenBasic, User user, HttpSession session, Model model) {
+		
+//		apply1Service.viewJobOpen(jobopenBasic);
+//		apply1Service.viewUser(user);
+		
+	}
 
 	@RequestMapping(value="/userDetail", method=RequestMethod.POST)
 	public ModelAndView userDetailProc(UserDetail userDetail, HttpSession session) {
