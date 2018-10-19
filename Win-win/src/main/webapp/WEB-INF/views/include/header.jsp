@@ -32,7 +32,7 @@
 					<li class="nav-item ml-4 font-weight-bold text-black-50" style="font-size: 13px"><a href="/qna/list" style="text-decoration: none; color: gray;">문의사항</a></li>
 				</ul>
 				<ul class="nav justify-content-end mb-2">
-					<li class="nav-item ml-4  font-weight-bold text-black-50" style="font-size: 13px"><a href="#" style="text-decoration: none; color: gray;">채용공고</a></li>
+					<li class="nav-item ml-4  font-weight-bold text-black-50" style="font-size: 13px"><a href="/jobOpen/list" style="text-decoration: none; color: gray;">채용공고</a></li>
 					<li class="nav-item ml-4  font-weight-bold text-black-50 mr-xl-5" style="font-size: 13px"><a href="#" style="text-decoration: none; color: gray;">결과확인&nbsp;</a></li>
 					<li class="mr-4"></li>
 				</ul>

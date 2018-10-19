@@ -25,7 +25,7 @@
 	</div>
 	
 	<hr class="mt-5" style="height:1px; width:750px; background-color: lightgray">
-	<span class="ml-5 pl-5"></span><span class="ml-5 pl-5 font-weight-bold" style="font-size: 14px"><a href="#" style="text-decoration: none; color: black;">채용공고</a></span>
+	<span class="ml-5 pl-5"></span><span class="ml-5 pl-5 font-weight-bold" style="font-size: 14px"><a href="/jobOpen/list" style="text-decoration: none; color: black;">채용공고</a></span>
 	
 	<div class="text-center mt-4">
 	<table class="table table-sm col-md-8 " align="center">

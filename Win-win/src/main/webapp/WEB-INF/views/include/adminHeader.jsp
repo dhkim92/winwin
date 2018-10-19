@@ -7,7 +7,7 @@
 <div class="container">
 	<div>	
 		<div class="text-right">
-			<a href="#"><span class="badge badge-pill badge-primary mt-3 " style="background-color: #376092">로그아웃</span></a>
+			<a href="/admin/adminLogout"><span class="badge badge-pill badge-primary mt-3 " style="background-color: #376092">로그아웃</span></a>
 		</div>
 		
 		<p class="font-weight-bold h1"><a href="/main/adminmain" style="color:black; text-decoration: none">WIN-WIN</a></p>
