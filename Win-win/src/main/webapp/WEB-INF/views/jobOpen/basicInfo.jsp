@@ -124,13 +124,13 @@
 				    </div>
 				    <div class="col-2">
 				    	<div class="form-check-inline">
-					    	<input type="checkbox" class="form-check-input" id="classify_new" checked>
+					    	<input type="checkbox" class="form-check-input" id="classify_new" name="offer[]" checked>
 							<label class="form-check-label" for="classify_new">신입</label>
 						</div>
 					</div>
 					<div class="col-2">
 						<div class="form-check-inline">
-							<input type="checkbox" class="form-check-input" id="classify_exp">
+							<input type="checkbox" class="form-check-input" id="classify_exp" name="offer[]">
 							<label class="form-check-label" for="classify_exp">경력</label>
 						</div>
 				    </div>
@@ -142,25 +142,25 @@
 			    	</div>
 			    	<div class="col-2">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="permanent" checked>
+			    			<input type="checkbox" class="form-check-input" id="permanent" name="form" checked>
 							<label class="form-check-label" for="permanent">정규직</label>
 			    		</div>
 			    	</div>
 			    	<div class="col-2">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="contract">
+			    			<input type="checkbox" class="form-check-input" id="contract" name="form" >
 							<label class="form-check-label" for="contract">계약직</label>
 			    		</div>
 			    	</div>
 			    	<div class="col-2">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="intern">
+			    			<input type="checkbox" class="form-check-input" id="intern" name="form" >
 							<label class="form-check-label" for="intern">인턴</label>
 			    		</div>
 			    	</div>
 			    	<div class="col-2">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="military">
+			    			<input type="checkbox" class="form-check-input" id="military" name="form" >
 							<label class="form-check-label" for="military">병역특례</label>
 			    		</div>
 			    	</div>
@@ -173,7 +173,7 @@
 			    	</div>
 			    	<div class="col-3" >
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="rulPay" checked>
+			    			<input type="checkbox" class="form-check-input" id="rulPay" name="rulPay" checked>
 							<label class="form-check-label" for="rulPay">회사 내규에 따름</label>
 			    		</div>
 			    	</div>
@@ -182,9 +182,9 @@
 			    			<a id="payCheck" style="cursor:pointer; text-decoration: underline;" class="m-2 text-black-50">급여 지정하기</a>
 			    			<!-- 급여지정 지웠다 켜졌다 하기 -->
 			    			<div id="pay" style="visibility: hidden;">
-			    				<input type="number" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
+			    				<input type="number" name="startPay" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
 			    				~
-			    				<input type="number" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
+			    				<input type="number" name="endPay" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
 			    			</div>
 			    		</div>
 			    	</div>
@@ -196,7 +196,7 @@
 			    	</div>
 			    	<div class="col-3" >
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="allOpen" checked>
+			    			<input type="checkbox" class="form-check-input" id="allOpen" name="allOpen" checked>
 							<label class="form-check-label" for="allOpen">상시 채용</label>
 			    		</div>
 			    	</div>
@@ -204,10 +204,10 @@
 			    		<div class="form-check-inline">
 			    			<a id="openCheck" style="cursor:pointer; text-decoration: underline;" class="m-2 text-black-50">날짜 지정하기</a>
 			    			<!-- 날짜지정 지웠다 켜졌다 하기 -->
-			    			<div id="open" style="visibility: hidden;">
-			    				<input name="startDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
+			    			<div id="open" style="visibility:hidden">
+			    				<input id="startOpen" name="startDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
 			    				~
-			    				<input name="endDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
+			    				<input name="endDate" name="endDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
 			    			</div>
 			    		</div>
 			    	</div>
@@ -229,6 +229,7 @@
 <script>
 
 $(document).ready(function(){
+	
 	
 	$("#payCheck").click(function(){
 		if($('#pay').css('visibility') == 'hidden'){

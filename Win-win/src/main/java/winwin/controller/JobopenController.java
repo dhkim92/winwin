@@ -41,7 +41,9 @@ public class JobopenController {
 	@RequestMapping(value="/basicInfo", method=RequestMethod.POST)
 	public String basicProc(JobopenBasic jobopenBasic) {
 		
-		jobopenService.writeBasic(jobopenBasic);
+		System.out.println(jobopenBasic);
+		
+//		jobopenService.writeBasic(jobopenBasic);
 		
 		return "detailInfo";
 	}

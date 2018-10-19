@@ -1,10 +1,12 @@
 package winwin.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class JobopenBasic {
 	private int jobopenNo; // idx
 	private String title; // 공고제목
+	private List<String> offer; //
 	private String form; //고용 형태
 	private int startPay; //최저 급여
 	private int endPay; // 최고 급여
