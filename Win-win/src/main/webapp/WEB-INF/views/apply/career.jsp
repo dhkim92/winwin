@@ -206,7 +206,7 @@
                   		<option value="기타">기타</option>
                   	</select>
                   </td>
-                  <td class="align-middle"><input type="date" name="eStartDate" max="3000-12-31" min="1900-01-01" class="form-control ml-3" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="date" data-provide="monthpicker" name="eStartDate" max="3000-12-31" min="1900-01-01" class="form-control ml-3" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="date" name="eEndDate" max="3000-12-31" min="1900-01-01" class="form-control" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="text" name="eContent" class="mr-1" style="width:350px" /></td>
                   <td class="align-middle"><button name="DBtn">삭제</button></td>
@@ -231,19 +231,21 @@
 					<th class="text-center align-middle">파일명</th>
 					<th class="text-center align-middle">등록수정일</th>
 					<th class="text-center align-middle">용량</th>
+					<th class="text-center align-middle">파일첨부</th>
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle"><input type="text" name="originName" class="mr-1" style="width:150px;" disabled/></td>
-                  <td class="align-middle"><input type="text" name="originName" class="mr-1" style="width:350px;" disabled/><button>수정</button></td>
+                  <td class="align-middle"><input type="text" name="originName" class="mr-1" style="width:300px;" disabled/></td>
                   <td class="align-middle"><input type="text" name="date" class="mr-1" style="width:200px;" disabled/></td>
                   <td class="align-middle"><input type="text" name="size" class="mr-1" style="width:200px" disabled/></td>
+                  <td class="align-middle"><input type="file" name="file" id="file" style="display:none"><button onclick='$("#file").click();'>파일 첨부</button></td>
                   <td class="align-middle"><button name="DBtn">삭제</button></td>
                 </tr>
                 <tr>
                 	<td colspan="8" class="text-center align-middle">파일 첨부시 파일첨부 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<button class="ml-1" name="ABtn">+ 파일첨부</button>
+                	<button class="ml-1" name="ABtn">+ 추가</button>
                 	</td>
                 </tr>
 			</tbody>
@@ -293,7 +295,7 @@ $(document).ready(function() {
     });
 	
 	$(document).on("click","button[name=ABtn]",function(){
-	
+		
 		var test = $(this).parent().parent().parent().children().eq(1);
 		var standard = $(this).parent().parent().parent().children('tr');
 		
@@ -303,7 +305,6 @@ $(document).ready(function() {
     	if( standard.length < 6 ) {
 			test.parent().children().eq(1).after($.newTr);
     	}
-    	
   });
   
 });
