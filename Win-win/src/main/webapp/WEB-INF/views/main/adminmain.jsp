@@ -65,7 +65,7 @@
 			
 		</div>
 		<div class="col-4 text-center mt-2">
-			<a href="#" style="text-decoration: none; color: black;"><button type="button" class="btn font-weight-bold text-white btn-lg mt-5 mb-5" style="font-size: 14px; background: #376092; height: 50px">채용공고 등록하기</button></a>
+			<a href="/jobOpen/basicInfo" style="text-decoration: none; color: black;"><button type="button" class="btn font-weight-bold text-white btn-lg mt-5 mb-5" style="font-size: 14px; background: #376092; height: 50px">채용공고 등록하기</button></a>
 			<a href="#" style="text-decoration: none; color: black;"><button type="button" class="btn btn-secondary font-weight-bold btn-lg mt-5 mb-5" style="font-size: 14px; height: 50px;">공지사항 등록하기</button></a>
 			
 			<div id="carouselExampleControls" class="carousel slide mt-2" data-ride="carousel">
