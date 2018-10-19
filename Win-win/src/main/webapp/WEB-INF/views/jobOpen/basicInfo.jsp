@@ -85,13 +85,16 @@
 			<div class="box text-primary text-center"><strong>등록하기</strong></div>
 		</div>		
 	</div>
-	
 	<div class="row clearfix m-2">
-		<div class="col-9"></div>
-		<div class="col-3"> 사원 코드 : 123456789<br>
-							사원 이름 : 김동현</div>
+		<div class="col-10"></div>
+		<div class="col-2">
+			<i class="fas fa-key"></i><small>&nbsp;사원 코드 : 123456789</small><br>
+			<i class="far fa-id-card"></i><small>&nbsp;사원 이름 : 김동현</small>
+		</div>
 	</div>
 </div>
+	
+
 
 <div class="container-fluid">
 
@@ -164,7 +167,7 @@
 			    </div>
 
 			    
-			    <div class="form-inline m-3">
+			    <div class="form-inline mt-3 ml-3 mr-3 mb-2">
 			    	<div class="col-2">
 			    		<label>급&emsp;&emsp;&nbsp;여</label>
 			    	</div>
@@ -187,7 +190,7 @@
 			    	</div>
 			    </div>
 			    
-			    <div class="form-inline m-3">
+			    <div class="form-inline ml-3 mr-3 mb-3">
 			    	<div class="col-2">
 			    		<label>접수 기간</label>
 			    	</div>
