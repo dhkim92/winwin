@@ -112,7 +112,27 @@ public class UserController {
 				}
 
 	}
-
+	
+	@RequestMapping(value="user/loginHelper", method=RequestMethod.GET)
+	public void loginHelper() {
+		logger.info("이메일/비밀번호찾기 페이지");
+	}
+	
+	@RequestMapping(value="user/loginHelper", method=RequestMethod.POST)
+	public void loginHelperProc() {
+		
+	}
+	
+	@RequestMapping(value="user/pwchange", method=RequestMethod.GET)
+	public void pwChange() {
+		logger.info("비밀번호 변경 페이지");
+	}
+	
+	@RequestMapping(value="user/pwchange", method=RequestMethod.POST)
+	public void pwChangeProc() {
+		
+	}
+	
 	@RequestMapping(value="user/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();

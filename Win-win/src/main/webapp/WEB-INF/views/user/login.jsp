@@ -21,14 +21,14 @@
 	<div class="row">
 
 		<div class="col-12 mt-5">
-			<h1 class="font-weight-bold">로그인</h1>
+			<p class="font-weight-bold h3">로그인</p>
 			<hr style="border: solid #376092;">
 		</div>
 
 		<div class="col-12 mt-4">
-			<p class="font-weight-bold h3" style="line-height: 200%;">로그인 정보가 필요합니다.</p>
-			<p class="font-weight-light h5" style="line-height: 200%;">회원 가입시 이메일 주소와 비밀번호를 입력해 주시기 바랍니다.</p>
-			<p class="font-weight-light h5" style="line-height: 200%;">회원정보가 없으신 분들은 [회원가입]을 눌러 회원가입을 먼저 해주시기 바랍니다.</p>
+			<p class="font-weight-bold h4" style="line-height: 200%;">로그인 정보가 필요합니다.</p>
+			<p class="font-weight-light h6" style="line-height: 200%;">회원 가입시 이메일 주소와 비밀번호를 입력해 주시기 바랍니다.</p>
+			<p class="font-weight-light h6" style="line-height: 200%;">회원정보가 없으신 분들은 [회원가입]을 눌러 회원가입을 먼저 해주시기 바랍니다.</p>
 		</div>
 
 		<div class="col-12 mt-4 text-right">
@@ -38,7 +38,7 @@
 
 		<div class="col-12 mt-2">
 			<form action="/user/login" method="post" id="loginForm">
-				<table class="table table-sm">
+				<table class="table table-sm col-md-12">
 					<tbody>
 						<tr>
 							<th scope="row" class="cols align-middle">
@@ -70,7 +70,6 @@
 							<td>
 								<strong>아이디저장하기</strong>
 							</td>
-							<td></td>
 						</tr>
 					</tbody>
 				</table>
@@ -90,7 +89,7 @@
 	</form>
 
 		<div class="col-12 mt-4 mb-5 text-center">
-			<button type="button" class="btn btn-secondary btn-sm mx-4"
+			<button type="button" id="LoginHelper" class="btn btn-secondary btn-sm mx-4"
 				style="width: 170px;">이메일 / 비밀번호 찾기</button>
 		</div>
 
@@ -105,7 +104,7 @@
 							<strong>이메일 주소 혹은 비밀번호에 문제가 있으신 분은 [로그인 도우미] 버튼을 눌러서 해결해 주시기 바랍니다.</strong>
 						</td>
 						<td class="table-light align-middle">
-							<button type="button" class="btn btn-secondary btn-sm ml-5"
+							<button type="button" id="LoginHelper2" class="btn btn-secondary btn-sm ml-5"
 							style="width: 170px;">로그인 도우미</button>
 						</td>
 					</tr>
@@ -134,6 +133,14 @@ $(document).ready(function() {
 	
 	$("#btnJoin").click(function() {
 		location.href="/user/join";
+	});
+	
+	$("#LoginHelper").click(function() {
+		location.href="/user/loginHelper";
+	});
+	
+	$("#LoginHelper2").click(function() {
+		location.href="/user/loginHelper";
 	});
 	
 });

@@ -20,12 +20,12 @@
 	<div class="row">
 
 		<div class="col-12 mt-5">
-			<h1 class="font-weight-bold">회원가입</h1>
+			<p class="font-weight-bold h3">회원가입</p>
 			<hr style="border: solid #376092;">
 		</div>
 		
 		<div class="col-12 mt-4">
-			<p class="font-weight-bold h3" style="line-height: 200%;">신규회원가입</p>
+			<p class="font-weight-bold h4" style="line-height: 200%;">신규회원가입</p>
 			<p class="font-weight-light h6" style="line-height: 200%;">본 사이트는 개인정보보호법 계정에 때라 회원가입에 
 				필요한 다음의 최소 항목만을 수집합니다.</p>
 			<p class="font-weight-light h6" style="line-height: 200%;">이메일 주소는 본인의 회원 ID로 등록되며, 전화번호는 아이디를 분실하셨을 
