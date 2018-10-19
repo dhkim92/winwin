@@ -4,6 +4,8 @@ import winwin.dto.Admin;
 
 public interface AdminDao {
 
-	public void adminlogin(Admin admin);
+	public int adminlogin(Admin admin);
+
+	public Admin adminInfo(Admin admin);
 
 }

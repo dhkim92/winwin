@@ -16,9 +16,7 @@ import winwin.service.AdminService;
 
 @Controller
 public class AdminController {
-	// 테스트 주석
-	// 테스트 주석2
-	// 테스트 주석 3
+
 	@Autowired
 	AdminService adminservice;
 
@@ -34,14 +32,24 @@ public class AdminController {
 	@RequestMapping(value="/admin/adminLogin", method=RequestMethod.POST)
 	public String adminloginProc(HttpSession session, Admin admin) {
 		logger.info("관리자 로그인");
-		adminservice.adminlogin(admin);
-		return "redirect://";
+		boolean success = adminservice.adminlogin(admin);
+		
+		if(success==true) {
+			logger.info("관리자 로그인 성공!");
+			admin = adminservice.adminInfo(admin);
+			session.setAttribute("adminLogin", true);
+			session.setAttribute("admincode", admin.getAdminCode());
+			session.setAttribute("adminname", admin.getNick());
+			return "redirect:/main/adminmain";
+		}
+		logger.info("로그인 실패");
+		return "redirect:/admin/adminLogin";
 	}
 	
-	@RequestMapping(value="/admin/adminLoginout", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/adminLogout", method=RequestMethod.POST)
 	public String adminLogout(HttpSession session) {
 		logger.info("관리자 로그아웃");
 		session.invalidate();
-		return "redirect://";
+		return "redirect:/admin/adminLogin";
 	}
 }
