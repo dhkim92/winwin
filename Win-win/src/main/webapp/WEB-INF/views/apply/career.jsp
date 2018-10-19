@@ -7,7 +7,7 @@
 
 
 <div class="container">
-	<h3 class="mt-3 font-weight-bold">입사지원 등록</h3>
+	<h3 class="mt-5 font-weight-bold">입사지원 등록</h3>
 	<img class="img-fluid d-block" src="/resources/image/grayline.png">
 
 	<div class="col-md-12 border border-secondary mt-3 p-0">
@@ -60,37 +60,33 @@
                   <td class="align-middle">
                                              영어
                   </td>
-                  <td class="align-middle">
-					<div class="btn-group">
-  					<button type="button" name="level" class="btn btn dropdown-toggle btn-sm" style="width:60px; height:25px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">선택 </button>
-  						<div class="dropdown-menu" style="width:30px">
-    						<a class="dropdown-item" href="#">상</a>
-   							<a class="dropdown-item" href="#">중</a>
-    						<a class="dropdown-item" href="#">하</a>
-  						</div>
-					</div>	 			
+                  <td>
+                  	<select style="height:25px; width:70px;" name="level">
+                  		<option value="0">선택</option>
+                  		<option value="상">상</option>
+                  		<option value="중">중</option>
+                  		<option value="하">하</option>
+                  	</select>
                   </td>
-                  <td class="align-middle">
-                    <div class="btn-group">
-  					<button type="button" name="testName" class="btn btn dropdown-toggle btn-sm" style="width:60px; height:25px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">선택 </button>
-  						<div class="dropdown-menu">
-    						<a class="dropdown-item" href="#">TOEIC</a>
-   							<a class="dropdown-item" href="#">TOEFL</a>
-    						<a class="dropdown-item" href="#">TEPS</a>
-    						<a class="dropdown-item" href="#">TOEIC Speaking</a>
-    						<a class="dropdown-item" href="#">OPIc</a>
-  						</div>
-					</div>
+                  <td>
+                  	<select style="height:26px; width:150px;" name="testName">
+                  		<option value="0">선택</option>
+                  		<option value="TOEIC">TOEIC</option>
+                  		<option value="TOEFL">TOEFL</option>
+                  		<option value="TEPS">TEPS</option>
+                  		<option value="TOEIC Speaking">TOEIC Speaking</option>
+                  		<option value="OPIc">OPIc</option>
+                  	</select>
                   </td>
                   <td class="align-middle"><input type="text" name="Score" /></td>
                   <td class="align-middle"><input type="date" name="lDate" min="2000-01-01" max="3000-12-31" class="form-control" style="height:25px;"></td>
                   <td class="align-middle"><input type="text" name="lOrgan" /></td>
-                  <td class="align-middle"><button>삭제</button></td>
+                  <td class="align-middle"><button name="DBtn">삭제</button></td>
                 </tr>
                 <tr>
                 	<td colspan="7" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<button class="ml-1">+ 추가</button>
+                	<button class="ml-1" name="ABtn">+ 추가</button>
                 	</td>
                 </tr>
 			</tbody>
@@ -109,15 +105,15 @@
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" name="liName" class="mr-1" style="width:200px" /><button class="ml-1 mr-1">검색</button><button class="ml-1">취소</button></td>
+                  <td class="align-middle"><input type="text" name="liName" class="mr-1" style="width:200px" disabled/><button class="ml-1 mr-1">검색</button><button class="ml-1">취소</button></td>
                   <td class="align-middle"><input type="date" name="liDate" min="2000-01-01" max="3000-12-31" class="form-control" style="height:25px;"></td>
                   <td class="align-middle"><input type="text" name="liOrgan" /></td>
-                  <td class="align-middle"><button>삭제</button></td>
+                  <td class="align-middle"><button name="DBtn">삭제</button></td>
                 </tr>
                 <tr>
                 	<td colspan="7" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<button class="ml-1">+ 추가</button>
+                	<button class="ml-1" name="ABtn">+ 추가</button>
                 	</td>
                 </tr>
 			</tbody>
@@ -146,12 +142,12 @@
                   <td class="align-middle"><input type="text" name="task" class="mr-1" style="width:100px" /></td>
                   <td class="align-middle"><input type="text" name="salary" class="mr-1" style="width:100px" /></td>
                   <td class="align-middle"><input type="text" name="cContent" class="mr-1" style="width:300px" /></td>
-                  <td class="align-middle"><button>삭제</button></td>
+                  <td class="align-middle"><button name="DBtn">삭제</button></td>
                 </tr>
                 <tr>
                 	<td colspan="8" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<button class="ml-1">+ 추가</button>
+                	<button class="ml-1" name="ABtn">+ 추가</button>
                 	</td>
                 </tr>
 			</tbody>
@@ -174,12 +170,12 @@
                   <td class="align-middle"><input type="date" name="aStartDate" max="3000-12-31" min="1900-01-01" class="form-control" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="date" name="aEndDate" max="3000-12-31" min="1900-01-01" class="form-control" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="text" name="aContent" class="mr-1" style="width:350px" /></td>
-                  <td class="align-middle"><button>삭제</button></td>
+                  <td class="align-middle"><button name="DBtn">삭제</button></td>
                 </tr>
                 <tr>
                 	<td colspan="8" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<button class="ml-1">+ 추가</button>
+                	<button class="ml-1" name="ABtn">+ 추가</button>
                 	</td>
                 </tr>
 			</tbody>
@@ -200,27 +196,25 @@
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle"><input type="text" name="eOrgan" class="mr-1" style="width:250px" /></td>
-                  <td class="align-middle">
-                  <div class="btn-group">
-  					<button type="button" name="testName" class="btn btn dropdown-toggle btn-sm mr-2" style="width:60px; height:25px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">선택 </button>
-  						<div class="dropdown-menu">
-    						<a class="dropdown-item" href="#">어학연수</a>
-   							<a class="dropdown-item" href="#">봉사</a>
-    						<a class="dropdown-item" href="#">인턴</a>
-    						<a class="dropdown-item" href="#">수상경력</a>
-    						<a class="dropdown-item" href="#">기타</a>
-  						</div>
-					</div>
+                  <td>
+                  <select style="height:25px; width:80px;" name="option">
+                  		<option value="0">선택</option>
+                  		<option value="봉사">봉사</option>
+                  		<option value="수상경력">수상경력</option>
+                  		<option value="어학연수">어학연수</option>
+                  		<option value="TOEIC Speaking">인턴</option>
+                  		<option value="기타">기타</option>
+                  	</select>
                   </td>
                   <td class="align-middle"><input type="date" name="eStartDate" max="3000-12-31" min="1900-01-01" class="form-control ml-3" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="date" name="eEndDate" max="3000-12-31" min="1900-01-01" class="form-control" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="text" name="eContent" class="mr-1" style="width:350px" /></td>
-                  <td class="align-middle"><button>삭제</button></td>
+                  <td class="align-middle"><button name="DBtn">삭제</button></td>
                 </tr>
                 <tr>
                 	<td colspan="8" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<button class="ml-1">+ 추가</button>
+                	<button class="ml-1" name="ABtn">+ 추가</button>
                 	</td>
                 </tr>
 			</tbody>
@@ -240,16 +234,16 @@
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" name="originName" class="mr-1" style="width:150px;" /></td>
-                  <td class="align-middle"><input type="text" name="originName" class="mr-1" style="width:350px;" ><button>수정</button></td>
-                  <td class="align-middle"><input type="text" name="date" class="mr-1" style="width:200px;" ></td>
-                  <td class="align-middle"><input type="text" name="size" class="mr-1" style="width:200px" /></td>
-                  <td class="align-middle"><button>삭제</button></td>
+                  <td class="align-middle"><input type="text" name="originName" class="mr-1" style="width:150px;" disabled/></td>
+                  <td class="align-middle"><input type="text" name="originName" class="mr-1" style="width:350px;" disabled/><button>수정</button></td>
+                  <td class="align-middle"><input type="text" name="date" class="mr-1" style="width:200px;" disabled/></td>
+                  <td class="align-middle"><input type="text" name="size" class="mr-1" style="width:200px" disabled/></td>
+                  <td class="align-middle"><button name="DBtn">삭제</button></td>
                 </tr>
                 <tr>
                 	<td colspan="8" class="text-center align-middle">파일 첨부시 파일첨부 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<button class="ml-1">+ 파일첨부</button>
+                	<button class="ml-1" name="ABtn">+ 파일첨부</button>
                 	</td>
                 </tr>
 			</tbody>
@@ -283,6 +277,36 @@
    </div>
 	
 </div>
-<br><br><br><br>
-</body>
-</html>
+
+<%@ include file="../include/scriptLoader.jsp"%>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$(document).on("click","button[name=DBtn]",function(){
+        
+        var value = $(this).parent().parent();
+        var standard = $(this).parent().parent().parent().children('tr');
+
+        if( standard.length > 3 ) {
+        	value.remove();
+        }
+    });
+	
+	$(document).on("click","button[name=ABtn]",function(){
+	
+		var test = $(this).parent().parent().parent().children().eq(1);
+		var standard = $(this).parent().parent().parent().children('tr');
+		
+		$.trClone = test.clone().html();
+    	$.newTr = $("<tr>"+$.trClone+"</tr>");
+    	
+    	if( standard.length < 6 ) {
+			test.parent().children().eq(1).after($.newTr);
+    	}
+    	
+  });
+  
+});
+</script> 
+
+<%@ include file="../include/footer.jsp"%>

@@ -21,6 +21,15 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- file Upload -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        
+        <beans:property name="maxInMemorySize" value="1048576" />
+        <beans:property name="maxUploadSize" value="1048576" />
+        <beans:property name="defaultEncoding" value="utf-8" />
+        
+    </beans:bean>
+
 	<context:component-scan base-package="winwin" />
 	
 	
