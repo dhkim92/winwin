@@ -12,21 +12,20 @@
 		<img src="/resources/image/linkbar.PNG" width="708"/>
 	</div>
 	<div class="text-center mt-3">
-		<i class="fas fa-bullhorn fa-2x ml-5 mr-5 pl-4 pr-4"></i>
-		<i class="far fa-edit fa-2x ml-5 mr-5 pl-4 pr-4"></i>		
-		<i class="far fa-check-square fa-2x ml-5 mr-5 pl-4 pr-4"></i>
-		<i class="far fa-question-circle fa-2x ml-5 mr-5 pl-4 pr-4"></i>
+		<a href="/notice/list" style="text-decoration: none; color: black;"><i class="fas fa-bullhorn fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
+		<a href="#" style="text-decoration: none; color: black;"><i class="far fa-edit fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>		
+		<a href="#" style="text-decoration: none; color: black;"><i class="far fa-check-square fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
+		<a href="/qna/list" style="text-decoration: none; color: black;"><i class="far fa-question-circle fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
 	</div>
 		<div class="text-center mt-2">
-		<span class="ml-5 mr-5 pl-3 pr-2 font-weight-bold" style="font-size: 14px">공지사항</span>
-		<span class="ml-5 mr-5 pl-3 pr-2 font-weight-bold" style="font-size: 14px">입사지원</span>		
-		<span class="ml-5 mr-5 pl-3 pr-2 font-weight-bold" style="font-size: 14px">결과확인</span>
-		<span class="ml-5 mr-5 pl-3 pr-2 font-weight-bold" style="font-size: 14px">채용문의</span>
+		<span class="ml-5 mr-5 pl-3 pr-2 font-weight-bold" style="font-size: 14px"><a href="/notice/list" style="text-decoration: none; color: black;">공지사항</a></span>
+		<span class="ml-5 mr-5 pl-3 pr-2 font-weight-bold" style="font-size: 14px"><a href="#" style="text-decoration: none; color: black;">입사지원</a></span>		
+		<span class="ml-5 mr-5 pl-3 pr-2 font-weight-bold" style="font-size: 14px"><a href="#" style="text-decoration: none; color: black;">결과확인</a></span>
+		<span class="ml-5 mr-5 pl-3 pr-2 font-weight-bold" style="font-size: 14px"><a href="/qna/list" style="text-decoration: none; color: black;">채용문의</a></span>
 	</div>
 	
 	<hr class="mt-5" style="height:1px; width:750px; background-color: lightgray">
-	
-	<span class="ml-5 pl-5"></span><span class="ml-5 pl-5 font-weight-bold" style="font-size: 14px">채용공고</span>
+	<span class="ml-5 pl-5"></span><span class="ml-5 pl-5 font-weight-bold" style="font-size: 14px"><a href="#" style="text-decoration: none; color: black;">채용공고</a></span>
 	
 	<div class="text-center mt-4">
 	<table class="table table-sm col-md-8 " align="center">
