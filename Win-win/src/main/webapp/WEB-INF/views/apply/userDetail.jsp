@@ -108,20 +108,33 @@ $(document).ready(function() {
 	<tbody>
 	<tr>
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">성명<span style="color : red;">*</span></th>
-		<td style="width: 40%"><span style="font-size: 10px ;">한글 </span>한상근 / <span style="font-size: 10px ;">영어 </span><input type="text" class="ml-1 mr-1" /></td>
+		<td style="width: 40%"><span style="font-size: 10px ;">
+			한글 </span>한상근 / <span style="font-size: 10px ;">영어 </span>
+			<input type="text" class="ml-1 mr-1" id="eName" name="eName" onkeyup="english(this)"/>
+			<span style="font-size: 10px ;"> 예)Hong Gil Dong</span>
+		</td>
 		<th class="text-center align-middle bg-secondary">이메일<span style="color : red;">*</span></th>
 		<td>youngeun940725@gmail.com</td>
 	</tr>
 	<tr>
 		<th class="text-center align-middle bg-secondary" style="width: 5%" >생년월일<span style="color : red;">*</span></th>
-		<td colspan="3"><input type="text" /></td>
+		<td colspan="3">
+			<input type="text" class="numberOnly"/>
+			<span style="font-size: 10px ;">예)19900101</span>
+		</td>
 	</tr>
 	<tr>
 		<th class="text-center align-middle bg-secondary">주소<span style="color : red;">*</span></th>
 		<td colspan="3">
 			<table>
-				<tr><input type="text" style="width: 80px;" name="postcode" placeholder="우편번호"  id="postcode"/><button class="ml-1 mr-1" onclick="Search()">우편번호 찾기</button><input type="text" style="width: 230px; " name="address" id="address" placeholder="주소"></tr>
-				<tr><input type="text" style="width: 420px ;" class="mt-1" name="address2" id="address2" placeholder="상세주소"/></tr>	
+				<tr>
+					<input type="text" style="width: 80px;" name="postcode" placeholder="우편번호" id="postcode" readonly onclick="Search()"/>
+					<button class="ml-1 mr-1" onclick="Search()">우편번호 찾기</button>
+					<input type="text" style="width: 364px; " name="address" id="address" placeholder="주소는 자동입력됩니다" readonly>
+				</tr>
+				<tr>
+					<input type="text" style="width: 550px ;" class="mt-1" name="address2" id="address2" placeholder="상세주소를 입력하세요"/>
+				</tr>	
 			</table>
 		
 		</td>
@@ -129,14 +142,27 @@ $(document).ready(function() {
 	<tr>
 		<th class="text-center align-middle bg-secondary">긴급연락처<span style="color : red;">*</span></th>
 		<td colspan="3">  		
-			<select style="width: 70px; height: 27px" id="living" name="living">
-				<option value="0">010</option>
+			<select style="width: 100px; height: 27px" id="living" name="living">
+				<option>010</option>
 				<option>02</option>
-				<option>031</option>
-				<option>063</option>
+				<option>051</option>
+				<option>053</option>
+				<option>032</option>
+				<option>062</option>
 				<option>042</option>
+				<option>052</option>
+				<option>044</option>
+				<option>031</option>
+				<option>033</option>
+				<option>043</option>
+				<option>041</option>
+				<option>063</option>
+				<option>061</option>
+				<option>054</option>
+				<option>055</option>
+				<option>064</option>
 			</select>
-				-<input type="text" class="ml-1 mr-1" style="width: 100px ;">-<input type="text" class="ml-1 mr-1" style="width: 100px ;" />
+				-<input type="text" class="ml-1 mr-1 numberOnly" style="width: 100px ;" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);" >-<input type="text" class="ml-1 mr-1 numberOnly" style="width: 100px ;" />
 		</td>
 	</tr>
 	
@@ -249,6 +275,31 @@ function Search() {
 		}
 	}).open();
 }
+
+function english(obj) {
+	var pattern = /[^(a-zA-Z)]/; //영문만 허용
+	if (pattern.test(obj.value)) {
+		alert("성명을 영어로 기재하십시오.");
+		obj.value = '';
+		obj.focus();
+		return false;
+	}
+}
+
+// 숫자만 입력받기
+function fn_press(event, type) {
+	if(type == "numbers") {
+		if(event.keyCode < 48 || event.keyCode > 57) return false;
+	}
+}
+
+// 한글입력 방지
+function fn_press_han(obj) {
+	if(event.keyCode == 8 || event.keyCode ==9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46) return;
+	
+	obj.value=obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+}
+
 
 </script>
 <%@ include file="../include/footer.jsp"%>
