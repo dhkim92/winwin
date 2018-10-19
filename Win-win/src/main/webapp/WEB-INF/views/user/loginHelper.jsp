@@ -4,6 +4,15 @@
 
 <style>
 
+.cols {
+	width: 5%;
+	text-align: center;
+}
+
+.cols2 {
+	width: 15%;
+}
+
 </style>
 
 <%@ include file="../include/header.jsp"%>
@@ -31,7 +40,7 @@
 		
 		
 		<div class="col-12 mt-1 mb-4">
-			<form action="/user/login" method="post" id="loginForm">
+			<form action="/user/login" method="post">
 				<table class="table table-sm border border-right-0 border-left-0">
 					<tbody>
 						<tr>
