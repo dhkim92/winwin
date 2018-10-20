@@ -49,7 +49,7 @@
 							</td>
 							<td>
 								<input type="email" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="userid" name="userid" placeholder="이메일을 입력하시오.">
+								id="userid" name="userid" placeholder="이메일을 입력하시오." required>
 							</td>
 						</tr>
 						<tr>
@@ -59,8 +59,9 @@
 							<td class="cols2 align-middle">
 								<strong>비밀번호</strong>
 							</td>
-							<td><input type="password" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="password" name="password" placeholder="패스워드">
+							<td>
+								<input type="password" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
+								id="password" name="password" placeholder="패스워드" required>
 							</td>
 						</tr>
 						<tr>
@@ -177,23 +178,15 @@ $("#loginForm").submit(function(e) {
 
 		//로그인 버튼 클릭시
 		$("#login_button").click(function() {
-			//아이디 미입력시
-			if ($.trim($("#userid").val()) == "") {
-				alert("아이디를 입력하세요");
-				return;
-				//아이디 입력시
-			} else if($.trim($("#password").val()) == ""){
-				alert("비밀번호를 입력하세요");
-				return;
-			} else{
-				//아이디저장 체크되어있으면 쿠키저장
-				if ($("#rememberid").prop("checked")) {
-					$.cookie('userid', $("#userid").val());
-					//아이디저장 미체크면 쿠키에 정보가 있던간에 삭제
-				} else {
-					$.removeCookie("userid");
-				}
+			
+			//아이디저장 체크되어있으면 쿠키저장	
+			if ($("#rememberid").prop("checked")) {
+				$.cookie('userid', $("#userid").val());
+				//아이디저장 미체크면 쿠키에 정보가 있던간에 삭제
+			} else {
+				$.removeCookie("userid");
 			}
+			
 		})
 
 		$.cookie('쿠키명', '쿠키값', {
