@@ -40,11 +40,11 @@ public class UserController {
 	
 	@RequestMapping(value="/user/join", method=RequestMethod.POST)
 	public String joinProc(User user) {
-		logger.info("회원가입 활성화");
+		logger.info("회원가입 성공");
 		logger.info(user.toString());
 		userservice.join(user);
 		
-		return "redirect:/user/main";
+		return "redirect:/user/login";
 	}
 	
 	@RequestMapping(value="/user/login", method=RequestMethod.GET)
