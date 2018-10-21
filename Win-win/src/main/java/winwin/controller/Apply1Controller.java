@@ -67,7 +67,7 @@ public class Apply1Controller {
 	@RequestMapping(value="/academic", method=RequestMethod.GET)
 	public void academic(JobopenBasic jobopenBasic, Model model) {
 		
-		apply1Service.viewJobOpen(jobopenBasic);
+//		apply1Service.viewJobOpen(jobopenBasic);
 				
 	}
 

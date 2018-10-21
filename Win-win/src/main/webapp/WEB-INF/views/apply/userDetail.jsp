@@ -87,18 +87,10 @@ $(document).ready(function() {
 	<h4 class="mt-4 mb-3 font-weight-bold">개인사항</h4>
 	<div class="row">
 		<img class="img-fluid d-block ml-3" src="/resources/image/B_userDetail.png">
-		<a href="/apply/academicUpdate">
-			<img class="img-fluid d-block" src="/resources/image/G_academic.png">
-		</a>
-		<a href="/apply/militaryUpdate">
-			<img class="img-fluid d-block" src="/resources/image/G_military.png">
-		</a> 
-		<a href="/apply/careerUpdate">
-			<img class="img-fluid d-block" src="/resources/image/G_career.png">
-		</a>
-		<a href="/apply/introduceUpdate">
-			<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
-		</a>
+		<img class="img-fluid d-block" src="/resources/image/G_academic.png">
+		<img class="img-fluid d-block" src="/resources/image/G_military.png">
+		<img class="img-fluid d-block" src="/resources/image/G_career.png">
+		<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
 		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 	</div>
 	
