@@ -35,10 +35,10 @@ public class NoticeBoardController {
 	
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
 	public void view(NoticeBoard board,Model m) {
-		NoticeBoard resBoard = service.view(board);
-		List<File> files = service.FilesByBoardNo(board);
-		m.addAttribute("board", resBoard);
-		m.addAttribute("files", files);
+//		NoticeBoard resBoard = service.view(board);
+//		List<File> files = service.FilesByBoardNo(board);
+//		m.addAttribute("board", resBoard);
+//		m.addAttribute("files", files);
 		
 	}
 	
@@ -71,8 +71,8 @@ public class NoticeBoardController {
 	
 	@RequestMapping(value="/notice/update", method=RequestMethod.GET)
 	public void update(NoticeBoard board) {
-		service.view(board);
-		service.FilesByBoardNo(board);
+//		service.view(board);
+//		service.FilesByBoardNo(board);
 	}
 	
 	@RequestMapping(value="/notice/update", method=RequestMethod.POST)

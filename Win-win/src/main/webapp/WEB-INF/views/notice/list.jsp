@@ -4,64 +4,77 @@
 <%@ include file="../include/CSSLoader.jsp"%>
     
 <style>
-
+th {
+	font-size: 14px;
+}
 </style>
 
 <%@ include file="../include/header.jsp"%>
 
 <div class = "container">
-	<div class="p-5">
-	<h3 class="text-primary font-weight-bold">공지사항</h3>
-	<hr>
-	<button class="btn btn-primary float-right">작성</button>
-	<table class="table table-striped table-hover table-condensed">
-		<thead style="background-color: lightgray; text-align: center; font-size: 16px">
-			<tr>
-				<td colspan="1">
-					<strong>번호</strong>
-				</td>
-				<td colspan="5">
-					<strong>제목</strong>
-				</td>
-				<td colspan="3">
-					<strong>작성일자</strong>
-				</td>
-				<td colspan="2">
-					<strong>작성자</strong>
-				</td>
-				<td colspan="1">
-					<strong>조회수</strong>
-				</td>
-			</tr>
-		</thead>
-		<tbody class="text-truncate" style="text-align: center">
-		<tr>
-			<td colspan="1">
-			07
-			</td>
-			<td colspan="5">
-			제목입니다 제목제목제목제목제목제목제목제목제목제목제목제목목제목제목제목제목목제목제목제목제목목제목제목제목제목
-			</td>
-			<td colspan="3">
-			2018.09.24
-			</td>
-			<td colspan="2">
-			관리자
-			</td>
-			<td colspan="1" class="text-truncate">
-			0
-			</td>
-		</tr>
-		</tbody>
-	</table>
+	<div class="container">
+	<div class="col-12 mt-5">
+		<p class="font-weight-bold h3">공지사항</p>
+		<hr style="border: solid #376092;">
+	</div>
+	<div id="btn" class="text-right">
+		<button class="btn btn-primary mr-3">작성</button>
+	</div>	
+	<div class="mt-4">
+		<table class="table table-sm col-md-11 table-hover text-center" align="center">
+			<thead class="thead-light">
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성일자</th>
+					<th>작성자</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+		
+	<%-- 	<c:forEach items="${list }" var="board"> --%>
+	<!-- 	<tr> -->
+	<%-- 		<td>${board.boardNo }</td> --%>
+	<!-- 		<td> -->
+	<%-- 			<a href="/board/view?boardNo=${board.boardNo }">${board.title }</a> --%>
+	<!-- 		</td> -->
+	<%-- 	<%-- 	<td>${board.title }</td> --%>
+	<%-- 		<td>${board.writerNick }</td> --%>
+	<%-- 		<td>${board.hit }</td> --%>
+	<%-- 		<td><fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd" /></td> --%>
+	<%-- 	<%-- 	<td>${board.writeDate }</td> --%>
+	<!-- 	</tr> -->
+	<%-- 	</c:forEach> --%>
 	
-	<div class="form-group d-flex justify-content-center">
-		<button type="button" class="btn btn-primary">목록</button>
-		<button type="button" class="btn btn-primary ml-2 mr-2">수정</button>
-		<button type="button" class="btn btn-primary">삭제</button>
+		</table>
 	</div>
-	<div class="col-sm-5" style="background-color: blue;">안녕하세요
-	</div>
+	
+	<div class=" d-flex justify-content-center">
+	  <ul class="pagination">
+	    <li class="page-item">
+	      <a class="page-link" href="#">&laquo;</a>
+	    </li>
+	    <li class="page-item active">
+	      <a class="page-link" href="#">1</a>
+	    </li>
+	    <li class="page-item">
+	      <a class="page-link" href="#">2</a>
+	    </li>
+	    <li class="page-item">
+	      <a class="page-link" href="#">3</a>
+	    </li>
+	    <li class="page-item">
+	      <a class="page-link" href="#">4</a>
+	    </li>
+	    <li class="page-item">
+	      <a class="page-link" href="#">5</a>
+	    </li>
+	    <li class="page-item">
+	      <a class="page-link" href="#">&raquo;</a>
+	    </li>
+	  </ul>
+	</div>	
+
 	</div>
 </div>
 

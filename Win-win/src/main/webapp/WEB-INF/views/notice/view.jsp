@@ -35,12 +35,15 @@
 			첨부파일
 			</td>
 			<td style="width:600px;text-align: center">
-			
+			<a href="notice/download">파일01.text</a>
 			</td>
 		</tr>
 	</table>
-	
-	<div class="form-group d-flex justify-content-center">
+	<div id="content">
+	여기에 게시글의 내용이 보입니다
+	이미지도 볼 수 있습니다
+	</div>
+	<div id="btns" class="form-group d-flex justify-content-center">
 		<button type="button" class="btn btn-primary">목록</button>
 		<button type="button" class="btn btn-primary ml-2 mr-2">수정</button>
 		<button type="button" class="btn btn-primary">삭제</button>

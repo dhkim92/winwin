@@ -22,7 +22,7 @@
 				<strong>제목</strong>
 			</td>
 			<td style="width:600px;text-align: center;background-color: lightgray; font-size: 16px">
-				<input type="text" class="form-control" id="title" placeholder="제목을 적으세요(66자 이내)"/>
+				<input type="text" class="form-control" id="title" value="수정할 제목" readonly="readonly"/>
 			</td>
 		</tr>
 		<tr>
@@ -48,7 +48,7 @@
 	</div>
 	</form>
 	<div class="form-group d-flex justify-content-center">
-		<button type="button" id="btnCancel" class="btn btn-primary">작성</button>
+		<button type="button" id="btnCancel" class="btn btn-primary">수정</button>
 		<button type="button" id="btnWrite" class="btn btn-primary ml-2">취소</button>
 	</div>	
 </div>
