@@ -38,12 +38,12 @@
 			  <div class="collapse" id="navbarToggleExternalContent">
 				<ul class="nav justify-content-end mb-1">
 					<li class="nav-item ml-4 font-weight-bold text-black-50" style="font-size: 13px"><a href="/notice/list" style="text-decoration: none; color: gray;">공지사항</a></li>
-					<li class="nav-item ml-4 font-weight-bold text-black-50" style="font-size: 13px"><a href="#" style="text-decoration: none; color: gray;">입사지원</a></li>
+					<li class="nav-item ml-4 font-weight-bold text-black-50" style="font-size: 13px"><a href="/applyMenu/selectApply" style="text-decoration: none; color: gray;">입사지원</a></li>
 					<li class="nav-item ml-4 font-weight-bold text-black-50" style="font-size: 13px"><a href="/qna/list" style="text-decoration: none; color: gray;">문의사항</a></li>
 				</ul>
 				<ul class="nav justify-content-end mb-2">
 					<li class="nav-item ml-4  font-weight-bold text-black-50" style="font-size: 13px"><a href="/jobOpen/list" style="text-decoration: none; color: gray;">채용공고</a></li>
-					<li class="nav-item ml-4  font-weight-bold text-black-50 mr-xl-5" style="font-size: 13px"><a href="#" style="text-decoration: none; color: gray;">결과확인&nbsp;</a></li>
+					<li class="nav-item ml-4  font-weight-bold text-black-50 mr-xl-5" style="font-size: 13px"><a href="/applyMenu/passfail" style="text-decoration: none; color: gray;">결과확인&nbsp;</a></li>
 					<li class="mr-4"></li>
 				</ul>
 			  </div>	  

@@ -27,15 +27,15 @@
 
 	<div class="text-center mt-3">
 		<a class="a" href="/notice/list"><i class="fas fa-bullhorn fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
-		<a class="a" href="#"><i class="far fa-edit fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>		
-		<a class="a" href="#"><i class="far fa-check-square fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
+		<a class="a" href="/applyMenu/selectApply"><i class="far fa-edit fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>		
+		<a class="a" href="/applyMenu/passfail"><i class="far fa-check-square fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
 		<a class="a" href="/qna/list"><i class="far fa-question-circle fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
 	</div>
 	
 	<div class="text-center mt-2">
 		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="/notice/list">공지사항</a></span>
-		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="#">입사지원</a></span>		
-		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="#">결과확인</a></span>
+		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="/applyMenu/selectApply">입사지원</a></span>		
+		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="/applyMenu/passfail">결과확인</a></span>
 		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="/qna/list">채용문의</a></span>
 	</div>
 	
@@ -74,7 +74,7 @@
 
 	<div class="d-flex justify-content-center mt-4">
 	  <ul class="pagination pagination-sm">
-	    <li class="page-item disabled">
+	    <li class="page-item">
 	      <a class="page-link" href="#">&laquo;</a>
 	    </li>
 	    <li class="page-item active">

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import winwin.service.JobopenService;
 
 @Controller
-@RequestMapping(value="/apply")
+@RequestMapping(value="/applyMenu")
 public class ApplyMenuController {
 	
 	@Autowired JobopenService jobopenService;

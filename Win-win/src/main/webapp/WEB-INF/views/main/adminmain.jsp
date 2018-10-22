@@ -72,10 +72,10 @@ h6 {
 		<div class="box1 col-4 mt-4"">
 			<div class="row" >
 				<div class="col-6">
-					<h6 class="font-weight-bold mt-2 ml-2"><a href="#">채용공고</a></h6>
+					<h6 class="font-weight-bold mt-2 ml-2"><a href="/jobOpen/list">채용공고</a></h6>
 				</div>
 				<div class="col-6 text-right">
-					<p class="viewmore badge badge-pill font-weight-bold badge-light mt-2"><a href="#">더보기 ></a></p>
+					<p class="viewmore badge badge-pill font-weight-bold badge-light mt-2"><a href="/jobOpen/list">더보기 ></a></p>
 				</div>
 			</div>
 			<div class="underline mt-1" ></div>
@@ -109,7 +109,7 @@ h6 {
 		
 		<div class="col-4 text-center mt-2">
 			<a href="/jobOpen/basicInfo"><button type="button" class="bigbutton btn font-weight-bold text-white btn-lg mt-5 mb-5" style="background: #376092;">채용공고 등록하기</button></a>
-			<a href="#"><button type="button" class="bigbutton btn btn-secondary font-weight-bold btn-lg mt-5 mb-5">공지사항 등록하기</button></a>
+			<a href="/notice/write"><button type="button" class="bigbutton btn btn-secondary font-weight-bold btn-lg mt-5 mb-5">공지사항 등록하기</button></a>
 			<div id="carouselExampleControls" class="carousel slide mt-2" data-ride="carousel">
 			  <div class="carousel-inner">
 			    <div class="carousel-item active">
@@ -134,7 +134,7 @@ h6 {
 			    <span class="sr-only">Next</span>
 			  </a>
 			</div>
-			<a href="#"><button type="button" class="btn btn-secondary font-weight-bold btn-sm mt-2" style="width: 300px">지원현황 바로가기</button></a>
+			<a href="/support/list"><button type="button" class="btn btn-secondary font-weight-bold btn-sm mt-2" style="width: 300px">지원현황 바로가기</button></a>
 		</div>
 	</div>
 	
