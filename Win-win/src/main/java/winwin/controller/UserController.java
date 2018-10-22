@@ -69,6 +69,7 @@ public class UserController {
 	public String loginProc(User user, HttpSession session,  RedirectAttributes ra) {
 
 		logger.info("로그인 활성화");
+		logger.info(user.toString());
 		
 		//개인키 취득
 				PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
@@ -87,13 +88,13 @@ public class UserController {
 				try {
 		
 					String email = rsaUtil.getDecryptText(key, user.getUserid());
-					String password = rsaUtil.getDecryptText(key, user.getPassword());
+					String password = rsaUtil.getDecryptText(key, user.getPwd());
 					
 					logger.info("복호화 한 email : " + email);
 					logger.info("복호화 한 password : " + password);
 					logger.info(user.toString());
 					user.setUserid(email);
-					user.setPassword(password);
+					user.setPwd(password);
 					boolean success = userservice.login(user);
 					
 					if(success==true) {

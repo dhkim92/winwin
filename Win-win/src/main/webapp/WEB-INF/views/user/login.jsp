@@ -61,7 +61,7 @@
 							</td>
 							<td>
 								<input type="password" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="password" name="password" placeholder="패스워드" required>
+								id="pwd" name="pwd" placeholder="패스워드" required>
 							</td>
 						</tr>
 						<tr>
@@ -86,7 +86,7 @@
 		<!-- 실제 서버로 전송되는 form -->
 	<form action="/user/login" method="post" id="hiddenForm">
 	        <input type="hidden" name="userid" />
-	        <input type="hidden" name="password" />
+	        <input type="hidden" name="pwd" />
 	</form>
 
 		<div class="col-12 mt-4 mb-5 text-center">
@@ -147,7 +147,7 @@ $(document).ready(function() {
 });
 
 var $userid = $("#hiddenForm input[name='userid']");
-var $password = $("#hiddenForm input[name='password']");
+var $pwd = $("#hiddenForm input[name='pwd']");
 
 // Server로부터 받은 공개키 입력
 var rsa = new RSAKey();
@@ -161,9 +161,9 @@ $("#loginForm").submit(function(e) {
 
     // 아이디/비밀번호 암호화 후 hidden form으로 submit
     var userid = $(this).find("#userid").val();
-    var password = $(this).find("#password").val();
+    var pwd = $(this).find("#pwd").val();
     $userid.val(rsa.encrypt(userid)); // 아이디 암호화
-    $password.val(rsa.encrypt(password)); // 비밀번호 암호화
+    $pwd.val(rsa.encrypt(pwd)); // 비밀번호 암호화
     $("#hiddenForm").submit();
 });	
 

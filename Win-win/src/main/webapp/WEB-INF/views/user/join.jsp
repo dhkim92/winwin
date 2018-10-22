@@ -94,7 +94,7 @@
 							</td>
 							<td class="align-middle">
 								<input type="password" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="password" name="password" placeholder="패스워드" 
+								id="pwd" name="pwd" placeholder="패스워드" 
 								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,16}"
 								title="비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자(!@#$%^&*)를 혼합해서 사용하셔야합니다." required>
 								<ul>
@@ -166,7 +166,7 @@ $(function(){
     $("#pwdSuccess").hide();
     $("#pwdFail").hide();
     $("#pwConfirm").keyup(function(){
-        var pwd1=$("#password").val();
+        var pwd1=$("#pwd").val();
         var pwd2=$("#pwConfirm").val();
         if(pwd2 == "") {
         	$("#pwdSuccess").hide();

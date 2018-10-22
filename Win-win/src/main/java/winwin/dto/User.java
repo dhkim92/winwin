@@ -5,12 +5,12 @@ public class User {
 	private String userid;
 	private String username;
 	private String phone;
-	private String password;
+	private String pwd;
 	private String pwConfirm;
 	
 	@Override
 	public String toString() {
-		return "Member [userid=" + userid + ", username=" + username + ", phone=" + phone + ", password=" + password
+		return "User [userid=" + userid + ", username=" + username + ", phone=" + phone + ", pwd=" + pwd
 				+ ", pwConfirm=" + pwConfirm + "]";
 	}
 
@@ -38,12 +38,12 @@ public class User {
 		this.phone = phone;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	public String getPwConfirm() {
@@ -53,5 +53,6 @@ public class User {
 	public void setPwConfirm(String pwConfirm) {
 		this.pwConfirm = pwConfirm;
 	}
+	
 	
 }
