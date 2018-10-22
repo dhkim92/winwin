@@ -45,6 +45,12 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+		
+		
+		$("#btnOk").click(function() {
+			location.href="#";
+		});
+		
 			
 		// Get the modal
 		var modal = document.getElementById('myModal');
@@ -53,7 +59,9 @@
 		var btn = document.getElementById("myBtn");
 		
 		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];                                          
+		var span = document.getElementsByClassName("close")[0];     
+
+		var btnClose = document.getElementById("btnClose");
 		
 		// When the user clicks on the button, open the modal 
 		btn.onclick = function() {
@@ -64,6 +72,11 @@
 		span.onclick = function() {
 		    modal.style.display = "none";
 		}
+		
+		btnClose.onclick = function() {
+		    modal.style.display = "none";
+		}
+		
 		
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
@@ -107,8 +120,8 @@
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
-				<button type="button" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
-				<button type="button" class="font-weight-bold btn btn-secondary">닫기</button>
+				<button type="button" id="btnOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
+				<button type="button" id="btnClose" class="font-weight-bold btn btn-secondary">닫기</button>
 				</div>
 			</div>
 	      </div>
