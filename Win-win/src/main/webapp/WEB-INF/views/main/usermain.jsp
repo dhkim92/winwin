@@ -4,7 +4,7 @@
 
 <style type="text/css">
 
-a {
+.a {
   text-decoration: none !important; 
   color: black !important;
 }
@@ -26,21 +26,21 @@ a {
 	</div>
 
 	<div class="text-center mt-3">
-		<a href="/notice/list"><i class="fas fa-bullhorn fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
-		<a href="#"><i class="far fa-edit fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>		
-		<a href="#"><i class="far fa-check-square fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
-		<a href="/qna/list"><i class="far fa-question-circle fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
+		<a class="a" href="/notice/list"><i class="fas fa-bullhorn fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
+		<a class="a" href="#"><i class="far fa-edit fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>		
+		<a class="a" href="#"><i class="far fa-check-square fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
+		<a class="a" href="/qna/list"><i class="far fa-question-circle fa-2x ml-5 mr-5 pl-4 pr-4"></i></a>
 	</div>
 	
 	<div class="text-center mt-2">
-		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a href="/notice/list">공지사항</a></span>
-		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a href="#">입사지원</a></span>		
-		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a href="#">결과확인</a></span>
-		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a href="/qna/list">채용문의</a></span>
+		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="/notice/list">공지사항</a></span>
+		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="#">입사지원</a></span>		
+		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="#">결과확인</a></span>
+		<span class="title ml-5 mr-5 pl-3 pr-2 font-weight-bold"><a class="a" href="/qna/list">채용문의</a></span>
 	</div>
 	
 	<hr class="mt-5" style="height:1px; width:750px; background-color: lightgray">
-	<span class="ml-5 pl-5"></span><span class="title ml-5 pl-5 font-weight-bold"><a href="/jobOpen/list">채용공고</a></span>
+	<span class="ml-5 pl-5"></span><span class="title ml-5 pl-5 font-weight-bold"><a class="a" href="/jobOpen/list">채용공고</a></span>
 	
 	<div class="text-center mt-4">
 		<table class="table table-sm col-md-8 " align="center">
