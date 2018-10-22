@@ -27,11 +27,6 @@ public class UserController {
 	private static final Logger logger =
 			LoggerFactory.getLogger(UserController.class);
 	
-
-	@RequestMapping(value="/user/main", method=RequestMethod.GET)
-	public void main() {
-		logger.info("메인 페이지");
-	}
 	
 	@RequestMapping(value="/user/join", method=RequestMethod.GET)
 	public void join() {
