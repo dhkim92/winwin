@@ -34,10 +34,10 @@ public class QnaBoardController {
 	
 	@RequestMapping(value="/qna/view", method=RequestMethod.GET)
 	public void view(QnaBoard board,Model m) {
-		QnaBoard resBoard = service.view(board);
-		List<QnaComment> comments = service.selectCommentByBoardNo(board);
-		m.addAttribute("board", resBoard);
-		m.addAttribute("comments", comments);
+//		QnaBoard resBoard = service.view(board);
+//		List<QnaComment> comments = service.selectCommentByBoardNo(board);
+//		m.addAttribute("board", resBoard);
+//		m.addAttribute("comments", comments);
 		
 	}
 	
@@ -67,7 +67,7 @@ public class QnaBoardController {
 	
 	@RequestMapping(value="/qna/update", method=RequestMethod.GET)
 	public void update(QnaBoard board) {
-		service.view(board);
+//		service.view(board);
 	}
 	
 	@RequestMapping(value="/qna/update", method=RequestMethod.POST)
