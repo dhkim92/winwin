@@ -136,10 +136,10 @@
 					</thead>
 					<tbody>
 						<tr>
-							<th scope="row" class="text-center">20</th>
-							<td class="text-center">경력 사원 입사지원서</td>
-							<td class="text-center">18.08.23</td>
-							<td class="text-center">문재환</td>
+							<th scope="row" class="text-center align-middle">20</th>
+							<td class="text-center align-middle">경력 사원 입사지원서</td>
+							<td class="text-center align-middle">18.08.23</td>
+							<td class="text-center align-middle">문재환</td>
 							<td class="text-center"><button type="button"
 									class="btn btn-primary btn-sm" data-toggle="modal"
 									data-target="#exampleModal">포트폴리오</button></td>
