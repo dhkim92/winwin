@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp"%>
+
 <style>
 </style>
 
@@ -157,7 +158,7 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" name="liName" class="mr-1" style="width:200px" disabled/><input type="button" value="검색"/><input type="button" value="취소"/></td>
+                  <td class="align-middle"><input type="text" id="selectLicense" name="liName" class="mr-1" style="width:200px" /><input id="myBtn" type="button" style="margin-right: 3px;" value="검색"/><input type="button" value="취소"/></td>
                   <td class="align-middle"><input type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
                   <td class="align-middle"><input type="text" name="liOrgan" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
@@ -363,4 +364,5 @@ $(document).ready(function() {
 
 </script> 
 
+<%@ include file="../apply/licenseAPI.jsp"%>
 <%@ include file="../include/footer.jsp"%>
