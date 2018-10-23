@@ -13,4 +13,6 @@ public interface UserService {
 	public User info(User user);
 
 	public void join(User user);
+
+	public boolean idcheck(User user);
 }

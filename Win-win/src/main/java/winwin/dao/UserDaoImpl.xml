@@ -17,4 +17,8 @@
 	<select id="select" resultType="winwin.dto.User">
 		select * from member where userid=#{userid }
 	</select>
+	
+	<select id="idcheck" parameterType="winwin.dto.User" resultType="int" >
+		select count(*) from member where userid=#{userid }
+	</select>
   </mapper>

@@ -24,4 +24,13 @@ public class UserServiceImpl implements UserService {
 	public void join(User user) {
 		userdao.join(user);
 	}
+
+	@Override
+	public boolean idcheck(User user) {
+		if(userdao.idcheck(user) > 0) {
+			return false;
+		}
+		return true;
+		
+	}
 }

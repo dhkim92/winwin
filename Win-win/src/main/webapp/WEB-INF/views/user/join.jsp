@@ -4,46 +4,6 @@
 
 <style>
 
- /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding-left: 10px; 
-            padding-right: 10px; 
-            border: 1px solid #888;
-            width: 38%; /* 모달 폭 지정 */ 
-        }
-        
-        .modal-footer {
-       	 border-top: none;
-        }
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right; 
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
 
 .cols {
 	width: 5%;
@@ -83,7 +43,7 @@
 		
 		<div class="col-12 mt-3">
 		<p class="font-weight-bold h5" style="line-height: 200%;">회원 가입 정보</p>
-			<form action="/user/join" method="post">
+			<form action="/user/join" name="frm" id="frm" method="post">
 				<table class="table table-sm">
 					<tbody>
 						<tr>
@@ -166,7 +126,7 @@
 				</table>
 				
 				<div class="col-12 mt-5 mb-5 text-center">
-					<button type="submit" id="submit" class="btn btn-primary btn-sm mr-3"
+					<button type="button" id="joinOk" class="btn btn-primary btn-sm mr-3"
 						style="width: 90px;">회원가입</button>
 					<button type="button" id="btnLogin" class="btn btn-primary btn-sm ml-2"
 						style="width: 90px;">로그인 이동</button>
@@ -193,14 +153,12 @@
 			</table>
 		</div>
 		
-		
 	</div>
 </div>
 </div>
 
-  <!-- The Modal -->
-    <div id="myModal" class="modal">
- 
+
+ <div id="myModal" class="modal">
 	      <!-- Modal content -->
 	      <div class="modal-content">
 	      	
@@ -216,107 +174,236 @@
 	     	
 	     	<!-- 모달 내용 입력하는 부분 -->
 	     	<div>
-	     	<div class="mt-4">
-	        <p class="font-weight-bold text-center">모달 내용입력</p> 
-	<!--         <select id="license" class="js-example-basic-single" > -->
-	<!-- 		</select> -->
-			</div>
+		     	<div class="mt-4">
+			        <p class="font-weight-bold text-center" id="idChecking"></p>
+				</div>
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
-				<button type="button" id="btnOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
-				<button type="button" id="btnClose" class="font-weight-bold btn btn-secondary">닫기</button>
+				<button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button>
 				</div>
 			</div>
 	      </div>
 	 
 	    </div>
     </div>
-
+  
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
 
-$(function(){
-    $("#pwdSuccess").hide();
-    $("#pwdFail").hide();
-    $("#pwConfirm").keyup(function(){
-        var pwd1=$("#pwd").val();
-        var pwd2=$("#pwConfirm").val();
-        if(pwd2 == "") {
-        	$("#pwdSuccess").hide();
-            $("#pwdFail").hide();
-        } else if(pwd1 != "" || pwd2 != ""){
-            if(pwd1 == pwd2){
-                $("#pwdSuccess").show();
-                $("#pwdFail").hide();
-                $("#submit").removeAttr("disabled");
-            }else{
-                $("#pwdSuccess").hide();
-                $("#pwdFail").show();
-                $("#submit").attr("disabled", "disabled");
-            }    
-        }
-    });
-});
+	$(document).ready(function() {
 
-$(document).ready(function() {
-	
-	$("#btnLogin").click(function() {
-		location.href="/user/login";
+		$("#btnLogin").click(function() {
+			location.href = "/user/login";
+		});
+
+		$("#btnOk").click(function() {
+			location.href = "/user/login";
+		});
+
 	});
 	
-	$("#btnOk").click(function() {
-		location.href="/user/login";
-	});
-	
-	
-	// Get the modal
-	var modal = document.getElementById('myModal');
-	
-	// Get the button that opens the modal
-	var btn = document.getElementById("idConfirm");
-	
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];     
-	
-	var btnClose = document.getElementById("btnClose");
-	
-	// When the user clicks on the button, open the modal 
-	btn.onclick = function() {
-	    modal.style.display = "block";
-	}
-	
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
-	    modal.style.display = "none";
-	}
-	
-	btnClose.onclick = function() {
-	    modal.style.display = "none";
-	}
-	
-	
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-	    if (event.target == modal) {
-	        modal.style.display = "none";
-	    }
-	}
-	
-});
-
-function han(obj) {
-	var pattern = /[^(ㄱ-힣)]/; //한글만 허용 할때
-	if (pattern.test(obj.value)) {
-		alert("한글성명은 한글만 허용합니다.");
-		obj.value = '';
-		obj.focus();
+	// 이메일 형식 체크
+	function validateEmail(userid) {
+		var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		if (filter.test(userid)) {
+		return true;
+	} else {
 		return false;
+		}
 	}
-}
+	
+// 	function validatePhone(sEmail) {
+// 		var filter = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+// 		if (filter.test(sEmail)) {
+// 		return true;
+// 	} else {
+// 		return false;
+// 		}
+// 	}
+	
+	
+	
+	$(function() {
+		//idck 버튼을 클릭했을 때 
+		var idck = 0;
+
+		$("#idConfirm").click(
+			function() {
+			
+				//userid 를 param.
+				var userid = $("#userid").val();
+
+				if (userid == "") {
+					alert("이메일 주소를 입력하시오.");
+					$("#userid").addClass("is-invalid");
+					$("#joinOk").attr("disabled", "disabled");
+				} else if(validateEmail(userid)==false){
+					alert("이메일 형식이 맞지 않습니다.");
+					$("#userid").addClass("is-invalid");
+					$("#joinOk").attr("disabled", "disabled");
+				} else {
+
+				$.ajax({
+					type : 'POST',
+					url : "/user/idcheck",
+					dataType : "json",
+					data : {
+					userid : userid
+					},
+
+					success : function(data) {
+					if (data.success == 0) {
+
+						var modal = document.getElementById('myModal');
+						modal.style.display = "block";
+						var span = document.getElementsByClassName("close")[0];
+						var btnClose = document.getElementById("btnClose");
+											
+						span.onclick = function() {
+							modal.style.display = "none";
+							}
+
+							btnClose.onclick = function() {
+							modal.style.display = "none";
+							}
+
+							$('#idChecking').html("중복된아이디입니다.");
+							$("#userid").addClass("is-invalid");
+							$("#joinOk").attr("disabled", "disabled");
+							$("#userid").focus();
+
+							} else {
+								var modal = document.getElementById('myModal');
+								modal.style.display = "block";
+								var span = document.getElementsByClassName("close")[0];
+
+								var btnClose = document.getElementById("btnClose");
+											
+								span.onclick = function() {
+									modal.style.display = "none";
+								}
+
+								btnClose.onclick = function() {
+									modal.style.display = "none";
+								}
+
+								$('#idChecking').html("사용가능한 아이디입니다.");
+								$("#userid").removeClass("is-invalid");
+								$("#joinOk").removeAttr("disabled");
+								$("#phone").focus();
+								//아이디가 중복하지 않으면  idck = 1 
+								idck = 1;
+
+							}
+						},
+					error : function(error) {
+					alert("error : " + error);
+					}
+				});
+			}
+
+		});
+
+				
+		$("#joinOk").click(function() {
+			
+		    	
+			if (idck == 0) {
+				var modal = document.getElementById('myModal');
+				modal.style.display = "block";
+				var span = document.getElementsByClassName("close")[0];
+
+				var btnClose = document.getElementById("btnClose");
+				
+				span.onclick = function() {
+					modal.style.display = "none";
+				}
+
+				btnClose.onclick = function() {
+					modal.style.display = "none";
+				}
+
+				$('#idChecking').html("이메일 중복 확인하여 주십시오.");
+				return false;
+				
+			} else {
+		
+				var modal = document.getElementById('myModal');
+				modal.style.display = "block";
+				var span = document.getElementsByClassName("close")[0];
+
+				var btnClose = document.getElementById("btnClose");
+				
+				span.onclick = function() {
+					modal.style.display = "none";
+				}
+
+				btnClose.onclick = function() {
+					modal.style.display = "none";
+				}
+
+				$('#idChecking').html("회원가입을 축하드립니다.");
+				$("#frm").submit();
+			    
+				}
+		    
+		});
+	
+	});
+	
+	
+	$(function() {
+		$("#pwdSuccess").hide();
+		$("#pwdFail").hide();
+		$("#pwConfirm").keyup(function() {
+			var pwd1 = $("#pwd").val();
+			var pwd2 = $("#pwConfirm").val();
+			if (pwd2 == "") {
+				$("#pwdSuccess").hide();
+				$("#pwdFail").hide();
+			} else if (pwd1 != "" || pwd2 != "") {
+				if (pwd1 == pwd2) {
+					$("#pwdSuccess").show();
+					$("#pwdFail").hide();
+					$("#pwConfirm").removeClass("is-invalid")
+					$("#joinOk").removeAttr("disabled");
+				} else {
+					$("#pwdSuccess").hide();
+					$("#pwdFail").show();
+					$("#pwConfirm").addClass("is-invalid")
+					$("#joinOk").attr("disabled", "disabled");
+				}
+			}
+		});
+	});
 
 
+	function han(obj) {
+		var pattern = /[^(ㄱ-힣)]/; //한글만 허용 할때
+		if (pattern.test(obj.value)) {
+			var modal = document.getElementById('myModal');
+			modal.style.display = "block";
+			var span = document.getElementsByClassName("close")[0];
+
+			var btnClose = document.getElementById("btnClose");
+			
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+
+			btnClose.onclick = function() {
+				modal.style.display = "none";
+			}
+
+			$('#idChecking').html("한글성명은 한글만 허용합니다.");
+			obj.value = '';
+			obj.focus();
+			return false;
+		}
+	}
 </script>
+
 
 <%@ include file="../include/footer.jsp"%>

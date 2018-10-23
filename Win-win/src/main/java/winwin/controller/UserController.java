@@ -1,7 +1,11 @@
 package winwin.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.PrivateKey;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import winwin.dto.User;
 import winwin.dto.RSA;
+import winwin.dto.User;
 import winwin.service.UserService;
 import winwin.util.RSAUtil;
 
@@ -40,6 +44,25 @@ public class UserController {
 		userservice.join(user);
 		
 		return "redirect:/user/login";
+	}
+	
+	@RequestMapping(value="/user/idcheck", method=RequestMethod.POST)
+	public void idcheck(HttpServletRequest request, HttpServletResponse resp, User user) {
+		logger.info("아이디 중복확인");
+		
+		String userid = request.getParameter("userid");
+		user.setUserid(userid);
+		logger.info(user.toString());
+		boolean success = userservice.idcheck(user);
+		resp.setContentType("application/json; charset=utf-8");
+		 PrintWriter out;
+	      try {
+	         out = resp.getWriter();
+	         out.append("{\"success\":"+success+"}");
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+		
 	}
 	
 	@RequestMapping(value="/user/login", method=RequestMethod.GET)

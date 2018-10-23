@@ -10,4 +10,6 @@ public interface UserDao {
 
 	public void join(User user);
 
+	public int idcheck(User user);
+
 }
