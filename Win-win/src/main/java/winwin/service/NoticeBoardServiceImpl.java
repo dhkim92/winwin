@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import winwin.dao.NoticeBoardDao;
-import winwin.dto.File;
+import winwin.dto.Material;
 import winwin.dto.NoticeBoard;
 import winwin.util.Paging;
 
@@ -47,22 +47,22 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 	}
 
 	@Override
-	public void insertFile(File file) {
+	public void insertFile(Material file) {
 		dao.insertFile(file);
 	}
 
 	@Override
-	public void deleteFile(File file) {
+	public void deleteFile(Material file) {
 		dao.deleteFile(file);
 	}
 
 	@Override
-	public List<File> FilesByBoardNo(NoticeBoard board) {
+	public List<Material> FilesByBoardNo(NoticeBoard board) {
 		return dao.FilesByBoardNo(board);
 	}
 
 	@Override
-	public File selectFile(File file) {
+	public Material selectFile(Material file) {
 		return dao.selectFile(file);
 	}
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import winwin.dto.File;
+import winwin.dto.Material;
 import winwin.dto.NoticeBoard;
 import winwin.service.NoticeBoardService;
 import winwin.util.Paging;
@@ -36,14 +36,14 @@ public class NoticeBoardController {
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
 	public void view(NoticeBoard board,Model m) {
 //		NoticeBoard resBoard = service.view(board);
-//		List<File> files = service.FilesByBoardNo(board);
+		List<Material> files = service.FilesByBoardNo(board);
 //		m.addAttribute("board", resBoard);
 //		m.addAttribute("files", files);
 		
 	}
 	
 	@RequestMapping(value="/notice/download", method=RequestMethod.POST)
-	public void download(File file) {
+	public void download(Material file) {
 		service.selectFile(file);
 	}
 	
@@ -53,7 +53,7 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
-	public void writeProc(MultipartFile up,NoticeBoard board,File file) {
+	public void writeProc(MultipartFile up,NoticeBoard board,Material file) {
 		if(up==null) {
 			service.write(board);
 		}else {
@@ -63,7 +63,7 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/notice/delete", method=RequestMethod.POST)
-	public String delete(NoticeBoard board, File file) {
+	public String delete(NoticeBoard board, Material file) {
 		service.deleteBoard(board);
 		service.deleteFile(file);
 		return "redirect:/notice/list";
@@ -76,7 +76,7 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
-	public void updateProc(MultipartFile up,NoticeBoard board, File file) {
+	public void updateProc(MultipartFile up,NoticeBoard board, Material file) {
 		if(up==null) {
 			service.deleteFilesByBoardNo(board);
 			service.updateBoard(board);

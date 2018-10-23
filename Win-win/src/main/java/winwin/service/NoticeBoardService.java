@@ -2,7 +2,7 @@ package winwin.service;
 
 import java.util.List;
 
-import winwin.dto.File;
+import winwin.dto.Material;
 import winwin.dto.NoticeBoard;
 import winwin.util.Paging;
 
@@ -20,14 +20,14 @@ public interface NoticeBoardService {
 	
 	public void deleteBoard(NoticeBoard board);
 	
-	public void insertFile(File file);
+	public void insertFile(Material file);
 	
-	public void deleteFile(File file);
+	public void deleteFile(Material file);
 	
 	public void deleteFilesByBoardNo(NoticeBoard board);
 	
-	public File selectFile(File file);
+	public Material selectFile(Material file);
 	
-	public List<File> FilesByBoardNo(NoticeBoard board);
+	public List<Material> FilesByBoardNo(NoticeBoard board);
 	
 }
