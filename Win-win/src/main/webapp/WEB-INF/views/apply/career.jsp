@@ -364,5 +364,5 @@ $(document).ready(function() {
 
 </script>
 
-<%@ include file="../apply/licenseAPI.jsp"%>
+<%@ include file="../apply/colMajorAPI.jsp"%>
 <%@ include file="../include/footer.jsp"%>

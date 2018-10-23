@@ -19,7 +19,7 @@ $(document).ready(function() {
 			for(var i=0; i<data.length; i++){
 				value[i] = data[i].facilName;
 	         	         
-	         	var valarr = value[i].split(", ")
+	         	var valarr = value[i].split(", ");
 	      	 	for(var k=0; k<valarr.length; k++){
 
 	      	 		$("#major").append(

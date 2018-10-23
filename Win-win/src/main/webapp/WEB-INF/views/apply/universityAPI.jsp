@@ -18,11 +18,16 @@ $(document).ready(function() {
 	    	var value = new Array();
 	      	for(var i=0; i<data.length; i++){
 	      		value[i] = data[i].schoolName;
-	      		$("#university").append(
-	      			$("<option>").attr(
-	                	"value", value[i]
-	                 ).text(value[i])
-	            );
+	      	}
+	      	
+	      	value.sort();
+	      	
+	      	for(var i=0; i<data.length; i++){
+	      		$("#college").append(
+		      		$("<option>").attr(
+		            	"value", value[i]
+		                 ).text(value[i])
+		        );
 	      	}
 	   }
 	};

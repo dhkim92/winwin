@@ -9,33 +9,37 @@
 
 	$(document).ready(function() {
 			
-		$.ajax({
-			type:"post"
-			, url:"/apply/licenseAPI"
-			, dataType: "json"
-			, success: function( data ) {
-				
-				var list = JSON.parse(data.data).response.body.items.item;
-				
-				var value = new Array();
-				
-				for(var i=0; i<list.length; i++) { 
-					value[i] = list[i].jmfldnm;
-					$("#license").append(
-						$("<option>").attr(
-							"value", value[i]
-						).text(value[i])
-					);
-				}
-				
-				console.log(value);
-				
-				if(data.result) {
-				}
-			}, error: function() {
-				alert("error");
-			}
-		})
+	      $.ajax({
+	          type:"post"
+	          , url:"/apply/licenseAPI"
+	          , dataType: "json"
+	          , success: function( data ) {
+	             
+//	              console.log(JSON.parse(data.data).response.body.items.item);
+	             
+	             var list = JSON.parse(data.data).response.body.items.item;
+	             
+	             var value = new Array();
+	             for(var i=0; i<list.length; i++) {
+	                value[i] = list[i].jmfldnm;
+	             }
+
+	             value.sort();
+
+	             for(var i=0; i<list.length; i++) {
+	                $("#license").append(
+	                   $("<option>").attr(
+	                      "value", value[i]
+	                   ).text(value[i])
+	                );
+	             }
+	             
+	             console.log(value);
+
+	          }, error: function() {
+	             alert("error");
+	          }
+	       })
 			
 	 
 		$('.js-example-basic-single').select2();
