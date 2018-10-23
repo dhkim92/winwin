@@ -4,41 +4,37 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
-
 <script type="text/javascript">
 
-	$(document).ready(function() {
-			
-		$.ajax({
-			type:"post"
-			, url:"/apply/licenseAPI"
-			, dataType: "json"
-			, success: function( data ) {
-				
-				var list = JSON.parse(data.data).response.body.items.item;
-				
-				var value = new Array();
-				
-				for(var i=0; i<list.length; i++) { 
-					value[i] = list[i].jmfldnm;
-					$("#license").append(
-						$("<option>").attr(
-							"value", value[i]
-						).text(value[i])
-					);
-				}
-				
-				console.log(value);
-				
-				if(data.result) {
-				}
-			}, error: function() {
-				alert("error");
-			}
-		})
-			
-	 
-		$('.js-example-basic-single').select2();
+$(document).ready(function() {
+
+	var xhr = new XMLHttpRequest();
+	var url = "http://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=3d2366be6096ee283bd1d6eaede2a14f&svcType=api&svcCode=MAJOR&contentType=json&gubun=univ_list&univSe=college&thisPage=1&perPage=204"
+	xhr.open('GET', url);
+	xhr.onreadystatechange = function () {
+	    if (this.readyState == 4) {
+	    	var data = JSON.parse(this.responseText).dataSearch.content;
+	      
+			var value = new Array();
+			for(var i=0; i<data.length; i++){
+				value[i] = data[i].facilName;
+	         	         
+	         	var valarr = value[i].split(", ")
+	      	 	for(var k=0; k<valarr.length; k++){
+
+	      	 		$("#major").append(
+	                  $("<option>").attr(
+	                     "value", valarr[k]
+	                  ).text(valarr[k])
+	               );
+	         	}	         
+	      }
+	    }
+	};
+
+	xhr.send('');
+            
+      $('.js-example-basic-single').select2();
 		
 
 		
@@ -77,27 +73,25 @@
 		
 		
 		$("#btnOk").click(function() {
-			var select = $("#license option:selected").val();
-			var write =$("#writeLicense").val();
+			var select = $("#major option:selected").val();
+			var write =$("#writeMajor").val();
 			
-			if($('#license').val() == "자격증을 선택하세요") {
-				$('#selectLicense').val(write);
+			if($('#major').val() == "학과명을 선택하세요") {
+				$('#selectHighSchool').val(write);
 				modal.style.display = "none";
-				$("#writeLicense").val('');
+				$("#writeMajor").val('');
 				
 			} else {
-				$('#selectLicense').val(select);
+				$('#selectMajor').val(select);
 				modal.style.display = "none";
-				$("#license").val('자격증을 선택하세요').trigger('change') ;
+				$("#major").val('학과명을 선택하세요').trigger('change') ;
 			}
 
 			
 		});
-		
-
-			
-	});	
-	
+      
+   });   
+   
 </script>
 
 </head>
@@ -122,20 +116,20 @@
 	     	<!-- 모달 내용 입력하는 부분 -->
 	     	<div>
 		     	<div class="mt-4">
-			        <p class="font-weight-bold text-center" style="margin-bottom: 0;">국가기술자격 자격증을 검색하세요.</p>
-			        <p class="text-center mb-3" style="font-size: 13px; margin-bottom: 0;">( 기능사/산업기사/기사/기능장/기술사 )</p>
+			        <p class="font-weight-bold text-center" style="margin-bottom: 0;">학과명을 검색하세요.</p>
+			        <p class="text-center mb-3" style="font-size: 13px; margin-bottom: 0;">해외대학 검색시 대/소문자를 구분하여 입력해 주세요.</p>
 			        <div class="d-flex justify-content-center">
-				        <select id="license" class="js-example-basic-single " style="width: 200px;">
-				        	 <option selected="selected">자격증을 선택하세요</option>
+				        <select id="major" class="js-example-basic-single " style="width: 200px;">
+				        	 <option selected="selected">학과명을 선택하세요</option>
 						</select>
 					</div> 
 					
 				</div>
 
 				<div class="mt-4">
-			        <p class="font-weight-bold text-center mb-3" style="margin-bottom: 0;">그밖의 자격증을 직접 입력하세요.</p>
+			        <p class="font-weight-bold text-center mb-3" style="margin-bottom: 0;">그밖의 학과명을 직접 입력하세요.</p>
 			        <div class="d-flex justify-content-center">
-			        	<input type="text" id="writeLicense" style="width:200px;"/>
+			        	<input type="text" id="writeMajor" style="width:200px;"/>
 			        </div>
 				</div>
 			
@@ -151,4 +145,3 @@
     </div>
 
 </body>
-</html>

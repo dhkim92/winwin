@@ -4,41 +4,32 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
-
 <script type="text/javascript">
 
-	$(document).ready(function() {
-			
-		$.ajax({
-			type:"post"
-			, url:"/apply/licenseAPI"
-			, dataType: "json"
-			, success: function( data ) {
-				
-				var list = JSON.parse(data.data).response.body.items.item;
-				
-				var value = new Array();
-				
-				for(var i=0; i<list.length; i++) { 
-					value[i] = list[i].jmfldnm;
-					$("#license").append(
-						$("<option>").attr(
-							"value", value[i]
-						).text(value[i])
-					);
-				}
-				
-				console.log(value);
-				
-				if(data.result) {
-				}
-			}, error: function() {
-				alert("error");
-			}
-		})
-			
-	 
-		$('.js-example-basic-single').select2();
+$(document).ready(function() {
+      
+	var xhr = new XMLHttpRequest();
+	var url = "http://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=3d2366be6096ee283bd1d6eaede2a14f&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list&sch1=100323&thisPage=1&perPage=300"
+	xhr.open('GET', url);
+	xhr.onreadystatechange = function () {
+		if (this.readyState == 4) {
+			var data = JSON.parse(this.responseText).dataSearch.content;
+	      
+	    	var value = new Array();
+	      	for(var i=0; i<data.length; i++){
+	      		value[i] = data[i].schoolName;
+	      		$("#university").append(
+	      			$("<option>").attr(
+	                	"value", value[i]
+	                 ).text(value[i])
+	            );
+	      	}
+	   }
+	};
+
+	xhr.send('');
+            
+      $('.js-example-basic-single').select2();
 		
 
 		
@@ -77,27 +68,25 @@
 		
 		
 		$("#btnOk").click(function() {
-			var select = $("#license option:selected").val();
-			var write =$("#writeLicense").val();
+			var select = $("#university option:selected").val();
+			var write =$("#writeUniversity").val();
 			
-			if($('#license').val() == "자격증을 선택하세요") {
-				$('#selectLicense').val(write);
+			if($('#university').val() == "학교명을 선택하세요") {
+				$('#selectUniversity').val(write);
 				modal.style.display = "none";
-				$("#writeLicense").val('');
+				$("#writeUniversity").val('');
 				
 			} else {
-				$('#selectLicense').val(select);
+				$('#selectUniversity').val(select);
 				modal.style.display = "none";
-				$("#license").val('자격증을 선택하세요').trigger('change') ;
+				$("#university").val('학교명을 선택하세요').trigger('change') ;
 			}
 
 			
 		});
-		
-
-			
-	});	
-	
+      
+   });   
+   
 </script>
 
 </head>
@@ -122,20 +111,20 @@
 	     	<!-- 모달 내용 입력하는 부분 -->
 	     	<div>
 		     	<div class="mt-4">
-			        <p class="font-weight-bold text-center" style="margin-bottom: 0;">국가기술자격 자격증을 검색하세요.</p>
-			        <p class="text-center mb-3" style="font-size: 13px; margin-bottom: 0;">( 기능사/산업기사/기사/기능장/기술사 )</p>
+			        <p class="font-weight-bold text-center" style="margin-bottom: 0;">학교명을 검색하세요.</p>
+			        <p class="text-center mb-3" style="font-size: 13px; margin-bottom: 0;">해외대학 검색시 대/소문자를 구분하여 입력해 주세요.</p>
 			        <div class="d-flex justify-content-center">
-				        <select id="license" class="js-example-basic-single " style="width: 200px;">
-				        	 <option selected="selected">자격증을 선택하세요</option>
+				        <select id="university" class="js-example-basic-single " style="width: 200px;">
+				        	 <option selected="selected">학교명을 선택하세요</option>
 						</select>
 					</div> 
 					
 				</div>
 
 				<div class="mt-4">
-			        <p class="font-weight-bold text-center mb-3" style="margin-bottom: 0;">그밖의 자격증을 직접 입력하세요.</p>
+			        <p class="font-weight-bold text-center mb-3" style="margin-bottom: 0;">그밖의 학교명을 직접 입력하세요.</p>
 			        <div class="d-flex justify-content-center">
-			        	<input type="text" id="writeLicense" style="width:200px;"/>
+			        	<input type="text" id="writeUniversity" style="width:200px;"/>
 			        </div>
 				</div>
 			
