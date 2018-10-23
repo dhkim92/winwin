@@ -19,9 +19,13 @@ tr,td{
 
 <%@ include file="../include/adminHeader.jsp"%>
 
-<h1>메인페이지</h1>
-<hr>
-<table>
+<div class = "container">
+<div class="container">
+<div class="col-12 mt-5">
+	<p class="font-weight-bold h3">통계관리</p>
+	<hr style="border: solid #376092;">
+</div>
+<table class="table table-md-12 text-center">
 	<tr>   <!--Div that will hold the pie chart-->
     	<td><div id="chart_div"></div></td>
     	<td><div id="another_chart_div"></div></td>
@@ -178,7 +182,8 @@ tr,td{
 		</td>
 	</tr>
 </table>    
-    
+</div>
+</div>    
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
@@ -217,10 +222,20 @@ function drawChart1() {
         ]);
 
         // Set chart options
-        var options = {'title':'Win-Win 연령대별 입사 지원자 수',
-                       'width':400,
-                       'height':300,
-                       'bars':'vertical'};
+        var options = {'chart.title':'Win-Win 연령대별 입사 지원자 수',
+                       'width':330,
+                       'height':270,
+                       'bars':'vertical',
+                       'legend': { position: 'none' },
+                       'bar': {groupWidth: '50%'},
+                       'hAxis' : {
+                    	   title: 'Hello',
+                    	   titleTextStyle: {
+                    	     color: '#FF0000'
+                    	   }
+                    	 },
+                       'chartArea':{left:20,top:50,width:'50%',height:'50%'}
+                       };
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.charts.Bar(document.getElementById('chart_div'));
@@ -242,8 +257,16 @@ function drawChart2() {
 
     // Set chart options
     var options = {'title':'학력별 지원자 현황',
-                   'width':400,
-                   'height':300};
+                   'width':330,
+                   'height':270,
+                   	'is3D':false,
+                    'pieSliceText': 'label',
+                    'pieStartAngle': 100,
+                    'chartArea':{left:20,top:50,width:'100%',height:'100%'},
+                    'legend':{position: 'none', textStyle: {color: 'black', fontSize: 11},alignment : 'end'},
+                    'titleTextStyle':{color: 'black', fontSize: 20,bold: true},
+                    'colors': ['#657ea5', '#184b9b', '#386fc4', '#76a5ed'],
+    				};
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById('another_chart_div'));
@@ -266,8 +289,8 @@ function drawChart3() {
 
     // Set chart options
     var options = {title:'분기별 지원자 현황',
-                   width:400,
-                   height:300,
+                   width:330,
+                   height:270,
                    	hAxis:{title:'분기'},
     				vAxis:{minValue:0, maxValue:1800}
     				};
