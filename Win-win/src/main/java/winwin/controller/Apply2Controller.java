@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import winwin.dto.Activity;
 import winwin.dto.Career;
 import winwin.dto.Experience;
-import winwin.dto.File;
+import winwin.dto.Material;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
@@ -40,7 +40,7 @@ public class Apply2Controller {
 	@RequestMapping(value="/career", method=RequestMethod.POST) 
 	public ModelAndView careerProc
 		(@RequestParam(value="language[]")List<Language> language, @RequestParam(value="license[]")List<License> license, @RequestParam(value="career[]")List<Career> career, 
-					@RequestParam(value="activity[]")List<Activity> activity, @RequestParam(value="experience[]")List<Experience> experience, @RequestParam(value="file[]")List<File> file) {
+					@RequestParam(value="activity[]")List<Activity> activity, @RequestParam(value="experience[]")List<Experience> experience, @RequestParam(value="file[]")List<Material> file) {
 		
 		for(int i=0; i<language.size(); i++) {
 	         apply2Service.insertLanguage(language.get(i));
@@ -71,7 +71,7 @@ public class Apply2Controller {
 	}
 		
 	@RequestMapping(value="/careerUpdate", method=RequestMethod.GET)
-	public void careerUpdate(Model model, HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, File file) {
+	public void careerUpdate(Model model, HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, Material file) {
 		
 		apply2Service.selectLanguage(language);
 		apply2Service.selectLicense(license);
@@ -86,7 +86,7 @@ public class Apply2Controller {
 	@RequestMapping(value="/careerUpdate", method=RequestMethod.POST)
 	public ModelAndView careerUpdateProc
 	(@RequestParam(value="language[]")List<Language> language, @RequestParam(value="license[]")List<License> license, @RequestParam(value="career[]")List<Career> career, 
-				@RequestParam(value="activity[]")List<Activity> activity, @RequestParam(value="experience[]")List<Experience> experience, @RequestParam(value="file[]")List<File> file) {
+				@RequestParam(value="activity[]")List<Activity> activity, @RequestParam(value="experience[]")List<Experience> experience, @RequestParam(value="file[]")List<Material> file) {
 	
 		for(int i=0; i<language.size(); i++) {
 	         apply2Service.updateLanguage(language.get(i));

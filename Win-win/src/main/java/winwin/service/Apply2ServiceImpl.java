@@ -7,7 +7,7 @@ import winwin.dao.Apply2Dao;
 import winwin.dto.Activity;
 import winwin.dto.Career;
 import winwin.dto.Experience;
-import winwin.dto.File;
+import winwin.dto.Material;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
@@ -82,15 +82,15 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.updateExperience(experience);
 	}
 	
-	public void insertFile(File file) {
+	public void insertFile(Material file) {
 		dao.insertFile(file);
 	}
 	
-	public File selectFile(File file) {
+	public Material selectFile(Material file) {
 		return dao.selectFile(file);
 	}
 	
-	public void updateFile(File file) {
+	public void updateFile(Material file) {
 		dao.updateFile(file);
 	}
 	

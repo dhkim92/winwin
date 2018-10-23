@@ -3,7 +3,7 @@ package winwin.dao;
 import winwin.dto.Activity;
 import winwin.dto.Career;
 import winwin.dto.Experience;
-import winwin.dto.File;
+import winwin.dto.Material;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
@@ -43,11 +43,11 @@ public interface Apply2Dao {
 
 	public void updateExperience(Experience experience);
 
-	public void insertFile(File file);
+	public void insertFile(Material file);
 
-	public File selectFile(File file);
+	public Material selectFile(Material file);
 
-	public void updateFile(File file);
+	public void updateFile(Material file);
 	
 	public void insertIntroduce(Introduce introduce);
 

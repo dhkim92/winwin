@@ -2,7 +2,7 @@ package winwin.dto;
 
 import java.util.Date;
 
-public class File {
+public class Material {
 
 	int fileNo;
 	String userId;
@@ -17,7 +17,7 @@ public class File {
 	
 	@Override
 	public String toString() {
-		return "File [fileNo=" + fileNo + ", userId=" + userId + ", adminCode=" + adminCode + ", noticeNo=" + noticeNo
+		return "Material [fileNo=" + fileNo + ", userId=" + userId + ", adminCode=" + adminCode + ", noticeNo=" + noticeNo
 				+ ", portfolioId=" + portfolioId + ", originName=" + originName + ", storedName=" + storedName
 				+ ", date=" + date + ", size=" + size + ", path=" + path + "]";
 	}

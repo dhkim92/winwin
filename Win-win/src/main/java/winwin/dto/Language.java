@@ -6,7 +6,7 @@ public class Language {
 	String userId;
 	int jobopenNo;
 	String lName;
-	String level;
+	String grade;
 	String testName;
 	String score;
 	String lDate;
@@ -15,7 +15,7 @@ public class Language {
 	@Override
 	public String toString() {
 		return "Language [languageNo=" + languageNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", lName="
-				+ lName + ", level=" + level + ", testName=" + testName + ", score=" + score + ", lDate=" + lDate
+				+ lName + ", grade=" + grade + ", testName=" + testName + ", score=" + score + ", lDate=" + lDate
 				+ ", lOrgan=" + lOrgan + "]";
 	}
 
@@ -51,12 +51,12 @@ public class Language {
 		this.lName = lName;
 	}
 
-	public String getLevel() {
-		return level;
+	public String getgrade() {
+		return grade;
 	}
 
-	public void setLevel(String level) {
-		this.level = level;
+	public void setgrade(String grade) {
+		this.grade = grade;
 	}
 
 	public String getTestName() {
