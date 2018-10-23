@@ -108,7 +108,7 @@
 			
 	<div class="row justify-content-center mt-5">
 		<div class="col-8">
-			<form action="/jobOpen/basicInfo" method="post">
+			<form action="/jobOpen/basicInfo" method="post" id="formId">
 				<div class="form-inline m-3">
 				    <div class="col-2">
 				      <label for="title">공고 제목</label>
@@ -124,13 +124,13 @@
 				    </div>
 				    <div class="col-2">
 				    	<div class="form-check-inline">
-					    	<input type="checkbox" class="form-check-input" id="classify_new" name="offer[]" checked>
+					    	<input type="checkbox" class="form-check-input" id="classify_new" name="offer" value="신입" checked>
 							<label class="form-check-label" for="classify_new">신입</label>
 						</div>
 					</div>
 					<div class="col-2">
 						<div class="form-check-inline">
-							<input type="checkbox" class="form-check-input" id="classify_exp" name="offer[]">
+							<input type="checkbox" class="form-check-input" id="classify_exp" name="offer" value="경력">
 							<label class="form-check-label" for="classify_exp">경력</label>
 						</div>
 				    </div>
@@ -142,25 +142,25 @@
 			    	</div>
 			    	<div class="col-2">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="permanent" name="form" checked>
+			    			<input type="checkbox" class="form-check-input" id="permanent" name="form" value="정규직" checked>
 							<label class="form-check-label" for="permanent">정규직</label>
 			    		</div>
 			    	</div>
 			    	<div class="col-2">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="contract" name="form" >
+			    			<input type="checkbox" class="form-check-input" id="contract" name="form" value="계약직">
 							<label class="form-check-label" for="contract">계약직</label>
 			    		</div>
 			    	</div>
 			    	<div class="col-2">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="intern" name="form" >
+			    			<input type="checkbox" class="form-check-input" id="intern" name="form" value="인턴" >
 							<label class="form-check-label" for="intern">인턴</label>
 			    		</div>
 			    	</div>
 			    	<div class="col-2">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="military" name="form" >
+			    			<input type="checkbox" class="form-check-input" id="military" name="form" value="병역특례" >
 							<label class="form-check-label" for="military">병역특례</label>
 			    		</div>
 			    	</div>
@@ -173,8 +173,8 @@
 			    	</div>
 			    	<div class="col-3" >
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="rulPay" name="rulPay" checked>
-							<label class="form-check-label" for="rulPay">회사 내규에 따름</label>
+			    			<input type="checkbox" class="form-check-input" id="rulPay" name="rulePay" value="회사 내규에 따름" checked>
+							<label class="form-check-label" for="rulePay">회사 내규에 따름</label>
 			    		</div>
 			    	</div>
 			    	<div class="col-7">
@@ -196,7 +196,7 @@
 			    	</div>
 			    	<div class="col-3" >
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="allOpen" name="allOpen" checked>
+			    			<input type="checkbox" class="form-check-input" id="allOpen" name="allOpen" value="상시 채용" checked>
 							<label class="form-check-label" for="allOpen">상시 채용</label>
 			    		</div>
 			    	</div>
@@ -229,6 +229,10 @@
 <script>
 
 $(document).ready(function(){
+	
+	$("#btnCancel").click(function(){
+		location.href="/main/adminmain";
+	});
 	
 	
 	$("#payCheck").click(function(){

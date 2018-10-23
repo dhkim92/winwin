@@ -7,9 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
@@ -39,13 +42,27 @@ public class JobopenController {
 	}
 	
 	@RequestMapping(value="/basicInfo", method=RequestMethod.POST)
-	public String basicProc(JobopenBasic jobopenBasic) {
-		
-		System.out.println(jobopenBasic);
-		
-//		jobopenService.writeBasic(jobopenBasic);
-		
-		return "detailInfo";
+	public String basicProc(@Validated JobopenBasic jobopenBasic, Errors errors, HttpSession session) {
+	      if( errors.hasErrors() ) {
+	          jobopenBasic.setEndDate(null);
+	          jobopenBasic.setStartDate(null);
+	          jobopenBasic.setStartPay(0);
+	          jobopenBasic.setEndPay(0);
+	       }
+	      
+	      if(jobopenBasic.getRulePay()==null) {
+	    	  jobopenBasic.setRulePay("0");
+	      }
+	      if(jobopenBasic.getAllOpen()==null) {
+	    	  jobopenBasic.setAllOpen("0");
+	      }
+	      
+	      jobopenService.writeBasic(jobopenBasic);
+	      session.setAttribute("jobopen", jobopenBasic.getJobopenNo());
+	      
+	      System.out.println(jobopenBasic.getJobopenNo());
+	
+		return "redirect:detailInfo";
 	}
 	
 	@RequestMapping(value="/detailInfo", method=RequestMethod.GET)

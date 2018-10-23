@@ -3,15 +3,19 @@ package winwin.dto;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class JobopenBasic {
 	private int jobopenNo; // idx
 	private String title; // 공고제목
-	private List<String> offer; //
+	private String offer; //
 	private String form; //고용 형태
 	private int startPay; //최저 급여
 	private int endPay; // 최고 급여
 	private String rulePay; // 회사내규에 따름
+	@DateTimeFormat(pattern="yyyy-mm-dd")
 	private Date startDate; // 채용 시작일
+	@DateTimeFormat(pattern="yyyy-mm-dd")
 	private Date endDate; // 채용 마감일
 	private String allOpen; // 상시채용
 	private String academic; // 학력제한 - 없을경우 "없음" 삽입
@@ -26,10 +30,19 @@ public class JobopenBasic {
 	
 	@Override
 	public String toString() {
-		return "JobopenBasic [jobopenNo=" + jobopenNo + ", title=" + title + ", form=" + form + ", startPay=" + startPay
-				+ ", endPay=" + endPay + ", rulePay=" + rulePay + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", allOpen=" + allOpen + ", academic=" + academic + ", score=" + score + ", lang=" + lang
-				+ ", etcQual=" + etcQual + ", etc=" + etc + ", writeDate=" + writeDate + ", hit=" + hit + "]";
+		return "JobopenBasic [jobopenNo=" + jobopenNo + ", title=" + title + ", offer=" + offer + ", form=" + form
+				+ ", startPay=" + startPay + ", endPay=" + endPay + ", rulePay=" + rulePay + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", allOpen=" + allOpen + ", academic=" + academic + ", score=" + score
+				+ ", lang=" + lang + ", etcQual=" + etcQual + ", etc=" + etc + ", writeDate=" + writeDate + ", hit="
+				+ hit + "]";
+	}
+	
+	public String getOffer() {
+		return offer;
+	}
+
+	public void setOffer(String offer) {
+		this.offer = offer;
 	}
 	
 	public String getTitle() {

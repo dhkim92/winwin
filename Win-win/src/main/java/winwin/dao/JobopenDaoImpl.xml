@@ -5,4 +5,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="winwin.dao.JobopenDao">
+  
+  	<insert id="insertBasic" parameterType="winwin.dto.JobopenBasic">
+  		<selectKey order="AFTER" keyProperty="jobopenNo" resultType="int">
+  			select JobOpenBasic_seq.nextval from dual
+  		</selectKey>
+  		insert into jobopenBasic(jobopenNo, title, form, startPay, endPay, rulePay, startDate, endDate, allOpen)
+  		values(#{jobopenNo}, #{title}, #{form}, #{startPay}, #{endPay}, #{rulePay},
+  		<if test="startDate!=null and startDate!=''">
+  		#{startDate}, 
+  		</if> 
+  		<if test="startDate==null or startDate==''">
+  		null, 
+  		</if> 
+ 		<if test="endDate!=null and endDate!=''">
+  		#{endDate}, 
+  		</if> 
+  		<if test="endDate==null or endDate==''">
+  		null, 
+  		</if> 
+   		 #{allOpen})
+  	</insert>
+  
   </mapper>
