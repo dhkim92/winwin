@@ -36,7 +36,7 @@ public class NoticeBoardController {
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
 	public void view(NoticeBoard board,Model m) {
 //		NoticeBoard resBoard = service.view(board);
-		List<Material> files = service.FilesByBoardNo(board);
+//		List<Material> files = service.FilesByBoardNo(board);
 //		m.addAttribute("board", resBoard);
 //		m.addAttribute("files", files);
 		

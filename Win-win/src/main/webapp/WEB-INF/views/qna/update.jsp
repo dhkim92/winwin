@@ -7,7 +7,7 @@
 #content{
 	width : 99%
 }
-td{
+tr{
 	font-size: 16px;
 }
 </style>
@@ -15,38 +15,42 @@ td{
 <%@ include file="../include/header.jsp"%>
 
 <div class = "container">
-	<form action="/notice/write" method="post" enctype="multipart/form-data">
+	<form action="/notice/update" method="post" enctype="multipart/form-data">
 	<div class="p-5">
-	<h3 class="text-primary font-weight-bold">공지사항</h3>
+	<h3 class="text-primary font-weight-bold">채용Q&A</h3>
 	<hr style="border: solid #376092;">
 	<table class="table table-sm table-bordered table-hover">
 		<tr>
-			<td class="align-middle text-center" style="background-color: lightgray;width: 300px">
+			<td class="text-center align-middle">
 				<strong>제목</strong>
 			</td>
-			<td class="text-center" style="background-color: lightgray;">
-				<input type="text" class="form-control" id="title" placeholder="제목을 적으세요(66자 이내)"/>
+			<td class="text-center">
+				<input type="text" class="form-control" value="제목은 수정할 수 없습니다" readonly="readonly" id="title" placeholder="제목을 적으세요(66자 이내)"/>
+			</td>
+			<td class="text-center align-middle">
+				<strong>비밀번호</strong>
+			</td>
+			<td class="text-center">
+				<input type="password" class="form-control" id="pw" placeholder="비밀번호를 입력하세요" value="1234"/>
 			</td>
 		</tr>
 		<tr>
 			<td class="text-center">
-			작성일
+				작성자
 			</td>
 			<td class="text-center">
-			2018.09.24
-			</td>
-		</tr>
-		<tr>
-			<td class="text-center">
-			첨부파일
+				이현우
 			</td>
 			<td class="text-center">
-				<input type="file" multiple="multiple" />
+				작성일
+			</td>
+			<td class="text-center">
+				2018.09.24
 			</td>
 		</tr>
 	</table>
 	<div class="p-5">
-		<textarea class="form-control" rows="20" id="content"></textarea>
+		<textarea class="form-control" rows="20" id="content">수정할 내용은 여기에 있습니다. 패스워드를 새로입력할 수 있습니다.</textarea>
 	</div>
 	</div>
 	</form>

@@ -4,6 +4,16 @@
 <%@ include file="../include/CSSLoader.jsp"%>
     
 <style>
+td{
+	font-size: 16px
+}
+#content{
+	max-width: 1080px;
+	max-height: 400px; 
+	overflow-x : hidden;
+	overflow-y : auto;
+	word-wrap: break-word;
+}
 
 </style>
 
@@ -15,24 +25,26 @@
 	<hr style="border: solid #376092;">
 	<table class="table table-sm table-striped table-hover table-condensed">
 		<tr>
-			<td style="width:150px;text-align: center;font-size: 16px">
+			<td class="text-center" style="background-color: lightgray">
 				<strong>제목</strong>
 			</td>
-			<td style="width:750px;text-align: center;font-size: 16px">
+			<td class="text-center" style="background-color: lightgray">
 				<strong>2018년 하반기 채용 금지</strong>
 			</td>
+			<td style="background-color: lightgray"></td>
+			<td style="background-color: lightgray"></td>
 		</tr>
 		<tr>
-			<td style="width:100px;text-align: center">
+			<td class="text-center">
 			작성자
 			</td>
-			<td style="width:350px;text-align: center">
+			<td class="text-center">
 			이현우
 			</td>
-			<td style="width:100px;text-align: center">
+			<td class="text-center">
 			작성일
 			</td>
-			<td style="width:350px;text-align: center">
+			<td class="text-center">
 			2018.09.24
 			</td>
 		</tr>
@@ -41,7 +53,11 @@
 	여기에 게시글의 내용이 보입니다.<br>
 	질문 내용이 포함됩니다.<br>
 	밑에 답변버튼을 누르면 답변하기를 할 수 있습니다.<br>
+	<br><br>
+	
+	
 	</div>
+	
 	<div id="aswBox" class="text-right">
 		<button type="button" class="btn btn-primary" onclick="onAsw();">답변하기</button>
 	</div>
@@ -51,7 +67,12 @@
 		<button type="button" class="btn btn-primary ml-2 mr-2">수정</button>
 		<button type="button" class="btn btn-primary">삭제</button>
 	</div>
-	<br><br><br><br><br>
+	<br><br><br>
+	
+	<div id="commentList">
+		<i class="far fa-comment-dots mr-2" onclick="onComment();"></i><label onclick="onComment();">댓글 목록(0)</label>
+		<hr>
+	</div>
 	<h3 class="font-weight-bold">댓글 남기기</h3>
 	<hr style="border: solid #376092;">
 	<div id="commentBox" class="form-inline text-center">
@@ -79,6 +100,9 @@ function offAsw(){
 	$("#aswBox").html("");
 	var button1 = "<button type='button' class='btn btn-primary' onclick='onAsw();'>답변하기</button>"
 	$("#aswBox").append(button1);
+}
+function onComment(){
+	console.log("댓글 열림");
 }
 </script>
 

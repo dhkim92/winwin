@@ -4,7 +4,9 @@
 <%@ include file="../include/CSSLoader.jsp"%>
     
 <style>
-
+tr{
+	font-size: 16px
+}
 </style>
 
 <%@ include file="../include/header.jsp"%>
@@ -13,28 +15,28 @@
 	<div class="p-5">
 	<h3 class="text-primary font-weight-bold">공지사항</h3>
 	<hr style="border: solid #376092;">
-	<table class="table table-bordered table-hover table-condensed">
+	<table class="table table-sm table-bordered table-hover">
 		<tr>
-			<td style="width:300px;text-align: center;background-color: lightgray; font-size: 16px">
+			<td class="text-center" style="width:300px;background-color: lightgray">
 				<strong>제목</strong>
 			</td>
-			<td style="width:600px;text-align: center;background-color: lightgray; font-size: 16px">
+			<td class="text-center" style="background-color: lightgray">
 				<strong>2018년 하반기 채용 금지</strong>
 			</td>
 		</tr>
 		<tr>
-			<td style="width:300px;text-align: center">
+			<td class="text-center">
 			작성일
 			</td>
-			<td style="width:600px;text-align: center">
+			<td class="text-center">
 			2018.09.24
 			</td>
 		</tr>
 		<tr>
-			<td style="width:300px;text-align: center">
+			<td class="text-center">
 			첨부파일
 			</td>
-			<td style="width:600px;text-align: center">
+			<td class="text-center">
 			<a href="notice/download">파일01.text</a>
 			</td>
 		</tr>
