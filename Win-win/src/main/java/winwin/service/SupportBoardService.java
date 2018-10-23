@@ -12,6 +12,8 @@ public interface SupportBoardService {
 	
 	public List<SupportBoard> list(Paging paging);
 	
+	public Paging getPaging(int curPage, int listCount, int pageCount);
+	
 	public SupportBoard view(SupportBoard board);
 	
 	public SupportBoard Search(String search);

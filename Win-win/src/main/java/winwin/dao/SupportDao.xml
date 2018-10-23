@@ -4,4 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="winwin.dao.SupportDao">
+ 	<resultMap type="winwin.dto.SupportBoard" id="Support">
+ 		<result column="passNo" property="passNo"/>
+ 		<result column="jobopenNo" property="jobopenNo"/>
+ 		<result column="userId" property="userId"/>
+ 		<result column="status" property="status"/>
+ 		<result column="title" property="title"/>
+ 		<result column="applyDate" property="applyDate"/>
+ 	</resultMap>
+ 	<sql id="selectSupportBoard">
+ 		SELECT passNo, jobopenNo, userId, status, title, applyDate FROM apply
+ 	</sql>
+ 	<select id="list" resultMap="Support" parameterType="winwin.util.Paging">
+ 		SELECT * FROM ( SELECT rownum rnum, S.* FROM(
+ 		<include refid="selectSupportBoard"/>
+ 		) S ORDER BY passNo DESC ) R WHERE R.rnum BETWEEN #{startNo} AND #{endNo} ORDER BY rnum
+ 	</select>
+ 	<select id="totalCnt" resultType="int">
+ 		SELECT COUNT(*) CNT FROM (
+ 		<include refid="selectSupportBoard"/>
+ 		) CNT	
+ 	</select>
  </mapper>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ include file="../include/CSSLoader.jsp"%>
 <style>
 #test tr td {
@@ -135,18 +134,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope="row" class="text-center align-middle">20</th>
-							<td class="text-center align-middle">경력 사원 입사지원서</td>
-							<td class="text-center align-middle">18.08.23</td>
-							<td class="text-center align-middle">문재환</td>
-							<td class="text-center"><button type="button"
-									class="btn btn-primary btn-sm" data-toggle="modal"
-									data-target="#exampleModal">포트폴리오</button></td>
-							<td class="text-center"><button type="button"
-									class="btn btn-secondary btn-sm">처리 전</button></td>
-									
-						</tr>
+					<c:forEach items="${list }" var="SupportBoard">
+							<tr>
+								<th scope="row" class="text-center align-middle">${SupportBoard.passNo }</th>
+								<td class="text-center align-middle">${SupportBoard.title }</td>
+								<td class="text-center align-middle">
+								<fmt:formatDate value="${SupportBoard.applyDate}" pattern="yy.MM.dd" /></td>
+								<td class="text-center align-middle">${SupportBoard.userId }</td>
+								<td class="text-center"><button type="button"
+										class="btn btn-primary btn-sm" data-toggle="modal"
+										data-target="#exampleModal">포트폴리오</button></td>
+								<td class="text-center"><button type="button"
+										class="btn btn-secondary btn-sm">${SupportBoard.status }</button></td>
+							</tr>
+							</c:forEach>
 					</tbody>
 				</table>
 			</div>

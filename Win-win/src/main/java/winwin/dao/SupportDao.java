@@ -14,6 +14,8 @@ public interface SupportDao {
 	
 	public SupportBoard view(SupportBoard board);
 	
+	public SupportBoard Search(String search);
+	
 	public SupportBoard status(SupportBoard board);
 
 
