@@ -18,13 +18,13 @@
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="checkbox" id="pass"
 						value="option1" style="width: 20px; height: 20px;"> <label
-						class="form-check-label" for="inlineCheckbox1">합격</label>
+						class="form-check-label font-weight-bold" for="pass" style="font-size: 15px">합격</label>
 				</div>
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="checkbox"
 						id="disqualification" value="option2"
 						style="width: 20px; height: 20px;"> <label
-						class="form-check-label" for="inlineCheckbox2">불합격</label>
+						class="form-check-label font-weight-bold" for="disqualification" style="font-size: 15px">불합격</label>
 				</div>
 				<div class="mt-3">
 					<select class="custom-select" style="width: 457px; height: 40px;"
@@ -47,7 +47,7 @@
 		<div class="row">
 			<div class="col-12 mt-5">
 				<table class="table table-hover">
-					<thead class="thead-light">
+					<thead style="background-color: #eee;">
 						<tr>
 							<th class="text-center align-middle"><input type="checkbox"
 								aria-label="Checkbox for following text input"
@@ -80,7 +80,7 @@
 		<div class="row">
 			<div class="col-12 d-flex justify-content-center">
 				<ul class="pagination">
-					<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a>
+					<li class="page-item"><a class="page-link" href="#">&laquo;</a>
 					</li>
 					<li class="page-item active"><a class="page-link" href="#">1</a>
 					</li>

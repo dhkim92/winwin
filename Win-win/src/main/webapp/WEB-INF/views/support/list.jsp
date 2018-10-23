@@ -21,7 +21,7 @@
 			<div class="col-12 mt-5">
 
 				<table class="table table-bordered">
-					<thead class="thead-light">
+					<thead style="background-color: #eee;">
 						<tr>
 							<th class="text-center">경력</th>
 							<th class="text-center">고용형태</th>
@@ -123,7 +123,7 @@
 		<div class="row">
 			<div class="col-12 mt-5">
 				<table class="table table-hover">
-					<thead class="thead-light">
+					<thead style="background-color: #eee;">
 						<tr>
 							<th class="text-center">번호</th>
 							<th class="text-center">공 고 명</th>
@@ -155,7 +155,7 @@
 		<div class="row">
 			<div class="col-12 d-flex justify-content-center">
 				<ul class="pagination">
-					<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a>
+					<li class="page-item"><a class="page-link" href="#">&laquo;</a>
 					</li>
 					<li class="page-item active"><a class="page-link" href="#">1</a>
 					</li>
