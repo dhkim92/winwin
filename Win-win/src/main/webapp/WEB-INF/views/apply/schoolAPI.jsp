@@ -38,7 +38,7 @@ $(document).ready(function() {
 		var modal = document.getElementById('myModal');
 		
 		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn");
+		var btn = document.getElementById("hsSearch");
 		
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];                                          
@@ -72,12 +72,12 @@ $(document).ready(function() {
 			var write =$("#writeHighSchool").val();
 			
 			if($('#HighSchool').val() == "학교명을 선택하세요") {
-				$('#selectHighSchool').val(write);
+				$('#hsName').val(write);
 				modal.style.display = "none";
 				$("#writeHighSchool").val('');
 				
 			} else {
-				$('#selectHighSchool').val(select);
+				$('#hsName').val(select);
 				modal.style.display = "none";
 				$("#HighSchool").val('학교명을 선택하세요').trigger('change') ;
 			}

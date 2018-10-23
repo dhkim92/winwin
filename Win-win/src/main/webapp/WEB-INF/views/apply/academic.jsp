@@ -84,7 +84,7 @@ $(document).ready(function() {
 	</table>
 	</div>
 
-	<h4 class="mt-4 mb-3 font-weight-bold">학력사항</h4>
+	<h4 class="mt-4 mb-3 font-weight-bold">학력사항<input type="hidden" value="jobopenNo" /></h4>
 	<div class="row">
 		<a href="/apply/userDetailupdate">
 			<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png">
@@ -111,20 +111,21 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-					<input type="text" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
-					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
-					<select style="height:24px; width:70px;" class="hsselect">
-						<option >주/야</option>
-						<option>주간</option>
-						<option>야간</option>
+                  	<input type="hidden" id="category" name="category" value="고등학교"/>
+					<input type="text" id="hsName" name="name" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
+					<input type="button" class="m-1 mr-1" id="hsSearch" value="검색" /><button class="ml-1 mr-1">취소</button>
+					<select style="height:24px; width:70px;" class="hsselect" id="day" name="day">
+						<option value="0">주/야</option>
+						<option value="주간">주간</option>
+						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-                  	<select style="height:24px; width: 110px;" class="hsselect">
-                  		<option>전공</option>
-                  		<option>인문계</option>
-                  		<option>자연계</option>
-                  		<option>실업계</option>
+                  	<select style="height:24px; width: 110px;" class="hsselect" id="major" name="major">
+                  		<option value="0">전공</option>
+                  		<option value="인문계">인문계</option>
+                  		<option value="자연계">자연계</option>
+                  		<option value="실업계">실업계</option>
                   	</select>
                   </td>
                   <td class="align-middle">
@@ -176,14 +177,14 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-					<input type="text" class="mr-1 colTxt" style="width: 110px" readonly/>
-					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
-					<select style="height:24px; width:85px;" class="colTxt">
-						<option>본교/분교</option>
-						<option>본교</option>
-						<option>분교</option>
+					<input type="text" id="colName" name="name" class="mr-1 colTxt" style="width: 110px" readonly/>
+					<button class="m-1 mr-1" id="colSearch">검색</button><button class="ml-1 mr-1">취소</button>
+					<select style="height:24px; width:85px;" class="colselect" >
+						<option value="0">본교/분교</option>
+						<option value="본교">본교</option>
+						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="colTxt">
+					<select style="height:24px; width:70px;" class="colselect">
 						<option>주/야</option>
 						<option>주간</option>
 						<option>야간</option>
@@ -192,17 +193,17 @@ $(document).ready(function() {
                   <td class="align-middle">
 					<input type="text" class="mr-1 colTxt" style="width: 100px" readonly/>
 					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>					                  
- 					<input type="text" class="mr-1 colTxt" style="width: 30px; "/> / <input type="text" class="mr-1 colTxt" style="width: 30px; "/> 만점
+ 					<input type="text" class="mr-1 colTxt" style="width: 30px;" pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> / <input type="text" class="mr-1 colTxt" style="width: 30px; " pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> 만점
                   </td>
                   <td class="align-middle">
                   	<input class="colTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select style="height:24px; width: 70px;" class="colTxt">
+                  	<select style="height:24px; width: 70px;" class="colselect">
                   		<option>입학/편입</option>
                   		<option>입학</option>
                   		<option>편입</option>
                   	</select>
                   	<input class="colTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                   	<select style="height:24px; width: 70px;" class="colTxt">
+                   	<select style="height:24px; width: 70px;" class="colselect">
                   		<option>졸업구분</option>
                   		<option>졸업</option>
                   		<option>졸업예정</option>
@@ -210,7 +211,7 @@ $(document).ready(function() {
                   	</select>                 	
                   </td>
                   <td class="align-middle">
-                    <select class="colTxt">
+                    <select class="colselect">
                   		<option>지역</option>
                   		<option>서울</option>
                   		<option>인천</option>
@@ -251,12 +252,12 @@ $(document).ready(function() {
                   <td class="align-middle">
 					<input type="text" class="mr-1 univTxt" style="width: 110px" readonly/>
 					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
-					<select style="height:24px; width:85px;" class="univTxt">
+					<select style="height:24px; width:85px;" class="univselect">
 						<option>본교/분교</option>
 						<option>본교</option>
 						<option>분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="univTxt">
+					<select style="height:24px; width:70px;" class="univselect">
 						<option>주/야</option>
 						<option>주간</option>
 						<option>야간</option>
@@ -277,13 +278,13 @@ $(document).ready(function() {
                   </td>
                   <td class="align-middle">
                   	<input class="univTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select style="height:24px; width: 75px;" class="univTxt">
+                  	<select style="height:24px; width: 75px;" class="univselect">
                   		<option>입학/편입</option>
                   		<option>입학</option>
                   		<option>편입</option>
                   	</select>
                   	<input class="univTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                   	<select style="height:24px; width: 75px;" class="univTxt">
+                   	<select style="height:24px; width: 75px;" class="univselect">
                   		<option>졸업구분</option>
                   		<option>졸업</option>
                   		<option>졸업예정</option>
@@ -291,7 +292,7 @@ $(document).ready(function() {
                   	</select>                 	
                   </td>
                   <td class="align-middle">
-                    <select class="univTxt">
+                    <select class="univselect">
                   		<option>지역</option>
                   		<option>서울</option>
                   		<option>인천</option>
@@ -330,27 +331,25 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-					<input type="text" class="mr-1 gschoolTxt" style="width: 110px" readonly/>
-					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
-					<select style="height:24px; width:85px;" class="gschoolTxt">
+					<input type="text" class="mr-1 gschoolTxt" style="width: 200px" />
+					<select style="height:24px; width:85px;" class="gsselect">
 						<option>본교/분교</option>
 						<option>본교</option>
 						<option>분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="gschoolTxt">
+					<select style="height:24px; width:70px;" class="gsselect">
 						<option>주/야</option>
 						<option>주간</option>
 						<option>야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-					<input type="text" class="mr-1 gschoolTxt" style="width: 100px" readonly/>
-					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>					                  
+					<input type="text" class="mr-1 gschoolTxt" style="width: 200px" />
  					<input type="text" class="mr-1 gschoolTxt" style="width: 30px; "/> / <input type="text" class="mr-1 gschoolTxt" style="width: 30px; "/> 만점
                   </td>
                   <td class="align-middle">
                   	<input type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" class="gschoolTxt"/>
-                  	<select style="height:24px; width: 80px;" class="gschoolTxt">
+                  	<select style="height:24px; width: 80px;" class="gsselect">
                   		<option>졸업구분</option>
                   		<option>졸업</option>
                   		<option>졸업예정</option>
@@ -358,7 +357,7 @@ $(document).ready(function() {
                   	</select>
                   </td>
                   <td class="align-middle">
-                    <select class="gschoolTxt">
+                    <select class="gsselect">
                   		<option>지역</option>
                   		<option>서울</option>
                   		<option>인천</option>
@@ -412,28 +411,39 @@ $(document).ready(function() {
 <%@ include file="../include/scriptLoader.jsp"%>
 <script>
 $("#hsResetBtn").click(function() {
-	console.log("hs버튼 클릭")
+// 	console.log("hs버튼 클릭")
 	$(".hschoolTxt").val('');
-	$(".hsselect").val('');
-	$(".hsselect").find('option:first').attr('selected', 'selected');
+	$(".hsselect").find('option:first').prop('selected', true);
+// 	console.log("hs버튼 클릭2")
 });
 
 $("#colResetBtn").click(function() {
 	console.log("col 버튼 클릭")
 	$(".colTxt").val('');
+	$(".colselect").find('option:first').prop('selected', true);
+
 
 });
 
 $("#univResetBtn").click(function() {
 	console.log("univ 버튼 클릭")
 	$(".univTxt").val('');
+	$(".univselect").find('option:first').prop('selected', true);
+
 
 });
 
 $("#gsResetBtn").click(function() {
 	console.log("버튼 클릭")
 	$(".gschoolTxt").val('');
+	$(".gsselect").find('option:first').prop('selected', true);
 
+	
 });
 </script>
+<%-- <%@ include file="../apply/collegeAPI.jsp"%>	 --%>
+<%-- <%@ include file="../apply/colMajorAPI.jsp"%>	 --%>
+<%-- <%@ include file="../apply/universityAPI.jsp"%>	 --%>
+<%-- <%@ include file="../apply/majorAPI.jsp"%> --%>
+<%@ include file="../apply/schoolAPI.jsp"%>		
 <%@ include file="../include/footer.jsp"%>	

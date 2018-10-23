@@ -52,6 +52,24 @@ $(document).ready(function() {
 		return ""+nHour+":"+nMin+":"+nSec;
 	}
 	
+	
+	$("#save").click(function() {
+		
+		console.log("저장하고 계속하기 버튼 클릭")
+		var phoneNum;
+		
+		var phoneNum1 = $("#phoneNum1 option:selected").val();
+		var phoneNum2 = $("#phoneNum2").val();
+		var phoneNum3 = $("#phoneNum3").val();
+		
+		phoneNum = phoneNum1+"-"+phoneNum2+"-"+phoneNum3;
+		
+// 		console.log(phoneNum);
+		
+		$("#phoneNum").val(phoneNum);
+		
+	});
+	
 });
 
 </script>
@@ -84,7 +102,7 @@ $(document).ready(function() {
 	</table>
 	</div>
 
-	<h4 class="mt-4 mb-3 font-weight-bold">개인사항</h4>
+	<h4 class="mt-4 mb-3 font-weight-bold">개인사항<input type="hidden" value="jobopenNo" /></h4>
 	<div class="row">
 		<img class="img-fluid d-block ml-3" src="/resources/image/B_userDetail.png">
 		<img class="img-fluid d-block" src="/resources/image/G_academic.png">
@@ -100,18 +118,18 @@ $(document).ready(function() {
 	<tbody>
 	<tr>
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">성명<span style="color : red;">*</span></th>
-		<td style="width: 40%"><span style="font-size: 10px ;">
-			한글 </span>한상근 / <span style="font-size: 10px ;">영어 </span>
+		<td style="width: 40%">
+		<span style="font-size: 10px ;">한글 </span><input style="border: none; width: 50px;" type="text" id="username" name="username" value="한상근" readonly/> / <span style="font-size: 10px ;">영어 </span>
 			<input type="text" class="ml-1 mr-1" id="eName" name="eName" onkeyup="english(this)"/>
 			<span style="font-size: 10px ;"> 예)Hong Gil Dong</span>
 		</td>
 		<th class="text-center align-middle bg-secondary">이메일<span style="color : red;">*</span></th>
-		<td>youngeun940725@gmail.com</td>
+		<td><input style="border: none; width: 300px; " id="userId" name="userId" type="text" value="youngeun940725@gmail.com" readonly/></td>
 	</tr>
 	<tr>
 		<th class="text-center align-middle bg-secondary" style="width: 5%" >생년월일<span style="color : red;">*</span></th>
 		<td colspan="3">
-			<input type="text" class="numberOnly"/>
+			<input type="text" name="birth" id="birth" pattern="[0-9]{8}" title="생년월일을  YYYYMMDD 형식으로 입력하십시오." class="numberOnly"/>
 			<span style="font-size: 10px ;">예)19900101</span>
 		</td>
 	</tr>
@@ -120,12 +138,12 @@ $(document).ready(function() {
 		<td colspan="3">
 			<table>
 				<tr>
-					<input type="text" style="width: 80px;" name="postcode" placeholder="우편번호" id="postcode" readonly onclick="Search()"/>
+					<input type="text" style="width: 80px;" id="zipCode" name="zipCode" placeholder="우편번호" readonly onclick="Search()"/>
 					<button class="ml-1 mr-1" onclick="Search()">우편번호 찾기</button>
 					<input type="text" style="width: 364px; " name="address" id="address" placeholder="주소는 자동입력됩니다" readonly>
 				</tr>
 				<tr>
-					<input type="text" style="width: 550px ;" class="mt-1" name="address2" id="address2" placeholder="상세주소를 입력하세요"/>
+					<input type="text" style="width: 550px ;" class="mt-1" name="addressDetail" id="addressDetail" placeholder="상세주소를 입력하세요"/>
 				</tr>	
 			</table>
 		
@@ -134,33 +152,34 @@ $(document).ready(function() {
 	<tr>
 		<th class="text-center align-middle bg-secondary">긴급연락처<span style="color : red;">*</span></th>
 		<td colspan="3">  		
-			<select style="width: 100px; height: 27px" id="living" name="living">
-				<option>010</option>
-				<option>02</option>
-				<option>051</option>
-				<option>053</option>
-				<option>032</option>
-				<option>062</option>
-				<option>042</option>
-				<option>052</option>
-				<option>044</option>
-				<option>031</option>
-				<option>033</option>
-				<option>043</option>
-				<option>041</option>
-				<option>063</option>
-				<option>061</option>
-				<option>054</option>
-				<option>055</option>
-				<option>064</option>
+			<select style="width: 100px; height: 27px" id="phoneNum1" name="phoneNum1">
+				<option value="010">010</option>
+				<option value="02">02</option>
+				<option value="051">051</option>
+				<option value="053">053</option>
+				<option value="032">032</option>
+				<option value="062">062</option>
+				<option value="042">042</option>
+				<option value="052">052</option>
+				<option value="044">044</option>
+				<option value="031">031</option>
+				<option value="033">033</option>
+				<option value="043">043</option>
+				<option value="041">041</option>
+				<option value="063">063</option>
+				<option value="061">061</option>
+				<option value="054">054</option>
+				<option value="055">055</option>
+				<option value="064">064</option>
 			</select>
-				-<input type="text" class="ml-1 mr-1 numberOnly" style="width: 100px ;" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);" >-<input type="text" class="ml-1 mr-1 numberOnly" style="width: 100px ;" />
+				-<input type="text" id="phoneNum2" name="phoneNum2" class="ml-1 mr-1 numberOnly" style="width: 100px ;" pattern="[0-9]{3,4}" title="" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);" >-<input type="text" id="phoneNum3" name="phoneNum3" class="ml-1 mr-1 numberOnly" pattern="[0-9]{3,4}" title="" style="width: 100px ;" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);" />
+			<input type="text" id="phoneNum" name="phoneNum" />	
 		</td>
 	</tr>
 	
 	<tr>
 		<th class="text-center align-middle bg-secondary">휴대전화<span style="color : red;">*</span></th>
-		<td colspan="3">010 - 1234 - 5678</td>
+		<td colspan="3"><input style="border: none; width: 200px; " type="text" id="phone" name="phone" value="010 - 1234 - 5678" /></td>
 	</tr>
 	
 	</tbody>
@@ -174,10 +193,10 @@ $(document).ready(function() {
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">보훈여부<span style="color : red;">*</span></th>
 		<td colspan="2">
 			<div style="width: 50%;" class="input-group">
-     			<input class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
-  				<label class="mr-5 mb-0" style="width: 100px ;">보훈</label>
-     			<input class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
-				<label class="mr-5 mb-0" style="width: 100px ;">비보훈</label>	
+     			<input name="veteran" id="veteran" class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
+  				<label for="veteran" class="mr-5 mb-0" style="width: 100px ;">보훈</label>
+     			<input name="veteran" id="notVeteran" class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
+				<label for="notVeteran" class="mr-5 mb-0" style="width: 100px ;">비보훈</label>	
 			</div>
 		</td>
 
@@ -186,16 +205,16 @@ $(document).ready(function() {
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">장애여부<span style="color : red;">*</span></th>
 		<td colspan="2">
 			<div style="width: 50%;" class="input-group">
-     			<input class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
-  				<label class="mr-5 mb-0" style="width: 100px ;">장애</label>
-     			<input class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
-				<label class="mr-5 mb-0" style="width: 100px ;">비장애</label>	
+     			<input name="disable" id="disable" class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
+  				<label for="disable" class="mr-5 mb-0" style="width: 100px ;">장애</label>
+     			<input name="disable" id="notDisable" class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
+				<label for="notDisable" class="mr-5 mb-0" style="width: 100px ;">비장애</label>	
 			</div>
 		</td>		
 	</tr>
 	<tr>
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">취미/특기</th>
-		<td colspan="2"><input type="text"></td>
+		<td colspan="2"><input type="text" name="interest" id="interest"></td>
 	</tr>
 	</tbody>
 	</table>
@@ -223,7 +242,7 @@ $(document).ready(function() {
 	</div>
 	
 	<div class="col-12 mt-5 p-0 d-flex justify-content-end">
-		<input class="btn btn-primary text-white" type="submit" value="저장하고 계속하기"/>
+		<input class="btn btn-primary text-white" type="button" id="save" name="save" value="저장하고 계속하기"/>
 	</div>
       
 </div>
@@ -262,11 +281,11 @@ function Search() {
 			}
 			
 			//우편번호와 주소 정보를 해당필드에 넣는다.
-			document.getElementById('postcode').value = data.zonecode;
+			document.getElementById('zipCode').value = data.zonecode;
 			document.getElementById('address').value = fullAddr;
 			
 			//커서를 상세주소 필드로 이동한다.
-			document.getElementById('address2').focus();
+			document.getElementById('addressDetail').focus();
 		}
 	}).open();
 }
@@ -286,6 +305,7 @@ function fn_press(event, type) {
 	if(type == "numbers") {
 		if(event.keyCode < 48 || event.keyCode > 57) return false;
 	}
+	
 }
 
 // 한글입력 방지

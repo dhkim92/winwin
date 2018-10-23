@@ -105,9 +105,9 @@ $(document).ready(function() {
 			<tbody>
 				<tr style="line-height: 1.5em;">
 					<th class="text-center align-middle" style="width: 20% ;">병역구분<span style="color : red;">*</span></th>
-					<th class="text-center align-middle" style="width: 55% ;">복무기간<span style="color : red;">*</span></th>
-					<th class="text-center align-middle" style="width: 15% ;">군별<span style="color : red;">*</span></th>
-					<th class="text-center align-middle" style="width: 10% ;">계급<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 40% ;">복무기간<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 20% ;">군별<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 20% ;">계급<span style="color : red;">*</span></th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
