@@ -97,47 +97,47 @@ $(document).ready(function() {
 	</div>
 	
 	<h6 class="mt-5 font-weight-bold">고등학교
-		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;">초기화</button>
+		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="hsResetBtn">초기화</button>
 	</h6>
 	
-	<div class="col-md-12 border border-secondary mt-3 p-0">
-		<table class="table col-md-12 mb-0 text-center table-sm">
+	<div class="col-md-12 mt-3 p-0">
+		<table class="table border border-secondary col-md-12 mb-0 text-center table-sm">
 			<tbody>
 				<tr style="line-height: 1.5em;">
-					<th class="text-center align-middle">학교명<span style="color : red;">*</span></th>
-					<th class="text-center align-middle">전공<span style="color : red;">*</span></th>
-					<th class="text-center align-middle">졸업년도<span style="color : red;">*</span></th>
-					<th class="text-center align-middle">지역<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 37% ;">학교명<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 33% ;">전공<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 22% ;">졸업년도<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 8% ;">지역<span style="color : red;">*</span></th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-					<input type="text" class="mr-1" style="width: 200px" readonly/>
+					<input type="text" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
 					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
-					<select style="height:24px; width:70px;">
-						<option>주/야</option>
+					<select style="height:24px; width:70px;" class="hsselect">
+						<option >주/야</option>
 						<option>주간</option>
 						<option>야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-                  	<select style="height:24px; width: 75px;">
+                  	<select style="height:24px; width: 110px;" class="hsselect">
                   		<option>전공</option>
                   		<option>인문계</option>
                   		<option>자연계</option>
                   		<option>실업계</option>
                   	</select>
                   </td>
-                  <td>
-                  	<input type="date" name="liDate" min="2000-01-01" max="3000-12-31" class="form-control" style="height:24px; width: 100px;">
-                  	<select>
+                  <td class="align-middle">
+                  	<input class="hschoolTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select  class="hsselect" style="height:24px; width: 80px;">
                   		<option>졸업구분</option>
                   		<option>졸업</option>
                   		<option>졸업예정</option>
                   		<option>재학</option>
                   	</select>
                   </td>
-                  <td>
-                    <select>
+                  <td class="align-middle">
+                    <select class="hsselect">
                   		<option>지역</option>
                   		<option>서울</option>
                   		<option>인천</option>
@@ -161,8 +161,279 @@ $(document).ready(function() {
 		</table>
 	</div>
 	
+	<h6 class="mt-5 font-weight-bold">전문대학
+		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="colResetBtn">초기화</button>
+	</h6>
+	
+	<div class="col-md-12 mt-3 p-0">
+		<table class="table border border-secondary col-md-12 mb-0 text-center table-sm">
+			<tbody>
+				<tr style="line-height: 1.5em;">
+					<th class="text-center align-middle" style="width: 37% ;">학교명<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 33% ;">전공<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 22% ;">재학기간<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 8% ;">지역<span style="color : red;">*</span></th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="align-middle">
+					<input type="text" class="mr-1 colTxt" style="width: 110px" readonly/>
+					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
+					<select style="height:24px; width:85px;" class="colTxt">
+						<option>본교/분교</option>
+						<option>본교</option>
+						<option>분교</option>
+					</select>
+					<select style="height:24px; width:70px;" class="colTxt">
+						<option>주/야</option>
+						<option>주간</option>
+						<option>야간</option>
+					</select>
+                  </td>
+                  <td class="align-middle">
+					<input type="text" class="mr-1 colTxt" style="width: 100px" readonly/>
+					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>					                  
+ 					<input type="text" class="mr-1 colTxt" style="width: 30px; "/> / <input type="text" class="mr-1 colTxt" style="width: 30px; "/> 만점
+                  </td>
+                  <td class="align-middle">
+                  	<input class="colTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select style="height:24px; width: 70px;" class="colTxt">
+                  		<option>입학/편입</option>
+                  		<option>입학</option>
+                  		<option>편입</option>
+                  	</select>
+                  	<input class="colTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                   	<select style="height:24px; width: 70px;" class="colTxt">
+                  		<option>졸업구분</option>
+                  		<option>졸업</option>
+                  		<option>졸업예정</option>
+                  		<option>재학</option>
+                  	</select>                 	
+                  </td>
+                  <td class="align-middle">
+                    <select class="colTxt">
+                  		<option>지역</option>
+                  		<option>서울</option>
+                  		<option>인천</option>
+                  		<option>대전</option>
+                  		<option>광주</option>
+                  		<option>부산</option>
+                  		<option>울산</option>
+                  		<option>대구</option>
+                  		<option>강원</option>
+                  		<option>경기</option>
+                  		<option>충북</option>
+                  		<option>충남</option>
+                  		<option>전북</option>
+                  		<option>전남</option>
+                  		<option>경북</option>
+                  		<option>경남</option>
+                  	</select>
+                  </td>
+                </tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<h6 class="mt-5 font-weight-bold">대학교
+		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="univResetBtn">초기화</button>
+	</h6>
+
+	<div class="col-md-12 mt-3 p-0">
+		<table class="table border border-secondary col-md-12 mb-0 text-center table-sm">
+			<tbody>
+				<tr style="line-height: 1.5em;">
+					<th class="text-center align-middle" style="width: 37% ;">학교명<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 33% ;" colspan="2">전공<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 22% ;">재학기간<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 8% ;">지역<span style="color : red;">*</span></th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="align-middle">
+					<input type="text" class="mr-1 univTxt" style="width: 110px" readonly/>
+					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
+					<select style="height:24px; width:85px;" class="univTxt">
+						<option>본교/분교</option>
+						<option>본교</option>
+						<option>분교</option>
+					</select>
+					<select style="height:24px; width:70px;" class="univTxt">
+						<option>주/야</option>
+						<option>주간</option>
+						<option>야간</option>
+					</select>
+                  </td>
+                  <td class="align-middle">
+                  <div>
+					<input type="text" class="mr-1 univTxt" style="width: 100px" readonly/>
+					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
+				  </div>
+				  <div>		
+					<input type="text" class="mr-1 univTxt" style="width: 100px" readonly/>
+					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>					                  
+				  </div>
+				  </td>
+				  <td>						                  
+ 					<input type="text" class="mr-1 mt-2 univTxt" style="width: 30px; "/> / <input type="text" class="mr-1 univTxt" style="width: 30px; "/> 만점
+                  </td>
+                  <td class="align-middle">
+                  	<input class="univTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select style="height:24px; width: 75px;" class="univTxt">
+                  		<option>입학/편입</option>
+                  		<option>입학</option>
+                  		<option>편입</option>
+                  	</select>
+                  	<input class="univTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                   	<select style="height:24px; width: 75px;" class="univTxt">
+                  		<option>졸업구분</option>
+                  		<option>졸업</option>
+                  		<option>졸업예정</option>
+                  		<option>재학</option>
+                  	</select>                 	
+                  </td>
+                  <td class="align-middle">
+                    <select class="univTxt">
+                  		<option>지역</option>
+                  		<option>서울</option>
+                  		<option>인천</option>
+                  		<option>대전</option>
+                  		<option>광주</option>
+                  		<option>부산</option>
+                  		<option>울산</option>
+                  		<option>대구</option>
+                  		<option>강원</option>
+                  		<option>경기</option>
+                  		<option>충북</option>
+                  		<option>충남</option>
+                  		<option>전북</option>
+                  		<option>전남</option>
+                  		<option>경북</option>
+                  		<option>경남</option>
+                  	</select>
+                  </td>
+                </tr>
+			</tbody>
+		</table>
+	</div>
+
+	<h6 class="mt-5 font-weight-bold">대학원
+		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="gsResetBtn">초기화</button>
+	</h6>
+	
+	<div class="col-md-12 mt-3 p-0">
+		<table class="table border border-secondary col-md-12 mb-0 text-center table-sm">
+			<tbody>
+				<tr style="line-height: 1.5em;">
+					<th class="text-center align-middle" style="width: 37% ;">학교명<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 33% ;">전공<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 22% ;">졸업년도<span style="color : red;">*</span></th>
+					<th class="text-center align-middle" style="width: 8% ;">지역<span style="color : red;">*</span></th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="align-middle">
+					<input type="text" class="mr-1 gschoolTxt" style="width: 110px" readonly/>
+					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
+					<select style="height:24px; width:85px;" class="gschoolTxt">
+						<option>본교/분교</option>
+						<option>본교</option>
+						<option>분교</option>
+					</select>
+					<select style="height:24px; width:70px;" class="gschoolTxt">
+						<option>주/야</option>
+						<option>주간</option>
+						<option>야간</option>
+					</select>
+                  </td>
+                  <td class="align-middle">
+					<input type="text" class="mr-1 gschoolTxt" style="width: 100px" readonly/>
+					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>					                  
+ 					<input type="text" class="mr-1 gschoolTxt" style="width: 30px; "/> / <input type="text" class="mr-1 gschoolTxt" style="width: 30px; "/> 만점
+                  </td>
+                  <td class="align-middle">
+                  	<input type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" class="gschoolTxt"/>
+                  	<select style="height:24px; width: 80px;" class="gschoolTxt">
+                  		<option>졸업구분</option>
+                  		<option>졸업</option>
+                  		<option>졸업예정</option>
+                  		<option>재학</option>
+                  	</select>
+                  </td>
+                  <td class="align-middle">
+                    <select class="gschoolTxt">
+                  		<option>지역</option>
+                  		<option>서울</option>
+                  		<option>인천</option>
+                  		<option>대전</option>
+                  		<option>광주</option>
+                  		<option>부산</option>
+                  		<option>울산</option>
+                  		<option>대구</option>
+                  		<option>강원</option>
+                  		<option>경기</option>
+                  		<option>충북</option>
+                  		<option>충남</option>
+                  		<option>전북</option>
+                  		<option>전남</option>
+                  		<option>경북</option>
+                  		<option>경남</option>
+                  	</select>
+                  </td>
+                </tr>
+			</tbody>
+		</table>
+	</div>
+	<br><br><br><br><br><br>
+	
+		
+	<div class="col-12 mt-5 p-0">
+         <table class="table border">
+            <tbody>
+               <tr>
+                  <th class="text-center table-light align-middle">
+                     <i class="fas fa-exclamation-triangle fa-3x"></i>
+                  </th>
+                  <td class="table-light align-middle"> 
+                  <ul class="mb-0">
+                     <li style="line-height: 150%;"><strong><span class="text-info">학력사항</span>은 최종학력까지 졸업년월, 학교명, 지역명 등을 빠짐없이 기재하여 주시기 바랍니다.</strong></li>
+                     <li style="line-height: 150%;"><strong><span class="text-danger">(전문대학 이상의 성적란에는 본인의 누계평점 및 만점을 기재합니다. 예)3.0/4.5)</span></strong></li>
+                  </ul>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+	</div>
+	
+	<div class="col-12 mt-5 p-0 d-flex justify-content-end">
+		<input class="btn btn-primary text-white" type="submit" value="저장하고 계속하기"/>
+	</div>
+
 	
 </div>	
 	
 <%@ include file="../include/scriptLoader.jsp"%>
+<script>
+$("#hsResetBtn").click(function() {
+	console.log("hs버튼 클릭")
+	$(".hschoolTxt").val('');
+	$(".hsselect").val('');
+	$(".hsselect").find('option:first').attr('selected', 'selected');
+});
+
+$("#colResetBtn").click(function() {
+	console.log("col 버튼 클릭")
+	$(".colTxt").val('');
+
+});
+
+$("#univResetBtn").click(function() {
+	console.log("univ 버튼 클릭")
+	$(".univTxt").val('');
+
+});
+
+$("#gsResetBtn").click(function() {
+	console.log("버튼 클릭")
+	$(".gschoolTxt").val('');
+
+});
+</script>
 <%@ include file="../include/footer.jsp"%>	

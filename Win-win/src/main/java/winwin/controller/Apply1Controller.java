@@ -99,7 +99,7 @@ public class Apply1Controller {
 	@RequestMapping(value="/military", method=RequestMethod.GET)
 	public void military(JobopenBasic jobopenBasic, HttpSession session, Model model) {
 		
-		apply1Service.viewJobOpen(jobopenBasic);
+//		apply1Service.viewJobOpen(jobopenBasic);
 
 	}
 
