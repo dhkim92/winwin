@@ -134,12 +134,12 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${list }" var="SupportBoard">
+						<c:forEach items="${list }" var="SupportBoard">
 							<tr>
 								<th scope="row" class="text-center align-middle">${SupportBoard.passNo }</th>
 								<td class="text-center align-middle">${SupportBoard.title }</td>
-								<td class="text-center align-middle">
-								<fmt:formatDate value="${SupportBoard.applyDate}" pattern="yy.MM.dd" /></td>
+								<td class="text-center align-middle"><fmt:formatDate
+										value="${SupportBoard.applyDate}" pattern="yy.MM.dd" /></td>
 								<td class="text-center align-middle">${SupportBoard.userId }</td>
 								<td class="text-center"><button type="button"
 										class="btn btn-primary btn-sm" data-toggle="modal"
@@ -147,41 +147,24 @@
 								<td class="text-center"><button type="button"
 										class="btn btn-secondary btn-sm">${SupportBoard.status }</button></td>
 							</tr>
-							</c:forEach>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-12 d-flex justify-content-center">
-				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="#">&laquo;</a>
-					</li>
-					<li class="page-item active"><a class="page-link" href="#">1</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item"><a class="page-link" href="#">5</a></li>
-					<li class="page-item"><a class="page-link" href="#">&raquo;</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+<%@ include file="../util/supportpaging.jsp"%>
+		
 	</div>
 </div>
-
-
-<style>
-</style>
 
 
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
-	
+
+
 </script>
 
 <%@ include file="../include/footer.jsp"%>

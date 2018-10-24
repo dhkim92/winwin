@@ -37,7 +37,6 @@ public class SupportBoardController {
 		mav.setViewName("support/list");
 		mav.addObject("list",list);
 		
-		logger.info(list.toString());
 		return mav;
 	}
 	
