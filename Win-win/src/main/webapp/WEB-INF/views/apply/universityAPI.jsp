@@ -23,7 +23,7 @@ $(document).ready(function() {
 	      	value.sort();
 	      	
 	      	for(var i=0; i<data.length; i++){
-	      		$("#college").append(
+	      		$("#university").append(
 		      		$("<option>").attr(
 		            	"value", value[i]
 		                 ).text(value[i])
@@ -40,15 +40,15 @@ $(document).ready(function() {
 		
 			
 		// Get the modal
-		var modal = document.getElementById('myModal');
+		var modal = document.getElementById('univModal');
 		
 		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn");
+		var btn = document.getElementById("univSearch");
 		
 		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];                                          
+		var span = document.getElementsByClassName("close")[0];                                   
 		
-		var btnClose = document.getElementById("btnClose");
+		var btnUnivClose = document.getElementById("btnUnivClose");
 		
 		// When the user clicks on the button, open the modal 
 		btn.onclick = function() {
@@ -60,7 +60,7 @@ $(document).ready(function() {
 		    modal.style.display = "none";
 		}
 		
-		btnClose.onclick = function() {
+		btnUnivClose.onclick = function() {
 		    modal.style.display = "none";
 		}
 		
@@ -72,17 +72,17 @@ $(document).ready(function() {
 		}
 		
 		
-		$("#btnOk").click(function() {
+		$("#btnUnivOk").click(function() {
 			var select = $("#university option:selected").val();
 			var write =$("#writeUniversity").val();
 			
 			if($('#university').val() == "학교명을 선택하세요") {
-				$('#selectUniversity').val(write);
+				$('#univName').val(write);
 				modal.style.display = "none";
 				$("#writeUniversity").val('');
 				
 			} else {
-				$('#selectUniversity').val(select);
+				$('#univName').val(select);
 				modal.style.display = "none";
 				$("#university").val('학교명을 선택하세요').trigger('change') ;
 			}
@@ -98,7 +98,7 @@ $(document).ready(function() {
 <body>
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div id="univModal" class="modal">
  
 	      <!-- Modal content -->
 	      <div class="modal-content">
@@ -135,8 +135,8 @@ $(document).ready(function() {
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
-				<button type="button"  id="btnOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
-				<button type="button"  id="btnClose" class="font-weight-bold btn btn-secondary">닫기</button>
+				<button type="button"  id="btnUnivOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
+				<button type="button"  id="btnUnivClose" class="font-weight-bold btn btn-secondary">닫기</button>
 				</div>
 			</div>
 	      </div>

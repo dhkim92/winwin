@@ -84,7 +84,7 @@ $(document).ready(function() {
 	</table>
 	</div>
 
-	<h4 class="mt-4 mb-3 font-weight-bold">학력사항<input type="hidden" value="jobopenNo" /></h4>
+	<h4 class="mt-4 mb-3 font-weight-bold">학력사항</h4>
 	<div class="row">
 		<a href="/apply/userDetailupdate">
 			<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png">
@@ -100,6 +100,7 @@ $(document).ready(function() {
 		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="hsResetBtn">초기화</button>
 	</h6>
 	
+	<form action="/apply/academic" method="POST" id="hsForm" name="hsForm">
 	<div class="col-md-12 mt-3 p-0">
 		<table class="table border border-secondary col-md-12 mb-0 text-center table-sm">
 			<tbody>
@@ -111,17 +112,18 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-                  	<input type="hidden" id="category" name="category" value="고등학교"/>
+                  	<input type="hidden" name="jobopenNo" id="hsJobopenNo" value="1" />
+                  	<input type="hidden" id="hsCategory" name="category" value="고등학교"/>
 					<input type="text" id="hsName" name="name" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
 					<input type="button" class="m-1 mr-1" id="hsSearch" value="검색" /><button class="ml-1 mr-1">취소</button>
-					<select style="height:24px; width:70px;" class="hsselect" id="day" name="day">
+					<select style="height:24px; width:70px;" class="hsselect" id="hsDay" name="day">
 						<option value="0">주/야</option>
 						<option value="주간">주간</option>
 						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-                  	<select style="height:24px; width: 110px;" class="hsselect" id="major" name="major">
+                  	<select style="height:24px; width: 110px;" class="hsselect" id="hsMajor" name="major">
                   		<option value="0">전공</option>
                   		<option value="인문계">인문계</option>
                   		<option value="자연계">자연계</option>
@@ -129,38 +131,39 @@ $(document).ready(function() {
                   	</select>
                   </td>
                   <td class="align-middle">
-                  	<input class="hschoolTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select  class="hsselect" style="height:24px; width: 80px;">
-                  		<option>졸업구분</option>
-                  		<option>졸업</option>
-                  		<option>졸업예정</option>
-                  		<option>재학</option>
+                  	<input class="hschoolTxt" type="date" name="endDate" id="hsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select class="hsselect" style="height:24px; width: 80px;" name="graduate" id="hsGraduate">
+                  		<option value="0">졸업구분</option>
+                  		<option value="졸업">졸업</option>
+                  		<option value="졸업예정">졸업예정</option>
+                  		<option value="재학">재학</option>
                   	</select>
                   </td>
                   <td class="align-middle">
-                    <select class="hsselect">
-                  		<option>지역</option>
-                  		<option>서울</option>
-                  		<option>인천</option>
-                  		<option>대전</option>
-                  		<option>광주</option>
-                  		<option>부산</option>
-                  		<option>울산</option>
-                  		<option>대구</option>
-                  		<option>강원</option>
-                  		<option>경기</option>
-                  		<option>충북</option>
-                  		<option>충남</option>
-                  		<option>전북</option>
-                  		<option>전남</option>
-                  		<option>경북</option>
-                  		<option>경남</option>
+                    <select class="hsselect" id="hsSelect" name="region">
+                  		<option value="0">지역</option>
+                  		<option value="서울">서울</option>
+                  		<option value="인천">인천</option>
+                  		<option value="대전">대전</option>
+                  		<option value="광주">광주</option>
+                  		<option value="부산">부산</option>
+                  		<option value="울산">울산</option>
+                  		<option value="대구">대구</option>
+                  		<option value="강원">강원</option>
+                  		<option value="경기">경기</option>
+                  		<option value="충북">충북</option>
+                  		<option value="충남">충남</option>
+                  		<option value="전북">전북</option>
+                  		<option value="전남">전남</option>
+                  		<option value="경북">경북</option>
+                  		<option value="경남">경남</option>
                   	</select>
                   </td>
                 </tr>
 			</tbody>
 		</table>
 	</div>
+	</form>
 	
 	<h6 class="mt-5 font-weight-bold">전문대학
 		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="colResetBtn">초기화</button>
@@ -177,57 +180,59 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
+                  	<input type="hidden" name="jobopenNo" id="colJobopenNo" value="jobopenNo" />
+                  	<input type="hidden" id="colCategory" name="category" value="전문대학"/>
 					<input type="text" id="colName" name="name" class="mr-1 colTxt" style="width: 110px" readonly/>
 					<button class="m-1 mr-1" id="colSearch">검색</button><button class="ml-1 mr-1">취소</button>
-					<select style="height:24px; width:85px;" class="colselect" >
+					<select style="height:24px; width:85px;" class="colselect" id="colSelect" name="branch">
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
 						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="colselect">
-						<option>주/야</option>
-						<option>주간</option>
-						<option>야간</option>
+					<select style="height:24px; width:70px;" class="colselect" id="colDay" name="day">
+						<option value="0">주/야</option>
+						<option value="주간">주간</option>
+						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-					<input type="text" class="mr-1 colTxt" style="width: 100px" readonly/>
-					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>					                  
- 					<input type="text" class="mr-1 colTxt" style="width: 30px;" pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> / <input type="text" class="mr-1 colTxt" style="width: 30px; " pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> 만점
+					<input type="text" class="mr-1 colTxt" style="width: 100px" id="colMajor" name="major" readonly/>
+					<button class="m-1 mr-1" id="colSearchM" name="colSearchM">검색</button><button class="ml-1 mr-1">취소</button>					                  
+ 					<input type="text" name="score" id="colScore" class="mr-1 colTxt" style="width: 30px;" pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> / <input id="colTotalScore" name="totalScore" type="text" class="mr-1 colTxt" style="width: 30px; " pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> 만점
                   </td>
                   <td class="align-middle">
-                  	<input class="colTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select style="height:24px; width: 70px;" class="colselect">
-                  		<option>입학/편입</option>
-                  		<option>입학</option>
-                  		<option>편입</option>
+                  	<input class="colTxt" type="date" id="colStartDate" name="startDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select style="height:24px; width: 70px;" class="colselect" id="colTransfer" name="transfer">
+                  		<option value="0">입학/편입</option>
+                  		<option value="입학">입학</option>
+                  		<option value="편입">편입</option>
                   	</select>
-                  	<input class="colTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                   	<select style="height:24px; width: 70px;" class="colselect">
-                  		<option>졸업구분</option>
-                  		<option>졸업</option>
-                  		<option>졸업예정</option>
-                  		<option>재학</option>
+                  	<input class="colTxt" type="date" id="colEndDate" name="endDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                   	<select style="height:24px; width: 70px;" class="colselect" id="colGraduate" name="graduate">
+                  		<option value="0">졸업구분</option>
+                  		<option value="졸업">졸업</option>
+                  		<option value="졸업예정">졸업예정</option>
+                  		<option value="재학">재학</option>
                   	</select>                 	
                   </td>
                   <td class="align-middle">
-                    <select class="colselect">
-                  		<option>지역</option>
-                  		<option>서울</option>
-                  		<option>인천</option>
-                  		<option>대전</option>
-                  		<option>광주</option>
-                  		<option>부산</option>
-                  		<option>울산</option>
-                  		<option>대구</option>
-                  		<option>강원</option>
-                  		<option>경기</option>
-                  		<option>충북</option>
-                  		<option>충남</option>
-                  		<option>전북</option>
-                  		<option>전남</option>
-                  		<option>경북</option>
-                  		<option>경남</option>
+                    <select class="colselect" id="colSelect" name="region">
+                  		<option value="0">지역</option>
+                  		<option value="서울">서울</option>
+                  		<option value="인천">인천</option>
+                  		<option value="대전">대전</option>
+                  		<option value="광주">광주</option>
+                  		<option value="부산">부산</option>
+                  		<option value="울산">울산</option>
+                  		<option value="대구">대구</option>
+                  		<option value="강원">강원</option>
+                  		<option value="경기">경기</option>
+                  		<option value="충북">충북</option>
+                  		<option value="충남">충남</option>
+                  		<option value="전북">전북</option>
+                  		<option value="전남">전남</option>
+                  		<option value="경북">경북</option>
+                  		<option value="경남">경남</option>
                   	</select>
                   </td>
                 </tr>
@@ -250,65 +255,67 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-					<input type="text" class="mr-1 univTxt" style="width: 110px" readonly/>
-					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
-					<select style="height:24px; width:85px;" class="univselect">
-						<option>본교/분교</option>
-						<option>본교</option>
-						<option>분교</option>
+                  	<input type="hidden" name="jobopenNo" id="univJobopenNo" value="jobopenNo" />
+                  	<input type="hidden" id="univCategory" name="category" value="대학교"/>
+					<input type="text" id="univName" name="name" class="mr-1 univTxt" style="width: 110px" readonly/>
+					<button class="m-1 mr-1" id="univSearch" name="univSearch">검색</button><button class="ml-1 mr-1">취소</button>
+					<select style="height:24px; width:85px;" class="univselect" id="univBranch" name="branch">
+						<option value="0">본교/분교</option>
+						<option value="본교">본교</option>
+						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="univselect">
-						<option>주/야</option>
-						<option>주간</option>
-						<option>야간</option>
+					<select style="height:24px; width:70px;" class="univselect" id="univDay" name="day">
+						<option value="0">주/야</option>
+						<option value="주간">주간</option>
+						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
                   <div>
-					<input type="text" class="mr-1 univTxt" style="width: 100px" readonly/>
-					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>
+					<input type="text" id="univMajor" name="major" class="mr-1 univTxt" style="width: 100px" readonly/>
+					<button class="m-1 mr-1" id="univMSearch" name="univMSearch">검색</button><button class="ml-1 mr-1">취소</button>
 				  </div>
 				  <div>		
-					<input type="text" class="mr-1 univTxt" style="width: 100px" readonly/>
+					<input type="text"  name="minor" class="mr-1 univTxt" style="width: 100px" readonly/>
 					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>					                  
 				  </div>
 				  </td>
 				  <td>						                  
- 					<input type="text" class="mr-1 mt-2 univTxt" style="width: 30px; "/> / <input type="text" class="mr-1 univTxt" style="width: 30px; "/> 만점
+ 					<input type="text" id="univScore" name="score" class="mr-1 mt-2 univTxt" style="width: 30px; "/> / <input type="text" id="univTotalScore" name="totalScore" class="mr-1 univTxt" style="width: 30px; "/> 만점
                   </td>
                   <td class="align-middle">
-                  	<input class="univTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select style="height:24px; width: 75px;" class="univselect">
-                  		<option>입학/편입</option>
-                  		<option>입학</option>
-                  		<option>편입</option>
+                  	<input class="univTxt" type="date" id="univStartDate" name="startDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select style="height:24px; width: 75px;" class="univselect" id="univTransfer" name="transfer">
+                  		<option value="0">입학/편입</option>
+                  		<option value="입학">입학</option>
+                  		<option value="편입">편입</option>
                   	</select>
-                  	<input class="univTxt" type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<input class="univTxt" type="date" id="univEndDate" name="endDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
                    	<select style="height:24px; width: 75px;" class="univselect">
-                  		<option>졸업구분</option>
-                  		<option>졸업</option>
-                  		<option>졸업예정</option>
-                  		<option>재학</option>
+                  		<option value="0">졸업구분</option>
+                  		<option value="졸업">졸업</option>
+                  		<option value="졸업예정">졸업예정</option>
+                  		<option value="재학">재학</option>
                   	</select>                 	
                   </td>
                   <td class="align-middle">
-                    <select class="univselect">
-                  		<option>지역</option>
-                  		<option>서울</option>
-                  		<option>인천</option>
-                  		<option>대전</option>
-                  		<option>광주</option>
-                  		<option>부산</option>
-                  		<option>울산</option>
-                  		<option>대구</option>
-                  		<option>강원</option>
-                  		<option>경기</option>
-                  		<option>충북</option>
-                  		<option>충남</option>
-                  		<option>전북</option>
-                  		<option>전남</option>
-                  		<option>경북</option>
-                  		<option>경남</option>
+                    <select class="univselect" id="univRegion" name="region">
+                  		<option value="0">지역</option>
+                  		<option value="서울">서울</option>
+                  		<option value="인천">인천</option>
+                  		<option value="대전">대전</option>
+                  		<option value="광주">광주</option>
+                  		<option value="부산">부산</option>
+                  		<option value="울산">울산</option>
+                  		<option value="대구">대구</option>
+                  		<option value="강원">강원</option>
+                  		<option value="경기">경기</option>
+                  		<option value="충북">충북</option>
+                  		<option value="충남">충남</option>
+                  		<option value="전북">전북</option>
+                  		<option value="전남">전남</option>
+                  		<option value="경북">경북</option>
+                  		<option value="경남">경남</option>
                   	</select>
                   </td>
                 </tr>
@@ -331,49 +338,51 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-					<input type="text" class="mr-1 gschoolTxt" style="width: 200px" />
-					<select style="height:24px; width:85px;" class="gsselect">
-						<option>본교/분교</option>
-						<option>본교</option>
-						<option>분교</option>
+                  	<input type="hidden" name="jobopenNo" id="gsJobopenNo" value="jobopenNo" />
+                  	<input type="hidden" id="gsCategory" name="category" value="대학원"/>
+					<input type="text" id="gsName" name="name" class="mr-1 gschoolTxt" style="width: 200px" />
+					<select style="height:24px; width:85px;" class="gsselect" id="gsBranch" name="branch" >
+						<option value="0">본교/분교</option>
+						<option value="본교">본교</option>
+						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="gsselect">
-						<option>주/야</option>
-						<option>주간</option>
-						<option>야간</option>
+					<select style="height:24px; width:70px;" class="gsselect" id="gsDay" name="day">
+						<option value="0">주/야</option>
+						<option value="주간">주간</option>
+						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-					<input type="text" class="mr-1 gschoolTxt" style="width: 200px" />
- 					<input type="text" class="mr-1 gschoolTxt" style="width: 30px; "/> / <input type="text" class="mr-1 gschoolTxt" style="width: 30px; "/> 만점
+					<input type="text" id="gsName" name="name" class="mr-1 gschoolTxt" style="width: 200px" />
+ 					<input type="text" id="gsScore" name="score" class="mr-1 gschoolTxt" style="width: 30px; "/> / <input type="text" id="gsTotalScore" name="totalScore" class="mr-1 gschoolTxt" style="width: 30px; "/> 만점
                   </td>
                   <td class="align-middle">
-                  	<input type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" class="gschoolTxt"/>
-                  	<select style="height:24px; width: 80px;" class="gsselect">
-                  		<option>졸업구분</option>
-                  		<option>졸업</option>
-                  		<option>졸업예정</option>
-                  		<option>재학</option>
+                  	<input type="date" name="endDate" id="gsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" class="gschoolTxt"/>
+                  	<select style="height:24px; width: 80px;" class="gsselect" id="gsGraduate" name="graduate">
+                  		<option value="0">졸업구분</option>
+                  		<option value="졸업">졸업</option>
+                  		<option value="졸업예정">졸업예정</option>
+                  		<option value="재학">재학</option>
                   	</select>
                   </td>
                   <td class="align-middle">
-                    <select class="gsselect">
-                  		<option>지역</option>
-                  		<option>서울</option>
-                  		<option>인천</option>
-                  		<option>대전</option>
-                  		<option>광주</option>
-                  		<option>부산</option>
-                  		<option>울산</option>
-                  		<option>대구</option>
-                  		<option>강원</option>
-                  		<option>경기</option>
-                  		<option>충북</option>
-                  		<option>충남</option>
-                  		<option>전북</option>
-                  		<option>전남</option>
-                  		<option>경북</option>
-                  		<option>경남</option>
+                    <select class="gsselect" id="gsRegion" name="region">
+                  		<option value="0">지역</option>
+                  		<option value="서울">서울</option>
+                  		<option value="인천">인천</option>
+                  		<option value="대전">대전</option>
+                  		<option value="광주">광주</option>
+                  		<option value="부산">부산</option>
+                  		<option value="울산">울산</option>
+                  		<option value="대구">대구</option>
+                  		<option value="강원">강원</option>
+                  		<option value="경기">경기</option>
+                  		<option value="충북">충북</option>
+                  		<option value="충남">충남</option>
+                  		<option value="전북">전북</option>
+                  		<option value="전남">전남</option>
+                  		<option value="경북">경북</option>
+                  		<option value="경남">경남</option>
                   	</select>
                   </td>
                 </tr>
@@ -402,7 +411,7 @@ $(document).ready(function() {
 	</div>
 	
 	<div class="col-12 mt-5 p-0 d-flex justify-content-end">
-		<input class="btn btn-primary text-white" type="submit" value="저장하고 계속하기"/>
+		<input class="btn btn-primary text-white" type="button" id="saveBtn" value="저장하고 계속하기"/>
 	</div>
 
 	
@@ -440,10 +449,16 @@ $("#gsResetBtn").click(function() {
 
 	
 });
+
+$("#saveBtn").click(function() {
+	console.log("save버튼 클릭");
+	$("#hsForm").submit();
+});
+
 </script>
-<%-- <%@ include file="../apply/collegeAPI.jsp"%>	 --%>
-<%-- <%@ include file="../apply/colMajorAPI.jsp"%>	 --%>
-<%-- <%@ include file="../apply/universityAPI.jsp"%>	 --%>
-<%-- <%@ include file="../apply/majorAPI.jsp"%> --%>
 <%@ include file="../apply/schoolAPI.jsp"%>		
+<%@ include file="../apply/collegeAPI.jsp"%>	
+<%@ include file="../apply/colMajorAPI.jsp"%>	
+<%@ include file="../apply/universityAPI.jsp"%>	
+<%@ include file="../apply/majorAPI.jsp"%>
 <%@ include file="../include/footer.jsp"%>	

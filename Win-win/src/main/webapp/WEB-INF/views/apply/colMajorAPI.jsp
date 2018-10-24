@@ -40,15 +40,15 @@ $(document).ready(function() {
 		
 			
 		// Get the modal
-		var modal = document.getElementById('myModal');
+		var modal = document.getElementById('colMModal');
 		
 		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn");
+		var btn = document.getElementById("colSearchM");
 		
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];                                          
 		
-		var btnClose = document.getElementById("btnClose");
+		var btnColMClose = document.getElementById("btnColMClose");
 		
 		// When the user clicks on the button, open the modal 
 		btn.onclick = function() {
@@ -60,7 +60,7 @@ $(document).ready(function() {
 		    modal.style.display = "none";
 		}
 		
-		btnClose.onclick = function() {
+		btnColMClose.onclick = function() {
 		    modal.style.display = "none";
 		}
 		
@@ -72,17 +72,17 @@ $(document).ready(function() {
 		}
 		
 		
-		$("#btnOk").click(function() {
+		$("#btnColMOk").click(function() {
 			var select = $("#major option:selected").val();
 			var write =$("#writeMajor").val();
 			
 			if($('#major').val() == "학과명을 선택하세요") {
-				$('#selectHighSchool').val(write);
+				$('#colMajor').val(write);
 				modal.style.display = "none";
 				$("#writeMajor").val('');
 				
 			} else {
-				$('#selectMajor').val(select);
+				$('#colMajor').val(select);
 				modal.style.display = "none";
 				$("#major").val('학과명을 선택하세요').trigger('change') ;
 			}
@@ -98,7 +98,7 @@ $(document).ready(function() {
 <body>
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div id="colMModal" class="modal">
  
 	      <!-- Modal content -->
 	      <div class="modal-content">
@@ -135,8 +135,8 @@ $(document).ready(function() {
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
-				<button type="button"  id="btnOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
-				<button type="button"  id="btnClose" class="font-weight-bold btn btn-secondary">닫기</button>
+				<button type="button"  id="btnColMOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
+				<button type="button"  id="btnColMClose" class="font-weight-bold btn btn-secondary">닫기</button>
 				</div>
 			</div>
 	      </div>

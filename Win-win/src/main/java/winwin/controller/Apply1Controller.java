@@ -74,7 +74,9 @@ public class Apply1Controller {
 	@RequestMapping(value="/academic", method=RequestMethod.POST)
 	public ModelAndView academicProc(Academic academic, HttpSession session, Model model) {
 		
-		apply1Service.insertAcademic(academic);
+		System.out.println(academic);
+		
+//		apply1Service.insertAcademic(academic);
 		return null;
 	}
 	
