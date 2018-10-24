@@ -40,7 +40,7 @@ $(document).ready(function() {
 		var modal = document.getElementById('myModal');
 		
 		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn");
+		var btn = document.getElementById("colSearch");
 		
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];                                          
@@ -74,12 +74,12 @@ $(document).ready(function() {
 			var write =$("#writeCollege").val();
 			
 			if($('#college').val() == "학교명을 선택하세요") {
-				$('#selectCollege').val(write);
+				$('#colName').val(write);
 				modal.style.display = "none";
-				$("#writeCollege").val('');
+				$("#colName").val('');
 				
 			} else {
-				$('#selectCollege').val(select);
+				$('#colName').val(select);
 				modal.style.display = "none";
 				$("#college").val('학교명을 선택하세요').trigger('change') ;
 			}
@@ -95,7 +95,7 @@ $(document).ready(function() {
 <body>
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div id="colModal" class="modal">
  
 	      <!-- Modal content -->
 	      <div class="modal-content">

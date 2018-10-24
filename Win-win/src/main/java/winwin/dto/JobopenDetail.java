@@ -1,9 +1,12 @@
 package winwin.dto;
 
+import java.util.Arrays;
+
 public class JobopenDetail {
 	
-	private String title; //공고 제목
-	private String sector; // 모집부문
+	private int jobopenNo; //공고 제목
+	private String[] sector; // 모집부문
+	
 	private String task; // 담당업무
 	private int volume; //모집인원
 	
@@ -11,19 +14,20 @@ public class JobopenDetail {
 	
 	@Override
 	public String toString() {
-		return "JobopenDetail [title=" + title + ", sector=" + sector + ", task=" + task + ", volume=" + volume
-				+ ", place=" + place + ", special=" + special + "]";
+		return "JobopenDetail [jobopenNo=" + jobopenNo + ", sector=" + Arrays.toString(sector) + ", task=" + task
+				+ ", volume=" + volume + ", place=" + place + ", special=" + special + "]";
 	}
-	public String getTitle() {
-		return title;
+	
+	public int getJobopenNo() {
+		return jobopenNo;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setJobopenNo(int jobopenNo) {
+		this.jobopenNo = jobopenNo;
 	}
-	public String getSector() {
+	public String[] getSector() {
 		return sector;
 	}
-	public void setSector(String sector) {
+	public void setSector(String[] sector) {
 		this.sector = sector;
 	}
 	public String getTask() {

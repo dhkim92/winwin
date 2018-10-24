@@ -29,12 +29,12 @@
 	</div>
 	
 	<div class="row col-12 mt-5">
-		<div class="col-5 text-center">
+		<div class="col-5 text-center mt-3">
 			<p class="font-weight-bold h4">지원하기 전에 <span style="color: red;">꼭 알아두세요!</span></p>
 			<img src="/resources/image/resume.png" style="height: 200px;"/>
 		</div>
 		<div class="col-7">
-			<div>
+			<div class="mt-3">
 				<p class="infolist">지원 시에 입력하신 정보</p> 
 				<ul>
 				<li class="info">지원자의 입사지원서 기재 내용이 허위임이 판정될 때에는 그 내용의 중요성과 관계없이 합격(입사)을 취소합니다.</li>

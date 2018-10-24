@@ -102,6 +102,7 @@ $(document).ready(function() {
 	</table>
 	</div>
 
+	<form action="apply/userDetail" method="POST">
 	<h4 class="mt-4 mb-3 font-weight-bold">개인사항<input type="hidden" value="jobopenNo" /></h4>
 	<div class="row">
 		<img class="img-fluid d-block ml-3" src="/resources/image/B_userDetail.png">
@@ -218,6 +219,7 @@ $(document).ready(function() {
 	</tr>
 	</tbody>
 	</table>
+	</form>
 	
 	<br><br><br><br><br><br>
 	
@@ -314,6 +316,20 @@ function fn_press_han(obj) {
 	
 	obj.value=obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
 }
+
+$("#saveBtn").click(function() {
+	console.log("save버튼 클릭");
+	
+	
+	
+	
+	
+	
+	
+	
+	$("#hsForm").submit();
+});
+
 
 
 </script>

@@ -18,13 +18,15 @@
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="checkbox" id="pass"
 						value="option1" style="width: 20px; height: 20px;"> <label
-						class="form-check-label font-weight-bold" for="pass" style="font-size: 15px">합격</label>
+						class="form-check-label font-weight-bold" for="pass"
+						style="font-size: 15px">합격</label>
 				</div>
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="checkbox"
 						id="disqualification" value="option2"
 						style="width: 20px; height: 20px;"> <label
-						class="form-check-label font-weight-bold" for="disqualification" style="font-size: 15px">불합격</label>
+						class="form-check-label font-weight-bold" for="disqualification"
+						style="font-size: 15px">불합격</label>
 				</div>
 				<div class="mt-3">
 					<select class="custom-select" style="width: 457px; height: 40px;"
@@ -57,6 +59,7 @@
 							<th class="text-center">지원 일자</th>
 							<th class="text-center">지원자</th>
 							<th class="text-center">처리 상태</th>
+							<th class="text-center">이메일 발송</th>
 
 						</tr>
 					</thead>
@@ -71,34 +74,18 @@
 							<td class="text-center align-middle">문재환</td>
 							<td class="text-center"><button type="button"
 									class="btn btn-secondary btn-sm">합격</button></td>
+							<td class="text-center"><button type="button"
+									class="btn btn-secondary btn-sm">발송</button></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-12 d-flex justify-content-center">
-				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="#">&laquo;</a>
-					</li>
-					<li class="page-item active"><a class="page-link" href="#">1</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item"><a class="page-link" href="#">5</a></li>
-					<li class="page-item"><a class="page-link" href="#">&raquo;</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+<%@ include file="../util/resultpaging.jsp"%>
+		
 	</div>
 </div>
-
-
-<style>
-</style>
 
 
 

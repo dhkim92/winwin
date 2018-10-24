@@ -35,7 +35,7 @@ $(document).ready(function() {
 		
 			
 		// Get the modal
-		var modal = document.getElementById('myModal');
+		var modal = document.getElementById('hsModal');
 		
 		// Get the button that opens the modal
 		var btn = document.getElementById("hsSearch");
@@ -43,7 +43,7 @@ $(document).ready(function() {
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];                                          
 		
-		var btnClose = document.getElementById("btnClose");
+		var btnHsClose = document.getElementById("btnHsClose");
 		
 		// When the user clicks on the button, open the modal 
 		btn.onclick = function() {
@@ -55,7 +55,7 @@ $(document).ready(function() {
 		    modal.style.display = "none";
 		}
 		
-		btnClose.onclick = function() {
+		btnHsClose.onclick = function() {
 		    modal.style.display = "none";
 		}
 		
@@ -67,7 +67,7 @@ $(document).ready(function() {
 		}
 		
 		
-		$("#btnOk").click(function() {
+		$("#btnHsOk").click(function() {
 			var select = $("#HighSchool option:selected").val();
 			var write =$("#writeHighSchool").val();
 			
@@ -93,7 +93,7 @@ $(document).ready(function() {
 <body>
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div id="hsModal" class="modal">
  
 	      <!-- Modal content -->
 	      <div class="modal-content">
@@ -130,8 +130,8 @@ $(document).ready(function() {
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
-				<button type="button"  id="btnOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
-				<button type="button"  id="btnClose" class="font-weight-bold btn btn-secondary">닫기</button>
+				<button type="button"  id="btnHsOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
+				<button type="button"  id="btnHsClose" class="font-weight-bold btn btn-secondary">닫기</button>
 				</div>
 			</div>
 	      </div>

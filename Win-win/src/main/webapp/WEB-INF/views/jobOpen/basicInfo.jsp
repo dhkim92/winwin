@@ -78,7 +78,7 @@
 <div class="container">
 	<div class="row m-3 justify-content-center">
 		<div style="width: 680px; height: 101px; border:1px solid #376092;">
-			<div class="box text-light text-center" style="background-color: #376092"><strong>기본정보</strong></div>
+			<div class="box text-light text-center" style="background-color: #376092;"><strong>기본정보</strong></div>
 			<div class="triangle-right-primary"></div>
 			<div class="boxm text-primary text-center pl-5"><strong>세부정보</strong></div>
 			<div class="line"></div>
@@ -114,7 +114,7 @@
 				      <label for="title">공고 제목</label>
 				    </div>
 				    <div class="col-10">
-				      <input type="text" id="title" class="form-control" style="width:680px" name="title"/>
+				      <input type="text" id="title" class="form-control" style="width:680px" name="title" required/>
 				    </div>
 			    </div>
 			    
