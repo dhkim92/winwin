@@ -162,7 +162,8 @@ $("#loginForm").submit(function(e) {
     // 아이디/비밀번호 암호화 후 hidden form으로 submit
     var userid = $(this).find("#userid").val();
     var pwd = $(this).find("#pwd").val();
-    $userid.val(rsa.encrypt(userid)); // 아이디 암호화
+    $userid.val(userid);
+//     $userid.val(rsa.encrypt(userid)); // 아이디 암호화
     $pwd.val(rsa.encrypt(pwd)); // 비밀번호 암호화
     $("#hiddenForm").submit();
 });	

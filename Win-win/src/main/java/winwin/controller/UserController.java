@@ -105,13 +105,11 @@ public class UserController {
 				//아이디/비밀번호 복호화
 				try {
 		
-					String email = rsaUtil.getDecryptText(key, user.getUserid());
 					String password = rsaUtil.getDecryptText(key, user.getPwd());
-					
-					logger.info("복호화 한 email : " + email);
+
 					logger.info("복호화 한 password : " + password);
 					logger.info(user.toString());
-					user.setUserid(email);
+		
 					user.setPwd(password);
 					boolean success = userservice.login(user);
 					
