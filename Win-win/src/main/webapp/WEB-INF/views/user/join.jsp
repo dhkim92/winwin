@@ -82,8 +82,7 @@
 							</td>
 							<td class="align-middle">
 								<input type="text" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="phone" name="phone" placeholder="전화번호를입력하시오." 
-								pattern="\d{2,4}-\d{3,4}-\d{4}" title="'0~9', '-'를 포함하여  전화번호 형식에 맞게 입력하십시오." required>
+								id="phone" name="phone" placeholder="전화번호를입력하시오." required>
 							</td>
 						</tr>
 						<tr>
@@ -95,9 +94,7 @@
 							</td>
 							<td class="align-middle">
 								<input type="password" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="pwd" name="pwd" placeholder="패스워드" 
-								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,16}"
-								title="비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자(!@#$%^&*)를 혼합해서 사용하셔야합니다." required>
+								id="pwd" name="pwd" placeholder="패스워드" required>
 								<ul>
 								<li class="mt-3" style="color:#008CBA; line-height: 200%;">비밀번호는 8~16자의 영문 대/소문자, 숫자,
 									 특수문자(!@#$%^&*)를 혼합해서 사용하셔야합니다.</li>
@@ -201,7 +198,7 @@
 		$("#btnOk").click(function() {
 			location.href = "/user/login";
 		});
-
+		
 	});
 	
 	// 이메일 형식 체크
@@ -214,14 +211,25 @@
 		}
 	}
 	
-// 	function validatePhone(sEmail) {
-// 		var filter = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-// 		if (filter.test(sEmail)) {
-// 		return true;
-// 	} else {
-// 		return false;
-// 		}
-// 	}
+	// 전화번호 형식 체크
+	function validatePhone(phone) {
+		var filter = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+		if (filter.test(phone)) {
+		return true;
+	} else {
+		return false;
+		}
+	}
+	
+	// 비밀번호 형식 체크
+	function validatePwd(pwd) {
+		var filter = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,16}$/;
+		if (filter.test(pwd)) {
+		return true;
+	} else {
+		return false;
+		}
+	}
 	
 	
 	
@@ -240,7 +248,7 @@
 					$("#userid").addClass("is-invalid");
 					$("#joinOk").attr("disabled", "disabled");
 				} else if(validateEmail(userid)==false){
-					alert("이메일 형식이 맞지 않습니다.");
+					alert("잘못된 이메일 입니다.");
 					$("#userid").addClass("is-invalid");
 					$("#joinOk").attr("disabled", "disabled");
 				} else {
@@ -263,12 +271,11 @@
 											
 						span.onclick = function() {
 							modal.style.display = "none";
-							}
+						}
 
-							btnClose.onclick = function() {
+						btnClose.onclick = function() {
 							modal.style.display = "none";
-							}
-
+						}
 							$('#idChecking').html("중복된아이디입니다.");
 							$("#userid").addClass("is-invalid");
 							$("#joinOk").attr("disabled", "disabled");
@@ -303,13 +310,36 @@
 					}
 				});
 			}
-
+				
 		});
 
 				
 		$("#joinOk").click(function() {
 			
-		    	
+			var phone = $("#phone").val();
+			var username = $("#username").val();
+			var pwd = $("#pwd").val();
+			var pwConfirm = $("#pwConfirm").val();
+			
+			if (username == "") {
+				alert("한글이름을 입력하시오.");
+				$("#username").focus();
+			} else if (phone == "") {
+				alert("전화번호를 입력하시오.");
+				$("#phone").focus();
+			} else if(validatePhone(phone)==false){
+				alert("잘못된 전화번호 형식 입니다.");
+				$("#phone").focus();
+			} else if(pwd == "") {
+				alert("비밀번호를 입력하시오.");
+				$("#pwd").focus();
+			} else if(validatePwd(pwd)==false) {
+				alert("잘못된 비밀번호 형식 입니다.");
+				$("#pwd").focus();
+			} else if(pwConfirm == "") {
+				alert("비밀번호 확인을 입력하시오.");
+				$("#pwConfirm").focus();
+			} else {
 			if (idck == 0) {
 				var modal = document.getElementById('myModal');
 				modal.style.display = "block";
@@ -326,6 +356,7 @@
 				}
 
 				$('#idChecking').html("이메일 중복 확인하여 주십시오.");
+				$("#userid").addClass("is-invalid");
 				return false;
 				
 			} else {
@@ -348,7 +379,7 @@
 				$("#frm").submit();
 			    
 				}
-		    
+			}
 		});
 	
 	});
