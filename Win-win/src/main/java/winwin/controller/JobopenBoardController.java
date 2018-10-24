@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
 import winwin.service.JobopenService;
+import winwin.util.Paging;
 
 @Controller
 @RequestMapping(value="/jobOpen")
