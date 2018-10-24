@@ -3,11 +3,14 @@
 <%@ include file="../include/CSSLoader.jsp"%>
     
 <style>
+.t{
+	margin-right: auto;
+	margin-left: auto;
+}
 .header{
 	background-color: lightgray;
 	font-weight: bold;
 	text-align: center;
-	
 }
 tr,td{
 	text-align: center;
@@ -31,7 +34,7 @@ tr,td{
 	</tr>
 	<tr>
 		<td>
-			<table class="table table-sm col-md-10 table-bordered">
+			<table class="t table table-sm col-md-10 table-bordered">
 				<tr class="header">
 					<td>
 					연령대
@@ -75,7 +78,7 @@ tr,td{
 			</table>
 		</td>
 		<td>
-			<table class="table table-sm col-md-10 table-bordered">
+			<table class="t table table-sm col-md-10 table-bordered">
 				<tr class="header">
 					<td>
 					학력별
@@ -119,7 +122,7 @@ tr,td{
 			</table>
 		</td>
 		<td>
-			<table class="table table-sm col-md-10 table-bordered">
+			<table class="t table table-sm col-md-10 table-bordered">
 				<tr class="header">
 					<td>
 					분기별
@@ -182,7 +185,7 @@ tr,td{
 </table>    
 </div>
 </div>    
-<br><br><br><br><br>
+<br><br>
 
 
 
@@ -292,7 +295,7 @@ function drawChart3() {
     				vAxis:{minValue:0, maxValue:1800},
                     titleTextStyle:{color: 'black', fontSize: 20,bold: true},
                     legend: {position: 'none'},
-                    chartArea:{left:40,top:70,width:'80%',height:'70%'},
+                    chartArea:{left:40,top:70,width:'80%',height:'60%'},
                     areaOpacity:0.0,
                     annotations: {
                     	stem: {
