@@ -3,9 +3,6 @@
 <%@ include file="../include/CSSLoader.jsp"%>
     
 <style>
-.tableBox{
-	padding : 6px;
-}
 .header{
 	background-color: lightgray;
 	font-weight: bold;
@@ -14,6 +11,7 @@
 }
 tr,td{
 	text-align: center;
+	font-size: 14px;
 }
 </style>
 
@@ -32,8 +30,8 @@ tr,td{
    		<td><div id="theother_chart_div"></div></td>
 	</tr>
 	<tr>
-		<td class="tableBox">
-			<table class="table table-bordered">
+		<td>
+			<table class="table table-sm col-md-10 table-bordered">
 				<tr class="header">
 					<td>
 					연령대
@@ -44,7 +42,7 @@ tr,td{
 				</tr>
 				<tr>
 					<td>
-					20대 초,중반
+					20대 초반(20~25세)
 					</td>
 					<td>
 					57
@@ -52,7 +50,7 @@ tr,td{
 				</tr>
 				<tr>
 					<td>
-					20대 후반
+					20대 후반(26~29세)
 					</td>
 					<td>
 					102
@@ -76,8 +74,8 @@ tr,td{
 				</tr>
 			</table>
 		</td>
-		<td class="tableBox">
-			<table class="table table-bordered">
+		<td>
+			<table class="table table-sm col-md-10 table-bordered">
 				<tr class="header">
 					<td>
 					학력별
@@ -120,8 +118,8 @@ tr,td{
 				</tr>
 			</table>
 		</td>
-		<td class="tableBox">
-			<table class="table table-bordered">
+		<td>
+			<table class="table table-sm col-md-10 table-bordered">
 				<tr class="header">
 					<td>
 					분기별
@@ -184,7 +182,7 @@ tr,td{
 </table>    
 </div>
 </div>    
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
 
 
 
@@ -211,35 +209,34 @@ google.charts.setOnLoadCallback(drawChart3);
 function drawChart1() {
 
         // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', '연령대');
-        data.addColumn('number', '지원자수');
-        data.addRows([
-          ['20대 초,중반', 57],
-          ['20대 후반', 102],
-          ['30대', 38],
-          ['40대', 13],
-        ]);
+        var data = new google.visualization.arrayToDataTable([
+            ["연령대", "지원자수", { role: "style" } ],
+            ["20대 초,중반", 57, "#184b9b"],
+            ["20대 후반", 102, "#184b9b"],
+            ["30대", 38, "#184b9b"],
+            ["40대", 13, "#184b9b"]
+          ]);
 
-        // Set chart options
-        var options = {'chart.title':'Win-Win 연령대별 입사 지원자 수',
-                       'width':330,
-                       'height':270,
-                       'bars':'vertical',
-                       'legend': { position: 'none' },
-                       'bar': {groupWidth: '50%'},
-                       'hAxis' : {
-                    	   title: 'Hello',
-                    	   titleTextStyle: {
-                    	     color: '#FF0000'
-                    	   }
-                    	 },
-                       'chartArea':{left:20,top:50,width:'50%',height:'50%'}
-                       };
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+                         { calc: "stringify",
+                           sourceColumn: 1,
+                           type: "string",
+                           role: "annotation" },
+                         2]);
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.charts.Bar(document.getElementById('chart_div'));
-        chart.draw(data, options);
+        var options = {
+                title: "WIN-WIN 연령별 지원자 현황",
+                width: 330,
+                height: 270,
+                bar: {groupWidth: "50%"},
+                legend: { position: "none" },
+                titleTextStyle:{color: 'black', fontSize: 20,bold: true},
+                chartArea:{left:30,top:70,width:'80%',height:'80%'}
+              };
+        
+        var chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));
+        chart.draw(view, options);
       }
       
 function drawChart2() {
@@ -256,13 +253,13 @@ function drawChart2() {
     ]);
 
     // Set chart options
-    var options = {'title':'학력별 지원자 현황',
+    var options = {'title':'WIN-WIN 학력별 지원자 현황',
                    'width':330,
                    'height':270,
                    	'is3D':false,
                     'pieSliceText': 'label',
                     'pieStartAngle': 100,
-                    'chartArea':{left:20,top:50,width:'100%',height:'100%'},
+                    'chartArea':{left:20,top:70,width:'100%',height:'100%'},
                     'legend':{position: 'none', textStyle: {color: 'black', fontSize: 11},alignment : 'end'},
                     'titleTextStyle':{color: 'black', fontSize: 20,bold: true},
                     'colors': ['#657ea5', '#184b9b', '#386fc4', '#76a5ed'],
@@ -278,21 +275,40 @@ function drawChart3() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', '분기별');
     data.addColumn('number', '지원자수');
+    data.addColumn({type:'number', role: 'annotation'});
     data.addRows([
-      ['2016년 상반기', 780],
-      ['2016년 하반기', 997],
-      ['2017년 상반기', 860],
-      ['2017년 하반기', 1307],
-      ['2018년 상반기', 923],
-      ['2018년 하반기', 1582],
+      ['2016년 상반기', 780,780],
+      ['2016년 하반기', 997,997],
+      ['2017년 상반기', 860,860],
+      ['2017년 하반기', 1307,1307],
+      ['2018년 상반기', 923,923],
+      ['2018년 하반기', 1582,1582],
     ]);
 
     // Set chart options
-    var options = {title:'분기별 지원자 현황',
+    var options = {title:'WIN-WIN 분기별 지원자 현황',
                    width:330,
                    height:270,
-                   	hAxis:{title:'분기'},
-    				vAxis:{minValue:0, maxValue:1800}
+    				vAxis:{minValue:0, maxValue:1800},
+                    titleTextStyle:{color: 'black', fontSize: 20,bold: true},
+                    legend: {position: 'none'},
+                    chartArea:{left:40,top:70,width:'80%',height:'70%'},
+                    areaOpacity:0.0,
+                    annotations: {
+                    	stem: {
+                    		color : 'white',
+                    		length : 4
+                    	},
+                        textStyle: {
+                          fontSize: 12,
+                          bold: true,
+                          // The color of the text.
+                          color: 'black',
+                          // The color of the text outline.                
+                          opacity: 0.7
+                        }
+                      }
+                          
     				};
 
     // Instantiate and draw our chart, passing in some options.

@@ -23,7 +23,7 @@ td{
 	<div class="p-5">
 	<h3 class="text-primary font-weight-bold">채용Q&A</h3>
 	<hr style="border: solid #376092;">
-	<table class="table table-sm table-striped table-hover table-condensed">
+	<table class="table table-sm table-striped table-hover">
 		<tr>
 			<td class="text-center" style="background-color: lightgray">
 				<strong>제목</strong>
