@@ -13,9 +13,9 @@ public class JobopenBasic {
 	private int startPay; //최저 급여
 	private int endPay; // 최고 급여
 	private String rulePay; // 회사내규에 따름
-	@DateTimeFormat(pattern="yyyy-mm-dd")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date startDate; // 채용 시작일
-	@DateTimeFormat(pattern="yyyy-mm-dd")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endDate; // 채용 마감일
 	private String allOpen; // 상시채용
 	private String academic; // 학력제한 - 없을경우 "없음" 삽입

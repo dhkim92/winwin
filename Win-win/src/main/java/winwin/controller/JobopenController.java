@@ -29,6 +29,13 @@ import winwin.service.JobopenService;
  *
  */
 
+class TestArr{
+	private Test[] t;
+}
+class Test{
+	private String s;
+}
+
 @Controller
 @RequestMapping(value="/jobOpen")
 public class JobopenController {
@@ -37,15 +44,14 @@ public class JobopenController {
 	JobopenService jobopenService;
 	
 	@RequestMapping(value="/basicInfo", method=RequestMethod.GET)
-	public void basic() {
-		
+	public void basic(TestArr tr) {
+
+//		name="t[0].s" 
 	}
 	
 	@RequestMapping(value="/basicInfo", method=RequestMethod.POST)
 	public String basicProc(@Validated JobopenBasic jobopenBasic, Errors errors, HttpSession session) {
 	      if( errors.hasErrors() ) {
-	          jobopenBasic.setEndDate(null);
-	          jobopenBasic.setStartDate(null);
 	          jobopenBasic.setStartPay(0);
 	          jobopenBasic.setEndPay(0);
 	       }
@@ -57,10 +63,14 @@ public class JobopenController {
 	    	  jobopenBasic.setAllOpen("0");
 	      }
 	      
+	      
+	      
+	      System.out.println(jobopenBasic);
+	      
 	      jobopenService.writeBasic(jobopenBasic);
 	      session.setAttribute("jobopen", jobopenBasic.getJobopenNo());
 	      
-	      System.out.println(jobopenBasic.getJobopenNo());
+	      System.out.println(jobopenBasic);
 	
 		return "redirect:detailInfo";
 	}
@@ -71,13 +81,14 @@ public class JobopenController {
 	}
 	
 	@RequestMapping(value="/detailInfo", method=RequestMethod.POST)
-	public String detailProc(JobopenBasic jobopenBasic, @RequestParam(value="jobopenDetail[]") List<JobopenDetail> jobopenDetail) {
+	public String detailProc(JobopenDetail jobopenDetail) {
 		
-		jobopenService.updateBasic(jobopenBasic);
+		System.out.println("디테일");
 		
-		for(int i=0;i<jobopenDetail.size();i++){
-		jobopenService.writeDetail(jobopenDetail.get(i));
+		for(int i=0; i<jobopenDetail.getSector().length;i++){
+			System.out.println(jobopenDetail.getSector()[i]);
 		}
+		
 		
 		return "register";
 	}
@@ -89,7 +100,7 @@ public class JobopenController {
 		JobopenDetail jobopenDetail = new JobopenDetail();
 		
 		jobopenBasic.setTitle((String)session.getAttribute("title"));
-		jobopenDetail.setTitle(jobopenBasic.getTitle());
+//		jobopenDetail.setTitle(jobopenBasic.getTitle());
 		
 		JobopenBasic basic = jobopenService.viewBasic(jobopenBasic);
 		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
