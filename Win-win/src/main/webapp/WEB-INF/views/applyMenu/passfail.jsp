@@ -35,7 +35,7 @@
 			<div>
 				<p class="infolist">지원 결과 확인 시</p> 
 				<ul>
-				<li class="info">지원하신 공고를 선택하시고 작성 시 등록한 성명, 이메일, 비밀번호를 다시 한번 입력하신 후 내역을 확인하시기 바랍니다.</li>
+				<li class="info">지원하신 공고를 선택하시고 비밀번호를 다시 한번 입력하신 후 합격 결과를 확인하시기 바랍니다.</li>
 				</ul>
 				<br>
 				<p class="infolist">관련 문의사항</p> 
@@ -76,18 +76,18 @@
 			</td>
 		</tr>
 		
-		<tr>
-			<th class="text-center align-middle bg-secondary pr-3 pl-3" >한글성명</th>
-			<td colspan="3">  		
-				<input class="ml-4" type="text" style="width: 250px; height: 25px;"/>
-			</td>			
-		</tr>
-		<tr>
-			<th class="text-center align-middle bg-secondary pr-3 pl-3" >이메일</th>
-			<td colspan="3">  		
-				<input class="ml-4" type="text" style="width: 250px; height: 25px;"/>
-			</td>			
-		</tr>
+<!-- 		<tr> -->
+<!-- 			<th class="text-center align-middle bg-secondary pr-3 pl-3" >한글성명</th> -->
+<!-- 			<td colspan="3">  		 -->
+<!-- 				<input class="ml-4" type="text" style="width: 250px; height: 25px;"/> -->
+<!-- 			</td>			 -->
+<!-- 		</tr> -->
+<!-- 		<tr> -->
+<!-- 			<th class="text-center align-middle bg-secondary pr-3 pl-3" >이메일</th> -->
+<!-- 			<td colspan="3">  		 -->
+<!-- 				<input class="ml-4" type="text" style="width: 250px; height: 25px;"/> -->
+<!-- 			</td>			 -->
+<!-- 		</tr> -->
 		<tr>
 			<th class="text-center align-middle bg-secondary pr-3 pl-3" >비밀번호</th>
 			<td colspan="3">  		
