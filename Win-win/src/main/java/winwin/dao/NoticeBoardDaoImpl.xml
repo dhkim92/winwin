@@ -4,4 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="winwin.dao.NoticeBoardDao">
+ 	<select id="totalCnt" resultType="int">
+ 		SELECT count(*)
+ 		FROM notice 	
+ 	</select>
+ 	<select id="list" parameterType="winwin.util.Paging" resultType="winwin.dto.NoticeBoard">
+ 		SELECT
+ 			B.rnum,
+ 			B.title,
+ 			B.code,
+ 			B.writer,
+ 			B.content,
+ 			B.hit,
+ 			B.writedate		
+ 		FROM(
+ 			SELECT rownum rnum, A.*
+ 			FROM(
+ 				SELECT * FROM notice
+ 				ORDER BY noticeno DESC
+ 			)A 
+ 			ORDER BY rnum
+ 		)B
+ 		WHERE B.rnum BETWEEN #{startNo} AND #{endNo}
+ 	</select>
+ 
+ 
  </mapper>

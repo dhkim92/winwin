@@ -4,26 +4,26 @@ import java.util.Date;
 
 public class NoticeBoard {
 
-	private int noticeNo;
+	private int noticeno;
 	private String title;
 	private int code;
 	private String writer;
 	private String content;
 	private int hit;
-	private Date date;
+	private Date writedate;
 	
 
 	@Override
 	public String toString() {
-		return "NoticeBoard [noticeNo=" + noticeNo + ", title=" + title + ", code=" + code + ", writer=" + writer
-				+ ", content=" + content + ", hit=" + hit + ", date=" + date + "]";
+		return "NoticeBoard [noticeno=" + noticeno + ", title=" + title + ", code=" + code + ", writer=" + writer
+				+ ", content=" + content + ", hit=" + hit + ", writedate=" + writedate + "]";
 	}
-	public int getNoticeNo() {
-		return noticeNo;
+	public int getNoticeno() {
+		return noticeno;
 	}
 
-	public void setNoticeNo(int noticeNo) {
-		this.noticeNo = noticeNo;
+	public void setNoticeno(int noticeno) {
+		this.noticeno = noticeno;
 	}
 
 	public String getTitle() {
@@ -66,12 +66,12 @@ public class NoticeBoard {
 		this.hit = hit;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getwritedate() {
+		return writedate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void writedate(Date writedate) {
+		this.writedate = writedate;
 	}
 
 	

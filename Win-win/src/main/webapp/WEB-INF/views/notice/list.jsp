@@ -30,8 +30,14 @@ th {
 					<th>조회수</th>
 				</tr>
 			</thead>
-		
-	<%-- 	<c:forEach items="${list }" var="board"> --%>
+		<tbody>
+		<c:forEach items="${list }" var="board">
+		<tr>
+			<td>${board.noticeno }</td>
+			<td><a href="/notice/view?noticeno=${board.noticeno}">${board.title }</a></td>
+			<td>${board.writedate }</td>
+			<td>${board.writer }</td>
+			<td>${board.hit }</td>	
 	<!-- 	<tr> -->
 	<%-- 		<td>${board.boardNo }</td> --%>
 	<!-- 		<td> -->
@@ -44,7 +50,9 @@ th {
 	<%-- 	<%-- 	<td>${board.writeDate }</td> --%>
 	<!-- 	</tr> -->
 	<%-- 	</c:forEach> --%>
-	
+		</tr>
+		</c:forEach>
+		</tbody>
 		</table>
 	</div>
 	
