@@ -16,4 +16,8 @@ public interface MemberDao {
 
 	public Member emailSearch(Member member);
 
+	public int pwdSearchCnt(Member member);
+
+	public Member pwdSearch(Member member);
+
 }

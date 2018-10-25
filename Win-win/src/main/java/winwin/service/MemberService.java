@@ -19,4 +19,8 @@ public interface MemberService {
 	public boolean emailSearchCnt(Member member);
 
 	public Member emailSearch(Member member);
+
+	public boolean pwdSearchCnt(Member member);
+
+	public Member pwdSearch(Member member);
 }

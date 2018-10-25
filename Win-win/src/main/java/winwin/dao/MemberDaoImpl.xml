@@ -29,4 +29,12 @@
 	<select id="emailSearch" resultType="winwin.dto.Member">
 		select (userid) from member where username=#{username } and phone=#{phone }
 	</select>
+	
+	<select id="pwdSearchCnt" parameterType="winwin.dto.Member" resultType="int" >
+		select count(*) from member where username=#{username } and userid=#{userid }
+	</select>
+	
+	<select id="pwdSearch" resultType="winwin.dto.Member">
+		select (pwd) from member where username=#{username } and userid=#{userid }
+	</select>
   </mapper>

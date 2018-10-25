@@ -40,7 +40,7 @@
 		
 		
 		<div class="col-12 mt-1 mb-4">
-			<form action="/user/loginHelper" method="post">
+			<form action="/user/idSearch" method="post">
 				<table class="table table-sm border border-right-0 border-left-0">
 					<tbody>
 						<tr>
@@ -63,9 +63,7 @@
 								<strong>전화번호</strong>
 							</td>
 							<td><input type="text" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="phone" name="phone" placeholder="전화번호를 입력하시오" 
-								pattern="01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})" 
-								title="전화번호 형식에 맞춰서 입력하십시오." required>
+								id="phone" name="phone" placeholder="전화번호를 입력하시오" required>
 							</td>
 						</tr>
 					</tbody>
@@ -103,7 +101,7 @@
 							</td>
 							<td>
 								<input type="text" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="username" name="username" placeholder="이름을 입력하시오." onkeyup="han(this)" required>
+								id="username2" name="username2" placeholder="이름을 입력하시오." onkeyup="han(this)" required>
 							</td>
 						</tr>
 						<tr>
@@ -198,6 +196,17 @@ $(document).ready(function() {
 	
 });
 
+
+// 이메일 형식 체크
+function validateEmail(userid) {
+	var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	if (filter.test(userid)) {
+	return true;
+} else {
+	return false;
+	}
+}
+
 //전화번호 형식 체크
 function validatePhone(phone) {
 	var filter = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -227,7 +236,7 @@ $(function() {
 
 			$.ajax({
 				type : 'POST',
-				url : "/user/loginHelper",
+				url : "/user/idSearch",
 				dataType : "json",
 				data : {
 					username : username,
@@ -297,25 +306,25 @@ $(function() {
 	$("#pwdSearch").click(
 			function() {
 		
-				var username = $("#username").val();
+				var username2 = $("#username2").val();
 				var userid = $("#userid").val();
 
-				if (username == "") {
+				if (username2 == "") {
 					alert("이름을 입력하시오.");
 				} else if(userid == ""){
 					alert("이메일을 입력하시오.");
-				} else if(validatePhone(phone)==false){
-					alert("잘못된 전화번호 형식 입니다.");
-					$("#phone").focus();
+				} else if(userid==false){
+					alert("잘못된 이메일 형식 입니다.");
+					$("#userid").focus();
 				} else {
 
 				$.ajax({
 					type : 'POST',
-					url : "/user/loginHelper",
+					url : "/user/pwdSearch",
 					dataType : "json",
 					data : {
-						username : username,
-						phone : phone
+						username2 : username2,
+						userid : userid
 					},
 
 					
@@ -334,7 +343,7 @@ $(function() {
 						btnClose.onclick = function() {
 							modal.style.display = "none";
 						}
-						$('#idChecking').html("회원님의 이메일 주소는 "+data.userid+" 입니다.");
+						$('#idChecking').html("회원님의 비밀번호는 "+data.pwd+" 입니다.");
 
 							} else {
 								var modal = document.getElementById('myModal');

@@ -46,4 +46,17 @@ public class MemberServiceImpl implements MemberService {
 	public Member emailSearch(Member member) {
 		return memberdao.emailSearch(member);
 	}
+
+	@Override
+	public boolean pwdSearchCnt(Member member) {
+		if(memberdao.pwdSearchCnt(member) > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Member pwdSearch(Member member) {
+		return memberdao.pwdSearch(member);
+	}
 }

@@ -133,9 +133,9 @@ public class UserController {
 		logger.info("이메일/비밀번호찾기 페이지");
 	}
 
-	@RequestMapping(value = "user/loginHelper", method = RequestMethod.POST)
+	@RequestMapping(value = "user/idSearch", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<Object, Object> loginHelperProc(String username, String phone, Member member) {
+	public Map<Object, Object> idSearchProc(String username, String phone, Member member) {
 		logger.info("이메일 찾기");
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		member.setUsername(username);
@@ -148,6 +148,28 @@ public class UserController {
 			logger.info(userid);
 			map.put("success", success);
 			map.put("userid", userid);
+		} else {
+			logger.info("불일치!");
+		}
+		return map;
+	}
+	
+	@RequestMapping(value = "user/pwdSearch", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> pwdSearchProc(String username2, String userid, Member member) {
+		logger.info("비밀번호 찾기");
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		member.setUsername(username2);
+		member.setUserid(userid);
+		logger.info(member.toString());
+		boolean success = memberservice.pwdSearchCnt(member);
+		if (success == true) {
+			logger.info("일치");
+			member = memberservice.pwdSearch(member);
+			String pwd = member.getPwd();
+			logger.info(pwd);
+			map.put("success", success);
+			map.put("pwd", pwd);
 		} else {
 			logger.info("불일치!");
 		}

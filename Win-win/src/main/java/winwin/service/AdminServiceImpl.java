@@ -14,7 +14,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public boolean adminlogin(Admin admin) {
-		if( admindao.adminlogin(admin) == 1 )	return true;
+		if( admindao.adminlogin(admin) == 1 )	{
+			return true;
+		}
 		else	return false;
 	}
 
