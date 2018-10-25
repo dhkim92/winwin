@@ -60,9 +60,18 @@
 				<td>${JobopenBasic.jobopenNo }</td>
 				<td>${JobopenBasic.offer }</td>
 				<td>${JobopenBasic.title }</td>
-				<td><fmt:formatDate value="${JobopenBasic.startDate }" pattern="yyyy-MM-dd" />&nbsp;-&nbsp;<fmt:formatDate value="${JobopenBasic.endDate }" pattern="yyyy-MM-dd" /></td>
-				<td></td>
-				<td></td>
+				<td>
+					<c:if test="${JobopenBasic.allOpen eq null }">
+						<fmt:formatDate value="${JobopenBasic.startDate }" pattern="yyyy-MM-dd" />&nbsp;-&nbsp;<fmt:formatDate value="${JobopenBasic.endDate }" pattern="yyyy-MM-dd" />
+					</c:if>
+						${JobopenBasic.allOpen }
+				</td>
+				<td>
+					<c:if test="${JobopenBasic.allOpen eq '상시 채용'}">
+						<span class="badge badge-pill badge-primary">채용중</span>
+					</c:if>
+
+				</td>
 			</tr>
 			</c:forEach>
 		</table>
