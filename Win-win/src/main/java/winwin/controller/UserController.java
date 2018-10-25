@@ -22,14 +22,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import winwin.dto.Member;
 import winwin.dto.RSA;
-import winwin.service.UserService;
+import winwin.service.MemberService;
 import winwin.util.RSAUtil;
 
 @Controller
 public class UserController {
 
 	@Autowired
-	UserService userservice;
+	MemberService memberservice;
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -42,7 +42,7 @@ public class UserController {
 	public String joinProc(Member member) {
 		logger.info("회원가입 성공");
 		logger.info(member.toString());
-		userservice.join(member);
+		memberservice.join(member);
 
 		return "redirect:/user/login";
 	}
@@ -53,7 +53,7 @@ public class UserController {
 
 		String userid = request.getParameter("userid");
 		member.setUserid(userid);
-		boolean success = userservice.idcheck(member);
+		boolean success = memberservice.idcheck(member);
 		resp.setContentType("application/json; charset=utf-8");
 		PrintWriter out;
 		try {
@@ -109,11 +109,11 @@ public class UserController {
 			logger.info(member.toString());
 
 			member.setPwd(password);
-			boolean success = userservice.login(member);
+			boolean success = memberservice.login(member);
 
 			if (success == true) {
 				logger.info("email, password 일치!");
-				member = userservice.info(member);
+				member = memberservice.info(member);
 				session.setAttribute("login", true);
 				session.setAttribute("id", member.getUserid());
 				return "redirect:/main/usermain";
@@ -140,10 +140,10 @@ public class UserController {
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		member.setUsername(username);
 		member.setPhone(phone);
-		boolean success = userservice.emailSearchCnt(member);
+		boolean success = memberservice.emailSearchCnt(member);
 		if (success == true) {
 			logger.info("일치");
-			member = userservice.emailSearch(member);
+			member = memberservice.emailSearch(member);
 			String userid = member.getUserid();
 			logger.info(userid);
 			map.put("success", success);

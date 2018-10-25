@@ -373,11 +373,11 @@
 
 				btnClose.onclick = function() {
 					modal.style.display = "none";
+					$("#frm").submit();	
 				}
 
 				$('#idChecking').html("회원가입을 축하드립니다.");
-				$("#frm").submit();
-			    
+						    
 				}
 			}
 		});

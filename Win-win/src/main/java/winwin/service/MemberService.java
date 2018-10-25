@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import winwin.dto.Member;
 
 @Service
-public interface UserService {
+public interface MemberService {
 	
 
 	public boolean login(Member member);

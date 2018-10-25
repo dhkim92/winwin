@@ -2,7 +2,7 @@ package winwin.dao;
 
 import winwin.dto.Member;
 
-public interface UserDao {
+public interface MemberDao {
 
 	public int selectCnt(Member member);
 

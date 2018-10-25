@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="winwin.dao.UserDao">
+  <mapper namespace="winwin.dao.MemberDao">
   
    <insert id="join" parameterType="winwin.dto.Member">
 		INSERT INTO member ( userid, username, phone, pwd ) VALUES ( #{userid }, #{username }, #{phone }, #{pwd } )

@@ -3,31 +3,31 @@ package winwin.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import winwin.dao.UserDao;
+import winwin.dao.MemberDao;
 import winwin.dto.Member;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	UserDao userdao;
+	MemberDao memberdao;
 	
 	public boolean login(Member member) {
-		if( userdao.selectCnt(member) == 1 )	return true;
+		if( memberdao.selectCnt(member) == 1 )	return true;
 		else	return false;
 	}
 
 	public Member info(Member member) {
-		return userdao.select(member);
+		return memberdao.select(member);
 	}
 
 	public void join(Member member) {
-		userdao.join(member);
+		memberdao.join(member);
 	}
 
 	@Override
 	public boolean idcheck(Member member) {
-		if(userdao.idcheck(member) > 0) {
+		if(memberdao.idcheck(member) > 0) {
 			return true;
 		}
 		return false;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean emailSearchCnt(Member member) {
-		if(userdao.emailSearchCnt(member) > 0) {
+		if(memberdao.emailSearchCnt(member) > 0) {
 			return true;
 		}
 		return false;
@@ -44,6 +44,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Member emailSearch(Member member) {
-		return userdao.emailSearch(member);
+		return memberdao.emailSearch(member);
 	}
 }
