@@ -4,6 +4,7 @@ import java.util.List;
 
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
+import winwin.util.Paging;
 
 public interface JobopenService {
 	
@@ -42,7 +43,7 @@ public interface JobopenService {
 	 * @param paging
 	 * @return List
 	 */
-//	public List<JobopenBasic> selectBasic(Paging paging);
+	public List selectBasic(Paging paging);
 	
 	/**
 	 * 페이징처리 하기
@@ -52,8 +53,7 @@ public interface JobopenService {
 	 * @param pageCount
 	 * @return Paging
 	 */
-//	public Paging getPaging(int curPage, int listCount, int pageCount);
-	
+	public Paging getPaging(int curPage, int listCount, int pageCount);
 	
 	/**
 	 * 기본정보 게시글 보기

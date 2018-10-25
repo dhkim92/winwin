@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import winwin.dao.JobopenDao;
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
+import winwin.util.Paging;
 
 @Service
 public class JobopenServiceImpl implements JobopenService {
@@ -54,6 +55,22 @@ public class JobopenServiceImpl implements JobopenService {
 	@Override
 	public int CountBasic() {
 		return jobopenDao.CountBasic();
+	}
+	
+	@Override
+	public List selectBasic(Paging paging) {
+		return jobopenDao.selectBasic(paging);
+	}
+
+
+	@Override
+	public Paging getPaging(int curPage, int listCount, int pageCount) {
+
+		int totalCount = this.CountBasic();
+		
+		Paging paging = new Paging(totalCount, curPage, listCount, pageCount);
+		
+		return paging;		
 	}
 
 }

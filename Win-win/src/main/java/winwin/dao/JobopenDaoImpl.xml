@@ -26,5 +26,20 @@
   		</if> 
    		 #{allOpen})
   	</insert>
+  	
+  	<select id="selectBasic" resultType="winwin.dto.JobopenBasic" parameterType="winwin.util.Paging">
+  		SELECT * FROM ( 
+            SELECT rownum rnum, B.* FROM (
+		         SELECT * FROM jobopenbasic
+                ORDER BY jobopenno DESC 
+            ) B 
+        ) R WHERE R.rnum BETWEEN #{startNo} AND #{endNo } ORDER BY rnum 	
+  	</select>
+  	
+	<select id="CountBasic" resultType="int">
+		SELECT COUNT(*) CNT FROM (
+		 SELECT * FROM jobopenbasic
+		) CNT
+	</select>
   
   </mapper>

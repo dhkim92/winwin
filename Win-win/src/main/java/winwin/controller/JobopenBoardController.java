@@ -27,11 +27,11 @@ public class JobopenBoardController {
 			@RequestParam(required=false, defaultValue="10") int listCount,
 			@RequestParam(required=false, defaultValue="10") int pageCount) {			
 		
-//		Paging paging = jobopenService.getPaging(curPage, listCount, pageCount);
-//		model.addAttribute("paging", paging);
+		Paging paging = jobopenService.getPaging(curPage, listCount, pageCount);
+		model.addAttribute("paging", paging);
 		
-//		List<JobopenBasic> list = jobopenService.selectBasic(paging);
-//		model.addAttribute("list", list);
+		List<JobopenBasic> list = jobopenService.selectBasic(paging);
+		model.addAttribute("list", list);
 	}
 	
 	@RequestMapping(value="/view", method = RequestMethod.GET)

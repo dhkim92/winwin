@@ -4,6 +4,7 @@ import java.util.List;
 
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
+import winwin.util.Paging;
 
 public interface JobopenDao {
 	
@@ -22,5 +23,7 @@ public interface JobopenDao {
 	public void deleteAll(JobopenBasic basic);
 	
 	public int CountBasic();
+
+	public List selectBasic(Paging paging);
 
 }

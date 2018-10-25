@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
 th {
@@ -55,49 +56,22 @@ th {
 					<th>진행상황</th>
 				</tr>
 			</thead>
+			
+			<c:forEach items="${list }" var="JobopenBasic">
+			<tr>
+				<td>${JobopenBasic.jobopenNo }</td>
+				<td>${JobopenBasic.form }</td>
+				<td>${JobopenBasic.title }</td>
+				<td><fmt:formatDate value="${JobopenBasic.startDate }" pattern="yyyy-MM-dd" />&nbsp;-&nbsp;<fmt:formatDate value="${JobopenBasic.endDate }" pattern="yyyy-MM-dd" /></td>
+				<td>${JobopenBasic.hit }</td>
+				<td></td>
+			</tr>
+			</c:forEach>
 		
-	<%-- 	<c:forEach items="${list }" var="board"> --%>
-	<!-- 	<tr> -->
-	<%-- 		<td>${board.boardNo }</td> --%>
-	<!-- 		<td> -->
-	<%-- 			<a href="/board/view?boardNo=${board.boardNo }">${board.title }</a> --%>
-	<!-- 		</td> -->
-	<%-- 	<%-- 	<td>${board.title }</td> --%>
-	<%-- 		<td>${board.writerNick }</td> --%>
-	<%-- 		<td>${board.hit }</td> --%>
-	<%-- 		<td><fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd" /></td> --%>
-	<%-- 	<%-- 	<td>${board.writeDate }</td> --%>
-	<!-- 	</tr> -->
-	<%-- 	</c:forEach> --%>
-	
 		</table>
 	</div>
 	
-	<div class=" d-flex justify-content-center">
-	  <ul class="pagination">
-	    <li class="page-item">
-	      <a class="page-link" href="#">&laquo;</a>
-	    </li>
-	    <li class="page-item active">
-	      <a class="page-link" href="#">1</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">2</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">3</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">4</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">5</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">&raquo;</a>
-	    </li>
-	  </ul>
-	</div>
+<jsp:include page="../util/jobopenpaging.jsp" />
 	
 </div>
 </div>
