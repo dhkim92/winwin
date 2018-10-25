@@ -10,8 +10,8 @@
   		<selectKey order="BEFORE" keyProperty="jobopenNo" resultType="int">
   			select JobOpenBasic_seq.nextval from dual
   		</selectKey>
-  		insert into jobopenBasic(jobopenNo, title, form, startPay, endPay, rulePay, startDate, endDate, allOpen)
-  		values(#{jobopenNo}, #{title}, #{form}, #{startPay}, #{endPay}, #{rulePay},
+  		insert into jobopenBasic(jobopenNo, title, offer, form, startPay, endPay, rulePay, startDate, endDate, allOpen)
+  		values(#{jobopenNo}, #{title}, #{offer}, #{form}, #{startPay}, #{endPay}, #{rulePay},
   		<if test="startDate!=null">
   		#{startDate}, 
   		</if> 
