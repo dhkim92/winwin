@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style type="text/css">
 
 .a {
@@ -54,49 +55,20 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>신입</td>
-		      <td>신입 IT 개발자 채용</td>
-		      <td>2018.10.18 - 2018.10.18</td>
-		      <td><span class="badge badge-pill badge-primary">채용중</span></td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>경력</td>
-		      <td>경력 FRONT 디자이너 채용</td>
-		      <td>2018.10.18 - 2018.10.18</td>
-		      <td><span class="badge badge-pill badge-light">채용완료</span></td>
-		    </tr>
-		  </tbody>
+			<c:forEach items="${list }" var="JobopenBasic">
+			<tr>
+				<td>${JobopenBasic.jobopenNo }</td>
+				<td>${JobopenBasic.offer }</td>
+				<td>${JobopenBasic.title }</td>
+				<td><fmt:formatDate value="${JobopenBasic.startDate }" pattern="yyyy-MM-dd" />&nbsp;-&nbsp;<fmt:formatDate value="${JobopenBasic.endDate }" pattern="yyyy-MM-dd" /></td>
+				<td></td>
+				<td></td>
+			</tr>
+			</c:forEach>
 		</table>
 	</div>
 
-	<div class="d-flex justify-content-center mt-4">
-	  <ul class="pagination pagination-sm">
-	    <li class="page-item">
-	      <a class="page-link" href="#">&laquo;</a>
-	    </li>
-	    <li class="page-item active">
-	      <a class="page-link" href="#">1</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">2</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">3</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">4</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">5</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">&raquo;</a>
-	    </li>
-	  </ul>
-	</div>	
+<jsp:include page="../util/usermainpaging.jsp" />
 	
 </div>
 

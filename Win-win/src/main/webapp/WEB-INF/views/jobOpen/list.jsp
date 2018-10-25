@@ -60,7 +60,7 @@ th {
 			<c:forEach items="${list }" var="JobopenBasic">
 			<tr>
 				<td>${JobopenBasic.jobopenNo }</td>
-				<td>${JobopenBasic.form }</td>
+				<td>${JobopenBasic.offer }</td>
 				<td>${JobopenBasic.title }</td>
 				<td><fmt:formatDate value="${JobopenBasic.startDate }" pattern="yyyy-MM-dd" />&nbsp;-&nbsp;<fmt:formatDate value="${JobopenBasic.endDate }" pattern="yyyy-MM-dd" /></td>
 				<td>${JobopenBasic.hit }</td>

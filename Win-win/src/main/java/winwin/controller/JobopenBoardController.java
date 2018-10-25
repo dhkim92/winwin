@@ -37,8 +37,8 @@ public class JobopenBoardController {
 	@RequestMapping(value="/view", method = RequestMethod.GET)
 	public void view(JobopenBasic jobopenbasic, JobopenDetail jobopenDetail) {
 	
-		jobopenService.viewBasic(jobopenbasic);
-		jobopenService.viewDetail(jobopenDetail);	
+//		jobopenService.viewBasic(jobopenbasic);
+//		jobopenService.viewDetail(jobopenDetail);	
 		
 	}
 	

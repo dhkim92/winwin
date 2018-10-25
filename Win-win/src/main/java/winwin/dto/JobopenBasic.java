@@ -8,8 +8,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class JobopenBasic {
 	private int jobopenNo; // idx
 	private String title; // 공고제목
-	private String offer; //
-	private String form; //고용 형태
+	private String offer; // 신입 or 경력
+	private String form; //고용 형태 (정규직, 인턴...)
 	private int startPay; //최저 급여
 	private int endPay; // 최고 급여
 	private String rulePay; // 회사내규에 따름

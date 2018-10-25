@@ -1,24 +1,37 @@
 package winwin.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import winwin.dto.JobopenBasic;
+import winwin.service.JobopenService;
 import winwin.service.MainService;
+import winwin.util.Paging;
 
 @Controller
 @RequestMapping(value="/main")
 public class MainController {
 	
 	@Autowired MainService mainService;
+	@Autowired JobopenService jobopenService;
 	
 	@RequestMapping(value="/usermain", method=RequestMethod.GET)
-	public void main() { 
+	public void main(
+			Model model,
+			@RequestParam(required=false, defaultValue="0") int curPage,
+			@RequestParam(required=false, defaultValue="10") int listCount,
+			@RequestParam(required=false, defaultValue="10") int pageCount) {			
+		Paging paging = jobopenService.getPaging(curPage, listCount, pageCount);
+		model.addAttribute("paging", paging);
 		
-//		//채용공고 리스트 띄우기 
-//		mainService.getJobopenBoard();
+		List<JobopenBasic> list = jobopenService.selectBasic(paging);
+		model.addAttribute("list", list);
 	}
 	
 	@RequestMapping(value="/adminmain", method=RequestMethod.GET)
