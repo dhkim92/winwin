@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import winwin.dto.Academic;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Military;
-import winwin.dto.User;
+import winwin.dto.Member;
 import winwin.dto.UserDetail;
 import winwin.service.Apply1Service;
 
@@ -23,7 +23,7 @@ public class Apply1Controller {
 	@Autowired Apply1Service apply1Service;
 	
 	@RequestMapping(value="/userDetail", method=RequestMethod.GET)
-	public void userDetail(JobopenBasic jobopenBasic, User user, HttpSession session, Model model) {
+	public void userDetail(JobopenBasic jobopenBasic, Member user, HttpSession session, Model model) {
 		
 //		apply1Service.viewJobOpen(jobopenBasic);
 //		apply1Service.viewUser(user);
@@ -31,7 +31,7 @@ public class Apply1Controller {
 	}
 	
 	@RequestMapping(value="/timer", method=RequestMethod.GET)
-	public void timer(JobopenBasic jobopenBasic, User user, HttpSession session, Model model) {
+	public void timer(JobopenBasic jobopenBasic, Member user, HttpSession session, Model model) {
 		
 //		apply1Service.viewJobOpen(jobopenBasic);
 //		apply1Service.viewUser(user);
@@ -46,7 +46,7 @@ public class Apply1Controller {
 	}
 
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.GET)
-	public void userDetailUpdate(JobopenBasic jobopenBasic, User user, UserDetail userDetail, HttpSession session, Model model) {
+	public void userDetailUpdate(JobopenBasic jobopenBasic, Member user, UserDetail userDetail, HttpSession session, Model model) {
 
 		apply1Service.viewJobOpen(jobopenBasic);
 		apply1Service.viewUser(user);

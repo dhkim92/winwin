@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import winwin.dao.UserDao;
-import winwin.dto.User;
+import winwin.dto.Member;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -12,22 +12,22 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDao userdao;
 	
-	public boolean login(User user) {
-		if( userdao.selectCnt(user) == 1 )	return true;
+	public boolean login(Member member) {
+		if( userdao.selectCnt(member) == 1 )	return true;
 		else	return false;
 	}
 
-	public User info(User user) {
-		return userdao.select(user);
+	public Member info(Member member) {
+		return userdao.select(member);
 	}
 
-	public void join(User user) {
-		userdao.join(user);
+	public void join(Member member) {
+		userdao.join(member);
 	}
 
 	@Override
-	public boolean idcheck(User user) {
-		if(userdao.idcheck(user) > 0) {
+	public boolean idcheck(Member member) {
+		if(userdao.idcheck(member) > 0) {
 			return true;
 		}
 		return false;
@@ -35,15 +35,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean emailSearchCnt(User user) {
-		if(userdao.emailSearchCnt(user) > 0) {
+	public boolean emailSearchCnt(Member member) {
+		if(userdao.emailSearchCnt(member) > 0) {
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public User emailSearch(User user) {
-		return userdao.emailSearch(user);
+	public Member emailSearch(Member member) {
+		return userdao.emailSearch(member);
 	}
 }

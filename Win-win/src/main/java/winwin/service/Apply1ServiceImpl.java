@@ -7,7 +7,7 @@ import winwin.dao.Apply1Dao;
 import winwin.dto.Academic;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Military;
-import winwin.dto.User;
+import winwin.dto.Member;
 import winwin.dto.UserDetail;
 
 @Service
@@ -21,7 +21,7 @@ public class Apply1ServiceImpl implements Apply1Service {
 	}
 	
 	
-	public User viewUser(User user) {
+	public Member viewUser(Member user) {
 		return dao.selectUser(user);
 	}
 	

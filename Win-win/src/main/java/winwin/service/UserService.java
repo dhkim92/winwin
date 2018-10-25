@@ -2,21 +2,21 @@ package winwin.service;
 
 import org.springframework.stereotype.Service;
 
-import winwin.dto.User;
+import winwin.dto.Member;
 
 @Service
 public interface UserService {
 	
 
-	public boolean login(User user);
+	public boolean login(Member member);
 
-	public User info(User user);
+	public Member info(Member member);
 
-	public void join(User user);
+	public void join(Member member);
 
-	public boolean idcheck(User user);
+	public boolean idcheck(Member member);
 
-	public boolean emailSearchCnt(User user);
+	public boolean emailSearchCnt(Member member);
 
-	public User emailSearch(User user);
+	public Member emailSearch(Member member);
 }

@@ -15,14 +15,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import winwin.dto.Member;
 import winwin.dto.RSA;
-import winwin.dto.User;
 import winwin.service.UserService;
 import winwin.util.RSAUtil;
 
@@ -40,21 +39,21 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/join", method = RequestMethod.POST)
-	public String joinProc(User user) {
+	public String joinProc(Member member) {
 		logger.info("회원가입 성공");
-		logger.info(user.toString());
-		userservice.join(user);
+		logger.info(member.toString());
+		userservice.join(member);
 
 		return "redirect:/user/login";
 	}
 
 	@RequestMapping(value = "/user/idcheck", method = RequestMethod.POST)
-	public void idcheck(HttpServletRequest request, HttpServletResponse resp, User user) {
+	public void idcheck(HttpServletRequest request, HttpServletResponse resp, Member member) {
 		logger.info("아이디 중복확인");
 
 		String userid = request.getParameter("userid");
-		user.setUserid(userid);
-		boolean success = userservice.idcheck(user);
+		member.setUserid(userid);
+		boolean success = userservice.idcheck(member);
 		resp.setContentType("application/json; charset=utf-8");
 		PrintWriter out;
 		try {
@@ -85,7 +84,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
-	public String loginProc(User user, HttpSession session, RedirectAttributes ra) {
+	public String loginProc(Member member, HttpSession session, RedirectAttributes ra) {
 
 		logger.info("로그인 활성화");
 		// 개인키 취득
@@ -104,19 +103,19 @@ public class UserController {
 		// 아이디/비밀번호 복호화
 		try {
 
-			String password = rsaUtil.getDecryptText(key, user.getPwd());
+			String password = rsaUtil.getDecryptText(key, member.getPwd());
 
 			logger.info("복호화 한 password : " + password);
-			logger.info(user.toString());
+			logger.info(member.toString());
 
-			user.setPwd(password);
-			boolean success = userservice.login(user);
+			member.setPwd(password);
+			boolean success = userservice.login(member);
 
 			if (success == true) {
 				logger.info("email, password 일치!");
-				user = userservice.info(user);
+				member = userservice.info(member);
 				session.setAttribute("login", true);
-				session.setAttribute("id", user.getUserid());
+				session.setAttribute("id", member.getUserid());
 				return "redirect:/main/usermain";
 			} else {
 				logger.info("email, password 불일치!");
@@ -136,16 +135,16 @@ public class UserController {
 
 	@RequestMapping(value = "user/loginHelper", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<Object, Object> loginHelperProc(String username, String phone, User user) {
+	public Map<Object, Object> loginHelperProc(String username, String phone, Member member) {
 		logger.info("이메일 찾기");
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		user.setUsername(username);
-		user.setPhone(phone);
-		boolean success = userservice.emailSearchCnt(user);
+		member.setUsername(username);
+		member.setPhone(phone);
+		boolean success = userservice.emailSearchCnt(member);
 		if (success == true) {
 			logger.info("일치");
-			user = userservice.emailSearch(user);
-			String userid = user.getUserid();
+			member = userservice.emailSearch(member);
+			String userid = member.getUserid();
 			logger.info(userid);
 			map.put("success", success);
 			map.put("userid", userid);
@@ -161,8 +160,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "user/pwchange", method = RequestMethod.POST)
-	public void pwChangeProc(User user) {
-		logger.info(user.toString());
+	public void pwChangeProc(Member member) {
+		logger.info(member.toString());
 
 	}
 

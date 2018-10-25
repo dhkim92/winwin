@@ -3,14 +3,14 @@ package winwin.service;
 import winwin.dto.Academic;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Military;
-import winwin.dto.User;
+import winwin.dto.Member;
 import winwin.dto.UserDetail;
 
 public interface Apply1Service {
 
 	public JobopenBasic viewJobOpen(JobopenBasic jopopenBasic);
 	
-	public User viewUser(User user);
+	public Member viewUser(Member user);
 	
 	public void insertUserDetail(UserDetail userDetail);
 	

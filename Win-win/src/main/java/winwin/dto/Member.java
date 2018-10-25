@@ -1,6 +1,6 @@
 package winwin.dto;
 
-public class User {
+public class Member {
 
 	private String userid;
 	private String username;

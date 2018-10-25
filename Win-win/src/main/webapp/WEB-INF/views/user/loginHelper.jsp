@@ -102,8 +102,8 @@
 								<strong>이름</strong>
 							</td>
 							<td>
-								<input type="email" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="username" name="username" placeholder="이름을 입력하시오.">
+								<input type="text" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
+								id="username" name="username" placeholder="이름을 입력하시오." onkeyup="han(this)" required>
 							</td>
 						</tr>
 						<tr>
@@ -120,7 +120,7 @@
 					</tbody>
 				</table>
 				<div class="col-12 mt-2 text-right">
-					<button type="submit" class="btn btn-primary btn-sm">비밀번호 찾기</button>
+					<button type="button" id="pwdSearch" class="btn btn-primary btn-sm">비밀번호 찾기</button>
 				</div>
 			</form>
 		</div>
@@ -292,6 +292,90 @@ $(function() {
 		}
 			
 	});
+	
+	
+	$("#pwdSearch").click(
+			function() {
+		
+				var username = $("#username").val();
+				var userid = $("#userid").val();
+
+				if (username == "") {
+					alert("이름을 입력하시오.");
+				} else if(userid == ""){
+					alert("이메일을 입력하시오.");
+				} else if(validatePhone(phone)==false){
+					alert("잘못된 전화번호 형식 입니다.");
+					$("#phone").focus();
+				} else {
+
+				$.ajax({
+					type : 'POST',
+					url : "/user/loginHelper",
+					dataType : "json",
+					data : {
+						username : username,
+						phone : phone
+					},
+
+					
+					success : function(data) {
+					if (data.success > 0) {
+						console.log(data.userid);
+						var modal = document.getElementById('myModal');
+						modal.style.display = "block";
+						var span = document.getElementsByClassName("close")[0];
+						var btnClose = document.getElementById("btnClose");
+											
+						span.onclick = function() {
+							modal.style.display = "none";
+						}
+
+						btnClose.onclick = function() {
+							modal.style.display = "none";
+						}
+						$('#idChecking').html("회원님의 이메일 주소는 "+data.userid+" 입니다.");
+
+							} else {
+								var modal = document.getElementById('myModal');
+								modal.style.display = "block";
+								var span = document.getElementsByClassName("close")[0];
+
+								var btnClose = document.getElementById("btnClose");
+											
+								span.onclick = function() {
+									modal.style.display = "none";
+								}
+
+								btnClose.onclick = function() {
+									modal.style.display = "none";
+								}
+
+								$('#idChecking').html("일치하는 이메일 주소가 없습니다.");
+
+							}
+						},
+					error : function(error) {
+						var modal = document.getElementById('myModal');
+						modal.style.display = "block";
+						var span = document.getElementsByClassName("close")[0];
+
+						var btnClose = document.getElementById("btnClose");
+									
+						span.onclick = function() {
+							modal.style.display = "none";
+						}
+
+						btnClose.onclick = function() {
+							modal.style.display = "none";
+						}
+
+						$('#idChecking').html("Q&A게시판으로 이동하여 관리자에게 문의하십시오.");
+					}
+				});
+			}
+				
+		});
 });
 
 

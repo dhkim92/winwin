@@ -1,19 +1,19 @@
 package winwin.dao;
 
-import winwin.dto.User;
+import winwin.dto.Member;
 
 public interface UserDao {
 
-	public int selectCnt(User user);
+	public int selectCnt(Member member);
 
-	public User select(User user);
+	public Member select(Member member);
 
-	public void join(User user);
+	public void join(Member member);
 
-	public int idcheck(User user);
+	public int idcheck(Member member);
 
-	public int emailSearchCnt(User user);
+	public int emailSearchCnt(Member member);
 
-	public User emailSearch(User user);
+	public Member emailSearch(Member member);
 
 }
