@@ -107,10 +107,27 @@
 							</select></td>
 						</tr>
 						<tr>
-							<td colspan="7" style="height: 80px"><button
-									class="btn float-right btn-primary	"
-									style="margin-right: 15px; margin-top: 35px">선택된 조건
-									검색하기</button></td>
+							<td colspan="7" style="height: 90px">
+							<div class="row">
+							<div class="col-10">
+							<span id="career1"></span> <span id="employment1"></span> <span
+								id="academiccareer1"></span> <span id="credit1"></span> <span
+								id="language1"></span> <span id="score1"></span> <span
+								id="status1"></span>
+							</div>
+							<div class="col-2 mt-2">
+								<button class="btn float-right btn-sm btn-primary	"
+									style="margin-right: 15px">초기화</button>
+									</div>
+									</div>
+									<div class="row">
+									<div class="col-12 d-flex justify-content-end mt-2">
+									<button class="btn float-right btn-primary"
+										style="margin-right: 15px; magrin-top: 35px;">선택된 조건 검색하기</button>
+										</div>
+										</div>
+										
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -153,8 +170,8 @@
 			</div>
 		</div>
 
-<%@ include file="../util/supportpaging.jsp"%>
-		
+		<%@ include file="../util/supportpaging.jsp"%>
+
 	</div>
 </div>
 
@@ -164,7 +181,165 @@
 
 <script>
 
+// var start_temp = "<button>sdf"
+// var end_temp = "sdf</button>"
 
+	$(function() {
+		$("#career1").hide();
+		$("#career").click(function() {
+
+			var career = $("#career option:selected").val();
+
+			$.ajax({
+				type : 'POST',
+				url : "/support/list",
+				dataType : "json",
+				data : {
+					career : career
+				},
+
+				success : function(data) {
+					if (data.success == true) {
+						$("#career1").html(data.career)
+						$("#career1").show();
+					}
+				}
+			});
+		});
+
+		$("#employment1").hide();
+		$("#employment").click(function() {
+
+			var employment = $("#employment option:selected").val();
+
+			$.ajax({
+				type : 'POST',
+				url : "/support/list",
+				dataType : "json",
+				data : {
+					employment : employment
+				},
+
+				success : function(data) {
+					if (data.success == true) {
+						$("#employment1").html(data.employment)
+						$("#employment1").show();
+					}
+				}
+			});
+		});
+
+		$("#academiccareer1").hide();
+		$("#academiccareer").click(function() {
+
+			var academiccareer = $("#academiccareer option:selected").val();
+
+			$.ajax({
+				type : 'POST',
+				url : "/support/list",
+				dataType : "json",
+				data : {
+					academiccareer : academiccareer
+				},
+
+				success : function(data) {
+					if (data.success == true) {
+						$("#academiccareer1").html(data.academiccareer)
+						$("#academiccareer1").show();
+					}
+				}
+			});
+		});
+
+		$("#credit1").hide();
+		$("#credit").click(function() {
+
+			var credit = $("#credit option:selected").val();
+
+			$.ajax({
+				type : 'POST',
+				url : "/support/list",
+				dataType : "json",
+				data : {
+					credit : credit
+				},
+
+				success : function(data) {
+					if (data.success == true) {
+						$("#credit1").html(data.credit)
+						$("#credit1").show();
+					}
+				}
+			});
+		});
+
+		$("#language1").hide();
+		$("#language").click(function() {
+
+			var language = $("#language option:selected").val();
+
+			$.ajax({
+				type : 'POST',
+				url : "/support/list",
+				dataType : "json",
+				data : {
+					language : language
+				},
+
+				success : function(data) {
+					if (data.success == true) {
+						$("#language1").html(data.language)
+						$("#language1").show();
+					}
+				}
+			});
+		});
+
+		$("#score1").hide();
+		$("#score").click(function() {
+
+			var score = $("#score option:selected").val();
+
+			$.ajax({
+				type : 'POST',
+				url : "/support/list",
+				dataType : "json",
+				data : {
+					score : score
+				},
+
+				success : function(data) {
+					if (data.success == true) {
+						$("#score1").html(data.score)
+						$("#score1").show();
+					}
+				}
+			});
+		});
+
+		$("#status1").hide();
+		$("#status").click(function() {
+
+			var status = $("#status option:selected").val();
+
+			$.ajax({
+				type : 'POST',
+				url : "/support/list",
+				dataType : "json",
+				data : {
+					status : status
+				},
+
+				success : function(data) {
+					if (data.success == true) {
+						$("#status1").html(data.status)
+						$("#status1").show();
+					}
+				}
+			});
+		});
+
+	});
 </script>
 
 <%@ include file="../include/footer.jsp"%>

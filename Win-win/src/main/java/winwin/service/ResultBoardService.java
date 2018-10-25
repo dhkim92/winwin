@@ -10,6 +10,8 @@ public interface ResultBoardService {
 	public int totalCnt();
 
 	public List<ResultBoard> list(Paging paging);
+	
+	public Paging getPaging(int curPage, int listCount, int pageCount);
 
 	public ResultBoard send(ResultBoard board);
 
