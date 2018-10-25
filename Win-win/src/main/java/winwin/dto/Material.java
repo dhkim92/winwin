@@ -12,7 +12,7 @@ public class Material {
 	String originName;
 	String storedName;
 	Date writedate;
-	int filesize;
+	long filesize;
 	String path;
 	
 	@Override
@@ -86,11 +86,11 @@ public class Material {
 		this.writedate = date;
 	}
 
-	public int getFilesize() {
+	public long getFilesize() {
 		return filesize;
 	}
 
-	public void setFileSize(int size) {
+	public void setFileSize(long size) {
 		this.filesize = size;
 	}
 

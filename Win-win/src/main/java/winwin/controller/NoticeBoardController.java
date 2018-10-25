@@ -1,13 +1,19 @@
 package winwin.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +28,7 @@ public class NoticeBoardController {
 	
 	private static Logger logger;
 	
+	@Autowired ServletContext context;
 	@Autowired NoticeBoardService service;
 
 	@RequestMapping(value="/notice/list")
@@ -58,12 +65,49 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
-	public void writeProc(MultipartFile up,NoticeBoard board,Material file) {
-		if(up==null) {
+	public void writeProc(@ModelAttribute NoticeBoard board) {
+		
+		List<MultipartFile> up = board.getList();
+//		List<String> upNames = new ArrayList<>();
+		
+		if(up == null || up.size()==0) {
+			
 			service.write(board);
+		
 		}else {
-			service.insertFile(file);
+			
+			for (MultipartFile data : up) {
+				
+				Material file = new Material();
+				
+				String realpath = context.getRealPath("upload");				
+				String uid = UUID.randomUUID().toString().split("-")[4];				
+				String stored = data.getOriginalFilename()+"_"+uid;
+				File dest = new File(realpath, stored);
+				
+				file.setFileSize(data.getSize());
+				file.setNoticeNo(board.getNoticeno());
+				file.setAdminCode(board.getCode());
+				file.setPath(realpath);
+				file.setStoredName(stored);
+				file.setOriginName(data.getOriginalFilename());
+				
+				//파일 업로드
+				try {
+					data.transferTo(dest);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				//DB 업로드
+				service.insertFile(file);
+				
+			}
+			
 			service.write(board);
+			
 		}
 	}
 	
@@ -82,6 +126,7 @@ public class NoticeBoardController {
 	
 	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
 	public void updateProc(MultipartFile up,NoticeBoard board, Material file) {
+		
 		if(up==null) {
 			service.deleteFilesByBoardNo(board);
 			service.updateBoard(board);

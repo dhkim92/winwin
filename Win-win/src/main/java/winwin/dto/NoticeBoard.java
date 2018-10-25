@@ -1,6 +1,9 @@
 package winwin.dto;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class NoticeBoard {
 
@@ -11,6 +14,7 @@ public class NoticeBoard {
 	private String content;
 	private int hit;
 	private Date writedate;
+	private List<MultipartFile> list;
 	
 
 	@Override
@@ -18,6 +22,20 @@ public class NoticeBoard {
 		return "NoticeBoard [noticeno=" + noticeno + ", title=" + title + ", code=" + code + ", writer=" + writer
 				+ ", content=" + content + ", hit=" + hit + ", writedate=" + writedate + "]";
 	}
+	
+	public Date getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(Date writedate) {
+		this.writedate = writedate;
+	}
+	public List<MultipartFile> getList() {
+		return list;
+	}
+	public void setList(List<MultipartFile> list) {
+		this.list = list;
+	}
+	
 	public int getNoticeno() {
 		return noticeno;
 	}
@@ -65,14 +83,4 @@ public class NoticeBoard {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-
-	public Date getwritedate() {
-		return writedate;
-	}
-
-	public void writedate(Date writedate) {
-		this.writedate = writedate;
-	}
-
-	
 }

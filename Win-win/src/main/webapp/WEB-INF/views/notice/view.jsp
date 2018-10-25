@@ -46,9 +46,9 @@ tr{
 	${board.content}
 	</div>
 	<div id="btns" class="form-group d-flex justify-content-center">
-		<button type="button" class="btn btn-primary">목록</button>
-		<button type="button" class="btn btn-primary ml-2 mr-2">수정</button>
-		<button type="button" class="btn btn-primary">삭제</button>
+		<button id="btnList" type="button" class="btn btn-primary">목록</button>
+		<button id="btnUpdate" type="button" class="btn btn-primary ml-2 mr-2">수정</button>
+		<button id="btnDel" type="button" class="btn btn-primary">삭제</button>
 	</div>
 	</div>
 </div>
@@ -58,9 +58,15 @@ tr{
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
-
-
-
+$("#btnList").click(function(){
+	$(location).attr("href","/notice/list");
+});
+$("#btnUpdate").click(function(){
+	$(location).attr("href","/notice/update?noticeno="+${board.noticeno});
+});
+$("#btnDel").click(function(){
+	$(location).attr("href","/notice/delete?noticeno="+${board.noticeno});
+});
 </script>
 
 <%@ include file="../include/footer.jsp"%>

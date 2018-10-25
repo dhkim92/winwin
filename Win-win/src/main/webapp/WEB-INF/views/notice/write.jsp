@@ -21,7 +21,7 @@ td{
 	<hr style="border: solid #376092;">
 	<table class="table table-sm table-bordered table-hover">
 		<tr>
-			<td class="align-middle text-center" style="background-color: lightgray;width: 300px">
+			<td class="align-middle text-center" style="background-color:lightgray; width: 300px">
 				<strong>제목</strong>
 			</td>
 			<td class="text-center" style="background-color: lightgray;">
@@ -49,11 +49,15 @@ td{
 		<textarea class="form-control" rows="20" id="content"></textarea>
 	</div>
 	</div>
+	
+	<input type="hidden" id="code" value="${sessionScope.code }"/>
+	<input type="hidden" id="writer" value="${sessionScope.logName }"/>
+	
 	</form>
 	<div class="form-group d-flex justify-content-center">
-		<button type="button" id="btnCancel" class="btn btn-primary">작성</button>
-		<button type="button" id="btnWrite" class="btn btn-primary ml-2">취소</button>
-	</div>	
+		<button type="button" id="btnWrite" class="btn btn-primary">작성</button>
+		<button type="button" id="btnCancel" class="btn btn-primary ml-2">취소</button>
+	</div>
 </div>
 
 
@@ -100,6 +104,5 @@ function submitContents(elClickedObj) {
     } catch(e) {}
 }
 </script>
-
 
 <%@ include file="../include/footer.jsp"%>

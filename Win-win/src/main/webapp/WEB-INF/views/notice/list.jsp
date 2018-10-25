@@ -18,7 +18,7 @@ th,td {
 		<hr style="border: solid #376092;">
 	</div>
 	<div id="btn" class="text-right">
-		<button class="btn btn-primary mr-3">작성</button>
+		<button id="btnWrite" class="btn btn-primary mr-3">작성</button>
 	</div>	
 	<div class="d-flex justify-content-center">
 		<table class="table table-sm col-md-11 table-hover text-center">
@@ -55,9 +55,9 @@ th,td {
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
-
-
-
+$("#btnWrite").click(function(){
+	$(location).attr("href","/notice/write");
+});
 </script>
 
 <%@ include file="../include/footer.jsp"%>

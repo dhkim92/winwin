@@ -56,7 +56,38 @@
  			writedate,
  			filesize,
  			path
- 			FROM material
+ 		FROM material
  		WHERE noticeno = #{noticeno}
  	</select>
+ 	<insert id="write" parameterType="winwin.dto.NoticeBoard">
+ 		INSERT INTO
+ 			notice
+ 		VALUES
+ 			(
+ 			notice_seq.nextval,
+ 			#{title},
+ 			#{code},
+ 			#{writer},
+ 			#{content},
+ 			default,
+ 			default
+ 			)
+ 	</insert>
+ 	<insert id="insertFile" parameterType="winwin.dto.Material">
+ 		INSERT INTO
+ 			material	
+ 		VALUES
+ 			(
+ 			material_seq.nextval,
+ 			#{userId},
+ 			#{adminCode},
+ 			#{noticeNo},
+ 			null,
+ 			#{originName},
+ 			#{storedName},
+ 			default,
+ 			#{fileSize},
+ 			#{path}
+ 			)
+ 	</insert>
  </mapper>
