@@ -11,15 +11,15 @@ public class Material {
 	String portfolioId;
 	String originName;
 	String storedName;
-	Date date;
-	int size;
+	Date writedate;
+	int filesize;
 	String path;
 	
 	@Override
 	public String toString() {
 		return "Material [fileNo=" + fileNo + ", userId=" + userId + ", adminCode=" + adminCode + ", noticeNo=" + noticeNo
 				+ ", portfolioId=" + portfolioId + ", originName=" + originName + ", storedName=" + storedName
-				+ ", date=" + date + ", size=" + size + ", path=" + path + "]";
+				+ ", date=" + writedate + ", size=" + filesize + ", path=" + path + "]";
 	}
 
 	public int getFileNo() {
@@ -78,20 +78,20 @@ public class Material {
 		this.storedName = storedName;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getWritedate() {
+		return writedate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setWritedate(Date date) {
+		this.writedate = date;
 	}
 
-	public int getSize() {
-		return size;
+	public int getFilesize() {
+		return filesize;
 	}
 
-	public void setSize(int size) {
-		this.size = size;
+	public void setFileSize(int size) {
+		this.filesize = size;
 	}
 
 	public String getPath() {

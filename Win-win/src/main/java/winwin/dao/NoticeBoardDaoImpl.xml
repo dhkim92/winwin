@@ -11,6 +11,7 @@
  	<select id="list" parameterType="winwin.util.Paging" resultType="winwin.dto.NoticeBoard">
  		SELECT
  			B.rnum,
+ 			B.noticeno,
  			B.title,
  			B.code,
  			B.writer,
@@ -27,6 +28,35 @@
  		)B
  		WHERE B.rnum BETWEEN #{startNo} AND #{endNo}
  	</select>
- 
- 
+ 	<update id="hit" parameterType="winwin.dto.NoticeBoard">
+ 		UPDATE notice SET hit = hit+1
+ 		WHERE noticeno = #{noticeno}
+ 	</update>
+ 	<select id="view" parameterType="winwin.dto.NoticeBoard" resultType="winwin.dto.NoticeBoard">
+ 		SELECT
+ 			noticeno,
+ 			title,
+ 			code,
+ 			writer,
+ 			content,
+ 			hit,
+ 			writedate
+ 		FROM notice
+ 		WHERE noticeno = #{noticeno} 	
+ 	</select>
+ 	<select id="filesByBoardNo" parameterType="winwin.dto.NoticeBoard" resultType="winwin.dto.Material">
+ 		SELECT
+ 			fileNo,
+ 			userId,
+ 			adminCode,
+ 			noticeNo,
+ 			portfolioId,
+ 			originName,
+ 			storedName,
+ 			writedate,
+ 			filesize,
+ 			path
+ 			FROM material
+ 		WHERE noticeno = #{noticeno}
+ 	</select>
  </mapper>

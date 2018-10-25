@@ -57,8 +57,8 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 	}
 
 	@Override
-	public List<Material> FilesByBoardNo(NoticeBoard board) {
-		return dao.FilesByBoardNo(board);
+	public List<Material> filesByBoardNo(NoticeBoard board) {
+		return dao.filesByBoardNo(board);
 	}
 
 	@Override

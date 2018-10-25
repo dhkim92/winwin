@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ include file="../include/CSSLoader.jsp"%>
     
 <style>
@@ -21,7 +22,7 @@ tr{
 				<strong>제목</strong>
 			</td>
 			<td class="text-center" style="background-color: lightgray">
-				<strong>2018년 하반기 채용 금지</strong>
+				<strong>${board.title}</strong>
 			</td>
 		</tr>
 		<tr>
@@ -29,7 +30,7 @@ tr{
 			작성일
 			</td>
 			<td class="text-center">
-			2018.09.24
+			<fmt:formatDate value="${board.writedate}" pattern="yyyy-MM-dd" />
 			</td>
 		</tr>
 		<tr>
@@ -37,13 +38,12 @@ tr{
 			첨부파일
 			</td>
 			<td class="text-center">
-			<a href="notice/download">파일01.text</a>
+			<a href="notice/download">파일.text</a>
 			</td>
 		</tr>
 	</table>
 	<div id="content">
-	여기에 게시글의 내용이 보입니다
-	이미지도 볼 수 있습니다
+	${board.content}
 	</div>
 	<div id="btns" class="form-group d-flex justify-content-center">
 		<button type="button" class="btn btn-primary">목록</button>

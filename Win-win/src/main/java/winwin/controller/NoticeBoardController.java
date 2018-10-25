@@ -36,15 +36,15 @@ public class NoticeBoardController {
 		Paging paging = new Paging(total, curPage);
 		List<NoticeBoard> list = service.list(paging);
 		m.addAttribute("list", list);
+		m.addAttribute("paging", paging);
 	}
 	
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
 	public void view(NoticeBoard board,Model m) {
-//		NoticeBoard resBoard = service.view(board);
-//		List<Material> files = service.FilesByBoardNo(board);
-//		m.addAttribute("board", resBoard);
-//		m.addAttribute("files", files);
-		
+		NoticeBoard resBoard = service.view(board);
+		List<Material> files = service.filesByBoardNo(board);
+		m.addAttribute("board", resBoard);
+		m.addAttribute("files", files);		
 	}
 	
 	@RequestMapping(value="/notice/download", method=RequestMethod.POST)

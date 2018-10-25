@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../include/CSSLoader.jsp"%>
-    
+
 <style>
-th {
-	font-size: 14px;
+th,td {
+	font-size: 16px;
 }
 </style>
 
@@ -19,8 +20,8 @@ th {
 	<div id="btn" class="text-right">
 		<button class="btn btn-primary mr-3">작성</button>
 	</div>	
-	<div class="mt-4">
-		<table class="table table-sm col-md-11 table-hover text-center" align="center">
+	<div class="d-flex justify-content-center">
+		<table class="table table-sm col-md-11 table-hover text-center">
 			<thead class="thead-light">
 				<tr>
 					<th>번호</th>
@@ -35,52 +36,16 @@ th {
 		<tr>
 			<td>${board.noticeno }</td>
 			<td><a href="/notice/view?noticeno=${board.noticeno}">${board.title }</a></td>
-			<td>${board.writedate }</td>
+			<td><fmt:formatDate value="${board.writedate}" pattern="yyyy-MM-dd" /></td>
 			<td>${board.writer }</td>
 			<td>${board.hit }</td>	
-	<!-- 	<tr> -->
-	<%-- 		<td>${board.boardNo }</td> --%>
-	<!-- 		<td> -->
-	<%-- 			<a href="/board/view?boardNo=${board.boardNo }">${board.title }</a> --%>
-	<!-- 		</td> -->
-	<%-- 	<%-- 	<td>${board.title }</td> --%>
-	<%-- 		<td>${board.writerNick }</td> --%>
-	<%-- 		<td>${board.hit }</td> --%>
-	<%-- 		<td><fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd" /></td> --%>
-	<%-- 	<%-- 	<td>${board.writeDate }</td> --%>
-	<!-- 	</tr> -->
-	<%-- 	</c:forEach> --%>
 		</tr>
 		</c:forEach>
 		</tbody>
 		</table>
 	</div>
-	
-	<div class=" d-flex justify-content-center">
-	  <ul class="pagination">
-	    <li class="page-item">
-	      <a class="page-link" href="#">&laquo;</a>
-	    </li>
-	    <li class="page-item active">
-	      <a class="page-link" href="#">1</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">2</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">3</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">4</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">5</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">&raquo;</a>
-	    </li>
-	  </ul>
-	</div>	
+	<br>
+	<jsp:include page="/WEB-INF/views/util/noticepaging.jsp" />
 
 	</div>
 </div>

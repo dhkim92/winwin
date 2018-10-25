@@ -28,7 +28,7 @@ public interface NoticeBoardDao {
 		
 	public Material selectFile(Material file);
 
-	public List<Material> FilesByBoardNo(NoticeBoard board);
+	public List<Material> filesByBoardNo(NoticeBoard board);
 	
 	public void deleteFilesByBoardNo(NoticeBoard board);
 	
