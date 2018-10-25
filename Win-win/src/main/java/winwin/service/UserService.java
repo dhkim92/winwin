@@ -15,4 +15,8 @@ public interface UserService {
 	public void join(User user);
 
 	public boolean idcheck(User user);
+
+	public boolean emailSearchCnt(User user);
+
+	public User emailSearch(User user);
 }

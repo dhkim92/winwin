@@ -21,4 +21,12 @@
 	<select id="idcheck" parameterType="winwin.dto.User" resultType="int" >
 		select count(*) from member where userid=#{userid }
 	</select>
+	
+	<select id="emailSearchCnt" parameterType="winwin.dto.User" resultType="int" >
+		select count(*) from member where username=#{username } and phone=#{phone }
+	</select>
+	
+	<select id="emailSearch" resultType="winwin.dto.User">
+		select (userid) from member where username=#{username } and phone=#{phone }
+	</select>
   </mapper>

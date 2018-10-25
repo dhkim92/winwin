@@ -262,7 +262,7 @@
 					},
 
 					success : function(data) {
-					if (data.success == 0) {
+					if (data.success > 0) {
 
 						var modal = document.getElementById('myModal');
 						modal.style.display = "block";

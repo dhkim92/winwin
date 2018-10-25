@@ -40,7 +40,7 @@
 		
 		
 		<div class="col-12 mt-1 mb-4">
-			<form action="/user/login" method="post">
+			<form action="/user/loginHelper" method="post">
 				<table class="table table-sm border border-right-0 border-left-0">
 					<tbody>
 						<tr>
@@ -51,8 +51,8 @@
 								<strong>이름</strong>
 							</td>
 							<td>
-								<input type="email" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="username" name="username" placeholder="이름을 입력하시오.">
+								<input type="text" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
+								id="username" name="username" placeholder="이름을 입력하시오." onkeyup="han(this)" required>
 							</td>
 						</tr>
 						<tr>
@@ -63,13 +63,15 @@
 								<strong>전화번호</strong>
 							</td>
 							<td><input type="text" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="phone" name="phone" placeholder="전화번호를 입력하시오">
+								id="phone" name="phone" placeholder="전화번호를 입력하시오" 
+								pattern="01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})" 
+								title="전화번호 형식에 맞춰서 입력하십시오." required>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 				<div class="col-12 mt-2 text-right">
-					<button type="submit" class="btn btn-primary btn-sm">이메일 찾기</button>
+					<button type="button" id="idSearch" class="btn btn-primary btn-sm">이메일 찾기</button>
 				</div>
 			</form>
 		</div>
@@ -89,7 +91,7 @@
 		</div>
 		
 		<div class="col-12 mt-1">
-			<form action="/user/login" method="post" id="loginForm">
+			<form action="user/loginHelper" method="post" id="loginForm">
 				<table class="table table-sm border border-right-0 border-left-0">
 					<tbody>
 						<tr>
@@ -150,6 +152,36 @@
 	</div>
 </div>
 </div>    
+
+<div id="myModal" class="modal">
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	     	<div>
+		     	<div class="mt-4">
+			        <p class="font-weight-bold text-center" id="idChecking"></p>
+				</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>
     
 <%@ include file="../include/scriptLoader.jsp"%>
 
@@ -165,6 +197,128 @@ $(document).ready(function() {
 	});
 	
 });
+
+//전화번호 형식 체크
+function validatePhone(phone) {
+	var filter = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+	if (filter.test(phone)) {
+	return true;
+} else {
+	return false;
+	}
+}
+
+$(function() {
+
+	$("#idSearch").click(
+		function() {
+	
+			var username = $("#username").val();
+			var phone = $("#phone").val();
+
+			if (username == "") {
+				alert("이름을 입력하시오.");
+			} else if(phone == ""){
+				alert("전화번호를 입력하시오.");
+			} else if(validatePhone(phone)==false){
+				alert("잘못된 전화번호 형식 입니다.");
+				$("#phone").focus();
+			} else {
+
+			$.ajax({
+				type : 'POST',
+				url : "/user/loginHelper",
+				dataType : "json",
+				data : {
+					username : username,
+					phone : phone
+				},
+
+				
+				success : function(data) {
+				if (data.success > 0) {
+					console.log(data.userid);
+					var modal = document.getElementById('myModal');
+					modal.style.display = "block";
+					var span = document.getElementsByClassName("close")[0];
+					var btnClose = document.getElementById("btnClose");
+										
+					span.onclick = function() {
+						modal.style.display = "none";
+					}
+
+					btnClose.onclick = function() {
+						modal.style.display = "none";
+					}
+					$('#idChecking').html("회원님의 이메일 주소는 "+data.userid+" 입니다.");
+
+						} else {
+							var modal = document.getElementById('myModal');
+							modal.style.display = "block";
+							var span = document.getElementsByClassName("close")[0];
+
+							var btnClose = document.getElementById("btnClose");
+										
+							span.onclick = function() {
+								modal.style.display = "none";
+							}
+
+							btnClose.onclick = function() {
+								modal.style.display = "none";
+							}
+
+							$('#idChecking').html("일치하는 이메일 주소가 없습니다.");
+
+						}
+					},
+				error : function(error) {
+					var modal = document.getElementById('myModal');
+					modal.style.display = "block";
+					var span = document.getElementsByClassName("close")[0];
+
+					var btnClose = document.getElementById("btnClose");
+								
+					span.onclick = function() {
+						modal.style.display = "none";
+					}
+
+					btnClose.onclick = function() {
+						modal.style.display = "none";
+					}
+
+					$('#idChecking').html("Q&A게시판으로 이동하여 관리자에게 문의하십시오.");
+				}
+			});
+		}
+			
+	});
+});
+
+
+function han(obj) {
+	var pattern = /[^(ㄱ-힣)]/; //한글만 허용 할때
+	if (pattern.test(obj.value)) {
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		var span = document.getElementsByClassName("close")[0];
+
+		var btnClose = document.getElementById("btnClose");
+		
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		btnClose.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		$('#idChecking').html("한글성명은 한글만 허용합니다.");
+		obj.value = '';
+		obj.focus();
+		return false;
+	}
+}
+
 </script>
 
 <%@ include file="../include/footer.jsp"%>

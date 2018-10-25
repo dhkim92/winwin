@@ -12,4 +12,8 @@ public interface UserDao {
 
 	public int idcheck(User user);
 
+	public int emailSearchCnt(User user);
+
+	public User emailSearch(User user);
+
 }

@@ -28,9 +28,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean idcheck(User user) {
 		if(userdao.idcheck(user) > 0) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 		
+	}
+
+	@Override
+	public boolean emailSearchCnt(User user) {
+		if(userdao.emailSearchCnt(user) > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public User emailSearch(User user) {
+		return userdao.emailSearch(user);
 	}
 }
