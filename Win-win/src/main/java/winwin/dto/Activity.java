@@ -2,7 +2,7 @@ package winwin.dto;
 
 public class Activity {
 	
-	int activityId;
+	int activityNo;
 	String userId;
 	int jobopenNo;
 	String aName;
@@ -12,16 +12,16 @@ public class Activity {
 	
 	@Override
 	public String toString() {
-		return "Activity [activityId=" + activityId + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", aName="
+		return "Activity [activityNo=" + activityNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo + ", aName="
 				+ aName + ", aStartDate=" + aStartDate + ", aEndDate=" + aEndDate + ", aContent=" + aContent + "]";
 	}
 
-	public int getActivityId() {
-		return activityId;
+	public int getactivityNo() {
+		return activityNo;
 	}
 
-	public void setActivityId(int activityId) {
-		this.activityId = activityId;
+	public void setactivityNo(int activityNo) {
+		this.activityNo = activityNo;
 	}
 
 	public String getUserId() {

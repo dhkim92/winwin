@@ -15,11 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 import winwin.dto.Activity;
 import winwin.dto.Career;
 import winwin.dto.Experience;
-import winwin.dto.Material;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
 import winwin.dto.License;
+import winwin.dto.Material;
+import winwin.dto.Member;
+import winwin.dto.Support;
 import winwin.service.Apply2Service;
 
 @Controller
@@ -39,11 +41,11 @@ public class Apply2Controller {
 
 	@RequestMapping(value="/career", method=RequestMethod.POST) 
 	public ModelAndView careerProc
-		(@RequestParam(value="language[]")List<Language> language, @RequestParam(value="license[]")List<License> license, @RequestParam(value="career[]")List<Career> career, 
+		(@RequestParam(value="language[]") Language[] language, @RequestParam(value="license[]")List<License> license, @RequestParam(value="career[]")List<Career> career, 
 					@RequestParam(value="activity[]")List<Activity> activity, @RequestParam(value="experience[]")List<Experience> experience, @RequestParam(value="file[]")List<Material> file) {
 		
-		for(int i=0; i<language.size(); i++) {
-	         apply2Service.insertLanguage(language.get(i));
+		for(int i=0; i<language.length; i++) {
+//	         apply2Service.insertLanguage(language[i]);
 	    }
 	      
 		for(int i=0; i<license.size(); i++) {
@@ -116,11 +118,6 @@ public class Apply2Controller {
 
 	}
 
-
-	
-
-
-
 	
 	
 	@RequestMapping(value="/introduce", method=RequestMethod.GET)
@@ -131,27 +128,46 @@ public class Apply2Controller {
 	
 	
 	@RequestMapping(value="/introduce", method=RequestMethod.POST)
-	public ModelAndView introduceProc(Introduce introduce, HttpSession session, Model model) {
+	public String introduceProc(Introduce introduce, HttpSession session) {
 		
+		introduce.setUserId((String)session.getAttribute("id"));
+		introduce.setJobopenNo(3);
 		apply2Service.insertIntroduce(introduce);
 		
-		return null;
+		return "/apply/finish";
 	}
 
 
 	@RequestMapping(value="/introduceUpdate", method=RequestMethod.GET)
 	public void introduceUpdate(JobopenBasic jobopenBasic, Introduce introduce, HttpSession session, Model model) {
 		
-		apply2Service.viewJobOpen(jobopenBasic);
-		apply2Service.selectIntroduce(introduce);
-		
+//		apply2Service.viewJobOpen(jobopenBasic);
+		introduce.setUserId((String)session.getAttribute("id"));
+		introduce.setJobopenNo(3);	//수정
+		model.addAttribute("intro", apply2Service.selectIntroduce(introduce));
+
 	}
 
 	@RequestMapping(value="/introduceUpdate", method=RequestMethod.POST)
-	public ModelAndView introduceUpdateProc(Introduce introduce) {
-		
+	public String introduceUpdateProc(Introduce introduce, HttpSession session) {
+	
+		introduce.setUserId((String)session.getAttribute("id"));
+		introduce.setJobopenNo(3);	//수정
 		apply2Service.updateIntroduce(introduce);
-		return null;
+		
+		return "/apply/finish";
+	}
+	
+	
+	
+	@RequestMapping(value="/finish")
+	public String finish(HttpSession session, Support support) {
+		
+		support.setJobopenNo(3);	//수정
+		support.setUserId((String)session.getAttribute("id"));
+		apply2Service.insertSupport(support);
+		
+		return "/main/usermain";
 	}
 
 

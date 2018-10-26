@@ -7,53 +7,72 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	   
-	   var tid;
-	   var cnt = 1800;
-	   
-	   counter_init();
-	   
-	   function counter_init() {
-	      tid = setInterval(function counter_run() {
-	         document.all.counter.innerText = time_format(cnt);
-	         cnt--;
-//	          console.log(cnt);
-	         
-	         if(cnt < 0) {
-	            clearInterval(tid);
-//	             self.location = "logout.php";
-	         }
-	      }, 1000);
-	   }
-	   
-	   $("#timer").click(function() {
-	      clearInterval(tid);
-	      cnt = parseInt(1800);
-	      counter_init();
-	   });
-	   
-	   function time_format(s) {
-	      var nHour=0;
-	      var nMin=0;
-	      var nSec=0;
-	      
-	      if(s>0) {
-	         nMin = parseInt(s/60);
-	         nSec = s%60;
-	         
-	         if(nMin>60) {
-	            nHour = parseInt(nMin/60);
-	            nMin = nMin%60;
-	         }
-	      }
-	      
-	      if(nSec<10) nSec = "0"+nSec;
-	      if(nMin<10) nMin = "0"+nMin;
-	      
-	      return ""+nHour+":"+nMin+":"+nSec;
-	   }
-	   
+	
+	var tid;
+	var cnt = 1800;
+	
+	counter_init();
+	
+	function counter_init() {
+		tid = setInterval(function counter_run() {
+			document.all.counter.innerText = time_format(cnt);
+			cnt--;
+// 			console.log(cnt);
+			
+			if(cnt < 0) {
+				clearInterval(tid);
+				logout();
+				
+			}
+		}, 1000);
+	}
+	
+	function logout() {
+		
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		
+		var span = document.getElementsByClassName("close")[0];
+		var btnClose = document.getElementById("btnClose");
+		
+		
+		btnClose.onclick = function() {
+			modal.style.display = "none";
+		}
+		
+		$("#logoutModal").html("시간이 경과되어 자동 로그아웃됩니다.")
+		
+	}
+	
+	$("#timer").click(function() {
+		clearInterval(tid);
+		cnt = parseInt(1800);
+		counter_init();
 	});
+	
+	function time_format(s) {
+		var nHour=0;
+		var nMin=0;
+		var nSec=0;
+		
+		if(s>0) {
+			nMin = parseInt(s/60);
+			nSec = s%60;
+			
+			if(nMin>60) {
+				nHour = parseInt(nMin/60);
+				nMin = nMin%60;
+			}
+		}
+		
+		if(nSec<10) nSec = "0"+nSec;
+		if(nMin<10) nMin = "0"+nMin;
+		
+		return ""+nHour+":"+nMin+":"+nSec;
+	}
+	
+});
+
 </script>
 <%@ include file="../include/header.jsp"%>
 
@@ -84,7 +103,7 @@ $(document).ready(function() {
    		</table>
    	</div>
 
-	<form>
+	<form action="/apply/career" method="post">
 	<h4 class="mt-4 mb-3 font-weight-bold">경력사항</h4><input type="hidden" value="jopopenNo" />
 	<div class="row">
 		<a href="/apply/userDetailUpdate"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
@@ -110,11 +129,9 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle">
-                                             영어
-                  </td>
+                  <td class="align-middle"><input type="text" name="lName" value="영어" style="width:80px;" readonly/></td>
                   <td>
-                  	<select style="height:25px; width:70px;" name="level">
+                  	<select style="height:25px; width:70px;" name="grade">
                   		<option value="0">선택</option>
                   		<option value="상">상</option>
                   		<option value="중">중</option>
@@ -131,7 +148,7 @@ $(document).ready(function() {
                   		<option value="OPIc">OPIc</option>
                   	</select>
                   </td>
-                  <td class="align-middle"><input type="text" name="Score" /></td>
+                  <td class="align-middle"><input type="text" name="score" /></td>
                   <td class="align-middle"><input type="date" name="lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
                   <td class="align-middle"><input type="text" name="lOrgan" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
@@ -158,7 +175,7 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" id="selectLicense" name="liName" class="mr-1" style="width:200px" /><input id="myBtn" type="button" style="margin-right: 3px;" value="검색"/><input type="button" value="취소"/></td>
+                  <td class="align-middle"><input type="text" id="selectLicense" name="liName" class="mr-1" style="width:200px" /><input id="myBtn" type="button" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td>
                   <td class="align-middle"><input type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
                   <td class="align-middle"><input type="text" name="liOrgan" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
@@ -250,7 +267,7 @@ $(document).ready(function() {
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle"><input type="text" name="eOrgan" class="mr-1" style="width:250px" /></td>
                   <td>
-                  <select style="height:25px; width:80px;" name="option">
+                  <select style="height:25px; width:80px;" name="period">
                   		<option value="0">선택</option>
                   		<option value="봉사">봉사</option>
                   		<option value="수상경력">수상경력</option>
@@ -288,10 +305,10 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" name="originName" class="mr-1" style="width:150px;" disabled/></td>
-                  <td class="align-middle"><input type="text" name="originName" class="mr-1" style="width:300px;" disabled/></td>
+                  <td class="align-middle"><input type="text" id="extFile" name="extName" class="mr-1" style="width:150px;" disabled/></td>
+                  <td class="align-middle"><input type="text" id="originFile" name="originName" class="mr-1" style="width:300px;" disabled/></td>
                   <td class="align-middle"><input type="text" name="date" class="mr-1" style="width:200px;" disabled/></td>
-                  <td class="align-middle"><input type="text" name="size" class="mr-1" style="width:200px" disabled/></td>
+                  <td class="align-middle"><input type="text" id="fileSize" name="filesize" class="mr-1" style="width:200px" disabled/></td>
                   <td class="align-middle"><input type="file" name="file" id="file" style="display:none"><input type="button" onclick='$("#file").click();' value="파일첨부"/></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
@@ -327,11 +344,44 @@ $(document).ready(function() {
    </div>
    
    <div class="col-12 mt-5 p-0 d-flex justify-content-end">
-   	  <button class="btn btn-primary text-white">저장하고 계속하기</button>
+   	  <button class="btn btn-primary text-white" id="Btn">저장하고 계속하기</button>
    </div>
    </form>
 
 </div>
+
+
+	<div id="myModal" class="modal">
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	     	<div>
+		     	<div class="mt-4">
+			        <p class="font-weight-bold text-center" id="logoutModal"></p>
+				</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<a href="/user/logout"><button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button></a>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>
+
+
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
@@ -358,11 +408,29 @@ $(document).ready(function() {
     	if( standard.length < 6 ) {
 			test.parent().children().eq(1).after($.newTr);
     	}
-  });
+ 	});
+	
+	$("#liCancel").click(function() {
+		$('#selectLicense').val("");	
+	});
+
+	
   
 });
 
+$('#file').on('change', function(){
+	
+	var originName = $(this).val().split('\\').pop();
+	var realName = originName.split('.')[0];
+	var extName = $(this).val().split('.').pop();
+
+	var fileSize = document.getElementById('file').files[0].size/1024;
+
+	$("#extFile").val(extName);
+	$("#originFile").val(realName);
+	$("#fileSize").val(fileSize);
+});
 </script>
 
-<%@ include file="../apply/colMajorAPI.jsp"%>
+<%@ include file="../apply/licenseAPI.jsp"%>
 <%@ include file="../include/footer.jsp"%>

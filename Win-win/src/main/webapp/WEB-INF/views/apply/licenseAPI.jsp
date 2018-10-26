@@ -34,8 +34,6 @@
 	                );
 	             }
 	             
-	             console.log(value);
-
 	          }, error: function() {
 	             alert("error");
 	          }
@@ -48,7 +46,7 @@
 		
 			
 		// Get the modal
-		var modal = document.getElementById('myModal');
+		var modal = document.getElementById('apiModal');
 		
 		// Get the button that opens the modal
 		var btn = document.getElementById("myBtn");
@@ -108,7 +106,7 @@
 <body>
 
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div id="apiModal" class="modal">
  
 	      <!-- Modal content -->
 	      <div class="modal-content">

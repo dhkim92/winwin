@@ -7,11 +7,12 @@ import winwin.dao.Apply2Dao;
 import winwin.dto.Activity;
 import winwin.dto.Career;
 import winwin.dto.Experience;
-import winwin.dto.Material;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
 import winwin.dto.License;
+import winwin.dto.Material;
+import winwin.dto.Support;
 
 @Service
 public class Apply2ServiceImpl implements Apply2Service{
@@ -106,5 +107,8 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.updateIntroduce(introduce);
 	}
 
+	public void insertSupport(Support support) {
+		dao.insertSupport(support);
+	}
 
 }

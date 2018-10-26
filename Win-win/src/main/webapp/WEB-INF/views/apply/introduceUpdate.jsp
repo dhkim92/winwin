@@ -6,54 +6,110 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	   
-	   var tid;
-	   var cnt = 1800;
-	   
-	   counter_init();
-	   
-	   function counter_init() {
-	      tid = setInterval(function counter_run() {
-	         document.all.counter.innerText = time_format(cnt);
-	         cnt--;
-//	          console.log(cnt);
-	         
-	         if(cnt < 0) {
-	            clearInterval(tid);
-//	             self.location = "logout.php";
-	         }
-	      }, 1000);
-	   }
-	   
-	   $("#timer").click(function() {
-	      clearInterval(tid);
-	      cnt = parseInt(1800);
-	      counter_init();
-	   });
-	   
-	   function time_format(s) {
-	      var nHour=0;
-	      var nMin=0;
-	      var nSec=0;
-	      
-	      if(s>0) {
-	         nMin = parseInt(s/60);
-	         nSec = s%60;
-	         
-	         if(nMin>60) {
-	            nHour = parseInt(nMin/60);
-	            nMin = nMin%60;
-	         }
-	      }
-	      
-	      if(nSec<10) nSec = "0"+nSec;
-	      if(nMin<10) nMin = "0"+nMin;
-	      
-	      return ""+nHour+":"+nMin+":"+nSec;
-	   }
-	   
+	
+	var tid;
+	var cnt = 1800;
+	
+	counter_init();
+	
+	function counter_init() {
+		tid = setInterval(function counter_run() {
+			document.all.counter.innerText = time_format(cnt);
+			cnt--;
+// 			console.log(cnt);
+			
+			if(cnt < 0) {
+				clearInterval(tid);
+				logout();
+				
+			}
+		}, 1000);
+	}
+	
+	function logout() {
+		
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		
+		var span = document.getElementsByClassName("close")[0];
+		var btnClose = document.getElementById("btnClose");
+		
+		
+		btnClose.onclick = function() {
+			modal.style.display = "none";
+		}
+		
+		$("#logoutModal").html("시간이 경과되어 자동 로그아웃됩니다.")
+		
+	}
+	
+	$("#timer").click(function() {
+		clearInterval(tid);
+		cnt = parseInt(1800);
+		counter_init();
 	});
 	
+	function time_format(s) {
+		var nHour=0;
+		var nMin=0;
+		var nSec=0;
+		
+		if(s>0) {
+			nMin = parseInt(s/60);
+			nSec = s%60;
+			
+			if(nMin>60) {
+				nHour = parseInt(nMin/60);
+				nMin = nMin%60;
+			}
+		}
+		
+		if(nSec<10) nSec = "0"+nSec;
+		if(nMin<10) nMin = "0"+nMin;
+		
+		return ""+nHour+":"+nMin+":"+nSec;
+	}
+	
+	
+	$("#saveBtn").click(function() {
+		
+		console.log("저장하고 계속하기 버튼 클릭")
+		var phoneNum;
+		
+		var phoneNum1 = $("#phoneNum1 option:selected").val();
+		var phoneNum2 = $("#phoneNum2").val();
+		var phoneNum3 = $("#phoneNum3").val();
+		
+		phoneNum = phoneNum1+"-"+phoneNum2+"-"+phoneNum3;
+		
+// 		console.log(phoneNum);
+		
+		$("#phoneNum").val(phoneNum);
+		
+		$("#userDetailForm").submit();		
+	});
+	
+	
+	$('#saveBtn').click(function(){
+		
+		var content1 = $('#content1').val();
+		var content2 = $('#content2').val();
+		var content3 = $('#content3').val();
+		var content4 = $('#content4').val();
+		var content5 = $('#content5').val();
+		console.log(content5);
+
+		if( content1 == "" | content2 == "" | content3 == "" | content4 == "" | content5 == "") {
+			alert('모든 항목을 입력하세요.');
+		} else {
+			$('#intro').submit();
+		}
+
+	
+	});
+	
+});
+
 </script>
 <%@ include file="../include/header.jsp"%>
 
@@ -94,14 +150,14 @@ $(document).ready(function() {
 		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 	</div>
 
-	<form>
+	<form action="/apply/introduceUpdate" method="post" id="intro">
 	<h6 class="mt-5 font-weight-bold">
 		1. 성장과정 (자신에 대한 소개)
 		<span style="color:red;"> *</span>
 		<span id="count1" style="float:right;">###</span>
 	</h6>
 	<hr>
-	<textarea id="content1" name="content1" maxlength="500" style="width: 100%;resize: none; height:250px;"></textarea>
+	<textarea id="content1" name="content1" maxlength="500" style="width: 100%;resize: none; height:250px;">${intro.content1 }</textarea>
 
    <h6 class="mt-5 font-weight-bold">
 		2. 지원동기 및 포부
@@ -109,7 +165,7 @@ $(document).ready(function() {
 		<span id="count2" style="float:right;">###</span>
 	</h6>
 	<hr>
-	<textarea id="content2" name="content2" maxlength="500" style="width: 100%;resize: none; height:250px;"></textarea>
+	<textarea id="content2" name="content2" maxlength="500" style="width: 100%;resize: none; height:250px;">${intro.content2 }</textarea>
 	
 	<h6 class="mt-5 font-weight-bold">
 		3. 성격의 장단점
@@ -117,7 +173,7 @@ $(document).ready(function() {
 		<span id="count3" style="float:right;">###</span>
 	</h6>
 	<hr>
-	<textarea id="content3" name="content3" maxlength="500" style="width: 100%;resize: none; height:250px;"></textarea>
+	<textarea id="content3" name="content3" maxlength="500" style="width: 100%;resize: none; height:250px;">${intro.content3 }</textarea>
 	
 	<h6 class="mt-5 font-weight-bold">
 		4. 살아오면서 중요했던 일
@@ -125,7 +181,7 @@ $(document).ready(function() {
 		<span id="count4" style="float:right;">###</span>
 	</h6>
 	<hr>
-	<textarea id="content4" name="content4" maxlength="500" style="width: 100%;resize: none; height:250px;"></textarea>
+	<textarea id="content4" name="content4" maxlength="500" style="width: 100%;resize: none; height:250px;">${intro.content4 }</textarea>
 	
 	<h6 class="mt-5 font-weight-bold">
 		5. 보유기술 및 경험직무 (구체적으로 기술)
@@ -133,8 +189,7 @@ $(document).ready(function() {
 		<span id="count5" style="float:right;">###</span>
 	</h6>
 	<hr>
-	<textarea id="content5" name="content5" maxlength="500" style="width: 100%;resize: none; height:250px;"></textarea>
-   </form>
+	<textarea id="content5" name="content5" maxlength="500" style="width: 100%;resize: none; height:250px;">${intro.content5 }</textarea>
    
       <div class="col-12 mt-5 p-0">
          <table class="table border">
@@ -145,8 +200,8 @@ $(document).ready(function() {
                   </th>
                   <td class="table-light align-middle"> 
                   <ul class="mb-0">
-                     <li style="line-height: 150%;"><strong>자기소개란 작성시<span class="text-info">잦은 줄바꿈(Enter Key)은 출력시 하단의 내용이 안보이는 현상</span>이 발생할 수 있으므로 한번에 2칸이상 줄바꿈을 자제하시기 바랍니다.</strong></li>
-                     <li style="line-height: 150%;"><strong>자기소개란 내용은<span class="text-info">서류전형 및 변접시 평가에 영향을 미칠 수 </span>있으므로, 성실하고 자세하게 작성 바랍니다.</strong></li>
+                     <li style="line-height: 150%;"><strong>자기소개란 작성시 <span class="text-info">잦은 줄바꿈(Enter Key)은 출력시 하단의 내용이 안보이는 현상</span>이 발생할 수 있으므로 한번에 2칸이상 줄바꿈을 자제하시기 바랍니다.</strong></li>
+                     <li style="line-height: 150%;"><strong>자기소개란 내용은 <span class="text-info">서류전형 및 변접시 평가에 영향을 미칠 수 </span>있으므로, 성실하고 자세하게 작성 바랍니다.</strong></li>
                      <strong>(최소 3 ~ 5줄 작성 요망)</strong>
                   </ul>
                   </td>
@@ -154,12 +209,46 @@ $(document).ready(function() {
             </tbody>
          </table>
    </div>
+   </form>
    
    <div class="col-12 mt-5 p-0 d-flex justify-content-end">
       <button class="btn btn-primary text-white">저장완료</button>
    </div>
    
 </div>
+
+
+	<div id="myModal" class="modal">
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	     	<div>
+		     	<div class="mt-4">
+			        <p class="font-weight-bold text-center" id="logoutModal"></p>
+				</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<a href="/user/logout"><button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button></a>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>
+
+
 
 <%@ include file="../include/scriptLoader.jsp"%>
 

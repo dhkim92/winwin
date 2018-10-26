@@ -7,55 +7,92 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	   
-	   var tid;
-	   var cnt = 1800;
-	   
-	   counter_init();
-	   
-	   function counter_init() {
-	      tid = setInterval(function counter_run() {
-	         document.all.counter.innerText = time_format(cnt);
-	         cnt--;
-//	          console.log(cnt);
-	         
-	         if(cnt < 0) {
-	            clearInterval(tid);
-//	             self.location = "logout.php";
-	         }
-	      }, 1000);
-	   }
-	   
-	   $("#timer").click(function() {
-	      clearInterval(tid);
-	      cnt = parseInt(1800);
-	      counter_init();
-	   });
-	   
-	   function time_format(s) {
-	      var nHour=0;
-	      var nMin=0;
-	      var nSec=0;
-	      
-	      if(s>0) {
-	         nMin = parseInt(s/60);
-	         nSec = s%60;
-	         
-	         if(nMin>60) {
-	            nHour = parseInt(nMin/60);
-	            nMin = nMin%60;
-	         }
-	      }
-	      
-	      if(nSec<10) nSec = "0"+nSec;
-	      if(nMin<10) nMin = "0"+nMin;
-	      
-	      return ""+nHour+":"+nMin+":"+nSec;
-	   }
-	   
+	
+	var tid;
+	var cnt = 1800;
+	
+	counter_init();
+	
+	function counter_init() {
+		tid = setInterval(function counter_run() {
+			document.all.counter.innerText = time_format(cnt);
+			cnt--;
+// 			console.log(cnt);
+			
+			if(cnt < 0) {
+				clearInterval(tid);
+				logout();
+				
+			}
+		}, 1000);
+	}
+	
+	function logout() {
+		
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		
+		var span = document.getElementsByClassName("close")[0];
+		var btnClose = document.getElementById("btnClose");
+		
+		
+		btnClose.onclick = function() {
+			modal.style.display = "none";
+		}
+		
+		$("#logoutModal").html("시간이 경과되어 자동 로그아웃됩니다.")
+		
+	}
+	
+	$("#timer").click(function() {
+		clearInterval(tid);
+		cnt = parseInt(1800);
+		counter_init();
 	});
-</script>
-<%@ include file="../include/header.jsp"%>
+	
+	function time_format(s) {
+		var nHour=0;
+		var nMin=0;
+		var nSec=0;
+		
+		if(s>0) {
+			nMin = parseInt(s/60);
+			nSec = s%60;
+			
+			if(nMin>60) {
+				nHour = parseInt(nMin/60);
+				nMin = nMin%60;
+			}
+		}
+		
+		if(nSec<10) nSec = "0"+nSec;
+		if(nMin<10) nMin = "0"+nMin;
+		
+		return ""+nHour+":"+nMin+":"+nSec;
+	}
+	
+	
+	$("#saveBtn").click(function() {
+		
+		console.log("저장하고 계속하기 버튼 클릭")
+		var phoneNum;
+		
+		var phoneNum1 = $("#phoneNum1 option:selected").val();
+		var phoneNum2 = $("#phoneNum2").val();
+		var phoneNum3 = $("#phoneNum3").val();
+		
+		phoneNum = phoneNum1+"-"+phoneNum2+"-"+phoneNum3;
+		
+// 		console.log(phoneNum);
+		
+		$("#phoneNum").val(phoneNum);
+		
+		$("#userDetailForm").submit();		
+	});
+	
+});
+
+</script><%@ include file="../include/header.jsp"%>
 
 
 <div class="container">
@@ -332,6 +369,39 @@ $(document).ready(function() {
    </form>
 
 </div>
+
+
+	<div id="myModal" class="modal">
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	     	<div>
+		     	<div class="mt-4">
+			        <p class="font-weight-bold text-center" id="logoutModal"></p>
+				</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<a href="/user/logout"><button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button></a>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>
+
+
 
 <%@ include file="../include/scriptLoader.jsp"%>
 

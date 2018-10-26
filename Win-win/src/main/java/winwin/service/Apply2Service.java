@@ -3,11 +3,12 @@ package winwin.service;
 import winwin.dto.Activity;
 import winwin.dto.Career;
 import winwin.dto.Experience;
-import winwin.dto.Material;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
 import winwin.dto.License;
+import winwin.dto.Material;
+import winwin.dto.Support;
 
 public interface Apply2Service {
 
@@ -54,5 +55,7 @@ public interface Apply2Service {
 	public Introduce selectIntroduce(Introduce introduce);
 
 	public void updateIntroduce(Introduce introduce);
+	
+	public void insertSupport(Support support);
 	
 }
