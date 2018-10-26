@@ -174,7 +174,21 @@ $(function() {
 						}
 					},
 				error : function(error) {
-				alert("error : " + error);
+					var modal = document.getElementById('myModal');
+					modal.style.display = "block";
+					var span = document.getElementsByClassName("close")[0];
+
+					var btnClose = document.getElementById("btnClose");
+								
+					span.onclick = function() {
+						modal.style.display = "none";
+					}
+
+					btnClose.onclick = function() {
+						modal.style.display = "none";
+					}
+
+					$('#idChecking').html("Q&A게시판으로 이동하여 관리자에게 문의하십시오.");
 				}
 			});
 		}
