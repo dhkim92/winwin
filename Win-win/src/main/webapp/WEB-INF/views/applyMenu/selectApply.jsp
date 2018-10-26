@@ -74,10 +74,13 @@
 		
 		<tr>
 			<th class="text-center align-middle bg-secondary pr-3 pl-3">채용공고</th>
-			<td colspan="3">  		
-				<select class="ml-4" style="width: 500px;">
-				</select>
-				<button type="button" class="btn btn-primary btn-sm ml-3">지원하기</button>
+			<td colspan="3">
+					<select class="ml-4" id="jobTitle" style="width: 500px;">
+						<c:forEach items="${list }" var="JobopenBasic">
+							<option selected="selected" value="${JobopenBasic.jobopenNo}"> ${JobopenBasic.title}</option>						
+						</c:forEach>	
+					</select>
+					<button type="button" class="btn btn-primary btn-sm ml-3">지원하기</button>
 			</td>
 		</tr>
 	</tbody>
@@ -86,6 +89,8 @@
 
 </div>
 </div>
+
+
 
 <%@ include file="../include/scriptLoader.jsp"%>
 <%@ include file="../include/footer.jsp"%>

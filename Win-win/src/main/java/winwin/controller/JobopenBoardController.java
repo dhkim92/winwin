@@ -24,7 +24,7 @@ public class JobopenBoardController {
 	public void list(
 			Model model,
 			@RequestParam(required=false, defaultValue="0") int curPage,
-			@RequestParam(required=false, defaultValue="10") int listCount,
+			@RequestParam(required=false, defaultValue="15") int listCount,
 			@RequestParam(required=false, defaultValue="10") int pageCount) {			
 		
 		Paging paging = jobopenService.getPaging(curPage, listCount, pageCount);

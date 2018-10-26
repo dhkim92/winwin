@@ -59,7 +59,7 @@
 			<tr>
 				<td>${JobopenBasic.jobopenNo }</td>
 				<td>${JobopenBasic.offer }</td>
-				<td>${JobopenBasic.title }</td>
+				<td><a href="/jobOpen/view?boardNo=${JobopenBasic.jobopenNo}" style="text-decoration: none;">${JobopenBasic.title }</a></td>
 				<td>
 					<c:if test="${JobopenBasic.allOpen eq null }">
 						<fmt:formatDate value="${JobopenBasic.startDate }" pattern="yyyy-MM-dd" />&nbsp;-&nbsp;<fmt:formatDate value="${JobopenBasic.endDate }" pattern="yyyy-MM-dd" />
