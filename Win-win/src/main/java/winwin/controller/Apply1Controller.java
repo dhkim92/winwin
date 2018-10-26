@@ -2,6 +2,8 @@ package winwin.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +22,20 @@ import winwin.service.Apply1Service;
 @RequestMapping(value="/apply")
 public class Apply1Controller {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired Apply1Service apply1Service;
 	
 	@RequestMapping(value="/userDetail", method=RequestMethod.GET)
-	public void userDetail(JobopenBasic jobopenBasic, Member user, HttpSession session, Model model) {
+	public void userDetail(JobopenBasic jobopenBasic, Member member, HttpSession session, Model model) {	
+		logger.info("userDetail 활성화");
 		
 //		apply1Service.viewJobOpen(jobopenBasic);
-//		apply1Service.viewUser(user);
+		member.setUserid((String)session.getAttribute("id"));
+		Member viewUserDetail = apply1Service.viewMember(member);
+		
+		logger.info("userDetailController : " + viewUserDetail);
+		model.addAttribute("member", viewUserDetail);
 		
 	}
 	
@@ -39,17 +48,22 @@ public class Apply1Controller {
 	}
 
 	@RequestMapping(value="/userDetail", method=RequestMethod.POST)
-	public ModelAndView userDetailProc(UserDetail userDetail, HttpSession session) {
+	public String userDetailProc(UserDetail userDetail, HttpSession session, Model model) {
 		
+		logger.info("userDetail 데이터 insert 활성화");
+		userDetail.setUserId((String)session.getAttribute("id"));
+		
+		logger.info("Apply1Cont_userDetailProc() : " + userDetail);
 		apply1Service.insertUserDetail(userDetail);
-		return null;
+		
+		return "redirect:/apply/academic";
 	}
 
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.GET)
 	public void userDetailUpdate(JobopenBasic jobopenBasic, Member user, UserDetail userDetail, HttpSession session, Model model) {
 
-		apply1Service.viewJobOpen(jobopenBasic);
-		apply1Service.viewUser(user);
+//		apply1Service.viewJobOpen(jobopenBasic);
+//		apply1Service.viewUser(user);
 		apply1Service.selectUserDetail(userDetail);
 		
 	}

@@ -10,7 +10,7 @@ public interface Apply1Dao {
 
 public JobopenBasic selectJobOpen(JobopenBasic jopopenBasic);
 	
-	public Member selectUser(Member user);
+	public Member selectMember(Member member);
 
 	public void insertUserDetail(UserDetail userDetail);
 

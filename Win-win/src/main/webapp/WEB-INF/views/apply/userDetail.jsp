@@ -20,9 +20,27 @@ $(document).ready(function() {
 			
 			if(cnt < 0) {
 				clearInterval(tid);
-// 				self.location = "logout.php";
+				logout();
+				
 			}
 		}, 1000);
+	}
+	
+	function logout() {
+		
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		
+		var span = document.getElementsByClassName("close")[0];
+		var btnClose = document.getElementById("btnClose");
+		
+		
+		btnClose.onclick = function() {
+			modal.style.display = "none";
+		}
+		
+		$("#logoutModal").html("시간이 경과되어 자동 로그아웃됩니다.")
+		
 	}
 	
 	$("#timer").click(function() {
@@ -53,7 +71,7 @@ $(document).ready(function() {
 	}
 	
 	
-	$("#save").click(function() {
+	$("#saveBtn").click(function() {
 		
 		console.log("저장하고 계속하기 버튼 클릭")
 		var phoneNum;
@@ -68,6 +86,7 @@ $(document).ready(function() {
 		
 		$("#phoneNum").val(phoneNum);
 		
+		$("#userDetailForm").submit();		
 	});
 	
 });
@@ -102,7 +121,7 @@ $(document).ready(function() {
 	</table>
 	</div>
 
-	<form action="apply/userDetail" method="POST">
+	<form action="/apply/userDetail" method="POST" id="userDetailForm">
 	<h4 class="mt-4 mb-3 font-weight-bold">개인사항<input type="hidden" value="jobopenNo" /></h4>
 	<div class="row">
 		<img class="img-fluid d-block ml-3" src="/resources/image/B_userDetail.png">
@@ -120,12 +139,12 @@ $(document).ready(function() {
 	<tr>
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">성명<span style="color : red;">*</span></th>
 		<td style="width: 40%">
-		<span style="font-size: 10px ;">한글 </span><input style="border: none; width: 50px;" type="text" id="username" name="username" value="한상근" readonly/> / <span style="font-size: 10px ;">영어 </span>
+		<span style="font-size: 10px ;">한글 </span><input style="border: none; width: 50px;" type="text" id="username" name="username" value="${member.username }" readonly/> / <span style="font-size: 10px ;">영어 </span>
 			<input type="text" class="ml-1 mr-1" id="eName" name="eName" onkeyup="english(this)"/>
 			<span style="font-size: 10px ;"> 예)Hong Gil Dong</span>
 		</td>
 		<th class="text-center align-middle bg-secondary">이메일<span style="color : red;">*</span></th>
-		<td><input style="border: none; width: 300px; " id="userId" name="userId" type="text" value="youngeun940725@gmail.com" readonly/></td>
+		<td><input style="border: none; width: 300px; " id="userid" name="userid" type="text" value="${sessionScope.id }" readonly/></td>
 	</tr>
 	<tr>
 		<th class="text-center align-middle bg-secondary" style="width: 5%" >생년월일<span style="color : red;">*</span></th>
@@ -140,7 +159,7 @@ $(document).ready(function() {
 			<table>
 				<tr>
 					<input type="text" style="width: 80px;" id="zipCode" name="zipCode" placeholder="우편번호" readonly onclick="Search()"/>
-					<button class="ml-1 mr-1" onclick="Search()">우편번호 찾기</button>
+					<input type="button" class="ml-1 mr-1" onclick="Search()" value="우편번호 찾기" />
 					<input type="text" style="width: 364px; " name="address" id="address" placeholder="주소는 자동입력됩니다" readonly>
 				</tr>
 				<tr>
@@ -174,13 +193,13 @@ $(document).ready(function() {
 				<option value="064">064</option>
 			</select>
 				-<input type="text" id="phoneNum2" name="phoneNum2" class="ml-1 mr-1 numberOnly" style="width: 100px ;" pattern="[0-9]{3,4}" title="" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);" >-<input type="text" id="phoneNum3" name="phoneNum3" class="ml-1 mr-1 numberOnly" pattern="[0-9]{3,4}" title="" style="width: 100px ;" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);" />
-			<input type="text" id="phoneNum" name="phoneNum" />	
+			<input type="hidden" id="phoneNum" name="phoneNum" />	
 		</td>
 	</tr>
 	
 	<tr>
 		<th class="text-center align-middle bg-secondary">휴대전화<span style="color : red;">*</span></th>
-		<td colspan="3"><input style="border: none; width: 200px; " type="text" id="phone" name="phone" value="010 - 1234 - 5678" /></td>
+		<td colspan="3"><input style="border: none; width: 200px; " type="text" id="phone" name="phone" value="${member.phone }" /></td>
 	</tr>
 	
 	</tbody>
@@ -194,9 +213,9 @@ $(document).ready(function() {
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">보훈여부<span style="color : red;">*</span></th>
 		<td colspan="2">
 			<div style="width: 50%;" class="input-group">
-     			<input name="veteran" id="veteran" class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
+     			<input name="veteran" id="veteran" class="m-1 align-middle" type="radio" value="보훈" aria-label="Radio button for following text input" />
   				<label for="veteran" class="mr-5 mb-0" style="width: 100px ;">보훈</label>
-     			<input name="veteran" id="notVeteran" class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
+     			<input name="veteran" id="notVeteran" class="m-1 align-middle" type="radio" value="비보훈" aria-label="Radio button for following text input" />
 				<label for="notVeteran" class="mr-5 mb-0" style="width: 100px ;">비보훈</label>	
 			</div>
 		</td>
@@ -206,9 +225,9 @@ $(document).ready(function() {
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">장애여부<span style="color : red;">*</span></th>
 		<td colspan="2">
 			<div style="width: 50%;" class="input-group">
-     			<input name="disable" id="disable" class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
+     			<input name="disable" id="disable" class="m-1 align-middle" type="radio" value="장애" aria-label="Radio button for following text input" />
   				<label for="disable" class="mr-5 mb-0" style="width: 100px ;">장애</label>
-     			<input name="disable" id="notDisable" class="m-1 align-middle" type="radio" aria-label="Radio button for following text input" />
+     			<input name="disable" id="notDisable" class="m-1 align-middle" type="radio" value="비장애" aria-label="Radio button for following text input" />
 				<label for="notDisable" class="mr-5 mb-0" style="width: 100px ;">비장애</label>	
 			</div>
 		</td>		
@@ -221,8 +240,7 @@ $(document).ready(function() {
 	</table>
 	</form>
 	
-	<br><br><br><br><br><br>
-	
+	<br><br><br>
 	
 	<div class="col-12 mt-5 p-0">
          <table class="table border">
@@ -244,10 +262,41 @@ $(document).ready(function() {
 	</div>
 	
 	<div class="col-12 mt-5 p-0 d-flex justify-content-end">
-		<input class="btn btn-primary text-white" type="button" id="save" name="save" value="저장하고 계속하기"/>
+		<input class="btn btn-primary text-white" type="button" id="saveBtn" name="save" value="저장하고 계속하기"/>
 	</div>
       
 </div>
+
+ <div id="myModal" class="modal">
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	     	<div>
+		     	<div class="mt-4">
+			        <p class="font-weight-bold text-center" id="logoutModal"></p>
+				</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<a href="/user/logout"><button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button></a>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>
+
 
 <%@ include file="../include/scriptLoader.jsp"%>
 <script>
@@ -293,8 +342,10 @@ function Search() {
 }
 
 function english(obj) {
-	var pattern = /[^(a-zA-Z)]/; //영문만 허용
-	if (pattern.test(obj.value)) {
+	
+	var pattern = /^[a-zA-Z\s]+$/ //영문, 띄어쓰기만 허용
+	
+	if (!pattern.test(obj.value)) {
 		alert("성명을 영어로 기재하십시오.");
 		obj.value = '';
 		obj.focus();
@@ -317,18 +368,7 @@ function fn_press_han(obj) {
 	obj.value=obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
 }
 
-$("#saveBtn").click(function() {
-	console.log("save버튼 클릭");
-	
-	
-	
-	
-	
-	
-	
-	
-	$("#hsForm").submit();
-});
+
 
 
 

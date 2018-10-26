@@ -10,7 +10,7 @@ public interface Apply1Service {
 
 	public JobopenBasic viewJobOpen(JobopenBasic jopopenBasic);
 	
-	public Member viewUser(Member user);
+	public Member viewMember(Member member);
 	
 	public void insertUserDetail(UserDetail userDetail);
 	

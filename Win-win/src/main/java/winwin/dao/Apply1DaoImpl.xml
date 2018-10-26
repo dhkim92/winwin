@@ -5,4 +5,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="winwin.dao.Apply1Dao">
+  	<select id="selectMember" parameterType="winwin.dto.Member" resultType="winwin.dto.Member">
+  		SELECT username, phone FROM member WHERE userId=#{userid}
+  	</select>
+  	
+  	<insert id="insertUserDetail" parameterType="winwin.dto.UserDetail">
+  		INSERT INTO userDetail (userdetailNo, userId, jobopenNo, eName, birth, zipCode, address, addressDetail, phoneNum, veteran, disable, interest) VALUES ( userdetail_seq.nextval, #{userId} ,#{jobopenNo} ,#{eName} ,#{birth} ,#{zipCode} ,#{address} ,#{addressDetail} ,#{phoneNum} ,#{veteran} ,#{disable} ,#{interest})
+  	</insert>
+  	
+  	<insert id="insertMilitary" parameterType="winwin.dto.Military">
+  		INSERT INTO military (militaryNo, userId, jobopenNo, discharge, startDate, endDate, mCategory, mGrade) VALUES (military_seq.nextval, #{userId}, #{jobopenNo}, #{discharge}, #{startDate}, #{endDate}, #{mCategory}, #{mGrade})
+  	</insert>
+  	
   </mapper>

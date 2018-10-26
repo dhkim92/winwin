@@ -21,8 +21,8 @@ public class Apply1ServiceImpl implements Apply1Service {
 	}
 	
 	
-	public Member viewUser(Member user) {
-		return dao.selectUser(user);
+	public Member viewMember(Member member) {
+		return dao.selectMember(member);
 	}
 	
 	public void insertUserDetail(UserDetail userDetail) {
