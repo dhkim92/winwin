@@ -8,7 +8,7 @@
 $(document).ready(function() {
 	
 	var tid;
-	var cnt = 1800;
+	var cnt = 5;
 	
 	counter_init();
 	
@@ -20,14 +20,34 @@ $(document).ready(function() {
 			
 			if(cnt < 0) {
 				clearInterval(tid);
-// 				self.location = "logout.php";
+				logout();
+
 			}
 		}, 1000);
 	}
 	
+	function logout() {
+		
+		var modal = document.getElementById('logoutModal');
+		modal.style.display = "block";
+		
+		var span = document.getElementsByClassName("close")[0];
+		var btnClose = document.getElementById("btnLogoutClose");
+		
+		
+		btnClose.onclick = function() {
+			modal.style.display = "none";
+		}
+		
+		$("#logoutModal").html("시간이 경과되어 자동 로그아웃됩니다.")
+		
+	}
+	
+	
+	
 	$("#timer").click(function() {
 		clearInterval(tid);
-		cnt = parseInt(1800);
+		cnt = parseInt(5);
 		counter_init();
 	});
 	
@@ -115,7 +135,7 @@ $(document).ready(function() {
                   	<input type="hidden" name="jobopenNo" id="hsJobopenNo" value="1" />
                   	<input type="hidden" id="hsCategory" name="category" value="고등학교"/>
 					<input type="text" id="hsName" name="name" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
-					<input type="button" class="m-1 mr-1" id="hsSearch" value="검색" /><button class="ml-1 mr-1">취소</button>
+					<input type="button" class="m-1 mr-1" id="hsSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
 					<select style="height:24px; width:70px;" class="hsselect" id="hsDay" name="day">
 						<option value="0">주/야</option>
 						<option value="주간">주간</option>
@@ -183,7 +203,7 @@ $(document).ready(function() {
                   	<input type="hidden" name="jobopenNo" id="colJobopenNo" value="jobopenNo" />
                   	<input type="hidden" id="colCategory" name="category" value="전문대학"/>
 					<input type="text" id="colName" name="name" class="mr-1 colTxt" style="width: 110px" readonly/>
-					<button class="m-1 mr-1" id="colSearch">검색</button><button class="ml-1 mr-1">취소</button>
+					<input type="button" class="m-1 mr-1" id="colSearch" value="검색"><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
 					<select style="height:24px; width:85px;" class="colselect" id="colSelect" name="branch">
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
@@ -197,7 +217,7 @@ $(document).ready(function() {
                   </td>
                   <td class="align-middle">
 					<input type="text" class="mr-1 colTxt" style="width: 100px" id="colMajor" name="major" readonly/>
-					<button class="m-1 mr-1" id="colSearchM" name="colSearchM">검색</button><button class="ml-1 mr-1">취소</button>					                  
+					<input type="button" class="m-1 mr-1" id="colSearchM" name="colSearchM" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPI" value="취소" />					                  
  					<input type="text" name="score" id="colScore" class="mr-1 colTxt" style="width: 30px;" pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> / <input id="colTotalScore" name="totalScore" type="text" class="mr-1 colTxt" style="width: 30px; " pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> 만점
                   </td>
                   <td class="align-middle">
@@ -258,7 +278,7 @@ $(document).ready(function() {
                   	<input type="hidden" name="jobopenNo" id="univJobopenNo" value="jobopenNo" />
                   	<input type="hidden" id="univCategory" name="category" value="대학교"/>
 					<input type="text" id="univName" name="name" class="mr-1 univTxt" style="width: 110px" readonly/>
-					<button class="m-1 mr-1" id="univSearch" name="univSearch">검색</button><button class="ml-1 mr-1">취소</button>
+					<input type="button" class="m-1 mr-1" id="univSearch" name="univSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
 					<select style="height:24px; width:85px;" class="univselect" id="univBranch" name="branch">
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
@@ -273,11 +293,11 @@ $(document).ready(function() {
                   <td class="align-middle">
                   <div>
 					<input type="text" id="univMajor" name="major" class="mr-1 univTxt" style="width: 100px" readonly/>
-					<button class="m-1 mr-1" id="univMSearch" name="univMSearch">검색</button><button class="ml-1 mr-1">취소</button>
+					<input type="button" class="m-1 mr-1" id="univMSearch" name="univMSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPI" value="취소" />
 				  </div>
 				  <div>		
-					<input type="text"  name="minor" class="mr-1 univTxt" style="width: 100px" readonly/>
-					<button class="m-1 mr-1">검색</button><button class="ml-1 mr-1">취소</button>					                  
+					<input type="text"  id="univMinor" name="minor" class="mr-1 univTxt" style="width: 100px" readonly/>
+					<input type="button" class="m-1 mr-1" id="univMiSearch" name="univMiSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPI" value="취소" />					                  
 				  </div>
 				  </td>
 				  <td>						                  
@@ -415,7 +435,39 @@ $(document).ready(function() {
 	</div>
 
 	
-</div>	
+</div>
+
+
+ <div id="logoutModal" class="modal">
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	     	<div>
+		     	<div class="mt-4">
+			        <p class="font-weight-bold text-center" id="logoutModal"></p>
+				</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<a href="/user/logout"><button type="button"  id="btnLogoutClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button></a>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>
+	
 	
 <%@ include file="../include/scriptLoader.jsp"%>
 <script>
@@ -455,10 +507,23 @@ $("#saveBtn").click(function() {
 	$("#hsForm").submit();
 });
 
+$(".cancelAPI").click(function() {
+	
+	var cancelAPI = $(this).parent().children().eq(0);
+	cancelAPI.val("");
+});
+
+$(".cancelAPIS").click(function() {
+	
+	var cancelAPIS = $(this).parent().children().eq(2);
+	cancelAPIS.val("");
+	
+});
 </script>
 <%@ include file="../apply/schoolAPI.jsp"%>		
 <%@ include file="../apply/collegeAPI.jsp"%>	
 <%@ include file="../apply/colMajorAPI.jsp"%>	
 <%@ include file="../apply/universityAPI.jsp"%>	
 <%@ include file="../apply/majorAPI.jsp"%>
+<%@ include file="../apply/minorAPI.jsp"%>
 <%@ include file="../include/footer.jsp"%>	

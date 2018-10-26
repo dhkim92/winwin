@@ -79,13 +79,13 @@ public class Apply1Controller {
 	
 	
 	@RequestMapping(value="/academic", method=RequestMethod.GET)
-	public void academic(JobopenBasic jobopenBasic, Model model) {
+	public void academic(JobopenBasic jobopenBasic,HttpSession session ,Model model) {
 		
 //		apply1Service.viewJobOpen(jobopenBasic);
 				
 	}
 
-	@RequestMapping(value="/academic", method=RequestMethod.POST)
+	@RequestMapping(value="/academicHs", method=RequestMethod.POST)
 	public ModelAndView academicProc(Academic academic, HttpSession session, Model model) {
 		
 		System.out.println(academic);

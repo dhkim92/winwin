@@ -74,19 +74,81 @@ $(document).ready(function() {
 	$("#saveBtn").click(function() {
 		
 		console.log("저장하고 계속하기 버튼 클릭")
-		var phoneNum;
 		
-		var phoneNum1 = $("#phoneNum1 option:selected").val();
-		var phoneNum2 = $("#phoneNum2").val();
-		var phoneNum3 = $("#phoneNum3").val();
+		var eName = $("#eName").val();
+		var birth = $("#birth").val();
+		var zipCode = $("#zipCode").val();
+		var address = $("#address").val();
+		var addressDetail = $("#addressDetail").val();
+		var phoneNum = $("#phoneNum").val();
+		var veteran = $("#veteran").val();
+		var notVeteran = $("#notVeteran").val();
+		var disable = $("#disable").val();
+		var notDisable = $("#notDisable").val();
 		
-		phoneNum = phoneNum1+"-"+phoneNum2+"-"+phoneNum3;
+		if(eName == "") {
+			alert("영문 이름을 입력하세요.");
+			$("#eName").focus();
+		} else if(birth == "") {
+			alert("생년월일을 입력하세요.");
+			$("#birth").focus();			
+		} else if(zipCode == "" || address == "" || addressDetail == "" ) {
+			alert("주소 입력사항을 모두 입력하세요.");
+			$("#addressDetail").focus();
+		} else if(phoneNum) {
+			alert("긴급연락처를 입력하세요.");
+			$("#phoneNum").focus();
+		} else if(veteran == "" && notVeteran == "") {
+			alert("보훈여부를 입력하세요.");
+			$("#disable").focus();
+		} else if(disable == "" && notDisable == ""){
+			alert("장애여부를 입력하세요.");
+			$("#disable").focus();
+		} else {
+
+			var phoneNum2 = $("#phoneNum2").val();
+			var phoneNum3 = $("#phoneNum3").val();
+			
+			var patternE = /^[a-zA-Z\s]$/ // 영문, 띄어쓰기만 허용
+			var patternN = /^[0-9]{8}$/ //숫자 8자리만 가능
+			var patternP = /^[0-9]{3,4}$/ //숫자 3~4자리만 가능
+			
+			console.log(eName);
+			if(patternE.test(eName)) {
+				alert("성명을 영어로 기재하십시오.");
+				$("#eName").val('');
+				$("#eName").focus();
+			} else if(!patternN.test(birth)) {
+				alert("생년월일을 YYYYMMDD 형식으로 기재하십시오.");
+				$("#birth").val('');
+				$("#birth").focus();
+			} else if(!patternP.test(phoneNum2)){
+				alert("올바른 전화번호 형식으로 입력하십시오.");
+				$("#phoneNum2").val('');
+				$("#phoneNum2").focus();
+			} else if(!patternP.test(phoneNum3)){
+				alert("올바른 전화번호 형식으로 입력하십시오.");
+				$("#phoneNum3").val('');
+				$("#phoneNum3").focus();
+			} else {
+				
+				var phoneNum;
+				
+				var phoneNum1 = $("#phoneNum1 option:selected").val();
+				var phoneNum2 = $("#phoneNum2").val();
+				var phoneNum3 = $("#phoneNum3").val();
+				
+				phoneNum = phoneNum1+"-"+phoneNum2+"-"+phoneNum3;	
+//		 		console.log(phoneNum);
+				$("#phoneNum").val(phoneNum);
+				
+				$("#userDetailForm").submit();	
+				
+			}
+
+			
+		}
 		
-// 		console.log(phoneNum);
-		
-		$("#phoneNum").val(phoneNum);
-		
-		$("#userDetailForm").submit();		
 	});
 	
 });
@@ -140,7 +202,7 @@ $(document).ready(function() {
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">성명<span style="color : red;">*</span></th>
 		<td style="width: 40%">
 		<span style="font-size: 10px ;">한글 </span><input style="border: none; width: 50px;" type="text" id="username" name="username" value="${member.username }" readonly/> / <span style="font-size: 10px ;">영어 </span>
-			<input type="text" class="ml-1 mr-1" id="eName" name="eName" onkeyup="english(this)"/>
+			<input type="text" class="ml-1 mr-1" id="eName" name="eName"/>
 			<span style="font-size: 10px ;"> 예)Hong Gil Dong</span>
 		</td>
 		<th class="text-center align-middle bg-secondary">이메일<span style="color : red;">*</span></th>
@@ -149,7 +211,7 @@ $(document).ready(function() {
 	<tr>
 		<th class="text-center align-middle bg-secondary" style="width: 5%" >생년월일<span style="color : red;">*</span></th>
 		<td colspan="3">
-			<input type="text" name="birth" id="birth" pattern="[0-9]{8}" title="생년월일을  YYYYMMDD 형식으로 입력하십시오." class="numberOnly"/>
+			<input type="text" name="birth" id="birth"/>
 			<span style="font-size: 10px ;">예)19900101</span>
 		</td>
 	</tr>
@@ -192,7 +254,7 @@ $(document).ready(function() {
 				<option value="055">055</option>
 				<option value="064">064</option>
 			</select>
-				-<input type="text" id="phoneNum2" name="phoneNum2" class="ml-1 mr-1 numberOnly" style="width: 100px ;" pattern="[0-9]{3,4}" title="" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);" >-<input type="text" id="phoneNum3" name="phoneNum3" class="ml-1 mr-1 numberOnly" pattern="[0-9]{3,4}" title="" style="width: 100px ;" onkeypress="return fn_press(event, 'numbers');" onkeydown="fn_press_han(this);" />
+				-<input type="text" id="phoneNum2" name="phoneNum2" class="ml-1 mr-1 numberOnly" style="width: 100px ;" />-<input type="text" id="phoneNum3" name="phoneNum3" class="ml-1 mr-1 numberOnly" />
 			<input type="hidden" id="phoneNum" name="phoneNum" />	
 		</td>
 	</tr>
@@ -340,35 +402,6 @@ function Search() {
 		}
 	}).open();
 }
-
-function english(obj) {
-	
-	var pattern = /^[a-zA-Z\s]+$/ //영문, 띄어쓰기만 허용
-	
-	if (!pattern.test(obj.value)) {
-		alert("성명을 영어로 기재하십시오.");
-		obj.value = '';
-		obj.focus();
-		return false;
-	}
-}
-
-// 숫자만 입력받기
-function fn_press(event, type) {
-	if(type == "numbers") {
-		if(event.keyCode < 48 || event.keyCode > 57) return false;
-	}
-	
-}
-
-// 한글입력 방지
-function fn_press_han(obj) {
-	if(event.keyCode == 8 || event.keyCode ==9 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 46) return;
-	
-	obj.value=obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
-}
-
-
 
 
 

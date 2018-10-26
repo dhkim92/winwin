@@ -22,7 +22,7 @@ $(document).ready(function() {
 	         	var valarr = value[i].split(", ")
 	      	 	for(var k=0; k<valarr.length; k++){
 
-	      	 		$("#univMajorS").append(
+	      	 		$("#univMinorS").append(
 	                  $("<option>").attr(
 	                     "value", valarr[k]
 	                  ).text(valarr[k])
@@ -41,15 +41,15 @@ $(document).ready(function() {
 		
 			
 		// Get the modal
-		var modal = document.getElementById('univMModal');
+		var modal = document.getElementById('univMiModal');
 		
 		// Get the button that opens the modal
-		var btn = document.getElementById("univMSearch");
+		var btn = document.getElementById("univMiSearch");
 		
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];                                          
 		
-		var btnUnivMClose = document.getElementById("btnUnivMClose");
+		var btnUnivMClose = document.getElementById("btnUnivMiClose");
 		
 		// When the user clicks on the button, open the modal 
 		btn.onclick = function() {
@@ -61,7 +61,7 @@ $(document).ready(function() {
 		    modal.style.display = "none";
 		}
 		
-		btnUnivMClose.onclick = function() {
+		btnUnivMiClose.onclick = function() {
 		    modal.style.display = "none";
 		}
 		
@@ -73,19 +73,19 @@ $(document).ready(function() {
 		}
 		
 		
-		$("#btnUnivMOk").click(function() {
-			var select = $("#univMajorS option:selected").val();
-			var write =$("#writeunivMajor").val();
+		$("#btnUnivMiOk").click(function() {
+			var select = $("#univMinorS option:selected").val();
+			var write =$("#writeunivMinor").val();
 			
-			if($('#univMajorS').val() == "학과명을 선택하세요") {
-				$('#univMajor').val(write);
+			if($('#univMinorS').val() == "학과명을 선택하세요") {
+				$('#univMinor').val(write);
 				modal.style.display = "none";
-				$("#writeunivMajor").val('');
+				$("#writeunivMinor").val('');
 				
 			} else {
-				$('#univMajor').val(select);
+				$('#univMinor').val(select);
 				modal.style.display = "none";
-				$("#univMajorS").val('학과명을 선택하세요').trigger('change') ;
+				$("#univMinorS").val('학과명을 선택하세요').trigger('change') ;
 			}
 
 			
@@ -99,7 +99,7 @@ $(document).ready(function() {
 <body>
 
     <!-- The Modal -->
-    <div id="univMModal" class="modal">
+    <div id="univMiModal" class="modal">
  
 	      <!-- Modal content -->
 	      <div class="modal-content">
@@ -120,7 +120,7 @@ $(document).ready(function() {
 			        <p class="font-weight-bold text-center" style="margin-bottom: 0;">학과명을 검색하세요.</p>
 			        <p class="text-center mb-3" style="font-size: 13px; margin-bottom: 0;">해외대학 검색시 대/소문자를 구분하여 입력해 주세요.</p>
 			        <div class="d-flex justify-content-center">
-				        <select id="univMajorS" class="js-example-basic-single " style="width: 200px;">
+				        <select id="univMinorS" class="js-example-basic-single " style="width: 200px;">
 				        	 <option selected="selected">학과명을 선택하세요</option>
 						</select>
 					</div> 
@@ -130,14 +130,14 @@ $(document).ready(function() {
 				<div class="mt-4">
 			        <p class="font-weight-bold text-center mb-3" style="margin-bottom: 0;">그밖의 학과명을 직접 입력하세요.</p>
 			        <div class="d-flex justify-content-center">
-			        	<input type="text" id="writeunivMajor" style="width:200px;"/>
+			        	<input type="text" id="writeunivMinor" style="width:200px;"/>
 			        </div>
 				</div>
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
-				<button type="button"  id="btnUnivMOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
-				<button type="button"  id="btnUnivMClose" class="font-weight-bold btn btn-secondary">닫기</button>
+				<button type="button"  id="btnUnivMiOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
+				<button type="button"  id="btnUnivMiClose" class="font-weight-bold btn btn-secondary">닫기</button>
 				</div>
 			</div>
 	      </div>

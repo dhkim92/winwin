@@ -37,7 +37,7 @@ $(document).ready(function() {
       $('.js-example-basic-single').select2();
 			
 		// Get the modal
-		var modal = document.getElementById('myModal');
+		var modal = document.getElementById('colModal');
 		
 		// Get the button that opens the modal
 		var btn = document.getElementById("colSearch");
