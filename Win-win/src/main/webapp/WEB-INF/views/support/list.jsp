@@ -5,6 +5,15 @@
 #test tr td {
 	padding: 0px;
 }
+
+.box {
+	border: 1px solid #5bc0de;
+/* 	background-color: ; */
+	line-height: 40px;
+	float: left;
+	margin-left: 15px;
+	margin-top: 10px;
+}
 </style>
 
 <%@ include file="../include/adminHeader.jsp"%>
@@ -36,61 +45,61 @@
 					<tbody id="test">
 						<tr>
 							<td class="text-center" style="width: 12%"><select multiple
-								class="form-control" id="career">
-									<option>신입</option>
-									<option>1~3년</option>
-									<option>4~6년</option>
-									<option>7~9년</option>
-									<option>10년~15년</option>
+								class="form-control" id="career" form="search" name="career">
+									<option value="신입">신입</option>
+									<option value="1~3년">1~3년</option>
+									<option value="4~6년">4~6년</option>
+									<option value="7~9년">7~9년</option>
+									<option value="10~15년">10년~15년</option>
 							</select></td>
 							<td class="text-center" style="width: 16%"><select multiple
-								class="form-control" id="employment">
-									<option>정규직</option>
-									<option>계약직</option>
-									<option>인턴</option>
-									<option>파견직</option>
-									<option>프리랜서</option>
+								class="form-control" id="employment" form="search" name="employment">
+									<option value="정규직">정규직</option>
+									<option value="계약직">계약직</option>
+									<option value="인턴">인턴</option>
+									<option value="파견직">파견직</option>
+									<option value="프리랜서">프리랜서</option>
 							</select></td>
 							<td class="text-center" style="width: 25%"><select multiple
-								class="form-control" id="academiccareer">
-									<option>대학교졸업(4년)</option>
-									<option>대학교졸업(2~3년)</option>
-									<option>대학원 석사졸업</option>
-									<option>대학원 박사졸업</option>
-									<option>고등학교 졸업</option>
-									<option>학력 무관</option>
+								class="form-control" id="academiccareer" form="search" name="academiccareer">
+									<option value="대학교졸업(4년)">대학교졸업(4년)</option>
+									<option value="대학교졸업(2~3년)">대학교졸업(2~3년)</option>
+									<option value="대학원 석사졸업">대학원 석사졸업</option>
+									<option value="대학원 박사졸업">대학원 박사졸업</option>
+									<option value="고등학교 졸업">고등학교 졸업</option>
+									<option value="학력 무관">학력 무관</option>
 							</select></td>
 							<td class="text-center" style="width: 10%"><select multiple
-								class="form-control" id="credit">
-									<option>2.0 이상</option>
-									<option>2.5 이상</option>
-									<option>3.0 이상</option>
-									<option>3.5 이상</option>
-									<option>4.0 이상</option>
+								class="form-control" id="credit" form="search" name="credit">
+									<option value="2.0 이상">2.0 이상</option>
+									<option value="2.5 이상">2.5 이상</option>
+									<option value="3.0 이상">3.0 이상</option>
+									<option value="3.5 이상">3.5 이상</option>
+									<option value="4.0 이상">4.0 이상</option>
 							</select></td>
 							<td class="text-center" style="width: 15%"><select multiple
-								class="form-control" id="language">
-									<option>TOEIC</option>
-									<option>TOEFL</option>
-									<option>TEPS</option>
-									<option>TOEIC Speaking</option>
-									<option>OPIC</option>
+								class="form-control" id="language" form="search" name="language">
+									<option value="TOEIC">TOEIC</option>
+									<option value="TOEFL">TOEFL</option>
+									<option value="TEPS">TEPS</option>
+									<option value="TOEIC Speaking">TOEIC Speaking</option>
+									<option value="OPIC">OPIC</option>
 							</select></td>
 							<td style="width: 12%"><select multiple class="form-control"
-								id="score">
-									<option>500~550</option>
-									<option>550~600</option>
-									<option>600~650</option>
-									<option>650~700</option>
-									<option>750~800</option>
-									<option>800~850</option>
-									<option>850~900</option>
-									<option>900 이상</option>
+								id="score" form="search" name="score">
+									<option value="500~550">500~550</option>
+									<option value="550~600">550~600</option>
+									<option value="600~650">600~650</option>
+									<option value="650~700">650~700</option>
+									<option value="750~800">750~800</option>
+									<option value="800~850">800~850</option>
+									<option value="850~900">850~900</option>
+									<option value="900 이상">900 이상</option>
 							</select></td>
 							<td class="text-center" style="width: 10%"><select multiple
-								class="form-control" id="status">
-									<option>처리 전</option>
-									<option>처리 후</option>
+								class="form-control" id="status" form="search" name="status">
+									<option value="처리 전">처리 전</option>
+									<option value="처리 후">처리 후</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -98,7 +107,7 @@
 								style="background-color: #eee; padding: 0px; line-height: 2.5;">
 								공고명</th>
 							<td colspan="6"><select class="custom-select"
-								style="width: 457px;" id="living" name="living">
+								style="width: 457px;" id="title" name="title" form="search">
 									<option value="0" style="width: 457px">공고명을 선택해 주십시오!</option>
 									<option style="width: 457px;">아파트</option>
 									<option style="width: 457px;">빌라</option>
@@ -110,20 +119,24 @@
 							<td colspan="7" style="height: 90px">
 							<div class="row">
 							<div class="col-10">
-							<span id="career1"></span> <span id="employment1"></span> <span
-								id="academiccareer1"></span> <span id="credit1"></span> <span
-								id="language1"></span> <span id="score1"></span> <span
-								id="status1"></span>
+							<div class="box text-center" id=careerbox style="width:8em;"></div>
+							<div class="box text-center" id=employmentbox style="width:7em;"></div>
+							<div class="box text-center" id=academiccareerbox style="width:11em;"></div>
+							<div class="box text-center" id=creditbox style="width:6em;"></div>
+							<div class="box text-center" id=languagebox style="width:10em;"></div>
+							<div class="box text-center" id=scorebox style="width:7em;"></div>
+							<div class="box text-center" id=statusbox style="width:6em;"></div> 
 							</div>
 							<div class="col-2 mt-2">
-								<button class="btn float-right btn-sm btn-primary	"
-									style="margin-right: 15px">초기화</button>
+								<button class="btn float-right btn-sm btn-primary fas fa-redo	"
+									style="margin-right: 15px" id="clear">&nbsp; 초기화</button>
 									</div>
 									</div>
 									<div class="row">
-									<div class="col-12 d-flex justify-content-end mt-2">
+									<div class="col-12 d-flex justify-content-end mt-1">
+									<form action="/support/list" method="post" id="search">
 									<button class="btn float-right btn-primary"
-										style="margin-right: 15px; magrin-top: 35px;">선택된 조건 검색하기</button>
+										style="margin-right: 15px;">선택된 조건 검색하기</button></form>
 										</div>
 										</div>
 										
@@ -180,19 +193,17 @@
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
-
-// var start_temp = "<button>sdf"
-// var end_temp = "sdf</button>"
+$("#career option:selected").val();
 
 	$(function() {
-		$("#career1").hide();
+		$("#careerbox").hide();
 		$("#career").click(function() {
 
 			var career = $("#career option:selected").val();
 
 			$.ajax({
 				type : 'POST',
-				url : "/support/list",
+				url : "/support/search",
 				dataType : "json",
 				data : {
 					career : career
@@ -200,21 +211,25 @@
 
 				success : function(data) {
 					if (data.success == true) {
-						$("#career1").html(data.career)
-						$("#career1").show();
+						$("#careerbox").html(data.career+"<i class='fas fa-backspace ml-2' id='careerclose' style='cursor: pointer'></i>")
+						$("#careerbox").show();
 					}
 				}
 			});
+			$("#careerbox").on("click", "#careerclose", function(){
+				$("#careerbox").html("");
+				$("#careerbox").hide();
+			});
 		});
 
-		$("#employment1").hide();
+		$("#employmentbox").hide();
 		$("#employment").click(function() {
 
 			var employment = $("#employment option:selected").val();
 
 			$.ajax({
 				type : 'POST',
-				url : "/support/list",
+				url : "/support/search",
 				dataType : "json",
 				data : {
 					employment : employment
@@ -222,21 +237,25 @@
 
 				success : function(data) {
 					if (data.success == true) {
-						$("#employment1").html(data.employment)
-						$("#employment1").show();
+						$("#employmentbox").html(data.employment+"<i class='fas fa-backspace ml-2' id='employmentclose' style='cursor: pointer'></i>")
+						$("#employmentbox").show();
 					}
 				}
 			});
+			$("#employmentbox").on("click", "#employmentclose", function(){
+				$("employmentbox").html("");
+				$("#employmentbox").hide();
+			});
 		});
 
-		$("#academiccareer1").hide();
+		$("#academiccareerbox").hide();
 		$("#academiccareer").click(function() {
 
 			var academiccareer = $("#academiccareer option:selected").val();
 
 			$.ajax({
 				type : 'POST',
-				url : "/support/list",
+				url : "/support/search",
 				dataType : "json",
 				data : {
 					academiccareer : academiccareer
@@ -244,21 +263,25 @@
 
 				success : function(data) {
 					if (data.success == true) {
-						$("#academiccareer1").html(data.academiccareer)
-						$("#academiccareer1").show();
+						$("#academiccareerbox").html(data.academiccareer+"<i class='fas fa-backspace ml-2' id='academiccareerclose' style='cursor: pointer'></i>")
+						$("#academiccareerbox").show();
 					}
 				}
 			});
+			$("#academiccareerbox").on("click", "#academiccareerclose", function(){
+				$("academiccareerbox").html("");
+				$("#academiccareerbox").hide();
+			});
 		});
 
-		$("#credit1").hide();
+		$("#creditbox").hide();
 		$("#credit").click(function() {
 
 			var credit = $("#credit option:selected").val();
 
 			$.ajax({
 				type : 'POST',
-				url : "/support/list",
+				url : "/support/search",
 				dataType : "json",
 				data : {
 					credit : credit
@@ -266,21 +289,27 @@
 
 				success : function(data) {
 					if (data.success == true) {
-						$("#credit1").html(data.credit)
-						$("#credit1").show();
+						$("#creditbox").html(data.credit+"<i class='fas fa-backspace ml-2' id='creditclose' style='cursor: pointer'></i>")
+						$("#creditbox").show();
 					}
+					
+					
 				}
+			});
+			$("#creditbox").on("click", "#creditclose", function(){
+				$("creditbox").html("");
+				$("#creditbox").hide();
 			});
 		});
 
-		$("#language1").hide();
+		$("#languagebox").hide();
 		$("#language").click(function() {
 
 			var language = $("#language option:selected").val();
 
 			$.ajax({
 				type : 'POST',
-				url : "/support/list",
+				url : "/support/search",
 				dataType : "json",
 				data : {
 					language : language
@@ -288,21 +317,25 @@
 
 				success : function(data) {
 					if (data.success == true) {
-						$("#language1").html(data.language)
-						$("#language1").show();
+						$("#languagebox").html(data.language+"<i class='fas fa-backspace ml-2 ' id='languageclose' style='cursor: pointer'></i>")
+						$("#languagebox").show();
 					}
 				}
 			});
+			$("#languagebox").on("click", "#languageclose", function(){
+				$("languagebox").html("");
+				$("#languagebox").hide();
+			});
 		});
 
-		$("#score1").hide();
+		$("#scorebox").hide();
 		$("#score").click(function() {
 
 			var score = $("#score option:selected").val();
 
 			$.ajax({
 				type : 'POST',
-				url : "/support/list",
+				url : "/support/search",
 				dataType : "json",
 				data : {
 					score : score
@@ -310,21 +343,25 @@
 
 				success : function(data) {
 					if (data.success == true) {
-						$("#score1").html(data.score)
-						$("#score1").show();
+						$("#scorebox").html(data.score+"<i class='fas fa-backspace ml-2' id='scoreclose' style='cursor: pointer'></i>")
+						$("#scorebox").show();
 					}
 				}
 			});
+			$("#scorebox").on("click", "#scoreclose", function(){
+				$("scorebox").html("");
+				$("#scorebox").hide();
+			});
 		});
 
-		$("#status1").hide();
+		$("#statusbox").hide();
 		$("#status").click(function() {
 
 			var status = $("#status option:selected").val();
 
 			$.ajax({
 				type : 'POST',
-				url : "/support/list",
+				url : "/support/search",
 				dataType : "json",
 				data : {
 					status : status
@@ -332,8 +369,31 @@
 
 				success : function(data) {
 					if (data.success == true) {
-						$("#status1").html(data.status)
-						$("#status1").show();
+						$("#statusbox").html(data.status+"<i class='fas fa-backspace ml-2' id='statusclose' style='cursor: pointer'></i>")
+						$("#statusbox").show();
+					}
+				}
+			});
+			$("#statusbox").on("click", "#statusclose", function(){
+				$("#statusbox").html("");
+				$("#statusbox").hide();
+			});
+		});
+		$("#clear").click(function() {
+
+			var clear = $("#clear").val();
+
+			$.ajax({
+				type : 'POST',
+				url : "/support/search",
+				dataType : "json",
+				data : {
+					clear : clear
+				},
+
+				success : function(data) {
+					if (data.success == true) {
+						$(".box").hide();
 					}
 				}
 			});

@@ -35,7 +35,6 @@ public class SupportBoardController {
 
 		List<SupportBoard> list = service.list(paging);
 
-		System.out.println("getPaging :" + paging);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("support/list");
 		mav.addObject("list", list);
@@ -44,15 +43,15 @@ public class SupportBoardController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/support/list", method = RequestMethod.POST)
+	@RequestMapping(value = "/support/search", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<Object, Object> listProcess(String career, String employment, String academiccareer,
-										   String credit, String language, String score, String status) {
+	public Map<Object, Object> listProcess(String career, String employment, String academiccareer, String credit,
+			String language, String score, String status, String clear) {
 
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		
+
 		boolean success = true;
-				
+
 		map.put("success", success);
 		map.put("career", career);
 		map.put("employment", employment);
@@ -61,18 +60,33 @@ public class SupportBoardController {
 		map.put("language", language);
 		map.put("score", score);
 		map.put("status", status);
-		
+		map.put("clear", clear);
+
 		return map;
+	}
+
+	@RequestMapping(value = "/support/list", method = RequestMethod.POST)
+	public ModelAndView Search(String career, String employment, String academiccareer, String title, String credit,
+			String language, String score, String status, String clear,
+			@RequestParam(required = false, defaultValue = "0") int curPage,
+			@RequestParam(required = false, defaultValue = "20") int listCount,
+			@RequestParam(required = false, defaultValue = "5") int pageCount) throws Exception {
+
+		Paging paging = service.getPaging(curPage, listCount, pageCount);
+
+		List<SupportBoard> list = service.list(paging);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("support/list");
+		mav.addObject("list", list);
+		mav.addObject("paging", paging);
+
+		return mav;
+
 	}
 
 	@RequestMapping(value = "/support/view")
 	public SupportBoard view(SupportBoard board) {
-
-		return board;
-	}
-
-	@RequestMapping(value = "/support/Search", method = RequestMethod.GET)
-	public SupportBoard Search(String search, SupportBoard board) {
 
 		return board;
 	}

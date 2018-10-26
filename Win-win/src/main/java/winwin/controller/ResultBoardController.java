@@ -27,21 +27,7 @@ public class ResultBoardController {
 	ResultBoardService service;
 
 	@RequestMapping(value = "/result/list")
-	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int curPage,
-							 @RequestParam(required = false, defaultValue = "20") int listCount,
-							 @RequestParam(required = false, defaultValue = "5") int pageCount) throws Exception {
-
-		Paging paging = service.getPaging(curPage, listCount, pageCount);
-
-		List<ResultBoard> list = service.list(paging);
-
-		System.out.println("getPaging :" + paging);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("result/list");
-		mav.addObject("list", list);
-		mav.addObject("paging", paging);
-
-		return mav;
+	public void list() {
 	}
 
 	@RequestMapping(value = "/result/send", method = RequestMethod.GET)
