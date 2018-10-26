@@ -68,9 +68,20 @@
 				</td>
 				<td>
 					<c:if test="${JobopenBasic.allOpen eq '상시 채용'}">
-						<span class="badge badge-pill badge-primary">채용중</span>
+						<span class="badge badge-pill badge-primary  font-weight-bold">채용중</span>
 					</c:if>
-
+					
+					<jsp:useBean id="now" class="java.util.Date"/>
+					
+					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+					<fmt:formatDate value="${JobopenBasic.endDate }" pattern="yyyy-MM-dd" var="endDay"/>
+					
+					<c:if test="${today > endDay}">
+						<span class="badge badge-pill badge-secondary  font-weight-bold">채용완료</span>
+					</c:if>
+					<c:if test="${today <= endDay}">
+						<span class="badge badge-pill badge-primary  font-weight-bold">채용중</span>
+					</c:if>
 				</td>
 			</tr>
 			</c:forEach>
