@@ -14,7 +14,18 @@ public class NoticeBoard {
 	private String content;
 	private int hit;
 	private Date writedate;
-	private List<MultipartFile> list;
+	private List<MultipartFile> files;
+	
+	
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
+
+
 	
 
 	@Override
@@ -29,13 +40,6 @@ public class NoticeBoard {
 	public void setWritedate(Date writedate) {
 		this.writedate = writedate;
 	}
-	public List<MultipartFile> getList() {
-		return list;
-	}
-	public void setList(List<MultipartFile> list) {
-		this.list = list;
-	}
-	
 	public int getNoticeno() {
 		return noticeno;
 	}

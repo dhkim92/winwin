@@ -76,8 +76,8 @@ td{
 	<h3 class="font-weight-bold">댓글 남기기</h3>
 	<hr style="border: solid #376092;">
 	<div id="commentBox" class="form-inline text-center">
-		<textarea class="form-control col-md-11" placeholder="댓글을 남겨주세요" rows="5" cols="" style="display:inline-block;"></textarea>
-		<button class="btn btn-primary col-md-1" style="display:inline-block;height:130px">댓글등록</button>
+		<textarea class="form-control col-md-11" placeholder="댓글을 남겨주세요" rows="4" cols="" style="display:inline-block;"></textarea>
+		<button class="btn btn-primary col-md-1" style="display:inline-block;height:100px">댓글등록</button>
 	</div>
 	</div>
 </div>

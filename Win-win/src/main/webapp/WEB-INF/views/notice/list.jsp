@@ -4,8 +4,11 @@
 <%@ include file="../include/CSSLoader.jsp"%>
 
 <style>
-th,td {
-	font-size: 16px;
+th {
+	font-size: 15px;
+}
+td {
+	font-size: 14px;
 }
 </style>
 
@@ -35,7 +38,7 @@ th,td {
 		<c:forEach items="${list }" var="board">
 		<tr>
 			<td>${board.noticeno }</td>
-			<td><a href="/notice/view?noticeno=${board.noticeno}">${board.title }</a></td>
+			<td><a href="/notice/view?noticeno=${board.noticeno}" style="text-decoration: none">${board.title }</a></td>
 			<td><fmt:formatDate value="${board.writedate}" pattern="yyyy-MM-dd" /></td>
 			<td>${board.writer }</td>
 			<td>${board.hit }</td>	
@@ -49,8 +52,6 @@ th,td {
 
 	</div>
 </div>
-
-
 
 <%@ include file="../include/scriptLoader.jsp"%>
 

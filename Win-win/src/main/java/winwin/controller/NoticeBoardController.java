@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import winwin.dto.Material;
@@ -51,7 +53,7 @@ public class NoticeBoardController {
 		NoticeBoard resBoard = service.view(board);
 		List<Material> files = service.filesByBoardNo(board);
 		m.addAttribute("board", resBoard);
-		m.addAttribute("files", files);		
+		m.addAttribute("files", files);
 	}
 	
 	@RequestMapping(value="/notice/download", method=RequestMethod.POST)
@@ -60,30 +62,40 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/notice/write", method=RequestMethod.GET)
-	public void write() {
-		
+	public void write(HttpSession session) {
+		//관리자 초기 로그인 값
+		session.setAttribute("admincode", 111111);
+		session.setAttribute("adminname", "관리자");
 	}
 	
 	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
-	public void writeProc(@ModelAttribute NoticeBoard board) {
+	public void writeProc(@ModelAttribute("upFile") NoticeBoard board) {
 		
-		List<MultipartFile> up = board.getList();
+		List<MultipartFile> up = board.getFiles();
 //		List<String> upNames = new ArrayList<>();
 		
 		if(up == null || up.size()==0) {
+			
+			logger.info(board.toString());
+			
+			logger.info("첨부된 파일이 없을 경우");
 			
 			service.write(board);
 		
 		}else {
 			
+			logger.info("파일을 첨부할 경우");
+			
 			for (MultipartFile data : up) {
-				
+											
 				Material file = new Material();
 				
 				String realpath = context.getRealPath("upload");				
 				String uid = UUID.randomUUID().toString().split("-")[4];				
 				String stored = data.getOriginalFilename()+"_"+uid;
 				File dest = new File(realpath, stored);
+				
+				logger.info(realpath);
 				
 				file.setFileSize(data.getSize());
 				file.setNoticeNo(board.getNoticeno());

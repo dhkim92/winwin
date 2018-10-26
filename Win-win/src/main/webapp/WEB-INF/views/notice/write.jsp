@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
 <style>
 #content{
@@ -15,8 +16,7 @@ td{
 <%@ include file="../include/header.jsp"%>
 
 <div class = "container">
-	<form action="/notice/write" method="post" enctype="multipart/form-data">
-	<div class="p-5">
+	<form id="upFile" action="/notice/write" method="post" enctype="multipart/form-data">	<div class="p-5">
 	<h3 class="text-primary font-weight-bold">공지사항</h3>
 	<hr style="border: solid #376092;">
 	<table class="table table-sm table-bordered table-hover">
@@ -41,7 +41,7 @@ td{
 			첨부파일
 			</td>
 			<td class="text-center">
-				<input type="file" multiple="multiple" />
+				<input type="file" multiple="multiple" name="files" />
 			</td>
 		</tr>
 	</table>
@@ -50,8 +50,8 @@ td{
 	</div>
 	</div>
 	
-	<input type="hidden" id="code" value="${sessionScope.code }"/>
-	<input type="hidden" id="writer" value="${sessionScope.logName }"/>
+	<input type="hidden" id="code" value="${sessionScope.admincode }"/>
+	<input type="hidden" id="writer" value="${sessionScope.adminname }"/>
 	
 	</form>
 	<div class="form-group d-flex justify-content-center">
@@ -59,7 +59,6 @@ td{
 		<button type="button" id="btnCancel" class="btn btn-primary ml-2">취소</button>
 	</div>
 </div>
-
 
 
 <%@ include file="../include/scriptLoader.jsp"%>
