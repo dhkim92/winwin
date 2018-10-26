@@ -59,4 +59,10 @@ public class MemberServiceImpl implements MemberService {
 	public Member pwdSearch(Member member) {
 		return memberdao.pwdSearch(member);
 	}
+
+	@Override
+	public void pwchange(Member member) {
+		memberdao.pwchange(member);
+		
+	}
 }

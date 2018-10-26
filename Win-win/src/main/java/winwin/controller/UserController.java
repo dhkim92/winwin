@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import winwin.dto.Mail;
 import winwin.dto.Member;
 import winwin.dto.RSA;
 import winwin.service.MemberService;
@@ -30,6 +31,7 @@ public class UserController {
 
 	@Autowired
 	MemberService memberservice;
+
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -157,19 +159,40 @@ public class UserController {
 	@RequestMapping(value = "user/pwdSearch", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<Object, Object> pwdSearchProc(String username2, String userid, Member member) {
+		
 		logger.info("비밀번호 찾기");
 		Map<Object, Object> map = new HashMap<Object, Object>();
+		
 		member.setUsername(username2);
 		member.setUserid(userid);
 		logger.info(member.toString());
+		
 		boolean success = memberservice.pwdSearchCnt(member);
+		
 		if (success == true) {
 			logger.info("일치");
 			member = memberservice.pwdSearch(member);
 			String pwd = member.getPwd();
-			logger.info(pwd);
+			SendMail sendmail = new SendMail();
+			Mail mail = new Mail();
+			
+			String newPw = null;
+			int min = 100000; 
+			int max = 999999;
+			double doubleRanNum = Math.floor(Math.random()*(max-min+1))+min;		
+			int intRanNum = (int)doubleRanNum;		
+			newPw = String.valueOf(intRanNum);
+			member.setPwd(newPw);
+			member.setUserid(userid);
+			logger.info(member.toString());
+			
+			memberservice.pwchange(member);
+			mail.setContent("비밀번호는"+newPw+"입니다.");
+			mail.setSender(userid);
+			mail.setTitle(userid+"님의 비밀번호 찾기 메일입니다.");
+			sendmail.sendMail(mail);
 			map.put("success", success);
-			map.put("pwd", pwd);
+			map.put("pwd", newPw);
 		} else {
 			logger.info("불일치!");
 		}

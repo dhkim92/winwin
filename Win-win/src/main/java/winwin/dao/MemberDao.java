@@ -20,4 +20,6 @@ public interface MemberDao {
 
 	public Member pwdSearch(Member member);
 
+	public void pwchange(Member member);
+
 }

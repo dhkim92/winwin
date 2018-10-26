@@ -37,4 +37,8 @@
 	<select id="pwdSearch" resultType="winwin.dto.Member">
 		select (pwd) from member where username=#{username } and userid=#{userid }
 	</select>
+	
+	<update id="pwchange" parameterType="winwin.dto.Member">
+		update member set pwd = #{pwd } where userid = #{userid }
+	</update>
   </mapper>

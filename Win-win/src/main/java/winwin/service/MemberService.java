@@ -23,4 +23,6 @@ public interface MemberService {
 	public boolean pwdSearchCnt(Member member);
 
 	public Member pwdSearch(Member member);
+
+	public void pwchange(Member member);
 }
