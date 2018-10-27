@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
+import winwin.dto.JobopenArr;
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
 import winwin.service.JobopenService;
@@ -29,24 +30,18 @@ import winwin.service.JobopenService;
  *
  */
 
-class TestArr{
-	private Test[] t;
-}
-class Test{
-	private String s;
-}
-
 @Controller
 @RequestMapping(value="/jobOpen")
 public class JobopenController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(JobopenController.class);
 	
 	@Autowired
 	JobopenService jobopenService;
 	
 	@RequestMapping(value="/basicInfo", method=RequestMethod.GET)
-	public void basic(TestArr tr) {
+	public void basic() {
 
-//		name="t[0].s" 
 	}
 	
 	@RequestMapping(value="/basicInfo", method=RequestMethod.POST)
@@ -64,13 +59,10 @@ public class JobopenController {
 	      }
 	      
 	      
-	      
-	      System.out.println(jobopenBasic);
-	      
 	      jobopenService.writeBasic(jobopenBasic);
 	      session.setAttribute("jobopen", jobopenBasic.getJobopenNo());
 	      
-	      System.out.println(jobopenBasic);
+	      logger.info(jobopenBasic.toString());
 	
 		return "redirect:detailInfo";
 	}
@@ -81,13 +73,12 @@ public class JobopenController {
 	}
 	
 	@RequestMapping(value="/detailInfo", method=RequestMethod.POST)
-	public String detailProc(JobopenDetail jobopenDetail) {
+	public String detailProc(JobopenArr detail, JobopenBasic jobopenBasic) {
 		
 		System.out.println("디테일");
 		
-		for(int i=0; i<jobopenDetail.getSector().length;i++){
-			System.out.println(jobopenDetail.getSector()[i]);
-		}
+		logger.info(detail.toString());
+		logger.info(jobopenBasic.toString());
 		
 		
 		return "register";
