@@ -41,5 +41,15 @@
 		 SELECT * FROM jobopenbasic
 		) CNT
 	</select>
+	
+	<insert id="insertDetail" parameterType="winwin.dto.JobopenDetail">
+		insert into jobopenDetail(jobopenNo, sector, volume, location, special)
+		values(#{jobopenNo}, #{sector}, #{volume}, #{location}, #{special})
+	
+	</insert>
+	
+	<update id="updateBasic" parameterType="winwin.dto.JobopenBasic">
+		update jobopenBasic set academic=#{academic}, score=#{score}, lang=#{lang}, etcQual=#{etcQual}, etc=#{etc} where jobopenNo=#{jobopenNo}; 
+	</update>
   
   </mapper>

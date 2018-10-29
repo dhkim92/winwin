@@ -77,11 +77,24 @@ public class JobopenController {
 		
 		System.out.println("디테일");
 		
-		logger.info(detail.toString());
-		logger.info(jobopenBasic.toString());
+		for(int i=0; i<detail.getDetail().length;i++) {
+			System.out.println(detail.getDetail()[i]);
+			jobopenService.writeDetail(detail.getDetail()[i]);
+		}
+		
+		jobopenService.updateBasic(jobopenBasic);
 		
 		
-		return "register";
+		return "redirect:register";
+	}
+	
+	@RequestMapping(value="/detailCancel", method=RequestMethod.POST)
+	public String detailCancel() {
+		
+		logger.info("취소 컨트롤러");
+		
+		
+		return "basicInfo";
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
@@ -90,14 +103,14 @@ public class JobopenController {
 		JobopenBasic jobopenBasic = new JobopenBasic();
 		JobopenDetail jobopenDetail = new JobopenDetail();
 		
-		jobopenBasic.setTitle((String)session.getAttribute("title"));
+//		jobopenBasic.setTitle((String)session.getAttribute("title"));
 //		jobopenDetail.setTitle(jobopenBasic.getTitle());
 		
-		JobopenBasic basic = jobopenService.viewBasic(jobopenBasic);
-		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
-		
-		model.addAttribute("basic", basic);
-		model.addAttribute("detail", detail);
+//		JobopenBasic basic = jobopenService.viewBasic(jobopenBasic);
+//		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
+//		
+//		model.addAttribute("basic", basic);
+//		model.addAttribute("detail", detail);
 	}
 	
 }
