@@ -8,7 +8,7 @@ import winwin.dto.UserDetail;
 
 public interface Apply1Dao {
 
-public JobopenBasic selectJobOpen(JobopenBasic jopopenBasic);
+	public JobopenBasic selectJobOpen(JobopenBasic jopopenBasic);
 	
 	public Member selectMember(Member member);
 

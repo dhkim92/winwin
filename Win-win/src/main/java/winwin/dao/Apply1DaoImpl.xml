@@ -17,4 +17,8 @@
   		INSERT INTO military (militaryNo, userId, jobopenNo, discharge, startDate, endDate, mCategory, mGrade) VALUES (military_seq.nextval, #{userId}, #{jobopenNo}, #{discharge}, #{startDate}, #{endDate}, #{mCategory}, #{mGrade})
   	</insert>
   	
+  	<select id="selectJobOpen" parameterType="winwin.dto.JobopenBasic" resultType="winwin.dto.JobopenBasic">
+  		SELECT title, endDate, jobopenNo FROM jobopenbasic WHERE jobopenNo=#{jobopenNo}
+  	</select>
+  	
   </mapper>

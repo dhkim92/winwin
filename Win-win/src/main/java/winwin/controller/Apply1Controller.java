@@ -29,13 +29,18 @@ public class Apply1Controller {
 	@RequestMapping(value="/userDetail", method=RequestMethod.GET)
 	public void userDetail(String title, String jobopenNo, JobopenBasic jobopenBasic, Member member, HttpSession session, Model model) {	
 		logger.info("userDetail 활성화");
-		logger.info(title);
-		logger.info(jobopenNo);
-//		apply1Service.viewJobOpen(jobopenBasic);
+		logger.info("공고명"+title);
+		logger.info("공고번호"+jobopenNo);
+		
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
+		JobopenBasic jobOpen = apply1Service.viewJobOpen(jobopenBasic);
+		
+		
 		member.setUserid((String)session.getAttribute("id"));
 		Member viewUserDetail = apply1Service.viewMember(member);
 		
 		logger.info("userDetailController : " + viewUserDetail);
+		model.addAttribute("jobopenBasic", jobOpen);
 		model.addAttribute("member", viewUserDetail);
 		
 	}

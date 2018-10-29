@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <%@ include file="../include/CSSLoader.jsp"%>
+
 <style>
 </style>
 
@@ -70,6 +72,17 @@ $(document).ready(function() {
 		return ""+nHour+":"+nMin+":"+nSec;
 	}
 	
+	var Dday = new Date('<fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" />');
+	var now = new Date();
+	console.log(now);
+	console.log(Dday);
+	
+	var gap = now.getTime() - Dday.getTime();
+	var result = Math.floor(gap/ (1000*60*60*24)) * -1;
+	
+	console.log("남은 날은 " + result + " 일");
+	
+	$("#dDay").val("(D- " + result + "일)");
 	
 	$("#saveBtn").click(function() {
 		
@@ -165,7 +178,7 @@ $(document).ready(function() {
 	<table class="table col-md-12 mb-0">
 	  <thead>
 	    <tr>
-	      <th>공고명</th>
+	      <th>${jobopenBasic.title}</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -173,8 +186,8 @@ $(document).ready(function() {
 	      <th class="text-center align-middle bg-secondary">접수상태</th>
 	      	<td class="text-center align-middle">지원서 저장 전 입니다</td>
 	      <th class="text-center align-middle bg-secondary">원서 마감 일시</th>
-	      	<td class="text-center align-middle">2018-12-31 23:59</td>
-	      	<td class="text-danger text-center align-middle">(D-98일 전)</td>
+	      	<td class="text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
+	      	<td class="text-danger text-center align-middle"><input style="border: none; width: 100px; color: red;" type="text" id="dDay" value="" readonly/></td>
 	      <th class="text-center align-middle bg-secondary">자동 로그아웃</th>
 	      	<td class="text-danger text-center align-middle"><span id="counter"></span></td>
 	      	<td><button id="timer">연장</button></td>
