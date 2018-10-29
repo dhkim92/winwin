@@ -118,6 +118,37 @@
 </div>
 
 
+<div id="myModal" class="modal">
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	     	<div>
+		     	<div class="mt-4">
+			        <p class="font-weight-bold text-center" id="idChecking"></p>
+				</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>
+
+
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <!-- javascropt lib load -->
@@ -153,6 +184,7 @@ var $pwd = $("#hiddenForm input[name='pwd']");
 var rsa = new RSAKey();
 rsa.setPublic("${modulus}", "${exponent}");
 
+
 $("#loginForm").submit(function(e) {
     // 실제 유저 입력 form은 event 취소
     // javascript가 작동되지 않는 환경에서는 유저 입력 form이 submit 됨
@@ -165,7 +197,53 @@ $("#loginForm").submit(function(e) {
     $userid.val(userid);
 //     $userid.val(rsa.encrypt(userid)); // 아이디 암호화
     $pwd.val(rsa.encrypt(pwd)); // 비밀번호 암호화
-    $("#hiddenForm").submit();
+    
+    $.ajax({
+		type : 'POST',
+		url : "/user/login",
+		dataType : "json",
+		data :
+			$("#hiddenForm").serialize(),
+		success : function(data) {
+		if (data.success > 0) {
+			location.href="/main/usermain";
+				} else {
+					var modal = document.getElementById('myModal');
+					modal.style.display = "block";
+					var span = document.getElementsByClassName("close")[0];
+
+					var btnClose = document.getElementById("btnClose");
+								
+					span.onclick = function() {
+						modal.style.display = "none";
+					}
+
+					btnClose.onclick = function() {
+						location.href="/user/login";
+					}
+
+					$('#idChecking').html("등록된 회원이 아니거나<br>이메일 또는 비밀번호가 틀렸습니다.");
+
+				}
+			},
+		error : function(error) {
+			var modal = document.getElementById('myModal');
+			modal.style.display = "block";
+			var span = document.getElementsByClassName("close")[0];
+
+			var btnClose = document.getElementById("btnClose");
+						
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+
+			btnClose.onclick = function() {
+				modal.style.display = "none";
+			}
+
+			$('#idChecking').html("Q&A게시판으로 이동하여 관리자에게 문의하십시오.");
+		}
+	});
 });	
 
 
@@ -192,17 +270,13 @@ $("#loginForm").submit(function(e) {
 
 		$.cookie('쿠키명', '쿠키값', {
 			//쿠키보관일
-			expires : 5
-			//도메인
-			,
-			domain : 'http://hellogk.tistory.com'
-			//https/http 결정
-			,
+			expires : 5,
+			domain : 'http://hellogk.tistory.com',//https/http 결정
 			secure : false
 		});
 
 	});
-
+	
 
 </script>
 

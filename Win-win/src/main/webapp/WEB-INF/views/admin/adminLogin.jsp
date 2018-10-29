@@ -54,7 +54,7 @@
 		</div>
 		
 		<div class="col-12 mt-2">
-			<form action="/admin/adminLogin" method="post">
+			<form action="/admin/adminLogin" method="post" id="adminForm">
 				<table class="table table-sm col-md-12 border border-right-0 border-left-0">
 					<tbody>
 						<tr>
@@ -125,12 +125,9 @@ function validateAdminCode(adminCode) {
 }
 
 $(function() {
-
-
 	$("#adminLogin").click(
 		function() {
 		
-			//userid 를 param.
 			var adminCode = $("#adminCode").val();
 
 			if (adminCode == "") {
@@ -145,9 +142,7 @@ $(function() {
 				type : 'POST',
 				url : "/admin/adminLogin",
 				dataType : "json",
-				data : {
-					adminCode : adminCode
-				},
+				data : $("#adminForm").serialize(),	
 
 				success : function(data) {
 				if (data.success > 0) {
@@ -193,6 +188,13 @@ $(function() {
 			});
 		}
 			
+	});
+	
+	$('#adminCode').keypress(function(event){
+	     if ( event.which == 13 ) {
+	         $('#adminLogin').click();
+	         return false;
+	     }
 	});
 
 });

@@ -86,15 +86,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
-	public String loginProc(Member member, HttpSession session, RedirectAttributes ra) {
+	@ResponseBody
+	public Map<Object, Object> loginProc(Member member, HttpSession session, RedirectAttributes ra) {
 
 		logger.info("로그인 활성화");
+		Map<Object, Object> map = new HashMap<Object, Object>();
 		// 개인키 취득
 		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
 
 		if (key == null) {
 			ra.addFlashAttribute("resultMsg", "비정상적인 접근입니다.");
-			return "redirect:/user/login";
 		}
 
 		// session에 저장된 개인키 초기화
@@ -118,16 +119,17 @@ public class UserController {
 				member = memberservice.info(member);
 				session.setAttribute("login", true);
 				session.setAttribute("id", member.getUserid());
-				return "redirect:/main/usermain";
+				map.put("success", success);
+			
 			} else {
 				logger.info("email, password 불일치!");
-				return "redirect:/user/login";
+			
 			}
 		} catch (Exception e) {
 			ra.addFlashAttribute("resultMsg", "비정상적인 접근입니다");
-			return "redirect:/user/login";
+			
 		}
-
+		return map;
 	}
 
 	@RequestMapping(value = "user/loginHelper", method = RequestMethod.GET)
