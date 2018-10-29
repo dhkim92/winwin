@@ -159,7 +159,7 @@ public class UserController {
 	@RequestMapping(value = "user/pwdSearch", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<Object, Object> pwdSearchProc(String username2, String userid, Member member) {
-		
+		logger.info(member.toString());
 		logger.info("비밀번호 찾기");
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		
@@ -172,7 +172,6 @@ public class UserController {
 		if (success == true) {
 			logger.info("일치");
 			member = memberservice.pwdSearch(member);
-			String pwd = member.getPwd();
 			SendMail sendmail = new SendMail();
 			Mail mail = new Mail();
 			
@@ -186,8 +185,8 @@ public class UserController {
 			member.setUserid(userid);
 			logger.info(member.toString());
 			
-			memberservice.pwchange(member);
-			mail.setContent("비밀번호는"+newPw+"입니다.");
+			memberservice.temppwchange(member);
+			mail.setContent(newPw);
 			mail.setSender(userid);
 			mail.setTitle(userid+"님의 비밀번호 찾기 메일입니다.");
 			sendmail.sendMail(mail);
@@ -199,15 +198,31 @@ public class UserController {
 		return map;
 	}
 
-	@RequestMapping(value = "user/pwchange", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/pwchange", method = RequestMethod.GET)
 	public void pwChange() {
 		logger.info("비밀번호 변경 페이지");
+		
 	}
 
-	@RequestMapping(value = "user/pwchange", method = RequestMethod.POST)
-	public void pwChangeProc(Member member) {
+	@RequestMapping(value = "/user/pwchange", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> pwChangeProc(String userid, String temppwd, String chpwd, Member member) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
 		logger.info(member.toString());
-
+		member.setPwd(temppwd);
+		logger.info(member.toString());
+		boolean success = memberservice.pwChangeCnt(member);
+		
+		if(success == true) {
+			logger.info("일치!");
+			member.setPwd(chpwd);
+			logger.info(member.toString());
+			memberservice.pwdChange(member);
+			map.put("success", success);
+		} else {
+			logger.info("불일치!");
+		}
+		return map;
 	}
 
 	@RequestMapping(value = "user/logout", method = RequestMethod.GET)

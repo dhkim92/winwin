@@ -20,6 +20,10 @@ public interface MemberDao {
 
 	public Member pwdSearch(Member member);
 
-	public void pwchange(Member member);
+	public void temppwchange(Member member);
+
+	public int pwChangeCnt(Member member);
+
+	public void pwdChange(Member member);
 
 }

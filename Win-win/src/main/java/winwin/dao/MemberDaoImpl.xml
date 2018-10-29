@@ -30,7 +30,7 @@
 		select (userid) from member where username=#{username } and phone=#{phone }
 	</select>
 	
-	<select id="pwdSearchCnt" parameterType="winwin.dto.Member" resultType="int" >
+	<select id="pwdSearchCnt" parameterType="winwin.dto.Member" resultType="int">
 		select count(*) from member where username=#{username } and userid=#{userid }
 	</select>
 	
@@ -38,7 +38,16 @@
 		select (pwd) from member where username=#{username } and userid=#{userid }
 	</select>
 	
-	<update id="pwchange" parameterType="winwin.dto.Member">
+	<update id="temppwchange" parameterType="winwin.dto.Member">
 		update member set pwd = #{pwd } where userid = #{userid }
 	</update>
+	
+	<select id="pwChangeCnt" parameterType="winwin.dto.Member" resultType="int">
+		select count(*) from member where userid=#{userid } and pwd=#{pwd }
+	</select>
+	
+	<update id="pwdChange" parameterType="winwin.dto.Member">
+		update member set pwd = #{pwd } where userid = #{userid }
+	</update>
+	
   </mapper>

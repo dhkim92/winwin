@@ -248,7 +248,7 @@
 					$("#userid").addClass("is-invalid");
 					$("#joinOk").attr("disabled", "disabled");
 				} else if(validateEmail(userid)==false){
-					alert("잘못된 이메일 입니다.");
+					alert("잘못된 이메일 형식입니다.");
 					$("#userid").addClass("is-invalid");
 					$("#joinOk").attr("disabled", "disabled");
 				} else {

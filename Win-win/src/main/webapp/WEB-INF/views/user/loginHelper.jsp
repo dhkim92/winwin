@@ -343,7 +343,7 @@ $(function() {
 						btnClose.onclick = function() {
 							modal.style.display = "none";
 						}
-						$('#idChecking').html("회원님의 비밀번호는 "+data.pwd+" 입니다.");
+						$('#idChecking').html("회원님의 이메일로 임시비밀번호를 발송했습니다");
 
 							} else {
 								var modal = document.getElementById('myModal');

@@ -21,18 +21,13 @@ public class SendMail {
 		
 		String host = "smtp.gmail.com";
 		final String user = "popiui0051@gmail.com";
-		final String password = "qwe123RTY";
+		final String password = "qwe123Q!";
 		
-		String to = mail.getSender();
-		String pw = mail.getContent();
-		String po = mail.getTitle();
-		System.out.println(to);
-		System.out.println(pw);
-		System.out.println(po);
-		
+		String sender = mail.getSender();
+		String pwd = mail.getContent();
+		String title = mail.getTitle();
 		
 		//Get the session object
-		System.out.println("TLSEmail Start");
 		Properties props= new Properties();
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", "587");
@@ -50,17 +45,22 @@ public class SendMail {
 		try {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(user));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			
-			
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(sender));
+
 			//제목
-			message.setSubject(mail.getTitle());
+			message.setSubject(title);
 			
 			//내용
-			message.setText(mail.getContent());
+			message.setText(new StringBuffer().append("회원님의 임시비밀번호는 <strong>")
+					.append(pwd)
+					.append("</strong>입니다.")
+					.append("<P><a href='http://localhost:8088/user/pwchange'>비밀번호 "
+							+ "변경하기</a> 링크를 통해서 "
+							+ "비밀번호를 변경해주시기 바랍니다.</P>").toString());
 			
-			
-			
+			// 이메일 해더
+			message.setHeader("content-Type","text/html");
+	
 			//메세지 보내기
 			Transport.send(message);
 			System.out.println("메세지 전송 완료");
@@ -75,7 +75,5 @@ public class SendMail {
 			System.out.println(e.getMessage());
 			return false;
 		}
-		
-		
 	}
 }

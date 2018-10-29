@@ -61,8 +61,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void pwchange(Member member) {
-		memberdao.pwchange(member);
+	public void temppwchange(Member member) {
+		memberdao.temppwchange(member);
 		
+	}
+
+	@Override
+	public boolean pwChangeCnt(Member member) {
+		if(memberdao.pwChangeCnt(member) > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void pwdChange(Member member) {
+		memberdao.pwdChange(member);
 	}
 }
