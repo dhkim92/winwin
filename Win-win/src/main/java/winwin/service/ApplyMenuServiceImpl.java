@@ -15,8 +15,13 @@ public class ApplyMenuServiceImpl implements ApplyMenuService{
 	@Override
 	public List getJobopenBasic() {
 		
-		
 		return applyMenuDao.getJobopenBasic();
+	}
+
+	@Override
+	public List getJobopenBasic2() {
+		
+		return applyMenuDao.getJobopenBasic2();
 	}
 
 }

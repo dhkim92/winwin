@@ -77,10 +77,10 @@
 			<td colspan="3">
 					<select class="ml-4" id="jobTitle" style="width: 500px;">
 						<c:forEach items="${list }" var="JobopenBasic">
-							<option selected="selected" value="${JobopenBasic.jobopenNo}"> ${JobopenBasic.title}</option>						
+							<option value="${JobopenBasic.jobopenNo}">${JobopenBasic.title}</option>						
 						</c:forEach>	
 					</select>
-					<button type="button" class="btn btn-primary btn-sm ml-3">지원하기</button>
+					<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();">지원하기</button>
 			</td>
 		</tr>
 	</tbody>
@@ -90,7 +90,116 @@
 </div>
 </div>
 
+<script type="text/javascript">
 
+	$(document).ready(function() {
+		$("#exampleRadios2").click(function(){
+			
+			//여기다가 ajax로 경력 select 해서 가져오기 
+		     
+			$.ajax({
+		          type:"post"
+		          , url:"/applyMenu/selectApply"
+		          , dataType: "json"
+		          , success: function( data ) {
+		        	 
+		        	  console.log(data.result2);
+			            
+		        	  $("#jobTitle").find("option").remove();
+
+		        	  
+			             var list = data.result2;
+			             
+			             var title = new Array();
+			             var no = new Array();
+			             
+			             for(var i=0; i<list.length; i++) {
+			            	 title[i] = list[i].title;
+			            	 no[i] = list[i].jobopenNo;
+			            	 
+			                $("#jobTitle").append(
+			                   $("<option>").attr(
+			                      "value", no[i]
+			                   ).text(title[i])
+			                );
+			             }
+						
+		        	  
+		          }, error: function() {
+		             alert("error");
+		          }
+		       })
+							
+		});
+		
+		
+		$("#exampleRadios1").click(function(){
+			
+			//여기다가 ajax로 경력 select 해서 가져오기 
+		     
+			$.ajax({
+		          type:"post"
+		          , url:"/applyMenu/selectApply"
+		          , dataType: "json"
+		          , success: function( data ) {
+		        	 
+		        	  console.log(data.result1);
+			            
+		        	  $("#jobTitle").find("option").remove();
+
+		        	  
+			             var list = data.result1;
+			             
+			             var title = new Array();
+			             var no = new Array();
+ 			             
+			             for(var i=0; i<list.length; i++) {
+			            	 title[i] = list[i].title;
+			            	 no[i] = list[i].jobopenNo;
+			            	 
+			                $("#jobTitle").append(
+			                   $("<option>").attr(
+			                      "value", no[i]
+			                   ).text(title[i])
+			                );
+			             }
+						
+		        	  
+		          }, error: function() {
+		             alert("error");
+		          }
+		       })
+							
+		});
+	 
+	});
+	
+	function selectsubmit(){
+		var target = document.getElementById("jobTitle");
+// 		   alert('선택된 옵션 text 값=' + target.options[target.selectedIndex].text);     // 옵션 text 값
+// 	       alert('선택된 옵션 value 값=' + target.options[target.selectedIndex].value);     // 옵션 value 값
+		   var title = target.options[target.selectedIndex].text;
+	       var jobopenNo = target.options[target.selectedIndex].value;
+
+				var applyData = { "title": title, "jobopenNo": jobopenNo };
+
+				$.ajax({
+		          type:"get"
+		          , url:"/apply/userDetail"
+		          , dataType: "text"
+		          , data: applyData
+		          , success: function( data ) {
+					  
+		        	  location.href = "/apply/userDetail";
+		        	  
+		          }, error: function() {
+		             alert("error");
+		          }
+		       })
+
+	}
+
+</script>
 
 <%@ include file="../include/scriptLoader.jsp"%>
 <%@ include file="../include/footer.jsp"%>

@@ -1,12 +1,18 @@
 package winwin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.JobopenBasic;
 import winwin.service.ApplyMenuService;
@@ -22,6 +28,24 @@ public class ApplyMenuController {
 
 		List<JobopenBasic> list = applyMenuService.getJobopenBasic();
 		model.addAttribute("list", list);
+		
+	}
+	
+	@RequestMapping(value="/selectApply", method = RequestMethod.POST)
+	public @ResponseBody Map<String, List> selectApplyProc(HttpServletResponse resp) {
+		
+		Map<String, List> map = new HashMap<String, List>();
+		
+		
+		List<JobopenBasic> list1 = applyMenuService.getJobopenBasic();
+		
+		List<JobopenBasic> list2 = applyMenuService.getJobopenBasic2();
+		
+		map.put("result1", list1);
+		map.put("result2", list2);
+		return map;
+		
+		
 	}
 	
 	@RequestMapping(value="/passfail", method = RequestMethod.GET)
