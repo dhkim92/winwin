@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
 <style>
 #content{
@@ -16,7 +15,8 @@ td{
 <%@ include file="../include/header.jsp"%>
 
 <div class = "container">
-	<form id="upFile" action="/notice/write" method="post" enctype="multipart/form-data">	<div class="p-5">
+	<form id="upFile" action="/notice/write" method="post" enctype="multipart/form-data">	
+	<div class="p-5">
 	<h3 class="text-primary font-weight-bold">공지사항</h3>
 	<hr style="border: solid #376092;">
 	<table class="table table-sm table-bordered table-hover">
@@ -25,7 +25,7 @@ td{
 				<strong>제목</strong>
 			</td>
 			<td class="text-center" style="background-color: lightgray;">
-				<input type="text" class="form-control" id="title" placeholder="제목을 적으세요(66자 이내)"/>
+				<input type="text" class="form-control" name="title" placeholder="제목을 적으세요(66자 이내)"/>
 			</td>
 		</tr>
 		<tr>
@@ -46,12 +46,12 @@ td{
 		</tr>
 	</table>
 	<div class="p-5">
-		<textarea class="form-control" rows="20" id="content"></textarea>
+		<textarea class="form-control" rows="20" name="content" id="content"></textarea>
 	</div>
 	</div>
 	
-	<input type="hidden" id="code" value="${sessionScope.admincode }"/>
-	<input type="hidden" id="writer" value="${sessionScope.adminname }"/>
+	<input type="hidden" name="code" value="${sessionScope.admincode }"/>
+	<input type="hidden" name="writer" value="${sessionScope.adminname }"/>
 	
 	</form>
 	<div class="form-group d-flex justify-content-center">

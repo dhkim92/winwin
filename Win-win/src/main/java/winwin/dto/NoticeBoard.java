@@ -14,19 +14,8 @@ public class NoticeBoard {
 	private String content;
 	private int hit;
 	private Date writedate;
-	private List<MultipartFile> files;
 	
-	
-	public List<MultipartFile> getFiles() {
-		return files;
-	}
-
-	public void setFiles(List<MultipartFile> files) {
-		this.files = files;
-	}
-
-
-	
+	private List<MultipartFile> files;	
 
 	@Override
 	public String toString() {
@@ -34,6 +23,12 @@ public class NoticeBoard {
 				+ ", content=" + content + ", hit=" + hit + ", writedate=" + writedate + "]";
 	}
 	
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
 	public Date getWritedate() {
 		return writedate;
 	}
@@ -43,47 +38,36 @@ public class NoticeBoard {
 	public int getNoticeno() {
 		return noticeno;
 	}
-
 	public void setNoticeno(int noticeno) {
 		this.noticeno = noticeno;
 	}
-
 	public String getTitle() {
 		return title;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 	public int getCode() {
 		return code;
 	}
-
 	public void setCode(int code) {
 		this.code = code;
 	}
-
 	public String getWriter() {
 		return writer;
 	}
-
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-
 	public String getContent() {
 		return content;
 	}
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 	public int getHit() {
 		return hit;
 	}
-
 	public void setHit(int hit) {
 		this.hit = hit;
 	}

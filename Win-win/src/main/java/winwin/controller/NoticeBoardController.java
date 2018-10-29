@@ -2,15 +2,18 @@ package winwin.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,13 +31,15 @@ import winwin.util.Paging;
 @Controller
 public class NoticeBoardController {
 	
-	private static Logger logger;
+	private static Logger logger
+		=LoggerFactory.getLogger(NoticeBoardController.class);
 	
 	@Autowired ServletContext context;
 	@Autowired NoticeBoardService service;
 
 	@RequestMapping(value="/notice/list")
 	public void list(Model m,HttpServletRequest req) {
+		
 		int total = service.totalCnt();
 		String curr =req.getParameter("curPage");
 		
@@ -69,12 +74,14 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
-	public void writeProc(@ModelAttribute("upFile") NoticeBoard board) {
+	public void writeProc(@ModelAttribute("board") NoticeBoard board,HttpServletResponse resp) {
 		
 		List<MultipartFile> up = board.getFiles();
+		logger.info(board.toString());
+		logger.info(String.valueOf(up.size()));
 //		List<String> upNames = new ArrayList<>();
 		
-		if(up == null || up.size()==0) {
+		if(up.size()==1 && up.get(0).getOriginalFilename().equals("") ) {
 			
 			logger.info(board.toString());
 			
@@ -86,24 +93,15 @@ public class NoticeBoardController {
 			
 			logger.info("파일을 첨부할 경우");
 			
+			int noticeNo = service.getNoticeNo() + 1;
+
 			for (MultipartFile data : up) {
-											
-				Material file = new Material();
-				
+															
 				String realpath = context.getRealPath("upload");				
 				String uid = UUID.randomUUID().toString().split("-")[4];				
 				String stored = data.getOriginalFilename()+"_"+uid;
 				File dest = new File(realpath, stored);
-				
-				logger.info(realpath);
-				
-				file.setFileSize(data.getSize());
-				file.setNoticeNo(board.getNoticeno());
-				file.setAdminCode(board.getCode());
-				file.setPath(realpath);
-				file.setStoredName(stored);
-				file.setOriginName(data.getOriginalFilename());
-				
+
 				//파일 업로드
 				try {
 					data.transferTo(dest);
@@ -113,7 +111,16 @@ public class NoticeBoardController {
 					e.printStackTrace();
 				}
 				
+				
 				//DB 업로드
+				Material file = new Material();
+				
+				file.setFilesize(data.getSize());
+				file.setNoticeNo(noticeNo);
+				file.setAdminCode(board.getCode());
+				file.setStoredName(stored);
+				file.setOriginName(data.getOriginalFilename());
+				
 				service.insertFile(file);
 				
 			}
@@ -121,6 +128,19 @@ public class NoticeBoardController {
 			service.write(board);
 			
 		}
+		
+		resp.setContentType("text/html;charset=utf-8");
+		try {
+			PrintWriter out = resp.getWriter();
+			out.println("<script>");
+			out.println("alert('글쓰기 완료')");
+			out.println("location.href='/notice/list'");
+			out.println("</script>");
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@RequestMapping(value="/notice/delete", method=RequestMethod.POST)
