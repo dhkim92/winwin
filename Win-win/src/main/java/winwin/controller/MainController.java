@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import winwin.dto.JobopenBasic;
+import winwin.dto.NoticeBoard;
+import winwin.dto.QnaBoard;
+import winwin.service.ApplyMenuService;
 import winwin.service.JobopenService;
 import winwin.service.MainService;
 import winwin.util.Paging;
@@ -20,6 +23,7 @@ public class MainController {
 	
 	@Autowired MainService mainService;
 	@Autowired JobopenService jobopenService;
+	@Autowired ApplyMenuService applyMenuService;
 	
 	@RequestMapping(value="/usermain", method=RequestMethod.GET)
 	public void main(
@@ -35,16 +39,24 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/adminmain", method=RequestMethod.GET)
-	public void adminmain(JobopenBasic jobopenBasic /*, QNA qna */) { 
+	public void adminmain(Model model) { 
 		
-//		//채용공고 게시판 리스트 띄우기 
-//		mainService.getJobopenBoard();
+		List<JobopenBasic> applylist = applyMenuService.getJobopenBasic();
+		model.addAttribute("applylist", applylist);
+		
 //		
 //		//공지사항 리스트 띄우기
 //		mainService.getNoticeBoard();
+		
+		List<NoticeBoard> noticelist = applyMenuService.getNoticeBoard();
+		model.addAttribute("noticelist", noticelist);
 //		
 //		//문의사항 리스트 띄우기 
 //		mainService.getQnABoard();
+		
+		List<QnaBoard> qnalist = applyMenuService.getQnaBoard();
+		model.addAttribute("qnalist", qnalist);
+		
 //		
 //		//통계관리 미리보기 
 //				

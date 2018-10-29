@@ -71,8 +71,11 @@
 		<tr>
 			<th class="text-center align-middle bg-secondary pr-3 pl-3">채용공고</th>
 			<td colspan="3">  		
-				<select class="ml-4" style="width: 500px;height: 25px;">
-				</select>
+					<select class="ml-4" id="jobTitle" style="width: 500px; height: 25px;">
+						<c:forEach items="${list }" var="JobopenBasic">
+							<option value="${JobopenBasic.jobopenNo}">${JobopenBasic.title}</option>						
+						</c:forEach>	
+					</select>
 			</td>
 		</tr>
 		
@@ -103,6 +106,93 @@
 
 </div>
 </div>
+
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$("#exampleRadios2").click(function(){
+			
+			//여기다가 ajax로 경력 select 해서 가져오기 
+		     
+			$.ajax({
+		          type:"post"
+		          , url:"/applyMenu/selectApply"
+		          , dataType: "json"
+		          , success: function( data ) {
+		        	 
+		        	  console.log(data.result2);
+			            
+		        	  $("#jobTitle").find("option").remove();
+
+		        	  
+			             var list = data.result2;
+			             
+			             var title = new Array();
+			             var no = new Array();
+			             
+			             for(var i=0; i<list.length; i++) {
+			            	 title[i] = list[i].title;
+			            	 no[i] = list[i].jobopenNo;
+			            	 
+			                $("#jobTitle").append(
+			                   $("<option>").attr(
+			                      "value", no[i]
+			                   ).text(title[i])
+			                );
+			             }
+						
+		        	  
+		          }, error: function() {
+		             alert("error");
+		          }
+		       })
+							
+		});
+		
+		
+		$("#exampleRadios1").click(function(){
+			
+			//여기다가 ajax로 경력 select 해서 가져오기 
+		     
+			$.ajax({
+		          type:"post"
+		          , url:"/applyMenu/selectApply"
+		          , dataType: "json"
+		          , success: function( data ) {
+		        	 
+		        	  console.log(data.result1);
+			            
+		        	  $("#jobTitle").find("option").remove();
+
+		        	  
+			             var list = data.result1;
+			             
+			             var title = new Array();
+			             var no = new Array();
+ 			             
+			             for(var i=0; i<list.length; i++) {
+			            	 title[i] = list[i].title;
+			            	 no[i] = list[i].jobopenNo;
+			            	 
+			                $("#jobTitle").append(
+			                   $("<option>").attr(
+			                      "value", no[i]
+			                   ).text(title[i])
+			                );
+			             }
+						
+		        	  
+		          }, error: function() {
+		             alert("error");
+		          }
+		       })
+							
+		});
+	 
+	});
+	
+</script>	
 
 <%@ include file="../include/scriptLoader.jsp"%>
 <%@ include file="../include/footer.jsp"%>

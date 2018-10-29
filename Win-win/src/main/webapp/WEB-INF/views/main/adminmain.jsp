@@ -80,11 +80,9 @@ h6 {
 			</div>
 			<div class="underline mt-1" ></div>
 			<ul class="mt-3">
-				<li class="mb-3" >신입 IT 개발자 채용</li>
-				<li class="mb-3" >경력 FRONT 디자이너 채용</li>
-				<li class="mb-3" >인턴 채용 연계형 개발자 채용</li>
-				<li class="mb-3" >신입 안드로이드 앱 개발자 채용</li>
-				<li class="mb-3" >경력 PM 채용</li>
+				<c:forEach items="${applylist }" var="JobopenBasic" begin="0" end="4">
+					<li class="mb-3" ><a href="/jobOpen/view?boardNo=${JobopenBasic.jobopenNo}">${JobopenBasic.title}</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 		
@@ -99,11 +97,9 @@ h6 {
 			</div>
 			<div class="underline mt-1" ></div>
 			<ul class="mt-3">
-				<li class="mb-3" >2018 하반기 채용공지</li>
-				<li class="mb-3" >경력사원 채용 공고 안내</li>
-				<li class="mb-3" >2018 상반기 신입 채용 결과 발표</li>
-				<li class="mb-3" >2018 상반기 신입 채용 공고 변경사항 안내</li>
-				<li class="mb-3" >2018 상반기 신입사원 채용 공지</li>
+				<c:forEach items="${noticelist }" var="NoticeBoard" begin="0" end="4">
+					<li class="mb-3" ><a href="/notice/view?boardNo=${NoticeBoard.noticeno}">${NoticeBoard.title}</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 		
@@ -163,11 +159,9 @@ h6 {
 			</div>
 			<div class="underline mt-1"></div>
 			<ul class="mt-3">
-				<li class="mb-3" >병역사항 관련 문의</li>
-				<li class="mb-3" >학력 기준에 대해 질문 있습니다</li>
-				<li class="mb-3" >2018 하반기 채용은 언제쯤 공지되나요</li>
-				<li class="mb-3" >합격자 발표에 대해 문의 있습니다</li>
-				<li class="mb-3" >메일 내용에 대해 질문이 있습니다</li>
+				<c:forEach items="${qnalist }" var="QnaBoard" begin="0" end="4">
+					<li class="mb-3" ><a href="/qna/view?boardNo=${QnaBoard.qnaNo}">${QnaBoard.title}</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 		

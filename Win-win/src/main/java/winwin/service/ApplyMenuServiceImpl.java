@@ -24,4 +24,14 @@ public class ApplyMenuServiceImpl implements ApplyMenuService{
 		return applyMenuDao.getJobopenBasic2();
 	}
 
+	@Override
+	public List getNoticeBoard() {
+		return applyMenuDao.getNoticeBoard();
+	}
+
+	@Override
+	public List getQnaBoard() {
+		return applyMenuDao.getQnaBoard();
+	}
+
 }

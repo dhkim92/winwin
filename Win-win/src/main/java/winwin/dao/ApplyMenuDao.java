@@ -8,4 +8,8 @@ public interface ApplyMenuDao {
 
 	public List getJobopenBasic2();
 
+	public List getNoticeBoard();
+
+	public List getQnaBoard();
+
 }
