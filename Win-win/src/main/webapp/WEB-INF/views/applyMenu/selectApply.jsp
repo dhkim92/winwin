@@ -183,19 +183,9 @@
 
 				var applyData = { "title": title, "jobopenNo": jobopenNo };
 
-				$.ajax({
-		          type:"get"
-		          , url:"/apply/userDetail"
-		          , dataType: "text"
-		          , data: applyData
-		          , success: function( data ) {
-					  
-		        	  location.href = "/apply/userDetail";
-		        	  
-		          }, error: function() {
-		             alert("error");
-		          }
-		       })
+				console.log(applyData);
+
+        	  location.href = "/apply/userDetail?title="+title+"&jobopenNo="+jobopenNo;
 
 	}
 

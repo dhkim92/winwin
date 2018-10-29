@@ -8,7 +8,7 @@
 $(document).ready(function() {
 	
 	var tid;
-	var cnt = 1800;
+	var cnt = 5;
 	
 	counter_init();
 	
@@ -20,14 +20,32 @@ $(document).ready(function() {
 			
 			if(cnt < 0) {
 				clearInterval(tid);
-// 				self.location = "logout.php";
+				logout();
 			}
 		}, 1000);
 	}
 	
+	function logout() {
+		
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		
+		var span = document.getElementsByClassName("close")[0];
+		var btnClose = document.getElementById("btnClose");
+		
+		
+		btnClose.onclick = function() {
+			modal.style.display = "none";
+		}
+		
+		$("#logoutModal").html("시간이 경과되어 자동 로그아웃됩니다.")
+		
+	}	
+	
+	
 	$("#timer").click(function() {
 		clearInterval(tid);
-		cnt = parseInt(1800);
+		cnt = parseInt(5);
 		counter_init();
 	});
 	
@@ -51,6 +69,38 @@ $(document).ready(function() {
 		
 		return ""+nHour+":"+nMin+":"+nSec;
 	}
+	
+	
+	$("#saveBtn").click(function() {
+		
+		console.log("저장하고 계속하기 버튼 클릭");
+		
+		var discharge = $("#discharge").val();
+		
+		if(discharge == "0") {
+			alert("병역구분을 선택해주십시오.");
+			$("#discharge").focus();
+		} else if(discharge == "군필" || discharge == "복무중") {
+			
+			var startDate = $("#startDate").val();
+			var endDate = $("#endDate").val();
+			var mCategory = $("#mCategory").val();
+			var mGrade = $("#mGrade").val();
+
+			console.log(mCategory);
+			if(startDate == "" || endDate == "" || mCategory == "0" || mGrade == "0") {
+				console.log("빈칸!");
+				alert("모든 항목을 입력해주십시오.");
+			} else {
+				console.log("군필/복무중_모든항목 입력!");
+				$("#militaryForm").submit();
+			}
+		} else {
+			console.log("마지막 else");
+			$("#militaryForm").submit();
+		}
+		
+	})
 	
 });
 
@@ -84,7 +134,8 @@ $(document).ready(function() {
 	</table>
 	</div>
 
-	<h4 class="mt-4 mb-3 font-weight-bold">병역사항</h4>
+	<form action="/apply/military" method="POST" id="militaryForm">
+	<h4 class="mt-4 mb-3 font-weight-bold">병역사항<input type="hidden" name="jobopenNo" id="jobopenNo" value="1" /><input type="hidden" name="userId" id="userId" value="${sessionScope.id }"/></h4>
 	<div class="row">
 		<a href="/apply/userDetailupdate">
 			<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png">
@@ -111,57 +162,57 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-					<select style="height:24px; width:100px;">
-						<option>병역구분</option>
-						<option>비대상</option>
-						<option>군필</option>
-						<option>미필</option>
-						<option>면제</option>
-						<option>복무중</option>
+					<select style="height:24px; width:100px;" id="discharge" name="discharge">
+						<option value="0">병역구분</option>
+						<option value="비대상">비대상</option>
+						<option value="군필">군필</option>
+						<option value="미필">미필</option>
+						<option value="면제">면제</option>
+						<option value="복무중">복무중</option>
 					</select>
                   </td>
                   <td class="align-middle">
-                  	<input type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 160px;" /> ~
-                  	<input type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 160px;" />                 
+                  	<input type="date" id="startDate" name="startDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 160px;" /> ~
+                  	<input type="date" id= "endDate" name="endDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 160px;" />                 
                   </td>
                   <td class="align-middle">
-                  	<select style="height:24px; width: 100px;">
-                  		<option>군별</option>
-                  		<option>육군</option>
-                  		<option>해군</option>
-                  		<option>공군</option>
-                  		<option>해병</option>
-                  		<option>전경</option>
-                  		<option>의경</option>
-                  		<option>공익</option>
-                  		<option>병특</option>
-                  		<option>카투사</option>
-                  		<option>기타</option>
+                  	<select style="height:24px; width: 100px;" id="mCategory" name="mCategory">
+                  		<option value="0">군별</option>
+                  		<option value="육군">육군</option>
+                  		<option value="해군">해군</option>
+                  		<option value="공군">공군</option>
+                  		<option value="해병">해병</option>
+                  		<option value="전경">전경</option>
+                  		<option value="의경">의경</option>
+                  		<option value="공익">공익</option>
+                  		<option value="병특">병특</option>
+                  		<option value="카투사">카투사</option>
+                  		<option value="기타">기타</option>
                   	</select>
                   </td>
                   <td class="align-middle">
-                    <select style="height:24px; width: 100px;">
-                  		<option>계급</option>
-                  		<option>일병</option>
-                  		<option>이병</option>
-                  		<option>상병</option>
-                  		<option>병장</option>
-                  		<option>하사</option>
-                  		<option>중사</option>
-                  		<option>상사</option>
-                  		<option>원사</option>
-                  		<option>준위</option>
-                  		<option>소위</option>
-                  		<option>중위</option>
-                  		<option>대위</option>
-                  		<option>소령</option>
-                  		<option>중령</option>
-                  		<option>대령</option>
-                  		<option>준장</option>
-                  		<option>소장</option>
-                  		<option>중장</option>
-                  		<option>대장</option>
-                  		<option>원수</option>
+                    <select style="height:24px; width: 100px;" id="mGrade" name="mGrade">
+                  		<option value="0">계급</option>
+                  		<option value="일병">일병</option>
+                  		<option value="이병">이병</option>
+                  		<option value="상병">상병</option>
+                  		<option value="병장">병장</option>
+                  		<option value="하사">하사</option>
+                  		<option value="중사">중사</option>
+                  		<option value="상사">상사</option>
+                  		<option value="원사">원사</option>
+                  		<option value="준위">준위</option>
+                  		<option value="소위">소위</option>
+                  		<option value="중위">중위</option>
+                  		<option value="대위">대위</option>
+                  		<option value="소령">소령</option>
+                  		<option value="중령">중령</option>
+                  		<option value="대령">대령</option>
+                  		<option value="준장">준장</option>
+                  		<option value="소장">소장</option>
+                  		<option value="중장">중장</option>
+                  		<option value="대장">대장</option>
+                  		<option value="원수">원수</option>
                   	</select>
                   </td>
                 </tr>
@@ -188,13 +239,67 @@ $(document).ready(function() {
             </tbody>
          </table>
 	</div>
+	</form>
 	
 	<div class="col-12 mt-5 p-0 d-flex justify-content-end">
-		<input class="btn btn-primary text-white" type="submit" value="저장하고 계속하기"/>
+		<input class="btn btn-primary text-white" type="button" id="saveBtn" value="저장하고 계속하기"/>
 	</div>	
 	
-</div>	
+</div>
+
+
+ <div id="myModal" class="modal">
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	     	<div>
+		     	<div class="mt-4">
+			        <p class="font-weight-bold text-center" id="logoutModal"></p>
+				</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<a href="/user/logout"><button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button></a>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>	
 	
 <%@ include file="../include/scriptLoader.jsp"%>
+<script type="text/javascript">
+$("#discharge").change(function(){ 
+	
+	  console.log("discharge");
+	  
+	  if($(this).val() == "미필" || $(this).val() == "면제" || $(this).val() == "비대상") {
+		  console.log("선택");
+		  
+		  $("#startDate").attr("disabled", true);
+		  $("#endDate").attr("disabled", true);
+		  $("#mCategory").attr("disabled",true);
+		  $("#mGrade").attr("disabled",true);
+	  }
+	  
+	  if($(this).val() == "군필" || $(this).val() == "복무중") {
+		  $("#startDate").removeAttr("disabled");
+		  $("#endDate").removeAttr("disabled");
+		  $("#mCategory").removeAttr("disabled");
+		  $("#mGrade").removeAttr("disabled");
+	  }
+});
+</script>
 <%@ include file="../include/footer.jsp"%>		
 	

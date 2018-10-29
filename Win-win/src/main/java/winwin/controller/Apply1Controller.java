@@ -27,9 +27,10 @@ public class Apply1Controller {
 	@Autowired Apply1Service apply1Service;
 	
 	@RequestMapping(value="/userDetail", method=RequestMethod.GET)
-	public void userDetail(JobopenBasic jobopenBasic, Member member, HttpSession session, Model model) {	
+	public void userDetail(String title, String jobopenNo, JobopenBasic jobopenBasic, Member member, HttpSession session, Model model) {	
 		logger.info("userDetail 활성화");
-		
+		logger.info(title);
+		logger.info(jobopenNo);
 //		apply1Service.viewJobOpen(jobopenBasic);
 		member.setUserid((String)session.getAttribute("id"));
 		Member viewUserDetail = apply1Service.viewMember(member);
@@ -51,7 +52,7 @@ public class Apply1Controller {
 	public String userDetailProc(UserDetail userDetail, HttpSession session, Model model) {
 		
 		logger.info("userDetail 데이터 insert 활성화");
-		userDetail.setUserId((String)session.getAttribute("id"));
+//		userDetail.setUserId((String)session.getAttribute("id"));
 		
 		logger.info("Apply1Cont_userDetailProc() : " + userDetail);
 		apply1Service.insertUserDetail(userDetail);
@@ -121,11 +122,12 @@ public class Apply1Controller {
 
 
 	@RequestMapping(value="/military", method=RequestMethod.POST)
-	public ModelAndView militaryProc( Military military, HttpSession session, Model model) {
+	public String militaryProc( Military military) {
 		
-		apply1Service.insertMilitary(military);
+		logger.info("Apply1Controller_militaryProc : " + military);
+//		apply1Service.insertMilitary(military);
 		
-		return null;	
+		return "redirect:/apply/career";	
 	}
 	
 	

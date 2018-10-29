@@ -206,7 +206,7 @@ $(document).ready(function() {
 			<span style="font-size: 10px ;"> 예)Hong Gil Dong</span>
 		</td>
 		<th class="text-center align-middle bg-secondary">이메일<span style="color : red;">*</span></th>
-		<td><input style="border: none; width: 300px; " id="userid" name="userid" type="text" value="${sessionScope.id }" readonly/></td>
+		<td><input style="border: none; width: 300px; " id="userid" name="userId" type="text" value="${sessionScope.id }" readonly/></td>
 	</tr>
 	<tr>
 		<th class="text-center align-middle bg-secondary" style="width: 5%" >생년월일<span style="color : red;">*</span></th>

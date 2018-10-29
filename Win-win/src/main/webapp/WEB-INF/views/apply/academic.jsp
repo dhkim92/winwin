@@ -39,7 +39,6 @@ $(document).ready(function() {
 			modal.style.display = "none";
 		}
 		
-		$("#logoutModal").html("시간이 경과되어 자동 로그아웃됩니다.")
 		
 	}
 	
@@ -454,8 +453,8 @@ $(document).ready(function() {
 	     	
 	     	<!-- 모달 내용 입력하는 부분 -->
 	     	<div>
-		     	<div class="mt-4">
-			        <p class="font-weight-bold text-center" id="logoutModal"></p>
+		     	<div class="mt-4">　
+			        <p class="font-weight-bold text-center" id="logoutModal">시간이　경과되어　자동　로그아웃됩니다．</p>
 				</div>
 			
 			<div class="modal-footer d-flex justify-content-center">
@@ -467,7 +466,6 @@ $(document).ready(function() {
 	 
 	    </div>
     </div>
-	
 	
 <%@ include file="../include/scriptLoader.jsp"%>
 <script>
