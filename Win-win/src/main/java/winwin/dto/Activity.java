@@ -2,13 +2,13 @@ package winwin.dto;
 
 public class Activity {
 	
-	int activityNo;
-	String userId;
-	int jobopenNo;
-	String aName;
-	String aStartDate;
-	String aEndDate;
-	String aContent;
+	private int activityNo;
+	private String userId;
+	private int jobopenNo;
+	private String aName;
+	private String aStartDate;
+	private String aEndDate;
+	private String aContent;
 	
 	@Override
 	public String toString() {

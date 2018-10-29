@@ -2,12 +2,12 @@ package winwin.dto;
 
 public class License {
 
-	int licenseNo;
-	String userId;
-	int jobopenNo;
-	String liName;
-	String liDate;
-	String liOrgan;
+	private int licenseNo;
+	private String userId;
+	private int jobopenNo;
+	private String liName;
+	private String liDate;
+	private String liOrgan;
 	
 	@Override
 	public String toString() {

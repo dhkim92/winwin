@@ -2,22 +2,22 @@ package winwin.dto;
 
 public class Academic {
 
-	int academicNo;
-	String userId;
-	int jobopenNo;
-	String category;
-	String name;
-	String branch;
-	String day;
-	String major;
-	String minor;
-	int score;
-	int totalScore;
-	String startDate;
-	String endDate;
-	String region;
-	String transfer;
-	String graduate;
+	private int academicNo;
+	private String userId;
+	private int jobopenNo;
+	private String category;
+	private String name;
+	private String branch;
+	private String day;
+	private String major;
+	private String minor;
+	private int score;
+	private int totalScore;
+	private String startDate;
+	private String endDate;
+	private String region;
+	private String transfer;
+	private String graduate;
 	
 	@Override
 	public String toString() {

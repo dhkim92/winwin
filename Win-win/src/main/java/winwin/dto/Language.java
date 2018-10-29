@@ -2,15 +2,15 @@ package winwin.dto;
 
 public class Language {
 
-	int languageNo;
-	String userId;
-	int jobopenNo;
-	String lName;
-	String grade;
-	String testName;
-	String score;
-	String lDate;
-	String lOrgan;
+	private int languageNo;
+	private String userId;
+	private int jobopenNo;
+	private String lName;
+	private String grade;
+	private String testName;
+	private String score;
+	private String lDate;
+	private String lOrgan;
 	
 	@Override
 	public String toString() {

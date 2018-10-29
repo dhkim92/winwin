@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class Material {
 
-	int fileNo;
-	String userId;
-	int adminCode;
-	int noticeNo;
-	String portfolioId;
-	String originName;
-	String storedName;
-	Date writedate;
-	long filesize;
-	String path;
+	private int fileNo;
+	private String userId;
+	private int adminCode;
+	private int noticeNo;
+	private String portfolioId;
+	private String originName;
+	private String storedName;
+	private Date writedate;
+	private long filesize;
+	private String path;
 	
 	@Override
 	public String toString() {

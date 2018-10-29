@@ -2,18 +2,18 @@ package winwin.dto;
 
 public class UserDetail {
 
-	int userdetailNo;
-	String userId;
-	int jobopenNo;
-	String eName;
-	String birth;
-	int zipCode;
-	String address;
-	String addressDetail;
-	String phoneNum;
-	String veteran;
-	String disable;
-	String interest;
+	private int userdetailNo;
+	private String userId;
+	private int jobopenNo;
+	private String eName;
+	private String birth;
+	private int zipCode;
+	private String address;
+	private String addressDetail;
+	private String phoneNum;
+	private String veteran;
+	private String disable;
+	private String interest;
 	
 	@Override
 	public String toString() {

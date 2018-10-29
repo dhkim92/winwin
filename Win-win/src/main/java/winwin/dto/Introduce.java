@@ -2,14 +2,14 @@ package winwin.dto;
 
 public class Introduce {
 
-	int introduceNo;
-	String userId;
-	int jobopenNo;
-	String content1;
-	String content2;
-	String content3;
-	String content4;
-	String content5;
+	private int introduceNo;
+	private String userId;
+	private int jobopenNo;
+	private String content1;
+	private String content2;
+	private String content3;
+	private String content4;
+	private String content5;
 	
 	@Override
 	public String toString() {

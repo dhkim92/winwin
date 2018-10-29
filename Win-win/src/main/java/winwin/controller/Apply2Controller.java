@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +20,9 @@ import winwin.dto.Experience;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
+import winwin.dto.LanguageArr;
 import winwin.dto.License;
 import winwin.dto.Material;
-import winwin.dto.Member;
 import winwin.dto.Support;
 import winwin.service.Apply2Service;
 
@@ -29,7 +31,7 @@ import winwin.service.Apply2Service;
 public class Apply2Controller {
 	
 	@Autowired Apply2Service apply2Service;
-
+	private static final Logger logger = LoggerFactory.getLogger(JobopenController.class);
 	
 	@RequestMapping(value="/career", method=RequestMethod.GET)
 	public void career(JobopenBasic jobopenBasic, HttpSession session, Model model) {
@@ -40,34 +42,37 @@ public class Apply2Controller {
 
 
 	@RequestMapping(value="/career", method=RequestMethod.POST) 
-	public ModelAndView careerProc
-		(@RequestParam(value="language[]") Language[] language, @RequestParam(value="license[]")List<License> license, @RequestParam(value="career[]")List<Career> career, 
-					@RequestParam(value="activity[]")List<Activity> activity, @RequestParam(value="experience[]")List<Experience> experience, @RequestParam(value="file[]")List<Material> file) {
+	public String careerProc(HttpSession session, LanguageArr langArr) {
+
+		logger.info(langArr.toString());
+		System.out.println(langArr);
 		
-		for(int i=0; i<language.length; i++) {
-//	         apply2Service.insertLanguage(language[i]);
-	    }
+		
+		
+//		for(int i=0; i<langArr.getLanArr[]; i++) {
+//	         apply2Service.insertLanguage(langArr);
+//	    }
 	      
-		for(int i=0; i<license.size(); i++) {
-	         apply2Service.insertLicense(license.get(i));
-	    }
-		
-		for(int i=0; i<career.size(); i++) {
-	         apply2Service.insertCareer(career.get(i));
-	    }
-		
-		for(int i=0; i<activity.size(); i++) {
-	         apply2Service.insertActivity(activity.get(i));
-	    }
-		
-		for(int i=0; i<experience.size(); i++) {
-	         apply2Service.insertExperience(experience.get(i));
-	    }
-		
-		for(int i=0; i<file.size(); i++) {
-	         apply2Service.insertFile(file.get(i));
-	    }
-		return null;
+//		for(int i=0; i<license.size(); i++) {
+//	         apply2Service.insertLicense(license.get(i));
+//	    }
+//		
+//		for(int i=0; i<career.size(); i++) {
+//	         apply2Service.insertCareer(career.get(i));
+//	    }
+//		
+//		for(int i=0; i<activity.size(); i++) {
+//	         apply2Service.insertActivity(activity.get(i));
+//	    }
+//		
+//		for(int i=0; i<experience.size(); i++) {
+//	         apply2Service.insertExperience(experience.get(i));
+//	    }
+//		
+//		for(int i=0; i<file.size(); i++) {
+//	         apply2Service.insertFile(file.get(i));
+//	    }
+		return "redirect:/apply/introduce";
 	      
 	
 	}

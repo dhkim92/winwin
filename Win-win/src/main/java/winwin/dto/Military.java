@@ -2,14 +2,14 @@ package winwin.dto;
 
 public class Military {
 	
-	int militaryNo;
-	String userId;
-	int jobopenNo;
-	String discharge;
-	String startDate;
-	String endDate;
-	String mCategory;
-	String mGrade;
+	private int militaryNo;
+	private String userId;
+	private int jobopenNo;
+	private String discharge;
+	private String startDate;
+	private String endDate;
+	private String mCategory;
+	private String mGrade;
 	
 	@Override
 	public String toString() {

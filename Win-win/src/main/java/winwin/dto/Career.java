@@ -2,16 +2,16 @@ package winwin.dto;
 
 public class Career {
 
-	int careerNo;
-	String userId;
-	int jobopenNo;
-	String cStartDate;
-	String cEndDate;
-	String cName;
-	String position;
-	String task;
-	String salary;
-	String cContent;
+	private int careerNo;
+	private String userId;
+	private int jobopenNo;
+	private String cStartDate;
+	private String cEndDate;
+	private String cName;
+	private String position;
+	private String task;
+	private String salary;
+	private String cContent;
 	
 	@Override
 	public String toString() {

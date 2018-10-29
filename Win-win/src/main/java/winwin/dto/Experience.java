@@ -2,14 +2,14 @@ package winwin.dto;
 
 public class Experience {
 
-	int experienceNo;
-	String userId;
-	int jobopenNo;
-	String eOrgan;
-	String period;
-	String eStartDate;
-	String eEndDate;
-	String eContent;
+	private int experienceNo;
+	private String userId;
+	private int jobopenNo;
+	private String eOrgan;
+	private String period;
+	private String eStartDate;
+	private String eEndDate;
+	private String eContent;
 	
 	@Override
 	public String toString() {
