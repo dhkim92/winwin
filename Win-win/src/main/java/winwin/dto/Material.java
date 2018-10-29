@@ -13,13 +13,12 @@ public class Material {
 	String storedName;
 	Date writedate;
 	long filesize;
-	String path;
 	
 	@Override
 	public String toString() {
 		return "Material [fileNo=" + fileNo + ", userId=" + userId + ", adminCode=" + adminCode + ", noticeNo=" + noticeNo
 				+ ", portfolioId=" + portfolioId + ", originName=" + originName + ", storedName=" + storedName
-				+ ", date=" + writedate + ", size=" + filesize + ", path=" + path + "]";
+				+ ", date=" + writedate + ", size=" + filesize + "]";
 	}
 
 	public int getFileNo() {
@@ -90,16 +89,7 @@ public class Material {
 		return filesize;
 	}
 
-	public void setFileSize(long size) {
+	public void setFilesize(long size) {
 		this.filesize = size;
 	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-	
 }

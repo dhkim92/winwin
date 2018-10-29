@@ -14,6 +14,8 @@ public interface NoticeBoardService {
 	
 	public NoticeBoard view(NoticeBoard board);
 	
+	public int getNoticeNo();
+	
 	public void write(NoticeBoard board);
 	
 	public void updateBoard(NoticeBoard board);

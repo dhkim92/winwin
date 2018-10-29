@@ -235,7 +235,7 @@ function drawChart1() {
                 bar: {groupWidth: "50%"},
                 legend: { position: "none" },
                 titleTextStyle:{color: 'black', fontSize: 20,bold: true},
-                chartArea:{left:30,top:70,width:'80%',height:'80%'}
+                chartArea:{left:20,top:70,width:'80%',height:'70%'}
               };
         
         var chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));

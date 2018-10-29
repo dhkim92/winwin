@@ -71,4 +71,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 		dao.deleteFilesByBoardNo(board);
 	}
 
+	@Override
+	public int getNoticeNo() {
+		return dao.getNoticeNo();
+	}
+
 }
