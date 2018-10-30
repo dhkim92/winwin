@@ -76,4 +76,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 		return dao.getNoticeNo();
 	}
 
+	@Override
+	public int getFilesCnt(NoticeBoard board) {
+		return dao.getFilesCnt(board);
+	}
+
 }

@@ -14,7 +14,7 @@ public class NoticeBoard {
 	private String content;
 	private int hit;
 	private Date writedate;
-	
+	private int filesCnt;
 	private List<MultipartFile> files;	
 
 	@Override
@@ -23,6 +23,12 @@ public class NoticeBoard {
 				+ ", content=" + content + ", hit=" + hit + ", writedate=" + writedate + "]";
 	}
 	
+	public int getFilesCnt() {
+		return filesCnt;
+	}
+	public void setFilesCnt(int filesCnt) {
+		this.filesCnt = filesCnt;
+	}
 	public List<MultipartFile> getFiles() {
 		return files;
 	}

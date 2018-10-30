@@ -17,6 +17,8 @@ public interface NoticeBoardDao {
 	public void hit(NoticeBoard board);
 	
 	public int getNoticeNo();
+	
+	public int getFilesCnt(NoticeBoard board);
 
 	public void write(NoticeBoard board);
 	

@@ -3,7 +3,6 @@ package winwin.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,8 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.Material;
 import winwin.dto.NoticeBoard;
@@ -51,19 +50,25 @@ public class NoticeBoardController {
 		List<NoticeBoard> list = service.list(paging);
 		m.addAttribute("list", list);
 		m.addAttribute("paging", paging);
+
 	}
 	
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
 	public void view(NoticeBoard board,Model m) {
 		NoticeBoard resBoard = service.view(board);
 		List<Material> files = service.filesByBoardNo(board);
+		resBoard.setFilesCnt(service.getFilesCnt(board));
+		
 		m.addAttribute("board", resBoard);
 		m.addAttribute("files", files);
 	}
 	
-	@RequestMapping(value="/notice/download", method=RequestMethod.POST)
-	public void download(Material file) {
-		service.selectFile(file);
+	@RequestMapping(value="/notice/download", method=RequestMethod.GET)
+	public ModelAndView download(ModelAndView m,Material file) {
+		Material downfile = service.selectFile(file);
+		m.setViewName("download");
+		m.addObject("downFile",downfile);
+		return m;
 	}
 	
 	@RequestMapping(value="/notice/write", method=RequestMethod.GET)
@@ -145,11 +150,39 @@ public class NoticeBoardController {
 		
 	}
 	
-	@RequestMapping(value="/notice/delete", method=RequestMethod.POST)
-	public String delete(NoticeBoard board, Material file) {
+	@RequestMapping(value="/notice/delete", method=RequestMethod.GET)
+	public void delete(NoticeBoard board, HttpServletResponse resp) {
+		//첨부파일 삭제	
+		List<Material> list = service.filesByBoardNo(board);
+		String path = context.getRealPath("upload");
+		logger.info(path);
+		
+		for (Material material : list) {
+			String filename = material.getStoredName();
+			File delFile = new File(path, filename);
+			boolean res = delFile.delete();
+			if(res) {
+				logger.info("파일 삭제!");
+			}else {
+				logger.info("파일 삭제 실패!");
+			}
+		}
+		service.deleteFilesByBoardNo(board);
 		service.deleteBoard(board);
-		service.deleteFile(file);
-		return "redirect:/notice/list";
+		
+		resp.setContentType("text/html;charset=utf-8");
+		PrintWriter out=null;
+		try {
+			out = resp.getWriter();
+			out.println("<script>");
+			out.println("alert('글삭제 완료')");
+			out.println("location.href='/notice/list'");
+			out.println("</script>");
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@RequestMapping(value="/notice/update", method=RequestMethod.GET)

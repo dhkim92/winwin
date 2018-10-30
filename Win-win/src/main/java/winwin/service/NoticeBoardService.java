@@ -16,6 +16,8 @@ public interface NoticeBoardService {
 	
 	public int getNoticeNo();
 	
+	public int getFilesCnt(NoticeBoard board);
+	
 	public void write(NoticeBoard board);
 	
 	public void updateBoard(NoticeBoard board);

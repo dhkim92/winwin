@@ -31,6 +31,7 @@
    </beans:bean>
    
    <beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+	<beans:bean id="download" class="winwin.view.DownloadView" />
 	
 	
 	<!-- file Upload -->

@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <%@ include file="../include/CSSLoader.jsp"%>
     
 <style>
@@ -17,7 +18,13 @@ td{
 
 </style>
 
+<c:if test="${empty adminLogin}">
 <%@ include file="../include/header.jsp"%>
+</c:if>
+
+<c:if test="${adminLogin }">
+<%@ include file="../include/adminHeader.jsp"%>
+</c:if>
 
 <div class = "container">
 	<div class="p-5">
