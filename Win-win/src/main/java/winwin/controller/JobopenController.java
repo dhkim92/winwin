@@ -67,6 +67,7 @@ public class JobopenController {
 		return "redirect:detailInfo";
 	}
 	
+	
 	@RequestMapping(value="/detailInfo", method=RequestMethod.GET)
 	public void detail() {
 		
@@ -77,16 +78,26 @@ public class JobopenController {
 		
 		System.out.println("디테일");
 		
+		String title = jobopenService.viewBasic(jobopenBasic).getTitle();
+		
+		System.out.println(title);
+		
 		for(int i=0; i<detail.getDetail().length;i++) {
 			System.out.println(detail.getDetail()[i]);
+			detail.getDetail()[i].setTitle(title);
 			jobopenService.writeDetail(detail.getDetail()[i]);
 		}
 		
-		jobopenService.updateBasic(jobopenBasic);
+		logger.info(jobopenBasic.toString());
 		
+		jobopenService.updateBasic(jobopenBasic);
 		
 		return "redirect:register";
 	}
+	
+
+	
+	
 	
 	@RequestMapping(value="/detailCancel", method=RequestMethod.POST)
 	public String detailCancel() {
@@ -100,17 +111,21 @@ public class JobopenController {
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public void regi(Model model, HttpSession session) {
 		
+		int jobopenNo = (int)session.getAttribute("jobopen");
 		JobopenBasic jobopenBasic = new JobopenBasic();
+		jobopenBasic.setJobopenNo(jobopenNo);
+		JobopenBasic basic = jobopenService.viewBasic(jobopenBasic);
+		
 		JobopenDetail jobopenDetail = new JobopenDetail();
+		jobopenDetail.setJobopenNo(jobopenNo);
 		
-//		jobopenBasic.setTitle((String)session.getAttribute("title"));
-//		jobopenDetail.setTitle(jobopenBasic.getTitle());
+		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
 		
-//		JobopenBasic basic = jobopenService.viewBasic(jobopenBasic);
-//		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
-//		
-//		model.addAttribute("basic", basic);
-//		model.addAttribute("detail", detail);
+		logger.info(basic.toString());
+		logger.info(detail.toString());
+		
+		model.addAttribute("basic", basic);
+		model.addAttribute("detail", detail);
 	}
 	
 }

@@ -29,7 +29,7 @@
 		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="/notice/list" style="text-decoration: none; color: black;">공지사항관리</a></div>
 		  </li>
 		  <li class="nav-item">
-		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="#" style="text-decoration: none; color: black;">채용공고관리</a></div>
+		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="/jobOpen/list" style="text-decoration: none; color: black;">채용공고관리</a></div>
 		  </li>
 		  <li class="nav-item">
 		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="/qna/list" style="text-decoration: none; color: black;">문의사항관리</a></div>

@@ -160,7 +160,7 @@ public class Apply2Controller {
 		introduce.setJobopenNo(3);	//수정
 		apply2Service.updateIntroduce(introduce);
 		
-		return "/apply/finish";
+		return "redirect:/apply/finish";
 	}
 	
 	
@@ -175,5 +175,8 @@ public class Apply2Controller {
 		return "/main/usermain";
 	}
 
-
+	@RequestMapping(value="/modal")
+	public void test() {
+		
+	}
 }

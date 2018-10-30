@@ -8,12 +8,23 @@ public class JobopenDetail {
 	private int volume; //모집인원
 	private String location; //근무 지역
 	private String special; //우대사항
+	private String title;
 	
 	
+	
+
 	@Override
 	public String toString() {
-		return "JobopenDetail [jobopenNo=" + jobopenNo + ", sector=" + sector + ", task=" + task
-				+ ", volume=" + volume + ", location=" + location + ", special=" + special + "]";
+		return "JobopenDetail [jobopenNo=" + jobopenNo + ", sector=" + sector + ", task=" + task + ", volume=" + volume
+				+ ", location=" + location + ", special=" + special + ", title=" + title + "]";
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	public int getJobopenNo() {

@@ -43,13 +43,21 @@
 	</select>
 	
 	<insert id="insertDetail" parameterType="winwin.dto.JobopenDetail">
-		insert into jobopenDetail(jobopenNo, sector, volume, location, special)
-		values(#{jobopenNo}, #{sector}, #{volume}, #{location}, #{special})
+		insert into jobopenDetail(jobopenNo, sector, task, volume, location, special, title)
+		values(#{jobopenNo}, #{sector}, #{task}, #{volume}, #{location}, #{special}, #{title})
 	
 	</insert>
 	
 	<update id="updateBasic" parameterType="winwin.dto.JobopenBasic">
-		update jobopenBasic set academic=#{academic}, score=#{score}, lang=#{lang}, etcQual=#{etcQual}, etc=#{etc} where jobopenNo=#{jobopenNo}; 
+		update jobopenBasic set academic=#{academic}, score=#{score}, lang=#{lang}, etcQual=#{etcQual}, etc=#{etc} where jobopenNo=#{jobopenNo} 
 	</update>
+	
+	<select id="selectByBasic" resultType="winwin.dto.JobopenBasic" parameterType="winwin.dto.JobopenBasic">
+		select * from jobopenBasic where jobopenNo = #{jobopenNo}
+	</select>
+	
+	<select id="selectDetail" parameterType="winwin.dto.JobopenDetail" resultType="winwin.dto.JobopenDetail">
+		select * from jobopenDetail where jobopenNo = #{jobopenNo}
+	</select>
   
   </mapper>
