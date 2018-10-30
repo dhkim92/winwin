@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Material {
 
-<<<<<<< HEAD
 	private int fileNo;
 	private String userId;
 	private int adminCode;
@@ -14,18 +13,6 @@ public class Material {
 	private String storedName;
 	private Date writedate;
 	private long filesize;
-	private String path;
-=======
-	int fileNo;
-	String userId;
-	int adminCode;
-	int noticeNo;
-	String portfolioId;
-	String originName;
-	String storedName;
-	Date writedate;
-	long filesize;
->>>>>>> branch 'master' of https://github.com/dhkim92/winwin.git
 	
 	@Override
 	public String toString() {
