@@ -111,7 +111,7 @@ $(document).ready(function() {
 			</ul>
 			<br><br><br>
 			<div class="col-12 mt-5 p-0 d-flex justify-content-end">
-      			<button class="btn btn-secondary text-black mr-2">지원서 미리보기</button>
+      			<button class="btn btn-secondary text-black mr-2" id="Btn">지원서 미리보기</button>
       			<a href="/apply/finish"><button class="btn btn-primary text-white">최종접수</button></a>
   			</div>
 			<hr>
@@ -119,6 +119,8 @@ $(document).ready(function() {
 	</div>
    
 </div>
+
+<%@ include file="../apply/modal.jsp" %>
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
