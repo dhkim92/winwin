@@ -8,7 +8,7 @@
 $(document).ready(function() {
 	
 	var tid;
-	var cnt = 5;
+	var cnt = 1800;
 	
 	counter_init();
 	
@@ -46,7 +46,7 @@ $(document).ready(function() {
 	
 	$("#timer").click(function() {
 		clearInterval(tid);
-		cnt = parseInt(5);
+		cnt = parseInt(1800);
 		counter_init();
 	});
 	
