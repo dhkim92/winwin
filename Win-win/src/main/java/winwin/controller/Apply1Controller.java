@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.Academic;
+import winwin.dto.AcademicArr;
 import winwin.dto.JobopenBasic;
-import winwin.dto.Military;
 import winwin.dto.Member;
+import winwin.dto.Military;
 import winwin.dto.UserDetail;
 import winwin.service.Apply1Service;
 
@@ -91,10 +92,10 @@ public class Apply1Controller {
 				
 	}
 
-	@RequestMapping(value="/academicHs", method=RequestMethod.POST)
-	public ModelAndView academicProc(Academic academic, HttpSession session, Model model) {
+	@RequestMapping(value="/academic", method=RequestMethod.POST)
+	public ModelAndView academicProc(HttpSession session, AcademicArr acaArr) {
 		
-		System.out.println(academic);
+		logger.info(acaArr.toString());
 		
 //		apply1Service.insertAcademic(academic);
 		return null;
