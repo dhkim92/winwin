@@ -63,7 +63,7 @@
  			notice
  		VALUES
  			(
- 			notice_seq.nextval,
+ 			#{noticeno},
  			#{title},
  			#{code},
  			#{writer},
@@ -90,8 +90,7 @@
  	</insert>
  	
  	<select id="getNoticeNo" resultType="int">
-		SELECT LAST_NUMBER 
-		FROM user_sequences
-		WHERE SEQUENCE_NAME = 'NOTICE_SEQ'
+		SELECT notice_seq.nextval
+		FROM dual
  	</select>
  </mapper>

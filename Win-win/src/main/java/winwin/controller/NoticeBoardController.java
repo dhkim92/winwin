@@ -81,6 +81,9 @@ public class NoticeBoardController {
 		logger.info(String.valueOf(up.size()));
 //		List<String> upNames = new ArrayList<>();
 		
+		int noticeNo = service.getNoticeNo();
+		board.setNoticeno(noticeNo);
+		
 		if(up.size()==1 && up.get(0).getOriginalFilename().equals("") ) {
 			
 			logger.info(board.toString());
@@ -93,7 +96,6 @@ public class NoticeBoardController {
 			
 			logger.info("파일을 첨부할 경우");
 			
-			int noticeNo = service.getNoticeNo() + 1;
 
 			for (MultipartFile data : up) {
 															

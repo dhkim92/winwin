@@ -1,4 +1,5 @@
 
+<%@page import="org.springframework.web.bind.annotation.RequestParam"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
@@ -30,7 +31,7 @@
 				</tr>
 			</table>
 			<div class="text-right mb-2">
-				<i class="fas fa-download mr-2"></i>첨부된 파일(0)
+				<i class="fas fa-download mr-2"></i>첨부된 파일()
 			</div>			
 		</div>
 	</div>
