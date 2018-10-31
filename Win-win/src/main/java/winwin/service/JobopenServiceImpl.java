@@ -47,9 +47,9 @@ public class JobopenServiceImpl implements JobopenService {
 	}
 
 	@Override
-	public void deleteJobOpen(JobopenBasic basic) {
-		jobopenDao.deleteAll(basic);
-		
+	public void deleteJobopen(int jobopenNo) {
+		jobopenDao.deleteBasic(jobopenNo);
+		jobopenDao.deleteDetail(jobopenNo);
 	}
 
 	@Override

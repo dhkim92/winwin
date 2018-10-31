@@ -20,7 +20,9 @@ public interface JobopenDao {
 	
 	public JobopenDetail selectByDetail(JobopenDetail detail);
 	
-	public void deleteAll(JobopenBasic basic);
+	public void deleteBasic(int jobopenNo);
+	
+	public void deleteDetail(int jobopenNo);
 	
 	public int CountBasic();
 

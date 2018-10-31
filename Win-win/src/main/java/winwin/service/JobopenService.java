@@ -76,7 +76,7 @@ public interface JobopenService {
 	 * 
 	 * @param jobopenBasic
 	 */
-	public void deleteJobOpen(JobopenBasic jobopenBasic); // 두 테이블 컬럼 삭제
+	public void deleteJobopen(int JobopenNo); // 두 테이블 컬럼 삭제
 	
 	/**
 	 * 게시글 수 반환

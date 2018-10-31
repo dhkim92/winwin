@@ -267,15 +267,33 @@
 	</div>
 	
 	<div class="form-inline mt-5 d-flex justify-content-center" >
-		<button id="btnOk" class="btn btn-info mr-3">저장하고 계속하기</button><button type="button" id="btnCancel" class="btn btn-secondary">취소</button>
+		<button id="btnOk" class="btn btn-info mr-3">채용공고 등록하기</button><button type="button" id="btnCancel" class="btn btn-secondary">취소</button>
 	</div>
 	
-</div>-
+</div>
 
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
+
+$(document).ready(function(){
+	$("#btnOk").click(function(){
+		location.href = "/main/adminmain";	
+	});
+	$("#btnCancel").click(function(){
+		$.ajax({
+			type:"post",
+			url:"/jobOpen/detailCancel",
+			success:function(){
+				location.href="/main/adminmain";
+			},
+			error:function(){
+				console.log("취소 실패")
+			}
+		});
+	});
+});
 
 
 </script>

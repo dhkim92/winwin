@@ -301,17 +301,16 @@ $(document).ready(function(){
 	
 	var i = 0;
 	$('.addDetail').click(function(){
-		i++;
+		i++; 
 		var s = setSector(i);
 		$('#detailInfo').append(s);
 		$('[data-toggle="tooltip"]').tooltip();
 	});
-	
+	9
 	
 	$(document).on("click",".subDetail",function(){
 		$('[data-toggle="tooltip"]').tooltip('hide');
 		$(this).parent().parent().parent().remove();
-		i--;
 	});
 	
 	$("#btnCancel").click(function(){
@@ -319,7 +318,7 @@ $(document).ready(function(){
 			type:"post",
 			url:"/jobOpen/detailCancel",
 			success:function(){
-				console.log("취소 성공");
+				location.href="/main/adminmain";
 			},
 			error:function(){
 				console.log("취소 실패")

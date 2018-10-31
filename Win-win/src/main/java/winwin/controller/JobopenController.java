@@ -1,5 +1,8 @@
 package winwin.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -76,17 +79,26 @@ public class JobopenController {
 	@RequestMapping(value="/detailInfo", method=RequestMethod.POST)
 	public String detailProc(JobopenArr detail, JobopenBasic jobopenBasic) {
 		
-		System.out.println("디테일");
-		
 		String title = jobopenService.viewBasic(jobopenBasic).getTitle();
 		
-		System.out.println(title);
+		JobopenDetail[] d = detail.getDetail();
+		List<JobopenDetail> e = new LinkedList<JobopenDetail>(Arrays.asList(d));
 		
-		for(int i=0; i<detail.getDetail().length;i++) {
-			System.out.println(detail.getDetail()[i]);
-			detail.getDetail()[i].setTitle(title);
-			jobopenService.writeDetail(detail.getDetail()[i]);
+//		System.out.println(e.toString());
+		
+		for(int i=0; i<e.size(); i++) {
+			if(e.get(i).getJobopenNo()==0)
+				e.remove(i);
 		}
+		
+//		System.out.println(e.toString());
+		
+		
+		for(int i=0; i<e.size();i++) {
+			e.get(i).setTitle(title);
+			jobopenService.writeDetail(e.get(i));
+		}
+		  
 		
 		logger.info(jobopenBasic.toString());
 		
@@ -100,12 +112,13 @@ public class JobopenController {
 	
 	
 	@RequestMapping(value="/detailCancel", method=RequestMethod.POST)
-	public String detailCancel() {
+	public String detailCancel(HttpSession session) {
 		
-		logger.info("취소 컨트롤러");
+		jobopenService.deleteJobopen((int)session.getAttribute("jobopen"));
 		
+//		System.out.println("dd");
 		
-		return "basicInfo";
+		return "redirect:/main/adminmain";
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)

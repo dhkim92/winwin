@@ -59,5 +59,13 @@
 	<select id="selectDetail" parameterType="winwin.dto.JobopenDetail" resultType="winwin.dto.JobopenDetail">
 		select * from jobopenDetail where jobopenNo = #{jobopenNo}
 	</select>
+	
+	<delete id="deleteBasic" parameterType="int">
+		delete from jobopenBasic where jobopenNo = #{jobopenNo}
+	</delete>
+	
+	<delete id="deleteDetail" parameterType="int">
+		delete from jobopenDetail where jobopenNo = #{jobopenNo}
+	</delete>
   
   </mapper>
