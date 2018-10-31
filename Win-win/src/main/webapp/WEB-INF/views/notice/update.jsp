@@ -11,12 +11,19 @@
 td{
 	font-size: 16px
 }
+#fileBox{
+	max-width: 680px;
+	max-height: 100px; 
+	overflow-x : hidden;
+	overflow-y : auto;
+}
+
 </style>
 
 <%@ include file="../include/adminHeader.jsp"%>
 
 <div class = "container">
-	<form action="/notice/write" method="post" enctype="multipart/form-data">
+	<form action="/notice/update" method="post" enctype="multipart/form-data">
 	<div class="p-5">
 	<h3 class="text-primary font-weight-bold">공지사항</h3>
 	<hr style="border: solid #376092;">
@@ -26,7 +33,7 @@ td{
 				<strong>제목</strong>
 			</td>
 			<td class="text-center" style="background-color: lightgray">
-				<input type="text" class="form-control" id="title" value="제목은 수정할 수 없습니다" readonly="readonly"/>
+				<input type="text" class="form-control" name="title" value="${board.title }" placeholder="제목을 적으세요(66자 이내)"/>
 			</td>
 		</tr>
 		<tr>
@@ -39,21 +46,47 @@ td{
 		</tr>
 		<tr>
 			<td class="text-center">
-				첨부파일
+				첨부할 파일
 			</td>
 			<td class="text-center">
-				<input type="file" multiple="multiple" />
+				<input type="file" multiple="multiple" name="files"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="text-center">
+				첨부된 파일
+			</td>
+			<td class="text-center">
+				<c:if test="${board.filesCnt eq 0 }">첨부된 파일이 없습니다</c:if>
+				<c:if test="${board.filesCnt ne 0 }">
+				<div id="fileBox">
+					<table class="table table-sm">
+						<c:forEach items="${files }" var="file">
+							<tr>
+								<td width="10%"><i class="fas fa-save mr-2 ml-2"></i></td>
+								<td width="50%">${file.originName}</td>
+								<td width="20%">${file.filesize } bytes</td>
+								<td width="10%"><span class="badge badge-danger" onclick="delFile(event);">파일삭제</span></td>
+								<td style="display:none">${file.fileNo }</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				</c:if>
 			</td>
 		</tr>
 	</table>
 	<div class="p-5">
-		<textarea class="form-control" rows="20" id="content"></textarea>
+		<textarea class="form-control" rows="20" name="content" id="content">${board.content }</textarea>
 	</div>
 	</div>
+	
+	<input type="hidden" name="noticeno" value="${board.noticeno }"/>
+	
 	</form>
 	<div class="form-group d-flex justify-content-center">
-		<button type="button" id="btnCancel" class="btn btn-primary">수정</button>
-		<button type="button" id="btnWrite" class="btn btn-primary ml-2">취소</button>
+		<button type="button" id="btnUpdate" class="btn btn-primary">수정</button>
+		<button type="button" id="btnCancel" class="btn btn-primary ml-2">취소</button>
 	</div>	
 </div>
 
@@ -62,13 +95,15 @@ td{
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script type="text/javascript"
- src="/resources/smarteditor/js/service/HuskyEZCreator.js"></script>
+ src="/resources/se2/js/HuskyEZCreator.js"></script>
+ <script type="text/javascript" 
+ src="/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <script>
 $(document).ready(function() {
 	$("#btnCancel").click(function() {
-		history.go(-1);
+		$(location).attr("href","/notice/view?noticeno="+${board.noticeno});
 	});
-	$("#btnWrite").click(function() {
+	$("#btnUpdate").click(function() {
 		submitContents($(this));
 		$("form").submit();
 	});
@@ -79,7 +114,7 @@ var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
     oAppRef: oEditors,
     elPlaceHolder: "content",
-    sSkinURI: "/resources/smarteditor/SmartEditor2Skin.html",
+    sSkinURI: "/resources/se2/SmartEditor2Skin.html",
     fCreator: "createSEditor2",
     htParams : {
     	bUseToolbar: true, // 툴바 사용여부
@@ -99,6 +134,25 @@ function submitContents(elClickedObj) {
     try {
         elClickedObj.form.submit();
     } catch(e) {}
+}
+
+function delFile(event){
+	var target = event.currentTarget;
+	$(target).parent().parent().attr("style","display:none");
+	var fileno = $(target).parent().next().text();
+	console.log(fileno);
+	$.ajax({
+		type:"post",
+		url:"/notice/updateFile",
+		data:{"fileNo":fileno},
+		complete:function(){
+			alert("파일 삭제 완료!");
+		}
+	});
+}
+function pasteHTML(filepath){
+    var sHTML = '<img src="/upload/'+filepath+'">';
+    oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
 }
 </script>
 

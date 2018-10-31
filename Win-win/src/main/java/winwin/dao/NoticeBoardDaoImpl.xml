@@ -119,5 +119,13 @@
  		DELETE FROM notice
  		WHERE noticeno = #{noticeno}
  	</delete>
- 	
+ 	<delete id="deleteFile" parameterType="winwin.dto.Material">
+ 		DELETE FROM material
+ 		where fileno = #{fileNo}
+ 	</delete>
+ 	<update id="updateBoard" parameterType="winwin.dto.NoticeBoard">
+ 		UPDATE notice
+ 		SET title=#{title}, content=#{content}
+ 		WHERE noticeno = #{noticeno}	
+ 	</update>
  </mapper>

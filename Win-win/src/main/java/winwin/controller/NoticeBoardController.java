@@ -3,6 +3,7 @@ package winwin.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,7 +59,6 @@ public class NoticeBoardController {
 		NoticeBoard resBoard = service.view(board);
 		List<Material> files = service.filesByBoardNo(board);
 		resBoard.setFilesCnt(service.getFilesCnt(board));
-		
 		m.addAttribute("board", resBoard);
 		m.addAttribute("files", files);
 	}
@@ -82,16 +82,11 @@ public class NoticeBoardController {
 	public void writeProc(@ModelAttribute("board") NoticeBoard board,HttpServletResponse resp) {
 		
 		List<MultipartFile> up = board.getFiles();
-		logger.info(board.toString());
-		logger.info(String.valueOf(up.size()));
-//		List<String> upNames = new ArrayList<>();
 		
 		int noticeNo = service.getNoticeNo();
 		board.setNoticeno(noticeNo);
 		
 		if(up.size()==1 && up.get(0).getOriginalFilename().equals("") ) {
-			
-			logger.info(board.toString());
 			
 			logger.info("첨부된 파일이 없을 경우");
 			
@@ -186,22 +181,89 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/notice/update", method=RequestMethod.GET)
-	public void update(NoticeBoard board) {
-//		service.view(board);
-//		service.FilesByBoardNo(board);
+	public void update(NoticeBoard board,Model m) {
+		NoticeBoard resBoard = service.view(board);
+		resBoard.setFilesCnt(service.getFilesCnt(board));
+		List<Material> files = service.filesByBoardNo(board);
+		m.addAttribute("board", resBoard);
+		m.addAttribute("files", files);
 	}
 	
 	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
-	public void updateProc(MultipartFile up,NoticeBoard board, Material file) {
+	public void updateProc(@ModelAttribute("board") NoticeBoard board, HttpServletResponse resp) {
+
+		List<MultipartFile> up = board.getFiles();
 		
-		if(up==null) {
-			service.deleteFilesByBoardNo(board);
+		if(up.size()==1 && up.get(0).getOriginalFilename().equals("") ) {
+			
+			logger.info("첨부된 파일이 없을 경우");
 			service.updateBoard(board);
+		
 		}else {
-			service.deleteFilesByBoardNo(board);
-			service.insertFile(file);
+			
+			logger.info("파일을 첨부할 경우");
+
+			for (MultipartFile data : up) {
+															
+				String realpath = context.getRealPath("upload");				
+				String uid = UUID.randomUUID().toString().split("-")[4];				
+				String stored = data.getOriginalFilename()+"_"+uid;
+				File dest = new File(realpath, stored);
+
+				//파일 업로드
+				try {
+					data.transferTo(dest);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				
+				//DB 업로드
+				Material file = new Material();
+				
+				file.setFilesize(data.getSize());
+				file.setNoticeNo(board.getNoticeno());
+				file.setAdminCode(board.getCode());
+				file.setStoredName(stored);
+				file.setOriginName(data.getOriginalFilename());
+				
+				service.insertFile(file);
+				
+			}
+			
 			service.updateBoard(board);
+			
 		}
 		
+		resp.setContentType("text/html;charset=utf-8");
+		try {
+			PrintWriter out = resp.getWriter();
+			out.println("<script>");
+			out.println("alert('글수정 완료')");
+			out.println("location.href='/notice/view?noticeno="+board.getNoticeno()+"'");
+			out.println("</script>");
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	@RequestMapping(value="/notice/updateFile", method=RequestMethod.POST)
+	public void updateFile(Material file,Writer out) {
+		//파일 삭제
+		Material delFile = service.selectFile(file);
+		String path = context.getRealPath("upload");
+		String filename = delFile.getStoredName();
+		File f = new File(path,filename);
+		boolean res = f.delete();
+		if(res) {
+			logger.info("파일 삭제 완료!");
+		}else {
+			logger.info("파일 삭제 실패!");
+		}
+		//db데이터 삭제
+		service.deleteFile(file);
 	}
 }

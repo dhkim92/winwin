@@ -7,7 +7,12 @@
 <%@ include file="../include/CSSLoader.jsp"%>
     
 <style>
-
+#fileBox{
+	max-width: 680px;
+	max-height: 100px; 
+	overflow-x : hidden;
+	overflow-y : auto;
+}
 </style>
 
 <c:if test="${empty adminLogin}">
@@ -86,16 +91,18 @@
 	     	<div>
 		     	<div class="mt-4">
 			        <p class="font-weight-bold text-center" id="idChecking">
-			        	<table id="upTable" class="table table-hover table-sm">
-			        		<c:forEach items="${files}" var="file">
-			        	 		<tr>
-			        	 			<td class="upCol" width="10%"><i class="fas fa-file-download mr-2 ml-2"></i></td>
-			        	 			<td class="upCol" width="60%" class="truncated">${file.originName }</td>
-			        	 			<td class="upCol" width="30%" class="truncated">${file.filesize } bytes</td>
-			        	 			<td class="upCol" style="display :none;">${file.fileNo }</td>
-			        	 		</tr>
-			        		</c:forEach>
-			        	</table>
+			        	<div id="fileBox">
+			        		<table id="upTable" class="table table-hover table-sm">
+			        			<c:forEach items="${files}" var="file">
+			        	 			<tr>
+			        	 				<td class="upCol" width="10%"><i class="fas fa-file-download mr-2 ml-2"></i></td>
+			        	 				<td class="upCol" width="60%" class="truncated">${file.originName }</td>
+			        	 				<td class="upCol" width="30%" class="truncated">${file.filesize } bytes</td>
+			        	 				<td class="upCol" style="display :none;">${file.fileNo }</td>
+			        	 			</tr>
+			        			</c:forEach>
+			        		</table>
+			        	</div>
 			        </p>
 				</div>
 			
@@ -117,7 +124,7 @@ $("#btnList").click(function(){
 	$(location).attr("href","/notice/list");
 });
 $("#btnUpdate").click(function(){
-// 	$(location).attr("href","/notice/update?noticeno="+${board.noticeno});
+	$(location).attr("href","/notice/update?noticeno="+${board.noticeno});
 });
 $("#btnDel").click(function(){
 	$(location).attr("href","/notice/delete?noticeno="+${board.noticeno});
