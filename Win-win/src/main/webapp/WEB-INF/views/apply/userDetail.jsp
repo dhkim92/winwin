@@ -196,7 +196,7 @@ $(document).ready(function() {
 	</div>
 
 	<form action="/apply/userDetail" method="POST" id="userDetailForm">
-	<h4 class="mt-4 mb-3 font-weight-bold">개인사항<input type="hidden" value="jobopenNo" /></h4>
+	<h4 class="mt-4 mb-3 font-weight-bold">개인사항<input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" /></h4>
 	<div class="row">
 		<img class="img-fluid d-block ml-3" src="/resources/image/B_userDetail.png">
 		<img class="img-fluid d-block" src="/resources/image/G_academic.png">

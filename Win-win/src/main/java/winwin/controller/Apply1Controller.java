@@ -46,13 +46,6 @@ public class Apply1Controller {
 		
 	}
 	
-	@RequestMapping(value="/timer", method=RequestMethod.GET)
-	public void timer(JobopenBasic jobopenBasic, Member user, HttpSession session, Model model) {
-		
-//		apply1Service.viewJobOpen(jobopenBasic);
-//		apply1Service.viewUser(user);
-		
-	}
 
 	@RequestMapping(value="/userDetail", method=RequestMethod.POST)
 	public String userDetailProc(UserDetail userDetail, HttpSession session, Model model) {
@@ -63,12 +56,16 @@ public class Apply1Controller {
 		logger.info("Apply1Cont_userDetailProc() : " + userDetail);
 		apply1Service.insertUserDetail(userDetail);
 		
-		return "redirect:/apply/academic";
+		logger.info(userDetail.toString());
+		
+		return "redirect:/apply/academic?jobopenNo="+userDetail.getjobopenNo();
 	}
 
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.GET)
 	public void userDetailUpdate(JobopenBasic jobopenBasic, Member user, UserDetail userDetail, HttpSession session, Model model) {
 
+		
+		
 //		apply1Service.viewJobOpen(jobopenBasic);
 //		apply1Service.viewUser(user);
 		apply1Service.selectUserDetail(userDetail);
@@ -86,19 +83,30 @@ public class Apply1Controller {
 	
 	
 	@RequestMapping(value="/academic", method=RequestMethod.GET)
-	public void academic(JobopenBasic jobopenBasic,HttpSession session ,Model model) {
+	public void academic(String jobopenNo, JobopenBasic jobopenBasic, HttpSession session, Model model) {
 		
-//		apply1Service.viewJobOpen(jobopenBasic);
-				
+		logger.info("academic 활성화");
+		logger.info("공고번호"+jobopenNo);
+		
+		
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
+		JobopenBasic jobOpen = apply1Service.viewJobOpen(jobopenBasic);
+		
+		model.addAttribute("jobopenBasic", jobOpen);
+
 	}
 
 	@RequestMapping(value="/academic", method=RequestMethod.POST)
-	public ModelAndView academicProc(HttpSession session, AcademicArr acaArr) {
+	public String academicProc(HttpSession session, AcademicArr acaArr) {
 		
 		logger.info(acaArr.toString());
+		int jobopenNo = acaArr.getAcaArr()[0].getJobopenNo();
+		logger.info("jobopenNo : " + jobopenNo);
+		
 		
 //		apply1Service.insertAcademic(academic);
-		return null;
+
+		return "redirect:/apply/military?jobopenNo="+jobopenNo;
 	}
 	
 	@RequestMapping(value="/academicUpdate", method=RequestMethod.GET)
@@ -128,7 +136,7 @@ public class Apply1Controller {
 
 
 	@RequestMapping(value="/military", method=RequestMethod.POST)
-	public String militaryProc( Military military) {
+	public String militaryProc(Military military) {
 		
 		logger.info("Apply1Controller_militaryProc : " + military);
 //		apply1Service.insertMilitary(military);
