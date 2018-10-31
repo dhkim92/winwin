@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%@ include file="../include/CSSLoader.jsp"%>
 
 <style>
@@ -71,6 +71,14 @@ $(document).ready(function() {
 		return ""+nHour+":"+nMin+":"+nSec;
 	}
 	
+	var Dday = new Date('<fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" />');
+	var now = new Date();
+	
+	var gap = now.getTime() - Dday.getTime();
+	var result = Math.floor(gap/ (1000*60*60*24)) * -1;
+	
+	$("#dDay").val("(D- " + result + "일)");
+	
 });
 
 </script>
@@ -85,21 +93,21 @@ $(document).ready(function() {
    		<table class="table col-md-12 mb-0">
      		<thead>
        			<tr>
-       				<th>공고명</th>
+       				<th>${jobopenBasic.title}</th>
        			</tr>
      		</thead>
      		<tbody>
-       			<tr style="line-height: 0.8em;">
-         			<th class="text-center align-middle bg-secondary">접수상태</th>
-            		<td class="text-center align-middle">지원서 저장 전 입니다</td>
-         			<th class="text-center align-middle bg-secondary">원서 마감 일시</th>
-            		<td class="text-center align-middle">2018-12-31 23:59</td>
-            		<td class="text-danger text-center align-middle">(D-98일 전)</td>
-         			<th class="text-center align-middle bg-secondary">자동 로그아웃</th>
-            		<td class="text-danger text-center align-middle"><span id="counter"></span></td>
-            		<td><button id="timer">연장</button></td>
-      			</tr>    
-     		</tbody>
+	    		<tr style="line-height: 0.8em;">
+	      		<th class="text-center align-middle bg-secondary">접수상태</th>
+	      		<td class="text-center align-middle">지원서 저장 전 입니다</td>
+	      		<th class="text-center align-middle bg-secondary">원서 마감 일시</th>
+	      		<td class="text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
+	      		<td class="text-danger text-center align-middle"><input style="border: none; width: 100px; color: red;" type="text" id="dDay" value="" readonly/></td>
+	      		<th class="text-center align-middle bg-secondary">자동 로그아웃</th>
+	      		<td class="text-danger text-center align-middle"><span id="counter"></span></td>
+	      		<td><button id="timer">연장</button></td>
+	    		</tr>    
+	  		</tbody>
    		</table>
    	</div>
 
@@ -128,9 +136,9 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" id="lName" name="langArr[i].lName" value="영어" style="width:80px;" readonly/></td>
+                  <td class="align-middle"><input type="text" id="lName" name="langArr[0].lName" value="영어" style="width:80px;" readonly/></td>
                   <td>
-                  	<select style="height:25px; width:70px;" id="grade" name="langArr[i].grade">
+                  	<select style="height:25px; width:70px;" id="grade" name="langArr[0].grade">
                   		<option value="0">선택</option>
                   		<option value="상">상</option>
                   		<option value="중">중</option>
@@ -138,7 +146,7 @@ $(document).ready(function() {
                   	</select>
                   </td>
                   <td>
-                  	<select style="height:26px; width:150px;" id="testName" name="langArr[i].testName">
+                  	<select style="height:26px; width:150px;" id="testName" name="langArr[0].testName">
                   		<option value="0">선택</option>
                   		<option value="TOEIC">TOEIC</option>
                   		<option value="TOEFL">TOEFL</option>
@@ -147,9 +155,9 @@ $(document).ready(function() {
                   		<option value="OPIc">OPIc</option>
                   	</select>
                   </td>
-                  <td class="align-middle"><input type="text" id="score" name="langArr[i].score" /></td>
-                  <td class="align-middle"><input type="date" id="lDate" name="langArr[i].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
-                  <td class="align-middle"><input type="text" id="lOrgan" name="langArr[i].lOrgan" /></td>
+                  <td class="align-middle"><input type="text" id="score" name="langArr[0].score" /></td>
+                  <td class="align-middle"><input type="date" id="lDate" name="langArr[0].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
+                  <td class="align-middle"><input type="text" id="lOrgan" name="langArr[0].lOrgan" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
                 <tr>
@@ -264,7 +272,6 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" name="eOrgan" class="mr-1" style="width:250px" /></td>
                   <td>
                   <select style="height:25px; width:80px;" name="period">
                   		<option value="0">선택</option>
@@ -275,6 +282,7 @@ $(document).ready(function() {
                   		<option value="기타">기타</option>
                   	</select>
                   </td>
+                  <td class="align-middle"><input type="text" name="eOrgan" class="mr-1" style="width:250px" /></td>
                   <td class="align-middle"><input type="date" name="eStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="date" name="eEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="text" name="eContent" class="mr-1" style="width:350px" /></td>
@@ -391,41 +399,42 @@ $(document).ready(function() {
         
         var value = $(this).parent().parent();
         var standard = $(this).parent().parent().parent().children('tr');
-
-        if( standard.length > 3 ) {
+        
+         if( standard.length > 3 ) {
         	value.remove();
-        	for(var i=0; i<standard.length-1; i++) {
-				$("#lName").attr("name", "langArr["+i+"].lName");
-				$("#grade").attr("name", "langArr["+i+"].grade");
-			}
-        	
         }
     });
 	
+	function addForm(i) {
+		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		return form;
+	}
+	
+	var i=1;
 	$(document).on("click","[name=ABtn]",function(){
+		
 		
 		var test = $(this).parent().parent().parent().children().eq(1);
 		var standard = $(this).parent().parent().parent().children('tr');
 		
 		$.trClone = test.clone().html();
     	$.newTr = $("<tr>"+$.trClone+"</tr>");
+    	
+		
+		var a = addForm(i);
 
-    	if( standard.length < 6 ) {
-			for(var i=0; i<standard.length-1; i++) {
-				$("#lName").attr("name", "langArr["+i+"].lName");
-				$("#grade").attr("name", "langArr["+i+"].grade");
-				
-			}
-			test.parent().children().last().before($.newTr);
+		if( standard.length < 6 ) {
+			test.parent().children().last().before(a);
+			i++;
     	}
- 	 });
+ 	});
 	
 	$("#liCancel").click(function() {
 		$('#selectLicense').val("");	
 	});
   
 });
-
+	
 $('#file').on('change', function(){
 	
 	var originName = $(this).val().split('\\').pop();
@@ -433,7 +442,7 @@ $('#file').on('change', function(){
 	var extName = $(this).val().split('.').pop();
 
 	var fileSize = document.getElementById('file').files[0].size/1024;
-
+	
 	$("#extFile").val(extName);
 	$("#originFile").val(realName);
 	$("#fileSize").val(fileSize);

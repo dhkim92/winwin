@@ -6,6 +6,10 @@
   
   <mapper namespace="winwin.dao.Apply2Dao">
   
+  	<select id="selectJobOpen" parameterType="winwin.dto.JobopenBasic" resultType="winwin.dto.JobopenBasic">
+  		SELECT title, endDate, jobopenNo FROM jobopenbasic WHERE jobopenNo=#{jobopenNo}
+  	</select>
+  
   	<insert id="insertLanguage" parameterType="winwin.dto.Language">
   		INSERT INTO language(languageNo, userId, jobopenNo, lName, grade, testName, score, lDate, lOrgan)
   		VALUES(LANGUAGE_SEQ.NEXTVAL, #{userId }, #{jobopenNo }, '영어', #{grade }, #{testName }, #{score }, #{LDate }, #{LOrgan })

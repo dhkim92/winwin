@@ -58,85 +58,292 @@
 <body>
 
 <div class="modalCheck" id="checkModal">
-<div class="modal-contentCheck">
-	<h3 class="mt-3 font-weight-bold">지원서 미리보기</h3><hr style="border: solid 2px #376092;">
-	<br>
-	<h4 class="ml-2 font-weight-bold">개인사항</h4>
-	<hr class="ml-2 border-dark bg-dark" style="border: solid 1px;">
-	<h6 class="ml-4 mt-3 font-weight-bold">기본정보</h6>
-	<br>
-	<table class="ml-4 table table-bordered border-secondary">
-	<tbody>
-	<tr>
-		<th style="width: 15% ;" class="text-center align-middle bg-secondary">성명<span style="color : red;">*</span></th>
-		<td style="width: 40%">
-		<span style="font-size: 10px ;">한글 </span><input style="border: none; width: 50px;" type="text" id="username" name="username" value="${member.username }" readonly/> / <span style="font-size: 10px ;">영어 </span>
-			<input type="text" class="ml-1 mr-1" id="eName" name="eName"  value="Kim Young Eun" readonly/>
-			<span style="font-size: 10px ;"> 예)Hong Gil Dong</span>
-		</td>
-		<th class="text-center align-middle bg-secondary">이메일<span style="color : red;">*</span></th>
-		<td><input style="border: none; width: 300px; " id="userid" name="userId" type="text" value="${sessionScope.id }" readonly/></td>
-	</tr>
-	<tr>
-		<th class="text-center align-middle bg-secondary" style="width: 5%" >생년월일<span style="color : red;">*</span></th>
-		<td colspan="3">
-			<input type="text" name="birth" id="birth"/>
-			<span style="font-size: 10px ;">예)19900101</span>
-		</td>
-	</tr>
-	<tr>
-		<th class="text-center align-middle bg-secondary">주소<span style="color : red;">*</span></th>
-		<td colspan="3">
-			<table>
-				<tr>
-					<input type="text" style="width: 80px;" id="zipCode" name="zipCode" placeholder="우편번호" readonly onclick="Search()"/>
-					<input type="button" class="ml-1 mr-1" onclick="Search()" value="우편번호 찾기" />
-					<input type="text" style="width: 364px; " name="address" id="address" placeholder="주소는 자동입력됩니다" readonly>
-				</tr>
-				<tr>
-					<input type="text" style="width: 550px ;" class="mt-1" name="addressDetail" id="addressDetail" placeholder="상세주소를 입력하세요"/>
-				</tr>	
-			</table>
+	<div class="modal-contentCheck">
+	
+		<h3 class="mt-3 font-weight-bold">지원서 미리보기</h3><hr style="border: solid 2px #376092;"><br>
 		
-		</td>
-	</tr>
-	<tr>
-		<th class="text-center align-middle bg-secondary">긴급연락처<span style="color : red;">*</span></th>
-		<td colspan="3">  		
-			<select style="width: 100px; height: 27px" id="phoneNum1" name="phoneNum1">
-				<option value="010">010</option>
-				<option value="02">02</option>
-				<option value="051">051</option>
-				<option value="053">053</option>
-				<option value="032">032</option>
-				<option value="062">062</option>
-				<option value="042">042</option>
-				<option value="052">052</option>
-				<option value="044">044</option>
-				<option value="031">031</option>
-				<option value="033">033</option>
-				<option value="043">043</option>
-				<option value="041">041</option>
-				<option value="063">063</option>
-				<option value="061">061</option>
-				<option value="054">054</option>
-				<option value="055">055</option>
-				<option value="064">064</option>
-			</select>
-				-<input type="text" id="phoneNum2" name="phoneNum2" class="ml-1 mr-1 numberOnly" style="width: 100px ;" />-<input type="text" id="phoneNum3" name="phoneNum3" class="ml-1 mr-1 numberOnly" />
-			<input type="hidden" id="phoneNum" name="phoneNum" />	
-		</td>
-	</tr>
+	<div class="container">
+		<h4 class="ml-2 font-weight-bold">개인사항</h4><hr class="ml-2 border-dark bg-dark" style="border: solid 1px;">
+		<h6 class="ml-4 mt-5 font-weight-bold">기본정보</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+			<tr>
+				<th style="width: 15% ;" class="text-center text-center align-middle bg-secondary">성명</th>
+				<td style="width: 40%">
+					<span style="font-size: 10px ;">한글 </span>${member.username } / <span style="font-size: 10px ;">영어 </span>${userDetail.eName }
+				</td>
+				<th class="text-center text-center align-middle bg-secondary">이메일</th>
+				<td>${sessionScope.id }</td>
+			</tr>
+			<tr>
+				<th class="text-center text-center align-middle bg-secondary" style="width: 5%" >생년월일</th>
+				<td colspan="3">${userDetail.birth }</td>
+			</tr>
+			<tr>
+				<th class="text-center text-center align-middle bg-secondary">주소</th>
+				<td colspan="3">${userDetail.zipCode }, &nbsp&nbsp ${userDetail.address }, &nbsp&nbsp ${userDetail.addressDetail }</td>
+			</tr>
+			<tr>
+				<th class="text-center text-center align-middle bg-secondary">긴급연락처</th>
+				<td colspan="3">${userDetail.phoneNum }</td>
+			</tr>
+			<tr>
+				<th class="text-center text-center align-middle bg-secondary">휴대전화</th>
+				<td colspan="3">${member.phone }</td>
+			</tr>
+		</tbody>
+		</table>
+		
+	</div>
 	
-	<tr>
-		<th class="text-center align-middle bg-secondary">휴대전화<span style="color : red;">*</span></th>
-		<td colspan="3"><input style="border: none; width: 200px; " type="text" id="phone" name="phone" value="${member.phone }" /></td>
-	</tr>
 	
-	</tbody>
-	</table>
-</div>
+	<div class="mt-5 container">
+		<h4 class="ml-2 font-weight-bold">학력사항</h4><hr class="ml-2 border-dark bg-dark" style="border: solid 1px;">
+		<h6 class="ml-4 mt-5 font-weight-bold">고등학교</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">학교명</th>
+					<th class="text-center text-center align-middle">전공</th>
+					<th class="text-center text-center align-middle">졸업년도</th>
+					<th class="text-center text-center align-middle">지역</th>
+				</tr>
+				<tr style="line-height: 1.0em; height:15px;">
+                  <td class="text-center align-middle">${academic.name }</td>
+                  <td class="text-center align-middle">${academic.major }</td>
+                  <td class="text-center align-middle">${academic.endDate }</td>
+                  <td class="text-center align-middle">${academic.region }</td>
+                </tr>
+		</tbody>
+		</table>
+		
+		<h6 class="ml-4 mt-5 font-weight-bold">전문대학</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">학교명</th>
+					<th class="text-center text-center align-middle">전공</th>
+					<th class="text-center text-center align-middle">졸업년도</th>
+					<th class="text-center text-center align-middle">지역</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${academic.name }</td>
+                  <td class="text-center align-middle">${academic.major }</td>
+                  <td class="text-center align-middle">${academic.endDate }</td>
+                  <td class="text-center align-middle">${academic.region }</td>
+                </tr>
+		</tbody>
+		</table>
+		
+		<h6 class="ml-4 mt-5 font-weight-bold">대학교</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">학교명</th>
+					<th class="text-center text-center align-middle">전공</th>
+					<th class="text-center text-center align-middle">졸업년도</th>
+					<th class="text-center text-center align-middle">지역</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${academic.name }</td>
+                  <td class="text-center align-middle">${academic.major }</td>
+                  <td class="text-center align-middle">${academic.endDate }</td>
+                  <td class="text-center align-middle">${academic.region }</td>
+                </tr>
+		</tbody>
+		</table>
+		
+		<h6 class="ml-4 mt-5 font-weight-bold">대학원</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">학교명</th>
+					<th class="text-center text-center align-middle">전공</th>
+					<th class="text-center text-center align-middle">졸업년도</th>
+					<th class="text-center text-center align-middle">지역</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${academic.name }</td>
+                  <td class="text-center align-middle">${academic.major }</td>
+                  <td class="text-center align-middle">${academic.endDate }</td>
+                  <td class="text-center align-middle">${academic.region }</td>
+                </tr>
+		</tbody>
+		</table>
+		
+	</div>
+	
+	<div class="mt-5 container">
+		<h4 class="ml-2 font-weight-bold">병역사항</h4><hr class="ml-2 border-dark bg-dark" style="border: solid 1px;">
+		<h6 class="ml-4 mt-5 font-weight-bold">병역정보</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">제대구분</th>
+					<th class="text-center text-center align-middle">복무기간</th>
+					<th class="text-center text-center align-middle">군별</th>
+					<th class="text-center text-center align-middle">계급</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${military.discharge }</td>
+                  <td class="text-center align-middle">${military.startDate }&nbsp ~ &nbsp${military.endDate }</td>
+                  <td class="text-center align-middle">${military.mCategory }</td>
+                  <td class="text-center align-middle">${military.mGrade }</td>
+                </tr>
+		</tbody>
+		</table>
+		
+	</div>
+	
+	<div class="mt-5 container">
+		<h4 class="ml-2 font-weight-bold">경력사항</h4><hr class="ml-2 border-dark bg-dark" style="border: solid 1px;">
+		<h6 class="ml-4 mt-5 font-weight-bold">어학정보</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">외국어명</th>
+					<th class="text-center text-center align-middle">회화수준</th>
+					<th class="text-center text-center align-middle">공익시험명</th>
+					<th class="text-center text-center align-middle">점수(또는 급)</th>
+					<th class="text-center text-center align-middle">취득일</th>
+					<th class="text-center text-center align-middle">주관처</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${language.lName }</td>
+                  <td class="text-center align-middle">${language.grade }</td>
+                  <td class="text-center align-middle">${language.testName }</td>
+                  <td class="text-center align-middle">${language.score }</td>
+                  <td class="text-center align-middle">${language.lDate }</td>
+                  <td class="text-center align-middle">${language.lOrgan }</td>
+                </tr>
+		</tbody>
+		</table>
+		<h6 class="ml-4 mt-5 font-weight-bold">자격사항</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">자격증</th>
+					<th class="text-center text-center align-middle">취득일</th>
+					<th class="text-center text-center align-middle">주관처</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${license.liName }</td>
+                  <td class="text-center align-middle">${license.liDate }</td>
+                  <td class="text-center align-middle">${license.liOrgan }</td>
+                </tr>
+		</tbody>
+		</table>
+		<h6 class="ml-4 mt-5 font-weight-bold">회사경력</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">근무기간</th>
+					<th class="text-center text-center align-middle">회사명</th>
+					<th class="text-center text-center align-middle">직위</th>
+					<th class="text-center text-center align-middle">담당업무</th>
+					<th class="text-center text-center align-middle">연봉(만원)</th>
+					<th class="text-center text-center align-middle">퇴직사유</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${career.cStartDate } &nbsp ~ &nbsp ${career.cEndDate }</td>
+                  <td class="text-center align-middle">${career.cName }</td>
+                  <td class="text-center align-middle">${career.position }</td>
+                  <td class="text-center align-middle">${career.task }</td>
+                  <td class="text-center align-middle">${career.salary }</td>
+                  <td class="text-center align-middle">${career.cContent }</td>
+                </tr>
+		</tbody>
+		</table>
+		<h6 class="ml-4 mt-5 font-weight-bold">사회봉사활동</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">단체명</th>
+					<th class="text-center text-center align-middle">기간</th>
+					<th class="text-center text-center align-middle">설명</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${activity.aName }</td>
+                  <td class="text-center align-middle">${activity.aStartDate } &nbsp ~ &nbsp ${activity.aEndDate }</td>
+                  <td class="text-center align-middle">${activity.aContent }</td>
+                </tr>
+		</tbody>
+		</table>
+		<h6 class="ml-4 mt-5 font-weight-bold">연수경험</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">구분</th>
+					<th class="text-center text-center align-middle">연수기관</th>
+					<th class="text-center text-center align-middle">기간</th>
+					<th class="text-center text-center align-middle">설명</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${experience.period }</td>
+                  <td class="text-center align-middle">${experience.eOrgan }</td>
+                  <td class="text-center align-middle">${experience.eStartDate } &nbsp ~ &nbsp ${experience.eEndDate }</td>
+                  <td class="text-center align-middle">${experience.eContent }</td>
+                </tr>
+		</tbody>
+		</table>
+		<h6 class="ml-4 mt-5 font-weight-bold">포트폴리오 첨부파일</h6><br>
+		
+		<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
+		<tbody>
+				<tr style="line-height: 1.0em;">
+					<th class="text-center text-center align-middle">종류</th>
+					<th class="text-center text-center align-middle">파일명</th>
+					<th class="text-center text-center align-middle">등록수정일</th>
+					<th class="text-center text-center align-middle">용량</th>
+				</tr>
+				<tr style="line-height: 0.8em; height:10px;">
+                  <td class="text-center align-middle">${material.originName }</td>
+                  <td class="text-center align-middle">${material.originName }</td>
+                  <td class="text-center align-middle">${material.writedate }</td>
+                  <td class="text-center align-middle">${material.filesize }</td>
+                </tr>
+		</tbody>
+		</table>
+	
+	</div>
 
+	<div class="mt-5 container">
+		<h4 class="ml-2 font-weight-bold">자기소개서</h4><hr class="ml-2 border-dark bg-dark" style="border: solid 1px;">
+		
+		<h6 class="mt-5 font-weight-bold">1. 성장과정 (자신에 대한 소개)</h6><br>		
+		<textarea maxlength="500" style="width: 100%;resize: none; height:250px;" readonly>${introduce.content1 }</textarea>
+		<h6 class="mt-5 font-weight-bold">2. 지원동기 및 포부</h6><br>		
+		<textarea maxlength="500" style="width: 100%;resize: none; height:250px;" readonly>${introduce.content2 }</textarea>
+		<h6 class="mt-5 font-weight-bold">3. 성격의 장단점</h6><br>		
+		<textarea maxlength="500" style="width: 100%;resize: none; height:250px;" readonly>${introduce.content3 }</textarea>
+		<h6 class="mt-5 font-weight-bold">4. 살아오면서 중요했던 일</h6><br>		
+		<textarea maxlength="500" style="width: 100%;resize: none; height:250px;" readonly>${introduce.content4 }</textarea>
+		<h6 class="mt-5 font-weight-bold">5. 보유기술 및 경험직무 (구체적으로 기술) </h6><br>		
+		<textarea maxlength="500" style="width: 100%;resize: none; height:250px;" readonly>${introduce.content5 }</textarea>
+		
+	</div>	
+	
+	<div class="container">
+	<div class="col-12 mt-5 p-0 d-flex justify-content-end">
+   	  <button class="btn btn-primary text-white mr-2" style="width:80px;" id="btnUpdate">수정</button>
+   	  <button class="btn btn-secondary text-black" style="width:80px;" id="btnClose">닫기</button>
+   	</div>
+   	<br><br><br>
+	</div>
+	
+	</div>
+</div>
 </body>
 
 <script type="text/javascript">
@@ -150,7 +357,8 @@ var btn = document.getElementById("Btn");
 // Get the <span> element that closes the modal
 // var span = document.getElementsByClassName("closeCheck")[0];                                          
 
-// var btnUnivMClose = document.getElementById("btnUnivMClose");
+var btnClose = document.getElementById("btnClose");
+var btnUpdate = document.getElementById("btnUpdate");
 
 // When the user clicks on the button, open the modal 
 btn.onclick = function() {
@@ -162,9 +370,14 @@ btn.onclick = function() {
 //     modal.style.display = "none";
 // }
 
-// btnUnivMClose.onclick = function() {
-//     modal.style.display = "none";
-// }
+
+btnUpdate.onclick = function() {
+    location.href = "/apply/userDetailUpdate";
+}
+
+btnClose.onclick = function() {
+    modal.style.display = "none";
+}
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {

@@ -1,5 +1,7 @@
 package winwin.controller;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -34,18 +36,26 @@ public class Apply2Controller {
 	private static final Logger logger = LoggerFactory.getLogger(JobopenController.class);
 	
 	@RequestMapping(value="/career", method=RequestMethod.GET)
-	public void career(JobopenBasic jobopenBasic, HttpSession session, Model model) {
+	public void career(String jobopenNo, JobopenBasic jobopenBasic, HttpSession session, Model model) {
 		
-//		apply2Service.viewJobOpen(jobopenBasic);
+		jobopenBasic.setJobopenNo(3);	//수정
+		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
 		
 	}
 
-
+ 
 	@RequestMapping(value="/career", method=RequestMethod.POST) 
 	public String careerProc(HttpSession session, LanguageArr langArr) {
 
-		logger.info(langArr.toString());
-		System.out.println(langArr);
+		Language[] lang = langArr.getLangArr();
+		List<Language> langList = new LinkedList<Language>(Arrays.asList(lang));
+		
+		for(int i=0; i<langList.size(); i++) {
+			if(langList.get(i).getgrade() == "") {
+				langList.remove(i);
+			}
+			
+		}
 		
 		
 		
@@ -72,13 +82,16 @@ public class Apply2Controller {
 //		for(int i=0; i<file.size(); i++) {
 //	         apply2Service.insertFile(file.get(i));
 //	    }
+
 		return "redirect:/apply/introduce";
-	      
-	
+
 	}
 		
 	@RequestMapping(value="/careerUpdate", method=RequestMethod.GET)
-	public void careerUpdate(Model model, HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, Material file) {
+	public void careerUpdate(JobopenBasic jobopenBasic, Model model, HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, Material file) {
+		
+		jobopenBasic.setJobopenNo(3);	//수정
+		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
 		
 		apply2Service.selectLanguage(language);
 		apply2Service.selectLicense(license);
@@ -128,7 +141,9 @@ public class Apply2Controller {
 	@RequestMapping(value="/introduce", method=RequestMethod.GET)
 	public void introduce(JobopenBasic jobopenBasic, Model model) {
 		
-//		apply2Service.viewJobOpen(jobopenBasic);
+		jobopenBasic.setJobopenNo(3);	//수정
+		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
+	
 	}
 	
 	
@@ -136,17 +151,19 @@ public class Apply2Controller {
 	public String introduceProc(Introduce introduce, HttpSession session) {
 		
 		introduce.setUserId((String)session.getAttribute("id"));
-		introduce.setJobopenNo(3);
+		introduce.setJobopenNo(3);	//수정
 		apply2Service.insertIntroduce(introduce);
 		
-		return "/apply/finish";
+		return "redirect:/apply/finish";
 	}
 
 
 	@RequestMapping(value="/introduceUpdate", method=RequestMethod.GET)
 	public void introduceUpdate(JobopenBasic jobopenBasic, Introduce introduce, HttpSession session, Model model) {
 		
-//		apply2Service.viewJobOpen(jobopenBasic);
+		jobopenBasic.setJobopenNo(3);	//수정
+		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
+		
 		introduce.setUserId((String)session.getAttribute("id"));
 		introduce.setJobopenNo(3);	//수정
 		model.addAttribute("intro", apply2Service.selectIntroduce(introduce));
@@ -154,29 +171,36 @@ public class Apply2Controller {
 	}
 
 	@RequestMapping(value="/introduceUpdate", method=RequestMethod.POST)
-	public String introduceUpdateProc(Introduce introduce, HttpSession session) {
+	public String introduceUpdateProc(Introduce introduce, HttpSession session, ModelAndView mav) {
 	
 		introduce.setUserId((String)session.getAttribute("id"));
 		introduce.setJobopenNo(3);	//수정
 		apply2Service.updateIntroduce(introduce);
-		
 		return "redirect:/apply/finish";
 	}
 	
 	
 	
-	@RequestMapping(value="/finish")
-	public String finish(HttpSession session, Support support) {
+	@RequestMapping(value="/finish", method=RequestMethod.GET)
+	public void finish(HttpSession session, JobopenBasic jobopenBasic,Model model) {
+		
+		jobopenBasic.setJobopenNo(3);	//수정
+		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
+
+		//Member 이름 -> member
+		//UserDetail 상세정보 -> userDetail
+		
+	}
+	
+	@RequestMapping(value="/submit", method=RequestMethod.GET)
+	public String finishProc(HttpSession session, Support support, JobopenBasic jobopenBasic,Model model) {
 		
 		support.setJobopenNo(3);	//수정
 		support.setUserId((String)session.getAttribute("id"));
 		apply2Service.insertSupport(support);
+
+		return "redirect:/user/main";
 		
-		return "/main/usermain";
 	}
 
-	@RequestMapping(value="/modal")
-	public void test() {
-		
-	}
 }

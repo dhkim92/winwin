@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%@ include file="../include/CSSLoader.jsp"%>
 
 <style>
@@ -72,23 +72,13 @@ $(document).ready(function() {
 	}
 	
 	
-	$("#saveBtn").click(function() {
+	var Dday = new Date('<fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" />');
+	var now = new Date();
 		
-		console.log("저장하고 계속하기 버튼 클릭")
-		var phoneNum;
+	var gap = now.getTime() - Dday.getTime();
+	var result = Math.floor(gap/ (1000*60*60*24)) * -1;
 		
-		var phoneNum1 = $("#phoneNum1 option:selected").val();
-		var phoneNum2 = $("#phoneNum2").val();
-		var phoneNum3 = $("#phoneNum3").val();
-		
-		phoneNum = phoneNum1+"-"+phoneNum2+"-"+phoneNum3;
-		
-// 		console.log(phoneNum);
-		
-		$("#phoneNum").val(phoneNum);
-		
-		$("#userDetailForm").submit();		
-	});
+	$("#dDay").val("(D- " + result + "일)");
 	
 });
 
@@ -103,21 +93,21 @@ $(document).ready(function() {
    		<table class="table col-md-12 mb-0">
      		<thead>
        			<tr>
-       				<th>공고명</th>
+       				<th>${jobopenBasic.title}</th>
        			</tr>
      		</thead>
      		<tbody>
-       			<tr style="line-height: 0.8em;">
-         			<th class="text-center align-middle bg-secondary">접수상태</th>
-            		<td class="text-center align-middle">지원서 저장 전 입니다</td>
-         			<th class="text-center align-middle bg-secondary">원서 마감 일시</th>
-            		<td class="text-center align-middle">2018-12-31 23:59</td>
-            		<td class="text-danger text-center align-middle">(D-98일 전)</td>
-         			<th class="text-center align-middle bg-secondary">자동 로그아웃</th>
-            		<td class="text-danger text-center align-middle"><span id="counter"></span></td>
-            		<td><button id="timer">연장</button></td>
-      			</tr>    
-     		</tbody>
+	    		<tr style="line-height: 0.8em;">
+	      		<th class="text-center align-middle bg-secondary">접수상태</th>
+	      		<td class="text-center align-middle">지원서 저장 전 입니다</td>
+	      		<th class="text-center align-middle bg-secondary">원서 마감 일시</th>
+	      		<td class="text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
+	      		<td class="text-danger text-center align-middle"><input style="border: none; width: 100px; color: red;" type="text" id="dDay" value="" readonly/></td>
+	      		<th class="text-center align-middle bg-secondary">자동 로그아웃</th>
+	      		<td class="text-danger text-center align-middle"><span id="counter"></span></td>
+	      		<td><button id="timer">연장</button></td>
+	    		</tr>    
+	  		</tbody>
    		</table>
    	</div>
 
