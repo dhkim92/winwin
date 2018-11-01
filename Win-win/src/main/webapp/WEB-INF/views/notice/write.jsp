@@ -64,7 +64,7 @@ td{
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
-<<script type="text/javascript"
+<script type="text/javascript"
  src="/resources/se2/js/HuskyEZCreator.js"></script>
  <script type="text/javascript" 
  src="/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
