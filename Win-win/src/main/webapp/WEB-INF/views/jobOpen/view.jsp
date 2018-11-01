@@ -66,6 +66,13 @@
 		
 <!-- 				Sed tempus in nibh a mollis. Curabitur convallis elementum facilisis. Maecenas eu ex magna. Aliquam odio purus, volutpat fringilla enim id, tincidunt tincidunt mi. Etiam fermentum magna vel aliquam laoreet. Aenean commodo, nibh nec porta vehicula, lacus nunc tempor nunc, at sollicitudin mi lectus et purus. Sed pulvinar sed massa gravida dictum. Etiam molestie justo eros. Phasellus eu ultrices magna, sit amet pellentesque urna. Sed in malesuada libero. Nunc ut leo eget lacus dictum semper. Duis lacinia lobortis malesuada. Nunc laoreet ullamcorper pharetra. -->
 <!-- 			</p> -->
+
+					<div class="row justify-content-left p-4">
+						<div class="col-auto">
+							<div class="mt-5" style="border-bottom: 2px solid gray;"><h3>기본 정보</h3></div>
+						</div>
+					</div>
+
 					<div class="row justify-content-center mt-5">
 						<div class="col-8">
 								<div class="form-inline m-3">
