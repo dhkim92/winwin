@@ -1,6 +1,5 @@
 package winwin.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -90,10 +89,7 @@ public class JobopenController {
 			if(e.get(i).getJobopenNo()==0)
 				e.remove(i);
 		}
-		
 //		System.out.println(e.toString());
-		
-		
 		for(int i=0; i<e.size();i++) {
 			e.get(i).setTitle(title);
 			jobopenService.writeDetail(e.get(i));
@@ -115,8 +111,6 @@ public class JobopenController {
 	public String detailCancel(HttpSession session) {
 		
 		jobopenService.deleteJobopen((int)session.getAttribute("jobopen"));
-		
-//		System.out.println("dd");
 		
 		return "redirect:/main/adminmain";
 	}

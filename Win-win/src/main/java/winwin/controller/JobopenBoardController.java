@@ -45,6 +45,6 @@ public class JobopenBoardController {
 	@RequestMapping(value="/delete", method = RequestMethod.GET)
 	public void delete(JobopenBasic jobopenBasic) {
 		
-		jobopenService.deleteJobOpen(jobopenBasic);
+		jobopenService.deleteJobopen(jobopenBasic.getJobopenNo());
 	}
 }
