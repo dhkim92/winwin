@@ -4,4 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="winwin.dao.QnaBoardDao">
+ 	<select id="totalCnt" parameterType="winwin.util.Paging" resultType="winwin.dto.QnaBoard">
+ 		SELECT
+ 			B.qnaNo,
+ 			B.title,
+ 			B.userId,
+ 			B.writer,
+ 			B.pw,
+ 			B.content,
+ 			B.hit,
+ 			B.writedate,
+ 			B.asw_code,
+ 			B.asw_writer,
+ 			B.asw_content,
+ 			B.asw_date
+ 		FROM (
+ 			SELECT rownum rnum, A.*
+ 			FROM(
+ 				SELECT * FROM qna
+ 				ORDER BY qnano DESC
+ 			)A
+ 			ORDER BY rnum
+ 		)B
+ 		WHERE B.rnum BETWEEN #{startNo} AND #{endNo}
+ 	</select>
  </mapper>

@@ -3,6 +3,7 @@ package winwin.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,11 +28,25 @@ public class QnaBoardController {
 	
 	@RequestMapping(value="/qna/list")
 	public void list(Model m,HttpServletRequest req) {
+		
+		//관리자 초기 로그인 값
+		HttpSession session =  req.getSession();
+		session.setAttribute("adminLogin", true);
+		session.setAttribute("admincode", 111111);
+		session.setAttribute("adminname", "관리자");		
+		
 		int total = service.totalCnt();
-		int curr =Integer.parseInt(req.getParameter("curPage"));
-		Paging paging = new Paging(total, curr);
+		String curr =req.getParameter("curPage");
+		
+		int curPage = 0;
+		if( !"".equals(curr) && curr != null ) {
+			curPage = Integer.parseInt(curr);
+		}
+		
+		Paging paging = new Paging(total, curPage);
 		List<QnaBoard> list = service.list(paging);
 		m.addAttribute("list", list);
+		m.addAttribute("paging", paging);
 	}
 	
 	@RequestMapping(value="/qna/view", method=RequestMethod.GET)

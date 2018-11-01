@@ -8,6 +8,7 @@ public class QnaBoard {
 	private String title;
 	private int userId;
 	private String writer;
+	private String pw;
 	private String content;
 	private int hit;
 	private Date writedate;
@@ -21,6 +22,12 @@ public class QnaBoard {
 		return "QnaBoard [qnaNo=" + qnaNo + ", title=" + title + ", userId=" + userId + ", writer=" + writer
 				+ ", content=" + content + ", hit=" + hit + ", date=" + writedate + ", asw_code=" + asw_code
 				+ ", asw_writer=" + asw_writer + ", asw_content=" + asw_content + ", asw_date=" + asw_date + "]";
+	}
+	public String getPw() {
+		return pw;
+	}
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	public Date getWritedate() {
 		return writedate;
