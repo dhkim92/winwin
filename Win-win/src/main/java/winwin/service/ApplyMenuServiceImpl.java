@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import winwin.dao.ApplyMenuDao;
+import winwin.dto.Member;
 
 @Service
 public class ApplyMenuServiceImpl implements ApplyMenuService{
@@ -32,6 +33,12 @@ public class ApplyMenuServiceImpl implements ApplyMenuService{
 	@Override
 	public List getQnaBoard() {
 		return applyMenuDao.getQnaBoard();
+	}
+
+	@Override
+	public boolean pwCheck(Member member) {
+		if( applyMenuDao.pwCheck(member) == 1) return true;
+		else 	return false; 
 	}
 
 }

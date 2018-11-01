@@ -94,19 +94,49 @@
 		<tr>
 			<th class="text-center align-middle bg-secondary pr-3 pl-3" >비밀번호</th>
 			<td colspan="3">  		
-				<input class="ml-4" type="password" style="width: 250px; height: 25px;"/>
+				<input class="ml-4" id="pw" type="password" style="width: 250px; height: 25px; required"/>
 			</td>			
 		</tr>
 	</tbody>
 	</table>
 		<div class="d-flex justify-content-end" style="margin-right: 132px;">
-		<button type="button" class="btn btn-primary btn-sm ml-3 mr-5" >결과확인</button>
+		<button type="button" class="btn btn-primary btn-sm ml-3 mr-5" onclick="selectsubmit();" >결과확인</button>
 		</div>
 	</div>
 
 </div>
 </div>
 
+<!--     The Modal -->
+    <div id="myModal" class="modal">
+ 
+<!-- 	      Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<div>
+	     	<div class="mt-4">
+	        <p class="font-weight-bold text-center" id="ModalContent"></p> 
+			</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<button type="button" id="btnClose" class="font-weight-bold btn btn-secondary">닫기</button>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>
 
 <script type="text/javascript">
 
@@ -192,6 +222,133 @@
 	 
 	});
 	
+	
+	function selectsubmit(){
+		var target = document.getElementById("jobTitle");
+
+// 		var pass = $("#pw").val();
+		
+// 		console.log(pass);
+		
+				$.ajax({
+			          type:"post"
+			          , url:"/applyMenu/passfailCheck"
+			          , dataType: "json"
+// 			          , data: {
+// 			        	  "pw" : pass
+// 			          }
+			          , success: function( data ) {
+			        	  
+// 			        	  alert(data.pwCheck);
+			        	  
+			        	  if(data.result > 0 ) {
+			        		  
+// 			        		  if(data.pwCheck > 0) {
+			        			  			        			  
+// 			        		  } else {
+			        			  pwdCheck();
+			        			  
+// 			        		  }
+			        		  
+			        		  
+			        	  } else {
+			        			// Get the modal
+			        			var modal = document.getElementById('myModal');
+			        			
+			        			modal.style.display = "block";
+			        			
+			        			// Get the <span> element that closes the modal
+			        			var span = document.getElementsByClassName("close")[0];     
+
+			        			var btnClose = document.getElementById("btnClose");
+			        			
+			        			// When the user clicks on <span> (x), close the modal
+			        			span.onclick = function() {
+			        			    modal.style.display = "none";
+			        			}
+			        			
+			        			btnClose.onclick = function() {
+			        			    modal.style.display = "none";
+			        			}
+			        			
+			        			$("#ModalContent").html("로그인이 필요합니다")
+			        			
+			        	  }
+				        	  
+			          }, error: function() {
+			             alert("error");
+			          }
+			       })
+			       
+			  	
+//         	  location.href = "/apply/userDetail?title="+title+"&jobopenNo="+jobopenNo;
+
+	}	
+	
+	function pwdCheck(){
+
+		var pass = $("#pw").val();		
+		
+		$.ajax({
+	          type:"post"
+	          , url:"/applyMenu/pwdCheck"
+	          , dataType: "json"
+	          , data: {
+	        	  "pw" : pass
+	          }
+	          , success: function( data ) {
+	        	  
+	        	  if(data.pwCheck > 0 ) {
+	        			// Get the modal
+	        			var modal = document.getElementById('myModal');
+	        			
+	        			modal.style.display = "block";
+	        			
+	        			// Get the <span> element that closes the modal
+	        			var span = document.getElementsByClassName("close")[0];     
+
+	        			var btnClose = document.getElementById("btnClose");
+	        			
+	        			// When the user clicks on <span> (x), close the modal
+	        			span.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			btnClose.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			$("#ModalContent").html("귀하의 #### 지원에 대한 결과는 합격/불합격 입니다.")
+	        		  
+	        	  } else {
+	        			// Get the modal
+	        			var modal = document.getElementById('myModal');
+	        			
+	        			modal.style.display = "block";
+	        			
+	        			// Get the <span> element that closes the modal
+	        			var span = document.getElementsByClassName("close")[0];     
+
+	        			var btnClose = document.getElementById("btnClose");
+	        			
+	        			// When the user clicks on <span> (x), close the modal
+	        			span.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			btnClose.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			$("#ModalContent").html("비밀번호가 일치하지 않습니다.")
+	        			
+	        	  }
+		        	  
+	          }, error: function() {
+	             alert("error");
+	          }
+	       })
+	}
 </script>	
 
 <%@ include file="../include/scriptLoader.jsp"%>

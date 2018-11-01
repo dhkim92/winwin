@@ -27,4 +27,13 @@
 		ORDER BY qnano DESC
 	</select>
 	
+	<select id="pwCheck" parameterType="winwin.dto.Member" resultType="int">
+		SELECT COUNT(*) CNT FROM (
+			SELECT userid, pwd FROM member
+               WHERE userid = #{userid }
+               AND pwd = #{pwd}
+		) 
+	</select>
+	
+	
 </mapper>
