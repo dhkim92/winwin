@@ -35,16 +35,34 @@ public class JobopenBoardController {
 	}
 	
 	@RequestMapping(value="/view", method = RequestMethod.GET)
-	public void view(JobopenBasic jobopenbasic, JobopenDetail jobopenDetail) {
+	public void view(Model model, @RequestParam int boardNo) {
 	
-//		jobopenService.viewBasic(jobopenbasic);
-//		jobopenService.viewDetail(jobopenDetail);	
+		JobopenBasic jobopenBasic = new JobopenBasic();
+		JobopenDetail jobopenDetail = new JobopenDetail();
+		
+		jobopenBasic.setJobopenNo(boardNo);
+		jobopenDetail.setJobopenNo(boardNo);
+		
+		jobopenBasic = jobopenService.viewBasic(jobopenBasic);
+		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
+		
+		model.addAttribute("basic", jobopenBasic);
+		model.addAttribute("detail", detail);
 		
 	}
 	
 	@RequestMapping(value="/delete", method = RequestMethod.GET)
-	public void delete(JobopenBasic jobopenBasic) {
+	public String delete(@RequestParam int boardNo) {
 		
-		jobopenService.deleteJobopen(jobopenBasic.getJobopenNo());
+		JobopenBasic jobopenBasic = new JobopenBasic();
+		JobopenDetail jobopenDetail = new JobopenDetail();
+		
+		
+		jobopenBasic.setJobopenNo(boardNo);
+		jobopenDetail.setJobopenNo(boardNo);
+		
+		jobopenService.deleteJobopen(boardNo);
+		
+		return "redirect:/jobOpen/list";
 	}
 }
