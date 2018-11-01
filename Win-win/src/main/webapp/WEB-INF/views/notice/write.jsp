@@ -64,8 +64,10 @@ td{
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
-<script type="text/javascript"
- src="/resources/smarteditor/js/service/HuskyEZCreator.js"></script>
+<<script type="text/javascript"
+ src="/resources/se2/js/HuskyEZCreator.js"></script>
+ <script type="text/javascript" 
+ src="/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <script>
 $(document).ready(function() {
 	$("#btnCancel").click(function() {
@@ -82,7 +84,7 @@ var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
     oAppRef: oEditors,
     elPlaceHolder: "content",
-    sSkinURI: "/resources/smarteditor/SmartEditor2Skin.html",
+    sSkinURI: "/resources/se2/SmartEditor2Skin.html",
     fCreator: "createSEditor2",
     htParams : {
     	bUseToolbar: true, // 툴바 사용여부
@@ -102,6 +104,10 @@ function submitContents(elClickedObj) {
     try {
         elClickedObj.form.submit();
     } catch(e) {}
+}
+function pasteHTML(filepath){
+	var sHTML = '<img src="/resources/image/'+filepath+'">';
+    oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
 }
 </script>
 

@@ -10,7 +10,7 @@ public class QnaBoard {
 	private String writer;
 	private String content;
 	private int hit;
-	private String date;
+	private Date writedate;
 	private String asw_code;
 	private String asw_writer;
 	private String asw_content;
@@ -19,8 +19,14 @@ public class QnaBoard {
 	@Override
 	public String toString() {
 		return "QnaBoard [qnaNo=" + qnaNo + ", title=" + title + ", userId=" + userId + ", writer=" + writer
-				+ ", content=" + content + ", hit=" + hit + ", date=" + date + ", asw_code=" + asw_code
+				+ ", content=" + content + ", hit=" + hit + ", date=" + writedate + ", asw_code=" + asw_code
 				+ ", asw_writer=" + asw_writer + ", asw_content=" + asw_content + ", asw_date=" + asw_date + "]";
+	}
+	public Date getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(Date writedate) {
+		this.writedate = writedate;
 	}
 	public int getQnaNo() {
 		return qnaNo;
@@ -46,7 +52,6 @@ public class QnaBoard {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 	public String getWriter() {
 		return writer;
 	}
@@ -65,13 +70,6 @@ public class QnaBoard {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-
 	public String getAsw_writer() {
 		return asw_writer;
 	}
@@ -90,6 +88,5 @@ public class QnaBoard {
 	public void setAsw_date(String asw_date) {
 		this.asw_date = asw_date;
 	}
-	
 	
 }

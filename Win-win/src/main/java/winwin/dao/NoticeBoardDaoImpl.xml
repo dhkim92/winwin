@@ -17,7 +17,9 @@
  			B.writer,
  			B.content,
  			B.hit,
- 			B.writedate		
+ 			B.writedate,
+ 			(SELECT count(*) FROM material
+ 			WHERE noticeno = B.noticeno)filesCnt
  		FROM(
  			SELECT rownum rnum, A.*
  			FROM(
@@ -98,7 +100,7 @@
  		WHERE noticeno = #{noticeno}
  	</select>
  	<select id="selectFile" parameterType="winwin.dto.Material" resultType="winwin.dto.Material">
- 		SELECT 
+ 		SELECT
  			fileNo,
  			userId,
  			adminCode,

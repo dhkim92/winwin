@@ -65,8 +65,10 @@
 		<div class="col-11 mt-3" style="border-top: 2px solid lightgrey; ">
 	    	<div id="btns" class="form-group d-flex justify-content-center mt-3 mb-2 " style="margin-bottom: 0px;">
 				<button id="btnList" type="button" class="btn btn-primary btn-sm">목록</button>
-				<button id="btnUpdate" type="button" class="btn btn-primary btn-sm ml-2 mr-2">수정</button>
-				<button id="btnDel" type="button" class="btn btn-sm btn-primary">삭제</button>
+				<c:if test="${adminLogin }">				
+					<button id="btnUpdate" type="button" class="btn btn-primary btn-sm ml-2 mr-2">수정</button>
+					<button id="btnDel" type="button" class="btn btn-sm btn-primary">삭제</button>
+				</c:if>
 			</div>
 		</div>
 	</div>

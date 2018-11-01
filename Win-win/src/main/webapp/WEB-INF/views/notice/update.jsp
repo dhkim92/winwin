@@ -89,7 +89,7 @@ td{
 		<button type="button" id="btnCancel" class="btn btn-primary ml-2">취소</button>
 	</div>	
 </div>
-
+<img src="C:/Users/user2/eclipse-workspace_spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Win-win/upload/2018_11_01_185456.png"/>
 
 
 <%@ include file="../include/scriptLoader.jsp"%>
@@ -109,6 +109,7 @@ $(document).ready(function() {
 	});
 });
 </script>
+
 <script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
@@ -122,7 +123,6 @@ nhn.husky.EZCreator.createInIFrame({
     	bUseModeChanger: true //모드 탭
     }
 });
-
 
 //‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
 function submitContents(elClickedObj) {
@@ -151,10 +151,9 @@ function delFile(event){
 	});
 }
 function pasteHTML(filepath){
-    var sHTML = '<img src="/upload/'+filepath+'">';
+	var sHTML = '<img src="/resources/image/'+filepath+'">';
     oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
 }
 </script>
-
 
 <%@ include file="../include/footer.jsp"%>

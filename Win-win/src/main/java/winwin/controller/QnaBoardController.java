@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,17 +20,18 @@ import winwin.util.Paging;
 @Controller
 public class QnaBoardController {
 
-	private static Logger logger;
+	private static Logger logger
+		= LoggerFactory.getLogger(QnaBoardController.class);
 	
 	@Autowired QnaBoardService service;
 	
 	@RequestMapping(value="/qna/list")
 	public void list(Model m,HttpServletRequest req) {
-//		int total = service.totalCnt();
-//		int curr =Integer.parseInt(req.getParameter("curPage"));
-//		Paging paging = new Paging(total, curr);
-//		List<QnaBoard> list = service.list(paging);
-//		m.addAttribute("list", list);
+		int total = service.totalCnt();
+		int curr =Integer.parseInt(req.getParameter("curPage"));
+		Paging paging = new Paging(total, curr);
+		List<QnaBoard> list = service.list(paging);
+		m.addAttribute("list", list);
 	}
 	
 	@RequestMapping(value="/qna/view", method=RequestMethod.GET)

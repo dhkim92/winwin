@@ -40,6 +40,12 @@ public class NoticeBoardController {
 	@RequestMapping(value="/notice/list")
 	public void list(Model m,HttpServletRequest req) {
 		
+		//관리자 초기 로그인 값
+		HttpSession session =  req.getSession();
+		session.setAttribute("adminLogin", true);
+		session.setAttribute("admincode", 111111);
+		session.setAttribute("adminname", "관리자");
+		
 		int total = service.totalCnt();
 		String curr =req.getParameter("curPage");
 		
@@ -72,11 +78,7 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/notice/write", method=RequestMethod.GET)
-	public void write(HttpSession session) {
-		//관리자 초기 로그인 값
-		session.setAttribute("admincode", 111111);
-		session.setAttribute("adminname", "관리자");
-	}
+	public void write() {}
 	
 	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
 	public void writeProc(@ModelAttribute("board") NoticeBoard board,HttpServletResponse resp) {
