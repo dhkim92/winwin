@@ -36,6 +36,12 @@ public interface JobopenService {
 	public void updateBasic(JobopenBasic jobopenBasic);
 	//---
 	
+	/**
+	 * 기본정보 리셋하기 (기본정보 페이지로 들어와서 수정하는 것)
+	 * @param jobopenBasic
+	 */
+	public void resetBasic(JobopenBasic jobopenBasic);
+	
 	
 	/**
 	 * 페이징처리해서 JobopenBasic 정보 리스트만들기

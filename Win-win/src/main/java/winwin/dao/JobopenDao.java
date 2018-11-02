@@ -27,5 +27,7 @@ public interface JobopenDao {
 	public int CountBasic();
 
 	public List selectBasic(Paging paging);
+	
+	public void resetBasic(JobopenBasic basic);
 
 }

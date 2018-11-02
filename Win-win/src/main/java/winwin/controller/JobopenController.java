@@ -26,10 +26,14 @@ import winwin.service.JobopenService;
  * @author 김동현
  * @category 채용 공고
  * 
- * Last Update : 18.10.10 
+ * First commit : 18.10.10 
  * 
  * memo : start winwin project
  *
+ *
+ * Last commit : 18.11.02
+ * 
+ * memo : remains update page
  */
 
 @Controller
@@ -72,8 +76,6 @@ public class JobopenController {
 	@RequestMapping(value="/basicUpdate", method=RequestMethod.GET)
 	public void basicUpdate(int jobopenNo, Model model) {
 		
-		System.out.println(jobopenNo);
-		
 		JobopenBasic basic = new JobopenBasic();
 		basic.setJobopenNo(jobopenNo);
 		
@@ -81,10 +83,35 @@ public class JobopenController {
 		
 	}
 	
+	@RequestMapping(value="/basicUpdate", method=RequestMethod.POST)
+	public String basicUpdateProc(@Validated JobopenBasic jobopenBasic, Errors errors, HttpSession session) {
+		
+		if( errors.hasErrors() ) {
+	          jobopenBasic.setStartPay(0);
+	          jobopenBasic.setEndPay(0);
+	       }
+	      
+	      if(jobopenBasic.getRulePay()==null) {
+	    	  jobopenBasic.setRulePay("0");
+	      }
+	      if(jobopenBasic.getAllOpen()==null) {
+	    	  jobopenBasic.setAllOpen("0");
+	      }
+	      
+	      jobopenBasic.setJobopenNo((int)session.getAttribute("jobopen"));
+	      
+	      jobopenService.resetBasic(jobopenBasic);
+	
+		return "redirect:detailInfo";
+		
+	}
+	
 	
 	
 	@RequestMapping(value="/detailInfo", method=RequestMethod.GET)
 	public void detail() {
+		
+		
 		
 	}
 	
@@ -116,6 +143,23 @@ public class JobopenController {
 		return "redirect:register";
 	}
 	
+	
+	@RequestMapping(value="/detailUpdate", method=RequestMethod.GET)
+	public void detailUpdate(int jobopenNo, Model model) {
+		
+		
+		JobopenBasic basic = new JobopenBasic();
+		basic.setJobopenNo(jobopenNo);
+		
+		JobopenDetail jobopenDetail = new JobopenDetail();
+		jobopenDetail.setJobopenNo(jobopenNo);
+		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
+		
+		model.addAttribute("basic", jobopenService.viewBasic(basic));
+		model.addAttribute("detail", detail);
+		
+		
+	}
 
 	
 	

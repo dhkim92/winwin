@@ -108,7 +108,7 @@
 			
 	<div class="row justify-content-center mt-5">
 		<div class="col-8">
-			<form action="/jobOpen/basicInfo" method="post" id="formId">
+			<form action="/jobOpen/basicUpdate" method="post" id="formId">
 				<div class="form-inline m-3">
 				    <div class="col-2">
 				      <label for="title">공고 제목</label>
@@ -124,7 +124,7 @@
 				    </div>
 				    <div class="col-2">
 				    	<div class="form-check-inline">
-					    	<input type="checkbox" class="form-check-input" id="classify_new" name="offer" value="신입" checked>
+					    	<input type="checkbox" class="form-check-input" id="classify_new" name="offer" value="신입">
 							<label class="form-check-label" for="classify_new">신입</label>
 						</div>
 					</div>
@@ -142,7 +142,7 @@
 			    	</div>
 			    	<div class="col-2">
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="permanent" name="form" value="정규직" checked>
+			    			<input type="checkbox" class="form-check-input" id="permanent" name="form" value="정규직">
 							<label class="form-check-label" for="permanent">정규직</label>
 			    		</div>
 			    	</div>
@@ -181,7 +181,12 @@
 			    		<div class="form-check-inline">
 			    			<a id="payCheck" style="cursor:pointer; text-decoration: underline;" class="m-2 text-black-50">급여 지정하기</a>
 			    			<!-- 급여지정 지웠다 켜졌다 하기 -->
+			    			<c:if test="${basic.startPay ne 0 }">
+			    			<div id="pay" style="visibility: visible;">
+			    			</c:if>
+			    			<c:if test="${basic.startPay eq 0 }">
 			    			<div id="pay" style="visibility: hidden;">
+			    			</c:if>
 			    				<input type="number" name="startPay" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
 			    				~
 			    				<input type="number" name="endPay" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
@@ -204,7 +209,12 @@
 			    		<div class="form-check-inline">
 			    			<a id="openCheck" style="cursor:pointer; text-decoration: underline;" class="m-2 text-black-50">날짜 지정하기</a>
 			    			<!-- 날짜지정 지웠다 켜졌다 하기 -->
-			    			<div id="open" style="visibility:hidden">
+			    			<c:if test="${basic.startDate ne null }">
+			    				<div id="open" style="visibility:visible">
+			    			</c:if>
+			    			<c:if test="${basic.startDate eq null }">
+			    				<div id="open" style="visibility:hidden">
+			    			</c:if>
 			    				<input id="startOpen" name="startDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
 			    				~
 			    				<input name="endDate" name="endDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
@@ -221,7 +231,6 @@
 		</div>
 	</div>
 </div>
-
 
 
 <%@ include file="../include/scriptLoader.jsp"%>
@@ -275,17 +284,48 @@ $(document).ready(function(){
 		}
 	});
 	
+	
+	// 모집 구분 해결
 	var offer = new Array();
 	var bOffer = "${basic.offer}";
 	offer = bOffer.split(",");
-	
-	for(var i=0;i<offer.length;i++){
-		if(offer[i]=="신입"){
-			console.log(offer[i]);
+	var j=0;
+	$('input:checkbox[name=offer]').each(function(){
+		console.log(j);
+		if(this.value==offer[j]){
+			j++;
+		this.checked = true;
 		}
+	});
+	
+	// 고용 형태 해결
+	var form = new Array();
+	var bForm = "${basic.form}";
+	form = bForm.split(",");
+	var j=0;
+	$('input:checkbox[name=form]').each(function(){
+		console.log(j);
+		if(this.value==form[j]){
+			j++;
+		this.checked = true;
+		}
+	});
+	
+	if(${basic.startPay ne 0}){
+		$('input:checkbox[name=rulePay]').attr("checked",false);
+		
+		$("input[name=startPay]").val("${basic.startPay}");
+		$("input[name=endPay]").val("${basic.endPay}");
 	}
 	
+	if(${basic.startDate ne null}){
+		$('input:checkbox[name=allOpen]').attr("checked", false);
+		
+		$("input[name=startDate]").val('<fmt:formatDate value="${basic.startDate }" pattern="yyyy-MM-dd" />');
+		$("input[name=endDate]").val('<fmt:formatDate value="${basic.endDate }" pattern="yyyy-MM-dd" />');
+	}
 	
+
 	
 });
 

@@ -73,4 +73,9 @@ public class JobopenServiceImpl implements JobopenService {
 		return paging;		
 	}
 
+	@Override
+	public void resetBasic(JobopenBasic jobopenBasic) {
+		jobopenDao.resetBasic(jobopenBasic);
+	}
+
 }

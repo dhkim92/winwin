@@ -179,7 +179,7 @@
 							<label for="academic">학&nbsp;&nbsp;&nbsp;력</label>
 						</div>
 						<div class="col-5">
-							<input type="text" id="academic" class="form-control w-100" name="academic" placeholder="ex) 4년제 대졸" required />
+							<input type="text" id="academic" class="form-control w-100" name="academic" placeholder="ex) 4년제 대졸" value="${basic.academic}" required />
 						</div>
 						<div class="col-2">
 							<div class="form-check-inline">
@@ -194,7 +194,7 @@
 							<label for="score">학&nbsp;&nbsp;&nbsp;점</label>		
 						</div>
 						<div class="col-5">
-							<input type="text" id="score" class="form-control w-100" name="score" placeholder="ex) 4.5환산 기준 3.0" required />
+							<input type="text" id="score" class="form-control w-100" name="score" placeholder="ex) 4.5환산 기준 3.0" value="${basic.score }" required />
 						</div>
 						<div class="col-2">
 							<div class="form-check-inline">
@@ -209,7 +209,7 @@
 							<label for="lang">어&nbsp;&nbsp;&nbsp;학</label>
 						</div>
 						<div class="col-5">
-							<input type="text" id="lang" class="form-control w-100" name="lang" placeholder="ex) TOEIC 600점 이상" required />
+							<input type="text" id="lang" class="form-control w-100" name="lang" placeholder="ex) TOEIC 600점 이상" value="${basic.lang }" required />
 						</div>
 						<div class="col-2">
 							<div class="form-check-inline">
@@ -224,7 +224,7 @@
 							<label for="etcQual">기타 자격</label>		
 						</div>
 						<div class="col-10">
-							<input type="text" id="etcQual" class="form-control w-100" name="etcQual" value="없음" required />
+							<input type="text" id="etcQual" class="form-control w-100" name="etcQual" value="${basic.etcQual }" required />
 						</div>
 					</div>
 					<div>
@@ -243,7 +243,7 @@
 		
 		<div class="form-group row justify-content-center">
 			<div class="col-9">
-				<textArea rows="10" id="content" name="etc" class="form-control"></textArea>
+				<textArea style="width:99%" id="content" name="etc" class="form-control" >${basic.etc }</textArea>
 			</div>	
 		</div>
 		
@@ -326,22 +326,32 @@ $(document).ready(function(){
 		});
 	});
 	
+	var arrDetail = document.getElementsByClassName("detailin");
+	for(var j=0;j<arrDetail.length;j++){
+		var arrInput = arrDetail[j].getElementsByTagName("input");
+		
+		for(var i=0;i<arrInput.length;i++){
+			console.log(arrInput[i]);
+		}
+	}
+	
+	
 	
 });
 
 </script>
 <script type="text/javascript"
- src="/resources/smarteditor/js/service/HuskyEZCreator.js"></script>
+ src="/resources/se2/js/HuskyEZCreator.js"></script>
 <script>
 var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 			oAppRef: oEditors,
 		elPlaceHolder: "content",
-		sSkinURI: "/resources/smarteditor/SmartEditor2Skin.html",
+		sSkinURI: "/resources/se2/SmartEditor2Skin.html",
 		fCreator: "createSEditor2",
 		htParams : {
 		bUseToolbar: true, // 툴바 사용여부
-		bUseVerticalResizer: false, //입력창 크기 조절바
+		bUseVerticalResizer: true, //입력창 크기 조절바
 		bUseModeChanger: true //모드 탭
 	}
 });

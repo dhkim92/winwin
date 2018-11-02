@@ -83,9 +83,9 @@
 <div class="container">
 	<div class="row m-3 justify-content-center">
 		<div style="width: 663px; height: 101px; border:1px solid #376092;">
-			<div class="boxm text-primary text-center pl-5" style="cursor:pointer;" onclick='location.href="/jobOpen/basicInfo";'><strong>기본정보</strong></div>
+			<div class="boxm text-primary text-center pl-5" style="cursor:pointer;" onclick='location.href="/jobOpen/basicUpdate?jobopenNo=${sessionScope.jobopen }";'><strong>기본정보</strong></div>
 			<div class="line"></div>
-			<div class="box text-primary text-center" style="cursor:pointer;" onclick='location.href="/jobOpen/detailInfo";'><strong>세부정보</strong></div>
+			<div class="box text-primary text-center" style="cursor:pointer;" onclick='location.href="/jobOpen/detailUpdate?jobopenNo=${sessionScope.jobopen }";'><strong>세부정보</strong></div>
 			<div class="triangle-right-primary"></div>
 			<div class="box text-light text-center" style="background-color: #376092;"><strong>등록하기</strong></div>
 		</div>		

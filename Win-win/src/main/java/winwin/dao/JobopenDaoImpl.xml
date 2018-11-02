@@ -67,5 +67,9 @@
 	<delete id="deleteDetail" parameterType="int">
 		delete from jobopenDetail where jobopenNo = #{jobopenNo}
 	</delete>
+	
+	<update id="resetBasic" parameterType="winwin.dto.JobopenBasic">
+		update jobopenBasic set title=#{title}, offer=#{offer}, form=#{form}, startPay=#{startPay}, endPay=#{endPay}, rulePay=#{rulePay}, startDate=#{startDate}, endDate=#{endDate}, allOpen=#{allOpen} where jobopenNo=#{jobopenNo}
+	</update>
   
   </mapper>
