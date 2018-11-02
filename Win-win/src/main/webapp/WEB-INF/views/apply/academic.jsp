@@ -131,7 +131,7 @@ $(document).ready(function() {
 	<form action="/apply/academic" method="POST" id="acaForm" name="acaForm">
 	
 	<h6 class="mt-5 font-weight-bold">고등학교
-		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="hsResetBtn">초기화</button>
+		<input type="button" class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="hsResetBtn" value="초기화" />
 	</h6>
 	
 	<div class="col-md-12 mt-3 p-0">
@@ -145,19 +145,18 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-                  	<input type="hidden" name="acaArr[0].userId" id="hsuserId" value="${sessionScope.id }" />
-                  	<input type="hidden" name="acaArr[0].jobopenNo" id="hsJobopenNo" value="${jobopenBasic.jobopenNo }" />
-                  	<input type="hidden" id="hsCategory" name="acaArr[0].category" value="고등학교"/>
-					<input type="text" id="hsName" name="acaArr[0].name" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
+                  	<input type="hidden" name="userId" id="hsuserId" value="${sessionScope.id }" />
+                  	<input type="hidden" name="jobopenNo" id="hsJobopenNo" value="${jobopenBasic.jobopenNo }" />
+					<input type="text" id="hsName" name="hsName" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
 					<input type="button" class="m-1 mr-1" id="hsSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
-					<select style="height:24px; width:70px;" class="hsselect" id="hsDay" name="acaArr[0].day">
+					<select style="height:24px; width:70px;" class="hsselect" id="hsDay" name="hsDay">
 						<option value="0">주/야</option>
 						<option value="주간">주간</option>
 						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-                  	<select style="height:24px; width: 110px;" class="hsselect" id="hsMajor" name="acaArr[0].major">
+                  	<select style="height:24px; width: 110px;" class="hsselect" id="hsMajor" name="hsMajor">
                   		<option value="0">전공</option>
                   		<option value="인문계">인문계</option>
                   		<option value="자연계">자연계</option>
@@ -165,8 +164,8 @@ $(document).ready(function() {
                   	</select>
                   </td>
                   <td class="align-middle">
-                  	<input class="hschoolTxt" type="date" name="acaArr[0].endDate" id="hsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select class="hsselect" style="height:24px; width: 80px;" name="acaArr[0].graduate" id="hsGraduate">
+                  	<input class="hschoolTxt" type="date" name="hsEndDate" id="hsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select class="hsselect" style="height:24px; width: 80px;" name="hsGraduate" id="hsGraduate">
                   		<option value="0">졸업구분</option>
                   		<option value="졸업">졸업</option>
                   		<option value="졸업예정">졸업예정</option>
@@ -174,7 +173,7 @@ $(document).ready(function() {
                   	</select>
                   </td>
                   <td class="align-middle">
-                    <select class="hsselect" id="hsSelect" name="acaArr[0].region">
+                    <select class="hsselect" id="hsSelect" name="hsRegion">
                   		<option value="0">지역</option>
                   		<option value="서울">서울</option>
                   		<option value="인천">인천</option>
@@ -213,36 +212,35 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-                  	<input type="hidden" name="acaArr[1].userId" id="coluserId" value="${sessionScope.id }" />
-                  	<input type="hidden" name="acaArr[1].jobopenNo" id="colJobopenNo" value="${jobopenBasic.jobopenNo }" />
-                  	<input type="hidden" id="colCategory" name="acaArr[1].category" value="전문대학"/>
-					<input type="text" id="colName" name="acaArr[1].name" class="mr-1 colTxt" style="width: 110px" readonly/>
+<%--                   	<input type="hidden" name="userId" id="coluserId" value="${sessionScope.id }" /> --%>
+                  	<input type="hidden" name="jobopenNo" id="colJobopenNo" value="${jobopenBasic.jobopenNo }" />
+					<input type="text" id="colName" name="colName" class="mr-1 colTxt" style="width: 110px" readonly/>
 					<input type="button" class="m-1 mr-1" id="colSearch" value="검색"><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
-					<select style="height:24px; width:85px;" class="colselect" id="colSelect" name="acaArr[1].branch">
+					<select style="height:24px; width:85px;" class="colselect" id="colSelect" name="colBranch">
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
 						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="colselect" id="colDay" name="acaArr[1].day">
+					<select style="height:24px; width:70px;" class="colselect" id="colDay" name="colDay">
 						<option value="0">주/야</option>
 						<option value="주간">주간</option>
 						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-					<input type="text" class="mr-1 colTxt" style="width: 100px" id="colMajor" name="acaArr[1].major" readonly/>
+					<input type="text" class="mr-1 colTxt" style="width: 100px" id="colMajor" name="colMajor" readonly/>
 					<input type="button" class="m-1 mr-1" id="colSearchM" name="colSearchM" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPI" value="취소" />					                  
- 					<input type="text" name="acaArr[1].score" id="colScore" class="mr-1 colTxt" style="width: 30px;" pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> / <input id="colTotalScore" name="acaArr[1].totalScore" type="text" class="mr-1 colTxt" style="width: 30px; " pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> 만점
+ 					<input type="text" name="colScore" id="colScore" class="mr-1 colTxt" style="width: 30px;" pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> / <input id="colTotalScore" name="colTotalScore" type="text" class="mr-1 colTxt" style="width: 30px; " pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> 만점
                   </td>
                   <td class="align-middle">
-                  	<input class="colTxt" type="date" id="colStartDate" name="acaArr[1].startDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select style="height:24px; width: 70px;" class="colselect" id="colTransfer" name="acaArr[1].transfer">
+                  	<input class="colTxt" type="date" id="colStartDate" name="colStartDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select style="height:24px; width: 70px;" class="colselect" id="colTransfer" name="colTransfer">
                   		<option value="0">입학/편입</option>
                   		<option value="입학">입학</option>
                   		<option value="편입">편입</option>
                   	</select>
-                  	<input class="colTxt" type="date" id="colEndDate" name="acaArr[1].endDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                   	<select style="height:24px; width: 70px;" class="colselect" id="colGraduate" name="acaArr[1].graduate">
+                  	<input class="colTxt" type="date" id="colEndDate" name="colEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                   	<select style="height:24px; width: 70px;" class="colselect" id="colGraduate" name="colGraduate">
                   		<option value="0">졸업구분</option>
                   		<option value="졸업">졸업</option>
                   		<option value="졸업예정">졸업예정</option>
@@ -250,7 +248,7 @@ $(document).ready(function() {
                   	</select>                 	
                   </td>
                   <td class="align-middle">
-                    <select class="colselect" id="colSelect" name="acaArr[1].region">
+                    <select class="colselect" id="colSelect" name="colRegion">
                   		<option value="0">지역</option>
                   		<option value="서울">서울</option>
                   		<option value="인천">인천</option>
@@ -289,17 +287,16 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-                  	<input type="hidden" name="acaArr[2].userId" id="univuserId" value="${sessionScope.id }" />
-                  	<input type="hidden" name="acaArr[2].jobopenNo" id="univJobopenNo" value="${jobopenBasic.jobopenNo }" />
-                  	<input type="hidden" id="univCategory" name="acaArr[2].category"value="대학교"/>
-					<input type="text" id="univName" name="acaArr[2].name" class="mr-1 univTxt" style="width: 110px" readonly/>
+<%--                   	<input type="hidden" name="userId" id="univuserId" value="${sessionScope.id }" /> --%>
+                  	<input type="hidden" name="jobopenNo" id="univJobopenNo" value="${jobopenBasic.jobopenNo }" />
+					<input type="text" id="univName" name="univName" class="mr-1 univTxt" style="width: 110px" readonly/>
 					<input type="button" class="m-1 mr-1" id="univSearch" name="univSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
-					<select style="height:24px; width:85px;" class="univselect" id="univBranch" name="acaArr[2].branch">
+					<select style="height:24px; width:85px;" class="univselect" id="univBranch" name="univBranch">
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
 						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="univselect" id="univDay" name="acaArr[2].day">
+					<select style="height:24px; width:70px;" class="univselect" id="univDay" name="univDay">
 						<option value="0">주/야</option>
 						<option value="주간">주간</option>
 						<option value="야간">야간</option>
@@ -307,26 +304,26 @@ $(document).ready(function() {
                   </td>
                   <td class="align-middle">
                   <div>
-					<input type="text" id="univMajor" name="acaArr[2].major" class="mr-1 univTxt" style="width: 100px" readonly/>
+					<input type="text" id="univMajor" name="univMajor" class="mr-1 univTxt" style="width: 100px" readonly/>
 					<input type="button" class="m-1 mr-1" id="univMSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPI" value="취소" />
 				  </div>
 				  <div>		
-					<input type="text"  id="univMinor" name="acaArr[2].minor" class="mr-1 univTxt" style="width: 100px" readonly/>
+					<input type="text"  id="univMinor" name="univMinor" class="mr-1 univTxt" style="width: 100px" readonly/>
 					<input type="button" class="m-1 mr-1" id="univMiSearch" name="univMiSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPI" value="취소" />					                  
 				  </div>
 				  </td>
 				  <td>						                  
- 					<input type="text" id="univScore" name="acaArr[2].score" class="mr-1 mt-2 univTxt" style="width: 30px; "/> / <input type="text" id="univTotalScore" name="acaArr[2].totalScore" class="mr-1 univTxt" style="width: 30px; "/> 만점
+ 					<input type="text" id="univScore" name="univScore" class="mr-1 mt-2 univTxt" style="width: 30px; "/> / <input type="text" id="univTotalScore" name="univTotalScore" class="mr-1 univTxt" style="width: 30px; "/> 만점
                   </td>
                   <td class="align-middle">
-                  	<input class="univTxt" type="date" id="univStartDate" name="acaArr[2].startDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select style="height:24px; width: 75px;" class="univselect" id="univTransfer" name="acaArr[2].transfer">
+                  	<input class="univTxt" type="date" id="univStartDate" name="univStartDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select style="height:24px; width: 75px;" class="univselect" id="univTransfer" name="univTransfer">
                   		<option value="0">입학/편입</option>
                   		<option value="입학">입학</option>
                   		<option value="편입">편입</option>
                   	</select>
-                  	<input class="univTxt" type="date" id="univEndDate" name="acaArr[2].endDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                   	<select style="height:24px; width: 75px;" class="univselect" name="acaArr[2].graduate">
+                  	<input class="univTxt" type="date" id="univEndDate" name="univEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                   	<select style="height:24px; width: 75px;" class="univselect" name="univGraduate">
                   		<option value="0">졸업구분</option>
                   		<option value="졸업">졸업</option>
                   		<option value="졸업예정">졸업예정</option>
@@ -334,7 +331,7 @@ $(document).ready(function() {
                   	</select>                 	
                   </td>
                   <td class="align-middle">
-                    <select class="univselect" id="univRegion" name="acaArr[2].region">
+                    <select class="univselect" id="univRegion" name="univRegion">
                   		<option value="0">지역</option>
                   		<option value="서울">서울</option>
                   		<option value="인천">인천</option>
@@ -373,28 +370,27 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-                  	<input type="hidden" name="acaArr[3].userId" id="gsuserId" value="${sessionScope.id }" />
-                  	<input type="hidden" name="acaArr[3].jobopenNo" id="gsJobopenNo" value="${jobopenBasic.jobopenNo }" />
-                  	<input type="hidden" id="gsCategory" name="acaArr[3].category" value="대학원"/>
-					<input type="text" id="gsName" name="acaArr[3].name" class="mr-1 gschoolTxt" style="width: 200px" />
-					<select style="height:24px; width:85px;" class="gsselect" id="gsBranch" name="acaArr[3].branch" >
+<%--                   	<input type="hidden" name="userId" id="gsuserId" value="${sessionScope.id }" /> --%>
+                  	<input type="hidden" name="jobopenNo" id="gsJobopenNo" value="${jobopenBasic.jobopenNo }" />
+					<input type="text" id="gsName" name="gsName" class="mr-1 gschoolTxt" style="width: 200px" />
+					<select style="height:24px; width:85px;" class="gsselect" id="gsBranch" name="gsBranch" >
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
 						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="gsselect" id="gsDay" name="acaArr[3].day">
+					<select style="height:24px; width:70px;" class="gsselect" id="gsDay" name="gsDay">
 						<option value="0">주/야</option>
 						<option value="주간">주간</option>
 						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-					<input type="text" id="gsName" name="acaArr[3].name" class="mr-1 gschoolTxt" style="width: 200px" />
- 					<input type="text" id="gsScore" name="acaArr[3].score" class="mr-1 gschoolTxt" style="width: 30px; "/> / <input type="text" id="gsTotalScore" name="acaArr[3].totalScore" class="mr-1 gschoolTxt" style="width: 30px; "/> 만점
+					<input type="text" id="gsMajor" name="gsMajor" class="mr-1 gschoolTxt" style="width: 200px" />
+ 					<input type="text" id="gsScore" name="gsScore" class="mr-1 gschoolTxt" style="width: 30px; "/> / <input type="text" id="gsTotalScore" name="acaArr[3].totalScore" class="mr-1 gschoolTxt" style="width: 30px; "/> 만점
                   </td>
                   <td class="align-middle">
-                  	<input type="date" name="acaArr[3].endDate" id="gsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" class="gschoolTxt"/>
-                  	<select style="height:24px; width: 80px;" class="gsselect" id="gsGraduate" name="acaArr[3].graduate">
+                  	<input type="date" name="gsEndDate" id="gsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" class="gschoolTxt"/>
+                  	<select style="height:24px; width: 80px;" class="gsselect" id="gsGraduate" name="gsGraduate">
                   		<option value="0">졸업구분</option>
                   		<option value="졸업">졸업</option>
                   		<option value="졸업예정">졸업예정</option>
@@ -402,7 +398,7 @@ $(document).ready(function() {
                   	</select>
                   </td>
                   <td class="align-middle">
-                    <select class="gsselect" id="gsRegion" name="acaArr[3].region">
+                    <select class="gsselect" id="gsRegion" name="gsRegion">
                   		<option value="0">지역</option>
                   		<option value="서울">서울</option>
                   		<option value="인천">인천</option>
