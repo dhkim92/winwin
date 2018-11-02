@@ -39,11 +39,11 @@
 		<div class="tablediv col-11 mt-3" style="border-bottom: 2px solid lightgrey">
 			<table class="table table-striped " style="border-bottom: 1px solid lightgrey">
 				<tr>
-					<th width="15%">글번호 <span class="ml-2">${jobopenBasic.jobopenNo}</span></th>
-					<th width="45%">제목 <span class="ml-3">${jobopenBasic.title}</span></th>
-					<th width="15%">작성자 <span class="ml-3">#</span></th>
-					<th width="10%">조회수<span class="ml-2">#</span></th>
-					<th width="15%">작성일<span class="ml-3"><fmt:formatDate value="${jobopenBasic.writeDate}" pattern="yyyy-MM-dd" /></span></th>
+					<th width="15%">글번호 <span class="ml-2">${basic.jobopenNo}</span></th>
+					<th width="45%">제목 <span class="ml-3">${basic.title}</span></th>
+					<th width="15%">작성자 <span class="ml-3">[관리자]</span></th>
+					<th width="10%">조회수<span class="ml-2">${basic.hit }</span></th>
+					<th width="15%">작성일<span class="ml-3"><fmt:formatDate value="${basic.writeDate}" pattern="yyyy-MM-dd" /></span></th>
 				</tr>
 			</table>
 		</div>

@@ -81,10 +81,7 @@
 <div class="container">
 	<div class="row m-3 justify-content-center">
 		<div style="width: 663px; height: 101px; border:1px solid #376092;">
-			<div class="box text-primary text-center" style="cursor:pointer;" onclick='location.href="/jobOpen/basicUpdate?jobopenNo=${sessionScope.jobopen }";'><strong>기본정보</strong></div>
-			
-			
-			
+			<div class="box text-primary text-center" style="cursor:pointer;" onclick='location.href="/jobOpen/basicInfo";'><strong>기본정보</strong></div>
 			<div class="triangle-left-primary"></div>
 			<div class="box text-light text-center" style="background-color: #376092;"><strong>세부정보</strong></div>
 			<div class="triangle-right-primary"></div>
@@ -246,7 +243,7 @@
 		
 		<div class="form-group row justify-content-center">
 			<div class="col-9">
-				<textArea style="width:99%"id="content" name="etc" class="form-control"></textArea>
+				<textArea rows="10" id="content" name="etc" class="form-control"></textArea>
 			</div>	
 		</div>
 		
@@ -334,17 +331,17 @@ $(document).ready(function(){
 
 </script>
 <script type="text/javascript"
- src="/resources/se2/js/HuskyEZCreator.js"></script>
+ src="/resources/smarteditor/js/service/HuskyEZCreator.js"></script>
 <script>
 var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 			oAppRef: oEditors,
 		elPlaceHolder: "content",
-		sSkinURI: "/resources/se2/SmartEditor2Skin.html",
+		sSkinURI: "/resources/smarteditor/SmartEditor2Skin.html",
 		fCreator: "createSEditor2",
 		htParams : {
 		bUseToolbar: true, // 툴바 사용여부
-		bUseVerticalResizer: true, //입력창 크기 조절바
+		bUseVerticalResizer: false, //입력창 크기 조절바
 		bUseModeChanger: true //모드 탭
 	}
 });

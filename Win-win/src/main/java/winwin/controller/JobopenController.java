@@ -69,6 +69,19 @@ public class JobopenController {
 		return "redirect:detailInfo";
 	}
 	
+	@RequestMapping(value="/basicUpdate", method=RequestMethod.GET)
+	public void basicUpdate(int jobopenNo, Model model) {
+		
+		System.out.println(jobopenNo);
+		
+		JobopenBasic basic = new JobopenBasic();
+		basic.setJobopenNo(jobopenNo);
+		
+		model.addAttribute("basic", jobopenService.viewBasic(basic));
+		
+	}
+	
+	
 	
 	@RequestMapping(value="/detailInfo", method=RequestMethod.GET)
 	public void detail() {
