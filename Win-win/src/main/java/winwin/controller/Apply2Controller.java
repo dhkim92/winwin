@@ -54,60 +54,69 @@ public class Apply2Controller {
 
  
 	@RequestMapping(value="/career", method=RequestMethod.POST) 
-	public String careerProc(String jobopenNo, HttpSession session, LanguageArr langArr, LicenseArr licArr, CareerArr carArr, ActivityArr actArr, ExperienceArr expArr, MaterialArr matArr) {
-
-		Language[] lang = langArr.getLangArr();
-		List<Language> langList = new LinkedList<>(Arrays.asList(lang));
-
-		List<Language> resLangList = new ArrayList<>();
-		Iterator<Language> langIter = langList.iterator();
-		
-		while(langIter.hasNext()) {
-			Language l = langIter.next();
-			
-			if(!(l.getgrade()==null) && !"0".equals(l.getgrade()) && !(l.getTestName()=="") ) {
-				resLangList.add(l);
-			}
-		}
-		
-		for(int i=0; i<resLangList.size(); i++) {
-			resLangList.get(i).setJobopenNo(3);
-			resLangList.get(i).setUserId((String)session.getAttribute("id"));
-			apply2Service.insertLanguage(resLangList.get(i));
-		}
-		
-		License[] lic = licArr.getLicArr();
-		List<License> licList = new LinkedList<>(Arrays.asList(lic));
-		
-		List<License> resLicList = new ArrayList<>();
-		Iterator<License> licIter = licList.iterator();
-		
-		while(licIter.hasNext()) {
-			License l = licIter.next();
-			
-//			if() {
-				resLicList.add(l);
+	public String careerProc(String jobopenNo, HttpSession session, /*LanguageArr langArr,*/ CareerArr carArr) {
+//
+//		Language[] lang = langArr.getLangArr();
+//		List<Language> langList = new LinkedList<>(Arrays.asList(lang));
+//
+//		List<Language> resLangList = new ArrayList<>();
+//		Iterator<Language> langIter = langList.iterator();
+//
+//		while(langIter.hasNext()) {
+//			Language l = langIter.next();
+//
+//			if(		(!(l.getgrade()==null) && !(l.getgrade()=="0")) 
+//				&& (!(l.getTestName()==null) && !(l.getTestName()=="0"))
+//				&& (!(l.getScore()==null) && !(l.getScore()==""))
+//				&& (!(l.getlDate()==null) && !(l.getlDate()==""))
+//				&& (!(l.getlOrgan()==null) && !(l.getlOrgan()==""))) {
+//				resLangList.add(l);
 //			}
-		}
+//		}
+//		
+//		for(int i=0; i<resLangList.size(); i++) {
+//			resLangList.get(i).setJobopenNo(3);
+//			resLangList.get(i).setUserId((String)session.getAttribute("id"));
+//			apply2Service.insertLanguage(resLangList.get(i));
+//		}
 		
-		for(int i=0; i<resLicList.size(); i++) {
-			resLicList.get(i).setJobopenNo(3);
-			resLicList.get(i).setUserId((String)session.getAttribute("id"));
-			apply2Service.insertLicense(resLicList.get(i));
-		}
+//		License[] lic = licArr.getLicArr();
+//		List<License> licList = new LinkedList<>(Arrays.asList(lic));
+//		
+//		List<License> resLicList = new ArrayList<>();
+//		Iterator<License> licIter = licList.iterator();
+//		System.out.println(licList.toString());
+//		while(licIter.hasNext()) {
+//			License l = licIter.next();
+			
+//			if(		(!(l.getgrade()==null) && !(l.getgrade()=="0")) 
+//					&& (!(l.getTestName()==null) && !(l.getTestName()=="0"))
+//					&& (!(l.getScore()==null) && !(l.getScore()==""))
+//					&& (!(l.getlDate()==null) && !(l.getlDate()==""))
+//					&& (!(l.getlOrgan()==null) && !(l.getlOrgan()==""))) {
+				
+//				resLicList.add(l);
+//			}
+//		}
+		
+//		for(int i=0; i<resLicList.size(); i++) {
+//			resLicList.get(i).setJobopenNo(3);
+//			resLicList.get(i).setUserId((String)session.getAttribute("id"));
+//			apply2Service.insertLicense(resLicList.get(i));
+//		}
 		
 		Career[] car = carArr.getCarArr();
 		List<Career> carList = new LinkedList<>(Arrays.asList(car));
 		
 		List<Career> resCarList = new ArrayList<>();
 		Iterator<Career> carIter = carList.iterator();
-		
+		System.out.println(carList.toString());
 		while(carIter.hasNext()) {
 			Career c = carIter.next();
 			
-//			if() {
+////			if() {
 				resCarList.add(c);
-//			}
+////			}
 		}
 		
 		for(int i=0; i<resCarList.size(); i++) {
@@ -115,70 +124,70 @@ public class Apply2Controller {
 			resCarList.get(i).setUserId((String)session.getAttribute("id"));
 			apply2Service.insertCareer(resCarList.get(i));
 		}
-		
-		
-		Activity[] act = actArr.getActArr();
-		List<Activity> actList = new LinkedList<>(Arrays.asList(act));
-		
-		List<Activity> resActList = new ArrayList<>();
-		Iterator<Activity> actIter = actList.iterator();
-		
-		while(actIter.hasNext()) {
-			Activity a = actIter.next();
-			
-//			if() {
-				resActList.add(a);
-//			}
-		}
-		
-		for(int i=0; i<resActList.size(); i++) {
-			resActList.get(i).setJobopenNo(3);
-			resActList.get(i).setUserId((String)session.getAttribute("id"));
-			apply2Service.insertActivity(resActList.get(i));
-		}
-		
-		
-		Experience[] exp = expArr.getExpArr();
-		List<Experience> expList = new LinkedList<>(Arrays.asList(exp));
-		
-		List<Experience> resExpList = new ArrayList<>();
-		Iterator<Experience> expIter = expList.iterator();
-		
-		while(expIter.hasNext()) {
-			Experience e = expIter.next();
-			
-//			if() {
-				resExpList.add(e);
-//			}
-		}
-		
-		for(int i=0; i<resExpList.size(); i++) {
-			resExpList.get(i).setJobopenNo(3);
-			resExpList.get(i).setUserId((String)session.getAttribute("id"));
-			apply2Service.insertExperience(resExpList.get(i));
-		}
-		
-		
-		Material[] mat = matArr.getMatArr();
-		List<Material> matList = new LinkedList<>(Arrays.asList(mat));
-		
-		List<Material> resMatList = new ArrayList<>();
-		Iterator<Material> matIter = matList.iterator();
-		
-		while(matIter.hasNext()) {
-			Material m = matIter.next();
-			
-//			if() {
-				resMatList.add(m);
-//			}
-		}
-		
-		for(int i=0; i<resMatList.size(); i++) {
-			resMatList.get(i).setPortfolioId(3);
-			resLicList.get(i).setUserId((String)session.getAttribute("id"));
-			apply2Service.insertMaterial(resMatList.get(i));
-		}
-		
+//		
+//		
+//		Activity[] act = actArr.getActArr();
+//		List<Activity> actList = new LinkedList<>(Arrays.asList(act));
+//		
+//		List<Activity> resActList = new ArrayList<>();
+//		Iterator<Activity> actIter = actList.iterator();
+//		
+//		while(actIter.hasNext()) {
+//			Activity a = actIter.next();
+//			
+////			if() {
+//				resActList.add(a);
+////			}
+//		}
+//		
+//		for(int i=0; i<resActList.size(); i++) {
+//			resActList.get(i).setJobopenNo(3);
+//			resActList.get(i).setUserId((String)session.getAttribute("id"));
+//			apply2Service.insertActivity(resActList.get(i));
+//		}
+//		
+//		
+//		Experience[] exp = expArr.getExpArr();
+//		List<Experience> expList = new LinkedList<>(Arrays.asList(exp));
+//		
+//		List<Experience> resExpList = new ArrayList<>();
+//		Iterator<Experience> expIter = expList.iterator();
+//		
+//		while(expIter.hasNext()) {
+//			Experience e = expIter.next();
+//			
+////			if() {
+//				resExpList.add(e);
+////			}
+//		}
+//		
+//		for(int i=0; i<resExpList.size(); i++) {
+//			resExpList.get(i).setJobopenNo(3);
+//			resExpList.get(i).setUserId((String)session.getAttribute("id"));
+//			apply2Service.insertExperience(resExpList.get(i));
+//		}
+//		
+//		
+//		Material[] mat = matArr.getMatArr();
+//		List<Material> matList = new LinkedList<>(Arrays.asList(mat));
+//		
+//		List<Material> resMatList = new ArrayList<>();
+//		Iterator<Material> matIter = matList.iterator();
+//		
+//		while(matIter.hasNext()) {
+//			Material m = matIter.next();
+//			
+////			if() {
+//				resMatList.add(m);
+////			}
+//		}
+//		
+//		for(int i=0; i<resMatList.size(); i++) {
+//			resMatList.get(i).setPortfolioId(3);
+//			resLicList.get(i).setUserId((String)session.getAttribute("id"));
+//			apply2Service.insertMaterial(resMatList.get(i));
+//		}
+//		
 		return "redirect:/apply/introduce";
 
 	}

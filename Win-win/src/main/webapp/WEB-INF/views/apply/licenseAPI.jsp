@@ -60,6 +60,7 @@
 // 		}
 		
 		$("table").on("click", ".licenseAPI", function() {
+			$("#iDiv").text($(this).attr('data-idx'));
 		    modal.style.display = "block";
 		});
 		
@@ -85,23 +86,25 @@
 		    }
 		}
 		
-		
 		$("#liBtnOk").click(function() {
 			var select = $("#license option:selected").val();
 			var write =$("#writeLicense").val();
 			
-			if($('#license').val() == "자격증을 선택하세요") {
-				$('#selectLicense').val(write);
-				modal.style.display = "none";
-				$("#writeLicense").val('');
-				
-			} else {
-				$('#selectLicense').val(select);
-				modal.style.display = "none";
-				$("#license").val('자격증을 선택하세요').trigger('change') ;
-			}
-
+			var index = $("#iDiv").text();
 			
+// 			for(var i=0; i<30; i++){
+				if($('#license').val() == "자격증을 선택하세요") {
+					$("#selectLicense"+index).val(write);
+					modal.style.display = "none";
+					$("#writeLicense").val('');
+					
+				} else {
+					$("#selectLicense"+index).val(select);
+					modal.style.display = "none";
+					$("#license").val('자격증을 선택하세요').trigger('change') ;
+				}
+
+// 			}
 		});
 		
 
@@ -148,6 +151,8 @@
 			        	<input type="text" id="writeLicense" style="width:200px;"/>
 			        </div>
 				</div>
+				
+				<div id="iDiv"></div>
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
