@@ -27,12 +27,6 @@ td {
 		<p class="font-weight-bold h3">공지사항</p>
 		<hr style="border: solid #376092;">
 	</div>
-	
-	<c:if test="${adminLogin }">
-		<div id="btn" class="text-right">
-			<button id="btnWrite" class="btn btn-primary mr-3">작성</button>
-		</div>
-	</c:if>
 		
 	<div class="d-flex justify-content-center">
 		<table class="table table-sm col-md-11 table-hover text-center">
@@ -64,7 +58,14 @@ td {
 		</tbody>
 		</table>
 	</div>
+	
+	<c:if test="${adminLogin }">
+		<div id="btn" class="text-right">
+			<button id="btnWrite" class="btn btn-primary mr-3">작성</button>
+		</div>
+	</c:if>
 	<br>
+	
 	<jsp:include page="/WEB-INF/views/util/noticepaging.jsp" />
 
 	</div>

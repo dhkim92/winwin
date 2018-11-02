@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="winwin.dao.QnaBoardDao">
- 	<select id="totalCnt" parameterType="winwin.util.Paging" resultType="winwin.dto.QnaBoard">
+ 	<select id="list" parameterType="winwin.util.Paging" resultType="winwin.dto.QnaBoard">
  		SELECT
  			B.qnaNo,
  			B.title,
@@ -27,5 +27,9 @@
  			ORDER BY rnum
  		)B
  		WHERE B.rnum BETWEEN #{startNo} AND #{endNo}
+ 	</select>
+ 	<select id="totalCnt" resultType="int">
+ 		SELECT count(*)
+ 		FROM qna
  	</select>
  </mapper>

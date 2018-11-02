@@ -6,7 +6,7 @@ public class QnaBoard {
 
 	private int qnaNo;
 	private String title;
-	private int userId;
+	private String userId;
 	private String writer;
 	private String pw;
 	private String content;
@@ -41,10 +41,10 @@ public class QnaBoard {
 	public void setQnaNo(int qnaNo) {
 		this.qnaNo = qnaNo;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getAsw_code() {
