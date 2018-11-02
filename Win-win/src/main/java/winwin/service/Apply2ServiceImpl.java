@@ -83,16 +83,16 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.updateExperience(experience);
 	}
 	
-	public void insertFile(Material file) {
-		dao.insertFile(file);
+	public void insertMaterial(Material material) {
+		dao.insertMaterial(material);
 	}
 	
-	public Material selectFile(Material file) {
-		return dao.selectFile(file);
+	public Material selectMaterial(Material material) {
+		return dao.selectMaterial(material);
 	}
 	
-	public void updateFile(Material file) {
-		dao.updateFile(file);
+	public void updateMaterial(Material material) {
+		dao.updateMaterial(material);
 	}
 	
 	public void insertIntroduce(Introduce introduce) {

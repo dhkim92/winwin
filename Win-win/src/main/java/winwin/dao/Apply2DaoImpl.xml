@@ -12,7 +12,7 @@
   
   	<insert id="insertLanguage" parameterType="winwin.dto.Language">
   		INSERT INTO language(languageNo, userId, jobopenNo, lName, grade, testName, score, lDate, lOrgan)
-  		VALUES(LANGUAGE_SEQ.NEXTVAL, #{userId }, #{jobopenNo }, '영어', #{grade }, #{testName }, #{score }, #{LDate }, #{LOrgan })
+  		VALUES(LANGUAGE_SEQ.NEXTVAL, #{userId }, #{jobopenNo }, '영어', #{grade }, #{testName }, #{score }, #{lDate }, #{lOrgan })
   	</insert>
   	
   	<insert id="insertLicense" parameterType="winwin.dto.License">
@@ -36,8 +36,8 @@
   	</insert>
   	
   	<insert id="insertMaterial" parameterType="winwin.dto.Material">
-  		INSERT INTO material(fileNo, userId, portfolioId, originName, storedName, date, filesize, path)
-  		VALUES(MATERIAL_SEQ.NEXTVAL, #{userId }, #{portfolioId }, #{originName }, #{storedName }, #{date }, #{filesize }, #{path })
+  		INSERT INTO material(fileNo, userId, portfolioId, originName, storedName, writedate, filesize)
+  		VALUES(MATERIAL_SEQ.NEXTVAL, #{userId }, #{portfolioId }, #{originName }, #{storedName }, #{writedate }, #{filesize })
   	</insert>
   	
   	<insert id="insertIntroduce" parameterType="winwin.dto.Introduce">
@@ -45,10 +45,20 @@
   		VALUES(INTRODUCE_SEQ.NEXTVAL, #{userId }, #{jobopenNo }, #{content1 }, #{content2 }, #{content3 }, #{content4 }, #{content5 })
   	</insert>  	
   	
+  	<insert id="insertSupport" parameterType="winwin.dto.Support">
+  		INSERT INTO support(passNO, jobopenNo, userId)
+  		VALUES(SUPPORT_SEQ.NEXTVAL,  #{jobopenNo }, #{userId })
+  	</insert>
+  	
+  	
+  	
   	<select id="selectIntroduce" parameterType="winwin.dto.Introduce" resultType="winwin.dto.Introduce">
   		SELECT * FROM introduce
   		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
   	</select>
+  	
+  	
+  	
   	
   	<update id="updateIntroduce" parameterType="winwin.dto.Introduce">
   		UPDATE introduce
@@ -59,10 +69,5 @@
   			content5 = #{content5 } 
   		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
   	</update>
-  	
-  	<insert id="insertSupport" parameterType="winwin.dto.Support">
-  		INSERT INTO support(passNO, jobopenNo, userId)
-  		VALUES(SUPPORT_SEQ.NEXTVAL,  #{jobopenNo }, #{userId })
-  	</insert>
   
   </mapper>

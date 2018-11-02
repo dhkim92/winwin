@@ -8,7 +8,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-			
+		
 	      $.ajax({
 	          type:"post"
 	          , url:"/apply/licenseAPI"
@@ -42,31 +42,39 @@
 	 
 		$('.js-example-basic-single').select2();
 		
-
-		
 			
 		// Get the modal
 		var modal = document.getElementById('apiModal');
 		
 		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn");
+// 		var btn = document.getElementsByClassName("licenseAPI");
 		
 		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];                                          
+		var span = document.getElementsByClassName("liClose")[0];                                          
 		
-		var btnClose = document.getElementById("btnClose");
+		var liBtnClose = document.getElementById("liBtnClose");
 		
 		// When the user clicks on the button, open the modal 
-		btn.onclick = function() {
+// 		btn.onclick = function() {
+// 		    modal.style.display = "block";
+// 		}
+		
+		$("table").on("click", ".licenseAPI", function() {
 		    modal.style.display = "block";
-		}
+		});
+		
+// 		for(var i=0; i<btn.length; i++) {
+// 			btn[i].onclick = function() {
+// 	 		    modal.style.display = "block";
+// 			}
+// 		}
 		
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {
 		    modal.style.display = "none";
 		}
 		
-		btnClose.onclick = function() {
+		liBtnClose.onclick = function() {
 		    modal.style.display = "none";
 		}
 		
@@ -78,7 +86,7 @@
 		}
 		
 		
-		$("#btnOk").click(function() {
+		$("#liBtnOk").click(function() {
 			var select = $("#license option:selected").val();
 			var write =$("#writeLicense").val();
 			
@@ -116,7 +124,7 @@
 				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
 				</div>
 				<div class="col-6">
-				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				<span class="d-flex justify-content-end mt-1"><span class="liClose">&times;</span></span>
 				</div>
 			</div>
 	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
@@ -143,8 +151,8 @@
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
-				<button type="button"  id="btnOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
-				<button type="button"  id="btnClose" class="font-weight-bold btn btn-secondary">닫기</button>
+				<button type="button"  id="liBtnOk" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">확인</button>
+				<button type="button"  id="liBtnClose" class="font-weight-bold btn btn-secondary">닫기</button>
 				</div>
 			</div>
 	      </div>

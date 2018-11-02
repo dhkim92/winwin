@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%@ include file="../include/CSSLoader.jsp"%>
 
+
 <style>
 </style>
 
@@ -111,7 +112,7 @@ $(document).ready(function() {
    		</table>
    	</div>
 
-	<form action="/apply/career" method="post">
+	<form action="/apply/career" method="post" id="career">
 	<h4 class="mt-4 mb-3 font-weight-bold">경력사항</h4><input type="hidden" value="jopopenNo" />
 	<div class="row">
 		<a href="/apply/userDetailUpdate"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
@@ -163,7 +164,7 @@ $(document).ready(function() {
                 <tr>
                 	<td colspan="7" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<input type="button" name="ABtn" value="+ 추가" />
+                	<input type="button" name="langABtn" value="+ 추가" />
                 	</td>
                 </tr>
 			</tbody>
@@ -182,15 +183,15 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" id="selectLicense" name="liName" class="mr-1" style="width:200px" /><input id="myBtn" type="button" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td>
-                  <td class="align-middle"><input type="date" name="liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
-                  <td class="align-middle"><input type="text" name="liOrgan" /></td>
+                  <td class="align-middle"><input type="text" id="selectLicense" name="licArr[0]liName" class="mr-1" style="width:200px" /><input class="licenseAPI" type="button" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td>
+                  <td class="align-middle"><input type="date" name="licArr[0]liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
+                  <td class="align-middle"><input type="text" name="licArr[0]liOrgan" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
                 <tr>
                 	<td colspan="7" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<input type="button" name="ABtn" value="+ 추가" />
+                	<input type="button" name="liABtn" value="+ 추가" />
                 	</td>
                 </tr>
 			</tbody>
@@ -224,7 +225,7 @@ $(document).ready(function() {
                 <tr>
                 	<td colspan="8" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<input type="button" name="ABtn" value="+ 추가" />
+                	<input type="button" name="carABtn" value="+ 추가" />
                 	</td>
                 </tr>
 			</tbody>
@@ -252,7 +253,7 @@ $(document).ready(function() {
                 <tr>
                 	<td colspan="8" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<input type="button" name="ABtn" value="+ 추가" />
+                	<input type="button" name="actABtn" value="+ 추가" />
                 	</td>
                 </tr>
 			</tbody>
@@ -291,7 +292,7 @@ $(document).ready(function() {
                 <tr>
                 	<td colspan="8" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<input type="button" name="ABtn" value="+ 추가" />
+                	<input type="button" name="expABtn" value="+ 추가" />
                 	</td>
                 </tr>
 			</tbody>
@@ -322,7 +323,7 @@ $(document).ready(function() {
                 <tr>
                 	<td colspan="8" class="text-center align-middle">파일 첨부시 파일첨부 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<input type="button" name="ABtn" value="+ 추가" />
+                	<input type="button" name="matABtn" value="+ 추가" />
                 	</td>
                 </tr>
 			</tbody>
@@ -351,10 +352,10 @@ $(document).ready(function() {
          </table>
    </div>
    
+   </form>
    <div class="col-12 mt-5 p-0 d-flex justify-content-end">
    	  <button class="btn btn-primary text-white" id="Btn">저장하고 계속하기</button>
    </div>
-   </form>
 
 </div>
 
@@ -405,13 +406,18 @@ $(document).ready(function() {
         }
     });
 	
-	function addForm(i) {
+	$(document).on("click","[class=licenseAPI]",function(){
+		console.log("버튼클릭");
+		
+	})
+	
+	function addLangForm(i) {
 		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
 	var i=1;
-	$(document).on("click","[name=ABtn]",function(){
+	$(document).on("click","[name=langABtn]",function(){
 		
 		
 		var test = $(this).parent().parent().parent().children().eq(1);
@@ -421,7 +427,132 @@ $(document).ready(function() {
     	$.newTr = $("<tr>"+$.trClone+"</tr>");
     	
 		
-		var a = addForm(i);
+		var a = addLangForm(i);
+
+		if( standard.length < 6 ) {
+			test.parent().children().last().before(a);
+			i++;
+    	}
+ 	});
+	
+	
+	function addLiForm(i) {
+		var form = '<tr><td class="align-middle"><input type="text" id="selectLicense" name="licArr['+i+']liName" class="mr-1" style="width:200px" /><input class="licenseAPI" type="button" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td><td class="align-middle"><input type="date" name="licArr['+i+']liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="licArr['+i+']liOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		return form;
+	}
+	
+	var i=1;
+	$(document).on("click","[name=liABtn]",function(){
+		
+		
+		var test = $(this).parent().parent().parent().children().eq(1);
+		var standard = $(this).parent().parent().parent().children('tr');
+		
+		$.trClone = test.clone().html();
+    	$.newTr = $("<tr>"+$.trClone+"</tr>");
+    	
+		
+		var a = addLiForm(i);
+
+		if( standard.length < 6 ) {
+			test.parent().children().last().before(a);
+			i++;
+    	}
+ 	});
+	
+	
+	function addCarForm(i) {
+		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		return form;
+	}
+	
+	var i=1;
+	$(document).on("click","[name=carABtn]",function(){
+		
+		
+		var test = $(this).parent().parent().parent().children().eq(1);
+		var standard = $(this).parent().parent().parent().children('tr');
+		
+		$.trClone = test.clone().html();
+    	$.newTr = $("<tr>"+$.trClone+"</tr>");
+    	
+		
+		var a = addCarForm(i);
+
+		if( standard.length < 6 ) {
+			test.parent().children().last().before(a);
+			i++;
+    	}
+ 	});
+	
+	
+	function addActForm(i) {
+		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		return form;
+	}
+	
+	var i=1;
+	$(document).on("click","[name=actABtn]",function(){
+		
+		
+		var test = $(this).parent().parent().parent().children().eq(1);
+		var standard = $(this).parent().parent().parent().children('tr');
+		
+		$.trClone = test.clone().html();
+    	$.newTr = $("<tr>"+$.trClone+"</tr>");
+    	
+		
+		var a = addActForm(i);
+
+		if( standard.length < 6 ) {
+			test.parent().children().last().before(a);
+			i++;
+    	}
+ 	});
+	
+	
+	function addExpForm(i) {
+		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		return form;
+	}
+	
+	var i=1;
+	$(document).on("click","[name=expABtn]",function(){
+		
+		
+		var test = $(this).parent().parent().parent().children().eq(1);
+		var standard = $(this).parent().parent().parent().children('tr');
+		
+		$.trClone = test.clone().html();
+    	$.newTr = $("<tr>"+$.trClone+"</tr>");
+    	
+		
+		var a = addExpForm(i);
+
+		if( standard.length < 6 ) {
+			test.parent().children().last().before(a);
+			i++;
+    	}
+ 	});
+	
+	
+	function addMatForm(i) {
+		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		return form;
+	}
+	
+	var i=1;
+	$(document).on("click","[name=matABtn]",function(){
+		
+		
+		var test = $(this).parent().parent().parent().children().eq(1);
+		var standard = $(this).parent().parent().parent().children('tr');
+		
+		$.trClone = test.clone().html();
+    	$.newTr = $("<tr>"+$.trClone+"</tr>");
+    	
+		
+		var a = addMatForm(i);
 
 		if( standard.length < 6 ) {
 			test.parent().children().last().before(a);
@@ -447,7 +578,15 @@ $('#file').on('change', function(){
 	$("#originFile").val(realName);
 	$("#fileSize").val(fileSize);
 });
+
+$('#Btn').click(function() {
+	
+	
+	
+	$('#career').submit();
+});
 </script>
 
 <%@ include file="../apply/licenseAPI.jsp"%>
+
 <%@ include file="../include/footer.jsp"%>

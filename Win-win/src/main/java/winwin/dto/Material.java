@@ -8,7 +8,7 @@ public class Material {
 	private String userId;
 	private int adminCode;
 	private int noticeNo;
-	private String portfolioId;
+	private int portfolioId;
 	private String originName;
 	private String storedName;
 	private Date writedate;
@@ -44,10 +44,10 @@ public class Material {
 	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;
 	}
-	public String getPortfolioId() {
+	public int getPortfolioId() {
 		return portfolioId;
 	}
-	public void setPortfolioId(String portfolioId) {
+	public void setPortfolioId(int portfolioId) {
 		this.portfolioId = portfolioId;
 	}
 	public String getOriginName() {

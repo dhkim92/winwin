@@ -1,9 +1,12 @@
 package winwin.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,14 +20,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.Activity;
+import winwin.dto.ActivityArr;
 import winwin.dto.Career;
+import winwin.dto.CareerArr;
 import winwin.dto.Experience;
+import winwin.dto.ExperienceArr;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
 import winwin.dto.LanguageArr;
 import winwin.dto.License;
+import winwin.dto.LicenseArr;
 import winwin.dto.Material;
+import winwin.dto.MaterialArr;
 import winwin.dto.Support;
 import winwin.service.Apply2Service;
 
@@ -33,6 +41,7 @@ import winwin.service.Apply2Service;
 public class Apply2Controller {
 	
 	@Autowired Apply2Service apply2Service;
+	@Autowired ServletContext context;
 	private static final Logger logger = LoggerFactory.getLogger(JobopenController.class);
 	
 	@RequestMapping(value="/career", method=RequestMethod.GET)
@@ -45,50 +54,137 @@ public class Apply2Controller {
 
  
 	@RequestMapping(value="/career", method=RequestMethod.POST) 
-	public String careerProc(HttpSession session, LanguageArr langArr) {
+	public String careerProc(String jobopenNo, HttpSession session, LanguageArr langArr, LicenseArr licArr, CareerArr carArr, ActivityArr actArr, ExperienceArr expArr, MaterialArr matArr) {
 
 		Language[] lang = langArr.getLangArr();
-		List<Language> langList = new LinkedList<Language>(Arrays.asList(lang));
+		List<Language> langList = new LinkedList<>(Arrays.asList(lang));
+
+		List<Language> resLangList = new ArrayList<>();
+		Iterator<Language> langIter = langList.iterator();
 		
-		for(int i=0; i<langList.size(); i++) {
-			if(langList.get(i).getgrade() == "") {
-				langList.remove(i);
-			}
+		while(langIter.hasNext()) {
+			Language l = langIter.next();
 			
+			if(!(l.getgrade()==null) && !"0".equals(l.getgrade()) && !(l.getTestName()=="") ) {
+				resLangList.add(l);
+			}
+		}
+		
+		for(int i=0; i<resLangList.size(); i++) {
+			resLangList.get(i).setJobopenNo(3);
+			resLangList.get(i).setUserId((String)session.getAttribute("id"));
+			apply2Service.insertLanguage(resLangList.get(i));
+		}
+		
+		License[] lic = licArr.getLicArr();
+		List<License> licList = new LinkedList<>(Arrays.asList(lic));
+		
+		List<License> resLicList = new ArrayList<>();
+		Iterator<License> licIter = licList.iterator();
+		
+		while(licIter.hasNext()) {
+			License l = licIter.next();
+			
+//			if() {
+				resLicList.add(l);
+//			}
+		}
+		
+		for(int i=0; i<resLicList.size(); i++) {
+			resLicList.get(i).setJobopenNo(3);
+			resLicList.get(i).setUserId((String)session.getAttribute("id"));
+			apply2Service.insertLicense(resLicList.get(i));
+		}
+		
+		Career[] car = carArr.getCarArr();
+		List<Career> carList = new LinkedList<>(Arrays.asList(car));
+		
+		List<Career> resCarList = new ArrayList<>();
+		Iterator<Career> carIter = carList.iterator();
+		
+		while(carIter.hasNext()) {
+			Career c = carIter.next();
+			
+//			if() {
+				resCarList.add(c);
+//			}
+		}
+		
+		for(int i=0; i<resCarList.size(); i++) {
+			resCarList.get(i).setJobopenNo(3);
+			resCarList.get(i).setUserId((String)session.getAttribute("id"));
+			apply2Service.insertCareer(resCarList.get(i));
 		}
 		
 		
+		Activity[] act = actArr.getActArr();
+		List<Activity> actList = new LinkedList<>(Arrays.asList(act));
 		
-//		for(int i=0; i<langArr.getLanArr[]; i++) {
-//	         apply2Service.insertLanguage(langArr);
-//	    }
-	      
-//		for(int i=0; i<license.size(); i++) {
-//	         apply2Service.insertLicense(license.get(i));
-//	    }
-//		
-//		for(int i=0; i<career.size(); i++) {
-//	         apply2Service.insertCareer(career.get(i));
-//	    }
-//		
-//		for(int i=0; i<activity.size(); i++) {
-//	         apply2Service.insertActivity(activity.get(i));
-//	    }
-//		
-//		for(int i=0; i<experience.size(); i++) {
-//	         apply2Service.insertExperience(experience.get(i));
-//	    }
-//		
-//		for(int i=0; i<file.size(); i++) {
-//	         apply2Service.insertFile(file.get(i));
-//	    }
-
+		List<Activity> resActList = new ArrayList<>();
+		Iterator<Activity> actIter = actList.iterator();
+		
+		while(actIter.hasNext()) {
+			Activity a = actIter.next();
+			
+//			if() {
+				resActList.add(a);
+//			}
+		}
+		
+		for(int i=0; i<resActList.size(); i++) {
+			resActList.get(i).setJobopenNo(3);
+			resActList.get(i).setUserId((String)session.getAttribute("id"));
+			apply2Service.insertActivity(resActList.get(i));
+		}
+		
+		
+		Experience[] exp = expArr.getExpArr();
+		List<Experience> expList = new LinkedList<>(Arrays.asList(exp));
+		
+		List<Experience> resExpList = new ArrayList<>();
+		Iterator<Experience> expIter = expList.iterator();
+		
+		while(expIter.hasNext()) {
+			Experience e = expIter.next();
+			
+//			if() {
+				resExpList.add(e);
+//			}
+		}
+		
+		for(int i=0; i<resExpList.size(); i++) {
+			resExpList.get(i).setJobopenNo(3);
+			resExpList.get(i).setUserId((String)session.getAttribute("id"));
+			apply2Service.insertExperience(resExpList.get(i));
+		}
+		
+		
+		Material[] mat = matArr.getMatArr();
+		List<Material> matList = new LinkedList<>(Arrays.asList(mat));
+		
+		List<Material> resMatList = new ArrayList<>();
+		Iterator<Material> matIter = matList.iterator();
+		
+		while(matIter.hasNext()) {
+			Material m = matIter.next();
+			
+//			if() {
+				resMatList.add(m);
+//			}
+		}
+		
+		for(int i=0; i<resMatList.size(); i++) {
+			resMatList.get(i).setPortfolioId(3);
+			resLicList.get(i).setUserId((String)session.getAttribute("id"));
+			apply2Service.insertMaterial(resMatList.get(i));
+		}
+		
 		return "redirect:/apply/introduce";
 
 	}
 		
 	@RequestMapping(value="/careerUpdate", method=RequestMethod.GET)
-	public void careerUpdate(JobopenBasic jobopenBasic, Model model, HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, Material file) {
+	public void careerUpdate(JobopenBasic jobopenBasic, Model model, HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, Material material) {
 		
 		jobopenBasic.setJobopenNo(3);	//수정
 		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
@@ -98,41 +194,16 @@ public class Apply2Controller {
 		apply2Service.selectCareer(career);
 		apply2Service.selectActivity(activity);
 		apply2Service.selectExperience(experience);
-		apply2Service.selectFile(file);
+		apply2Service.selectMaterial(material);
 		
 	}
 
 
 	@RequestMapping(value="/careerUpdate", method=RequestMethod.POST)
-	public ModelAndView careerUpdateProc
-	(@RequestParam(value="language[]")List<Language> language, @RequestParam(value="license[]")List<License> license, @RequestParam(value="career[]")List<Career> career, 
-				@RequestParam(value="activity[]")List<Activity> activity, @RequestParam(value="experience[]")List<Experience> experience, @RequestParam(value="file[]")List<Material> file) {
+	public String careerUpdateProc(LanguageArr langArr, LicenseArr licArr, CareerArr carArr, ActivityArr actArr, ExperienceArr expArr, MaterialArr matArr) {
 	
-		for(int i=0; i<language.size(); i++) {
-	         apply2Service.updateLanguage(language.get(i));
-	    }
-	      
-		for(int i=0; i<license.size(); i++) {
-	         apply2Service.updateLicense(license.get(i));
-	    }
 		
-		for(int i=0; i<career.size(); i++) {
-	         apply2Service.updateCareer(career.get(i));
-	    }
-		
-		for(int i=0; i<activity.size(); i++) {
-	         apply2Service.updateActivity(activity.get(i));
-	    }
-		
-		for(int i=0; i<experience.size(); i++) {
-	         apply2Service.updateExperience(experience.get(i));
-	    }
-		
-		for(int i=0; i<file.size(); i++) {
-	         apply2Service.updateFile(file.get(i));
-	    }
-		return null;
-      
+		return "redirect:/apply/introduce";
 
 	}
 
@@ -155,6 +226,7 @@ public class Apply2Controller {
 		apply2Service.insertIntroduce(introduce);
 		
 		return "redirect:/apply/finish";
+		
 	}
 
 
@@ -176,7 +248,9 @@ public class Apply2Controller {
 		introduce.setUserId((String)session.getAttribute("id"));
 		introduce.setJobopenNo(3);	//수정
 		apply2Service.updateIntroduce(introduce);
+		
 		return "redirect:/apply/finish";
+		
 	}
 	
 	

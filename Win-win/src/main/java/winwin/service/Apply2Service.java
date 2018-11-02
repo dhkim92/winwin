@@ -44,11 +44,11 @@ public interface Apply2Service {
 	
 	public void updateExperience(Experience experience);
 	
-	public void insertFile(Material file);
+	public void insertMaterial(Material material);
 	
-	public Material selectFile(Material file);
+	public Material selectMaterial(Material material);
 	
-	public void updateFile(Material file);
+	public void updateMaterial(Material material);
 	
 	public void insertIntroduce(Introduce introduce);
 
