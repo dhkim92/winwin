@@ -33,6 +33,7 @@
 						<tr>
 							<th class="text-center">경력</th>
 							<th class="text-center">고용형태</th>
+							<th class="text-center">직무</th>
 							<th class="text-center">학력</th>
 							<th class="text-center">학점</th>
 							<th class="text-center">어학</th>
@@ -60,7 +61,12 @@
 									<option value="파견직">파견직</option>
 									<option value="프리랜서">프리랜서</option>
 							</select></td>
-							<td class="text-center" style="width: 25%"><select multiple
+						<td class="text-center" style="width: 10%"><select multiple
+								class="form-control" id="duty" form="search" name="duty">
+									<option value="직무">직무</option>
+									<option value="직무">직무</option>
+							</select></td>
+							<td class="text-center" style="width: 15%"><select multiple
 								class="form-control" id="academiccareer" form="search" name="academiccareer">
 									<option value="대학교졸업(4년)">대학교졸업(4년)</option>
 									<option value="대학교졸업(2~3년)">대학교졸업(2~3년)</option>
@@ -102,11 +108,13 @@
 									<option value="처리 후">처리 후</option>
 							</select></td>
 						</tr>
+						
+						
 						<tr>
 							<th class="text-center" colspan="1"
 								style="background-color: #eee; padding: 0px; line-height: 2.5;">
 								공고명</th>
-							<td colspan="6"><select class="custom-select"
+							<td colspan="7"><select class="custom-select"
 								style="width: 457px;" id="title" name="title" form="search">
 									<option value="0" style="width: 457px">공고명을 선택해 주십시오!</option>
 									<option style="width: 457px;">아파트</option>
@@ -116,11 +124,12 @@
 							</select></td>
 						</tr>
 						<tr>
-							<td colspan="7" style="height: 90px">
+							<td colspan="8" style="height: 90px">
 							<div class="row">
 							<div class="col-10">
 							<div class="box text-center" id=careerbox style="width:8em;"></div>
 							<div class="box text-center" id=employmentbox style="width:7em;"></div>
+							<div class="box text-center" id=dutybox style="width:7em;"></div>
 							<div class="box text-center" id=academiccareerbox style="width:11em;"></div>
 							<div class="box text-center" id=creditbox style="width:6em;"></div>
 							<div class="box text-center" id=languagebox style="width:10em;"></div>
@@ -156,6 +165,7 @@
 						<tr>
 							<th class="text-center">번호</th>
 							<th class="text-center">공 고 명</th>
+							<th class="text-center">직무</th>
 							<th class="text-center">지원 일자</th>
 							<th class="text-center">지원자</th>
 							<th class="text-center">포트폴리오</th>
@@ -168,6 +178,7 @@
 							<tr>
 								<th scope="row" class="text-center align-middle">${SupportBoard.passNo }</th>
 								<td class="text-center align-middle">${SupportBoard.title }</td>
+								<td class="text-center align-middle">직무</td>
 								<td class="text-center align-middle"><fmt:formatDate
 										value="${SupportBoard.applyDate}" pattern="yy.MM.dd" /></td>
 								<td class="text-center align-middle">${SupportBoard.userId }</td>
@@ -242,9 +253,35 @@ $("#career option:selected").val();
 					}
 				}
 			});
-			$("#employmentbox").on("click", "#employmentclose", function(){
-				$("employmentbox").html("");
+			$("#employmentbox").on("click", "#employmentbox", function(){
+				$("#employmentbox").html("");
 				$("#employmentbox").hide();
+			});
+		});
+			
+			$("#dutybox").hide();
+			$("#duty").click(function() {
+
+				var duty = $("#duty option:selected").val();
+
+				$.ajax({
+					type : 'POST',
+					url : "/support/search",
+					dataType : "json",
+					data : {
+						duty : duty
+					},
+
+					success : function(data) {
+						if (data.success == true) {
+							$("#dutybox").html(data.duty+"<i class='fas fa-backspace ml-2' id='dutyclose' style='cursor: pointer'></i>")
+							$("#dutybox").show();
+						}
+					}
+				});
+			$("#dutybox").on("click", "#dutyclose", function(){
+				$("#dutybox").html("");
+				$("#dutybox").hide();
 			});
 		});
 
@@ -397,6 +434,8 @@ $("#career option:selected").val();
 					}
 				}
 			});
+			
+			$("#title").val("0").prop("selected", true);
 		});
 
 	});

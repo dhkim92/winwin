@@ -45,8 +45,8 @@ public class SupportBoardController {
 
 	@RequestMapping(value = "/support/search", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<Object, Object> listProcess(String career, String employment, String academiccareer, String credit,
-			String language, String score, String status, String clear) {
+	public Map<Object, Object> listProcess(String career, String employment, String duty, String academiccareer,
+			String credit, String language, String score, String status, String clear) {
 
 		Map<Object, Object> map = new HashMap<Object, Object>();
 
@@ -55,6 +55,7 @@ public class SupportBoardController {
 		map.put("success", success);
 		map.put("career", career);
 		map.put("employment", employment);
+		map.put("duty", duty);
 		map.put("academiccareer", academiccareer);
 		map.put("credit", credit);
 		map.put("language", language);
