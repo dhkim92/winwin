@@ -60,7 +60,7 @@ public class Apply1Controller {
 		
 		logger.info(userDetail.toString());
 		
-		return "redirect:/apply/academic?jobopenNo="+userDetail.getjobopenNo();
+		return "redirect:/apply/academic?jobopenNo="+userDetail.getJobopenNo();
 	}
 
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.GET)
