@@ -68,7 +68,7 @@
 							<th scope="row" class="text-right">
 								<input class="form-check-input" type="checkbox" id="rememberid">
 							</th>
-							<td>
+							<td colspan="2">
 								<strong>아이디저장하기</strong>
 							</td>
 						</tr>

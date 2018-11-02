@@ -246,7 +246,6 @@ $(function() {
 				
 				success : function(data) {
 				if (data.success > 0) {
-					console.log(data.userid);
 					var modal = document.getElementById('myModal');
 					modal.style.display = "block";
 					var span = document.getElementsByClassName("close")[0];
@@ -317,6 +316,19 @@ $(function() {
 					alert("잘못된 이메일 형식 입니다.");
 					$("#userid").focus();
 				} else {
+					
+					var modal = document.getElementById('myModal');
+					modal.style.display = "block";
+					var span = document.getElementsByClassName("close")[0];
+					
+										
+					span.onclick = function() {
+						modal.style.display = "none";
+					}
+
+					
+					$('#idChecking').html("잠시만 기다려 주십시오 . . . .");
+					$("#btnClose").attr("disabled", "disabled");
 
 				$.ajax({
 					type : 'POST',
@@ -326,11 +338,9 @@ $(function() {
 						username2 : username2,
 						userid : userid
 					},
-
 					
 					success : function(data) {
 					if (data.success > 0) {
-						console.log(data.userid);
 						var modal = document.getElementById('myModal');
 						modal.style.display = "block";
 						var span = document.getElementsByClassName("close")[0];
@@ -344,6 +354,7 @@ $(function() {
 							modal.style.display = "none";
 						}
 						$('#idChecking').html("회원님의 이메일로 임시비밀번호를 발송했습니다");
+						$("#btnClose").removeAttr("disabled");
 
 							} else {
 								var modal = document.getElementById('myModal');

@@ -223,7 +223,7 @@
 	
 	// 비밀번호 형식 체크
 	function validatePwd(pwd) {
-		var filter = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,16}$/;
+		var filter = /(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*]).{8,16}$/;
 		if (filter.test(pwd)) {
 		return true;
 	} else {
