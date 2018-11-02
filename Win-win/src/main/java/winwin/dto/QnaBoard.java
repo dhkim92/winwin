@@ -16,12 +16,20 @@ public class QnaBoard {
 	private String asw_writer;
 	private String asw_content;
 	private String asw_date;
+	private int commentCnt;
 	
 	@Override
 	public String toString() {
 		return "QnaBoard [qnaNo=" + qnaNo + ", title=" + title + ", userId=" + userId + ", writer=" + writer
 				+ ", content=" + content + ", hit=" + hit + ", date=" + writedate + ", asw_code=" + asw_code
 				+ ", asw_writer=" + asw_writer + ", asw_content=" + asw_content + ", asw_date=" + asw_date + "]";
+	}
+	
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
 	}
 	public String getPw() {
 		return pw;

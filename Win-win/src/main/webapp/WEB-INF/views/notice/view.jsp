@@ -24,7 +24,6 @@
 </c:if>
 
 <div class= "container">
-<div class= "container">
 
 	<div class="col-12 mt-5">
 		<p class="font-weight-bold h3">공지사항</p>
@@ -72,7 +71,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 
  <div id="myModal" class="modal">

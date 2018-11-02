@@ -32,4 +32,26 @@
  		SELECT count(*)
  		FROM qna
  	</select>
+ 	<select id="view" parameterType="winwin.dto.QnaBoard" resultType="winwin.dto.QnaBoard">
+ 		SELECT
+ 			qnaNo,
+ 			title,
+ 			userId,
+ 			writer,
+ 			pw,
+ 			content,
+ 			hit,
+ 			writedate,
+ 			asw_code,
+ 			asw_writer,
+ 			asw_content,
+ 			asw_date,
+ 			(SELECT count(*)
+ 			FROM qna_comment
+ 			WHERE qnano = #{qnaNo})commentCnt
+ 		FROM qna
+ 		WHERE qnano = #{qnaNo}
+ 	</select>
+ 	
+ 	
  </mapper>

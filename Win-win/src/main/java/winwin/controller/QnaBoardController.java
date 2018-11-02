@@ -1,5 +1,6 @@
 package winwin.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,12 +49,22 @@ public class QnaBoardController {
 		m.addAttribute("list", list);
 		m.addAttribute("paging", paging);
 	}
+	@RequestMapping(value="/qna/list", method=RequestMethod.POST)
+	public void listProc(QnaBoard board) {
+		QnaBoard resBoard = service.view(board);
+		if(board.getPw().equals(resBoard.getPw())) {
+		
+		}else {
+			int i = 4/0; //에러발생시키기
+		}
+	}
+	
 	
 	@RequestMapping(value="/qna/view", method=RequestMethod.GET)
 	public void view(QnaBoard board,Model m) {
-//		QnaBoard resBoard = service.view(board);
+		QnaBoard resBoard = service.view(board);
 //		List<QnaComment> comments = service.selectCommentByBoardNo(board);
-//		m.addAttribute("board", resBoard);
+		m.addAttribute("board", resBoard);
 //		m.addAttribute("comments", comments);
 		
 	}

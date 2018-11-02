@@ -128,7 +128,6 @@ $("#qnaTable").on("click",".view",function(){
 	int qnano = $(this).parent().children().eq(0).text();
 	$("#qnaNo").val(qnano);
 	onFiles();
-
 });
 
 function onFiles(){
@@ -155,20 +154,19 @@ function onFiles(){
 			modal.style.display = "none";
 		 	$.ajax({
 			type:"post"
-			,url:"/board/view"
+			,url:"/qna/list"
 			,data: data
 			,dataType:"json"
-			, success:function(data){	
-					$(location).attr("href","/qna/view?qnaNo="+qnaNo);
+			, success:function(data){
+				$(location).attr("href","/qna/view?qnaNo="+qnaNo);
 			},error:function(){
-					alert("패스워드와 일치하지 않습니다");
+					alert("패스워드가 일치하지 않습니다");
 				}
 			});
 		}
 		
 	}
 }
-
 
 </script>
 
