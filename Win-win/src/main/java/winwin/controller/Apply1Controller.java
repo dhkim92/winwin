@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import winwin.dto.Academic;
-import winwin.dto.AcademicArr;
+import winwin.dto.College;
+import winwin.dto.GSchool;
+import winwin.dto.HighSchool;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Member;
 import winwin.dto.Military;
+import winwin.dto.University;
 import winwin.dto.UserDetail;
 import winwin.service.Apply1Service;
 
@@ -75,7 +77,7 @@ public class Apply1Controller {
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.POST)
 	public ModelAndView userDetailUpdateProc(UserDetail userDetail) {
 		
-		apply1Service.updateUserDetail(userDetail);
+//		apply1Service.updateUserDetail(userDetail);
 		return null;
 	}
 
@@ -95,32 +97,36 @@ public class Apply1Controller {
 		model.addAttribute("jobopenBasic", jobOpen);
 
 	}
+	
 
 	@RequestMapping(value="/academic", method=RequestMethod.POST)
-	public String academicProc(HttpSession session, AcademicArr acaArr) {
-		
-		logger.info(acaArr.toString());
-		int jobopenNo = acaArr.getAcaArr()[0].getJobopenNo();
-		logger.info("jobopenNo : " + jobopenNo);
+	public String academicProc(HighSchool highSchool, College college, University university, GSchool gSchool) {
 		
 		
-//		apply1Service.insertAcademic(academic);
-
-		return "redirect:/apply/military?jobopenNo="+jobopenNo;
+		logger.info("academic POST 활성화");
+		logger.info("HighSchool : " + highSchool);
+		logger.info("College : " + college);
+		logger.info("University : " + university);
+		logger.info("GSchool : " + gSchool);
+		
+		
+		return "redirect:/apply/military?jobopenNo="+highSchool.getJobopenNo();
 	}
 	
 	@RequestMapping(value="/academicUpdate", method=RequestMethod.GET)
-	public void academicUpdate(JobopenBasic jobopenBasic, Academic academic, HttpSession session, Model model) {
+	public void academicUpdate(JobopenBasic jobopenBasic, HighSchool highSchool, College college, University university, GSchool gSchool, HttpSession session, Model model) {
 		
 		apply1Service.viewJobOpen(jobopenBasic);
-		apply1Service.selectAcademic(academic);
+		apply1Service.selectHighSchool(highSchool);
+		apply1Service.selectCollege(college);
+		apply1Service.selectUniversity(university);
+		apply1Service.selectGSchool(gSchool);
 
 	}
 
 	@RequestMapping(value="/academicUpdate", method=RequestMethod.POST)
-	public ModelAndView academicUpdateProc(Academic academic) {
+	public ModelAndView academicUpdateProc() {
 		
-		apply1Service.updateAcademic(academic);
 		return null;
 	}
 

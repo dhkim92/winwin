@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import winwin.dao.Apply1Dao;
-import winwin.dto.Academic;
+import winwin.dto.College;
+import winwin.dto.GSchool;
+import winwin.dto.HighSchool;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Military;
+import winwin.dto.University;
 import winwin.dto.Member;
 import winwin.dto.UserDetail;
 
@@ -37,17 +40,7 @@ public class Apply1ServiceImpl implements Apply1Service {
 		dao.updateUserDetail(userDetail);
 	}
 	
-	public void insertAcademic(Academic academic) {
-		dao.insertAcademic(academic);
-	}
-	
-	public Academic selectAcademic(Academic academic) {
-		return dao.selectAcademic(academic);
-	}
-	
-	public void updateAcademic(Academic academic) {
-		dao.updateAcademic(academic);
-	}
+
 	public void insertMilitary(Military military) {
 		dao.insertMilitary(military);
 	}
@@ -58,6 +51,79 @@ public class Apply1ServiceImpl implements Apply1Service {
 	
 	public void updateMilitary(Military military) {
 		dao.updateMilitary(military);
+	}
+
+
+	@Override
+	public void insertHighSchool(HighSchool highSchool) {
+		dao.insertHighSchool(highSchool);
+		
+	}
+
+
+	@Override
+	public void insertCollege(College college) {
+		dao.insertCollege(college);
+	}
+
+
+	@Override
+	public void insertUniversity(University university) {
+		dao.insertUniversity(university);
+	}
+
+
+	@Override
+	public void insertGSchool(GSchool gSchool) {
+		dao.insertGSchool(gSchool);
+	}
+
+
+	@Override
+	public HighSchool selectHighSchool(HighSchool highSchool) {
+		return dao.selectHighSchool(highSchool);
+	}
+
+
+	@Override
+	public College selectCollege(College college) {
+		return dao.selectCollege(college);
+	}
+
+
+	@Override
+	public University selectUniversity(University university) {
+		return dao.selectUniversity(university);
+	}
+
+
+	@Override
+	public GSchool selectGSchool(GSchool gSchool) {
+		return dao.selectGSchool(gSchool);
+	}
+
+
+	@Override
+	public void updateHighSchool(HighSchool highSchool) {
+		dao.updateHighSchool(highSchool);
+	}
+
+
+	@Override
+	public void updateCollege(College college) {
+		dao.updateCollege(college);
+	}
+
+
+	@Override
+	public void updateUniversity(University university) {
+		dao.updateUniversity(university);
+	}
+
+
+	@Override
+	public void updateGSchool(GSchool gSchool) {
+		dao.updateGSchool(gSchool);
 	}
 
 
