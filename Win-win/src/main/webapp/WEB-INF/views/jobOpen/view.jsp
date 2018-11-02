@@ -125,7 +125,7 @@
 							    	</div>
 							    	<div class="col-10" >
 							    	<c:if test="${basic.startDate ne null }">
-							    		<span>${basic.startDate }</span> ~ <span>${basic.endDate }</span>
+	    					    		<span><fmt:formatDate value="${basic.startDate }" pattern="yyyy-MM-dd" /></span> ~ <span><fmt:formatDate value="${basic.endDate }" pattern="yyyy-MM-dd" /></span>
 							    	</c:if>
 							    	<c:if test="${basic.startDate eq null }">
 							    		<span>${basic.allOpen }</span>

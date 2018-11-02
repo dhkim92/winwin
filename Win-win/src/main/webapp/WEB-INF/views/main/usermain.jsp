@@ -61,13 +61,15 @@
 				<td>${JobopenBasic.offer }</td>
 				<td><a href="/jobOpen/view?boardNo=${JobopenBasic.jobopenNo}" style="text-decoration: none;">${JobopenBasic.title }</a></td>
 				<td>
-					<c:if test="${JobopenBasic.allOpen eq null }">
+					<c:if test="${JobopenBasic.allOpen eq '0' }">
 						<fmt:formatDate value="${JobopenBasic.startDate }" pattern="yyyy-MM-dd" />&nbsp;-&nbsp;<fmt:formatDate value="${JobopenBasic.endDate }" pattern="yyyy-MM-dd" />
 					</c:if>
-						${JobopenBasic.allOpen }
+					<c:if test="${JobopenBasic.allOpen ne '0' }">
+						상시채용
+					</c:if>	
 				</td>
 				<td>
-					<c:if test="${JobopenBasic.allOpen eq '상시 채용'}">
+					<c:if test="${JobopenBasic.allOpen ne '0'}">
 						<span class="badge badge-pill badge-primary  font-weight-bold">채용중</span>
 					</c:if>
 					

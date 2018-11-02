@@ -79,8 +79,9 @@
 			<td colspan="3">
 					<select class="ml-4" id="jobTitle" style="width: 500px;">
 						<c:forEach items="${list }" var="JobopenBasic">
-							<option value="${JobopenBasic.jobopenNo}">${JobopenBasic.title}</option>						
-						</c:forEach>	
+<%-- 							<option value="${JobopenBasic.jobopenNo}">${JobopenBasic.title}</option>						 --%>
+							<option></option>						
+						</c:forEach>
 					</select>
 					<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();">지원하기</button>
 			</td>
@@ -130,6 +131,51 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+		
+		(function() {
+			$.ajax({
+		          type:"post"
+		          , url:"/applyMenu/selectApply"
+		          , dataType: "json"
+		          , success: function( data ) {
+		        	 
+		        	  console.log(data.result1);
+			            
+		        	  $("#jobTitle").find("option").remove();
+
+		        	  
+			             var list = data.result1;
+			             
+			             var title = new Array();
+			             var no = new Array();
+			             var end = new Array();
+			             
+			             var date = new Date();
+			             date.setHours(0, 0, 0, 0);
+			             
+			             for(var i=0; i<list.length; i++) {
+			            	 title[i] = list[i].title;
+			            	 no[i] = list[i].jobopenNo;
+			            	 end[i] = list[i].endDate;
+			            	 
+			            	 if(end[i] == null || date <= end[i]) {
+			            		 
+				                $("#jobTitle").append(
+				                   $("<option>").attr(
+				                      "value", no[i]
+				                   ).text(title[i])
+				                );
+			            	 }
+			             }
+						
+		        	  
+		          }, error: function() {
+		             alert("error");
+		          }
+		       })
+		})();
+
+		
 		$("#exampleRadios2").click(function(){
 			
 			//여기다가 ajax로 경력 select 해서 가져오기 
@@ -140,7 +186,7 @@
 		          , dataType: "json"
 		          , success: function( data ) {
 		        	 
-		        	  console.log(data.result2);
+		        	  console.log(data.result1);
 			            
 		        	  $("#jobTitle").find("option").remove();
 
@@ -149,16 +195,24 @@
 			             
 			             var title = new Array();
 			             var no = new Array();
+			             var end = new Array();
+			             
+			             var date = new Date();
+			             date.setHours(0, 0, 0, 0);
 			             
 			             for(var i=0; i<list.length; i++) {
 			            	 title[i] = list[i].title;
 			            	 no[i] = list[i].jobopenNo;
+			            	 end[i] = list[i].endDate;
 			            	 
-			                $("#jobTitle").append(
-			                   $("<option>").attr(
-			                      "value", no[i]
-			                   ).text(title[i])
-			                );
+			            	 if(end[i] == null || date <= end[i]) {
+			            		 
+				                $("#jobTitle").append(
+				                   $("<option>").attr(
+				                      "value", no[i]
+				                   ).text(title[i])
+				                );
+			            	 }
 			             }
 						
 		        	  
@@ -189,16 +243,24 @@
 			             
 			             var title = new Array();
 			             var no = new Array();
- 			             
+			             var end = new Array();
+			             
+			             var date = new Date();
+			             date.setHours(0, 0, 0, 0);
+			             
 			             for(var i=0; i<list.length; i++) {
 			            	 title[i] = list[i].title;
 			            	 no[i] = list[i].jobopenNo;
+			            	 end[i] = list[i].endDate;
 			            	 
-			                $("#jobTitle").append(
-			                   $("<option>").attr(
-			                      "value", no[i]
-			                   ).text(title[i])
-			                );
+			            	 if(end[i] == null || date <= end[i]) {
+			            		 
+				                $("#jobTitle").append(
+				                   $("<option>").attr(
+				                      "value", no[i]
+				                   ).text(title[i])
+				                );
+			            	 }
 			             }
 						
 		        	  

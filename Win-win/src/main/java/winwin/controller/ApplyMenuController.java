@@ -1,7 +1,5 @@
 package winwin.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,17 +10,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.JobopenBasic;
 import winwin.dto.Member;
 import winwin.service.ApplyMenuService;
-import winwin.service.MemberService;
 
 @Controller
 @RequestMapping(value="/applyMenu")
@@ -50,6 +44,9 @@ public class ApplyMenuController {
 		
 		map.put("result1", list1);
 		map.put("result2", list2);
+		
+		System.out.println("end날짜 확인" +list2);
+		
 		return map;
 		
 		

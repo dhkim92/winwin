@@ -299,6 +299,7 @@
 	          , success: function( data ) {
 	        	  
 	        	  if(data.pwCheck > 0 ) {
+	        		  
 	        			// Get the modal
 	        			var modal = document.getElementById('myModal');
 	        			
@@ -321,6 +322,30 @@
 	        			$("#ModalContent").html("귀하의 #### 지원에 대한 결과는 합격/불합격 입니다.")
 	        		  
 	        	  } else {
+	        		  
+	        		  if ( $("#pw").val() == "") {
+		        			// Get the modal
+		        			var modal = document.getElementById('myModal');
+		        			
+		        			modal.style.display = "block";
+		        			
+		        			// Get the <span> element that closes the modal
+		        			var span = document.getElementsByClassName("close")[0];     
+
+		        			var btnClose = document.getElementById("btnClose");
+		        			
+		        			// When the user clicks on <span> (x), close the modal
+		        			span.onclick = function() {
+		        			    modal.style.display = "none";
+		        			}
+		        			
+		        			btnClose.onclick = function() {
+		        			    modal.style.display = "none";
+		        			}
+		        			
+		        			$("#ModalContent").html("비밀번호를 입력해주세요.")
+	        		  } else {
+	        			  
 	        			// Get the modal
 	        			var modal = document.getElementById('myModal');
 	        			
@@ -341,6 +366,7 @@
 	        			}
 	        			
 	        			$("#ModalContent").html("비밀번호가 일치하지 않습니다.")
+	        		  }
 	        			
 	        	  }
 		        	  
