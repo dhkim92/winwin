@@ -5,4 +5,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="winwin.dao.MainDao">
+  
+  <select id="countQnAUnanswered" resultType="int">
+  	
+  	select count(*) fROM qna q WHERE length(q.asw_code)>0
+  
+  </select>
+  
+  <select id="allCountQnA" resultType="int">
+  	select count(*) fROM qna
+  </select>
+  
   </mapper>

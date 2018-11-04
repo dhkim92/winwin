@@ -76,7 +76,7 @@ td {
 				</td>
 				<td>${JobopenBasic.hit }</td>
 				<td>
-					<c:if test="${JobopenBasic.allOpen eq '상시 채용'}">
+					<c:if test="${JobopenBasic.allOpen ne '0'}">
 						<span class="badge badge-pill badge-primary  font-weight-bold">채용중</span>
 					</c:if>
 					

@@ -39,8 +39,8 @@
 		<div class="tablediv col-11 mt-3" style="border-bottom: 2px solid lightgrey">
 			<table class="table table-striped " style="border-bottom: 1px solid lightgrey">
 				<tr>
-					<th width="15%">글번호 <span class="ml-2">${basic.jobopenNo}</span></th>
-					<th width="45%">제목 <span class="ml-3">${basic.title}</span></th>
+					<th width="15%">글번호 <span class="ml-2" id="jobopenNo">${basic.jobopenNo}</span></th>
+					<th width="45%">제목 <span class="ml-3" id="title">${basic.title}</span></th>
 					<th width="15%">작성자 <span class="ml-3">[관리자]</span></th>
 					<th width="10%">조회수<span class="ml-2">${basic.hit }</span></th>
 					<th width="15%">작성일<span class="ml-3"><fmt:formatDate value="${basic.writeDate}" pattern="yyyy-MM-dd" /></span></th>
@@ -236,14 +236,100 @@
 	<div class="d-flex justify-content-center">
 		<div class="col-11 mt-3" style="border-top: 2px solid lightgrey; ">
 	    	<div id="btns" class="form-group d-flex justify-content-center mt-3 mb-2 " style="margin-bottom: 0px;">
-				<button id="btnList" type="button" class="btn btn-primary btn-sm">목록</button>
-				<a href="/jobOpen/delete?boardNo=${jobopenBasic.jobopenNo}"><button id="btnDel" type="button" class="btn btn-sm btn-primary ml-3">삭제</button></a>
+				<a href="/jobOpen/list"><button id="btnList" type="button" class="btn btn-primary btn-sm">목록</button></a>
+					<c:if test="${adminLogin }">
+				<a href="/jobOpen/delete?boardNo=${basic.jobopenNo}"><button id="btnDel" type="button" class="btn btn-sm btn-primary ml-3">삭제</button></a>
+					</c:if>
+				<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();">지원하기</button>
 			</div>
 		</div>
 	</div>
 	
 </div>
 </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	      	
+	      	<div class="row">
+				<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+				</div>
+				<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+				</div>
+			</div>
+	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	     	<div>
+	     	<div class="mt-4">
+	        <p class="font-weight-bold text-center">로그인이 필요합니다</p> 
+	<!--         <select id="license" class="js-example-basic-single" > -->
+	<!-- 		</select> -->
+			</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+				<button type="button" id="btnClose" class="font-weight-bold btn btn-secondary">닫기</button>
+				</div>
+			</div>
+	      </div>
+	 
+	    </div>
+    </div>
+
+<script type="text/javascript">
+
+function selectsubmit(){
+       var jobopenNo = document.getElementById("jobopenNo").innerHTML;
+       var title = document.getElementById("title").innerHTML;
+
+			var applyData = { "title": title, "jobopenNo": jobopenNo };
+
+			$.ajax({
+		          type:"post"
+		          , url:"/applyMenu/sessionCheck"
+		          , dataType: "json"
+		          , success: function( data ) {
+		        	  
+		        	  console.log(data.result);
+		        	  
+		        	  if(data.result > 0 ) {
+		        		  location.href = "/apply/userDetail?title="+title+"&jobopenNo="+jobopenNo;
+		        	  } else {
+		        			// Get the modal
+		        			var modal = document.getElementById('myModal');
+		        			
+		        			modal.style.display = "block";
+		        			
+		        			// Get the <span> element that closes the modal
+		        			var span = document.getElementsByClassName("close")[0];     
+
+		        			var btnClose = document.getElementById("btnClose");
+		        			
+		        			// When the user clicks on <span> (x), close the modal
+		        			span.onclick = function() {
+		        			    modal.style.display = "none";
+		        			}
+		        			
+		        			btnClose.onclick = function() {
+		        			    modal.style.display = "none";
+		        			}
+		        			
+		        	  }
+			        	  
+		          }, error: function() {
+		             alert("error");
+		          }
+		       })
+		  	
+}
+
+</script>
 
 <%@ include file="../include/scriptLoader.jsp"%>
 <%@ include file="../include/footer.jsp"%>

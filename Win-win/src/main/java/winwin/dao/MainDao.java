@@ -11,6 +11,9 @@ public interface MainDao {
 	public void getQnABoard();
 	
 	public int countApplicants(JobopenBasic jobopenBasic);
+
+	public int countQnAUnanswered();
+
+	public int allCountQnA();
 	
-//	public int countQnAUnanswered(QNA qan);
 }

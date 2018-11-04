@@ -64,7 +64,11 @@ public class MainController {
 //		mainService.countApplicants(jobopenBasic);
 
 		//Q&A 답변이 완료되지않은 문의사항 갯수세기 
-//		 mainService.countQnAUnanswered(qna);
+		 int commentCnt = mainService.countQnAUnanswered();
+		 
+		 System.out.println("미답변 갯수 :" + commentCnt);
+		 
+		 model.addAttribute("commentCnt", commentCnt);
 		
 	}
 	

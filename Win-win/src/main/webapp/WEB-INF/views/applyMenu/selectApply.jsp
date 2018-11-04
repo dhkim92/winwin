@@ -52,7 +52,7 @@
 	</div>
 
 	<div class="mt-5">
-	<table class="table table-bordered table-sm border-secondary col-8 " align="center">
+	<table class="table table-bordered table-sm border-secondary col-8 " align="center" >
 	<tbody>
 		<tr>
 			<th class="text-center align-middle bg-secondary pr-3 pl-3">채용분류</th>
@@ -77,17 +77,20 @@
 		<tr>
 			<th class="text-center align-middle bg-secondary pr-3 pl-3">채용공고</th>
 			<td colspan="3">
-					<select class="ml-4" id="jobTitle" style="width: 500px;">
-						<c:forEach items="${list }" var="JobopenBasic">
-<%-- 							<option value="${JobopenBasic.jobopenNo}">${JobopenBasic.title}</option>						 --%>
-							<option></option>						
-						</c:forEach>
-					</select>
-					<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();">지원하기</button>
+				<select class="ml-4" id="jobTitle" style="width: 300px;height: 25px; ">
+					<c:forEach items="${list }" var="JobopenBasic">
+						<option></option>						
+					</c:forEach>
+				</select>
 			</td>
+			
 		</tr>
 	</tbody>
 	</table>
+	</div>
+
+	<div class="d-flex justify-content-end" style="margin-right: 132px;">
+	<button type="button" class="btn btn-primary btn-sm ml-3 mr-5" onclick="selectsubmit();" >지원하기</button>
 	</div>
 
 </div>
@@ -186,7 +189,7 @@
 		          , dataType: "json"
 		          , success: function( data ) {
 		        	 
-		        	  console.log(data.result1);
+		        	  console.log(data.result2);
 			            
 		        	  $("#jobTitle").find("option").remove();
 

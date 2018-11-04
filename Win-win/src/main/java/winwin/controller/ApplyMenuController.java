@@ -45,7 +45,7 @@ public class ApplyMenuController {
 		map.put("result1", list1);
 		map.put("result2", list2);
 		
-		System.out.println("end날짜 확인" +list2);
+//		System.out.println("end날짜 확인" +list2);
 		
 		return map;
 		

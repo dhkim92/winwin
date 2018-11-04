@@ -12,6 +12,6 @@ public interface MainService {
 
 	public int countApplicants(JobopenBasic jobopenBasic);
 
-//	public int countQnAUnanswered(QNA qna);
+	public int countQnAUnanswered();
 
 }

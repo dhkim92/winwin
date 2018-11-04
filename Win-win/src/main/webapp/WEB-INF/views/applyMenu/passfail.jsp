@@ -31,13 +31,14 @@
 		<div class="col-5 text-center mt-3">
 			<img src="/resources/image/hand.png" style="height: 200px;"/>
 		</div>
-		<div class="col-7 d-flex flex-wrap align-content-center mt-4">
+		<div class="col-7 d-flex flex-wrap align-content-center mt-2">
 			<div>
 				<p class="infolist">지원 결과 확인 시</p> 
 				<ul>
 				<li class="info">지원하신 공고를 선택하시고 비밀번호를 다시 한번 입력하신 후 합격 결과를 확인하시기 바랍니다.</li>
 				</ul>
-				<br>
+				<p class="infolist">상시채용 공고 결과 발표</p> 
+				<ul><li class="info">상시채용 공고는 e-mail을 통해 <span style="color:#376092">개별통보</span> 됩니다.</li> </ul>
 				<p class="infolist">관련 문의사항</p> 
 				<ul><li class="info">결과에 대한 문의사항은 채용문의 게시판으로 문의 해주시기 바랍니다.</li> </ul>
 			
@@ -71,7 +72,7 @@
 		<tr>
 			<th class="text-center align-middle bg-secondary pr-3 pl-3">채용공고</th>
 			<td colspan="3">  		
-					<select class="ml-4" id="jobTitle" style="width: 500px; height: 25px;">
+					<select class="ml-4" id="jobTitle" style="width: 300px; height: 25px;">
 						<c:forEach items="${list }" var="JobopenBasic">
 							<option value="${JobopenBasic.jobopenNo}">${JobopenBasic.title}</option>						
 						</c:forEach>	
@@ -94,7 +95,7 @@
 		<tr>
 			<th class="text-center align-middle bg-secondary pr-3 pl-3" >비밀번호</th>
 			<td colspan="3">  		
-				<input class="ml-4" id="pw" type="password" style="width: 250px; height: 25px; required"/>
+				<input class="ml-4" id="pw" type="password" style="width: 300px; height: 25px; required"/>
 			</td>			
 		</tr>
 	</tbody>

@@ -153,6 +153,9 @@ h6 {
 				</div>
 			</div>
 			<div class="underline mt-1"></div>
+			
+			<div id="theother_chart_div"></div>
+			
 		</div>
 		
 		<div class="box2 col-4">
@@ -175,11 +178,70 @@ h6 {
 		<div class="col-4 text-center mt-5">
 			<div class="mt-3"></div>
 			<div class="font-weight-bold" style="font-size: 14px;">답변이 완료되지 않은 문의사항</div>
-			<h3 class="mt-3"><strong>18 개</strong></h3>
+			<h3 class="mt-3"><strong>${commentCnt} 개 </strong></h3>
 			<a href="/qna/list"><button type="button" class="btn btn-secondary font-weight-bold btn-sm mt-2" style="width: 300px">문의사항 바로가기</button></a>
 		</div>
 	</div>
 </div>
 
 <%@ include file="../include/scriptLoader.jsp"%>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+// Load the Visualization API and the corechart package.
+google.charts.load('current', {'packages':['bar']});
+google.charts.load('current', {'packages':['corechart']});
+
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.charts.setOnLoadCallback(drawChart3);
+
+function drawChart3() {
+
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', '분기별');
+    data.addColumn('number', '지원자수');
+    data.addColumn({type:'number', role: 'annotation'});
+    data.addRows([
+      ['2016년 상반기', 780,780],
+      ['2016년 하반기', 997,997],
+      ['2017년 상반기', 860,860],
+      ['2017년 하반기', 1307,1307],
+      ['2018년 상반기', 923,923],
+      ['2018년 하반기', 1582,1582],
+    ]);
+
+    // Set chart options
+    var options = {title:'분기별 지원자 현황',
+                   width:330,
+                   height:270,
+    				vAxis:{minValue:0, maxValue:1800},
+                    titleTextStyle:{color: '#376092', fontSize: 12, bold: true},
+                    legend: {position: 'none'},
+                    chartArea:{left:80,top:50,width:'70%',height:'50%'},
+                    areaOpacity:0.0,
+                    annotations: {
+                    	stem: {
+                    		color : 'white',
+                    		length : 4
+                    	},
+                        textStyle: {
+                          fontSize: 9,
+                          bold: true,
+                          // The color of the text.
+                          color: 'black',
+                          // The color of the text outline.                
+                          opacity: 0.7
+                        }
+                      }
+                          
+    				};
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.AreaChart(document.getElementById('theother_chart_div'));
+    chart.draw(data, options);
+  }
+</script>
 <%@ include file="../include/footer.jsp"%>

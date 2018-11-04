@@ -34,10 +34,18 @@ public class MainServiceImpl implements MainService {
 		return mainDao.countApplicants(jobopenBasic);
 		
 	}
-	
-//	@Override
-//	public int countQnAUnanswered(QNA qna) {
-//		return mainDao.countQnAUnanswered;
-//	}
 
+	@Override
+	public int countQnAUnanswered() {
+		
+		int answered = mainDao.countQnAUnanswered();
+		
+		int all = mainDao.allCountQnA();
+		
+		int Unanswered = all - answered;
+		
+		
+		return Unanswered;
+	}
+	
 }
