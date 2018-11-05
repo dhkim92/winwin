@@ -4,8 +4,8 @@
 
 <%-- <%if(session.getAttribute("admincode") == null ) { %> --%>
 <!-- 	<script type="text/javascript"> -->
-//  		alert("관리자페이지는 관리자 로그인 후 사용가능합니다.") 
-// 		location.href = "/admin/adminLogin"; 
+<!-- //  		alert("관리자페이지는 관리자 로그인 후 사용가능합니다.")  -->
+<!-- // 		location.href = "/admin/adminLogin";  -->
 <!-- 	</script> --> -->
 <%-- <%} %> --%>
 
