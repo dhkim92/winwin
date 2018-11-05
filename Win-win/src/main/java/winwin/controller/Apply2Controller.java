@@ -316,7 +316,7 @@ public class Apply2Controller {
 		
 		language.setUserId((String)session.getAttribute("id"));
 		language.setJobopenNo(jobopenBasic.getJobopenNo());
-		model.addAttribute("langauge", apply2Service.selectLanguage(language));
+		model.addAttribute("language", apply2Service.selectLanguage(language));
 
 		license.setUserId((String)session.getAttribute("id"));
 		license.setJobopenNo(jobopenBasic.getJobopenNo());
@@ -348,7 +348,7 @@ public class Apply2Controller {
 		
 		apply2Service.insertSupport(support);
 		
-		return "redirect:/user/main";
+		return "redirect:/main/usermain";
 		
 	}
 

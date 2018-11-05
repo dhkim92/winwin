@@ -133,7 +133,7 @@
                   <td class="text-center align-middle">${college.colName }&nbsp${college.colBranch }&nbsp${college.colDay }</td>
                   <td class="text-center align-middle">${college.colMajor }&nbsp${college.colScore }/${college.colTotalScore }</td>
                   <td class="text-center align-middle">${college.colStartDate }&nbsp~&nbsp${colEndDate }&nbsp${college.colTransfer }&nbsp${college.colGraduate }</td>
-                  <td class="text-center align-middle">${college.cRegion }</td>
+                  <td class="text-center align-middle">${college.colRegion }</td>
                 </tr>
 		</tbody>
 		</table>
@@ -149,10 +149,10 @@
 					<th class="text-center text-center align-middle">지역</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="text-center align-middle">${academic.name }</td>
-                  <td class="text-center align-middle">${academic.major }</td>
-                  <td class="text-center align-middle">${academic.endDate }</td>
-                  <td class="text-center align-middle">${academic.region }</td>
+                  <td class="text-center align-middle">${university.univName }&nbsp${university.univBranch }&nbsp${university.univDay }</td>
+                  <td class="text-center align-middle">${university.univMajor }&nbsp${university.univMinor }&nbsp${university.univScore }&nbsp/&nbsp${university.univTotalScore }</td>
+                  <td class="text-center align-middle">${university.univStartDate }&nbsp~&nbsp${university.univEndDate }&nbsp${university.univTransfer }&nbsp${university.univGraduate }</td>
+                  <td class="text-center align-middle">${university.univRegion }</td>
                 </tr>
 		</tbody>
 		</table>
@@ -168,10 +168,10 @@
 					<th class="text-center text-center align-middle">지역</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="text-center align-middle">${academic.name }</td>
-                  <td class="text-center align-middle">${academic.major }</td>
-                  <td class="text-center align-middle">${academic.endDate }</td>
-                  <td class="text-center align-middle">${academic.region }</td>
+                  <td class="text-center align-middle">${gSchool.gsName }&nbsp${gSchool.gsBranch }&nbsp${gSchool.gsDay }</td>
+                  <td class="text-center align-middle">${gSchool.gsMajor }&nbsp${gSchool.gsScore }&nbsp/&nbsp${gSchool.gsTotalScore }</td>
+                  <td class="text-center align-middle">${gSchool.gsEndDate }&nbsp${gSchool.gsGraduate }</td>
+                  <td class="text-center align-middle">${gSchool.gsRegion }</td>
                 </tr>
 		</tbody>
 		</table>
