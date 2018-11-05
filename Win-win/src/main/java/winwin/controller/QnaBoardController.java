@@ -33,11 +33,11 @@ public class QnaBoardController {
 	@RequestMapping(value="/qna/list")
 	public void list(Model m,HttpServletRequest req) {
 		
-		//관리자 초기 로그인 값
-		HttpSession session =  req.getSession();
-		session.setAttribute("login", true);
-		session.setAttribute("id", "USER2@naver.com");
-		session.setAttribute("name", "이현우");		
+//		//관리자 초기 로그인 값
+//		HttpSession session =  req.getSession();
+//		session.setAttribute("login", true);
+//		session.setAttribute("id", "USER2@naver.com");
+//		session.setAttribute("name", "이현우");		
 		
 		int total = service.totalCnt();
 		String curr =req.getParameter("curPage");
@@ -104,11 +104,22 @@ public class QnaBoardController {
 		}
 	}
 	
-	@RequestMapping(value="/qna/delete", method=RequestMethod.POST)
-	public String delete(QnaBoard board) {
+	@RequestMapping(value="/qna/delete", method=RequestMethod.GET)
+	public void delete(QnaBoard board,HttpServletResponse resp) {
 		service.deleteBoard(board);
-		service.deleteCommentsByBoardNo(board);
-		return "redirect:/qna/list";
+//		service.deleteCommentsByBoardNo(board);
+		resp.setContentType("text/html;charset=utf-8");
+		PrintWriter out=null;
+		try {
+			out = resp.getWriter();
+			out.println("<script>");
+			out.println("alert('글삭제 완료')");
+			out.println("location.href='/qna/list'");
+			out.println("</script>");
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value="/qna/update", method=RequestMethod.GET)

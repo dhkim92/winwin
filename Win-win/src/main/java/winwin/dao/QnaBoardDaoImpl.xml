@@ -56,5 +56,8 @@
  		INSERT INTO qna(qnano,title,userid,writer,pw,content,hit,writedate)
  		VALUES (qna_seq.nextval,#{title},#{userId},#{writer},#{pw},#{content},default,default)	
  	</insert>
- 	
+ 	<delete id="deleteBoard" parameterType="winwin.dto.QnaBoard">
+		DELETE FROM qna
+		WHERE qnano = #{qnaNo} 		
+ 	</delete>
  </mapper>
