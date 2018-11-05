@@ -113,7 +113,7 @@ $(document).ready(function() {
    	</div>
 
 	<form action="/apply/career" method="post" id="career">
-	<h4 class="mt-4 mb-3 font-weight-bold">경력사항</h4><input type="hidden" value="jopopenNo" />
+	<h4 class="mt-4 mb-3 font-weight-bold">경력사항</h4><input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
 		<a href="/apply/userDetailUpdate"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
 		<a href="/apply/academicUpdate"><img class="img-fluid d-block" src="/resources/image/G_academic.png"></a>
@@ -244,10 +244,10 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" name="aName" class="mr-1" style="width:250px" /></td>
-                  <td class="align-middle"><input type="date" name="aStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="date" name="aEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="text" name="aContent" class="mr-1" style="width:350px" /></td>
+                  <td class="align-middle"><input type="text" name="actArr[0].aName" class="mr-1" style="width:250px" /></td>
+                  <td class="align-middle"><input type="date" name="actArr[0].aStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="date" name="actArr[0].aEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="text" name="actArr[0].aContent" class="mr-1" style="width:350px" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
                 <tr>
@@ -266,15 +266,15 @@ $(document).ready(function() {
 			
 			<tbody>
 				<tr style="line-height: 1.5em;">
-					<th class="text-center align-middle">연수기관</th>
 					<th class="text-center align-middle">구분</th>
+					<th class="text-center align-middle">연수기관</th>
 					<th colspan="2" class="text-center align-middle">기간</th>
 					<th class="text-center align-middle">설명</th>
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td>
-                  <select style="height:25px; width:80px;" name="period">
+                  <select style="height:25px; width:80px;" name="expArr[0].eOption">
                   		<option value="0">선택</option>
                   		<option value="봉사">봉사</option>
                   		<option value="수상경력">수상경력</option>
@@ -283,10 +283,10 @@ $(document).ready(function() {
                   		<option value="기타">기타</option>
                   	</select>
                   </td>
-                  <td class="align-middle"><input type="text" name="eOrgan" class="mr-1" style="width:250px" /></td>
-                  <td class="align-middle"><input type="date" name="eStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="date" name="eEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="text" name="eContent" class="mr-1" style="width:350px" /></td>
+                  <td class="align-middle"><input type="text" name="expArr[0].eOrgan" class="mr-1" style="width:250px" /></td>
+                  <td class="align-middle"><input type="date" name="expArr[0].eStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="date" name="expArr[0].eEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="text" name="expArr[0].eContent" class="mr-1" style="width:350px" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
                 <tr>
@@ -315,7 +315,7 @@ $(document).ready(function() {
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle"><input type="text" id="extFile" name="extName" class="mr-1" style="width:150px;" disabled/></td>
                   <td class="align-middle"><input type="text" id="originFile" name="originName" class="mr-1" style="width:300px;" disabled/></td>
-                  <td class="align-middle"><input type="text" name="date" class="mr-1" style="width:200px;" disabled/></td>
+                  <td class="align-middle"><input type="text" id="updateday" name="date" class="mr-1" style="width:200px;" disabled/></td>
                   <td class="align-middle"><input type="text" id="fileSize" name="filesize" class="mr-1" style="width:200px" disabled/></td>
                   <td class="align-middle"><input type="file" name="file" id="file" style="display:none"><input type="button" onclick='$("#file").click();' value="파일첨부"/></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
@@ -435,7 +435,6 @@ $(document).ready(function() {
     	}
  	});
 	
-	
 	function addLiForm(i) {
 		var form = '<tr><td class="align-middle"><input type="text" id="selectLicense'+i+'" name="licArr['+i+'].liName" class="mr-1" style="width:200px" /><input class="licenseAPI" type="button" data-idx="'+i+'" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td><td class="align-middle"><input type="date" name="licArr['+i+'].liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="licArr['+i+'].liOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
@@ -487,7 +486,7 @@ $(document).ready(function() {
 	
 	
 	function addActForm(i) {
-		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td class="align-middle"><input type="text" name="actArr['+i+'].aName" class="mr-1" style="width:250px" /></td><td class="align-middle"><input type="date" name="actArr['+i+'].aStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" name="actArr['+i+'].aEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" name="actArr['+i+'].aContent" class="mr-1" style="width:350px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -512,7 +511,7 @@ $(document).ready(function() {
 	
 	
 	function addExpForm(i) {
-		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td> <select style="height:25px; width:80px;" name="expArr['+i+'].eOption"><option value="0">선택</option><option value="봉사">봉사</option><option value="수상경력">수상경력</option><option value="어학연수">어학연수</option><option value="TOEIC Speaking">인턴</option><option value="기타">기타</option> </select></td><td class="align-middle"><input type="text" name="expArr['+i+'].eOrgan" class="mr-1" style="width:250px" /></td><td class="align-middle"><input type="date" name="expArr['+i+'].eStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" name="expArr['+i+'].eEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" name="expArr['+i+'].eContent" class="mr-1" style="width:350px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -537,7 +536,7 @@ $(document).ready(function() {
 	
 	
 	function addMatForm(i) {
-		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td class="align-middle"><input type="text" id="extFile" name="matArr['+i+'].extName" class="mr-1" style="width:150px;" disabled/></td><td class="align-middle"><input type="text" id="originFile" name="matArr['+i+'].originName" class="mr-1" style="width:300px;" disabled/></td><td class="align-middle"><input type="text" name="matArr['+i+'].date" class="mr-1" style="width:200px;" disabled/></td><td class="align-middle"><input type="text" id="fileSize" name="matArr['+i+'].filesize" class="mr-1" style="width:200px" disabled/></td><td class="align-middle"><input type="file" name="file" id="file'+i+'" style="display:none"><input type="button" onclick="$("#file"'+i+').click();" value="파일첨부"/></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -565,7 +564,7 @@ $(document).ready(function() {
 	});
   
 });
-	
+
 $('#file').on('change', function(){
 	
 	var originName = $(this).val().split('\\').pop();
@@ -573,16 +572,30 @@ $('#file').on('change', function(){
 	var extName = $(this).val().split('.').pop();
 
 	var fileSize = document.getElementById('file').files[0].size/1024;
+
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1;
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+	    dd='0'+dd
+	} 
+
+	if(mm<10) {
+	    mm='0'+mm
+	} 
+
+	today = mm+'/'+dd+'/'+yyyy;
 	
 	$("#extFile").val(extName);
 	$("#originFile").val(realName);
-	$("#fileSize").val(fileSize);
+	$("#fileSize").val(fileSize.toFixed(2));
+	$("#updateday").val(today);
+
 });
 
 $('#Btn').click(function() {
-	
-	
-	
 	$('#career').submit();
 });
 

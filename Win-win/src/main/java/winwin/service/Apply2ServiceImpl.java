@@ -6,13 +6,20 @@ import org.springframework.stereotype.Service;
 import winwin.dao.Apply2Dao;
 import winwin.dto.Activity;
 import winwin.dto.Career;
+import winwin.dto.College;
 import winwin.dto.Experience;
+import winwin.dto.GSchool;
+import winwin.dto.HighSchool;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
 import winwin.dto.License;
 import winwin.dto.Material;
+import winwin.dto.Member;
+import winwin.dto.Military;
 import winwin.dto.Support;
+import winwin.dto.University;
+import winwin.dto.UserDetail;
 
 @Service
 public class Apply2ServiceImpl implements Apply2Service{
@@ -107,6 +114,35 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.updateIntroduce(introduce);
 	}
 
+	
+	public Member selectMember(Member member) {
+		return dao.selectMember(member);
+	}
+	
+	public UserDetail selectUserDetail(UserDetail userDetail) {
+		return dao.selectUserDetail(userDetail);
+	}
+	
+	public HighSchool selectHighSchool(HighSchool highSchool) {
+		return dao.selectHighSchool(highSchool);
+	}
+	
+	public College selectCollege(College college) {
+		return dao.selectCollege(college);
+	}
+	
+	public University selectUniversity(University university) {
+		return dao.selectUniversity(university);
+	}
+	
+	public GSchool selectGSchool(GSchool gSchool) {
+		return dao.selectGSchool(gSchool);
+	}
+	
+	public Military selectMilitary(Military military) {
+		return dao.selectMilitary(military);
+	}
+	
 	public void insertSupport(Support support) {
 		dao.insertSupport(support);
 	}

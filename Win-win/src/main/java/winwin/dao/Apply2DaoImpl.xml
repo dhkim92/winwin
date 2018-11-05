@@ -31,8 +31,8 @@
   	</insert>
   	
   	<insert id="insertExperience" parameterType="winwin.dto.Experience">
-  		INSERT INTO experience(experienceNo, userId, jobopenNo, eOrgan, period, eStartDate, eEndDate, eContent)
-  		VALUES(EXPERIENCE_SEQ.NEXTVAL, #{userId }, #{jobopenNo }, #{eOrgan }, #{period }, #{eStartDate }, #{eEndDate }, #{eContent })
+  		INSERT INTO experience(experienceNo, userId, jobopenNo, eOption, eOrgan, eStartDate, eEndDate, eContent)
+  		VALUES(EXPERIENCE_SEQ.NEXTVAL, #{userId }, #{jobopenNo }, #{eOption }, #{eOrgan }, #{eStartDate }, #{eEndDate }, #{eContent })
   	</insert>
   	
   	<insert id="insertMaterial" parameterType="winwin.dto.Material">
@@ -51,6 +51,70 @@
   	</insert>
   	
   	
+  	<select id="selectMember" parameterType="winwin.dto.Member" resultType="winwin.dto.Member">
+		SELECT * FROM member
+		WHERE userid = #{userid }  	
+  	</select>
+  	
+  	<select id="selectUserDetail" parameterType="winwin.dto.UserDetail" resultType="winwin.dto.UserDetail">
+  		SELECT * FROM userdetail
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectHighSchool" parameterType="winwin.dto.HighSchool" resultType="winwin.dto.HighSchool">
+  		SELECT * FROM highschool
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectCollege" parameterType="winwin.dto.College" resultType="winwin.dto.College">
+  		SELECT * FROM college
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectUniversity" parameterType="winwin.dto.University" resultType="winwin.dto.University">
+  		SELECT * FROM university
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectGSchool" parameterType="winwin.dto.GSchool" resultType="winwin.dto.GSchool">
+  		SELECT * FROM gschool
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectMilitary" parameterType="winwin.dto.Military" resultType="winwin.dto.Military">
+  		SELECT * FROM military
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectLanguage" parameterType="winwin.dto.Language" resultType="winwin.dto.Language">
+  		SELECT * FROM language
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectLicense" parameterType="winwin.dto.License" resultType="winwin.dto.License">
+  		SELECT * FROM license
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectCareer" parameterType="winwin.dto.Career" resultType="winwin.dto.Career">
+  		SELECT * FROM career
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectActivity" parameterType="winwin.dto.Activity" resultType="winwin.dto.Activity">
+  		SELECT * FROM activity
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectExperience" parameterType="winwin.dto.Experience" resultType="winwin.dto.Experience">
+  		SELECT * FROM experience
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="selectMaterial" parameterType="winwin.dto.Material" resultType="winwin.dto.Material">
+  		SELECT * FROM material
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
   	
   	<select id="selectIntroduce" parameterType="winwin.dto.Introduce" resultType="winwin.dto.Introduce">
   		SELECT * FROM introduce

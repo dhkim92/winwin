@@ -111,10 +111,10 @@
 					<th class="text-center text-center align-middle">지역</th>
 				</tr>
 				<tr style="line-height: 1.0em; height:15px;">
-                  <td class="text-center align-middle">${academic.name }</td>
-                  <td class="text-center align-middle">${academic.major }</td>
-                  <td class="text-center align-middle">${academic.endDate }</td>
-                  <td class="text-center align-middle">${academic.region }</td>
+                  <td class="text-center align-middle">${highSchool.hsName }&nbsp${highSchool.hsDay }</td>
+                  <td class="text-center align-middle">${highSchool.hsMajor }</td>
+                  <td class="text-center align-middle">${highSchool.hsEndDate }&nbsp${highSchool.hsGraduate }</td>
+                  <td class="text-center align-middle">${highSchool.hsRegion }</td>
                 </tr>
 		</tbody>
 		</table>
@@ -126,14 +126,14 @@
 				<tr style="line-height: 1.0em;">
 					<th class="text-center text-center align-middle">학교명</th>
 					<th class="text-center text-center align-middle">전공</th>
-					<th class="text-center text-center align-middle">졸업년도</th>
+					<th class="text-center text-center align-middle">재학기간</th>
 					<th class="text-center text-center align-middle">지역</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="text-center align-middle">${academic.name }</td>
-                  <td class="text-center align-middle">${academic.major }</td>
-                  <td class="text-center align-middle">${academic.endDate }</td>
-                  <td class="text-center align-middle">${academic.region }</td>
+                  <td class="text-center align-middle">${college.colName }&nbsp${college.colBranch }&nbsp${college.colDay }</td>
+                  <td class="text-center align-middle">${college.colMajor }&nbsp${college.colScore }/${college.colTotalScore }</td>
+                  <td class="text-center align-middle">${college.colStartDate }&nbsp~&nbsp${colEndDate }&nbsp${college.colTransfer }&nbsp${college.colGraduate }</td>
+                  <td class="text-center align-middle">${college.cRegion }</td>
                 </tr>
 		</tbody>
 		</table>
@@ -290,7 +290,7 @@
 					<th class="text-center text-center align-middle">설명</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="text-center align-middle">${experience.period }</td>
+                  <td class="text-center align-middle">${experience.eOption }</td>
                   <td class="text-center align-middle">${experience.eOrgan }</td>
                   <td class="text-center align-middle">${experience.eStartDate } &nbsp ~ &nbsp ${experience.eEndDate }</td>
                   <td class="text-center align-middle">${experience.eContent }</td>

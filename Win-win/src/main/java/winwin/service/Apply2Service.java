@@ -2,13 +2,20 @@ package winwin.service;
 
 import winwin.dto.Activity;
 import winwin.dto.Career;
+import winwin.dto.College;
 import winwin.dto.Experience;
+import winwin.dto.GSchool;
+import winwin.dto.HighSchool;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
 import winwin.dto.License;
 import winwin.dto.Material;
+import winwin.dto.Member;
+import winwin.dto.Military;
 import winwin.dto.Support;
+import winwin.dto.University;
+import winwin.dto.UserDetail;
 
 public interface Apply2Service {
 
@@ -55,6 +62,20 @@ public interface Apply2Service {
 	public Introduce selectIntroduce(Introduce introduce);
 
 	public void updateIntroduce(Introduce introduce);
+	
+	public Member selectMember(Member member);
+	
+	public UserDetail selectUserDetail(UserDetail userDetail);
+	
+	public HighSchool selectHighSchool(HighSchool highSchool);
+	
+	public College selectCollege(College college);
+	
+	public University selectUniversity(University university);
+	
+	public GSchool selectGSchool(GSchool gSchool);
+	
+	public Military selectMilitary(Military military);
 	
 	public void insertSupport(Support support);
 	

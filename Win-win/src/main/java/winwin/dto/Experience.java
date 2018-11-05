@@ -5,8 +5,8 @@ public class Experience {
 	private int experienceNo;
 	private String userId;
 	private int jobopenNo;
+	private String eOption;
 	private String eOrgan;
-	private String period;
 	private String eStartDate;
 	private String eEndDate;
 	private String eContent;
@@ -14,8 +14,8 @@ public class Experience {
 	@Override
 	public String toString() {
 		return "Experience [experienceNo=" + experienceNo + ", userId=" + userId + ", jobopenNo=" + jobopenNo
-				+ ", eOrgan=" + eOrgan + ", period=" + period + ", eStartDate=" + eStartDate + ", eEndDate=" + eEndDate
-				+ ", eContent=" + eContent + "]";
+				+ ", eOption=" + eOption + ", eOrgan=" + eOrgan + ", eStartDate=" + eStartDate + ", eEndDate="
+				+ eEndDate + ", eContent=" + eContent + "]";
 	}
 
 	public int getExperienceNo() {
@@ -42,20 +42,20 @@ public class Experience {
 		this.jobopenNo = jobopenNo;
 	}
 
+	public String geteOption() {
+		return eOption;
+	}
+
+	public void seteOption(String eOption) {
+		this.eOption = eOption;
+	}
+
 	public String geteOrgan() {
 		return eOrgan;
 	}
 
 	public void seteOrgan(String eOrgan) {
 		this.eOrgan = eOrgan;
-	}
-
-	public String getperiod() {
-		return period;
-	}
-
-	public void setperiod(String period) {
-		this.period = period;
 	}
 
 	public String geteStartDate() {
