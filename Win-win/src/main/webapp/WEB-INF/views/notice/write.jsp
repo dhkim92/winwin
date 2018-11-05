@@ -20,7 +20,7 @@ td{
 	<div class="p-5">
 	<h3 class="text-primary font-weight-bold">공지사항</h3>
 	<hr style="border: solid #376092;">
-	<table class="table table-sm table-bordered table-hover">
+	<table class="table table-sm table-bordered">
 		<tr>
 			<td class="align-middle text-center" style="background-color:lightgray; width: 300px">
 				<strong>제목</strong>
@@ -33,8 +33,7 @@ td{
 			<td class="text-center">
 			작성일
 			</td>
-			<td class="text-center">
-			2018.09.24
+			<td class="text-center" id="today">
 			</td>
 		</tr>
 		<tr>
@@ -70,6 +69,10 @@ td{
  src="/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <script>
 $(document).ready(function() {
+	var time = new Date();
+	var today = time.getFullYear()+"년 "+(time.getMonth()+1)+"월 "+time.getDate()+"일";
+	$("#today").text(today);
+	
 	$("#btnCancel").click(function() {
 		history.go(-1);
 	});

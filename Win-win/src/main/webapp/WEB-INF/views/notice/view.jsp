@@ -13,6 +13,9 @@
 	overflow-x : hidden;
 	overflow-y : auto;
 }
+.tablediv {
+	padding: 0;
+}
 </style>
 
 <c:if test="${empty adminLogin}">
@@ -24,6 +27,7 @@
 </c:if>
 
 <div class= "container">
+<div class="container">
 
 	<div class="col-12 mt-5">
 		<p class="font-weight-bold h3">공지사항</p>
@@ -55,7 +59,7 @@
 	<div class="d-flex justify-content-center">
 		<div class="col-11 mt-3" style="border: 1px dashed lightgrey;">	
 		    <p class="mt-4">
-			${board.content}
+				${board.content}
 			</p>
 		</div>
 	</div>	
@@ -71,6 +75,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
  <div id="myModal" class="modal">

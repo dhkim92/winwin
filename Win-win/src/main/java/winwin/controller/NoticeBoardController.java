@@ -253,7 +253,7 @@ public class NoticeBoardController {
 		
 	}
 	@RequestMapping(value="/notice/updateFile", method=RequestMethod.POST)
-	public void updateFile(Material file,Writer out) {
+	public void updateFile(Material file) {
 		//파일 삭제
 		Material delFile = service.selectFile(file);
 		String path = context.getRealPath("upload");

@@ -119,6 +119,7 @@ public class UserController {
 				member = memberservice.info(member);
 				session.setAttribute("login", true);
 				session.setAttribute("id", member.getUserid());
+				session.setAttribute("name", member.getUsername());
 				map.put("success", success);
 			
 			} else {

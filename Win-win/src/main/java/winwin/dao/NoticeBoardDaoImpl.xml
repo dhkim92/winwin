@@ -6,7 +6,7 @@
  <mapper namespace="winwin.dao.NoticeBoardDao">
  	<select id="totalCnt" resultType="int">
  		SELECT count(*)
- 		FROM qna	
+ 		FROM notice	
  	</select>
  	<select id="list" parameterType="winwin.util.Paging" resultType="winwin.dto.NoticeBoard">
  		SELECT

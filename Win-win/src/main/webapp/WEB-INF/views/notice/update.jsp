@@ -27,7 +27,7 @@ td{
 	<div class="p-5">
 	<h3 class="text-primary font-weight-bold">공지사항</h3>
 	<hr style="border: solid #376092;">
-	<table class="table table-sm table-bordered table-hover">
+	<table class="table table-sm table-bordered">
 		<tr>
 			<td class="text-center align-middle" style="width:300px;background-color: lightgray">
 				<strong>제목</strong>

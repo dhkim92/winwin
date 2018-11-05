@@ -52,6 +52,9 @@
  		FROM qna
  		WHERE qnano = #{qnaNo}
  	</select>
- 	
+ 	<insert id="write" parameterType="winwin.dto.QnaBoard">
+ 		INSERT INTO qna(qnano,title,userid,writer,pw,content,hit,writedate)
+ 		VALUES (qna_seq.nextval,#{title},#{userId},#{writer},#{pw},#{content},default,default)	
+ 	</insert>
  	
  </mapper>

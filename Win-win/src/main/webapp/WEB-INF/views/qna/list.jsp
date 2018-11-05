@@ -59,7 +59,7 @@ td {
 			<c:forEach items="${list }" var="board">
 				<tr>
 					<td class="view">${board.qnaNo }</td>					
-					<td class="view"><i class="fas fa-lock mr-2"></i><a href="/qna/view?qnaNo=${board.qnaNo}" style="text-decoration: none">${board.title }</a></td>
+					<td class="view"><i class="fas fa-lock mr-2"></i>${board.title }</a></td>
 					<td class="view">
 						<c:if test="${board.asw_code ne null }">
 							<i class="fas fa-check ml-2"></i>
@@ -111,7 +111,7 @@ td {
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
-					<button type="button" id="btnPw" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button>
+					<button type="button" id="btnPw" class="font-weight-bold btn btn-primary mr-2" style="background-color: #376092">확인</button>
 					<button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">취소</button>
 				</div>
 			</div>
@@ -124,8 +124,11 @@ td {
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
+$("#btnWrite").click(function(){
+	$(location).attr("href","/qna/write");
+});
 $("#qnaTable").on("click",".view",function(){
-	int qnano = $(this).parent().children().eq(0).text();
+	var qnano = $(this).parent().children().eq(0).text();
 	$("#qnaNo").val(qnano);
 	onFiles();
 });
@@ -134,6 +137,7 @@ function onFiles(){
 	var modal = document.getElementById('myModal');
 	modal.style.display = "block";
 	var span = document.getElementsByClassName("close")[0];
+	$("#pw").focus();
 
 	var btnClose = document.getElementById("btnClose");
 				
@@ -146,7 +150,9 @@ function onFiles(){
 	}
 	btnPw.onclick = function(){
 		var qnaNo = $("#qnaNo").val();
-		var pw = $("#pw").val();		
+		var pw = $("#pw").val();	
+		$("#pw").val("");		
+		
 		if(pw==""){
 			alert("패스워드를 입력하세요");
 		}else{
@@ -156,7 +162,7 @@ function onFiles(){
 			type:"post"
 			,url:"/qna/list"
 			,data: data
-			,dataType:"json"
+// 			,dataType:"json"
 			, success:function(data){
 				$(location).attr("href","/qna/view?qnaNo="+qnaNo);
 			},error:function(){
