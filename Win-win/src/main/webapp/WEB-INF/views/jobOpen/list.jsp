@@ -41,7 +41,7 @@ td {
 			
 			<tbody>
 				<tr>
-					<td>&nbsp;<i class="fas fa-lightbulb text-danger"></i>&nbsp;채용공고 작성가이드</td>
+					<td>&nbsp;<i class="fas fa-lightbulb text-danger"></i>&nbsp;입사지원 작성가이드</td>
 				</tr>
 			</tbody>
 		</table>
