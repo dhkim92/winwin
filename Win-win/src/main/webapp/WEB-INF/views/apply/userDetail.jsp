@@ -97,6 +97,7 @@ $(document).ready(function() {
 		var notVeteran = $("#notVeteran").val();
 		var disable = $("#disable").val();
 		var notDisable = $("#notDisable").val();
+		var task = $("#taskSel").val();
 		
 		if(eName == "") {
 			alert("영문 이름을 입력하세요.");
@@ -116,6 +117,9 @@ $(document).ready(function() {
 		} else if(disable == "" && notDisable == ""){
 			alert("장애여부를 입력하세요.");
 			$("#disable").focus();
+		} else if(task == "0") {
+			alert("직무를 선택하세요");
+			$("#taskSel").focus();
 		} else {
 
 			var phoneNum2 = $("#phoneNum2").val();
@@ -154,6 +158,8 @@ $(document).ready(function() {
 //		 		console.log(phoneNum);
 				$("#phoneNum").val(phoneNum);
 				
+				$("#task").val(task);
+				
 				$("#userDetailForm").submit();	
 				
 			}
@@ -175,18 +181,34 @@ $(document).ready(function() {
 
 	<div class="col-md-12 border border-secondary mt-3 p-0">
 	<table class="table col-md-12 mb-0">
-	  <thead>
+	  <tbody>
 	    <tr>
-	      <th>${jobopenBasic.title}</th>
-	    </tr>
-	  </thead>
+	      <td style="font-weight: bold; padding-left: 32px;">${jobopenBasic.title}</td>
+	      <td class="p-0 text-center align-middle bg-secondary" style="width: 162px; font-weight: bold;">지원직무</td>
+	      	<td class="text-center align-middle" style="width: 207px;">
+	      		<select style="height:21px; width:90px;" id="taskSel">
+	      			<option value="0">직무선택</option>
+	      			<c:forEach items="${task }" var="task">
+	      				<option value="${task.task }">${task.task }</option>
+	      			</c:forEach>	
+	      		</select>
+	      	</td>
+	    </tr>	  
+	  </tbody>
+	</table>	
+	<table class="table col-md-12 mb-0">
 	  <tbody>
 	    <tr style="line-height: 0.8em;">
 	      <th class="text-center align-middle bg-secondary">접수상태</th>
 	      	<td class="text-center align-middle">지원서 저장 전 입니다</td>
 	      <th class="text-center align-middle bg-secondary">원서 마감 일시</th>
-	      	<td class="text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
-	      	<td class="text-danger text-center align-middle"><input style="border: none; width: 100px; color: red;" type="text" id="dDay" value="" readonly/></td>
+	      	<c:if test="${jobopenBasic.endDate eq null}">
+	      		<td class="text-center align-middle" style="color: red;"><input style="border: none; width: 124px; color: red;" type="text" value="상시채용" readonly/></td>
+	      	</c:if>
+	      	<c:if test="${jobopenBasic.endDate ne null}">
+	      		<td class="text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
+	      		<td class="text-danger text-center align-middle"><input style="border: none; width: 100px; color: red;" type="text" id="dDay" value="" readonly/></td>
+			</c:if>
 	      <th class="text-center align-middle bg-secondary">자동 로그아웃</th>
 	      	<td class="text-danger text-center align-middle"><span id="counter"></span></td>
 	      	<td><button id="timer">연장</button></td>
@@ -312,6 +334,7 @@ $(document).ready(function() {
 	</tr>
 	</tbody>
 	</table>
+	<input type="hidden" id="task" name="task" />
 	</form>
 	
 	<br><br><br>

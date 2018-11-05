@@ -1,17 +1,22 @@
 package winwin.dao;
 
+import java.util.List;
+
 import winwin.dto.College;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
 import winwin.dto.JobopenBasic;
+import winwin.dto.JobopenDetail;
+import winwin.dto.Member;
 import winwin.dto.Military;
 import winwin.dto.University;
-import winwin.dto.Member;
 import winwin.dto.UserDetail;
 
 public interface Apply1Dao {
 
 	public JobopenBasic selectJobOpen(JobopenBasic jopopenBasic);
+	
+	public List<JobopenDetail> selectTask(JobopenDetail jobopenDetail);
 	
 	public Member selectMember(Member member);
 
@@ -50,4 +55,5 @@ public interface Apply1Dao {
 	public void updateUniversity(University university);
 
 	public void updateGSchool(GSchool gSchool);
+
 }

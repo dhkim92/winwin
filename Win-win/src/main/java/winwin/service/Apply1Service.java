@@ -1,9 +1,12 @@
 package winwin.service;
 
+import java.util.List;
+
 import winwin.dto.College;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
 import winwin.dto.JobopenBasic;
+import winwin.dto.JobopenDetail;
 import winwin.dto.Member;
 import winwin.dto.Military;
 import winwin.dto.University;
@@ -12,6 +15,8 @@ import winwin.dto.UserDetail;
 public interface Apply1Service {
 
 	public JobopenBasic viewJobOpen(JobopenBasic jopopenBasic);
+	
+	public List<JobopenDetail> viewTask(JobopenDetail jobopenDetail);
 	
 	public Member viewMember(Member member);
 	

@@ -34,11 +34,11 @@ public class Military {
 		this.userId = userId;
 	}
 
-	public int getjobopenNo() {
+	public int getJobopenNo() {
 		return jobopenNo;
 	}
 
-	public void setjobopenNo(int jobopenNo) {
+	public void setJobopenNo(int jobopenNo) {
 		this.jobopenNo = jobopenNo;
 	}
 

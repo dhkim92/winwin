@@ -1,5 +1,8 @@
 package winwin.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,6 +18,7 @@ import winwin.dto.College;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
 import winwin.dto.JobopenBasic;
+import winwin.dto.JobopenDetail;
 import winwin.dto.Member;
 import winwin.dto.Military;
 import winwin.dto.University;
@@ -30,19 +34,30 @@ public class Apply1Controller {
 	@Autowired Apply1Service apply1Service;
 	
 	@RequestMapping(value="/userDetail", method=RequestMethod.GET)
-	public void userDetail(String title, String jobopenNo, JobopenBasic jobopenBasic, Member member, HttpSession session, Model model) {	
+	public void userDetail(String title, String jobopenNo, JobopenDetail jobopenDetail, JobopenBasic jobopenBasic, Member member, HttpSession session, Model model) {	
 		logger.info("userDetail 활성화");
 		logger.info("공고명"+title);
 		logger.info("공고번호"+jobopenNo);
 		
-		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
+		int jobopenNum = Integer.parseInt(jobopenNo);
+		
+		//apply헤더 정보 가져오기
+		jobopenBasic.setJobopenNo(jobopenNum);
 		JobopenBasic jobOpen = apply1Service.viewJobOpen(jobopenBasic);
 		
+		//apply헤더_task 정보 가져오기
+		jobopenDetail.setJobopenNo(jobopenNum);
+		List<JobopenDetail> task = new ArrayList<>();
+		task.addAll(apply1Service.viewTask(jobopenDetail));
+		logger.info("task : " + task.toString());
 		
+		//개인정보 가져오기
 		member.setUserid((String)session.getAttribute("id"));
 		Member viewUserDetail = apply1Service.viewMember(member);
 		
 		logger.info("userDetailController : " + viewUserDetail);
+		
+		model.addAttribute("task", task);
 		model.addAttribute("jobopenBasic", jobOpen);
 		model.addAttribute("member", viewUserDetail);
 		
@@ -109,6 +124,12 @@ public class Apply1Controller {
 		logger.info("University : " + university);
 		logger.info("GSchool : " + gSchool);
 		
+		apply1Service.insertHighSchool(highSchool);
+		apply1Service.insertCollege(college);
+		apply1Service.insertUniversity(university);
+		apply1Service.insertGSchool(gSchool);
+		
+		
 		
 		return "redirect:/apply/military?jobopenNo="+highSchool.getJobopenNo();
 	}
@@ -145,7 +166,7 @@ public class Apply1Controller {
 	public String militaryProc(Military military) {
 		
 		logger.info("Apply1Controller_militaryProc : " + military);
-//		apply1Service.insertMilitary(military);
+		apply1Service.insertMilitary(military);
 		
 		return "redirect:/apply/career";	
 	}

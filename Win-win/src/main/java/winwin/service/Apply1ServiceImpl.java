@@ -1,5 +1,7 @@
 package winwin.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +10,10 @@ import winwin.dto.College;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
 import winwin.dto.JobopenBasic;
+import winwin.dto.JobopenDetail;
+import winwin.dto.Member;
 import winwin.dto.Military;
 import winwin.dto.University;
-import winwin.dto.Member;
 import winwin.dto.UserDetail;
 
 @Service
@@ -23,6 +26,10 @@ public class Apply1ServiceImpl implements Apply1Service {
 		return dao.selectJobOpen(jopopenBasic);
 	}
 	
+	@Override
+	public List<JobopenDetail> viewTask(JobopenDetail jobopenDetail) {
+		return dao.selectTask(jobopenDetail);
+	}
 	
 	public Member viewMember(Member member) {
 		return dao.selectMember(member);

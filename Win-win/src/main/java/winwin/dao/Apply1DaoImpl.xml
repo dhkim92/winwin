@@ -10,15 +10,46 @@
   	</select>
   	
   	<insert id="insertUserDetail" parameterType="winwin.dto.UserDetail">
-  		INSERT INTO userDetail (userdetailNo, userId, jobopenNo, eName, birth, zipCode, address, addressDetail, phoneNum, veteran, disable, interest) VALUES ( userdetail_seq.nextval, #{userId} ,#{jobopenNo} ,#{eName} ,#{birth} ,#{zipCode} ,#{address} ,#{addressDetail} ,#{phoneNum} ,#{veteran} ,#{disable} ,#{interest})
+  		INSERT INTO userDetail (userdetailNo, userId, jobopenNo, eName, birth, zipCode, address, addressDetail, phoneNum, veteran, disable, interest, task) VALUES ( userdetail_seq.nextval, #{userId} ,#{jobopenNo} ,#{eName} ,#{birth} ,#{zipCode} ,#{address} ,#{addressDetail} ,#{phoneNum} ,#{veteran} ,#{disable} ,#{interest}, #{task})
   	</insert>
   	
   	<insert id="insertMilitary" parameterType="winwin.dto.Military">
-  		INSERT INTO military (militaryNo, userId, jobopenNo, discharge, startDate, endDate, mCategory, mGrade) VALUES (military_seq.nextval, #{userId}, #{jobopenNo}, #{discharge}, #{startDate}, #{endDate}, #{mCategory}, #{mGrade})
+  		INSERT INTO military (militaryNo, userId, jobopenNo,
+  		<if test='discharge.equals("비대상") or discharge.equals("면제") or discharge.equals("미필")'>
+  			discharge) VALUES (military_seq.nextval, #{userId}, #{jobopenNo}, #{discharge})
+  		</if>
+  		<if test='discharge.equals("군필")or discharge.equals("복무중")'>
+  			discharge, startDate, endDate, mCategory, mGrade) VALUES (military_seq.nextval, #{userId}, #{jobopenNo}, #{discharge}, #{startDate}, #{endDate}, #{mCategory}, #{mGrade}) 
+  		</if>
   	</insert>
   	
   	<select id="selectJobOpen" parameterType="winwin.dto.JobopenBasic" resultType="winwin.dto.JobopenBasic">
   		SELECT title, endDate, jobopenNo FROM jobopenbasic WHERE jobopenNo=#{jobopenNo}
   	</select>
   	
+  	<select id="selectTask" parameterType="winwin.dto.JobopenDetail" resultType="winwin.dto.JobopenDetail">
+  		SELECT task FROM jobopenDetail WHERE jobopenNo=#{jobopenNo}
+  	</select>
+  	
+  	<insert id="insertHighSchool" parameterType="winwin.dto.HighSchool">
+  		INSERT INTO highSchool (hsNo, userId, jobopenNo, hsName, hsDay, hsMajor, hsEndDate, hsGraduate, hsRegion) VALUES (highschool_seq.nextval, #{userId}, #{jobopenNo}, #{hsName}, #{hsDay}, #{hsMajor}, #{hsEndDate}, #{hsGraduate}, #{hsRegion})
+  	</insert>
+  	
+  	<insert id="insertCollege" parameterType="winwin.dto.College">
+  		INSERT INTO college (colNo, userId, jobopenNo, colName, colBranch, colDay, colMajor, colScore, colTotalScore, colStartDate, colEndDate, colTransfer, colGraduate, colRegion) VALUES (college_seq.nextval, #{userId}, #{jobopenNo}, #{colName}, #{colBranch}, #{colDay}, #{colMajor}, #{colScore}, #{colTotalScore}, #{colStartDate}, #{colEndDate}, #{colTransfer}, #{colGraduate}, #{colRegion})
+  	</insert>
+  	
+  	<insert id="insertUniversity" parameterType="winwin.dto.University">
+  		INSERT INTO university (univNo, userId, jobopenNo, univName, univBranch, univDay, univMajor, univMinor, univScore, univTotalScore, univStartDate, univEndDate, univTransfer, univGraduate, univRegion) 
+  		<if test='univMinor!=null and !univMinor.equals("")'>
+  			VALUES(university_seq.nextval, #{userId}, #{jobopenNo}, #{univName}, #{univBranch}, #{univDay}, #{univMajor}, #{univMinor}, #{univScore}, #{univTotalScore},  #{univStartDate}, #{univEndDate}, #{univTransfer}, #{univGraduate}, #{univRegion})			
+  		</if>
+  		<if test='univMinor==null or univMinor.equals("")'>
+  			VALUES(university_seq.nextval, #{userId}, #{jobopenNo}, #{univName}, #{univBranch}, #{univDay}, #{univMajor}, default, #{univScore}, #{univTotalScore},  #{univStartDate}, #{univEndDate}, #{univTransfer}, #{univGraduate}, #{univRegion})
+  		</if>
+  	</insert>
+
+  	<insert id="insertGSchool" parameterType="winwin.dto.GSchool">
+  		INSERT INTO gSchool (gsNo, userId, jobopenNo, gsName, gsBranch, gsDay, gsMajor, gsScore, gsTotalScore, gsEndDate, gsGraduate, gsRegion) VALUES (gschool_seq.nextval,#{userId}, #{jobopenNo}, #{gsName}, #{gsBranch}, #{gsDay}, #{gsMajor}, #{gsScore}, #{gsTotalScore}, #{gsEndDate}, #{gsGraduate}, #{gsRegion})
+  	</insert>
   </mapper>
