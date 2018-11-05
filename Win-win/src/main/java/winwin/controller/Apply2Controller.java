@@ -53,7 +53,7 @@ public class Apply2Controller {
 	@RequestMapping(value="/career", method=RequestMethod.GET)
 	public void career(String jobopenNo, JobopenBasic jobopenBasic, HttpSession session, Model model) {
 		
-		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));	//수정
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
 		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
 		
 	}
@@ -237,7 +237,7 @@ public class Apply2Controller {
 	@RequestMapping(value="/introduce", method=RequestMethod.GET)
 	public void introduce(String jobopenNo, JobopenBasic jobopenBasic, Model model) {
 		
-		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));	//수정
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
 		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
 	
 	}
@@ -247,7 +247,7 @@ public class Apply2Controller {
 	public String introduceProc(JobopenBasic jobopenBasic, Introduce introduce, HttpSession session) {
 		
 		introduce.setUserId((String)session.getAttribute("id"));
-		introduce.setJobopenNo(jobopenBasic.getJobopenNo());	//수정
+		introduce.setJobopenNo(jobopenBasic.getJobopenNo());
 		apply2Service.insertIntroduce(introduce);
 		
 		return "redirect:/apply/finish?jobopenNo="+jobopenBasic.getJobopenNo();
@@ -284,7 +284,7 @@ public class Apply2Controller {
 	public void finish(String jobopenNo, HttpSession session, JobopenBasic jobopenBasic, Member member, UserDetail userDetail, HighSchool highSchool, College college, University university, GSchool gSchool, 
 			Military military, Language language, License license, Career career, Activity activity, Experience experience, Introduce introduce, Model model) {
 		
-		jobopenBasic.setJobopenNo(jobopenBasic.getJobopenNo());	//수정
+		jobopenBasic.setJobopenNo(jobopenBasic.getJobopenNo());
 		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
 
 		member.setUserid((String)session.getAttribute("id"));
@@ -343,7 +343,7 @@ public class Apply2Controller {
 	@RequestMapping(value="/submit", method=RequestMethod.GET)
 	public String finishProc(HttpSession session, JobopenBasic jobopenBasic, Support support) {
 		
-		support.setJobopenNo(jobopenBasic.getJobopenNo());	//수정
+		support.setJobopenNo(jobopenBasic.getJobopenNo());
 		support.setUserId((String)session.getAttribute("id"));
 		
 		apply2Service.insertSupport(support);

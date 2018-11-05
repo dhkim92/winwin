@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -215,6 +217,7 @@
 					<th class="text-center text-center align-middle">취득일</th>
 					<th class="text-center text-center align-middle">주관처</th>
 				</tr>
+				<c:forEach items="${language }" var="language">
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="text-center align-middle">${language.lName }</td>
                   <td class="text-center align-middle">${language.grade }</td>
@@ -223,6 +226,7 @@
                   <td class="text-center align-middle">${language.lDate }</td>
                   <td class="text-center align-middle">${language.lOrgan }</td>
                 </tr>
+                </c:forEach>
 		</tbody>
 		</table>
 		<h6 class="ml-4 mt-5 font-weight-bold">자격사항</h6><br>
@@ -234,11 +238,13 @@
 					<th class="text-center text-center align-middle">취득일</th>
 					<th class="text-center text-center align-middle">주관처</th>
 				</tr>
+				<c:forEach items="${license }" var="license">
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="text-center align-middle">${license.liName }</td>
                   <td class="text-center align-middle">${license.liDate }</td>
                   <td class="text-center align-middle">${license.liOrgan }</td>
                 </tr>
+                </c:forEach>
 		</tbody>
 		</table>
 		<h6 class="ml-4 mt-5 font-weight-bold">회사경력</h6><br>
@@ -253,6 +259,7 @@
 					<th class="text-center text-center align-middle">연봉(만원)</th>
 					<th class="text-center text-center align-middle">퇴직사유</th>
 				</tr>
+				<c:forEach items="${career }" var="career">
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="text-center align-middle">${career.cStartDate } &nbsp ~ &nbsp ${career.cEndDate }</td>
                   <td class="text-center align-middle">${career.cName }</td>
@@ -261,6 +268,7 @@
                   <td class="text-center align-middle">${career.salary }</td>
                   <td class="text-center align-middle">${career.cContent }</td>
                 </tr>
+				</c:forEach>
 		</tbody>
 		</table>
 		<h6 class="ml-4 mt-5 font-weight-bold">사회봉사활동</h6><br>
@@ -272,11 +280,13 @@
 					<th class="text-center text-center align-middle">기간</th>
 					<th class="text-center text-center align-middle">설명</th>
 				</tr>
+				<c:forEach items="${activity }" var="activity">
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="text-center align-middle">${activity.aName }</td>
                   <td class="text-center align-middle">${activity.aStartDate } &nbsp ~ &nbsp ${activity.aEndDate }</td>
                   <td class="text-center align-middle">${activity.aContent }</td>
                 </tr>
+                </c:forEach>
 		</tbody>
 		</table>
 		<h6 class="ml-4 mt-5 font-weight-bold">연수경험</h6><br>
@@ -289,12 +299,14 @@
 					<th class="text-center text-center align-middle">기간</th>
 					<th class="text-center text-center align-middle">설명</th>
 				</tr>
+				<c:forEach items="${experience }" var="experience">
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="text-center align-middle">${experience.eOption }</td>
                   <td class="text-center align-middle">${experience.eOrgan }</td>
                   <td class="text-center align-middle">${experience.eStartDate } &nbsp ~ &nbsp ${experience.eEndDate }</td>
                   <td class="text-center align-middle">${experience.eContent }</td>
                 </tr>
+                </c:forEach>
 		</tbody>
 		</table>
 		<h6 class="ml-4 mt-5 font-weight-bold">포트폴리오 첨부파일</h6><br>
@@ -307,12 +319,14 @@
 					<th class="text-center text-center align-middle">등록수정일</th>
 					<th class="text-center text-center align-middle">용량</th>
 				</tr>
+				<c:forEach items="${material }" var="material">
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="text-center align-middle">${material.originName }</td>
                   <td class="text-center align-middle">${material.originName }</td>
                   <td class="text-center align-middle">${material.writedate }</td>
                   <td class="text-center align-middle">${material.filesize }</td>
                 </tr>
+                </c:forEach>
 		</tbody>
 		</table>
 	

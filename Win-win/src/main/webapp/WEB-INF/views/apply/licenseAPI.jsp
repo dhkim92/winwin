@@ -92,7 +92,6 @@
 			
 			var index = $("#iDiv").text();
 			
-// 			for(var i=0; i<30; i++){
 				if($('#license').val() == "자격증을 선택하세요") {
 					$("#selectLicense"+index).val(write);
 					modal.style.display = "none";
@@ -104,7 +103,6 @@
 					$("#license").val('자격증을 선택하세요').trigger('change') ;
 				}
 
-// 			}
 		});
 		
 
