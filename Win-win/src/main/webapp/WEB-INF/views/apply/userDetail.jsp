@@ -295,7 +295,7 @@ $(document).ready(function() {
 	
 	<tr>
 		<th class="text-center align-middle bg-secondary">휴대전화<span style="color : red;">*</span></th>
-		<td colspan="3"><input style="border: none; width: 200px; " type="text" id="phone" name="phone" value="${member.phone }" /></td>
+		<td colspan="3"><input style="border: none; width: 200px; " type="text" id="phone" name="phone" value="${member.phone }" readonly/></td>
 	</tr>
 	
 	</tbody>
