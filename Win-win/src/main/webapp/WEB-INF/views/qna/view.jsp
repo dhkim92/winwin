@@ -39,8 +39,8 @@ td{
 		<div class="tablediv col-11 mt-3" style="border-bottom: 2px solid lightgrey">
 			<table class="table table-striped " style="border-bottom: 1px solid lightgrey">
 				<tr>
-					<th width="10%">글번호 <span class="ml-2" id="jobopenNo">${board.qnaNo}</span></th>
-					<th width="30%">제목 <span class="ml-3" id="title">${board.title}</span></th>
+					<th width="10%">글번호 <span class="ml-2">${board.qnaNo}</span></th>
+					<th width="30%">제목 <span class="ml-3">${board.title}</span></th>
 					<th width="15%">작성자 <span class="ml-3">${board.writer }</span></th>
 					<th width="15%">작성일<span class="ml-3"><fmt:formatDate value="${board.writedate}" pattern="yyyy-MM-dd" /></span></th>
 					<th width="15%">답변자<span class="ml-3">${board.asw_writer }</span></th>

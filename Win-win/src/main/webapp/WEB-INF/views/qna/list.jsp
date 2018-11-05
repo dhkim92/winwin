@@ -74,7 +74,7 @@ td {
 		</table>
 	</div>
 	
-	<c:if test="${adminLogin }">
+	<c:if test="${login }">
 		<div id="btn" class="text-right">
 			<button id="btnWrite" class="btn btn-primary mr-3">작성</button>
 		</div>

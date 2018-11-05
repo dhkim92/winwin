@@ -40,7 +40,7 @@
 				<tr>
 					<th width="15%">글번호 <span class="ml-2">${board.noticeno }</span></th>
 					<th width="40%">제목 <span class="ml-3">${board.title }</span></th>
-					<th width="15%">작성자 <span class="ml-3">${board.writer }</span></th>
+					<th width="15%">작성자 <span class="ml-3">[관리자]</span></th>
 					<th width="10%">조회수<span class="ml-2">${board.hit }</span></th>
 					<th width="20%">작성일<span class="ml-3"><fmt:formatDate value="${board.writedate}" pattern="yyyy-MM-dd" /></span></th>
 				</tr>
@@ -51,7 +51,7 @@
 				</c:if>
 				<c:if test="${board.filesCnt ne 0}">
 				<label onclick="onFiles();"><i class="fas fa-download mr-2"></i>첨부된 파일(${board.filesCnt }</label>)
-				</c:if>				
+				</c:if>		
 			</div>			
 		</div>
 	</div>

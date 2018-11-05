@@ -232,10 +232,11 @@ function drawChart1() {
                 title: "WIN-WIN 연령별 지원자 현황",
                 width: 330,
                 height: 270,
+    			vAxis : {maxValue : 110 },
                 bar: {groupWidth: "50%"},
                 legend: { position: "none" },
                 titleTextStyle:{color: 'black', fontSize: 20,bold: true},
-                chartArea:{left:20,top:70,width:'80%',height:'70%'}
+                chartArea:{left:40,top:50,width:'80%',height:'70%'}
               };
         
         var chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));

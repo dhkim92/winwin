@@ -51,7 +51,7 @@ td {
 			</c:if>
 			<td>
 			<td><fmt:formatDate value="${board.writedate}" pattern="yyyy-MM-dd" /></td>
-			<td>${board.writer }</td>
+			<td>[관리자]</td>
 			<td>${board.hit }</td>	
 		</tr>
 		</c:forEach>
