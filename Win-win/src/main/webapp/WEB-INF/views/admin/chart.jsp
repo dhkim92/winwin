@@ -262,7 +262,7 @@ function drawChart2() {
                    	'is3D':false,
                     'pieSliceText': 'label',
                     'pieStartAngle': 100,
-                    'chartArea':{left:20,top:70,width:'100%',height:'100%'},
+                    'chartArea':{left:20,top:50,width:'100%',height:'100%'},
                     'legend':{position: 'none', textStyle: {color: 'black', fontSize: 11},alignment : 'end'},
                     'titleTextStyle':{color: 'black', fontSize: 20,bold: true},
                     'colors': ['#657ea5', '#184b9b', '#386fc4', '#76a5ed'],

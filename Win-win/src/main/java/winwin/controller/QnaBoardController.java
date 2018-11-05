@@ -57,7 +57,6 @@ public class QnaBoardController {
 		QnaBoard resBoard = service.view(board);
 		if(board.getPw().equals(resBoard.getPw())) {
 			logger.info("pw 일치");
-
 		}else {
 			logger.info("pw 불일치");
 			int i = 4/0; //에러 함수 호출시키기
@@ -123,15 +122,26 @@ public class QnaBoardController {
 	}
 	
 	@RequestMapping(value="/qna/update", method=RequestMethod.GET)
-	public void update(QnaBoard board) {
-		service.view(board);
+	public void update(QnaBoard board,Model m) {
+		QnaBoard resBoard = service.view(board);
+		m.addAttribute("board",resBoard);
 	}
 	
 	@RequestMapping(value="/qna/update", method=RequestMethod.POST)
-	public void updateProc(QnaBoard board) {
+	public void updateProc(QnaBoard board,HttpServletResponse resp) {
 		service.updateBoard(board);
-		
-		
+		resp.setContentType("text/html;charset=utf-8");
+		PrintWriter out=null;
+		try {
+			out = resp.getWriter();
+			out.println("<script>");
+			out.println("alert('글수정 완료')");
+			out.println("location.href='/qna/view?qnaNo="+board.getQnaNo()+"'");
+			out.println("</script>");
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

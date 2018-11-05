@@ -60,4 +60,9 @@
 		DELETE FROM qna
 		WHERE qnano = #{qnaNo} 		
  	</delete>
+ 	<update id="updateBoard" parameterType="winwin.dto.QnaBoard">
+ 		UPDATE qna
+ 		SET title=#{title}, pw=#{pw}, content=#{content}
+ 		WHERE qnaNo=#{qnaNo}	
+ 	</update>
  </mapper>

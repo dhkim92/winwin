@@ -26,7 +26,7 @@ tr{
 				<strong>제목</strong>
 			</td>
 			<td class="text-center">
-				<input type="text" class="form-control" name="title" id="title" placeholder="제목을 적으세요(66자 이내)"/>
+				<input type="text" class="form-control" name="title" id="title" value="${board.title }" placeholder="제목을 적으세요(66자 이내)"/>
 			</td>
 			<td class="text-center align-middle">
 				<strong>비밀번호</strong>
@@ -60,7 +60,7 @@ tr{
 	<div class="form-group d-flex justify-content-center">
 		<button type="button" id="btnWrite" class="btn btn-primary">작성</button>
 		<button type="button" id="btnCancel" class="btn btn-primary ml-2">취소</button>
-	</div>	
+	</div>
 </div>
 
 

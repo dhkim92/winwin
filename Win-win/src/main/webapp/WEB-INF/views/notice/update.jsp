@@ -40,8 +40,7 @@ td{
 			<td class="text-center">
 				작성일
 			</td>
-			<td class="text-center">
-				2018.09.24
+			<td class="text-center" id="today">
 			</td>
 		</tr>
 		<tr>
@@ -100,6 +99,10 @@ td{
  src="/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <script>
 $(document).ready(function() {
+	var time = new Date();
+	var today = time.getFullYear()+"년 "+(time.getMonth()+1)+"월 "+time.getDate()+"일";
+	$("#today").text(today);
+	
 	$("#btnCancel").click(function() {
 		$(location).attr("href","/notice/view?noticeno="+${board.noticeno});
 	});
