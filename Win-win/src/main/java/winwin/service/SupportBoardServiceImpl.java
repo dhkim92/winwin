@@ -1,6 +1,7 @@
 package winwin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,10 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	}
 
 	@Override
-	public List<SupportBoard> list(Paging paging) {
-		return dao.list(paging);
+	public List<SupportBoard> list(Paging paging, Map<String, Object> param) {
+		param.put("startNo", paging.getStartNo());
+		param.put("endNo", paging.getEndNo());
+		return dao.list(param);
 	}
 	
 	@Override

@@ -1,8 +1,8 @@
 package winwin.service;
 
 import java.util.List;
+import java.util.Map;
 
-import winwin.dto.ResultBoard;
 import winwin.dto.SupportBoard;
 import winwin.util.Paging;
 
@@ -10,7 +10,7 @@ public interface SupportBoardService {
 
 	public int totalCnt();
 	
-	public List<SupportBoard> list(Paging paging);
+	public List<SupportBoard> list(Paging paging, Map<String, Object> param);
 	
 	public Paging getPaging(int curPage, int listCount, int pageCount);
 	

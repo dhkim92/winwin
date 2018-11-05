@@ -2,19 +2,25 @@ package winwin.dto;
 
 import java.util.Date;
 
+/**
+ * @author MoonJaeHwan
+ *
+ */
 public class SupportBoard {
 
 	private int passNo;
-	private int jobopenNo;
-	private String userId;
-	private String status;
 	private String title;
-	private Date applyDate;
+	private String task;
+	private Date supportDate;
+	private String username;
+	private String portfolioId;
+	private String status;
+	private String supportDateStr;
 	
 	@Override
 	public String toString() {
-		return "SupportBoard [passNo=" + passNo + ", jobopenNo=" + jobopenNo + ", userId=" + userId + ", status="
-				+ status + ", title=" + title + ", applyDate=" + applyDate + "]";
+		return "SupportBoard [passNo=" + passNo + ", title=" + title + ", task=" + task + ", supportDate=" + supportDate
+				+ ", username=" + username + ", portfolioId=" + portfolioId + ", status=" + status + "]";
 	}
 
 	public int getPassNo() {
@@ -25,20 +31,44 @@ public class SupportBoard {
 		this.passNo = passNo;
 	}
 
-	public int getJobopenNo() {
-		return jobopenNo;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setJobopenNo(int jobopenNo) {
-		this.jobopenNo = jobopenNo;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getTask() {
+		return task;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setTask(String task) {
+		this.task = task;
+	}
+
+	public Date getSupportDate() {
+		return supportDate;
+	}
+
+	public void setSupportDate(Date supportDate) {
+		this.supportDate = supportDate;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPortfolioId() {
+		return portfolioId;
+	}
+
+	public void setPortfolioId(String portfolioId) {
+		this.portfolioId = portfolioId;
 	}
 
 	public String getStatus() {
@@ -49,22 +79,12 @@ public class SupportBoard {
 		this.status = status;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getSupportDateStr() {
+		return supportDateStr;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setSupportDateStr(String supportDateStr) {
+		this.supportDateStr = supportDateStr;
 	}
-
-	public Date getApplyDate() {
-		return applyDate;
-	}
-
-	public void setApplyDate(Date applyDate) {
-		this.applyDate = applyDate;
-	}
-	
-	
 	
 }

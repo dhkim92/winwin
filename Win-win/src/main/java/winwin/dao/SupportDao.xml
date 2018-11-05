@@ -6,19 +6,79 @@
  <mapper namespace="winwin.dao.SupportDao">
  	<resultMap type="winwin.dto.SupportBoard" id="Support">
  		<result column="passNo" property="passNo"/>
- 		<result column="jobopenNo" property="jobopenNo"/>
- 		<result column="userId" property="userId"/>
- 		<result column="status" property="status"/>
  		<result column="title" property="title"/>
- 		<result column="applyDate" property="applyDate"/>
+ 		<result column="task" property="task"/>
+ 		<result column="supportDateStr" property="supportDateStr"/>
+ 		<result column="username" property="username"/>
+ 		<result column="portfolioId" property="portfolioId"/>
+ 		<result column="status" property="status"/>
  	</resultMap>
+ 	
  	<sql id="selectSupportBoard">
- 		SELECT passNo, jobopenNo, userId, status, title, applyDate FROM apply
+ 		SELECT 
+ 			sup.passNo, 
+ 			TO_DATE(sup.supportDate, 'yy.MM.dd') AS supportDateStr, 
+ 			sup.status, 
+ 			job.title, 
+ 			usr.task, 
+ 			mem.username, 
+ 			mat.portfolioId 
+ 		FROM 
+ 			support sup, jobopendetail job, jobopenbasic basic, userdetail usr, material mat, member mem
+ 		
+ 		<where>
+	 		sup.jobopenno = job.jobopenno 
+	 		AND job.jobopenno = basic.jobopenno
+	 		AND job.jobopenno = mat.portfolioId 
+	 		AND mat.userid = mem.userId
+	 		AND usr.userid = mem.userid
+	 		
+	 		<!-- 경력 ( 신입, 경력 ) -->
+			<if test="career != null and career != ''">
+				AND basic.offer LIKE '%' || #{career} || '%'
+			</if> 		
+			<!-- 고용형태 -->
+			<if test="employment != null and employment != ''">
+				AND basic.form LIKE '%' || #{employment} || '%'
+			</if>
+			<!-- 학력 -->
+			<if test="academiccareer != null and academiccareer != ''">
+				AND basic.academic LIKE '%' || #{academiccareer} || '%'
+				<!-- 학점 -->
+				<choose>
+					<when test='"1".equals(academiccareer.toString())'>
+						<!-- 석사 이상 -->
+						AND TO_NUMBER((SELECT gsc.gstotalscore FROM gschool gsc WHERE gsc.userid = usr.userid)) <![CDATA[>=]]> #{credit}
+					</when>
+					<when test='"2".equals(academiccareer.toString())'>
+						<!-- 대학교 졸업 2~3년 -->
+						AND TO_NUMBER((SELECT col.gstotalscore FROM colege col WHERE gsc.userid = usr.userid)) <![CDATA[>=]]> #{credit}
+					</when>
+					<when test='"3".equals(academiccareer.toString())'>
+						<!-- 대학교 졸업 4년 -->
+						AND TO_NUMBER((SELECT uni.univtotalscore FROM university uni WHERE uni.userid = usr.userid)) <![CDATA[>=]]> #{credit}
+					</when>
+				</choose>
+			</if>
+			
+			<!-- 토익 -->
+			<if test="score != null and language != ''">
+				AND basic.language LIKE '%' || #{language} || '%'
+			</if>
+			<!-- 처리상태 -->
+			<if test="score != null and status != ''">
+				AND sup.status LIKE '%' || #{status} || '%'
+			</if>
+			<!-- 공고명 -->
+			<if test="title != null and title != ''">
+				AND job.title LIKE '%' || #{title} || '%'
+			</if>
+ 		</where>
  	</sql>
  	<select id="list" resultMap="Support" parameterType="winwin.util.Paging">
- 		SELECT * FROM ( SELECT rownum rnum, S.* FROM(
+ 		SELECT * FROM ( SELECT rownum rnum, T.* FROM(
  		<include refid="selectSupportBoard"/>
- 		) S ORDER BY passNo DESC ) R WHERE R.rnum BETWEEN #{startNo} AND #{endNo} ORDER BY rnum
+ 		) T ORDER BY passNo DESC ) R WHERE R.rnum BETWEEN #{startNo} AND #{endNo} ORDER BY rnum
  	</select>
  	<select id="totalCnt" resultType="int">
  		SELECT COUNT(*) CNT FROM (
