@@ -124,12 +124,21 @@ public class Apply1Controller {
 		logger.info("University : " + university);
 		logger.info("GSchool : " + gSchool);
 		
-		apply1Service.insertHighSchool(highSchool);
-		apply1Service.insertCollege(college);
-		apply1Service.insertUniversity(university);
-		apply1Service.insertGSchool(gSchool);
+		if(!highSchool.getHsName().equals("")) {
+			apply1Service.insertHighSchool(highSchool);
+		}
 		
+		if(!college.getColName().equals("")) {
+			apply1Service.insertCollege(college);
+		}
 		
+		if(!university.getUnivName().equals("")) {
+			apply1Service.insertUniversity(university);
+		}
+		
+		if(!gSchool.getGsName().equals("")) {
+			apply1Service.insertGSchool(gSchool);
+		}
 		
 		return "redirect:/apply/military?jobopenNo="+highSchool.getJobopenNo();
 	}
@@ -155,9 +164,16 @@ public class Apply1Controller {
 	
 	
 	@RequestMapping(value="/military", method=RequestMethod.GET)
-	public void military(JobopenBasic jobopenBasic, HttpSession session, Model model) {
+	public void military(String jobopenNo, JobopenBasic jobopenBasic, HttpSession session, Model model) {
 		
-//		apply1Service.viewJobOpen(jobopenBasic);
+		logger.info("military 활성화");
+		logger.info("공고번호"+jobopenNo);
+		
+		
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
+		JobopenBasic jobOpen = apply1Service.viewJobOpen(jobopenBasic);
+		
+		model.addAttribute("jobopenBasic", jobOpen);
 
 	}
 
@@ -168,7 +184,7 @@ public class Apply1Controller {
 		logger.info("Apply1Controller_militaryProc : " + military);
 		apply1Service.insertMilitary(military);
 		
-		return "redirect:/apply/career";	
+		return "redirect:/apply/career?jobopenNo="+military.getJobopenNo();	
 	}
 	
 	
