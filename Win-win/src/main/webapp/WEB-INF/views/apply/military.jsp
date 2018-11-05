@@ -71,6 +71,19 @@ $(document).ready(function() {
 		return ""+nHour+":"+nMin+":"+nSec;
 	}
 	
+	var Dday = new Date('<fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" />');
+	var now = new Date();
+	console.log(now);
+	console.log(Dday);
+	
+	var gap = now.getTime() - Dday.getTime();
+	var result = Math.floor(gap/ (1000*60*60*24)) * -1;
+	
+	console.log("남은 날은 " + result + " 일");
+	
+	$("#dDay").val("(D- " + result + "일)");
+	
+	
 	
 	$("#saveBtn").click(function() {
 		
@@ -141,7 +154,7 @@ $(document).ready(function() {
 	</div>
 
 	<form action="/apply/military" method="POST" id="militaryForm">
-	<h4 class="mt-4 mb-3 font-weight-bold">병역사항<input type="hidden" name="jobopenNo" id="jobopenNo" value="1" /><input type="hidden" name="userId" id="userId" value="${sessionScope.id }"/></h4>
+	<h4 class="mt-4 mb-3 font-weight-bold">병역사항<input type="hidden" name="jobopenNo" id="jobopenNo" value="${jobopenBasic.jobopenNo}" /><input type="hidden" name="userId" id="userId" value="${sessionScope.id }"/></h4>
 	<div class="row">
 		<a href="/apply/userDetailupdate">
 			<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png">
