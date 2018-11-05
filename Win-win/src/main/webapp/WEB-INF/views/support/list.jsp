@@ -176,9 +176,9 @@
 				</table>
 			</div>
 		</div>
-<%-- 
+
 		<%@ include file="../util/supportpaging.jsp"%>
- --%>
+
 	</div>
 </div>
 

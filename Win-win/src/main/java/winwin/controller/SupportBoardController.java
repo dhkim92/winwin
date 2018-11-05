@@ -38,7 +38,7 @@ public class SupportBoardController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/support/search", method = RequestMethod.GET)
+	@RequestMapping(value = "/support/search")
 	public List<SupportBoard> listProcess(@RequestParam(required = false, defaultValue = "0") int curPage,
 			@RequestParam(required = false, defaultValue = "20") int listCount,
 			@RequestParam(required = false, defaultValue = "5") int pageCount,
