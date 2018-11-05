@@ -108,28 +108,35 @@ $(document).ready(function() {
 	<img class="img-fluid d-block" src="/resources/image/grayline.png">
 
 	 <div class="col-md-12 border border-secondary mt-3 p-0">
-   		<table class="table col-md-12 mb-0">
-     		<thead>
-       			<tr>
-       				<th>${jobopenBasic.title}</th>
-       			</tr>
-     		</thead>
-     		<tbody>
-	    		<tr style="line-height: 0.8em;">
-	      		<th class="text-center align-middle bg-secondary">접수상태</th>
-	      		<td class="text-center align-middle">지원서 저장 전 입니다</td>
-	      		<th class="text-center align-middle bg-secondary">원서 마감 일시</th>
-	      		<td class="text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
-	      		<td class="text-danger text-center align-middle"><input style="border: none; width: 100px; color: red;" type="text" id="dDay" value="" readonly/></td>
-	      		<th class="text-center align-middle bg-secondary">자동 로그아웃</th>
-	      		<td class="text-danger text-center align-middle"><span id="counter"></span></td>
-	      		<td><button id="timer">연장</button></td>
-	    		</tr>    
-	  		</tbody>
-   		</table>
+   		    <table class="table col-md-12 mb-0">
+     <thead>
+       <tr>
+         <td style="font-weight: bold; padding-left: 32px;">${jobopenBasic.title}</td>
+       </tr>
+     </thead>     
+     <tbody>
+       <tr style="line-height: 0.8em;">
+         <th class="text-center align-middle bg-secondary">접수상태</th>
+            <td class="text-center align-middle">지원서 저장 전 입니다</td>
+         <th class="text-center align-middle bg-secondary">원서 마감 일시</th>
+            <c:if test="${jobopenBasic.endDate eq null}">
+               <td class="text-center align-middle" style="color: red;"><input style="border: none; width: 124px; color: red;" type="text" value="상시채용" readonly/></td>
+            </c:if>
+            <c:if test="${jobopenBasic.endDate ne null}">
+               <td class="text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
+               <td class="text-danger text-center align-middle"><input style="border: none; width: 100px; color: red;" type="text" id="dDay" value="" readonly/></td>
+         </c:if>
+         <th class="text-center align-middle bg-secondary">자동 로그아웃</th>
+            <td class="text-danger text-center align-middle"><span id="counter"></span></td>
+            <td><button id="timer">연장</button></td>
+       </tr>    
+     </tbody>
+   </table>
    	</div>
 
-	<h4 class="mt-4 mb-3 font-weight-bold">자기소개</h4><input type="hidden" value="jopopenNo" />
+	<form action="/apply/introduce" method="post" id="intro">
+
+	<h4 class="mt-4 mb-3 font-weight-bold">자기소개</h4><input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
 		<a href="/apply/userDetailUpdate"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
 		<a href="/apply/academicUpdate"><img class="img-fluid d-block" src="/resources/image/G_academic.png"></a>
@@ -139,7 +146,6 @@ $(document).ready(function() {
 		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 	</div>
 
-	<form action="/apply/introduce" method="post" id="intro">
 	<h6 class="mt-5 font-weight-bold">
 		1. 성장과정 (자신에 대한 소개)
 		<span style="color:red;"> *</span>

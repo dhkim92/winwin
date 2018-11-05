@@ -152,7 +152,7 @@
 			        </div>
 				</div>
 				
-				<div id="iDiv"></div>
+				<div id="iDiv" style="display:none;"></div>
 			
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">
