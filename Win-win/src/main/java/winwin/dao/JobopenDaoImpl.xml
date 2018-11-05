@@ -71,5 +71,10 @@
 	<update id="resetBasic" parameterType="winwin.dto.JobopenBasic">
 		update jobopenBasic set title=#{title}, offer=#{offer}, form=#{form}, startPay=#{startPay}, endPay=#{endPay}, rulePay=#{rulePay}, startDate=#{startDate}, endDate=#{endDate}, allOpen=#{allOpen} where jobopenNo=#{jobopenNo}
 	</update>
+	
+	<update id="updateHit" parameterType="winwin.dto.JobopenBasic">
+		update jobopenBasic set hit=hit+1
+		WHERE jobopenNo = #{jobopenNo}
+	</update>
   
   </mapper>

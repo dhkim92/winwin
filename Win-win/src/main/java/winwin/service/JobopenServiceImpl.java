@@ -38,6 +38,7 @@ public class JobopenServiceImpl implements JobopenService {
 
 	@Override
 	public JobopenBasic viewBasic(JobopenBasic basic) {
+		jobopenDao.updateHit(basic);
 		return jobopenDao.selectByBasic(basic);
 	}
 

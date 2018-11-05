@@ -30,4 +30,6 @@ public interface JobopenDao {
 	
 	public void resetBasic(JobopenBasic basic);
 
+	public void updateHit(JobopenBasic basic);
+
 }
