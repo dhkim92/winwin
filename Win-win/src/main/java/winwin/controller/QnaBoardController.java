@@ -96,7 +96,7 @@ public class QnaBoardController {
 			PrintWriter out = resp.getWriter();
 			out.println("<script>");
 			out.println("alert('글쓰기 완료')");
-			out.println("location.href='/notice/list'");
+			out.println("location.href='/qna/list'");
 			out.println("</script>");
 			out.close();
 		} catch (IOException e) {
