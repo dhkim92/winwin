@@ -2,6 +2,8 @@ package winwin.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * @author MoonJaeHwan
  *
@@ -11,6 +13,7 @@ public class SupportBoard {
 	private int passNo;
 	private String title;
 	private String task;
+	@JsonFormat(pattern="yy.MM.dd")
 	private Date supportDate;
 	private String username;
 	private String portfolioId;

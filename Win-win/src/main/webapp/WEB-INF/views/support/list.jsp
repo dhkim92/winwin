@@ -19,88 +19,6 @@
 .remove-class{display:none;}
 </style>
 
-<script>
-
-
-$(function () {
-	supportList();
-	
-	//이벤트 누적 방지 ( 이전 이벤트를 삭제하고 새 이벤트 주입. unbind)
-	$('.searchSelect').unbind('click').click(function () {
-		$('#' + $(this).attr('forId')).html($(this).val() + "<i class='fas fa-backspace ml-2' id='careerclose' style='cursor: pointer'></i>").show();
-		supportList();
-	});
-	
-	$('.remove-class').unbind('click').click(function () {
-		$(this).html('');
-		$(this).hide();
-	});
-	
-
-	$("#career option:selected").val();
-
-	$("#clear").click(function() {
-
-		var clear = $("#clear").val();
-
-		$.ajax({
-			type : 'POST',
-			url : "/support/search",
-			dataType : "json",
-			data : {
-				clear : clear
-			},
-
-			success : function(data) {
-				if (data.success == true) {
-					$(".box").hide();
-				}
-			}
-		});
-		
-		$("#title").val("0").prop("selected", true);
-	});
-});
-
-
-function supportList () {
-	
-	var param = {
-			career 			: $('#career').val(),			//경력
-			employment 		: $('#employment').val(),		//고용형태
-			academiccareer 	: $('#academiccareer').val(),	//학력
-			credit 			: $('#credit').val(),			//학점
-			language 		: $('#language').val(),			//토익
-			status 			: $('#status').val(),			//처리상태
-	};
-
-	
-	//ajax 호출
-	$.getJSON('/support/search', param, function (result) {
-		if (result) {
-			//목록 초기화
-			$('#supportTable tbody').empty();
-			//목록 생성
-			$.each(result, function (i, item) {
-				var html  = '<tr>';
-					html += '	<th scope="row" class="text-center align-middle">' + (i + 1) + '</th>';
-					html += '	<td class="text-center align-middle">' + item.title + '</td>';
-					html += '	<td class="text-center align-middle">' + item.task + '</td>';
-					html += '	<td class="text-center align-middle">' + item.supportDateStr + '</td>';
-					html += '	<td class="text-center align-middle">' + item.username + '</td>';
-					html += '	<td class="text-center"><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">포트폴리오</button></td>';
-					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.status + '</button></td>';
-					html += '</tr>';
-					
-				$('#supportTable tbody').append(html);
-			});
-			
-		}
-	});
-	
-}
-</script>
-
 <%@ include file="../include/adminHeader.jsp"%>
 <div class="container">
 	<div class="container">
@@ -142,11 +60,11 @@ function supportList () {
 							</select></td>
 							<td class="text-center" style="width: 25%"><select multiple
 								class="form-control searchSelect" id="academiccareer" forId="academiccareerbox" form="search" name="academiccareer">
-									<option value="3">대학교졸업(4년)</option>
-									<option value="2">대학교졸업(2~3년)</option>
-									<option value="1">석사 이상</option>
-									<option value="0">고등학교 졸업</option>
-									<option value="0">학력 무관</option>
+									<option value="대학교졸업(4년)">대학교졸업(4년)</option>
+									<option value="대학교졸업(2~3년)">대학교졸업(2~3년)</option>
+									<option value="석사 이상">석사 이상</option>
+									<option value="고등학교 졸업">고등학교 졸업</option>
+									<option value="학력 무관">학력 무관</option>
 							</select></td>
 							<td class="text-center" style="width: 10%"><select multiple
 								class="form-control searchSelect" id="credit" forId="creditbox" form="search" name="credit">
@@ -207,7 +125,7 @@ function supportList () {
 									</div>
 									<div class="row">
 									<div class="col-12 d-flex justify-content-end mt-1">
-									<form action="/support/list" method="post" id="search">
+									<form action="/support/list" method="GET" id="search">
 									<button class="btn float-right btn-primary"
 										style="margin-right: 15px;">선택된 조건 검색하기</button></form>
 										</div>
@@ -265,6 +183,76 @@ function supportList () {
 </div>
 
 <%@ include file="../include/scriptLoader.jsp"%>
+
+<script>
+
+
+
+$(function () {
+	supportList();
+	
+	//이벤트 누적 방지 ( 이전 이벤트를 삭제하고 새 이벤트 주입. unbind)
+	$('.searchSelect').unbind('click').click(function () {
+		$('#' + $(this).attr('forId')).html($(this).val() + "<i class='fas fa-backspace ml-2' id='careerclose' style='cursor: pointer'></i>").show();
+		supportList();
+	});
+	
+	$('.remove-class').unbind('click').click(function () {
+		$(this).html('');
+		$(this).hide();
+	});
+	
+
+	$("#career option:selected").val();
+
+	$("#clear").click(function() {
+
+		var clear = $("#clear").val();
+
+					$(".box").hide();
+		
+		$("#title").val("0").prop("selected", true);
+	});
+});
+
+
+function supportList () {
+	
+	var param = {
+			career 			: $('#career').val(),			//경력
+			employment 		: $('#employment').val(),		//고용형태
+			academiccareer 	: $('#academiccareer').val(),	//학력
+			credit 			: $('#credit').val(),			//학점
+			language 		: $('#language').val(),			//토익
+			status 			: $('#status').val(),			//처리상태
+	};
+
+	
+	//ajax 호출
+	$.getJSON('/support/search', param, function (result) {
+		if (result) {
+			//목록 초기화
+			$('#supportTable tbody').empty();
+			//목록 생성
+			$.each(result, function (i, item) {
+				var html  = '<tr>';
+					html += '	<th scope="row" class="text-center align-middle">' + (i + 1) + '</th>';
+					html += '	<td class="text-center align-middle">' + item.title + '</td>';
+					html += '	<td class="text-center align-middle">' + item.task + '</td>';
+					html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
+					html += '	<td class="text-center align-middle">' + item.username + '</td>';
+					html += '	<td class="text-center"><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">포트폴리오</button></td>';
+					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.status + '</button></td>';
+					html += '</tr>';
+					
+				$('#supportTable tbody').append(html);
+			});
+			
+		}
+	});
+	
+}
+</script>
 
 
 <%@ include file="../include/footer.jsp"%>

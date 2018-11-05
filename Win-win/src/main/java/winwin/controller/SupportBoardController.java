@@ -44,12 +44,6 @@ public class SupportBoardController {
 			@RequestParam(required = false, defaultValue = "5") int pageCount,
 			Map<String, Object> param) {
 
-		System.out.println("==============");
-		System.out.println("==============");
-		System.out.println(param.get("status"));
-		System.out.println("==============");
-		System.out.println("==============");
-		System.out.println("==============");
 		Paging paging = service.getPaging(curPage, listCount, pageCount);
 
 		List<SupportBoard> list = service.list(paging, param);

@@ -17,7 +17,7 @@
  	<sql id="selectSupportBoard">
  		SELECT 
  			sup.passNo, 
- 			TO_DATE(sup.supportDate, 'yy.MM.dd') AS supportDateStr, 
+ 			sup.supportDate, 
  			sup.status, 
  			job.title, 
  			usr.task, 
