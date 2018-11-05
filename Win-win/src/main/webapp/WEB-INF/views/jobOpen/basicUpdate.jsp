@@ -88,8 +88,8 @@
 	<div class="row clearfix m-2">
 		<div class="col-10"></div>
 		<div class="col-2">
-			<i class="fas fa-key"></i><small>&nbsp;사원 코드 : 123456789</small><br>
-			<i class="far fa-id-card"></i><small>&nbsp;사원 이름 : 김동현</small>
+			<i class="fas fa-key"></i><small>&nbsp;사원 코드 : ${sessionScope.admincode }</small><br>
+			<i class="far fa-id-card"></i><small>&nbsp;사원 이름 : ${sessionScope.adminname }</small>
 		</div>
 	</div>
 </div>
