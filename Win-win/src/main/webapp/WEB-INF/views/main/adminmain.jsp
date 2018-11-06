@@ -111,7 +111,7 @@ h6 {
 		</div>
 		
 		<div class="col-4 text-center mt-2">
-			<a href="/jobOpen/jobopen"><button type="button" class="bigbutton btn font-weight-bold text-white btn-lg mt-5 mb-5" style="background: #376092;">채용공고 등록하기</button></a>
+			<a href="/jobOpen/basicInfo"><button type="button" class="bigbutton btn font-weight-bold text-white btn-lg mt-5 mb-5" style="background: #376092;">채용공고 등록하기</button></a>
 			<a href="/notice/write"><button type="button" class="bigbutton btn btn-secondary font-weight-bold btn-lg mt-5 mb-5">공지사항 등록하기</button></a>
 			<div id="carouselExampleControls" class="carousel slide mt-2" data-ride="carousel">
 			  <div class="carousel-inner">
