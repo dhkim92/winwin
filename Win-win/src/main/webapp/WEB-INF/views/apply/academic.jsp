@@ -152,34 +152,34 @@ $(document).ready(function() {
                   <td class="align-middle">
                   	<input type="hidden" name="userId" id="hsuserId" value="${sessionScope.id }" />
                   	<input type="hidden" name="jobopenNo" id="hsJobopenNo" value="${jobopenBasic.jobopenNo }" />
-					<input type="text" id="hsName" name="hsName" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
+					<input class="highVal" type="text" id="hsName" name="hsName" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
 					<input type="button" class="m-1 mr-1" id="hsSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
-					<select style="height:24px; width:70px;" class="hsselect" id="hsDay" name="hsDay">
-						<option value="0">주/야</option>
+					<select style="height:24px; width:70px;" class="hsselect highVal" id="hsDay" name="hsDay">
+						<option value="">주/야</option>
 						<option value="주간">주간</option>
 						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-                  	<select style="height:24px; width: 110px;" class="hsselect" id="hsMajor" name="hsMajor">
-                  		<option value="0">전공</option>
+                  	<select style="height:24px; width: 110px;" class="hsselect highVal" id="hsMajor" name="hsMajor">
+                  		<option value="">전공</option>
                   		<option value="인문계">인문계</option>
                   		<option value="자연계">자연계</option>
                   		<option value="실업계">실업계</option>
                   	</select>
                   </td>
                   <td class="align-middle">
-                  	<input class="hschoolTxt" type="date" name="hsEndDate" id="hsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select class="hsselect" style="height:24px; width: 80px;" name="hsGraduate" id="hsGraduate">
-                  		<option value="0">졸업구분</option>
+                  	<input class="hschoolTxt highVal" type="date" name="hsEndDate" id="hsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select class="hsselect highVal" style="height:24px; width: 80px;" name="hsGraduate" id="hsGraduate">
+                  		<option value="">졸업구분</option>
                   		<option value="졸업">졸업</option>
                   		<option value="졸업예정">졸업예정</option>
                   		<option value="재학">재학</option>S
                   	</select>
                   </td>
                   <td class="align-middle">
-                    <select class="hsselect" id="hsSelect" name="hsRegion">
-                  		<option value="0">지역</option>
+                    <select class="hsselect highVal" id="hsSelect" name="hsRegion">
+                  		<option value="">지역</option>
                   		<option value="서울">서울</option>
                   		<option value="인천">인천</option>
                   		<option value="대전">대전</option>
@@ -203,7 +203,7 @@ $(document).ready(function() {
 	</div>
 	
 	<h6 class="mt-5 font-weight-bold">전문대학
-		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="colResetBtn">초기화</button>
+		<input type="button" class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="colResetBtn" value="초기화" />
 	</h6>
 	
 	<div class="col-md-12 mt-3 p-0">
@@ -217,35 +217,34 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-<%--                   	<input type="hidden" name="userId" id="coluserId" value="${sessionScope.id }" /> --%>
                   	<input type="hidden" name="jobopenNo" id="colJobopenNo" value="${jobopenBasic.jobopenNo }" />
-					<input type="text" id="colName" name="colName" class="mr-1 colTxt" style="width: 110px" readonly/>
+					<input class="colVal" type="text" id="colName" name="colName" class="mr-1 colTxt" style="width: 110px" readonly/>
 					<input type="button" class="m-1 mr-1" id="colSearch" value="검색"><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
-					<select style="height:24px; width:85px;" class="colselect" id="colSelect" name="colBranch">
+					<select style="height:24px; width:85px;" class="colselect colVal" id="colSelect" name="colBranch">
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
 						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="colselect" id="colDay" name="colDay">
+					<select style="height:24px; width:70px;" class="colselect colVal" id="colDay" name="colDay">
 						<option value="0">주/야</option>
 						<option value="주간">주간</option>
 						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-					<input type="text" class="mr-1 colTxt" style="width: 100px" id="colMajor" name="colMajor" readonly/>
+					<input type="text" class="mr-1 colTxt colVal" style="width: 100px" id="colMajor" name="colMajor" readonly/>
 					<input type="button" class="m-1 mr-1" id="colSearchM" name="colSearchM" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPI" value="취소" />					                  
- 					<input type="text" name="colScore" id="colScore" class="mr-1 colTxt" style="width: 30px;" pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> / <input id="colTotalScore" name="colTotalScore" type="text" class="mr-1 colTxt" style="width: 30px; " pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> 만점
+ 					<input type="text" name="colScore" id="colScore" class="colVal mr-1 colTxt" style="width: 30px;" pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> / <input id="colTotalScore" name="colTotalScore" type="text" class="colVal mr-1 colTxt" style="width: 30px; " pattern="[0-5]{1}\.[0-9]{1,2}" title="학점은 소수점 둘째자리까지 입력하십시오."/> 만점
                   </td>
                   <td class="align-middle">
-                  	<input class="colTxt" type="date" id="colStartDate" name="colStartDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select style="height:24px; width: 70px;" class="colselect" id="colTransfer" name="colTransfer">
+                  	<input class="colTxt colVal" type="date" id="colStartDate" name="colStartDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select style="height:24px; width: 70px;" class="colselect colVal" id="colTransfer" name="colTransfer">
                   		<option value="0">입학/편입</option>
                   		<option value="입학">입학</option>
                   		<option value="편입">편입</option>
                   	</select>
-                  	<input class="colTxt" type="date" id="colEndDate" name="colEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                   	<select style="height:24px; width: 70px;" class="colselect" id="colGraduate" name="colGraduate">
+                  	<input class="colTxt colVal" type="date" id="colEndDate" name="colEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                   	<select style="height:24px; width: 70px;" class="colselect colVal" id="colGraduate" name="colGraduate">
                   		<option value="0">졸업구분</option>
                   		<option value="졸업">졸업</option>
                   		<option value="졸업예정">졸업예정</option>
@@ -253,7 +252,7 @@ $(document).ready(function() {
                   	</select>                 	
                   </td>
                   <td class="align-middle">
-                    <select class="colselect" id="colSelect" name="colRegion">
+                    <select class="colselect colVal" id="colSelect" name="colRegion">
                   		<option value="0">지역</option>
                   		<option value="서울">서울</option>
                   		<option value="인천">인천</option>
@@ -278,7 +277,7 @@ $(document).ready(function() {
 	</div>
 	
 	<h6 class="mt-5 font-weight-bold">대학교
-		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="univResetBtn">초기화</button>
+		<input type="button" class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="univResetBtn" value="초기화" />
 	</h6>
 
 	<div class="col-md-12 mt-3 p-0">
@@ -292,16 +291,15 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-<%--                   	<input type="hidden" name="userId" id="univuserId" value="${sessionScope.id }" /> --%>
                   	<input type="hidden" name="jobopenNo" id="univJobopenNo" value="${jobopenBasic.jobopenNo }" />
-					<input type="text" id="univName" name="univName" class="mr-1 univTxt" style="width: 110px" readonly/>
+					<input type="text" id="univName" name="univName" class="univVal mr-1 univTxt" style="width: 110px" readonly/>
 					<input type="button" class="m-1 mr-1" id="univSearch" name="univSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
-					<select style="height:24px; width:85px;" class="univselect" id="univBranch" name="univBranch">
+					<select style="height:24px; width:85px;" class="univselect univVal" id="univBranch" name="univBranch">
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
 						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="univselect" id="univDay" name="univDay">
+					<select style="height:24px; width:70px;" class="univselect univVal" id="univDay" name="univDay">
 						<option value="0">주/야</option>
 						<option value="주간">주간</option>
 						<option value="야간">야간</option>
@@ -309,26 +307,26 @@ $(document).ready(function() {
                   </td>
                   <td class="align-middle">
                   <div>
-					<input type="text" id="univMajor" name="univMajor" class="mr-1 univTxt" style="width: 100px" readonly/>
+					<input type="text" id="univMajor" name="univMajor" class="mr-1 univTxt univVal" style="width: 100px" readonly/>
 					<input type="button" class="m-1 mr-1" id="univMSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPI" value="취소" />
 				  </div>
 				  <div>		
-					<input type="text"  id="univMinor" name="univMinor" class="mr-1 univTxt" style="width: 100px" readonly/>
+					<input type="text"  id="univMinor" name="univMinor" class="mr-1 univTxt univVal" style="width: 100px" placeholder="부전공/복수전공" readonly/>
 					<input type="button" class="m-1 mr-1" id="univMiSearch" name="univMiSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPI" value="취소" />					                  
 				  </div>
 				  </td>
 				  <td>						                  
- 					<input type="text" id="univScore" name="univScore" class="mr-1 mt-2 univTxt" style="width: 30px; "/> / <input type="text" id="univTotalScore" name="univTotalScore" class="mr-1 univTxt" style="width: 30px; "/> 만점
+ 					<input type="text" id="univScore" name="univScore" class="mr-1 mt-2 univTxt univVal" style="width: 30px; "/> / <input type="text" id="univTotalScore" name="univTotalScore" class="mr-1 univTxt univVal" style="width: 30px; "/> 만점
                   </td>
                   <td class="align-middle">
-                  	<input class="univTxt" type="date" id="univStartDate" name="univStartDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                  	<select style="height:24px; width: 75px;" class="univselect" id="univTransfer" name="univTransfer">
+                  	<input class="univTxt univVal" type="date" id="univStartDate" name="univStartDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                  	<select style="height:24px; width: 75px;" class="univselect univVal" id="univTransfer" name="univTransfer">
                   		<option value="0">입학/편입</option>
                   		<option value="입학">입학</option>
                   		<option value="편입">편입</option>
                   	</select>
-                  	<input class="univTxt" type="date" id="univEndDate" name="univEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                   	<select style="height:24px; width: 75px;" class="univselect" name="univGraduate">
+                  	<input class="univTxt univVal" type="date" id="univEndDate" name="univEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
+                   	<select style="height:24px; width: 75px;" class="univselect univVal" name="univGraduate">
                   		<option value="0">졸업구분</option>
                   		<option value="졸업">졸업</option>
                   		<option value="졸업예정">졸업예정</option>
@@ -336,7 +334,7 @@ $(document).ready(function() {
                   	</select>                 	
                   </td>
                   <td class="align-middle">
-                    <select class="univselect" id="univRegion" name="univRegion">
+                    <select class="univselect univVal" id="univRegion" name="univRegion">
                   		<option value="0">지역</option>
                   		<option value="서울">서울</option>
                   		<option value="인천">인천</option>
@@ -361,7 +359,7 @@ $(document).ready(function() {
 	</div>
 
 	<h6 class="mt-5 font-weight-bold">대학원
-		<button class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="gsResetBtn">초기화</button>
+		<input type="button" class="btn btn-primary text-white mb-3 btn-sm font-weight-bold" style="float: right;" id="gsResetBtn" value="초기화" />
 	</h6>
 	
 	<div class="col-md-12 mt-3 p-0">
@@ -375,27 +373,26 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
-<%--                   	<input type="hidden" name="userId" id="gsuserId" value="${sessionScope.id }" /> --%>
                   	<input type="hidden" name="jobopenNo" id="gsJobopenNo" value="${jobopenBasic.jobopenNo }" />
-					<input type="text" id="gsName" name="gsName" class="mr-1 gschoolTxt" style="width: 200px" />
-					<select style="height:24px; width:85px;" class="gsselect" id="gsBranch" name="gsBranch" >
+					<input type="text" id="gsName" name="gsName" class="mr-1 gschoolTxt gsVal" style="width: 200px" />
+					<select style="height:24px; width:85px;" class="gsselect gsVal" id="gsBranch" name="gsBranch" >
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
 						<option value="분교">분교</option>
 					</select>
-					<select style="height:24px; width:70px;" class="gsselect" id="gsDay" name="gsDay">
+					<select style="height:24px; width:70px;" class="gsselect gsVal" id="gsDay" name="gsDay">
 						<option value="0">주/야</option>
 						<option value="주간">주간</option>
 						<option value="야간">야간</option>
 					</select>
                   </td>
                   <td class="align-middle">
-					<input type="text" id="gsMajor" name="gsMajor" class="mr-1 gschoolTxt" style="width: 200px" />
- 					<input type="text" id="gsScore" name="gsScore" class="mr-1 gschoolTxt" style="width: 30px; "/> / <input type="text" id="gsTotalScore" name="gsTotalScore" class="mr-1 gschoolTxt" style="width: 30px; "/> 만점
+					<input type="text" id="gsMajor" name="gsMajor" class="mr-1 gschoolTxt gsVal" style="width: 200px" />
+ 					<input type="text" id="gsScore" name="gsScore" class="mr-1 gschoolTxt gsVal" style="width: 30px; "/> / <input type="text" id="gsTotalScore" name="gsTotalScore" class="mr-1 gschoolTxt gsVal" style="width: 30px; "/> 만점
                   </td>
                   <td class="align-middle">
-                  	<input type="date" name="gsEndDate" id="gsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" class="gschoolTxt"/>
-                  	<select style="height:24px; width: 80px;" class="gsselect" id="gsGraduate" name="gsGraduate">
+                  	<input type="date" name="gsEndDate" id="gsEndDate" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" class="gschoolTxt gsVal"/>
+                  	<select style="height:24px; width: 80px;" class="gsselect gsVal" id="gsGraduate" name="gsGraduate">
                   		<option value="0">졸업구분</option>
                   		<option value="졸업">졸업</option>
                   		<option value="졸업예정">졸업예정</option>
@@ -403,7 +400,7 @@ $(document).ready(function() {
                   	</select>
                   </td>
                   <td class="align-middle">
-                    <select class="gsselect" id="gsRegion" name="gsRegion">
+                    <select class="gsselect gsVal" id="gsRegion" name="gsRegion">
                   		<option value="0">지역</option>
                   		<option value="서울">서울</option>
                   		<option value="인천">인천</option>
@@ -440,6 +437,7 @@ $(document).ready(function() {
                   <ul class="mb-0">
                      <li style="line-height: 150%;"><strong><span class="text-info">학력사항</span>은 최종학력까지 졸업년월, 학교명, 지역명 등을 빠짐없이 기재하여 주시기 바랍니다.</strong></li>
                      <li style="line-height: 150%;"><strong><span class="text-danger">(전문대학 이상의 성적란에는 본인의 누계평점 및 만점을 기재합니다. 예)3.0/4.5)</span></strong></li>
+                     <li style="line-height: 150%;"><strong><span class="text-info">부전공/복수전공</span> 항목은 해당사항이 있을경우만 기재하여 주시기 바랍니다.</strong></li>                     
                   </ul>
                   </td>
                </tr>
@@ -486,61 +484,260 @@ $(document).ready(function() {
     </div>
 
 
- <div id="checkModal" class="modal">
-	      <!-- Modal content -->
-	      <div class="modal-content">
-	      	
-	      	<div class="row">
-				<div class="col-6">
-				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
-				</div>
-				<div class="col-6">
-				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
-				</div>
-			</div>
-	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
-	     	
-	     	<!-- 모달 내용 입력하는 부분 -->
-	     	<div>
-		     	<div class="mt-4">　
-			        <p class="font-weight-bold text-center" id="checkModal">해당학력에 모든 항목을 입력하지 않으면<br>학력이 저장되지 않습니다.</p>
-				</div>
-			
-				<div class="modal-footer d-flex justify-content-center">
-					<div class="row">
-						<button id="btnSaveAca" class="mr-2 font-weight-bold text-white btn btn-primary" style="background-color: #376092">확인</button>
-						<button id="btnCheckClose" class="ml-2 font-weight-bold text-black btn btn-secondary" style="background-color: #eee;">닫기</button>
-					</div>
-				</div>
-	      </div>
-	 
-	    </div>
-    </div>
-
-
 	
 <%@ include file="../include/scriptLoader.jsp"%>
 <script>
 $("#saveBtn").click(function() {
 	console.log("saveBtn 클릭");
 	
-	var modal = document.getElementById('checkModal');
-	modal.style.display = "block";
-	
-	var span = document.getElementsByClassName("close")[0];
-	var btnClose = document.getElementById("btnCheckClose");
-	var btnOk = document.getElementById("btnSaveAca");
-	
-	btnOk.onclick = function() {
-		$("#acaForm").submit();
+		
+		//고등학교 validation
+		var checkH = 0;
+		var hOk = false;
+		
+		var hsName = document.getElementById("hsName");
+		var highVal = document.getElementsByClassName("highVal");
+		
+// 		console.log(highVal);
+			
+
+		for(var i=0; i<highVal.length; i++) {
+			var checkVal = highVal[i].value;
+				
+			if(checkVal=="" || checkVal==null || checkVal==0) {
+				checkH++;
+			}
+		}
+		
+// 		console.log("checkH : " + checkH);
+		
+		
+		//전문대학 validation
+		
+		var checkCol = 0;
+		var colOk = false;
+		
+		var colVal = document.getElementsByClassName("colVal");
+		
+// 		console.log(colVal.length);
+			
+		for(var i=0; i<colVal.length; i++) {
+			var checkVal = colVal[i].value;
+				
+			if(checkVal=="" || checkVal==null || checkVal==0) {
+				checkCol++;
+			}
+			
+		}
+		
+		
+		
+		//대학교 validation
+		
+		var checkUniv = 0;
+		var univOk = false;
+		
+		var univVal = document.getElementsByClassName("univVal");
+		
+// 		console.log(univVal.length);
+			
+		for(var i=0; i<univVal.length; i++) {
+			var checkVal = univVal[i].value;
+			
+			if(i!=4) {
+				console.log("i 4가 들어오면 안된다"+i);
+				if(checkVal=="" || checkVal==null || checkVal==0) {
+					checkUniv++;
+					continue;
+				}
+			} else {
+				console.log("i에 4만 들어와야함 : "+i);
+				checkUniv++;
+				continue;
+			}
+			
+		}
+		
+// 		console.log("univ : " + checkUniv);
+		
+		
+		//대학원 validation
+		
+		var checkGs = 0;
+		var gsOk = false;
+		
+		var gsVal = document.getElementsByClassName("gsVal");
+		
+// 		console.log(gsVal.length);
+			
+		for(var i=0; i<gsVal.length; i++) {
+			var checkVal = gsVal[i].value;
+				
+			if(checkVal=="" || checkVal==null || checkVal=="0") {
+				checkGs++;
+			}
+		}
+		
+// 		console.log("checkGs : " + checkGs);
+
+		
+		if(checkH!=highVal.length && checkH!=0) {
+			console.log("고등학교에 빈칸 있음");
+			alert("고등학교 학력사항 항목을 모두 입력해주십시오.");
+		} else if(checkCol!=colVal.length && checkCol!=0) {
+			console.log("전문대학에 빈칸 있음");
+			alert("전문대학 학력사항 항목을 모두 입력해주십시오.");
+		} else if(checkUniv!=univVal.length && checkUniv!=1 && checkUniv!=0){
+			console.log("대학교에 빈칸 있음");
+			alert("대학교 학력사항 항목을 모두 입력해주십시오.");
+		} else if(checkGs!=gsVal.length && checkGs!=0) {
+			console.log("대학원에 빈칸 있음");
+			alert("대학원 학력사항 항목을 모두 입력해주십시오.");
+		} else {
+			hOk = true;
+			colOk = true;
+			univOk = true;
+			gsOk = true;
+		}
+		
+		
+		if(hOk==true && colOk==true && univOk==true && gsOk==true) {
+			
+			var colCheck = false;
+			var univCheck = false;
+			var gsCheck = false;
+			
+			var colStartDate = $("#colStartDate").val();
+			var colEndDate = $("#colEndDate").val();
+			var univStartDate = $("#univStartDate").val();
+			var univEndDate = $("#univEndDate").val();
+			var colScore = $("#colScore").val();
+			var colTotalScore = $("#colTotalScore").val();
+			var univScore = $("#univScore").val();
+			var univTotalScore = $("#univTotalScore").val();
+			var gsScore = $("#gsScore").val();
+			var gsTotalScore = $("#gsTotalScore").val();
+			
+			var patternScore = /^\d+(?:[.]?[\d]?[\d])?$/ //소수점 둘째
+			var patternTScore = /^\d+(?:[.]?[\d])?$/ //소수점 첫째
+			
+			
+			if(checkCol==0) {		
+			//전문대학 유효성검사
+				if(colStartDate!="" || colStartDate!=null) {
+					
+					var colStartArr = colStartDate.split('-');
+					var colEndArr = colEndDate.split('-');
+					
+					var colStart_Day = new Date(colStartArr[0],colStartArr[1],colStartArr[2]);
+					var colEnd_Day = new Date(colEndArr[0],colEndArr[1],colEndArr[2]);
+					
+					if(colStart_Day.getTime() > colEnd_Day.getTime()) {
+						alert("졸업일보다 입학일이 빨라야합니다.");
+						$("#colStartDate").focus();
+						console.log("전문대 입학일");
+						return false;
+					} else if(!patternScore.test(colScore)) {
+						alert("학점은 소수점 둘째자리까지 입니다.");
+						$("#colScore").val('');
+						$("#colScore").focus();
+						console.log("전문대 학점");
+						return false;
+					} else if(!patternTScore.test(colTotalScore)) {
+						alert("총점은 소수점 첫째자리까지 입니다.");
+						$("#colTotalScore").val('');
+						$("#colTotalScore").focus();
+						console.log("전문대 총점");
+						return false;
+					} else {
+						colCheck = true;
+					}	
+					
+				} else {
+					colCheck = true;
+				}
+			
+			} else {
+				colCheck = true;
+			}
+			
+			
+			if(checkUniv==0) {
+			//대학교 유효성검사
+				if(univStartDate!="" || univStartDate!=null) {
+					
+					var univStartArr = univStartDate.split('-');
+					var univEndArr = univEndDate.split('-');
+					
+					var univStart_Day = new Date(univStartArr[0],univStartArr[1],univStartArr[2]);
+					var univEnd_Day = new Date(univEndArr[0],univEndArr[1],univEndArr[2]);
+					
+					if(univStart_Day.getTime() > univEnd_Day.getTime()) {
+						alert("졸업일보다 입학일이 빨라야합니다.");
+						$("#univStartDate").focus();
+						console.log("대학 졸업");
+						return false;
+					} else if(!patternScore.test(univScore)) {
+						alert("학점은 소수점 둘째자리까지 입니다.");
+						$("#univScore").val('');
+						$("#univScore").focus();
+						console.log("대학 학점");
+						return false;
+					} else if(!patternTScore.test(univTotalScore)) {
+						alert("총점은 소수점 첫째자리까지 입니다.");
+						$("#univTotalScore").val('');
+						$("#univTotalScore").focus();
+						console.log("대학 총점");
+						return false;
+					} else {
+						univCheck = true;
+					}	
+					
+				} else {
+					univCheck = true;
+				}
+			
+			} else {
+				univCheck = true;
+				
+			}
+			
+			if(checkGs==0) {
+				//대학원 유효성검사
+				if(gsScore!="" || gsScore!=null) {
+					
+					if(!patternScore.test(gsScore)) {
+						alert("학점은 소수점 둘째자리까지 입니다.");
+						$("#gsScore").val('');
+						$("#gsScore").focus();
+						console.log("대학원 학점");
+						return false;
+					} else if(!patternTScore.test(gsTotalScore)) {
+						alert("총점은 소수점 첫째자리까지 입니다.");
+						$("#gsTotalScore").val('');
+						$("#gsTotalScore").focus();
+						console.log("대학원 총점");
+						return false;
+					} else {
+						gsCheck = true;
+					}	
+					
+				} else {
+					gsCheck = true;
+				}			
+			
+			} else {
+				gsCheck = true;				
+			}
+			
+			if(colCheck==true && univCheck==true && gsCheck==true) {
+				$("#acaForm").submit();
+			}
+			
 	}
 	
-	btnClose.onclick = function() {
-		modal.style.display = "none";
-	}
 	
-	
-})
+});
 
 
 
