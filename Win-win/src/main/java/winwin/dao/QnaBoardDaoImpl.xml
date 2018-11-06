@@ -65,4 +65,9 @@
  		SET title=#{title}, pw=#{pw}, content=#{content}
  		WHERE qnaNo=#{qnaNo}	
  	</update>
+ 	<update id="updateBoardAsw" parameterType="winwin.dto.QnaBoard">
+ 		UPDATE qna
+ 		SET asw_code = #{asw_code}, asw_writer = #{asw_writer}, asw_content = #{asw_content}, asw_date= sysdate
+ 		WHERE qnaNo = #{qnaNo}
+ 	</update>
  </mapper>

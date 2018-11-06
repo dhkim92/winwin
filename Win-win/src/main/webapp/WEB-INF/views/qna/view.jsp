@@ -8,7 +8,7 @@
 td{
 	font-size: 16px
 }
-#content{
+#contentBox{
 	max-height: 400px; 
 	overflow-x : hidden;
 	overflow-y : auto;
@@ -39,29 +39,34 @@ td{
 		<div class="tablediv col-11 mt-3" style="border-bottom: 2px solid lightgrey">
 			<table class="table table-striped " style="border-bottom: 1px solid lightgrey">
 				<tr>
-					<th width="10%">글번호 <span class="ml-2">${board.qnaNo}</span></th>
+					<th width="10%">글번호 <span class="ml-2" id="qnaNo">${board.qnaNo}</span></th>
 					<th width="30%">제목 <span class="ml-3">${board.title}</span></th>
 					<th width="15%">작성자 <span class="ml-3">${board.writer }</span></th>
 					<th width="15%">작성일<span class="ml-3"><fmt:formatDate value="${board.writedate}" pattern="yyyy-MM-dd" /></span></th>
-					<th width="15%">답변자<span class="ml-3">${board.asw_writer }</span></th>
-					<th width="15%">답변일<span class="ml-3"></span></th>
+					<th width="15%">답변자<span class="ml-3" id="aswWriter">${board.asw_writer }</span></th>
+					<th width="15%">답변일<span class="ml-3" id="aswDate"><fmt:formatDate value="${board.asw_date}" pattern="yyyy-MM-dd" /></span></th>
 				</tr>
 			</table>
 		</div>
 	</div>
 	
 	<div class="d-flex justify-content-center">
-		<div class="col-11 mt-3" id="content">
-			<p class="mt-4">
+		<div class="col-11 mt-3" id="contentBox">
+			<p class="mt-4" id="res">
 				${board.content }
+				<br>
+				[답변내용]
+				${board.asw_content }
 			</p>
 			<div class="text-right" id="aswBox">
-				<button type="button" class="btn btn-primary" onclick="onAsw();">답변하기</button>
+				<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">답변하기</button>
+				<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
 			</div>
 		</div>
 	</div>
 
-	
+	<input type="hidden" id="code" value="${sessionScope.admincode }"/>
+	<input type="hidden" id="writer" value="${sessionScope.adminname }"/>	
 
 	<br>
 	<div id="btns" class="form-group d-flex justify-content-center">
@@ -94,6 +99,10 @@ td{
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
+<script type="text/javascript"
+ src="/resources/se2/js/HuskyEZCreator.js"></script>
+  <script type="text/javascript" 
+ src="/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 <script>
 $("#btnList").click(function(){
 	$(location).attr("href","/qna/list");
@@ -105,21 +114,75 @@ $("#btnDel").click(function(){
 	$(location).attr("href","/qna/delete?qnaNo="+${board.qnaNo});
 });
 function onAsw(){
-	$("#aswBox").html("");
-	var text = "<textarea rows='8' class='form-control' placeholder='답변하기'></textarea>";
+	$("#onAsw").css("display","none");
+	$("#content").css("display","block");
 	var button1 = "<button type='button' class='btn btn-primary mr-1' onclick='btnAsw();'>등록</button>";
 	var button2 = "<button type='button' class='btn btn-primary' onclick='offAsw();'>취소</button>";
-	$("#aswBox").append(text);
 	$("#aswBox").append(button1);
 	$("#aswBox").append(button2);
+	onSe();
 }
 function offAsw(){
 	$("#aswBox").html("");
-	var button1 = "<button type='button' class='btn btn-primary' onclick='onAsw();'>답변하기</button>"
+	var button1 = "<button type='button' class='btn btn-primary' onclick='onAsw();'>답변하기</button>";
 	$("#aswBox").append(button1);
+}
+function btnAsw(){
+	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+	var content = $("#content").val();
+	if(content==""){
+		alert("답변내용을 입력하세요");
+	}else{
+		var qnaNo = $("#qnaNo").text();
+		var code = $("#code").val();
+		var writer = $("#writer").val();
+		var aswData = {"qnaNo":qnaNo,"asw_code":code,"asw_writer":writer,"asw_content":content};
+		console.log(aswData);
+		$.ajax({
+			type:"post"
+			,url : "/qna/asw"
+			,data : aswData
+			,dataType : "json"
+			,success : function(data){
+				$("#res").html("");
+				var content1 = data.board.content +"<br><hr style='border: 1px solid #376092'><p>[답변내용]</p>"
+				$("#res").append(content1);
+				$("#res").append(data.board.asw_content);
+				$("#resDate").html("");
+				var aswDate = "<fmt:formatDate value='${board.asw_date}' pattern='yyyy-MM-dd' /></span>";
+				$("#resDate").append(aswDate);
+				$("#aswWriter").html("");
+				$("#aswWriter").append(data.board.asw_writer);
+				$("#content").css("display","none");
+			}
+			,error : function(){
+				
+			}
+		});
+	}
 }
 function onComment(){
 	console.log("댓글 열림");
+}
+
+function onSe(){
+	nhn.husky.EZCreator.createInIFrame({
+    	oAppRef: oEditors,
+    	elPlaceHolder: "content",
+    	sSkinURI: "/resources/se2/SmartEditor2Skin.html",
+    	fCreator: "createSEditor2",
+    	htParams : {
+    		bUseToolbar: true, // 툴바 사용여부
+    		bUseVerticalResizer: false, //입력창 크기 조절바
+    		bUseModeChanger: true //모드 탭
+    	}
+	});
+}
+var oEditors = [];
+//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
+function pasteHTML(filepath){
+	var sHTML = '<img src="/resources/image/'+filepath+'">';
+    oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
 }
 </script>
 

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.QnaBoard;
 import winwin.dto.QnaComment;
@@ -144,4 +145,20 @@ public class QnaBoardController {
 		}
 	}
 	
+	//json-lib
+	@RequestMapping(value="/qna/asw",method=RequestMethod.POST)
+	public ModelAndView writeAsw(HttpServletResponse resp,QnaBoard board) {
+		
+		logger.info(board.toString());
+		service.updateBoardAsw(board);
+		QnaBoard resBoard = service.view(board);
+		
+		//한글 폰트
+		resp.setContentType("application/json;charset=utf-8");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		mav.addObject("board",resBoard);
+		return mav;
+	}
 }

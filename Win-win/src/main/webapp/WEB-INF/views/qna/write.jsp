@@ -18,7 +18,7 @@ tr{
 <div class = "container">
 	<form action="/qna/write" method="post">
 	<div class="p-5">
-	<h3 class="text-primary font-weight-bold">채용Q&A</h3>
+	<h3 class="font-weight-bold">채용Q&A</h3>
 	<hr style="border: solid #376092;">
 	<table class="table table-sm table-bordered">
 		<tr style="background-color:lightgray;">

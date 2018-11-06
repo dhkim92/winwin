@@ -18,7 +18,7 @@ td{
 <div class = "container">
 	<form id="upFile" action="/notice/write" method="post" enctype="multipart/form-data">	
 	<div class="p-5">
-	<h3 class="text-primary font-weight-bold">공지사항</h3>
+	<h3 class="font-weight-bold">공지사항</h3>
 	<hr style="border: solid #376092;">
 	<table class="table table-sm table-bordered">
 		<tr>

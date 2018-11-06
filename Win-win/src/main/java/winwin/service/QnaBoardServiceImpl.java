@@ -64,6 +64,11 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 		dao.deleteCommentsByBoardNo(board);
 	}
 
+	@Override
+	public void updateBoardAsw(QnaBoard board) {
+		dao.updateBoardAsw(board);
+	}
+
 	
 
 }

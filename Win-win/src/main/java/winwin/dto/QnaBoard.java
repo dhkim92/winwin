@@ -15,7 +15,7 @@ public class QnaBoard {
 	private String asw_code;
 	private String asw_writer;
 	private String asw_content;
-	private String asw_date;
+	private Date asw_date;
 	private int commentCnt;
 	
 	@Override
@@ -97,10 +97,10 @@ public class QnaBoard {
 	public void setAsw_content(String asw_content) {
 		this.asw_content = asw_content;
 	}
-	public String getAsw_date() {
+	public Date getAsw_date() {
 		return asw_date;
 	}
-	public void setAsw_date(String asw_date) {
+	public void setAsw_date(Date asw_date) {
 		this.asw_date = asw_date;
 	}
 	

@@ -12,6 +12,8 @@ public interface QnaBoardDao {
 	
 	public List<QnaBoard> list(Paging paging);
 	
+	public void updateBoardAsw(QnaBoard board);
+	
 	public QnaBoard view(QnaBoard board);
 	
 	public void write(QnaBoard board);

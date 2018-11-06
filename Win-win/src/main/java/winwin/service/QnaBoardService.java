@@ -28,4 +28,6 @@ public interface QnaBoardService{
 	
 	public void deleteCommentsByBoardNo(QnaBoard board);
 	
+	public void updateBoardAsw(QnaBoard board);
+	
 }
