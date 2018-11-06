@@ -233,7 +233,7 @@
 		
 				$.ajax({
 			          type:"post"
-			          , url:"/applyMenu/passfailCheck"
+			          , url:"/applyMenu/loginCheck"
 			          , dataType: "json"
 // 			          , data: {
 // 			        	  "pw" : pass
@@ -300,28 +300,7 @@
 	          , success: function( data ) {
 	        	  
 	        	  if(data.pwCheck > 0 ) {
-	        		  
-	        			// Get the modal
-	        			var modal = document.getElementById('myModal');
-	        			
-	        			modal.style.display = "block";
-	        			
-	        			// Get the <span> element that closes the modal
-	        			var span = document.getElementsByClassName("close")[0];     
-
-	        			var btnClose = document.getElementById("btnClose");
-	        			
-	        			// When the user clicks on <span> (x), close the modal
-	        			span.onclick = function() {
-	        			    modal.style.display = "none";
-	        			}
-	        			
-	        			btnClose.onclick = function() {
-	        			    modal.style.display = "none";
-	        			}
-	        			
-	        			$("#ModalContent").html("귀하의 #### 지원에 대한 결과는 합격/불합격 입니다.")
-	        		  
+	        		  passfail();
 	        	  } else {
 	        		  
 	        		  if ( $("#pw").val() == "") {
@@ -376,6 +355,28 @@
 	          }
 	       })
 	}
+	
+	
+	function passfail() {
+			var target = document.getElementById("jobTitle");
+	      	var jobopenNo = target.options[target.selectedIndex].value;
+	     	var applyData = {"jobopenNo": jobopenNo };   
+					alert("passfail 컨트롤러 다녀오기 성공");
+	     	
+			$.ajax({
+		       
+				type:"post"
+		          , url:"/applyMenu/passfailCheck"
+		          , dataType: "json"
+		          , data: appyData
+		          , success: function( data ) {
+					alert("passfail 컨트롤러 다녀오기 성공");
+		        	  
+		          }, error: function() {
+		             alert("error");
+		          }
+		       })
+	};
 </script>	
 
 <%@ include file="../include/scriptLoader.jsp"%>

@@ -115,7 +115,7 @@
 	     	<!-- 모달 내용 입력하는 부분 -->
 	     	<div>
 	     	<div class="mt-4">
-	        <p class="font-weight-bold text-center">로그인이 필요합니다</p> 
+	        <p class="font-weight-bold text-center" id="ModalContent"></p> 
 	<!--         <select id="license" class="js-example-basic-single" > -->
 	<!-- 		</select> -->
 			</div>
@@ -278,12 +278,10 @@
 	
 	function selectsubmit(){
 		var target = document.getElementById("jobTitle");
-// 		   alert('선택된 옵션 text 값=' + target.options[target.selectedIndex].text);     // 옵션 text 값
-// 	       alert('선택된 옵션 value 값=' + target.options[target.selectedIndex].value);     // 옵션 value 값
-		   var title = target.options[target.selectedIndex].text;
+// 		   var title = target.options[target.selectedIndex].text;
 	       var jobopenNo = target.options[target.selectedIndex].value;
 
-				var applyData = { "title": title, "jobopenNo": jobopenNo };
+				var applyData = {"jobopenNo": jobopenNo };
 
 				console.log(applyData);
 				
@@ -291,12 +289,38 @@
 			          type:"post"
 			          , url:"/applyMenu/sessionCheck"
 			          , dataType: "json"
+			          , data: applyData
 			          , success: function( data ) {
 			        	  
-			        	  console.log(data.result);
+// 			        	  console.log(data.result);
 			        	  
 			        	  if(data.result > 0 ) {
-			        		  location.href = "/apply/userDetail?title="+title+"&jobopenNo="+jobopenNo;
+			        		  
+				        	  if(data.checkApp > 0 ) {
+				        			// Get the modal
+				        			var modal = document.getElementById('myModal');
+				        			
+				        			modal.style.display = "block";
+				        			
+				        			// Get the <span> element that closes the modal
+				        			var span = document.getElementsByClassName("close")[0];     
+
+				        			var btnClose = document.getElementById("btnClose");
+				        			
+				        			// When the user clicks on <span> (x), close the modal
+				        			span.onclick = function() {
+				        			    modal.style.display = "none";
+				        			}
+				        			
+				        			btnClose.onclick = function() {
+				        			    modal.style.display = "none";
+				        			}
+				        			
+				        			$("#ModalContent").html("이미 지원한 공고입니다.")
+				        	  } else {
+			        			  location.href = "/apply/userDetail?jobopenNo="+jobopenNo;
+				        	  }
+			        		  
 			        	  } else {
 			        			// Get the modal
 			        			var modal = document.getElementById('myModal');
@@ -316,7 +340,7 @@
 			        			btnClose.onclick = function() {
 			        			    modal.style.display = "none";
 			        			}
-			        			
+			        			$("#ModalContent").html("로그인이 필요합니다")
 			        	  }
 				        	  
 			          }, error: function() {

@@ -1,5 +1,7 @@
 package winwin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,16 @@ public class JobopenBoardController {
 		
 		model.addAttribute("basic", jobopenBasic);
 		model.addAttribute("detail", detail);
+
+		Date date = new Date();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		String today = fmt.format(date);
+		model.addAttribute("today", today);
+		if( jobopenBasic.getEndDate() != null ) {
+			Date d = jobopenBasic.getEndDate();
+			String end = fmt.format(d);
+			model.addAttribute("end", end);
+		}
 		
 	}
 	

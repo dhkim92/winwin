@@ -51,25 +51,10 @@
 
 	<div class="d-flex justify-content-center">
 		<div class="col-11 mt-3" style="border: 1px dashed lightgrey;">	
-<!-- 		    <p class="mt-4"> -->
-<!-- 			    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet magna sed massa ultrices rhoncus. Praesent suscipit, magna et congue tristique, nisl dolor bibendum diam, a volutpat lacus purus non eros. Mauris dignissim, dui quis dapibus finibus, dui lorem egestas mauris, vel porta ex arcu at ante. Curabitur non pellentesque libero. Proin in quam porta mauris commodo ornare. Nulla pretium justo eget ex rhoncus pulvinar. Donec at aliquam mauris, eu interdum ipsum. Cras ornare interdum elit, quis consectetur leo imperdiet nec. Praesent et odio pretium, vehicula nibh et, gravida mauris. Sed dictum ultrices velit, id elementum ligula. Morbi et rhoncus orci. Phasellus finibus rhoncus ex, ac rhoncus enim accumsan ac. -->
-		
-<!-- 				Sed tempus in nibh a mollis. Curabitur convallis elementum facilisis. Maecenas eu ex magna. Aliquam odio purus, volutpat fringilla enim id, tincidunt tincidunt mi. Etiam fermentum magna vel aliquam laoreet. Aenean commodo, nibh nec porta vehicula, lacus nunc tempor nunc, at sollicitudin mi lectus et purus. Sed pulvinar sed massa gravida dictum. Etiam molestie justo eros. Phasellus eu ultrices magna, sit amet pellentesque urna. Sed in malesuada libero. Nunc ut leo eget lacus dictum semper. Duis lacinia lobortis malesuada. Nunc laoreet ullamcorper pharetra. -->
-<!-- 			</p> -->
-<!-- 		    <p class="mt-4"> -->
-<!-- 		    	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet magna sed massa ultrices rhoncus. Praesent suscipit, magna et congue tristique, nisl dolor bibendum diam, a volutpat lacus purus non eros. Mauris dignissim, dui quis dapibus finibus, dui lorem egestas mauris, vel porta ex arcu at ante. Curabitur non pellentesque libero. Proin in quam porta mauris commodo ornare. Nulla pretium justo eget ex rhoncus pulvinar. Donec at aliquam mauris, eu interdum ipsum. Cras ornare interdum elit, quis consectetur leo imperdiet nec. Praesent et odio pretium, vehicula nibh et, gravida mauris. Sed dictum ultrices velit, id elementum ligula. Morbi et rhoncus orci. Phasellus finibus rhoncus ex, ac rhoncus enim accumsan ac. -->
-		
-<!-- 				Sed tempus in nibh a mollis. Curabitur convallis elementum facilisis. Maecenas eu ex magna. Aliquam odio purus, volutpat fringilla enim id, tincidunt tincidunt mi. Etiam fermentum magna vel aliquam laoreet. Aenean commodo, nibh nec porta vehicula, lacus nunc tempor nunc, at sollicitudin mi lectus et purus. Sed pulvinar sed massa gravida dictum. Etiam molestie justo eros. Phasellus eu ultrices magna, sit amet pellentesque urna. Sed in malesuada libero. Nunc ut leo eget lacus dictum semper. Duis lacinia lobortis malesuada. Nunc laoreet ullamcorper pharetra. -->
-<!-- 			</p> -->
-<!-- 		    <p class="mt-4"> -->
-<!-- 		    	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet magna sed massa ultrices rhoncus. Praesent suscipit, magna et congue tristique, nisl dolor bibendum diam, a volutpat lacus purus non eros. Mauris dignissim, dui quis dapibus finibus, dui lorem egestas mauris, vel porta ex arcu at ante. Curabitur non pellentesque libero. Proin in quam porta mauris commodo ornare. Nulla pretium justo eget ex rhoncus pulvinar. Donec at aliquam mauris, eu interdum ipsum. Cras ornare interdum elit, quis consectetur leo imperdiet nec. Praesent et odio pretium, vehicula nibh et, gravida mauris. Sed dictum ultrices velit, id elementum ligula. Morbi et rhoncus orci. Phasellus finibus rhoncus ex, ac rhoncus enim accumsan ac. -->
-		
-<!-- 				Sed tempus in nibh a mollis. Curabitur convallis elementum facilisis. Maecenas eu ex magna. Aliquam odio purus, volutpat fringilla enim id, tincidunt tincidunt mi. Etiam fermentum magna vel aliquam laoreet. Aenean commodo, nibh nec porta vehicula, lacus nunc tempor nunc, at sollicitudin mi lectus et purus. Sed pulvinar sed massa gravida dictum. Etiam molestie justo eros. Phasellus eu ultrices magna, sit amet pellentesque urna. Sed in malesuada libero. Nunc ut leo eget lacus dictum semper. Duis lacinia lobortis malesuada. Nunc laoreet ullamcorper pharetra. -->
-<!-- 			</p> -->
 
 					<div class="row justify-content-left p-4">
 						<div class="col-auto">
-							<div class="mt-5" style="border-bottom: 2px solid gray;"><h3>기본 정보</h3></div>
+							<div class="mt-3" style="border-bottom: 2px solid gray;"><h3>기본 정보</h3></div>
 						</div>
 					</div>
 
@@ -125,7 +110,7 @@
 							    	</div>
 							    	<div class="col-10" >
 							    	<c:if test="${basic.startDate ne null }">
-	    					    		<span><fmt:formatDate value="${basic.startDate }" pattern="yyyy-MM-dd" /></span> ~ <span><fmt:formatDate value="${basic.endDate }" pattern="yyyy-MM-dd" /></span>
+	    					    		<span><fmt:formatDate value="${basic.startDate }" pattern="yyyy-MM-dd" /></span> ~ <span id="edate"><fmt:formatDate value="${basic.endDate }" pattern="yyyy-MM-dd" /></span>
 							    	</c:if>
 							    	<c:if test="${basic.startDate eq null }">
 							    		<span>${basic.allOpen }</span>
@@ -237,10 +222,18 @@
 		<div class="col-11 mt-3" style="border-top: 2px solid lightgrey; ">
 	    	<div id="btns" class="form-group d-flex justify-content-center mt-3 mb-2 " style="margin-bottom: 0px;">
 				<a href="/jobOpen/list"><button id="btnList" type="button" class="btn btn-primary btn-sm">목록</button></a>
-					<c:if test="${adminLogin }">
+				<c:if test="${adminLogin}">
 				<a href="/jobOpen/delete?boardNo=${basic.jobopenNo}"><button id="btnDel" type="button" class="btn btn-sm btn-primary ml-3">삭제</button></a>
-					</c:if>
-				<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();">지원하기</button>
+				</c:if>
+				<c:if test="${today > end}">
+				<button type="button" class="btn btn-secondary btn-sm ml-3" onclick="selectsubmit();" disabled="disabled">지원하기</button>
+				</c:if>
+				<c:if test="${today <= end}">
+				<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();" >지원하기</button>
+				</c:if>
+				<c:if test="${basic.allOpen ne '0'}">
+				<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();" >지원하기</button>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -267,9 +260,7 @@
 	     	<!-- 모달 내용 입력하는 부분 -->
 	     	<div>
 	     	<div class="mt-4">
-	        <p class="font-weight-bold text-center">로그인이 필요합니다</p> 
-	<!--         <select id="license" class="js-example-basic-single" > -->
-	<!-- 		</select> -->
+	        <p class="font-weight-bold text-center" id="ModalContent"></p> 
 			</div>
 			
 			<div class="modal-footer d-flex justify-content-center">
@@ -284,22 +275,50 @@
 
 <script type="text/javascript">
 
+	
+
 function selectsubmit(){
        var jobopenNo = document.getElementById("jobopenNo").innerHTML;
-       var title = document.getElementById("title").innerHTML;
+//        var title = document.getElementById("title").innerHTML;
 
-			var applyData = { "title": title, "jobopenNo": jobopenNo };
+			var applyData = { "jobopenNo": jobopenNo };
 
 			$.ajax({
 		          type:"post"
 		          , url:"/applyMenu/sessionCheck"
 		          , dataType: "json"
+		          , data: applyData
 		          , success: function( data ) {
 		        	  
-		        	  console.log(data.result);
-		        	  
+// 		        	  console.log(data.result);
+// 		        	  console.log(data.checkApp);
+
 		        	  if(data.result > 0 ) {
-		        		  location.href = "/apply/userDetail?title="+title+"&jobopenNo="+jobopenNo;
+		        		  
+			        	  if(data.checkApp > 0 ) {
+			        			// Get the modal
+			        			var modal = document.getElementById('myModal');
+			        			
+			        			modal.style.display = "block";
+			        			
+			        			// Get the <span> element that closes the modal
+			        			var span = document.getElementsByClassName("close")[0];     
+
+			        			var btnClose = document.getElementById("btnClose");
+			        			
+			        			// When the user clicks on <span> (x), close the modal
+			        			span.onclick = function() {
+			        			    modal.style.display = "none";
+			        			}
+			        			
+			        			btnClose.onclick = function() {
+			        			    modal.style.display = "none";
+			        			}
+			        			
+			        			$("#ModalContent").html("이미 지원한 공고입니다.")
+			        	  } else {
+		        			  location.href = "/apply/userDetail?jobopenNo="+jobopenNo;
+			        	  }
 		        	  } else {
 		        			// Get the modal
 		        			var modal = document.getElementById('myModal');
@@ -320,8 +339,8 @@ function selectsubmit(){
 		        			    modal.style.display = "none";
 		        			}
 		        			
+		        			$("#ModalContent").html("로그인이 필요합니다")
 		        	  }
-			        	  
 		          }, error: function() {
 		             alert("error");
 		          }

@@ -3,6 +3,7 @@ package winwin.dao;
 import java.util.List;
 
 import winwin.dto.Member;
+import winwin.dto.Support;
 
 public interface ApplyMenuDao {
 
@@ -15,5 +16,7 @@ public interface ApplyMenuDao {
 	public List getQnaBoard();
 
 	public int pwCheck(Member member);
+
+	public int checkApplicant(Support supp);
 
 }

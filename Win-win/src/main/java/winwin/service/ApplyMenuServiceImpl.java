@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import winwin.dao.ApplyMenuDao;
 import winwin.dto.Member;
+import winwin.dto.Support;
 
 @Service
 public class ApplyMenuServiceImpl implements ApplyMenuService{
@@ -39,6 +40,12 @@ public class ApplyMenuServiceImpl implements ApplyMenuService{
 	public boolean pwCheck(Member member) {
 		if( applyMenuDao.pwCheck(member) == 1) return true;
 		else 	return false; 
+	}
+
+	@Override
+	public boolean checkApplicant(Support supp) {
+		if( applyMenuDao.checkApplicant(supp) >= 1) return true;
+		return false;
 	}
 
 }

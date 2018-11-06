@@ -35,5 +35,9 @@
 		) 
 	</select>
 	
+	<select id="checkApplicant" parameterType="winwin.dto.Support" resultType="int">
+		SELECT COUNT(*) FROM support WHERE jobopenno=#{jobopenNo} AND userid=#{userId} 
+	</select>
+	
 	
 </mapper>

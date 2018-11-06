@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import winwin.dto.JobopenBasic;
 import winwin.dto.Member;
+import winwin.dto.Support;
 import winwin.service.ApplyMenuService;
 
 @Controller
@@ -75,11 +76,24 @@ public class ApplyMenuController {
 	
 	
 	@RequestMapping(value="/sessionCheck", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> sessionCheck(HttpServletResponse resp, HttpSession session) {
+	public @ResponseBody Map<String, Object> sessionCheck(HttpServletResponse resp, HttpSession session, int jobopenNo) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Object obj = session.getAttribute("login");
+		
+		
+		if( session.getAttribute("login") != null ) {
+			
+			Support supp = new Support();
+			supp.setUserId((String)session.getAttribute("id"));
+			supp.setJobopenNo(jobopenNo);
+			
+			Object obj2 = applyMenuService.checkApplicant(supp);
+			
+			map.put("checkApp", obj2);
+		}
+		
 		
 		map.put("result", obj);
 		return map;
@@ -87,26 +101,25 @@ public class ApplyMenuController {
 	}
 	
 	
-	@RequestMapping(value="/passfailCheck", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> passfailCheck(HttpSession session /*, String pw */) {
+	@RequestMapping(value="/loginCheck", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> loginCheck(HttpSession session/*, int jobopenNo*/) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Object obj = session.getAttribute("login");
 
-//		// 세션에서 로그인 아이디 가져와서 입력받은 비밀번호랑 정보 같은지 확인해서 결과 반환
-//		
-//		Object LoginId = session.getAttribute("id");
-//		
-//		Member member = new Member();
-//		
-//		member.setUserid((String)session.getAttribute("id"));
-//		member.setPwd(pw);
-//		
-//		boolean pwCheck = applyMenuService.pwCheck(member);
+//		if( session.getAttribute("login") != null ) {
+//			
+//			Support supp = new Support();
+//			supp.setUserId((String)session.getAttribute("id"));
+//			supp.setJobopenNo(jobopenNo);
+//			
+//			Object obj2 = applyMenuService.checkApplicant(supp);
+//			
+//			map.put("checkApp", obj2);
+//		}
 		
 		map.put("result", obj);
-//		map.put("pwCheck", pwCheck);
 		return map;
 	}
 
@@ -127,6 +140,36 @@ public class ApplyMenuController {
 		boolean pwCheck = applyMenuService.pwCheck(member);
 		
 		map.put("pwCheck", pwCheck);
+		return map;
+	}
+	
+	@RequestMapping(value="/passfailCheck", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> passfailCheck(HttpSession session, int jobopenNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Object obj = session.getAttribute("login");
+
+//		if( session.getAttribute("login") != null ) {
+//			
+//			Support supp = new Support();
+//			supp.setUserId((String)session.getAttribute("id"));
+//			supp.setJobopenNo(jobopenNo);
+//			
+//			Object obj2 = applyMenuService.checkApplicant(supp);
+//			
+//			map.put("checkApp", obj2);
+//		}
+		
+		map.put("result", obj);
+		
+		
+		Support supp = new Support();
+		
+		supp.setUserId((String)session.getAttribute("id"));
+		supp.setJobopenNo(jobopenNo);
+		
+		
 		return map;
 	}
 	
