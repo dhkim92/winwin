@@ -316,23 +316,28 @@ public class Apply2Controller {
 		
 		language.setUserId((String)session.getAttribute("id"));
 		language.setJobopenNo(jobopenBasic.getJobopenNo());
-		model.addAttribute("language", apply2Service.selectLanguage(language));
+		List<Language> langList = apply2Service.selectLanguage(language);
+		model.addAttribute("language", langList);
 
 		license.setUserId((String)session.getAttribute("id"));
 		license.setJobopenNo(jobopenBasic.getJobopenNo());
-		model.addAttribute("license", apply2Service.selectLicense(license));
+		List<License> licList = apply2Service.selectLicense(license);
+		model.addAttribute("license", licList);
 
 		career.setUserId((String)session.getAttribute("id"));
 		career.setJobopenNo(jobopenBasic.getJobopenNo());
-		model.addAttribute("career", apply2Service.selectCareer(career));
+		List<Career> carList = apply2Service.selectCareer(career);
+		model.addAttribute("career", carList);
 		
 		activity.setUserId((String)session.getAttribute("id"));
 		activity.setJobopenNo(jobopenBasic.getJobopenNo());
-		model.addAttribute("activity", apply2Service.selectActivity(activity));
+		List<Activity> actList = apply2Service.selectActivity(activity);
+		model.addAttribute("activity", actList);
 
 		experience.setUserId((String)session.getAttribute("id"));
 		experience.setJobopenNo(jobopenBasic.getJobopenNo());
-		model.addAttribute("experience", apply2Service.selectExperience(experience));
+		List<Experience> expList = apply2Service.selectExperience(experience);
+		model.addAttribute("experience", expList);
 		
 		introduce.setUserId((String)session.getAttribute("id"));
 		introduce.setJobopenNo(jobopenBasic.getJobopenNo());

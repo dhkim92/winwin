@@ -1,5 +1,7 @@
 package winwin.dao;
 
+import java.util.List;
+
 import winwin.dto.Activity;
 import winwin.dto.Career;
 import winwin.dto.College;
@@ -23,37 +25,37 @@ public interface Apply2Dao {
 
 	public void insertLanguage(Language language);
 
-	public Language selectLanguage(Language language);
+	public List<Language> selectLanguage(Language language);
 
 	public void updateLanguage(Language language);
 
 	public void insertLicense(License license);
 
-	public License selectLicense(License license);
+	public List<License> selectLicense(License license);
 
 	public void updateLicense(License license);
 
 	public void insertCareer(Career career);
 
-	public Career selectCareer(Career career);
+	public List<Career> selectCareer(Career career);
 
 	public void updateCareer(Career career);
 
 	public void insertActivity(Activity activity);
 
-	public Activity selectActivity(Activity activity);
+	public List<Activity> selectActivity(Activity activity);
 
 	public void updateActivity(Activity activity);
 
 	public void insertExperience(Experience experience);
 
-	public Experience selectExperience(Experience experience);
+	public List<Experience> selectExperience(Experience experience);
 
 	public void updateExperience(Experience experience);
 
 	public void insertMaterial(Material material);
 
-	public Material selectMaterial(Material material);
+	public List<Material> selectMaterial(Material material);
 
 	public void updateMaterial(Material material);
 	

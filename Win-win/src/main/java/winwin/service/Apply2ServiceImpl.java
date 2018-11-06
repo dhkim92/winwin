@@ -1,5 +1,7 @@
 package winwin.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +36,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.insertLanguage(language);
 	}
 	
-	public Language selectLanguage(Language language) {
+	public List<Language> selectLanguage(Language language) {
 		return dao.selectLanguage(language);
 	}
 	
@@ -46,7 +48,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.insertLicense(license);
 	}
 	
-	public License selectLicense(License license) {
+	public List<License> selectLicense(License license) {
 		return dao.selectLicense(license);
 	}
 	
@@ -58,7 +60,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.insertCareer(career);
 	}
 	
-	public Career selectCareer(Career career) {
+	public List<Career> selectCareer(Career career) {
 		return dao.selectCareer(career);
 	}
 	
@@ -70,7 +72,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.insertActivity(activity);
 	}
 	
-	public Activity selectActivity(Activity activity) {
+	public List<Activity> selectActivity(Activity activity) {
 		return dao.selectActivity(activity);
 	}
 	
@@ -82,7 +84,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.insertExperience(experience);
 	}
 	
-	public Experience selectExperience(Experience experience) {
+	public List<Experience> selectExperience(Experience experience) {
 		return dao.selectExperience(experience);
 	}
 	
@@ -94,7 +96,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.insertMaterial(material);
 	}
 	
-	public Material selectMaterial(Material material) {
+	public List<Material> selectMaterial(Material material) {
 		return dao.selectMaterial(material);
 	}
 	
