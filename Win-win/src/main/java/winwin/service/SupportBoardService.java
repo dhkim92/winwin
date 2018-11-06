@@ -19,4 +19,12 @@ public interface SupportBoardService {
 	public SupportBoard Search(String search);
 	
 	public SupportBoard status(SupportBoard board);
+	
+	public SupportBoard send(SupportBoard board);
+
+	public SupportBoard emailsend(SupportBoard board);
+
+	public SupportBoard pass(SupportBoard board);
+
+	public SupportBoard selectTitle(SupportBoard board);
 }

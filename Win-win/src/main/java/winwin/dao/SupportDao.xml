@@ -8,7 +8,7 @@
  		<result column="passNo" property="passNo"/>
  		<result column="title" property="title"/>
  		<result column="task" property="task"/>
- 		<result column="supportDateStr" property="supportDateStr"/>
+ 		<result column="supportDate" property="supportDate"/>
  		<result column="username" property="username"/>
  		<result column="portfolioId" property="portfolioId"/>
  		<result column="status" property="status"/>

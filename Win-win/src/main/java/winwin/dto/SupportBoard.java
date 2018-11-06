@@ -17,13 +17,15 @@ public class SupportBoard {
 	private Date supportDate;
 	private String username;
 	private String portfolioId;
+	private String emailSend;
 	private String status;
-	private String supportDateStr;
+	private String pass;
 	
 	@Override
 	public String toString() {
 		return "SupportBoard [passNo=" + passNo + ", title=" + title + ", task=" + task + ", supportDate=" + supportDate
-				+ ", username=" + username + ", portfolioId=" + portfolioId + ", status=" + status + "]";
+				+ ", username=" + username + ", portfolioId=" + portfolioId + ", emailSend=" + emailSend + ", status="
+				+ status + ", pass=" + pass + "]";
 	}
 
 	public int getPassNo() {
@@ -74,6 +76,14 @@ public class SupportBoard {
 		this.portfolioId = portfolioId;
 	}
 
+	public String getEmailSend() {
+		return emailSend;
+	}
+
+	public void setEmailSend(String emailSend) {
+		this.emailSend = emailSend;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -82,12 +92,15 @@ public class SupportBoard {
 		this.status = status;
 	}
 
-	public String getSupportDateStr() {
-		return supportDateStr;
+	public String getPass() {
+		return pass;
 	}
 
-	public void setSupportDateStr(String supportDateStr) {
-		this.supportDateStr = supportDateStr;
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
+	
+	
+
 	
 }

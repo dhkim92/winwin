@@ -48,7 +48,7 @@
 
 		<div class="row">
 			<div class="col-12 mt-5">
-				<table class="table table-hover">
+				<table class="table table-hover" id = resultTable>
 					<thead style="background-color: #eee;">
 						<tr>
 							<th class="text-center align-middle"><input type="checkbox"
@@ -56,6 +56,7 @@
 								style="width: 18px; height: 18px;" class="align-middle"></th>
 							<th class="text-center">번호</th>
 							<th class="text-center">공 고 명</th>
+							<th class="text-center">직무</th>
 							<th class="text-center">지원 일자</th>
 							<th class="text-center">지원자</th>
 							<th class="text-center">처리 상태</th>
@@ -64,19 +65,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td scope="row" class="text-center align-middle"><input
-								type="checkbox" aria-label="Checkbox for following text input"
-								style="width: 18px; height: 18px;" class="align-middle"></td>
-							<th scope="row" class="text-center align-middle">20</th>
-							<td class="text-center align-middle">경력 사원 입사지원서</td>
-							<td class="text-center align-middle">18.08.23</td>
-							<td class="text-center align-middle">문재환</td>
-							<td class="text-center"><button type="button"
-									class="btn btn-secondary btn-sm">합격</button></td>
-							<td class="text-center"><button type="button"
-									class="btn btn-secondary btn-sm">발송</button></td>
-						</tr>
+<!-- 						<tr> -->
+<!-- 							<td scope="row" class="text-center align-middle"><input -->
+<!-- 								type="checkbox" aria-label="Checkbox for following text input" -->
+<!-- 								style="width: 18px; height: 18px;" class="align-middle"></td> -->
+<!-- 							<th scope="row" class="text-center align-middle">20</th> -->
+<!-- 							<td class="text-center align-middle">경력 사원 입사지원서</td> -->
+<!-- 							<td class="text-center align-middle">직무</td> -->
+<!-- 							<td class="text-center align-middle">18.08.23</td> -->
+<!-- 							<td class="text-center align-middle">문재환</td> -->
+<!-- 							<td class="text-center"><button type="button" -->
+<!-- 									class="btn btn-secondary btn-sm">합격</button></td> -->
+<!-- 							<td class="text-center"><button type="button" -->
+<!-- 									class="btn btn-secondary btn-sm">발송</button></td> -->
+<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
@@ -92,6 +94,39 @@
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
+
+function resultList (curPage) {
+	
+	console.log(curPage)
+	
+	var param = {
+			curPage			: curPage
+	};
+	
+	//ajax 호출
+	$.getJSON('/result/search', param, function (result) {
+		if (result) {
+			//목록 초기화
+			$('#resultTable tbody').empty();
+			//목록 생성
+			$.each(result, function (i, item) {
+				var html  = '<tr>';
+					html += '<td scope="row" class="text-center align-middle"><input type="checkbox" aria-label="Checkbox for following text input"style="width: 18px; height: 18px;" class="align-middle"></td>';
+					html += '	<th scope="row" class="text-center align-middle">' + (i+1) + '</th>';
+					html += '	<td class="text-center align-middle">' + item.title + '</td>';
+					html += '	<td class="text-center align-middle">' + item.task + '</td>';
+					html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
+					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.pass + '</button></td>';
+					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.emailsend + '</button></td>';
+					html += '</tr>';
+					
+				$('#resultTable tbody').append(html);
+			});
+			
+		}
+	});
+	
+}
 	
 </script>
 

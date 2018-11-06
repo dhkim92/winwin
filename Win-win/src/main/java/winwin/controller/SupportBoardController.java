@@ -39,7 +39,7 @@ public class SupportBoardController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/support/search")
-	public List<SupportBoard> listProcess(@RequestParam(required = false, defaultValue = "0") int curPage,
+	public List<SupportBoard> listProcess(@RequestParam(required = false, defaultValue = "1") int curPage,
 			@RequestParam(required = false, defaultValue = "20") int listCount,
 			@RequestParam(required = false, defaultValue = "5") int pageCount,
 			Map<String, Object> param) {
@@ -47,7 +47,11 @@ public class SupportBoardController {
 		Paging paging = service.getPaging(curPage, listCount, pageCount);
 
 		List<SupportBoard> list = service.list(paging, param);
-
+	
+		
+		System.out.println(curPage);
+		
+		System.out.println(paging);
 		/*
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("support/list");

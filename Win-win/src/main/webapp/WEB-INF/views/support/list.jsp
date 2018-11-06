@@ -155,23 +155,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%-- 
-						<c:forEach items="${list }" var="SupportBoard">
-							<tr>
-								<th scope="row" class="text-center align-middle">${SupportBoard.passNo }</th>
-								<td class="text-center align-middle">${JobopenDetail.title }</td>
-								<td class="text-center align-middle">${UserDetail.task }</td>
-								<td class="text-center align-middle"><fmt:formatDate
-										value="${SupportBoard.supportDate }" pattern="yy.MM.dd" /></td>
-								<td class="text-center align-middle">${Member.username }</td>
-								<td class="text-center"><button type="button"
-										class="btn btn-primary btn-sm" data-toggle="modal"
-										data-target="#exampleModal">포트폴리오</button></td>
-								<td class="text-center"><button type="button"
-										class="btn btn-secondary btn-sm">${SupportBoard.status }</button></td>
-							</tr>
-						</c:forEach> 
-						--%>
 					</tbody>
 				</table>
 			</div>
@@ -189,7 +172,7 @@
 
 
 $(function () {
-	supportList();
+	supportList(${param.curPage});
 	
 	//이벤트 누적 방지 ( 이전 이벤트를 삭제하고 새 이벤트 주입. unbind)
 	$('.searchSelect').unbind('click').click(function () {
@@ -215,8 +198,9 @@ $(function () {
 	});
 });
 
-
-function supportList () {
+function supportList (curPage) {
+	
+	console.log(curPage)
 	
 	var param = {
 			career 			: $('#career').val(),			//경력
@@ -225,9 +209,10 @@ function supportList () {
 			credit 			: $('#credit').val(),			//학점
 			language 		: $('#language').val(),			//토익
 			status 			: $('#status').val(),			//처리상태
+			curPage			: curPage
 	};
 
-	
+
 	//ajax 호출
 	$.getJSON('/support/search', param, function (result) {
 		if (result) {
@@ -252,7 +237,14 @@ function supportList () {
 	});
 	
 }
+
+//페이징 버튼 클릭 시
+$('.container .container').on("click", '.page-link', function() {
+	var curPage = $(this).attr('data-curpage');
+	supportList(curPage);	
+});
 </script>
+
 
 
 <%@ include file="../include/footer.jsp"%>

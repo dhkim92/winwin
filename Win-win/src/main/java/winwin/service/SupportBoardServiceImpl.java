@@ -24,6 +24,7 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	public List<SupportBoard> list(Paging paging, Map<String, Object> param) {
 		param.put("startNo", paging.getStartNo());
 		param.put("endNo", paging.getEndNo());
+		param.put("curPage", paging.getCurPage());
 		return dao.list(param);
 	}
 	
@@ -48,6 +49,30 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	@Override
 	public SupportBoard status(SupportBoard board) {
 		return dao.status(board);
+	}
+
+	@Override
+	public SupportBoard send(SupportBoard board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SupportBoard emailsend(SupportBoard board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SupportBoard pass(SupportBoard board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SupportBoard selectTitle(SupportBoard board) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

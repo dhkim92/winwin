@@ -1,23 +1,22 @@
 package winwin.dao;
 
 import java.util.List;
+import java.util.Map;
 
-import winwin.dto.ResultBoard;
 import winwin.dto.SupportBoard;
-import winwin.util.Paging;
 
 public interface ResultDao {
 	
 	public int totalCnt();
 	
-	public List<ResultBoard> list(Paging paging);
+	public List<SupportBoard> list(Map<String, Object> param);
 	
-	public ResultBoard send(ResultBoard board);
+	public SupportBoard send(SupportBoard board);
 	
-	public ResultBoard status(ResultBoard board);
+	public SupportBoard status(SupportBoard board);
 	
-	public ResultBoard pass(ResultBoard board);
+	public SupportBoard pass(SupportBoard board);
 	
-	public ResultBoard selectTitle(ResultBoard board);
+	public SupportBoard selectTitle(SupportBoard board);
 
 }
