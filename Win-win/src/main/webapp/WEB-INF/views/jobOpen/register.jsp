@@ -2,81 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp" %>
 
-
-<style>
-.box{
-	float: left;
-	width: 190px;
-	height: 100px;
-	display :inline-block;
-    line-height: 6.4em;
-}
-
-.boxm{
-	float:left;
-	width:160px;
-	height:100px;
-	display:inline-block;
-	line-height:6.4em;
-}
-
-.noticeBox{
-	width:800px;
-	height:200px;
- 	display : inline-block;
-	border : 1px solid blue;
-	text-align : center;
-	line-height: 200px;
-	font-family: inherit;
-	color: blue;
-}
-
-.size{
-	display:inline-block;
-	margin:1em;
-	border:1px solid black;
-}
-
-
-.triangle-left-primary {
-	float: left;	
-      width: 0;
-      height: 0;
-      border-top: 50px solid transparent;
-      border-left: 50px solid transparent;
-      border-bottom: 50px solid transparent;
-}
-
-.triangle-right-primary {
-	float: left;	
-      width: 0;
-      height: 0;
-      border-top: 50px solid #376092;
-      border-left: 50px solid  transparent ;
-      border-bottom: 50px solid #376092;
-}
-
-.triangle-right-white {
-	float: left;
-      width: 0;
-      height: 0;
-      border-top: 50px solid red;
-      border-left: 100px solid transparent;
-      border-bottom: 50px solid red;
-}
-
-.line {
-	float : left;
-	border-top : 1px solid #376092;
-	border-right: 1px solid #376092;
-	width:4.7em;
-	height:4.75em;
-	transform: scale(1) rotate(45deg) translateX(10px) translateY(10px);
-}
-    
-
-</style>
-
+<link rel="stylesheet" href="/resources/jobopen.css" />
 
 <%@ include file="../include/adminHeader.jsp"%>
 
@@ -86,7 +12,7 @@
 			<div class="boxm text-primary text-center pl-5" style="cursor:pointer;" onclick='location.href="/jobOpen/basicUpdate?jobopenNo=${sessionScope.jobopen }";'><strong>기본정보</strong></div>
 			<div class="line"></div>
 			<div class="box text-primary text-center" style="cursor:pointer;" onclick='location.href="/jobOpen/detailUpdate?jobopenNo=${sessionScope.jobopen }";'><strong>세부정보</strong></div>
-			<div class="triangle-right-primary"></div>
+			<div class="triangle-left-trans"></div>
 			<div class="box text-light text-center" style="background-color: #376092;"><strong>등록하기</strong></div>
 		</div>		
 	</div>
@@ -279,7 +205,16 @@
 
 $(document).ready(function(){
 	$("#btnOk").click(function(){
-		location.href = "/main/adminmain";	
+		$.ajax({
+			type:"post",
+			url:"/jobOpen/register",
+			success:function(){
+				location.href="/main/adminmain";
+			},
+			error:function(){
+				console.log("등록 실패");
+			}
+		})
 	});
 	$("#btnCancel").click(function(){
 		$.ajax({
@@ -289,7 +224,7 @@ $(document).ready(function(){
 				location.href="/main/adminmain";
 			},
 			error:function(){
-				console.log("취소 실패")
+				console.log("취소 실패");
 			}
 		});
 	});

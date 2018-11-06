@@ -112,7 +112,6 @@ public class JobopenController {
 	public void detail() {
 		
 		
-		
 	}
 	
 	@RequestMapping(value="/detailInfo", method=RequestMethod.POST)
@@ -190,6 +189,12 @@ public class JobopenController {
 		
 		model.addAttribute("basic", basic);
 		model.addAttribute("detail", detail);
+	}
+	
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+	public void regiProc(HttpSession session) {
+		
+		jobopenService.regiInfo((int)session.getAttribute("jobopen"));
 	}
 	
 }

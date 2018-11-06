@@ -2,75 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/CSSLoader.jsp"%>
 
-<style>
-.box{
-	float: left;
-	width: 190px;
-	height: 100px;
-	display :inline-block;
-    line-height: 6.4em;
-}
-
-.boxm{
-	float:left;
-	width:160px;
-	height:100px;
-	display:inline-block;
-	line-height:6.4em;
-}
-
-.noticeBox{
-	width:800px;
-	height:200px;
- 	display : inline-block;
-	border : 1px solid blue;
-	text-align : center;
-	line-height: 200px;
-	font-family: inherit;
-	color: blue;
-}
-
-.size{
-	display:inline-block;
-	margin:1em;
-	border:1px solid black;
-}
-
-.enter{
-	white-space:pre;
-}
-
-.red {
-	background-color: red;
-}
-.triangle-right-primary {
-	float: left;	
-      width: 0;
-      height: 0;
-      border-top: 50px solid transparent;
-      border-left: 50px solid #376092;
-      border-bottom: 50px solid transparent;
-}
-.triangle-right-white {
-	float: left;
-      width: 0;
-      height: 0;
-      border-top: 50px solid red;
-      border-left: 100px solid transparent;
-      border-bottom: 50px solid red;
-}
-
-.line {
-	float : left;
-	border-top : 1px solid #376092;
-	border-right: 1px solid #376092;
-	width:4.7em;
-	height:4.75em;
-	transform: scale(1) rotate(45deg) translateX(10px) translateY(10px);
-}
-    
-
-</style>
+<link rel="stylesheet" href="/resources/jobopen.css" />
 
 <%@ include file="../include/adminHeader.jsp"%>
 
@@ -79,7 +11,7 @@
 	<div class="row m-3 justify-content-center">
 		<div style="width: 680px; height: 101px; border:1px solid #376092;">
 			<div class="box text-light text-center" style="background-color: #376092;"><strong>기본정보</strong></div>
-			<div class="triangle-right-primary"></div>
+			<div class="triangle-left-primary"></div>
 			<div class="boxm text-primary text-center pl-5"><strong>세부정보</strong></div>
 			<div class="line"></div>
 			<div class="box text-primary text-center"><strong>등록하기</strong></div>
@@ -222,6 +154,36 @@
 	</div>
 </div>
 
+<div id="myModal" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content">
+		<div class="row">
+			<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+			</div>
+			<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+			</div>
+		</div>
+	    
+	    <div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	    <div>
+		    <div class="mt-4">
+				<p class="font-weight-bold text-center" id="idChecking"></p>
+			</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+					<button type="button" id="btnClose" class="font-weight-bold btn btn-primary mr-1" style="background-color: #376092">확인</button>
+					<button type="button" id="btnNo" class="font-weight-bold btn btn-primary" style="background-color: #376092">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 
 <%@ include file="../include/scriptLoader.jsp"%>
@@ -231,7 +193,24 @@
 $(document).ready(function(){
 	
 	$("#btnCancel").click(function(){
-		location.href="/main/adminmain";
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		var span = document.getElementsByClassName('close')[0];
+		var btnClose = document.getElementById('btnClose');
+		var btnNo = document.getElementById('btnNo');
+		
+		$('#idChecking').html("작성을 취소하시겠습니까?");
+		
+		span.onclick = function(){
+			modal.style.display = "none";
+		}
+		btnClose.onclick = function(){
+			modal.style.display = "none";
+			location.href="/main/adminmain";
+		}
+		btnNo.onclick = function(){
+			modal.style.display = "none";
+		}
 	});
 	
 	
@@ -274,6 +253,7 @@ $(document).ready(function(){
 			$('#open input').val("");
 		}
 	});
+	
 	
 	
 	

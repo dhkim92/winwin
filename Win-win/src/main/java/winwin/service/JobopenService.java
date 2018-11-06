@@ -90,4 +90,10 @@ public interface JobopenService {
 	 */
 	public int CountBasic();
 	
+	/**
+	 * display update (화면에 띄우기 등록)
+	 * @param jobopenNo
+	 */
+	public void regiInfo(int jobopenNo);
+	
 }
