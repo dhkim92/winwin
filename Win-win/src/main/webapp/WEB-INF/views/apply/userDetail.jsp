@@ -183,9 +183,9 @@ $(document).ready(function() {
 	<table class="table col-md-12 mb-0">
 	  <tbody>
 	    <tr>
-	      <td style="font-weight: bold; padding-left: 32px;">${jobopenBasic.title}</td>
-	      <td class="p-0 text-center align-middle bg-secondary" style="width: 162px; font-weight: bold;">지원직무</td>
-	      	<td class="text-center align-middle" style="width: 207px;">
+	      <td style="font-weight: bold; padding-left: 32px; width: 64%;">${jobopenBasic.title}</td>
+	      <td class="p-0 text-center align-middle bg-secondary" style="width: 14%; font-weight: bold;">지원직무</td>
+	      	<td class="text-center align-middle" style="width: 18%;">
 	      		<select style="height:21px; width:90px;" id="taskSel">
 	      			<option value="0">직무선택</option>
 	      			<c:forEach items="${task }" var="task">
@@ -203,11 +203,11 @@ $(document).ready(function() {
 	      	<td class="text-center align-middle">지원서 저장 전 입니다</td>
 	      <th class="text-center align-middle bg-secondary">원서 마감 일시</th>
 	      	<c:if test="${jobopenBasic.endDate eq null}">
-	      		<td class="text-center align-middle" style="color: red;"><input style="border: none; width: 124px; color: red;" type="text" value="상시채용" readonly/></td>
+	      		<td class="pr-0 text-center align-middle" style="color: red;"><input style="border: none; width: 124px; color: red;" type="text" value="상시채용" readonly/></td>
 	      	</c:if>
 	      	<c:if test="${jobopenBasic.endDate ne null}">
-	      		<td class="text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
-	      		<td class="text-danger text-center align-middle"><input style="border: none; width: 100px; color: red;" type="text" id="dDay" value="" readonly/></td>
+	      		<td class="pr-0 text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
+	      		<td class="pl-0 text-danger text-center align-middle"><input style="border: none; width: 55px; color: red;" type="text" id="dDay" value="" readonly/></td>
 			</c:if>
 	      <th class="text-center align-middle bg-secondary">자동 로그아웃</th>
 	      	<td class="text-danger text-center align-middle"><span id="counter"></span></td>

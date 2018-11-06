@@ -152,7 +152,7 @@ $(document).ready(function() {
                   <td class="align-middle">
                   	<input type="hidden" name="userId" id="hsuserId" value="${sessionScope.id }" />
                   	<input type="hidden" name="jobopenNo" id="hsJobopenNo" value="${jobopenBasic.jobopenNo }" />
-					<input class="highVal" type="text" id="hsName" name="hsName" class="mr-1 hschoolTxt" style="width: 200px" readonly/>
+					<input type="text" id="hsName" name="hsName" class="mr-1 hschoolTxt highVal" style="width: 200px" readonly/>
 					<input type="button" class="m-1 mr-1" id="hsSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
 					<select style="height:24px; width:70px;" class="hsselect highVal" id="hsDay" name="hsDay">
 						<option value="">주/야</option>
@@ -218,7 +218,7 @@ $(document).ready(function() {
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle">
                   	<input type="hidden" name="jobopenNo" id="colJobopenNo" value="${jobopenBasic.jobopenNo }" />
-					<input class="colVal" type="text" id="colName" name="colName" class="mr-1 colTxt" style="width: 110px" readonly/>
+					<input type="text" id="colName" name="colName" class="mr-1 colTxt colVal" style="width: 110px" readonly/>
 					<input type="button" class="m-1 mr-1" id="colSearch" value="검색"><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
 					<select style="height:24px; width:85px;" class="colselect colVal" id="colSelect" name="colBranch">
 						<option value="0">본교/분교</option>
