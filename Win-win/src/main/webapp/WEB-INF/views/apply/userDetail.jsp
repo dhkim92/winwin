@@ -203,10 +203,10 @@ $(document).ready(function() {
 	      	<td class="text-center align-middle">지원서 저장 전 입니다</td>
 	      <th class="text-center align-middle bg-secondary">원서 마감 일시</th>
 	      	<c:if test="${jobopenBasic.endDate eq null}">
-	      		<td class="pr-0 text-center align-middle" style="color: red;"><input style="border: none; width: 124px; color: red;" type="text" value="상시채용" readonly/></td>
+	      		<td class="pl-4 pr-0 text-center align-middle" style="color: red;"><input style="border: none; width: 124px; color: red;" type="text" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상시채용" readonly/></td>
 	      	</c:if>
 	      	<c:if test="${jobopenBasic.endDate ne null}">
-	      		<td class="pr-0 text-center align-middle"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
+	      		<td class="pr-0 text-center align-middle" style="padding-left: 10px;"><fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" /></td>
 	      		<td class="pl-0 text-danger text-center align-middle"><input style="border: none; width: 55px; color: red;" type="text" id="dDay" value="" readonly/></td>
 			</c:if>
 	      <th class="text-center align-middle bg-secondary">자동 로그아웃</th>
