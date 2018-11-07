@@ -6,6 +6,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+	history.pushState(null, null, location.href);
+	window.onpopstate = function () {
+	    history.go(1);
+	};
 	
 	var tid;
 	var cnt = 1800;

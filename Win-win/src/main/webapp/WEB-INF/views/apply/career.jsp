@@ -8,6 +8,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+	history.pushState(null, null, location.href);
+	window.onpopstate = function () {
+	    history.go(1);
+	};
 	
 	var tid;
 	var cnt = 1800;
@@ -541,7 +545,7 @@ $(document).ready(function() {
 	
 	
 	function addMatForm(i) {
-		var form = '<tr><td class="align-middle"><input type="text" id="extFile" name="matArr['+i+'].extName" class="mr-1" style="width:150px;" disabled/></td><td class="align-middle"><input type="text" id="originFile" name="matArr['+i+'].originName" class="mr-1" style="width:300px;" disabled/></td><td class="align-middle"><input type="text" name="matArr['+i+'].date" class="mr-1" style="width:200px;" disabled/></td><td class="align-middle"><input type="text" id="fileSize" name="matArr['+i+'].filesize" class="mr-1" style="width:200px" disabled/></td><td class="align-middle"><input type="file" name="file" id="file'+i+'" style="display:none"><input type="button" onclick="$("#file"'+i+').click();" value="파일첨부"/></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td class="align-middle"><input type="text" id="extFile" name="matArr['+i+'].extName" class="mr-1" style="width:150px;" disabled/></td><td class="align-middle"><input type="text" id="originFile" name="matArr['+i+'].originName" class="mr-1" style="width:300px;" disabled/></td><td class="align-middle"><input type="text" name="matArr['+i+'].date" class="mr-1" style="width:200px;" disabled/></td><td class="align-middle"><input type="text" id="fileSize" name="matArr['+i+'].filesize" class="mr-1" style="width:200px" disabled/></td><td class="align-middle"><input type="file" name="file" id="file'+i+'" style="display:none"><input type="button" onclick="$("#file'+i+'").click();" value="파일첨부"/></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -688,6 +692,23 @@ $('#Btn').click(function() {
 	}
 	
 	console.log("checkExp : " + checkExp);
+	
+	//첨부파일 null validation_class="portfolio"
+	var checkPort= 0;
+	var portOk = false;
+	
+	var portVal = document.getElementsByClassName("portfolio");
+	console.log("Portfolio 갯수 : " + portVal.length);
+	
+	for(var i=0; i<portVal.length; i++) {
+		var checkVal = portVal[i].value;
+		
+		if(checkVal=="" || checkVal==null || checkVal==0) {
+			checkPort++;
+		}
+	}
+	
+	console.log("checkPort : "+ checkPort);
 
 	
 // 	$('#career').submit();
