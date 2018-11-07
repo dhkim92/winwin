@@ -360,18 +360,101 @@
 	function passfail() {
 			var target = document.getElementById("jobTitle");
 	      	var jobopenNo = target.options[target.selectedIndex].value;
-	     	var applyData = {"jobopenNo": jobopenNo };   
-					alert("passfail 컨트롤러 다녀오기 성공");
+// 	     	var applyData = {"jobopenNo": jobopenNo };   
 	     	
 			$.ajax({
-		       
-				type:"post"
+		          type:"post"
 		          , url:"/applyMenu/passfailCheck"
 		          , dataType: "json"
-		          , data: appyData
+		          , data: {
+		        	  "jobopenNo": jobopenNo
+		          }
 		          , success: function( data ) {
-					alert("passfail 컨트롤러 다녀오기 성공");
 		        	  
+					if(data.result == "지원결과없음") {
+	        			var modal = document.getElementById('myModal');
+	        			
+	        			modal.style.display = "block";
+	        			
+	        			// Get the <span> element that closes the modal
+	        			var span = document.getElementsByClassName("close")[0];     
+
+	        			var btnClose = document.getElementById("btnClose");
+	        			
+	        			// When the user clicks on <span> (x), close the modal
+	        			span.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			btnClose.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			$("#ModalContent").html("해당 공고에 지원하지 않았습니다.")
+					} else if (data.result == null) {
+	        			var modal = document.getElementById('myModal');
+	        			
+	        			modal.style.display = "block";
+	        			
+	        			// Get the <span> element that closes the modal
+	        			var span = document.getElementsByClassName("close")[0];     
+
+	        			var btnClose = document.getElementById("btnClose");
+	        			
+	        			// When the user clicks on <span> (x), close the modal
+	        			span.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			btnClose.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			$("#ModalContent").html("해당공고는 아직 발표 전입니다.")
+					} else if(data.result == "합격") {
+	        			var modal = document.getElementById('myModal');
+	        			
+	        			modal.style.display = "block";
+	        			
+	        			// Get the <span> element that closes the modal
+	        			var span = document.getElementsByClassName("close")[0];     
+
+	        			var btnClose = document.getElementById("btnClose");
+	        			
+	        			// When the user clicks on <span> (x), close the modal
+	        			span.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			btnClose.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			$("#ModalContent").html("축하합니다 합격입니다.")
+		
+					} else if(data.result == "불합격") {
+	        			var modal = document.getElementById('myModal');
+	        			
+	        			modal.style.display = "block";
+	        			
+	        			// Get the <span> element that closes the modal
+	        			var span = document.getElementsByClassName("close")[0];     
+
+	        			var btnClose = document.getElementById("btnClose");
+	        			
+	        			// When the user clicks on <span> (x), close the modal
+	        			span.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			btnClose.onclick = function() {
+	        			    modal.style.display = "none";
+	        			}
+	        			
+	        			$("#ModalContent").html("불합격 입니다.")
+		
+					}
+			        	  
 		          }, error: function() {
 		             alert("error");
 		          }

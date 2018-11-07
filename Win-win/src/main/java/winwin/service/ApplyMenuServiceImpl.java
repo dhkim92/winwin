@@ -48,4 +48,9 @@ public class ApplyMenuServiceImpl implements ApplyMenuService{
 		return false;
 	}
 
+	@Override
+	public Support passfail(Support supp) {
+		return applyMenuDao.passfail(supp);
+	}
+
 }

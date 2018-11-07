@@ -22,4 +22,6 @@ public interface ApplyMenuService {
 
 	public boolean checkApplicant(Support supp);
 
+	public Support passfail(Support supp);
+
 }

@@ -39,5 +39,8 @@
 		SELECT COUNT(*) FROM support WHERE jobopenno=#{jobopenNo} AND userid=#{userId} 
 	</select>
 	
+	<select id="passfail" parameterType="winwin.dto.Support" resultType="winwin.dto.Support">
+		SELECT * FROM support WHERE jobopenno=#{jobopenNo} AND userid=#{userId} 
+	</select>
 	
 </mapper>

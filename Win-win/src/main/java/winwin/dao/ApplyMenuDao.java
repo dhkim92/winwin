@@ -19,4 +19,6 @@ public interface ApplyMenuDao {
 
 	public int checkApplicant(Support supp);
 
+	public Support passfail(Support supp);
+
 }

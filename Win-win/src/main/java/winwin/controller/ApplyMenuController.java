@@ -148,26 +148,25 @@ public class ApplyMenuController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		Object obj = session.getAttribute("login");
-
-//		if( session.getAttribute("login") != null ) {
-//			
-//			Support supp = new Support();
-//			supp.setUserId((String)session.getAttribute("id"));
-//			supp.setJobopenNo(jobopenNo);
-//			
-//			Object obj2 = applyMenuService.checkApplicant(supp);
-//			
-//			map.put("checkApp", obj2);
-//		}
-		
-		map.put("result", obj);
-		
-		
 		Support supp = new Support();
+		
 		
 		supp.setUserId((String)session.getAttribute("id"));
 		supp.setJobopenNo(jobopenNo);
+		
+		if (applyMenuService.checkApplicant(supp)) {
+			
+			supp = applyMenuService.passfail(supp);
+			
+			Object obj = supp.getPass();
+			
+			map.put("result", obj);
+			
+		} else {
+			
+			Object obj2 = "지원결과없음";
+			map.put("result", obj2);
+		}
 		
 		
 		return map;
