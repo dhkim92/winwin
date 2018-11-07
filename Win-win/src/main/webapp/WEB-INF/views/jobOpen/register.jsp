@@ -198,6 +198,37 @@
 	
 </div>
 
+<div id="myModal" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content">
+		<div class="row">
+			<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+			</div>
+			<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+			</div>
+		</div>
+	    
+	    <div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	    <div>
+		    <div class="mt-4">
+				<p class="font-weight-bold text-center" id="idChecking"></p>
+			</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+					<button type="button" id="btnClose" class="font-weight-bold btn btn-primary mr-1" style="background-color: #376092">확인</button>
+					<button type="button" id="btnNo" class="font-weight-bold btn btn-primary" style="background-color: #376092">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
@@ -216,17 +247,39 @@ $(document).ready(function(){
 			}
 		})
 	});
-	$("#btnCancel").click(function(){
-		$.ajax({
-			type:"post",
-			url:"/jobOpen/detailCancel",
-			success:function(){
-				location.href="/main/adminmain";
-			},
-			error:function(){
-				console.log("취소 실패");
-			}
-		});
+$("#btnCancel").click(function(){
+		
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		var span = document.getElementsByClassName('close')[0];
+		var btnClose = document.getElementById('btnClose');
+		var btnNo = document.getElementById('btnNo');
+		
+		$('#idChecking').html("작성을 취소하시겠습니까?");
+		
+		span.onclick = function(){
+			modal.style.display = "none";
+		}
+		
+		btnClose.onclick = function(){
+			modal.style.display = "none";
+			$.ajax({
+				type:"post",
+				url:"/jobOpen/detailCancel",
+				success:function(){
+					location.href="/main/adminmain";
+				},
+				error:function(){
+					console.log("취소 실패")
+				}
+			});
+		}
+		
+		btnNo.onclick = function(){
+			modal.style.display = "none";
+		}
+		
+		
 	});
 });
 

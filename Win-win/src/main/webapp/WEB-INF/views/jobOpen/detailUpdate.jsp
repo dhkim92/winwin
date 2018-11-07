@@ -81,7 +81,7 @@
 <div class="container">
 	<div class="row m-3 justify-content-center">
 		<div style="width: 663px; height: 101px; border:1px solid #376092;">
-			<div class="box text-primary text-center" style="cursor:pointer;" onclick='location.href="/jobOpen/basicInfo";'><strong>기본정보</strong></div>
+			<div class="box text-primary text-center" style="cursor:pointer;" onclick='location.href="/jobOpen/basicUpdate?jobopenNo=${sessionScope.jobopen }";'><strong>기본정보</strong></div>
 			<div class="triangle-left-primary"></div>
 			<div class="box text-light text-center" style="background-color: #376092;"><strong>세부정보</strong></div>
 			<div class="triangle-right-primary"></div>
@@ -109,16 +109,30 @@
 	
 		<div class="row justify-content-center">
 			<div class="col-9" id="detailInfo">
+			
+			<c:set var="i" value="0"/>
+			<c:forEach items="${detail }" var="detail">
+			
+			<c:if test="${i eq 0 }">
 				<div class="detailin p-3 bg-secondary">
+			</c:if>
+			<c:if test="${i ne 0 }">
+				<div class="detailin mt-5 p-3 bg-secondary">
+			</c:if>
 					<div class="form-inline m-1">
 						<div class="col-2">
 							<label for="sector">모집 부문</label>
 						</div>
 						<div class="col-6">
-							<input type="text" id="sector" class="form-control w-100" name="detail[0].sector" placeholder="ex) IT/WEB 서비스" required />
+							<input type="text" id="sector" class="form-control w-100" name="detail[${i }].sector" placeholder="ex) IT/WEB 서비스" value="${detail.sector }" required />
 						</div>
 						<div class="col-4">
-							<i class="far fa-plus-square fa-2x addDetail" data-toggle="tooltip" data-placement="top" title="모집요강 추가" style="cursor:pointer" ></i>
+							<c:if test="${i eq 0 }">
+								<i class="far fa-plus-square fa-2x addDetail" data-toggle="tooltip" data-placement="top" title="모집요강 추가" style="cursor:pointer" ></i>
+							</c:if>
+							<c:if test="${i ne 0 }">
+								<i class="far fa-minus-square fa-2x subDetail" data-toggle="tooltip" data-placement="top" title="모집요강 추가" style="cursor:pointer" ></i>
+							</c:if>
 						</div>
 						
 					</div>
@@ -128,7 +142,7 @@
 							<label for="task">담당 업무</label>		
 						</div>
 						<div class="col-10">
-							<input type="text" id="task" class="form-control w-100" name="detail[0].task" placeholder="ex) Back-End 개발자" required />
+							<input type="text" id="task" class="form-control w-100" name="detail[${i }].task" placeholder="ex) Back-End 개발자" value="${detail.task }" required />
 						</div>
 					</div>
 					
@@ -137,13 +151,13 @@
 							<label for="volume">채용 인원</label>
 						</div>
 						<div class="col-4  border-right border-light">
-							<input type="number" id="volume" class="form-control w-75" name="detail[0].volume" placeholder="00" required /> 명
+							<input type="number" id="volume" class="form-control w-75" name="detail[${i }].volume" placeholder="00" value="${detail.volume }" required /> 명
 						</div>
 						<div class="col-2">
 							<label for="location">근무지</label>
 						</div>
 						<div class="col-4">
-							<input type="text" id="location" class="form-control w-100" name="detail[0].location" placeholder="근무지를 입력해주세요" required />
+							<input type="text" id="location" class="form-control w-100" name="detail[${i }].location" placeholder="근무지를 입력해주세요" value="${detail.location }" required />
 						</div>
 					</div>
 					
@@ -152,14 +166,16 @@
 							<label for="special">우대 사항</label>		
 						</div>
 						<div class="col-10">
-							<input type="text" id="special" class="form-control w-100" name="detail[0].special" required />
+							<input type="text" id="special" class="form-control w-100" name="detail[${i }].special" value="${detail.special }" required />
 						</div>
 					</div>
 					<div>
 						<input type="hidden" value="${sessionScope.jobopen }" name="detail[0].jobopenNo"/>
 					</div>
-					
+					<c:set var="i" value="${i+1 }"/>
 				</div>
+				</c:forEach>
+				
 			</div>
 		</div> <!-- end of offer -->
 		
@@ -256,7 +272,35 @@
 	</form>
 </div>
 
-
+<div id="myModal" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content">
+		<div class="row">
+			<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+			</div>
+			<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
+			</div>
+		</div>
+	    
+	    <div class="mb-3" style="height:4px; background-color: #376092" ></div>
+	     	
+	     	<!-- 모달 내용 입력하는 부분 -->
+	    <div>
+		    <div class="mt-4">
+				<p class="font-weight-bold text-center" id="idChecking"></p>
+			</div>
+			
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+					<button type="button" id="btnClose" class="font-weight-bold btn btn-primary mr-1" style="background-color: #376092">확인</button>
+					<button type="button" id="btnNo" class="font-weight-bold btn btn-primary" style="background-color: #376092">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
@@ -306,38 +350,57 @@ $(document).ready(function(){
 		$('#detailInfo').append(s);
 		$('[data-toggle="tooltip"]').tooltip();
 	});
-	9
+	
 	
 	$(document).on("click",".subDetail",function(){
 		$('[data-toggle="tooltip"]').tooltip('hide');
 		$(this).parent().parent().parent().remove();
 	});
 	
-	$("#btnCancel").click(function(){
-		$.ajax({
-			type:"post",
-			url:"/jobOpen/detailCancel",
-			success:function(){
-				location.href="/main/adminmain";
-			},
-			error:function(){
-				console.log("취소 실패")
-			}
-		});
-	});
-	
-	var arrDetail = document.getElementsByClassName("detailin");
-	for(var j=0;j<arrDetail.length;j++){
-		var arrInput = arrDetail[j].getElementsByTagName("input");
+$("#btnCancel").click(function(){
 		
-		for(var i=0;i<arrInput.length;i++){
-			console.log(arrInput[i]);
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		var span = document.getElementsByClassName('close')[0];
+		var btnClose = document.getElementById('btnClose');
+		var btnNo = document.getElementById('btnNo');
+		
+		$('#idChecking').html("작성을 취소하시겠습니까?");
+		
+		span.onclick = function(){
+			modal.style.display = "none";
 		}
-	}
-	
-	
-	
+		
+		btnClose.onclick = function(){
+			modal.style.display = "none";
+			$.ajax({
+				type:"post",
+				url:"/jobOpen/detailCancel",
+				success:function(){
+					location.href="/main/adminmain";
+				},
+				error:function(){
+					console.log("취소 실패")
+				}
+			});
+		}
+		
+		btnNo.onclick = function(){
+			modal.style.display = "none";
+		}
+	});
+
+		for(var j=1; j<${detail.size()};j++){
+			$('[data-toggle="tooltip"]').tooltip();
+			i++;
+		}
+		
+
 });
+
+var j=1;
+console.log("${detail[1].sector}");
+
 
 </script>
 <script type="text/javascript"

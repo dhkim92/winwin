@@ -240,7 +240,38 @@
 $(document).ready(function(){
 	
 	$("#btnCancel").click(function(){
-		location.href="/main/adminmain";
+		
+		var modal = document.getElementById('myModal');
+		modal.style.display = "block";
+		var span = document.getElementsByClassName('close')[0];
+		var btnClose = document.getElementById('btnClose');
+		var btnNo = document.getElementById('btnNo');
+		
+		$('#idChecking').html("작성을 취소하시겠습니까?");
+		
+		span.onclick = function(){
+			modal.style.display = "none";
+		}
+		
+		btnClose.onclick = function(){
+			modal.style.display = "none";
+			$.ajax({
+				type:"post",
+				url:"/jobOpen/detailCancel",
+				success:function(){
+					location.href="/main/adminmain";
+				},
+				error:function(){
+					console.log("취소 실패")
+				}
+			});
+		}
+		
+		btnNo.onclick = function(){
+			modal.style.display = "none";
+		}
+		
+		
 	});
 	
 	

@@ -46,8 +46,8 @@ public class JobopenController {
 	JobopenService jobopenService;
 	
 	@RequestMapping(value="/basicInfo", method=RequestMethod.GET)
-	public void basic() {
-
+	public void basic(HttpSession session) {
+		session.removeAttribute("insertDetail");
 	}
 	
 	@RequestMapping(value="/basicInfo", method=RequestMethod.POST)
@@ -101,15 +101,20 @@ public class JobopenController {
 	      jobopenBasic.setJobopenNo((int)session.getAttribute("jobopen"));
 	      
 	      jobopenService.resetBasic(jobopenBasic);
+	      
 	
-		return "redirect:detailInfo";
-		
+	      if(session.getAttribute("insertDetail")==null) {
+	    	  return "redirect:detailInfo";
+	      } else {
+	    	  return "redirect:detailUpdate?jobopenNo="+jobopenBasic.getJobopenNo();
+	      }
 	}
 	
 	
 	
 	@RequestMapping(value="/detailInfo", method=RequestMethod.GET)
-	public void detail() {
+	public void detail(HttpSession session) {
+		
 		
 		
 	}
@@ -145,7 +150,7 @@ public class JobopenController {
 	
 	@RequestMapping(value="/detailUpdate", method=RequestMethod.GET)
 	public void detailUpdate(int jobopenNo, Model model) {
-		
+		logger.info("dd");
 		
 		JobopenBasic basic = new JobopenBasic();
 		basic.setJobopenNo(jobopenNo);
@@ -153,6 +158,9 @@ public class JobopenController {
 		JobopenDetail jobopenDetail = new JobopenDetail();
 		jobopenDetail.setJobopenNo(jobopenNo);
 		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
+		
+		System.out.println(jobopenService.viewBasic(basic));
+		System.out.println(detail);
 		
 		model.addAttribute("basic", jobopenService.viewBasic(basic));
 		model.addAttribute("detail", detail);
@@ -174,6 +182,7 @@ public class JobopenController {
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public void regi(Model model, HttpSession session) {
 		
+		session.setAttribute("insertDetail", true);
 		int jobopenNo = (int)session.getAttribute("jobopen");
 		JobopenBasic jobopenBasic = new JobopenBasic();
 		jobopenBasic.setJobopenNo(jobopenNo);
@@ -195,6 +204,7 @@ public class JobopenController {
 	public void regiProc(HttpSession session) {
 		
 		jobopenService.regiInfo((int)session.getAttribute("jobopen"));
+		session.removeAttribute("insertDetail");
 	}
 	
 }
