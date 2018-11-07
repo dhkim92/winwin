@@ -140,7 +140,7 @@ public class JobopenController {
 		}
 		  
 		
-		logger.info(jobopenBasic.toString());
+//		logger.info(jobopenBasic.toString());
 		
 		jobopenService.updateBasic(jobopenBasic);
 		
@@ -164,12 +164,32 @@ public class JobopenController {
 		
 		model.addAttribute("basic", jobopenService.viewBasic(basic));
 		model.addAttribute("detail", detail);
-		
-		
 	}
+	
+	@RequestMapping(value="/detailUpdate", method=RequestMethod.POST)
+	public String detailUpdateProc(@Validated JobopenArr detail, JobopenBasic jobopenBasic) {
+		
+		
+		JobopenDetail[] d = detail.getDetail();
+		List<JobopenDetail> e = new LinkedList<JobopenDetail>(Arrays.asList(d));
+		
+		for(int i=0; i<e.size(); i++) {
+			if(e.get(i).getJobopenNo()==0)
+				e.remove(i);
+		}
+//		System.out.println(e.toString());
+		for(int i=0; i<e.size();i++) {
+			jobopenService.updateDetail(e.get(i));
+		}
+	      
+		jobopenService.updateBasic(jobopenBasic);
+		
+		return "redirect:register";
+	      
+	}
+	
+	
 
-	
-	
 	
 	@RequestMapping(value="/detailCancel", method=RequestMethod.POST)
 	public String detailCancel(HttpSession session) {

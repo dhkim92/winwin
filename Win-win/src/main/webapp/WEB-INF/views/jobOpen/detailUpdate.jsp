@@ -98,7 +98,7 @@
 </div>
 
 <div class="container">
-	<form action="/jobOpen/detailInfo" method="post" id="formId">
+	<form action="/jobOpen/detailUpdate" method="post" id="formId">
 	
 		<!-- start of offer -->
 		<div class="row justify-content-left p-4">
@@ -268,7 +268,6 @@
 		<div class="form-inline mt-5 d-flex justify-content-center" >
 			  <button id="btnOk" class="btn btn-info mr-3">저장하고 계속하기</button><button type="button" id="btnCancel" class="btn btn-secondary">취소</button>
 		</div>
-		
 	</form>
 </div>
 

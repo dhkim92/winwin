@@ -96,4 +96,10 @@ public interface JobopenService {
 	 */
 	public void regiInfo(int jobopenNo);
 	
+	/**
+	 * 세부 정보 업데이트
+	 * @param jobopenDetail
+	 */
+	public void updateDetail(JobopenDetail jobopenDetail);
+	
 }

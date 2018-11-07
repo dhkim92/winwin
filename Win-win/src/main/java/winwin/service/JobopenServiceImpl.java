@@ -78,11 +78,19 @@ public class JobopenServiceImpl implements JobopenService {
 	public void resetBasic(JobopenBasic jobopenBasic) {
 		jobopenDao.resetBasic(jobopenBasic);
 	}
+	
+	
+	
 
 	@Override
 	public void regiInfo(int jobopenNo) {
 		jobopenDao.updateBasicDis(jobopenNo);
 		jobopenDao.updateDetailDis(jobopenNo);
+	}
+
+	@Override
+	public void updateDetail(JobopenDetail jobopenDetail) {
+		jobopenDao.updateDetail(jobopenDetail);
 	}
 
 }

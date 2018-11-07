@@ -29,6 +29,8 @@ public interface JobopenDao {
 	public List selectBasic(Paging paging);
 	
 	public void resetBasic(JobopenBasic basic);
+	
+	public void updateDetail(JobopenDetail detail);
 
 	public void updateHit(JobopenBasic basic);
 	

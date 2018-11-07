@@ -48,6 +48,11 @@
 	
 	</insert>
 	
+	<update id="updateDetail" parameterType="winwin.dto.JobopenDetail">
+		update jobopenDetail set sector=#{sector}, task=#{task}, volume=#{volume}, location=#{location}, special=#{special} where jobopenNo = #{jobopenNo}
+	</update>
+	
+	
 	<update id="updateBasic" parameterType="winwin.dto.JobopenBasic">
 		update jobopenBasic set academic=#{academic}, score=#{score}, lang=#{lang}, etcQual=#{etcQual}, etc=#{etc} where jobopenNo=#{jobopenNo} 
 	</update>
