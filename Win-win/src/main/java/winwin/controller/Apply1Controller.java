@@ -79,14 +79,37 @@ public class Apply1Controller {
 	}
 
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.GET)
-	public void userDetailUpdate(JobopenBasic jobopenBasic, Member user, UserDetail userDetail, HttpSession session, Model model) {
+	public void userDetailUpdate(String jobopenNo, JobopenDetail jobopenDetail, JobopenBasic jobopenBasic, Member member, UserDetail userDetail, HttpSession session, Model model) {
+		logger.info("userDetail update 활성화");
+		
+		int jobopenNum = Integer.parseInt(jobopenNo);
+		jobopenBasic.setJobopenNo(jobopenNum);
 
+		//apply헤더 정보 가져오기
+		jobopenBasic.setJobopenNo(jobopenNum);
+		JobopenBasic jobOpen = apply1Service.viewJobOpen(jobopenBasic);
 		
+		//apply헤더_task 정보 가져오기
+		jobopenDetail.setJobopenNo(jobopenNum);
+		List<JobopenDetail> task = new ArrayList<>();
+		task.addAll(apply1Service.viewTask(jobopenDetail));
+		logger.info("task : " + task.toString());
 		
-//		apply1Service.viewJobOpen(jobopenBasic);
-//		apply1Service.viewUser(user);
-		apply1Service.selectUserDetail(userDetail);
+		//개인정보 가져오기
+		member.setUserid((String)session.getAttribute("id"));
+		Member viewUserDetail = apply1Service.viewMember(member);
 		
+		logger.info("userDetailController : " + viewUserDetail);
+		
+		//userDetail 데이터 가져오기
+		userDetail.setJobopenNo(jobopenNum);
+		userDetail.setUserId((String)session.getAttribute("id"));
+		UserDetail userD = apply1Service.selectUserDetail(userDetail);
+
+		model.addAttribute("task", task);
+		model.addAttribute("jobopenBasic", jobOpen);
+		model.addAttribute("member", viewUserDetail);
+		model.addAttribute("userDetail", userD);
 	}
 
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.POST)

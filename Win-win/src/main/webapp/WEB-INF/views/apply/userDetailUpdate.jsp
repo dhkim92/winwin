@@ -227,11 +227,21 @@ $(document).ready(function() {
 	<h4 class="mt-4 mb-3 font-weight-bold">개인사항<input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" /></h4>
 	<div class="row">
 		<img class="img-fluid d-block ml-3" src="/resources/image/B_userDetail.png">
-		<img class="img-fluid d-block" src="/resources/image/G_academic.png">
-		<img class="img-fluid d-block" src="/resources/image/G_military.png">
-		<img class="img-fluid d-block" src="/resources/image/G_career.png">
-		<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
-		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
+		<a href="/apply/acaemicUpdate">
+			<img class="img-fluid d-block" src="/resources/image/G_academic.png">
+		</a>
+		<a href="/apply/militaryUpdate">
+			<img class="img-fluid d-block" src="/resources/image/G_military.png">
+		</a>
+		<a href="/apply/careerUpdate">
+			<img class="img-fluid d-block" src="/resources/image/G_career.png">
+		</a>
+		<a href="/apply/introduceUpdate">
+			<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
+		</a>
+		<a href="/apply/completeUpdate">
+			<img class="img-fluid d-block" src="/resources/image/G_complete.png">
+		</a>
 	</div>
 	
 	<h6 class="mt-5 mb-3 font-weight-bold">기본정보</h6>

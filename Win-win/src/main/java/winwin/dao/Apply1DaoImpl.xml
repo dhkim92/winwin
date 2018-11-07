@@ -52,4 +52,9 @@
   	<insert id="insertGSchool" parameterType="winwin.dto.GSchool">
   		INSERT INTO gSchool (gsNo, userId, jobopenNo, gsName, gsBranch, gsDay, gsMajor, gsScore, gsTotalScore, gsEndDate, gsGraduate, gsRegion) VALUES (gschool_seq.nextval,#{userId}, #{jobopenNo}, #{gsName}, #{gsBranch}, #{gsDay}, #{gsMajor}, #{gsScore}, #{gsTotalScore}, #{gsEndDate}, #{gsGraduate}, #{gsRegion})
   	</insert>
+  	
+  	<select id="selectUserDetail" parameterType="winwin.dto.UserDetail" resultType="winwin.dto.UserDetail">
+  		SELECT * FROM userDetail WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
+  	</select>
+  	
   </mapper>
