@@ -59,7 +59,7 @@ td {
 			<c:forEach items="${list }" var="board">
 				<tr>
 					<td class="view">${board.qnaNo }</td>					
-					<td class="view"><i class="fas fa-lock mr-2"></i>${board.title }</a></td>
+					<td class="view"><i class="fas fa-lock mr-2"></i>${board.title }</td>
 					<td class="view">
 						<c:if test="${board.asw_code ne null }">
 							<i class="fas fa-check ml-2"></i>

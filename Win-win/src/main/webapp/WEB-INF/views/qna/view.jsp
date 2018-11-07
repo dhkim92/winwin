@@ -9,7 +9,7 @@ td{
 	font-size: 16px
 }
 #contentBox{
-	max-height: 400px; 
+	max-height: 600px; 
 	overflow-x : hidden;
 	overflow-y : auto;
 	word-wrap: break-word;
@@ -17,6 +17,13 @@ td{
 }
 .tablediv {
 	padding: 0;
+}
+#content{
+	width : 99%;
+}
+
+#contentBox p{
+	margin-bottom: 0px;
 }
 </style>
 
@@ -37,7 +44,7 @@ td{
 	
 	<div class="d-flex justify-content-center">
 		<div class="tablediv col-11 mt-3" style="border-bottom: 2px solid lightgrey">
-			<table class="table table-striped " style="border-bottom: 1px solid lightgrey">
+			<table class="table table-striped" style="border-bottom: 1px solid lightgrey">
 				<tr>
 					<th width="10%">글번호 <span class="ml-2" id="qnaNo">${board.qnaNo}</span></th>
 					<th width="30%">제목 <span class="ml-3">${board.title}</span></th>
@@ -52,12 +59,19 @@ td{
 	
 	<div class="d-flex justify-content-center">
 		<div class="col-11 mt-3" id="contentBox">
-			<p class="mt-4" id="res">
-				${board.content }
-				<br>
-				[답변내용]
+			<div class="mt-4">
+				${board.content }<br>
+			</div>
+			<hr style="border: dotted #376092;">
+			[답변내용]<br><br>
+			안녕하세요 ${board.writer }님,<br><br>
+			<div id="res">
 				${board.asw_content }
-			</p>
+			</div>
+			<br>
+			답변이 도움이 되셨으면 좋겠습니다.<br>
+			답변 내용에 대해 추가 질문이 있으시면 댓글로 부탁드립니다.<br>
+			감사합니다.
 			<div class="text-right" id="aswBox">
 				<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">답변하기</button>
 				<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
@@ -117,15 +131,17 @@ function onAsw(){
 	$("#onAsw").css("display","none");
 	$("#content").css("display","block");
 	var button1 = "<button type='button' class='btn btn-primary mr-1' onclick='btnAsw();'>등록</button>";
-	var button2 = "<button type='button' class='btn btn-primary' onclick='offAsw();'>취소</button>";
+	var button2 = "<button type='button' class='btn btn-primary mr-4' onclick='offAsw();'>취소</button><br><br>";
 	$("#aswBox").append(button1);
 	$("#aswBox").append(button2);
 	onSe();
 }
 function offAsw(){
 	$("#aswBox").html("");
-	var button1 = "<button type='button' class='btn btn-primary' onclick='onAsw();'>답변하기</button>";
+	var button1 = "<button type='button' id='onAsw' class='btn btn-primary' onclick='onAsw();'>답변하기</button>";
+	var textarea = "<textarea style='display: none' rows='8' class='form-control' id='content' placeholder='답변하기'></textarea>"
 	$("#aswBox").append(button1);
+	$("#aswBox").append(textarea);
 }
 function btnAsw(){
 	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -144,19 +160,14 @@ function btnAsw(){
 			,data : aswData
 			,dataType : "json"
 			,success : function(data){
-				$("#res").html("");
-				var content1 = data.board.content +"<br><hr style='border: 1px solid #376092'><p>[답변내용]</p>"
-				$("#res").append(content1);
-				$("#res").append(data.board.asw_content);
-				$("#resDate").html("");
+				$("#res").html(data.board.asw_content);
 				var aswDate = "<fmt:formatDate value='${board.asw_date}' pattern='yyyy-MM-dd' /></span>";
-				$("#resDate").append(aswDate);
-				$("#aswWriter").html("");
-				$("#aswWriter").append(data.board.asw_writer);
+				$("#resDate").html(aswDate);
+				$("#aswWriter").html(data.board.asw_writer);
 				$("#content").css("display","none");
 			}
 			,error : function(){
-				
+				alert("처리과정에 오류가 있습니다");
 			}
 		});
 	}
