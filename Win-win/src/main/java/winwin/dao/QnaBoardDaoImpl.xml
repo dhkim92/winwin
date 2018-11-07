@@ -70,4 +70,9 @@
  		SET asw_code = #{asw_code}, asw_writer = #{asw_writer}, asw_content = #{asw_content}, asw_date= sysdate
  		WHERE qnaNo = #{qnaNo}
  	</update>
+ 	<update id="deleteBoardAsw" parameterType="winwin.dto.QnaBoard">
+ 		UPDATE qna
+ 		SET	asw_code= null, asw_writer = null, asw_content = null, asw_date = null
+ 		WHERE qnaNo = #{qnaNo}
+ 	</update>
  </mapper>

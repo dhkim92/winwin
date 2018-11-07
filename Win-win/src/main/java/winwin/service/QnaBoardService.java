@@ -30,4 +30,6 @@ public interface QnaBoardService{
 	
 	public void updateBoardAsw(QnaBoard board);
 	
+	public void deleteBoardAsw(QnaBoard board);
+		
 }

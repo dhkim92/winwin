@@ -36,7 +36,7 @@ td{
 </c:if>
 
 <div class="container">
-<div class = "container">
+<div class="container">
 	<div class="col-12 mt-5">
 		<p class="font-weight-bold h3">채용Q&A</p>
 		<hr style="border: solid #376092;">
@@ -62,26 +62,38 @@ td{
 			<div class="mt-4">
 				${board.content }<br>
 			</div>
-			<hr style="border: dotted #376092;">
-			[답변내용]<br><br>
-			안녕하세요 ${board.writer }님,<br><br>
+			<c:if test="${board.asw_code ne null }">
 			<div id="res">
+				<hr style="border: dotted #376092;">
+				[답변내용]<br>							
+				안녕하세요 ${board.writer }님,<br>
+				<div>
 				${board.asw_content }
+				</div>			
+				답변 내용에 대해 궁금하신 부분은 댓글을 남겨주시기 바랍니다.<br>
+				감사합니다.<br>
 			</div>
-			<br>
-			답변이 도움이 되셨으면 좋겠습니다.<br>
-			답변 내용에 대해 추가 질문이 있으시면 댓글로 부탁드립니다.<br>
-			감사합니다.
-			<div class="text-right" id="aswBox">
-				<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">답변하기</button>
-				<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
-			</div>
+			</c:if>
+			<c:if test="${board.asw_code eq null }" >
+				<div class="text-right" id="aswBox">
+					<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">답변하기</button>
+					<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
+				</div>
+			</c:if>
+			<c:if test="${board.asw_code ne null }" >
+				<div class="text-right" id="aswBox">
+					<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">수정하기</button>
+					<button type="button" id="delAsw" class="btn btn-danger" onclick="delAsw();">답변삭제</button>
+					<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
+				</div>
+			</c:if>
 		</div>
 	</div>
 
 	<input type="hidden" id="code" value="${sessionScope.admincode }"/>
-	<input type="hidden" id="writer" value="${sessionScope.adminname }"/>	
-
+	<input type="hidden" id="writer" value="${sessionScope.adminname }"/>
+	<input type="hidden" id="asw_content" value="${board.asw_content }"/>	
+		
 	<br>
 	<div id="btns" class="form-group d-flex justify-content-center">
 		<button id="btnList" type="button" class="btn btn-primary">목록</button>
@@ -109,8 +121,6 @@ td{
 </div>
 </div>
 
-
-
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script type="text/javascript"
@@ -130,7 +140,10 @@ $("#btnDel").click(function(){
 function onAsw(){
 	$("#onAsw").css("display","none");
 	$("#content").css("display","block");
-	var button1 = "<button type='button' class='btn btn-primary mr-1' onclick='btnAsw();'>등록</button>";
+	if($("#aswWriter").val() !=""){
+		$("#content").val($("#asw_content").val());
+	}	
+	var button1 = "<button type='button' class='btn btn-primary mr-1' onclick='btnAsw();'>등록</button>";	
 	var button2 = "<button type='button' class='btn btn-primary mr-4' onclick='offAsw();'>취소</button><br><br>";
 	$("#aswBox").append(button1);
 	$("#aswBox").append(button2);
@@ -138,10 +151,29 @@ function onAsw(){
 }
 function offAsw(){
 	$("#aswBox").html("");
-	var button1 = "<button type='button' id='onAsw' class='btn btn-primary' onclick='onAsw();'>답변하기</button>";
-	var textarea = "<textarea style='display: none' rows='8' class='form-control' id='content' placeholder='답변하기'></textarea>"
-	$("#aswBox").append(button1);
-	$("#aswBox").append(textarea);
+	if($("#aswWriter").val() ==""){
+		var button1 = "<button type='button' id='onAsw' class='btn btn-primary' onclick='onAsw();'>답변하기</button>";
+	}else{
+		var button1 = "<button type='button' id='onAsw' class='btn btn-primary' onclick='onAsw();'>수정하기</button>";
+	}
+	var textarea = "<textarea style='display: none' rows='8' class='form-control' id='content' placeholder='답변하기'></textarea>";
+		$("#aswBox").append(button1);
+		$("#aswBox").append(textarea);
+}
+function delAsw(){
+	var qnaNo = $("#qnaNo").text();
+	var aswData = {"qnaNo":qnaNo,"word":"del"};
+	$.ajax({
+		type:"post"
+		,url : "/qna/asw"
+		,data : aswData
+		,success : function(){
+			$("#res").html("");
+			$("#resDate").html("");
+			$("#aswWriter").html("");
+			alert("삭제완료");				
+		}
+	});
 }
 function btnAsw(){
 	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -152,23 +184,35 @@ function btnAsw(){
 		var qnaNo = $("#qnaNo").text();
 		var code = $("#code").val();
 		var writer = $("#writer").val();
-		var aswData = {"qnaNo":qnaNo,"asw_code":code,"asw_writer":writer,"asw_content":content};
+		var aswData = {"qnaNo":qnaNo,"asw_code":code,"asw_writer":writer,"asw_content":content,"word":"add"};
 		console.log(aswData);
 		$.ajax({
 			type:"post"
 			,url : "/qna/asw"
 			,data : aswData
 			,dataType : "json"
-			,success : function(data){
-				$("#res").html(data.board.asw_content);
-				var aswDate = "<fmt:formatDate value='${board.asw_date}' pattern='yyyy-MM-dd' /></span>";
-				$("#resDate").html(aswDate);
+			,success : function(data){			
+				$("#res").html("");
+				$("#res").append("<hr style='border: dotted #376092;'>[답변내용]<br>안녕하세요 ${board.writer }님,<br><div>");
+				$("#res").append(data.board.asw_content);
+				$("#res").append("</div>답변 내용에 대해 궁금하신 부분은 댓글을 남겨주시기 바랍니다.<br>감사합니다.");
+				var asw_date = "<fmt:formatDate value='${board.asw_date}' pattern='yyyy-MM-dd' /></span>";
+				$("#resDate").html(asw_date);
 				$("#aswWriter").html(data.board.asw_writer);
-				$("#content").css("display","none");
+				offAsw();
+				alert("답변완료");
+				
+				[답변내용]<br>							
+				안녕하세요 ${board.writer }님,<br>
+				<div>
+				${board.asw_content }
+				</div>			
+				답변 내용에 대해 궁금하신 부분은 댓글을 남겨주시기 바랍니다.<br>
+				감사합니다.
 			}
 			,error : function(){
 				alert("처리과정에 오류가 있습니다");
-			}
+			}			
 		});
 	}
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.QnaBoard;
@@ -34,11 +35,11 @@ public class QnaBoardController {
 	@RequestMapping(value="/qna/list")
 	public void list(Model m,HttpServletRequest req) {
 		
-//		//관리자 초기 로그인 값
-//		HttpSession session =  req.getSession();
-//		session.setAttribute("login", true);
-//		session.setAttribute("id", "USER2@naver.com");
-//		session.setAttribute("name", "이현우");		
+		//관리자 초기 로그인 값
+		HttpSession session =  req.getSession();
+		session.setAttribute("adminLogin", true);
+		session.setAttribute("admincode", "444444");
+		session.setAttribute("adminname", "이현우");		
 		
 		int total = service.totalCnt();
 		String curr =req.getParameter("curPage");
@@ -147,10 +148,17 @@ public class QnaBoardController {
 	
 	//json-lib
 	@RequestMapping(value="/qna/asw",method=RequestMethod.POST)
-	public ModelAndView writeAsw(HttpServletResponse resp,QnaBoard board) {
+	public ModelAndView writeAsw(HttpServletResponse resp,QnaBoard board,@RequestParam("word") String word) {
 		
-		logger.info(board.toString());
-		service.updateBoardAsw(board);
+		logger.info(word);
+		if(word.equals("del")) {
+			service.deleteBoardAsw(board);
+			logger.info("답변 내용 삭제");
+		}else if(word.equals("add")) {
+			logger.info(board.toString());
+			service.updateBoardAsw(board);
+			logger.info("답변 내용 추가");
+		}
 		QnaBoard resBoard = service.view(board);
 		
 		//한글 폰트
@@ -161,4 +169,6 @@ public class QnaBoardController {
 		mav.addObject("board",resBoard);
 		return mav;
 	}
+	
+	
 }
