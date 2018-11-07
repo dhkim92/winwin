@@ -10,7 +10,11 @@ public interface SupportBoardService {
 
 	public int totalCnt();
 	
+	public int resultCnt();
+	
 	public List<SupportBoard> list(Paging paging, Map<String, Object> param);
+	
+	public List<SupportBoard> resultlist(Paging paging, Map<String, Object> param);
 	
 	public Paging getPaging(int curPage, int listCount, int pageCount);
 	

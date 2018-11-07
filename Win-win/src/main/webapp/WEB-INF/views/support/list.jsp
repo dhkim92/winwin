@@ -169,10 +169,8 @@
 
 <script>
 
-
-
 $(function () {
-	supportList(${param.curPage});
+	supportList(${curPage});
 	
 	//이벤트 누적 방지 ( 이전 이벤트를 삭제하고 새 이벤트 주입. unbind)
 	$('.searchSelect').unbind('click').click(function () {

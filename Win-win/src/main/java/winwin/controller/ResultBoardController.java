@@ -1,5 +1,6 @@
 package winwin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import winwin.dto.SupportBoard;
-import winwin.service.ResultBoardService;
+import winwin.service.SupportBoardService;
 import winwin.util.Paging;
 
 @Controller
@@ -22,25 +23,45 @@ public class ResultBoardController {
 	private static Logger logger;
 
 	@Autowired
-	ResultBoardService service;
+	SupportBoardService service;
 
 	@RequestMapping(value = "/result/list", method = RequestMethod.GET)
-	public void list() {
+	public void list(Model model) {
+		int curPage = 1;
+		
+		model.addAttribute("curPage", curPage);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/result/search")
-	public List<SupportBoard> listProcess(@RequestParam(required = false, defaultValue = "1") int curPage,
+	public Map<String, Object> listProcess(@RequestParam(required = false, defaultValue = "1") int curPage,
 			@RequestParam(required = false, defaultValue = "20") int listCount,
 			@RequestParam(required = false, defaultValue = "5") int pageCount,
 			Map<String, Object> param) {
+		
+		Map<String, Object> map = new HashMap<>();
 
 		Paging paging = service.getPaging(curPage, listCount, pageCount);
 
-		List<SupportBoard> list = service.list(paging, param);
+		List<SupportBoard> resultlist = service.resultlist(paging, param);
+		
+		map.put("paging", paging);
+		map.put("list", resultlist);
+		
+		System.out.println(map);
+		
+		System.out.println(resultlist);
+		
+		System.out.println("---------------------");
+		System.out.println(paging);
+		System.out.println("---------------------");
+		System.out.println(param);
+		System.out.println("---------------------");
+		System.out.println(curPage);
+		System.out.println("---------------------");
 	
 		
-		return list;
+		return map;
 	}
 
 	@RequestMapping(value = "/result/send", method = RequestMethod.GET)

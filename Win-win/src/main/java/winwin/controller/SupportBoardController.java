@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,8 +26,11 @@ public class SupportBoardController {
 	SupportBoardService service;
 
 	@RequestMapping(value = "/support/list", method = RequestMethod.GET)
-	public String list() {
-		return "support/list";
+	public void list(Model model) {
+		
+		int curPage = 1;
+		
+		model.addAttribute("curPage", curPage);
 	}
 
 	/**
@@ -47,11 +51,6 @@ public class SupportBoardController {
 		Paging paging = service.getPaging(curPage, listCount, pageCount);
 
 		List<SupportBoard> list = service.list(paging, param);
-	
-		
-		System.out.println(curPage);
-		
-		System.out.println(paging);
 		/*
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("support/list");

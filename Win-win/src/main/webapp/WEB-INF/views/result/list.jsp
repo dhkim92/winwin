@@ -51,7 +51,7 @@
 				<table class="table table-hover" id = resultTable>
 					<thead style="background-color: #eee;">
 						<tr>
-							<th class="text-center align-middle"><input type="checkbox"
+							<th class="text-center align-middle"><input type="checkbox" name="checkAll"
 								aria-label="Checkbox for following text input"
 								style="width: 18px; height: 18px;" class="align-middle"></th>
 							<th class="text-center">번호</th>
@@ -84,7 +84,7 @@
 			</div>
 		</div>
 
-<%@ include file="../util/resultpaging.jsp"%>
+<%@ include file="../util/supportpaging.jsp"%>
 		
 	</div>
 </div>
@@ -95,38 +95,83 @@
 
 <script>
 
-function resultList (curPage) {
+$(document).ready(function(){
+	resultList(${curPage});
+});
+
+
+function resultList(curPage) {
 	
 	console.log(curPage)
 	
 	var param = {
-			curPage			: curPage
+			curPage	: curPage
 	};
+	
+	console.log(param);
 	
 	//ajax 호출
 	$.getJSON('/result/search', param, function (result) {
+		
+		console.log(result.list);
+		
 		if (result) {
 			//목록 초기화
 			$('#resultTable tbody').empty();
 			//목록 생성
-			$.each(result, function (i, item) {
+			$.each(result.list, function (i, item) {
 				var html  = '<tr>';
-					html += '<td scope="row" class="text-center align-middle"><input type="checkbox" aria-label="Checkbox for following text input"style="width: 18px; height: 18px;" class="align-middle"></td>';
+					html += '<td scope="row" class="text-center align-middle"><input type="checkbox" name="checkOne" aria-label="Checkbox for following text input"style="width: 18px; height: 18px;" class="align-middle"></td>';
 					html += '	<th scope="row" class="text-center align-middle">' + (i+1) + '</th>';
 					html += '	<td class="text-center align-middle">' + item.title + '</td>';
 					html += '	<td class="text-center align-middle">' + item.task + '</td>';
 					html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
+					html += '	<td class="text-center align-middle">' + item.username + '</td>';
 					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.pass + '</button></td>';
-					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.emailsend + '</button></td>';
+					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.emailSend + '</button></td>';
 					html += '</tr>';
 					
+					
+					
+					
 				$('#resultTable tbody').append(html);
+				
+				
 			});
 			
 		}
 	});
 	
 }
+
+//페이징 버튼 클릭 시
+$('.container .container').on("click", '.page-link', function() {
+	var curPage = $(this).attr('data-curpage');
+	resultList(curPage);	
+});
+
+//체크박스 전체 선택하기, 해제하기
+$("#resultTable").on("click", "[name=checkAll]", function(){
+	$("[name=checkOne]").prop("checked", $(this).prop("checked") );
+});
+
+// 개별 체크박스 선택 시
+$("#resultTable").on("click", "[name=checkOne]", function() {
+	
+	if( $(this).prop("checked") ) {
+		checkBoxLength = $("[name=checkOne]").length;
+		checkedLength = $("[name=checkOne]:checked").length;
+	
+		if( checkBoxLength == checkedLength ) {
+			$("[name=checkAll]").prop("checked", true);
+		} else {
+			$("[name=checkAll]").prop("checked", false);
+		}
+	} else {
+		// 하나라도 해제가 되면 전체 버튼은 해제
+		$("[name=checkAll]").prop("checked", false);
+	}
+});
 	
 </script>
 

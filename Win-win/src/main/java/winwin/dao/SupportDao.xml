@@ -14,6 +14,16 @@
  		<result column="status" property="status"/>
  	</resultMap>
  	
+ 	<resultMap type="winwin.dto.SupportBoard" id="Result">
+		<result column="passNo" property="passNo" />
+		<result column="title" property="title" />
+		<result column="task" property="task" />
+		<result column="supportDate" property="supportDate" />
+		<result column="username" property="username" />
+		<result column="pass" property="pass" />
+		<result column="emailSend" property="emailSend" />
+	</resultMap>
+ 	
  	<sql id="selectSupportBoard">
  		SELECT 
  			sup.passNo, 
@@ -85,4 +95,38 @@
  		<include refid="selectSupportBoard"/>
  		) CNT	
  	</select>
+ 	
+ 	<sql id="selectResultBoard">
+		SELECT
+		sup.passNo,
+		job.title,
+		usr.task,
+		sup.supportDate,
+		mem.username,
+		sup.pass,
+		sup.emailSend
+		FROM
+		support sup, jobopendetail job, userdetail usr, member mem
+
+		<where>
+			sup.jobopenno = job.jobopenno
+			AND job.jobopenno = usr.jobopenno
+			AND usr.userId = mem.userId
+		</where>
+
+	</sql>
+	
+	<select id="resultlist" resultMap="Result"
+		parameterType="winwin.util.Paging">
+		SELECT * FROM ( SELECT rownum rnum, T.* FROM(
+		<include refid="selectResultBoard" />
+		) T ORDER BY passNo DESC ) R WHERE R.rnum BETWEEN #{startNo} AND
+		#{endNo} ORDER BY rnum
+	</select>
+
+	<select id="resultCnt" resultType="int">
+		SELECT COUNT(*) CNT FROM (
+		<include refid="selectResultBoard" />
+		) CNT
+	</select>
  </mapper>
