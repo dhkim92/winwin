@@ -1,17 +1,17 @@
 package winwin.service;
 
+import java.util.List;
+
 import winwin.dto.JobopenBasic;
 
 public interface MainService {
 
-	public void getJobopenBoard();
-
-	public void getNoticeBoard();
-
-	public void getQnABoard();
-
-	public int countApplicants(JobopenBasic jobopenBasic);
-
 	public int countQnAUnanswered();
+	
+	public List getNoticeBoard();
+
+	public List getQnaBoard();
+
+	public List getJobopenBasic();
 
 }

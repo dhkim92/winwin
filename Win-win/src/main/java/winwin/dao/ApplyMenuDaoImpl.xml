@@ -17,16 +17,6 @@
 		ORDER BY jobopenno DESC
 	</select>
 	
-	<select id="getNoticeBoard" resultType="winwin.dto.NoticeBoard">
-		SELECT noticeno, title FROM notice
-		ORDER BY noticeno DESC
-	</select>
-	
-	<select id="getQnaBoard" resultType="winwin.dto.QnaBoard">
-		SELECT qnano, title FROM qna
-		ORDER BY qnano DESC
-	</select>
-	
 	<select id="pwCheck" parameterType="winwin.dto.Member" resultType="int">
 		SELECT COUNT(*) CNT FROM (
 			SELECT userid, pwd FROM member

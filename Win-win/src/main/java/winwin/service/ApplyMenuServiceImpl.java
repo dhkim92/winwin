@@ -27,16 +27,6 @@ public class ApplyMenuServiceImpl implements ApplyMenuService{
 	}
 
 	@Override
-	public List getNoticeBoard() {
-		return applyMenuDao.getNoticeBoard();
-	}
-
-	@Override
-	public List getQnaBoard() {
-		return applyMenuDao.getQnaBoard();
-	}
-
-	@Override
 	public boolean pwCheck(Member member) {
 		if( applyMenuDao.pwCheck(member) == 1) return true;
 		else 	return false; 

@@ -114,19 +114,20 @@ h6 {
 			<a href="/jobOpen/basicInfo"><button type="button" class="bigbutton btn font-weight-bold text-white btn-lg mt-5 mb-5" style="background: #376092;">채용공고 등록하기</button></a>
 			<a href="/notice/write"><button type="button" class="bigbutton btn btn-secondary font-weight-bold btn-lg mt-5 mb-5">공지사항 등록하기</button></a>
 			<div id="carouselExampleControls" class="carousel slide mt-2" data-ride="carousel">
+			
 			  <div class="carousel-inner">
-			    <div class="carousel-item active">
-			   		<div class="font-weight-bold" style="font-size: 14px;"><span style="color: #376092">신입 IT 개발자 채용</span>의 지원자수</div>
-			   		<h3 class="mt-3"><strong>12 명</strong></h3>
-			    </div>
-			    <div class="carousel-item">
-			    	<div class="font-weight-bold" style="font-size: 14px;"><span style="color: #376092">경력 FRONT 디자이너 채용</span>의 지원자수</div>
-			    	<h3 class="mt-3"><strong>23 명</strong></h3>
-			    </div>
-			    <div class="carousel-item">
-			    	<div class="font-weight-bold" style="font-size: 14px;"><span style="color: #376092">인턴 채용 연계형 개발자 채용</span>의 지원자수</div>
-			    	<h3 class="mt-3"><strong>152 명</strong></h3>
-			    </div>
+  				<c:forEach items="${applylist }" var="JobopenBasic" begin="0" end="0">
+			  		<div class="carousel-item active">
+				   		<div class="font-weight-bold" style="font-size: 14px;"><span style="color: #376092">${JobopenBasic.title}</span>의 지원자수</div>
+				   		<h3 class="mt-3"><strong>12 명</strong></h3>
+				    </div>
+				</c:forEach>
+  				<c:forEach items="${applylist }" var="JobopenBasic" begin="1">
+				    <div class="carousel-item">
+				   		<div class="font-weight-bold" style="font-size: 14px;"><span style="color: #376092">${JobopenBasic.title}</span>의 지원자수</div>
+				   		<h3 class="mt-3"><strong>12 명</strong></h3>
+				    </div>
+				</c:forEach>
 			  </div>
 			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" >
 			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>

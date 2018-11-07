@@ -14,10 +14,6 @@ public interface ApplyMenuService {
 
 	public List getJobopenBasic2();
 
-	public List getNoticeBoard();
-
-	public List getQnaBoard();
-
 	public boolean pwCheck(Member member);
 
 	public boolean checkApplicant(Support supp);

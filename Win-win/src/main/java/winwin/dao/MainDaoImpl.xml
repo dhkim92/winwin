@@ -16,4 +16,20 @@
   	select count(*) fROM qna
   </select>
   
+  	<select id="getNoticeBoard" resultType="winwin.dto.NoticeBoard">
+		SELECT noticeno, title FROM notice
+		ORDER BY noticeno DESC
+	</select>
+	
+	<select id="getQnaBoard" resultType="winwin.dto.QnaBoard">
+		SELECT qnano, title FROM qna
+		ORDER BY qnano DESC
+	</select>
+	
+	<select id="getJobopenBasic" resultType="winwin.dto.JobopenBasic">
+		SELECT jobopenno, title FROM jobopenbasic
+		ORDER BY jobopenno DESC
+	</select>
+	
+  
   </mapper>

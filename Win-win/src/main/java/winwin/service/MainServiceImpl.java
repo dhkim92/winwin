@@ -1,5 +1,7 @@
 package winwin.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,30 +12,6 @@ import winwin.dto.JobopenBasic;
 public class MainServiceImpl implements MainService {
 	
 	@Autowired MainDao mainDao;
-
-	@Override
-	public void getJobopenBoard() {
-		mainDao.getJobopenBoard();
-		
-	}
-
-	@Override
-	public void getNoticeBoard() {
-		mainDao.getNoticeBoard();
-		
-	}
-
-	@Override
-	public void getQnABoard() {
-		mainDao.getQnABoard();
-		
-	}
-
-	@Override
-	public int countApplicants(JobopenBasic jobopenBasic) {
-		return mainDao.countApplicants(jobopenBasic);
-		
-	}
 
 	@Override
 	public int countQnAUnanswered() {
@@ -47,5 +25,21 @@ public class MainServiceImpl implements MainService {
 		
 		return Unanswered;
 	}
+	
+	@Override
+	public List getNoticeBoard() {
+		return mainDao.getNoticeBoard();
+	}
+
+	@Override
+	public List getQnaBoard() {
+		return mainDao.getQnaBoard();
+	}
+
+	@Override
+	public List getJobopenBasic() {
+		return mainDao.getJobopenBasic();
+	}
+
 	
 }

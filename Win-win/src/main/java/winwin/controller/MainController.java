@@ -41,33 +41,21 @@ public class MainController {
 	@RequestMapping(value="/adminmain", method=RequestMethod.GET)
 	public void adminmain(Model model) { 
 		
-		List<JobopenBasic> applylist = applyMenuService.getJobopenBasic();
+		
+		//채용공고 리스트 띄우기
+		List<JobopenBasic> applylist = mainService.getJobopenBasic();
 		model.addAttribute("applylist", applylist);
 		
-//		
-//		//공지사항 리스트 띄우기
-//		mainService.getNoticeBoard();
-		
-		List<NoticeBoard> noticelist = applyMenuService.getNoticeBoard();
+		//공지사항 리스트 띄우기
+		List<NoticeBoard> noticelist = mainService.getNoticeBoard();
 		model.addAttribute("noticelist", noticelist);
-//		
-//		//문의사항 리스트 띄우기 
-//		mainService.getQnABoard();
-		
-		List<QnaBoard> qnalist = applyMenuService.getQnaBoard();
+
+		//문의사항 리스트 띄우기 
+		List<QnaBoard> qnalist = mainService.getQnaBoard();
 		model.addAttribute("qnalist", qnalist);
-		
-//		
-//		//통계관리 미리보기 
-//				
-//		//채용공고별 지원자 수 세기 
-//		mainService.countApplicants(jobopenBasic);
 
 		//Q&A 답변이 완료되지않은 문의사항 갯수세기 
 		 int commentCnt = mainService.countQnAUnanswered();
-		 
-		 System.out.println("미답변 갯수 :" + commentCnt);
-		 
 		 model.addAttribute("commentCnt", commentCnt);
 		
 	}

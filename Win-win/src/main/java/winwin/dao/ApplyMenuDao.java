@@ -11,10 +11,6 @@ public interface ApplyMenuDao {
 
 	public List getJobopenBasic2();
 
-	public List getNoticeBoard();
-
-	public List getQnaBoard();
-
 	public int pwCheck(Member member);
 
 	public int checkApplicant(Support supp);
