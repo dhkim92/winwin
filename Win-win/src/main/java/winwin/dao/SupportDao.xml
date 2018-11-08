@@ -34,11 +34,10 @@
  			mem.username, 
  			mat.portfolioId 
  		FROM 
- 			support sup, jobopendetail job, jobopenbasic basic, userdetail usr, material mat, member mem
+ 			support sup, jobopenbasic job, userdetail usr, material mat, member mem
  		
  		<where>
 	 		sup.jobopenno = job.jobopenno 
-	 		AND job.jobopenno = basic.jobopenno
 	 		AND job.jobopenno = mat.portfolioId 
 	 		AND mat.userid = mem.userId
 	 		AND usr.userid = mem.userid
@@ -106,7 +105,7 @@
 		sup.pass,
 		sup.emailSend
 		FROM
-		support sup, jobopendetail job, userdetail usr, member mem
+		support sup, jobopenbasic job, userdetail usr, member mem
 
 		<where>
 			sup.jobopenno = job.jobopenno
@@ -128,5 +127,9 @@
 		SELECT COUNT(*) CNT FROM (
 		<include refid="selectResultBoard" />
 		) CNT
+	</select>
+	
+	<select id="getTitle" resultType="winwin.dto.JobopenBasic">
+		SELECT title FROM jobopenbasic
 	</select>
  </mapper>

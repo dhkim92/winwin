@@ -32,10 +32,9 @@
 					<select class="custom-select" style="width: 457px; height: 40px;"
 						id="living" name="living">
 						<option value="0" style="width: 457px;">공고명을 선택해 주십시오!</option>
-						<option style="width: 457px;">아파트</option>
-						<option style="width: 457px;">빌라</option>
-						<option style="width: 457px;">주택</option>
-						<option style="width: 457px;">원룸</option>
+						<c:forEach items="${title }" var="job">
+							<option value="${job.title }">${job.title }</option>
+						</c:forEach>
 					</select>
 					<button class="btn float-right btn-primary	"
 						style="margin-right: 15px; margin-top: 3px;">이메일 보내기</button>
@@ -48,11 +47,11 @@
 
 		<div class="row">
 			<div class="col-12 mt-5">
-				<table class="table table-hover" id = resultTable>
+				<table class="table table-hover" id=resultTable>
 					<thead style="background-color: #eee;">
 						<tr>
-							<th class="text-center align-middle"><input type="checkbox" name="checkAll"
-								aria-label="Checkbox for following text input"
+							<th class="text-center align-middle"><input type="checkbox"
+								name="checkAll" aria-label="Checkbox for following text input"
 								style="width: 18px; height: 18px;" class="align-middle"></th>
 							<th class="text-center">번호</th>
 							<th class="text-center">공 고 명</th>
@@ -65,27 +64,27 @@
 						</tr>
 					</thead>
 					<tbody>
-<!-- 						<tr> -->
-<!-- 							<td scope="row" class="text-center align-middle"><input -->
-<!-- 								type="checkbox" aria-label="Checkbox for following text input" -->
-<!-- 								style="width: 18px; height: 18px;" class="align-middle"></td> -->
-<!-- 							<th scope="row" class="text-center align-middle">20</th> -->
-<!-- 							<td class="text-center align-middle">경력 사원 입사지원서</td> -->
-<!-- 							<td class="text-center align-middle">직무</td> -->
-<!-- 							<td class="text-center align-middle">18.08.23</td> -->
-<!-- 							<td class="text-center align-middle">문재환</td> -->
-<!-- 							<td class="text-center"><button type="button" -->
-<!-- 									class="btn btn-secondary btn-sm">합격</button></td> -->
-<!-- 							<td class="text-center"><button type="button" -->
-<!-- 									class="btn btn-secondary btn-sm">발송</button></td> -->
-<!-- 						</tr> -->
+						<!-- 						<tr> -->
+						<!-- 							<td scope="row" class="text-center align-middle"><input -->
+						<!-- 								type="checkbox" aria-label="Checkbox for following text input" -->
+						<!-- 								style="width: 18px; height: 18px;" class="align-middle"></td> -->
+						<!-- 							<th scope="row" class="text-center align-middle">20</th> -->
+						<!-- 							<td class="text-center align-middle">경력 사원 입사지원서</td> -->
+						<!-- 							<td class="text-center align-middle">직무</td> -->
+						<!-- 							<td class="text-center align-middle">18.08.23</td> -->
+						<!-- 							<td class="text-center align-middle">문재환</td> -->
+						<!-- 							<td class="text-center"><button type="button" -->
+						<!-- 									class="btn btn-secondary btn-sm">합격</button></td> -->
+						<!-- 							<td class="text-center"><button type="button" -->
+						<!-- 									class="btn btn-secondary btn-sm">발송</button></td> -->
+						<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
 		</div>
 
-<%@ include file="../util/supportpaging.jsp"%>
-		
+		<%@ include file="../util/supportpaging.jsp"%>
+
 	</div>
 </div>
 

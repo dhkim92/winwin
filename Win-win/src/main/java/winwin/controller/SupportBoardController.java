@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import winwin.dto.JobopenBasic;
 import winwin.dto.SupportBoard;
 import winwin.service.SupportBoardService;
 import winwin.util.Paging;
@@ -29,8 +30,10 @@ public class SupportBoardController {
 	public void list(Model model) {
 		
 		int curPage = 1;
+		List<JobopenBasic> title = service.getTitle();
 		
 		model.addAttribute("curPage", curPage);
+		model.addAttribute("title", title);
 	}
 
 	/**
@@ -51,12 +54,6 @@ public class SupportBoardController {
 		Paging paging = service.getPaging(curPage, listCount, pageCount);
 
 		List<SupportBoard> list = service.list(paging, param);
-		/*
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("support/list");
-		mav.addObject("list", list);
-		mav.addObject("paging", paging);
-		 */
 
 		return list;
 	}

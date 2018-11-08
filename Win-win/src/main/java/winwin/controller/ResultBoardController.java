@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import winwin.dto.JobopenBasic;
 import winwin.dto.SupportBoard;
 import winwin.service.SupportBoardService;
 import winwin.util.Paging;
@@ -27,9 +28,12 @@ public class ResultBoardController {
 
 	@RequestMapping(value = "/result/list", method = RequestMethod.GET)
 	public void list(Model model) {
+		
 		int curPage = 1;
+		List<JobopenBasic> title = service.getTitle();
 		
 		model.addAttribute("curPage", curPage);
+		model.addAttribute("title", title);
 	}
 	
 	@ResponseBody
@@ -47,19 +51,6 @@ public class ResultBoardController {
 		
 		map.put("paging", paging);
 		map.put("list", resultlist);
-		
-		System.out.println(map);
-		
-		System.out.println(resultlist);
-		
-		System.out.println("---------------------");
-		System.out.println(paging);
-		System.out.println("---------------------");
-		System.out.println(param);
-		System.out.println("---------------------");
-		System.out.println(curPage);
-		System.out.println("---------------------");
-	
 		
 		return map;
 	}

@@ -3,6 +3,7 @@ package winwin.dao;
 import java.util.List;
 import java.util.Map;
 
+import winwin.dto.JobopenBasic;
 import winwin.dto.SupportBoard;
 
 public interface SupportDao {
@@ -16,6 +17,8 @@ public interface SupportDao {
 	public List<SupportBoard> list(Map<String, Object> param);
 	
 	public List<SupportBoard> resultlist(Map<String, Object> param);
+	
+	public List<JobopenBasic> getTitle();
 	
 	public SupportBoard view(SupportBoard board);
 	

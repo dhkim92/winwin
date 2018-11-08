@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import winwin.dao.SupportDao;
+import winwin.dto.JobopenBasic;
 import winwin.dto.SupportBoard;
 import winwin.util.Paging;
 
@@ -39,6 +40,11 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 		param.put("endNo", paging.getEndNo());
 		param.put("curPage", paging.getCurPage());
 		return dao.resultlist(param);
+	}
+	
+	@Override
+	public List<JobopenBasic> getTitle() {
+		return dao.getTitle();
 	}
 	
 	@Override
@@ -83,6 +89,7 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	public SupportBoard selectTitle(SupportBoard board) {
 		return dao.selectTitle(board);
 	}
+
 
 
 
