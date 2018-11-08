@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <%@ include file="../include/CSSLoader.jsp"%>
 <style>
 </style>
@@ -8,6 +11,7 @@
 <script type="text/javascript">
 // window.onpopstate() : 히스토리에 저장된 데이터를 다시 사용하기 위해 꺼낸 후 사용 가능한 상태가 됐을 때, 뒤로가기버튼 눌렀을 때 trigger
 // HTML5에서 지원
+history.pushState(null, null, location.href); 
 window.onpopstate = function () {
     history.go(1);
 };
@@ -88,7 +92,21 @@ $(document).ready(function() {
 	console.log("남은 날은 " + result + " 일");
 	
 	$("#dDay").val("(D- " + result + "일)");
+
+	//전화번호 앞자리 
+	var phoneIntro = document.getElementsByClassName("phone1Sel");
+	var phone123 = ${phoneNum[0]};
 	
+	for(var i=0; i<phoneIntro.length; i++) {
+		var phone1 = phoneIntro[i].value;
+		
+		if(phone1.equals(phone123)) {
+			$("#phoneNum1 option").index
+		}
+	}
+	
+	
+
 	$("#saveBtn").click(function() {
 		
 		console.log("저장하고 계속하기 버튼 클릭")
@@ -192,7 +210,7 @@ $(document).ready(function() {
 	      <td style="font-weight: bold; padding-left: 32px; width: 64%;">${jobopenBasic.title}</td>
 	      <td class="p-0 text-center align-middle bg-secondary" style="width: 14%; font-weight: bold;">지원직무</td>
 	      	<td class="text-center align-middle" style="width: 18%;">
-	      		<select style="height:21px; width:90px;" id="taskSel">
+	      		<select style="height:21px; width:90px;" id="taskSel" >
 	      			<option value="0">직무선택</option>
 	      			<c:forEach items="${task }" var="task">
 	      				<option value="${task.task }">${task.task }</option>
@@ -252,7 +270,7 @@ $(document).ready(function() {
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">성명<span style="color : red;">*</span></th>
 		<td style="width: 40%">
 		<span style="font-size: 10px ;">한글 </span><input style="border: none; width: 50px;" type="text" id="username" name="username" value="${member.username }" readonly/> / <span style="font-size: 10px ;">영어 </span>
-			<input type="text" class="ml-1 mr-1" id="eName" name="eName"/>
+			<input type="text" class="ml-1 mr-1" id="eName" name="eName" value="${userDetail.eName }"/>
 			<span style="font-size: 10px ;"> 예)Hong Gil Dong</span>
 		</td>
 		<th class="text-center align-middle bg-secondary">이메일<span style="color : red;">*</span></th>
@@ -261,7 +279,7 @@ $(document).ready(function() {
 	<tr>
 		<th class="text-center align-middle bg-secondary" style="width: 5%" >생년월일<span style="color : red;">*</span></th>
 		<td colspan="3">
-			<input type="text" name="birth" id="birth"/>
+			<input type="text" name="birth" id="birth" value="${userDetail.birth }"/>
 			<span style="font-size: 10px ;">예)19900101</span>
 		</td>
 	</tr>
@@ -270,12 +288,12 @@ $(document).ready(function() {
 		<td colspan="3">
 			<table>
 				<tr>
-					<input type="text" style="width: 80px;" id="zipCode" name="zipCode" placeholder="우편번호" readonly onclick="Search()"/>
+					<input type="text" style="width: 80px;" id="zipCode" name="zipCode" placeholder="우편번호" readonly onclick="Search()" value="${userDetail.zipCode }"/>
 					<input type="button" class="ml-1 mr-1" onclick="Search()" value="우편번호 찾기" />
-					<input type="text" style="width: 364px; " name="address" id="address" placeholder="주소는 자동입력됩니다" readonly>
+					<input type="text" style="width: 364px; " name="address" id="address" placeholder="주소는 자동입력됩니다" value="${userDetail.address }"readonly />
 				</tr>
 				<tr>
-					<input type="text" style="width: 550px ;" class="mt-1" name="addressDetail" id="addressDetail" placeholder="상세주소를 입력하세요"/>
+					<input type="text" style="width: 550px ;" class="mt-1" name="addressDetail" id="addressDetail" placeholder="상세주소를 입력하세요" value="${userDetail.addressDetail }"/>
 				</tr>	
 			</table>
 		
@@ -285,26 +303,26 @@ $(document).ready(function() {
 		<th class="text-center align-middle bg-secondary">긴급연락처<span style="color : red;">*</span></th>
 		<td colspan="3">  		
 			<select style="width: 100px; height: 27px" id="phoneNum1" name="phoneNum1">
-				<option value="010">010</option>
-				<option value="02">02</option>
-				<option value="051">051</option>
-				<option value="053">053</option>
-				<option value="032">032</option>
-				<option value="062">062</option>
-				<option value="042">042</option>
-				<option value="052">052</option>
-				<option value="044">044</option>
-				<option value="031">031</option>
-				<option value="033">033</option>
-				<option value="043">043</option>
-				<option value="041">041</option>
-				<option value="063">063</option>
-				<option value="061">061</option>
-				<option value="054">054</option>
-				<option value="055">055</option>
-				<option value="064">064</option>
+				<option class="phone1Sel" value="010">010</option>
+				<option class="phone1Sel" value="02">02</option>
+				<option class="phone1Sel" value="051">051</option>
+				<option class="phone1Sel" value="053">053</option>
+				<option class="phone1Sel" value="032">032</option>
+				<option class="phone1Sel" value="062">062</option>
+				<option class="phone1Sel" value="042">042</option>
+				<option class="phone1Sel" value="052">052</option>
+				<option class="phone1Sel" value="044">044</option>
+				<option class="phone1Sel" value="031">031</option>
+				<option class="phone1Sel" value="033">033</option>
+				<option class="phone1Sel" value="043">043</option>
+				<option class="phone1Sel" value="041">041</option>
+				<option class="phone1Sel" value="063">063</option>
+				<option class="phone1Sel" value="061">061</option>
+				<option class="phone1Sel" value="054">054</option>
+				<option class="phone1Sel" value="055">055</option>
+				<option class="phone1Sel" value="064">064</option>
 			</select>
-				-<input type="text" id="phoneNum2" name="phoneNum2" class="ml-1 mr-1 numberOnly" style="width: 100px ;" />-<input type="text" id="phoneNum3" name="phoneNum3" class="ml-1 mr-1 numberOnly" />
+				-<input type="text" id="phoneNum2" name="phoneNum2" class="ml-1 mr-1 numberOnly" style="width: 100px ;" value="${phoneNum[1] }"/>-<input type="text" id="phoneNum3" name="phoneNum3" class="ml-1 mr-1 numberOnly" value="${phoneNum[2] }" />
 			<input type="hidden" id="phoneNum" name="phoneNum" />	
 		</td>
 	</tr>
@@ -346,7 +364,7 @@ $(document).ready(function() {
 	</tr>
 	<tr>
 		<th style="width: 15% ;" class="text-center align-middle bg-secondary">취미/특기</th>
-		<td colspan="2"><input type="text" name="interest" id="interest"></td>
+		<td colspan="2"><input type="text" name="interest" id="interest" value="${userDetail.interest }"></td>
 	</tr>
 	</tbody>
 	</table>

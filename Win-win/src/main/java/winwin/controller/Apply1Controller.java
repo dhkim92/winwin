@@ -105,11 +105,17 @@ public class Apply1Controller {
 		userDetail.setJobopenNo(jobopenNum);
 		userDetail.setUserId((String)session.getAttribute("id"));
 		UserDetail userD = apply1Service.selectUserDetail(userDetail);
+		
+		//전화번호 split하기
+		String[] phoneNum = userD.getPhoneNum().split("-");
+		
+		logger.info("phoneNum : " + phoneNum.toString());
 
 		model.addAttribute("task", task);
 		model.addAttribute("jobopenBasic", jobOpen);
 		model.addAttribute("member", viewUserDetail);
 		model.addAttribute("userDetail", userD);
+		model.addAttribute("phoneNum", phoneNum);
 	}
 
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.POST)

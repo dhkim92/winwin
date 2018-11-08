@@ -6,6 +6,7 @@
 </style>
 
 <script type="text/javascript">
+history.pushState(null, null, location.href); 
 window.onpopstate = function () {
     history.go(1);
 };
@@ -127,7 +128,7 @@ $(document).ready(function() {
 
 	<h4 class="mt-4 mb-3 font-weight-bold">학력사항</h4>
 	<div class="row">
-		<a href="/apply/userDetailupdate">
+		<a href="/apply/userDetailUpdate?jobopenNo=${jobopenBasic.jobopenNo}">
 			<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png">
 		</a>
 		<img class="img-fluid d-block" src="/resources/image/B_academic.png">
@@ -223,7 +224,7 @@ $(document).ready(function() {
                   <td class="align-middle">
                   	<input type="hidden" name="jobopenNo" id="colJobopenNo" value="${jobopenBasic.jobopenNo }" />
 					<input type="text" id="colName" name="colName" class="mr-1 colTxt colVal" style="width: 110px" readonly/>
-					<input type="button" class="m-1 mr-1" id="colSearch" value="검색"><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
+					<input type="button" class="m-1 mr-1" id="colSearch" value="검색"><input type="button" class="ml-1 mr-1 cancelAPIS2" value="취소" />
 					<select style="height:24px; width:85px;" class="colselect colVal" id="colSelect" name="colBranch">
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
@@ -297,7 +298,7 @@ $(document).ready(function() {
                   <td class="align-middle">
                   	<input type="hidden" name="jobopenNo" id="univJobopenNo" value="${jobopenBasic.jobopenNo }" />
 					<input type="text" id="univName" name="univName" class="univVal mr-1 univTxt" style="width: 110px" readonly/>
-					<input type="button" class="m-1 mr-1" id="univSearch" name="univSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPIS" value="취소" />
+					<input type="button" class="m-1 mr-1" id="univSearch" name="univSearch" value="검색" /><input type="button" class="ml-1 mr-1 cancelAPIS2" value="취소" />
 					<select style="height:24px; width:85px;" class="univselect univVal" id="univBranch" name="univBranch">
 						<option value="0">본교/분교</option>
 						<option value="본교">본교</option>
@@ -790,6 +791,12 @@ $(".cancelAPIS").click(function() {
 	var cancelAPIS = $(this).parent().children().eq(2);
 	cancelAPIS.val("");
 });
+
+$(".cancelAPIS2").click(function() {
+	
+	var cancelAPIS2 = $(this).parent().children().eq(1);
+	cancelAPIS2.val("");
+})
 </script>
 <%@ include file="../apply/schoolAPI.jsp"%>		
 <%@ include file="../apply/collegeAPI.jsp"%>	

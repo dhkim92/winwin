@@ -57,4 +57,5 @@
   		SELECT * FROM userDetail WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
   	</select>
   	
+  	
   </mapper>

@@ -8,6 +8,7 @@
 <script type="text/javascript">
 // window.onpopstate() : 히스토리에 저장된 데이터를 다시 사용하기 위해 꺼낸 후 사용 가능한 상태가 됐을 때, 뒤로가기버튼 눌렀을 때 trigger
 // HTML5에서 지원
+history.pushState(null, null, location.href); 
 window.onpopstate = function () {
     history.go(1);
 };
