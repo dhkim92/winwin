@@ -10,6 +10,8 @@ public interface QnaBoardDao {
 
 	public int totalCnt();
 	
+	public void hit(QnaBoard board);
+	
 	public List<QnaBoard> list(Paging paging);
 	
 	public void updateBoardAsw(QnaBoard board);

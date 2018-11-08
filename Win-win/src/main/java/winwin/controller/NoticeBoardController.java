@@ -62,6 +62,7 @@ public class NoticeBoardController {
 	
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
 	public void view(NoticeBoard board,Model m) {
+		service.hit(board);
 		NoticeBoard resBoard = service.view(board);
 		List<Material> files = service.filesByBoardNo(board);
 		resBoard.setFilesCnt(service.getFilesCnt(board));

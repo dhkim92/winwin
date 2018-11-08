@@ -14,16 +14,19 @@ import winwin.util.Paging;
 public class QnaBoardServiceImpl implements QnaBoardService{
 
 	@Autowired QnaBoardDao dao;
+	
 	@Override
 	public int totalCnt() {
 		return dao.totalCnt();
 	}
-
 	@Override
 	public List<QnaBoard> list(Paging paging) {
 		return dao.list(paging);
 	}
-
+	@Override
+	public void hit(QnaBoard board) {
+		dao.hit(board);		
+	}
 	@Override
 	public QnaBoard view(QnaBoard board) {
 		return dao.view(board);
@@ -38,42 +41,32 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	public void updateBoard(QnaBoard board) {
 		dao.updateBoard(board);
 	}
-
 	@Override
 	public void deleteBoard(QnaBoard board) {
 		dao.deleteBoard(board);
 	}
-
 	@Override
 	public List<QnaComment> selectCommentByBoardNo(QnaBoard board) {
 		return dao.selectCommentByBoardNo(board);
 	}
-
 	@Override
 	public void insertComment(QnaComment comment) {
 		dao.insertComment(comment);
 	}
-
 	@Override
 	public void deleteComment(QnaComment comment) {
 		dao.deleteComment(comment);
 	}
-
 	@Override
 	public void deleteCommentsByBoardNo(QnaBoard board) {
 		dao.deleteCommentsByBoardNo(board);
 	}
-
 	@Override
 	public void updateBoardAsw(QnaBoard board) {
 		dao.updateBoardAsw(board);
 	}
-
 	@Override
 	public void deleteBoardAsw(QnaBoard board) {
 		dao.deleteBoardAsw(board);		
 	}
-
-	
-
 }

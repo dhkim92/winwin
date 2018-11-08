@@ -75,4 +75,9 @@
  		SET	asw_code= null, asw_writer = null, asw_content = null, asw_date = null
  		WHERE qnaNo = #{qnaNo}
  	</update>
+ 	<update id="hit" parameterType="winwin.dto.QnaBoard">
+ 		UPDATE qna
+ 		SET hit = hit+1
+ 		WHERE qnaNo = #{qnaNo }
+ 	</update>
  </mapper>

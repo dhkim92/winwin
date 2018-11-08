@@ -62,18 +62,22 @@ td{
 			<div class="mt-4">
 				${board.content }<br>
 			</div>
-			<c:if test="${board.asw_code ne null }">
 			<div id="res">
+			<c:if test="${board.asw_code ne null }">
 				<hr style="border: dotted #376092;">
-				[답변내용]<br>							
+				<p>
+				[답변내용]<br><br>							
 				안녕하세요 ${board.writer }님,<br>
-				<div>
+				</p>
+				<div id="a">
 				${board.asw_content }
-				</div>			
-				답변 내용에 대해 궁금하신 부분은 댓글을 남겨주시기 바랍니다.<br>
+				</div>
+				<p>			
+				답변 내용에 대해 궁금하신 사항은 댓글로 남겨주시기 바랍니다.<br>
 				감사합니다.<br>
+				</p>
+			</c:if>	
 			</div>
-			</c:if>
 			<c:if test="${board.asw_code eq null }" >
 				<div class="text-right" id="aswBox">
 					<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">답변하기</button>
@@ -82,8 +86,8 @@ td{
 			</c:if>
 			<c:if test="${board.asw_code ne null }" >
 				<div class="text-right" id="aswBox">
-					<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">수정하기</button>
-					<button type="button" id="delAsw" class="btn btn-danger" onclick="delAsw();">답변삭제</button>
+					<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">다시쓰기</button>
+					<button type="button" id="delAsw" class="btn btn-danger" onclick="delAsw();">답변삭제</button><br>
 					<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
 				</div>
 			</c:if>
@@ -92,8 +96,7 @@ td{
 
 	<input type="hidden" id="code" value="${sessionScope.admincode }"/>
 	<input type="hidden" id="writer" value="${sessionScope.adminname }"/>
-	<input type="hidden" id="asw_content" value="${board.asw_content }"/>	
-		
+	
 	<br>
 	<div id="btns" class="form-group d-flex justify-content-center">
 		<button id="btnList" type="button" class="btn btn-primary">목록</button>
@@ -140,25 +143,31 @@ $("#btnDel").click(function(){
 function onAsw(){
 	$("#onAsw").css("display","none");
 	$("#content").css("display","block");
-	if($("#aswWriter").val() !=""){
-		$("#content").val($("#asw_content").val());
-	}	
-	var button1 = "<button type='button' class='btn btn-primary mr-1' onclick='btnAsw();'>등록</button>";	
+	var button1 = "<button type='button' class='btn btn-primary mr-1' onclick='addAsw();'>등록</button>";	
 	var button2 = "<button type='button' class='btn btn-primary mr-4' onclick='offAsw();'>취소</button><br><br>";
 	$("#aswBox").append(button1);
 	$("#aswBox").append(button2);
 	onSe();
+	if($("#aswWriter").text() !=""){
+		$("#delAsw").remove();
+		$("#a").css("background","orange");
+	}
 }
 function offAsw(){
 	$("#aswBox").html("");
-	if($("#aswWriter").val() ==""){
-		var button1 = "<button type='button' id='onAsw' class='btn btn-primary' onclick='onAsw();'>답변하기</button>";
+	if($("#aswWriter").text() ==""){
+		var button1 = "<button type='button' id='onAsw' class='btn btn-primary' onclick='onAsw();'>답변하기</button><br>";
+		$("#aswBox").append(button1);
 	}else{
-		var button1 = "<button type='button' id='onAsw' class='btn btn-primary' onclick='onAsw();'>수정하기</button>";
+		var button1 = "<button type='button' id='onAsw' class='btn btn-primary' onclick='onAsw();'>다시쓰기</button>&nbsp;";
+		$("#aswBox").append(button1);
+		var button2 = "<button type='button' id='delAsw' class='btn btn-danger' onclick='delAsw();'>답변삭제</button><br>";
+		$("#aswBox").append(button2);
 	}
 	var textarea = "<textarea style='display: none' rows='8' class='form-control' id='content' placeholder='답변하기'></textarea>";
-		$("#aswBox").append(button1);
-		$("#aswBox").append(textarea);
+	$("#aswBox").append(textarea);
+	$("#a").css("background","white");
+	
 }
 function delAsw(){
 	var qnaNo = $("#qnaNo").text();
@@ -169,13 +178,13 @@ function delAsw(){
 		,data : aswData
 		,success : function(){
 			$("#res").html("");
-			$("#resDate").html("");
+			$("#aswDate").html("");
 			$("#aswWriter").html("");
-			alert("삭제완료");				
+			offAsw();
 		}
 	});
 }
-function btnAsw(){
+function addAsw(){
 	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 	var content = $("#content").val();
 	if(content==""){
@@ -193,28 +202,29 @@ function btnAsw(){
 			,dataType : "json"
 			,success : function(data){			
 				$("#res").html("");
-				$("#res").append("<hr style='border: dotted #376092;'>[답변내용]<br>안녕하세요 ${board.writer }님,<br><div>");
-				$("#res").append(data.board.asw_content);
-				$("#res").append("</div>답변 내용에 대해 궁금하신 부분은 댓글을 남겨주시기 바랍니다.<br>감사합니다.");
-				var asw_date = "<fmt:formatDate value='${board.asw_date}' pattern='yyyy-MM-dd' /></span>";
-				$("#resDate").html(asw_date);
+				$("#res").append("<hr style='border: dotted #376092;'><p>[답변내용]<br><br>안녕하세요 ${board.writer }님,<br></p>");
+				$("#res").append("<div id='a'>"+data.board.asw_content+"</div>");
+				$("#res").append("<p>답변 내용에 대해 궁금하신 사항은 댓글로 남겨주시기 바랍니다.<br>감사합니다.</p>");
+				$("#aswDate").html(formatDate(Date(data.board.asw_date)));
 				$("#aswWriter").html(data.board.asw_writer);
 				offAsw();
-				alert("답변완료");
-				
-				[답변내용]<br>							
-				안녕하세요 ${board.writer }님,<br>
-				<div>
-				${board.asw_content }
-				</div>			
-				답변 내용에 대해 궁금하신 부분은 댓글을 남겨주시기 바랍니다.<br>
-				감사합니다.
-			}
+			}	
 			,error : function(){
 				alert("처리과정에 오류가 있습니다");
 			}			
 		});
 	}
+}
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
 }
 function onComment(){
 	console.log("댓글 열림");

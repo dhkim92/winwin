@@ -9,8 +9,10 @@ import winwin.util.Paging;
 public interface NoticeBoardService {
 
 	public int totalCnt();
-	
+		
 	public List<NoticeBoard> list(Paging paging);
+	
+	public void hit(NoticeBoard board);
 	
 	public NoticeBoard view(NoticeBoard board);
 	
