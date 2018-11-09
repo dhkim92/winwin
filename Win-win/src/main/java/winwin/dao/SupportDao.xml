@@ -6,6 +6,8 @@
  <mapper namespace="winwin.dao.SupportDao">
  	<resultMap type="winwin.dto.SupportBoard" id="Support">
  		<result column="passNo" property="passNo"/>
+ 		<result column="jobOpenNo" property="jobOpenNo"/>
+ 		<result column="fileNo" property="fileNo"/>
  		<result column="title" property="title"/>
  		<result column="task" property="task"/>
  		<result column="supportDate" property="supportDate"/>
@@ -27,6 +29,8 @@
  	<sql id="selectSupportBoard">
  		SELECT 
  			sup.passNo, 
+ 			job.jobOpenNo,
+ 			mat.fileNo,
  			sup.supportDate, 
  			sup.status, 
  			job.title, 
@@ -44,15 +48,15 @@
 	 		
 	 		<!-- 경력 ( 신입, 경력 ) -->
 			<if test="career != null and career != ''">
-				AND basic.offer LIKE '%' || #{career} || '%'
+				AND job.offer LIKE '%' || #{career} || '%'
 			</if> 		
 			<!-- 고용형태 -->
 			<if test="employment != null and employment != ''">
-				AND basic.form LIKE '%' || #{employment} || '%'
+				AND job.form LIKE '%' || #{employment} || '%'
 			</if>
 			<!-- 학력 -->
 			<if test="academiccareer != null and academiccareer != ''">
-				AND basic.academic LIKE '%' || #{academiccareer} || '%'
+				AND job.academic LIKE '%' || #{academiccareer} || '%'
 				<!-- 학점 -->
 				<choose>
 					<when test='"1".equals(academiccareer.toString())'>
@@ -72,7 +76,7 @@
 			
 			<!-- 토익 -->
 			<if test="score != null and language != ''">
-				AND basic.language LIKE '%' || #{language} || '%'
+				AND job.language LIKE '%' || #{language} || '%'
 			</if>
 			<!-- 처리상태 -->
 			<if test="score != null and status != ''">
@@ -84,15 +88,87 @@
 			</if>
  		</where>
  	</sql>
- 	<select id="list" resultMap="Support" parameterType="winwin.util.Paging">
+ 	
+ 	<select id="list" resultMap="Support" parameterType="map">
  		SELECT * FROM ( SELECT rownum rnum, T.* FROM(
  		<include refid="selectSupportBoard"/>
  		) T ORDER BY passNo DESC ) R WHERE R.rnum BETWEEN #{startNo} AND #{endNo} ORDER BY rnum
  	</select>
- 	<select id="totalCnt" resultType="int">
+ 	<select id="totalCnt" resultType="int" parameterType="map">
  		SELECT COUNT(*) CNT FROM (
  		<include refid="selectSupportBoard"/>
  		) CNT	
+ 	</select>
+ 	
+ 	<!-- 상세 정보 호출 -->
+ 	<select id="detail" resultMap="Support" parameterType="map">
+ 		SELECT 
+ 			sup.passNo, 
+ 			job.jobOpenNo,
+ 			mat.fileNo,
+ 			sup.supportDate, 
+ 			sup.status, 
+ 			job.title, 
+ 			usr.task, 
+ 			mem.username, 
+ 			mem.userId,
+ 			mat.portfolioId,
+ 			usr.eName,
+ 			usr.birth,
+ 			usr.zipCode,
+ 			usr.address,
+ 			usr.addressDetail,
+ 			usr.phoneNum,
+ 			mem.phone,
+ 			high.hsName,
+ 			high.hsDay,
+ 			high.hsMajor,
+ 			high.hsEndDate,
+ 			high.hsGraduate,
+ 			high.hsRegion,
+ 			mil.discharge,
+ 			mil.startDate,
+ 			mil.endDate,
+ 			mil.mCategory,
+ 			mil.mGrade,
+ 			lang.lName,
+ 			lang.grade,
+ 			lang.testName,
+ 			lang.score,
+ 			lang.lDate,
+ 			lang.lOrgan
+ 			
+<!--  			col.colName, -->
+<!--  			col.colBranch, -->
+<!--  			col.colDay, -->
+<!--  			col.colMajor, -->
+<!--  			col.colScore, -->
+<!--  			col.colTotalScore, -->
+<!--  			col.colStartDate, -->
+<!--  			col.colEndDate, -->
+<!--  			col.colTransfer, -->
+<!--  			col.colGraduate, -->
+<!--  			col.colRegion -->
+ 			
+ 			
+ 		FROM 
+ 			support sup, jobopenbasic job, userdetail usr, material mat, member mem, 
+ 			highschool high, military mil, language lang
+<!--  			college col -->
+ 			
+ 		WHERE
+ 			sup.jobopenno = job.jobopenno 
+	 		AND job.jobopenno = mat.portfolioId 
+	 		AND mat.userid = mem.userId
+	 		AND usr.userid = mem.userid
+	 		AND usr.userid = high.userid
+	 		AND usr.userid = mil.userid
+	 		AND usr.userid = lang.userid
+<!-- 	 		AND usr.userid = col.userid -->
+	 		
+	 		AND sup.passno = #{passNo}
+            AND job.jobopenno = #{jobNo}
+            AND mat.fileno = #{fileNo}
  	</select>
  	
  	<sql id="selectResultBoard">

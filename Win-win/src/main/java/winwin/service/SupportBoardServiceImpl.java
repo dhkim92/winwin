@@ -17,8 +17,8 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	@Autowired SupportDao dao;
 	
 	@Override
-	public int totalCnt() {
-		return dao.totalCnt();
+	public int totalCnt(Map<String, Object> param) {
+		return dao.totalCnt(param);
 	}
 
 	@Override
@@ -48,9 +48,9 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	}
 	
 	@Override
-	public Paging getPaging(int curPage, int listCount, int pageCount) {
+	public Paging getPaging(int curPage, int listCount, int pageCount, Map<String, Object> param) {
 		
-		int totalCount = this.totalCnt();	
+		int totalCount = this.totalCnt(param);	
 		Paging paging = new Paging(totalCount, curPage, listCount, pageCount);	
 		return paging;		
 	}
@@ -63,6 +63,11 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	@Override
 	public SupportBoard Search(String search) {
 		return dao.Search(search);
+	}
+	
+	@Override
+	public SupportBoard detail(Map<String, Object> param) {
+		return dao.detail(param);
 	}
 
 	@Override

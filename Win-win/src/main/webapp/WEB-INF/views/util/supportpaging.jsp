@@ -27,12 +27,12 @@
 				<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
 						var="page"> 
 	 					<c:if test="${paging.curPage eq page }"> 
-						<li class="page-item active">
-					</c:if>
-					<c:if test="${paging.curPage ne page }">
-						<li class="page-item"> 	
-					</c:if>
-					<button class="page-link" data-curPage="${ page }">${ page }</button>
+							<li class="page-item active">
+						</c:if>
+						<c:if test="${paging.curPage ne page }">
+							<li class="page-item"> 	
+						</c:if>
+						<button class="page-link" data-curPage="${ page }">${ page }</button>
 				</c:forEach>
 
 <!-- 				다음 페이지 -->

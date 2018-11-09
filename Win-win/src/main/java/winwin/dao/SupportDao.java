@@ -9,12 +9,14 @@ import winwin.dto.SupportBoard;
 public interface SupportDao {
 	
 	// support total Count
-	public int totalCnt();
+	public int totalCnt(Map<String, Object> param);
 	
 	// result total Count
 	public int resultCnt();
 	
 	public List<SupportBoard> list(Map<String, Object> param);
+	
+	public SupportBoard detail(Map<String, Object> param);
 	
 	public List<SupportBoard> resultlist(Map<String, Object> param);
 	

@@ -45,7 +45,7 @@ public class ResultBoardController {
 		
 		Map<String, Object> map = new HashMap<>();
 
-		Paging paging = service.getPaging(curPage, listCount, pageCount);
+		Paging paging = service.getPaging(curPage, listCount, pageCount, param);
 
 		List<SupportBoard> resultlist = service.resultlist(paging, param);
 		

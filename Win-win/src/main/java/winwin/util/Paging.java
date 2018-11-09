@@ -1,5 +1,7 @@
 package winwin.util;
 
+import java.util.List;
+
 public class Paging {
 	private int curPage;	//현재 페이지 번호 (현재 선택한 페이지)
 
@@ -13,6 +15,8 @@ public class Paging {
 	
 	private int startNo;	//게시물리스트 첫 번호
 	private int endNo;	//게시물리스트 마지막 번호
+	
+	private List<?> list;
 	
 	// 총 게시글 수만 입력하는 생성자
 	//	curPage == 1
@@ -169,4 +173,14 @@ public class Paging {
 				", startPage="+startPage+
 				", endPage="+endPage+"]";
 	}
+
+	public List<?> getList() {
+		return list;
+	}
+
+	public void setList(List<?> list) {
+		this.list = list;
+	}
+	
+	
 }

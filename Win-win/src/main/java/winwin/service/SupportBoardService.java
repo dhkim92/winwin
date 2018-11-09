@@ -9,17 +9,19 @@ import winwin.util.Paging;
 
 public interface SupportBoardService {
 
-	public int totalCnt();
+	public int totalCnt(Map<String, Object> param);
 	
 	public int resultCnt();
 	
 	public List<SupportBoard> list(Paging paging, Map<String, Object> param);
 	
+	public SupportBoard detail(Map<String, Object> param);
+	
 	public List<SupportBoard> resultlist(Paging paging, Map<String, Object> param);
 	
 	public List<JobopenBasic> getTitle();
 	
-	public Paging getPaging(int curPage, int listCount, int pageCount);
+	public Paging getPaging(int curPage, int listCount, int pageCount, Map<String, Object> param);
 	
 	public SupportBoard view(SupportBoard board);
 	
