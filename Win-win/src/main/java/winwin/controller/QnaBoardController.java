@@ -37,9 +37,9 @@ public class QnaBoardController {
 		
 		//관리자 초기 로그인 값
 		HttpSession session =  req.getSession();
-		session.setAttribute("adminLogin", true);
+//		session.setAttribute("adminLogin", true);
 		session.setAttribute("admincode", "444444");
-		session.setAttribute("adminname", "이현우");		
+		session.setAttribute("adminname", "이현우");
 		
 		int total = service.totalCnt();
 		String curr =req.getParameter("curPage");

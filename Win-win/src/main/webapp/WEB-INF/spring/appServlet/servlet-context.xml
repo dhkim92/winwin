@@ -8,6 +8,13 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/qna/**" />
+			<beans:bean class="winwin.interceptor.QnaInterceptor" />			
+		</interceptor>
+	</interceptors>
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />

@@ -78,18 +78,20 @@ td{
 				</p>
 			</c:if>	
 			</div>
-			<c:if test="${board.asw_code eq null }" >
-				<div class="text-right" id="aswBox">
-					<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">답변하기</button>
-					<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
-				</div>
-			</c:if>
-			<c:if test="${board.asw_code ne null }" >
-				<div class="text-right" id="aswBox">
-					<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">다시쓰기</button>
-					<button type="button" id="delAsw" class="btn btn-danger" onclick="delAsw();">답변삭제</button><br>
-					<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
-				</div>
+			<c:if test="${adminLogin}">
+				<c:if test="${board.asw_code eq null }">
+					<div class="text-right" id="aswBox">
+						<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">답변하기</button>
+						<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
+					</div>
+				</c:if>
+				<c:if test="${board.asw_code ne null }" >
+					<div class="text-right" id="aswBox">
+						<button type="button" id="onAsw" class="btn btn-primary" onclick="onAsw();">다시쓰기</button>
+						<button type="button" id="delAsw" class="btn btn-danger" onclick="delAsw();">답변삭제</button><br>
+						<textarea style="display: none" rows="8" class="form-control" id="content" placeholder="답변하기"></textarea>
+					</div>
+				</c:if>
 			</c:if>
 		</div>
 	</div>
