@@ -711,7 +711,7 @@ $('#Btn').click(function() {
 	console.log("checkPort : "+ checkPort);
 
 	
-// 	$('#career').submit();
+	$('#career').submit();
 });
 
 $("#dgsdg").on("click", "대상", function() {
