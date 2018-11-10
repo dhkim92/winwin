@@ -2,6 +2,7 @@ package winwin.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,6 +58,11 @@ public class MainController {
 		//Q&A 답변이 완료되지않은 문의사항 갯수세기 
 		 int commentCnt = mainService.countQnAUnanswered();
 		 model.addAttribute("commentCnt", commentCnt);
+		 
+		 // 공고별 지원자 수
+		 List<JobopenBasic> jobopenbasic = mainService.countSupport();
+		 model.addAttribute("supportCnt", jobopenbasic);
+		 System.out.println(jobopenbasic);
 		
 	}
 	

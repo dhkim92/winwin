@@ -41,5 +41,10 @@ public class MainServiceImpl implements MainService {
 		return mainDao.getJobopenBasic();
 	}
 
+	@Override
+	public List countSupport() {
+		return mainDao.countSupport();
+	}
+
 	
 }

@@ -116,16 +116,16 @@ h6 {
 			<div id="carouselExampleControls" class="carousel slide mt-2" data-ride="carousel">
 			
 			  <div class="carousel-inner">
-  				<c:forEach items="${applylist }" var="JobopenBasic" begin="0" end="0">
+  				<c:forEach items="${supportCnt }" var="JobopenBasic" begin="0" end="0">
 			  		<div class="carousel-item active">
 				   		<div class="font-weight-bold" style="font-size: 14px;"><span style="color: #376092">${JobopenBasic.title}</span>의 지원자수</div>
-				   		<h3 class="mt-3"><strong>12 명</strong></h3>
+				   		<h3 class="mt-3"><strong>${JobopenBasic.applicantCnt}</strong></h3>
 				    </div>
 				</c:forEach>
-  				<c:forEach items="${applylist }" var="JobopenBasic" begin="1">
+  				<c:forEach items="${supportCnt }" var="JobopenBasic" begin="1">
 				    <div class="carousel-item">
 				   		<div class="font-weight-bold" style="font-size: 14px;"><span style="color: #376092">${JobopenBasic.title}</span>의 지원자수</div>
-				   		<h3 class="mt-3"><strong>12 명</strong></h3>
+				   		<h3 class="mt-3"><strong>${JobopenBasic.applicantCnt}</strong></h3>
 				    </div>
 				</c:forEach>
 			  </div>

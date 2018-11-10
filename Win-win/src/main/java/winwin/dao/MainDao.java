@@ -13,5 +13,7 @@ public interface MainDao {
 	public List getQnaBoard();
 
 	public List getJobopenBasic();
+
+	public List countSupport();
 	
 }

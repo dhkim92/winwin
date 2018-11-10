@@ -14,4 +14,6 @@ public interface MainService {
 
 	public List getJobopenBasic();
 
+	public List countSupport();
+
 }
