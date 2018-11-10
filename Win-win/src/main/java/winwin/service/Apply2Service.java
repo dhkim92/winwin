@@ -80,5 +80,7 @@ public interface Apply2Service {
 	public Military selectMilitary(Military military);
 	
 	public void insertSupport(Support support);
+
+	public void fileUpload(Material mat);
 	
 }

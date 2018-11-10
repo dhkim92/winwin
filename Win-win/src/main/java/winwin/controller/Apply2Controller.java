@@ -1,10 +1,13 @@
 package winwin.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.Activity;
@@ -60,7 +64,7 @@ public class Apply2Controller {
 
  
 	@RequestMapping(value="/career", method=RequestMethod.POST) 
-	public String careerProc(HttpSession session, JobopenBasic jobopenBasic, LanguageArr langArr, LicenseArr licArr, CareerArr carArr, ActivityArr actArr, ExperienceArr expArr/*, MaterialArr matArr*/) {
+	public String careerProc(HttpSession session, JobopenBasic jobopenBasic, LanguageArr langArr, LicenseArr licArr, CareerArr carArr, ActivityArr actArr, ExperienceArr expArr/*, MaterialArr matArr*/, MultipartFile file) {
 
 		Language[] lang = langArr.getLangArr();
 		List<Language> langList = new LinkedList<>(Arrays.asList(lang));
@@ -204,6 +208,34 @@ public class Apply2Controller {
 //			apply2Service.insertMaterial(resMatList.get(i));
 //		}
 //		
+		
+		
+		// ------------파일업로드----------------
+		
+		String realpath = context.getRealPath("upload");
+		
+		String uid = UUID.randomUUID().toString().split("-")[4];
+		String stored = file.getOriginalFilename()+"_"+uid;
+		File dest = new File(realpath, stored);
+		try {
+			file.transferTo(dest);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Material mat = new Material();
+		
+		mat.setOriginName(file.getOriginalFilename());
+		mat.setStoredName(stored);
+		mat.setFilesize(file.getSize());
+		mat.setUserId((String)session.getId());
+		mat.setPortfolioId(jobopenBasic.getJobopenNo());
+		
+		
+		apply2Service.fileUpload(mat);
+		//------------------------------------
 		return "redirect:/apply/introduce?jobopenNo="+jobopenBasic.getJobopenNo();
 
 	}

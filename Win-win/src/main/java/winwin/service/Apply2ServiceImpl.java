@@ -149,4 +149,9 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.insertSupport(support);
 	}
 
+	@Override
+	public void fileUpload(Material mat) {
+		dao.fileUpload(mat);
+	}
+
 }

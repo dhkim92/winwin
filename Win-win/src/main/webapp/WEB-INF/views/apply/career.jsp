@@ -121,7 +121,7 @@ $(document).ready(function() {
    </table>
    	</div>
 
-	<form action="/apply/career" method="post" id="career">
+	<form action="/apply/career" method="post" id="career" enctype="multipart/form-data">
 	<h4 class="mt-4 mb-3 font-weight-bold">경력사항</h4><input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
 		<a href="/apply/userDetailUpdate"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
@@ -363,7 +363,7 @@ $(document).ready(function() {
    
    </form>
    <div class="col-12 mt-5 p-0 d-flex justify-content-end">
-   	  <button class="btn btn-primary text-white" id="Btn">저장하고 계속하기</button>
+   	  <input class="btn btn-primary text-white" type="button" id="Btn" value="저장하고 계속하기"/>
    </div>
 
 </div>

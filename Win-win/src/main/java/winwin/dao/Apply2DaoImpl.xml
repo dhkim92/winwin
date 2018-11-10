@@ -133,5 +133,11 @@
   			content5 = #{content5 } 
   		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
   	</update>
+  	
+  	
+	<insert id="fileUpload" parameterType="winwin.dto.Material">
+		INSERT INTO material( FILENO, USERID, PORTFOLIOID, ORIGINNAME, STOREDNAME, WRITEDATE, FILESIZE) 
+		VALUES (material_SEQ.nextval, #{userId}, #{portfolioId}, #{originName}, #{storedName}, sysdate, #{filesize})
+	</insert>
   
   </mapper>
