@@ -17,7 +17,10 @@ public class Paging {
 	private int endNo;	//게시물리스트 마지막 번호
 	
 	private List<?> list;
+	private String status;
 	
+	
+
 	// 총 게시글 수만 입력하는 생성자
 	//	curPage == 1
 	//	pageCount == 10
@@ -165,13 +168,9 @@ public class Paging {
 
 	@Override
 	public String toString() {
-		return "curPage="+curPage+
-				", totalCount="+totalCount+
-				", listCount="+listCount+
-				", totalPage="+totalPage+
-				", pageCount="+pageCount+
-				", startPage="+startPage+
-				", endPage="+endPage+"]";
+		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
+				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", startNo=" + startNo + ", endNo=" + endNo + ", list=" + list + ", status=" + status + "]";
 	}
 
 	public List<?> getList() {
@@ -181,6 +180,12 @@ public class Paging {
 	public void setList(List<?> list) {
 		this.list = list;
 	}
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
 }

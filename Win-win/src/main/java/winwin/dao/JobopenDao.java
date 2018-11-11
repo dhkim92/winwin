@@ -38,4 +38,5 @@ public interface JobopenDao {
 	
 	public void updateDetailDis(int jobopenNo);
 
+	public void updateStatus(JobopenBasic jobopenBasic);
 }

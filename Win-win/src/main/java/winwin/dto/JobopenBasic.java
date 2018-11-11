@@ -25,7 +25,11 @@ public class JobopenBasic {
 	private String etc; // 기타사항
 	private Date writeDate; // 공고 작성날짜
 	private int hit; // 조회수
+	private int display; // 출력 유무
+	private String status; // 공고 진행 상태
 	
+	
+
 	private int applicantCnt; // 지원자 수 
 
 	@Override
@@ -34,9 +38,10 @@ public class JobopenBasic {
 				+ ", startPay=" + startPay + ", endPay=" + endPay + ", rulePay=" + rulePay + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", allOpen=" + allOpen + ", academic=" + academic + ", score=" + score
 				+ ", lang=" + lang + ", etcQual=" + etcQual + ", etc=" + etc + ", writeDate=" + writeDate + ", hit="
-				+ hit + ", applicantCnt=" + applicantCnt + "]";
+				+ hit + ", display=" + display + ", status=" + status + ", applicantCnt=" + applicantCnt + "]";
 	}
 
+	
 	public int getJobopenNo() {
 		return jobopenNo;
 	}
@@ -180,7 +185,21 @@ public class JobopenBasic {
 	public void setApplicantCnt(int applicantCnt) {
 		this.applicantCnt = applicantCnt;
 	}
-	
+	public int getDisplay() {
+		return display;
+	}
+
+	public void setDisplay(int display) {
+		this.display = display;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
 
 }

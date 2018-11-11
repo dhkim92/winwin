@@ -101,5 +101,11 @@ public interface JobopenService {
 	 * @param jobopenDetail
 	 */
 	public void updateDetail(JobopenDetail jobopenDetail);
+
+	/**
+	 * 번호로 공고 진행 상태 업데이트
+	 * @param jobopenNo
+	 */
+	public void updateStatusByNo(JobopenBasic jobopenBasic);
 	
 }

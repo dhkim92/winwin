@@ -93,4 +93,9 @@ public class JobopenServiceImpl implements JobopenService {
 		jobopenDao.updateDetail(jobopenDetail);
 	}
 
+	@Override
+	public void updateStatusByNo(JobopenBasic jobopenBasic) {
+		jobopenDao.updateStatus(jobopenBasic);
+	}
+
 }

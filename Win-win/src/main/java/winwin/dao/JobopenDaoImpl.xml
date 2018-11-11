@@ -28,12 +28,22 @@
   	</insert>
   	
   	<select id="selectBasic" resultType="winwin.dto.JobopenBasic" parameterType="winwin.util.Paging">
-  		SELECT * FROM ( 
-            SELECT rownum rnum, B.* FROM (
-		         SELECT * FROM jobopenbasic
-                ORDER BY jobopenno DESC 
-            ) B 
-        ) R WHERE R.rnum BETWEEN #{startNo} AND #{endNo } ORDER BY rnum 	
+		SELECT *  FROM (
+     		SELECT ROWNUM RN, A.* FROM (    
+        		select * from
+        		(select j.title, count(s.userid) as applicantCnt
+            	from jobopenbasic j LEFT JOIN support s 
+            	ON s.jobopenno = j.jobopenno
+            	group by j.title) R LEFT JOIN jobopenBasic O
+        	ON R.title = O.title
+        order by jobopenNo desc) A 
+    )
+    <if test="status=='전체 확인'">
+    	WHERE RN BETWEEN #{startNo} AND #{endNo} AND display=1
+    </if>
+    <if test="status!='전체 확인'">
+		WHERE RN BETWEEN #{startNo} AND #{endNo} AND status=#{status} AND display=1
+	</if>
   	</select>
   	
 	<select id="CountBasic" resultType="int">
@@ -101,6 +111,10 @@
 	
 	<update id="updateDetailDis" parameterType="int">
 		update jobopenDetail set display=1 where jobopenNo = #{jobopenNo}
+	</update>
+	
+	<update id="updateStatus" parameterType="winwin.dto.JobopenBasic">
+		update jobopenBasic set status=#{status} where jobopenNo = #{jobopenNo}
 	</update>
 	
   
