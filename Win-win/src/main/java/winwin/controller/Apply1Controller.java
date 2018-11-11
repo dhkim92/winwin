@@ -109,7 +109,7 @@ public class Apply1Controller {
 		//전화번호 split하기
 		String[] phoneNum = userD.getPhoneNum().split("-");
 		
-		logger.info("phoneNum : " + phoneNum.toString());
+		logger.info("phoneNum : " + phoneNum.toString()); 
 
 		model.addAttribute("task", task);
 		model.addAttribute("jobopenBasic", jobOpen);
@@ -144,7 +144,7 @@ public class Apply1Controller {
 	
 
 	@RequestMapping(value="/academic", method=RequestMethod.POST)
-	public String academicProc(HighSchool highSchool, College college, University university, GSchool gSchool) {
+	public String academicProc(HighSchool highSchool, College college, University university, GSchool gSchool, HttpSession session) {
 		
 		
 		logger.info("academic POST 활성화");
@@ -153,34 +153,71 @@ public class Apply1Controller {
 		logger.info("University : " + university);
 		logger.info("GSchool : " + gSchool);
 		
+		String userId = (String)session.getAttribute("id");
+
 		if(!highSchool.getHsName().equals("")) {
 			apply1Service.insertHighSchool(highSchool);
-		}
+			apply1Service.updateMemCountH(userId);
+		} 
 		
 		if(!college.getColName().equals("")) {
 			apply1Service.insertCollege(college);
+			apply1Service.updateMemCountC(userId);
 		}
-		
+
 		if(!university.getUnivName().equals("")) {
 			apply1Service.insertUniversity(university);
+			apply1Service.updateMemCountU(userId);
 		}
 		
 		if(!gSchool.getGsName().equals("")) {
 			apply1Service.insertGSchool(gSchool);
+			apply1Service.updateMemCountGS(userId);
+		} 
+		
+		if(highSchool.getHsName().equals("") && college.getColName().equals("") && university.getUnivName().equals("") && gSchool.getGsName().equals("")) {
+			apply1Service.updateMemCountNone(userId);
 		}
+		
 		
 		return "redirect:/apply/military?jobopenNo="+highSchool.getJobopenNo();
 	}
 	
 	@RequestMapping(value="/academicUpdate", method=RequestMethod.GET)
-	public void academicUpdate(JobopenBasic jobopenBasic, HighSchool highSchool, College college, University university, GSchool gSchool, HttpSession session, Model model) {
+	public void academicUpdate(String jobopenNo, JobopenBasic jobopenBasic, HighSchool highSchool, College college, University university, GSchool gSchool, HttpSession session, Model model) {
 		
-		apply1Service.viewJobOpen(jobopenBasic);
-		apply1Service.selectHighSchool(highSchool);
-		apply1Service.selectCollege(college);
-		apply1Service.selectUniversity(university);
-		apply1Service.selectGSchool(gSchool);
+		int jobopenNum = Integer.parseInt(jobopenNo);
+		jobopenBasic.setJobopenNo(jobopenNum);
+		
+		//apply헤더 정보 가져오기
+		jobopenBasic.setJobopenNo(jobopenNum);
+		JobopenBasic jobOpen = apply1Service.viewJobOpen(jobopenBasic);
+		
+		//HighSchool 정보 가져오기
+		highSchool.setJobopenNo(jobopenNum);
+		highSchool.setUserId((String)session.getAttribute("id"));
+		HighSchool hsD = apply1Service.selectHighSchool(highSchool); 
+		
+		//College 정보 가져오기
+		college.setJobopenNo(jobopenNum);
+		college.setUserId((String)session.getAttribute("id"));
+		College colD = apply1Service.selectCollege(college);
 
+		//University 정보 가져오기
+		university.setJobopenNo(jobopenNum);
+		university.setUserId((String)session.getAttribute("id"));
+		University univD = apply1Service.selectUniversity(university);
+		
+		//GSchool 정보 가져오기
+		gSchool.setJobopenNo(jobopenNum);
+		gSchool.setUserId((String)session.getAttribute("id"));
+		GSchool gsD = apply1Service.selectGSchool(gSchool);
+		
+		model.addAttribute("jobopenBasic", jobOpen);
+		model.addAttribute("highSchool", hsD);
+		model.addAttribute("college", colD);
+		model.addAttribute("university", univD);
+		model.addAttribute("gSchool", gsD );
 	}
 
 	@RequestMapping(value="/academicUpdate", method=RequestMethod.POST)
@@ -218,11 +255,22 @@ public class Apply1Controller {
 	
 	
 	@RequestMapping(value="/militaryUpdate", method=RequestMethod.GET)
-	public void militaryUpdate(JobopenBasic jobopenBasic, Military military, Model model) {
+	public void militaryUpdate(String jobopenNo, JobopenBasic jobopenBasic, HttpSession session, Military military, Model model) {
 		
-		apply1Service.viewJobOpen(jobopenBasic);
-		apply1Service.selectMilitary(military);
+		int jobopenNum = Integer.parseInt(jobopenNo);
+		jobopenBasic.setJobopenNo(jobopenNum);
 		
+		//apply헤더 정보 가져오기
+		jobopenBasic.setJobopenNo(jobopenNum);
+		JobopenBasic jobOpen = apply1Service.viewJobOpen(jobopenBasic);
+		
+		//military 정보 가져오기
+		military.setJobopenNo(jobopenNum);
+		military.setUserId((String)session.getAttribute("id"));
+		Military mil = apply1Service.selectMilitary(military);
+
+		model.addAttribute("jobopenBasic", jobOpen);
+		model.addAttribute("military", mil);
 	}
 
 

@@ -57,5 +57,44 @@
   		SELECT * FROM userDetail WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
   	</select>
   	
+  	<update id="updateMemCountNone" parameterType="String">
+  		UPDATE member SET count='1' WHERE userId=#{userId}
+  	</update>
+
+  	<update id="updateMemCountH" parameterType="String">
+  		UPDATE member SET count='2' WHERE userId=#{userId}
+  	</update>
+
+  	<update id="updateMemCountC" parameterType="String">
+  		UPDATE member SET count='3' WHERE userId=#{userId}
+  	</update>
+
+  	<update id="updateMemCountU" parameterType="String">
+  		UPDATE member SET count='4' WHERE userId=#{userId}
+  	</update>
+
+  	<update id="updateMemCountGS" parameterType="String">
+  		UPDATE member SET count='5' WHERE userId=#{userId}
+  	</update>
   	
+	<select id="selectHighSchool" parameterType="winwin.dto.HighSchool" resultType="winwin.dto.HighSchool">
+		SELECT * FROM highschool WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
+	</select>
+
+	<select id="selectCollege" parameterType="winwin.dto.College" resultType="winwin.dto.College">
+		SELECT * FROM college WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
+	</select>
+
+	<select id="selectUniversity" parameterType="winwin.dto.University" resultType="winwin.dto.University">
+		SELECT * FROM university WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
+	</select>
+
+	<select id="selectGSchool" parameterType="winwin.dto.GSchool" resultType="winwin.dto.GSchool">
+		SELECT * FROM gschool WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
+	</select>
+	
+	<select id="selectMilitary" parameterType="winwin.dto.Military" resultType="winwin.dto.Military">
+		SELECT * FROM military WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
+	</select>
+
   </mapper>

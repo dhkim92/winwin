@@ -56,4 +56,14 @@ public interface Apply1Dao {
 
 	public void updateGSchool(GSchool gSchool);
 
+	public void updateMemCountH(String userId);
+
+	public void updateMemCountC(String userId);
+
+	public void updateMemCountU(String userId);
+
+	public void updateMemCountGS(String userId);
+
+	public void updateMemCountNone(String userId);
+
 }

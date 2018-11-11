@@ -34,6 +34,16 @@ public interface Apply1Service {
 
 	public void insertGSchool(GSchool gSchool);
 	
+	public void updateMemCountH(String userId);
+	
+	public void updateMemCountC(String userId);
+	
+	public void updateMemCountU(String userId);
+	
+	public void updateMemCountGS(String userId);
+	
+	public void updateMemCountNone(String userId);
+	
 	public HighSchool selectHighSchool(HighSchool highSchool);
 	
 	public College selectCollege(College college);

@@ -83,8 +83,8 @@ $(document).ready(function() {
 	
 	var Dday = new Date('<fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" />');
 	var now = new Date();
-	console.log(now);
-	console.log(Dday);
+// 	console.log(now);
+// 	console.log(Dday);
 	
 	var gap = now.getTime() - Dday.getTime();
 	var result = Math.floor(gap/ (1000*60*60*24)) * -1;
@@ -95,18 +95,47 @@ $(document).ready(function() {
 
 	//전화번호 앞자리 
 	var phoneIntro = document.getElementsByClassName("phone1Sel");
-	var phone123 = ${phoneNum[0]};
+	var phone123 = "${phoneNum[0]}";
 	
 	for(var i=0; i<phoneIntro.length; i++) {
 		var phone1 = phoneIntro[i].value;
+// 		console.log("phone1 : " + phone1);
 		
-		if(phone1.equals(phone123)) {
-			$("#phoneNum1 option").index
+		if(phone1==phone123) {
+// 			console.log("입장");
+			$("#phoneNum1").find("option[value="+phone123+"]").attr("selected","selected");			
 		}
 	}
 	
+	//직무 선택
+	var taskClass = document.getElementsByClassName("taskSelect");
+	var realTask = "${userDetail.task}";
+	
+	for(var i=0; i<taskClass.length; i++) {
+		var task1 = taskClass[i]. value;
+// 		console.log("task1 : " + task1);
+		
+		if(task1==realTask) {
+// 			console.log("입장");
+			$("#taskSel").find("option[value="+realTask+"]").attr("selected","selected");
+		}
+		
+	}
+	
+	//보훈, 비보훈
+	var realVeteran = "${userDetail.veteran}";
+// 	console.log("realVeteran : " + realVeteran);
+	
+	$('input:radio[name="veteran"][value="'+realVeteran+'"]').prop('checked', true);
+	
+	//장애, 비장애
+	var realDisable = "${userDetail.disable}";
+// 	console.log("realDisable : " + realDisable);
+	
+	$('input:radio[name="disable"][value="'+realDisable+'"]').prop('checked', true);
 	
 
+	//저장버튼 클릭 시 validation & submit
 	$("#saveBtn").click(function() {
 		
 		console.log("저장하고 계속하기 버튼 클릭")
@@ -188,7 +217,6 @@ $(document).ready(function() {
 				
 			}
 
-			
 		}
 		
 	});
@@ -213,7 +241,7 @@ $(document).ready(function() {
 	      		<select style="height:21px; width:90px;" id="taskSel" >
 	      			<option value="0">직무선택</option>
 	      			<c:forEach items="${task }" var="task">
-	      				<option value="${task.task }">${task.task }</option>
+	      				<option class="taskSelect" value="${task.task }">${task.task }</option>
 	      			</c:forEach>	
 	      		</select>
 	      	</td>
@@ -241,28 +269,26 @@ $(document).ready(function() {
 	</table>
 	</div>
 
-	<form action="/apply/userDetail" method="POST" id="userDetailForm">
-	<h4 class="mt-4 mb-3 font-weight-bold">개인사항<input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" /></h4>
+	<h4 class="mt-4 mb-3 font-weight-bold">개인사항</h4>
 	<div class="row">
 		<img class="img-fluid d-block ml-3" src="/resources/image/B_userDetail.png">
-		<a href="/apply/acaemicUpdate">
+		<a href="/apply/acaemicUpdate?jobopenNo=${jobopenBasic.jobopenNo}">
 			<img class="img-fluid d-block" src="/resources/image/G_academic.png">
 		</a>
-		<a href="/apply/militaryUpdate">
+		<a href="/apply/militaryUpdate?jobopenNo=${jobopenBasic.jobopenNo}">
 			<img class="img-fluid d-block" src="/resources/image/G_military.png">
 		</a>
-		<a href="/apply/careerUpdate">
+		<a href="/apply/careerUpdate?jobopenNo=${jobopenBasic.jobopenNo }">
 			<img class="img-fluid d-block" src="/resources/image/G_career.png">
 		</a>
-		<a href="/apply/introduceUpdate">
+		<a href="/apply/introduceUpdate?jobopenNo=${jobopenBasic.jobopenNo }">
 			<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
 		</a>
-		<a href="/apply/completeUpdate">
-			<img class="img-fluid d-block" src="/resources/image/G_complete.png">
-		</a>
+		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 	</div>
-	
-	<h6 class="mt-5 mb-3 font-weight-bold">기본정보</h6>
+
+	<form action="/apply/userDetailUpdate" method="POST" id="userDetailForm">
+	<h6 class="mt-5 mb-3 font-weight-bold">기본정보<input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" /></h6>
 	
 	<table class="table table-bordered border-secondary">
 	<tbody>

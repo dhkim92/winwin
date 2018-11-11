@@ -133,6 +133,35 @@ public class Apply1ServiceImpl implements Apply1Service {
 		dao.updateGSchool(gSchool);
 	}
 
+	@Override
+	public void updateMemCountH(String userId) {
+		dao.updateMemCountH(userId);
+	}
+
+	@Override
+	public void updateMemCountC(String userId) {
+		dao.updateMemCountC(userId);
+		
+	}
+
+	@Override
+	public void updateMemCountU(String userId) {
+		dao.updateMemCountU(userId);
+		
+	}
+
+	@Override
+	public void updateMemCountGS(String userId) {
+		dao.updateMemCountGS(userId);
+		
+	}
+
+	@Override
+	public void updateMemCountNone(String userId) {
+		dao.updateMemCountNone(userId);
+		
+	}
+
 
 	
 }
