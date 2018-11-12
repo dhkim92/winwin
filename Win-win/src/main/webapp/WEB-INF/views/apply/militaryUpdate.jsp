@@ -89,14 +89,72 @@ $(document).ready(function() {
 	$("#dDay").val("(D- " + result + "일)");
 	
 	//병역구분
+	var mDischargeSelect = document.getElementsByClassName("mDischargeSelect");
+	var realMDischarge = "${military.discharge}";
+	
+	for(var i=0; i<mDischargeSelect.length; i++) {
+		var mDischarge = mDischargeSelect[i].value;
+		
+		console.log("mDischarge : " + mDischarge);
+		
+		if(mDischarge==realMDischarge) {
+			console.log("mDischarge if문 입장");
+			$("#discharge").find("option[value="+realMDischarge+"]").attr("selected", "selected");
+			
+			if(realMDischarge=="비대상"||realMDischarge=="미필"||realMDischarge=="면제") {
+	
+			  $("#startDate").attr("disabled", true);
+			  $("#endDate").attr("disabled", true);
+			  $("#mCategory").attr("disabled",true);
+			  $("#mGrade").attr("disabled",true);
+			  
+			} else {
+				
+			  $("#startDate").removeAttr("disabled");
+			  $("#endDate").removeAttr("disabled");
+			  $("#mCategory").removeAttr("disabled");
+			  $("#mGrade").removeAttr("disabled");
+
+			}
+		}
+		
+	}
 	
 	
+	//군별
+	var mCategorySelect =  document.getElementsByClassName("mCategorySelect");
+	var realMCategory = "${military.mCategory}";
+	
+	for(var i=0; i<mCategorySelect.length; i++) {
+		var mCategory = mCategorySelect[i].value;
+		
+		console.log("mCategory : " + mCategory);
+		
+		if(mCategory==realMCategory) {
+			console.log("mCategory입장!");
+			$("#mCategory").find("option[value="+realMCategory+"]").attr("selected", "selected");
+			
+		}
+	}
+	
+	//계급
+	var mGradeSelect = document.getElementsByClassName("mGradeSelect");
+	var realMGrade = "${military.mGrade}"
+	
+	for(var i=0; i<mGradeSelect.length; i++) {
+		var mGrade = mGradeSelect[i].value;
+		
+		console.log("mGrade : " + mGrade);
+		
+		if(mGrade==realMGrade) {
+			console.log("mGrade입장!");
+			$("#mGrade").find("option[value="+realMGrade+"]").attr("selected", "selected");
+			
+		}
+	}
 	
 	
-	
-	
-	
-	
+		
 	$("#saveBtn").click(function() {
 		
 		console.log("저장하고 계속하기 버튼 클릭");

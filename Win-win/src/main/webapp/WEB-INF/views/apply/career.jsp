@@ -193,7 +193,7 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle"><input type="text" class="license" id="selectLicense0" name="licArr[0].liName" class="mr-1" style="width:200px" /><input class="licenseAPI" data-idx="0" type="button" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td>
-                  <td class="align-middle"><input type="date" class="license" name="licArr[0].liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
+                  <td class="align-middle"><input type="date" class="license licenseDate" name="licArr[0].liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
                   <td class="align-middle"><input type="text" class="license" name="licArr[0].liOrgan" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
@@ -222,8 +222,8 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="date" class="career" name="carArr[0].cStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="date" class="career" name="carArr[0].cEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="date" class="career carStartDate" name="carArr[0].cStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="date" class="career carEndDate" name="carArr[0].cEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="text" class="career" name="carArr[0].cName" class="mr-1" style="width:100px" /></td>
                   <td class="align-middle"><input type="text" class="career" name="carArr[0].position" class="mr-1" style="width:50px" /></td>
                   <td class="align-middle"><input type="text" class="career" name="carArr[0].task" class="mr-1" style="width:100px" /></td>
@@ -254,8 +254,8 @@ $(document).ready(function() {
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="align-middle"><input type="text" class="activity" name="actArr[0].aName" class="mr-1" style="width:250px" /></td>
-                  <td class="align-middle"><input type="date" class="activity" name="actArr[0].aStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="date" class="activity" name="actArr[0].aEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="date" class="activity actStartDate" name="actArr[0].aStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="date" class="activity actEndDate" name="actArr[0].aEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="text" class="activity" name="actArr[0].aContent" class="mr-1" style="width:350px" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
@@ -293,8 +293,8 @@ $(document).ready(function() {
                   	</select>
                   </td>
                   <td class="align-middle"><input type="text" class="experience" name="expArr[0].eOrgan" class="mr-1" style="width:250px" /></td>
-                  <td class="align-middle"><input type="date" class="experience" name="expArr[0].eStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="date" class="experience" name="expArr[0].eEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="date" class="experience expStartDate" name="expArr[0].eStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+                  <td class="align-middle"><input type="date" class="experience expEndDate" name="expArr[0].eEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
                   <td class="align-middle"><input type="text" class="experience" name="expArr[0].eContent" class="mr-1" style="width:350px" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
@@ -445,7 +445,7 @@ $(document).ready(function() {
  	});
 	
 	function addLiForm(i) {
-		var form = '<tr><td class="align-middle"><input type="text" class="license" id="selectLicense'+i+'" name="licArr['+i+'].liName" class="mr-1" style="width:200px" /><input class="licenseAPI" type="button" data-idx="'+i+'" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td><td class="align-middle"><input type="date" class="license" name="licArr['+i+'].liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" class="license" name="licArr['+i+'].liOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td class="align-middle"><input type="text" class="license" id="selectLicense'+i+'" name="licArr['+i+'].liName" class="mr-1" style="width:200px" /><input class="licenseAPI" type="button" data-idx="'+i+'" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td><td class="align-middle"><input type="date" class="license licenseDate" name="licArr['+i+'].liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" class="license" name="licArr['+i+'].liOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -470,7 +470,7 @@ $(document).ready(function() {
 	
 	
 	function addCarForm(i) {
-		var form = '<tr><td class="align-middle"><input type="date" class="career" name="carArr['+i+'].cStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" class="career" name="carArr['+i+'].cEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].cName" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].position" class="mr-1" style="width:50px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].task" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].salary" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].cContent" class="mr-1" style="width:300px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td class="align-middle"><input type="date" class="career carStartDate" name="carArr['+i+'].cStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" class="career carEndDate" name="carArr['+i+'].cEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].cName" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].position" class="mr-1" style="width:50px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].task" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].salary" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].cContent" class="mr-1" style="width:300px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -495,7 +495,7 @@ $(document).ready(function() {
 	
 	
 	function addActForm(i) {
-		var form = '<tr><td class="align-middle"><input type="text" class="activity" name="actArr['+i+'].aName" class="mr-1" style="width:250px" /></td><td class="align-middle"><input type="date" class="activity" name="actArr['+i+'].aStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" class="activity" name="actArr['+i+'].aEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" class="activity" name="actArr['+i+'].aContent" class="mr-1" style="width:350px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td class="align-middle"><input type="text" class="activity" name="actArr['+i+'].aName" class="mr-1" style="width:250px" /></td><td class="align-middle"><input type="date" class="activity actStartDate" name="actArr['+i+'].aStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" class="activity actEndDate" name="actArr['+i+'].aEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" class="activity" name="actArr['+i+'].aContent" class="mr-1" style="width:350px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -520,7 +520,7 @@ $(document).ready(function() {
 	
 	
 	function addExpForm(i) {
-		var form = '<tr><td> <select style="height:25px; width:80px;" class="experience" name="expArr['+i+'].eOption"><option value="0">선택</option><option value="봉사">봉사</option><option value="수상경력">수상경력</option><option value="어학연수">어학연수</option><option value="TOEIC Speaking">인턴</option><option value="기타">기타</option> </select></td><td class="align-middle"><input type="text" class="experience" name="expArr['+i+'].eOrgan" class="mr-1" style="width:250px" /></td><td class="align-middle"><input type="date" class="experience" name="expArr['+i+'].eStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" class="experience" name="expArr['+i+'].eEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" class="experience" name="expArr['+i+'].eContent" class="mr-1" style="width:350px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td> <select style="height:25px; width:80px;" class="experience" name="expArr['+i+'].eOption"><option value="0">선택</option><option value="봉사">봉사</option><option value="수상경력">수상경력</option><option value="어학연수">어학연수</option><option value="TOEIC Speaking">인턴</option><option value="기타">기타</option> </select></td><td class="align-middle"><input type="text" class="experience" name="expArr['+i+'].eOrgan" class="mr-1" style="width:250px" /></td><td class="align-middle"><input type="date" class="experience expStartDate" name="expArr['+i+'].eStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" class="experience expEndDate" name="expArr['+i+'].eEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" class="experience" name="expArr['+i+'].eContent" class="mr-1" style="width:350px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -748,18 +748,342 @@ $('#Btn').click(function() {
 		var actCheck = false;
 		var expCheck = false;
 		
+		//어학 취득일 검증
 		var langDate = document.getElementsByClassName("languageDate");
 		for(var i=0; i<langDate.length;i++) {
 			var languageDate = langDate[i].value;
 			console.log("languageDate : " + languageDate);
+			
+			//오늘 날짜
+			var now = new Date();
+			console.log(now);
+			
+			//어학 취득일
+			var langDateArr = languageDate.split('-');
+			var lang_Day = new Date(langDateArr[0], langDateArr[1], langDateArr[2]);
+			
+			//오늘 날짜-어학 취득일
+			var gap = now.getTime() - lang_Day.getTime();
+			var result = Math.floor(gap/(1000*60*60*24)) * -1;
+
+			console.log("result : " + result);
+			
+			
+			if(result>30) {
+				alert("어학정보 취득일을 확인해주십시오.");
+				langCheck = false;
+				
+				break;
+			} else {
+				langCheck = true;
+			}
+			
 		}
+		
+		//자격증 취득일 검증
+		var licDate = document.getElementsByClassName("licenseDate");
+		
+		for(var i=0; i<licDate.length;i++) {
+			var licenseDate = licDate[i].value;
+			console.log("licenseDate : " + licenseDate);
+			
+			//오늘 날짜
+			var now = new Date();
+			console.log(now);
+			
+			//자격증 취득일
+			var licDateArr = licenseDate.split('-');
+			var lic_Day = new Date(licDateArr[0], licDateArr[1], licDateArr[2]);
+			
+			//오늘 날짜-어학 취득일
+			var gap = now.getTime() - lic_Day.getTime();
+			var result = Math.floor(gap/(1000*60*60*24)) * -1;
+
+			console.log("result : " + result);
+			
+			
+			if(result>30) {
+				alert("자격증 취득일을 확인해주십시오.");
+				licCheck = false;
+				
+				break;
+			} else {
+				licCheck = true;
+			}
+			
+		}
+		
+		//회사경력 검증
+		var carStartDate = document.getElementsByClassName("carStartDate");
+		var carEndDate = document.getElementsByClassName("carEndDate");
+		
+		for(var i=0; i<carStartDate.length;i++) {
+			var careerSDate = carStartDate[i].value;
+			var careerEDate = carEndDate[i].value;
+			
+			console.log("careerSDate : " + careerSDate);
+			console.log("careerEDate : " + careerEDate);
+			
+			//회사경력 start, endDate
+			var carSDateArr = careerSDate.split('-');
+			var car_SDay = new Date(carSDateArr[0], carSDateArr[1], carSDateArr[2]);
+			console.log("car_SDay"+car_SDay);
+			
+			var carEDateArr = careerEDate.split('-');
+			var car_EDay = new Date(carEDateArr[0], carEDateArr[1], carEDateArr[2]);
+			console.log("car_EDay" + car_EDay);
+
+			//오늘날짜 
+			var now = new Date();
+			console.log(now);
+			
+			//오늘날짜 - startDate
+			var sGap = now.getTime() - car_SDay.getTime();
+			var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
+			console.log("sResult : " + sResult);
+			
+			//오늘날짜 - endDate
+			var eGap = now.getTime() - car_EDay.getTime();
+			var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
+			console.log("eResult : " + eResult);
+
+			if(sResult>30) {
+				alert("회사경력 근무시작일을 확인해주십시오.");
+			} else if(eResult>30) {
+				alert("회사경력 근무종료일을 확인해주십시오.");
+			} else {
+				
+				//endDate-startDate
+				var gap = car_EDay.getTime() - car_SDay.getTime();
+				var result = Math.floor(gap/(1000*60*60*24)) * -1;
+
+				console.log("result : " + result);
+				
+				if(result>0) {
+					alert("회사경력 근무기간을 확인해주십시오.");
+					carCheck = false;
+					
+					break;
+				} else {
+					carCheck = true;
+				}
+				
+			}
+
+			
+		}
+		
+
+		//사회봉사활동 검증
+		var actStartDate = document.getElementsByClassName("actStartDate");
+		var actEndDate = document.getElementsByClassName("actEndDate");
+		
+		for(var i=0; i<actStartDate.length;i++) {
+			var activitySDate = actStartDate[i].value;
+			var activityEDate = actEndDate[i].value;
+			
+			console.log("activitySDate : " + activitySDate);
+			console.log("activityEDate : " + activityEDate);
+			
+			//사회봉사 start, endDate
+			var actSDateArr = activitySDate.split('-');
+			var act_SDay = new Date(actSDateArr[0], actSDateArr[1], actSDateArr[2]);
+			console.log("act_SDay"+act_SDay);
+			
+			var actEDateArr = activityEDate.split('-');
+			var act_EDay = new Date(actEDateArr[0], actEDateArr[1], actEDateArr[2]);
+			console.log("act_EDay" + act_EDay);
+
+			//오늘날짜 
+			var now = new Date();
+			console.log(now);
+			
+			//오늘날짜 - startDate
+			var sGap = now.getTime() - act_SDay.getTime();
+			var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
+			console.log("sResult : " + sResult);
+			
+			//오늘날짜 - endDate
+			var eGap = now.getTime() - act_EDay.getTime();
+			var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
+			console.log("eResult : " + eResult);
+
+			if(sResult>30) {
+				alert("사회봉사활동의 시작일을 확인해주십시오.");
+				
+				break;
+			} else if(eResult>30) {
+				alert("사회봉사활동의 종료일을 확인해주십시오.");
+				
+				break;
+			} else {
+				
+				//endDate-startDate
+				var gap = act_EDay.getTime() - act_SDay.getTime();
+				var result = Math.floor(gap/(1000*60*60*24)) * -1;
+
+				console.log("result : " + result);
+				
+				if(result>0) {
+					alert("사회봉사활동 기간을 확인해주십시오.");
+					actCheck = false;
+					
+					break;
+				} else {
+					actCheck = true;
+				}
+				
+			}
+			
+		}
+		
+		//사회봉사활동 검증
+		var actStartDate = document.getElementsByClassName("actStartDate");
+		var actEndDate = document.getElementsByClassName("actEndDate");
+		
+		for(var i=0; i<actStartDate.length;i++) {
+			var activitySDate = actStartDate[i].value;
+			var activityEDate = actEndDate[i].value;
+			
+			console.log("activitySDate : " + activitySDate);
+			console.log("activityEDate : " + activityEDate);
+			
+			//사회봉사 start, endDate
+			var actSDateArr = activitySDate.split('-');
+			var act_SDay = new Date(actSDateArr[0], actSDateArr[1], actSDateArr[2]);
+			console.log("act_SDay"+act_SDay);
+			
+			var actEDateArr = activityEDate.split('-');
+			var act_EDay = new Date(actEDateArr[0], actEDateArr[1], actEDateArr[2]);
+			console.log("act_EDay" + act_EDay);
+
+			//오늘날짜 
+			var now = new Date();
+			console.log(now);
+			
+			//오늘날짜 - startDate
+			var sGap = now.getTime() - act_SDay.getTime();
+			var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
+			console.log("sResult : " + sResult);
+			
+			//오늘날짜 - endDate
+			var eGap = now.getTime() - act_EDay.getTime();
+			var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
+			console.log("eResult : " + eResult);
+
+			if(sResult>30) {
+				alert("사회봉사활동의 시작일을 확인해주십시오.");
+				
+				break;
+			} else if(eResult>30) {
+				alert("사회봉사활동의 종료일을 확인해주십시오.");
+				
+				break;
+			} else {
+				
+				//endDate-startDate
+				var gap = act_EDay.getTime() - act_SDay.getTime();
+				var result = Math.floor(gap/(1000*60*60*24)) * -1;
+
+				console.log("result : " + result);
+				
+				if(result>0) {
+					alert("사회봉사활동 기간을 확인해주십시오.");
+					actCheck = false;
+					
+					break;
+				} else {
+					actCheck = true;
+				}
+				
+			}
+			
+		}
+		
+
+		//연수경험 검증
+		var expStartDate = document.getElementsByClassName("expStartDate");
+		var expEndDate = document.getElementsByClassName("expEndDate");
+		
+		for(var i=0; i<expStartDate.length;i++) {
+			var experienceSDate = expStartDate[i].value;
+			var experienceEDate = expEndDate[i].value;
+			
+			console.log("experienceSDate : " + experienceSDate);
+			console.log("experienceEDate : " + experienceEDate);
+			
+			//사회봉사 start, endDate
+			var expSDateArr = experienceSDate.split('-');
+			var exp_SDay = new Date(expSDateArr[0], expSDateArr[1], expSDateArr[2]);
+			console.log("exp_SDay"+exp_SDay);
+			
+			var expEDateArr = experienceEDate.split('-');
+			var exp_EDay = new Date(expEDateArr[0], expEDateArr[1], expEDateArr[2]);
+			console.log("exp_EDay" + exp_EDay);
+
+			//오늘날짜 
+			var now = new Date();
+			console.log(now);
+			
+			//오늘날짜 - startDate
+			var sGap = now.getTime() - exp_SDay.getTime();
+			var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
+			console.log("sResult : " + sResult);
+			
+			//오늘날짜 - endDate
+			var eGap = now.getTime() - exp_EDay.getTime();
+			var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
+			console.log("eResult : " + eResult);
+
+			if(sResult>30) {
+				alert("연수경험의 시작일을 확인해주십시오.");
+				
+				break;
+			} else if(eResult>30) {
+				alert("연수경험의 종료일을 확인해주십시오.");
+				
+				break;
+			} else {
+				
+				//endDate-startDate
+				var gap = exp_EDay.getTime() - exp_SDay.getTime();
+				var result = Math.floor(gap/(1000*60*60*24)) * -1;
+
+				console.log("result : " + result);
+				
+				if(result>0) {
+					alert("연수경험의 기간을 확인해주십시오.");
+					expCheck = false;
+					
+					break;
+				} else {
+					expCheck = true;
+				}
+				
+			}
+			
+		}
+		
+		
+		if(langCheck==true && licCheck==true && carCheck==true && actCheck==true && expCheck==true) {
+			
+			console.log("마지막 if");
+			$('#career').submit();
+		}
+		
+		
+// 		console.log("expCheck : " + expCheck);
+// 		console.log("actCheck : " + actCheck);
+// 		console.log("carCheck : " + carCheck);
+// 		console.log("licCheck : " + licCheck);
+// 		console.log("langCheck : " + langCheck);
+
 	}
 	
 	//-----------------------------------------------
 	
 	
 	
-// 	$('#career').submit();
 });
 
 $("#dgsdg").on("click", "대상", function() {
