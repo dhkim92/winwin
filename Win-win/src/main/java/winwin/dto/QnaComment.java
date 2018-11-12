@@ -9,12 +9,20 @@ public class QnaComment {
 	private String writer;
 	private String id;
 	private String content;
-	private Date date;
+	private Date writedate;
+
+	private boolean admin;
 	
 	@Override
 	public String toString() {
 		return "QnaComment [commentNo=" + commentNo + ", qnaNo=" + qnaNo + ", writer=" + writer + ", id=" + id
-				+ ", content=" + content + ", date=" + date + "]";
+				+ ", content=" + content + ", date=" + writedate + "]";
+	}
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 	public int getCommentNo() {
 		return commentNo;
@@ -46,11 +54,11 @@ public class QnaComment {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getDate() {
-		return date;
+	public Date getWritedate() {
+		return writedate;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setWritedate(Date date) {
+		this.writedate = date;
 	}
 	
 }

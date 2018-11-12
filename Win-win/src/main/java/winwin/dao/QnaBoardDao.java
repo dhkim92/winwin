@@ -33,5 +33,7 @@ public interface QnaBoardDao {
 	public void deleteCommentsByBoardNo(QnaBoard board);
 	
 	public void deleteBoardAsw(QnaBoard board);
+	
+	public int getCommentCnt(QnaBoard board);
 
 }

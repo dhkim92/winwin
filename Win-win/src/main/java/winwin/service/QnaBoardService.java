@@ -10,6 +10,8 @@ public interface QnaBoardService{
 
 	public int totalCnt();
 	
+	public int getCommentCnt(QnaBoard board);
+	
 	public void hit(QnaBoard board);
 	
 	public List<QnaBoard> list(Paging paging);

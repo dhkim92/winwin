@@ -48,7 +48,8 @@ td {
 			<thead class="thead-light">
 				<tr>
 					<th width="13%">번호</th>
-					<th class="truncated" width="50%">제목</th>
+					<th class="truncated" width="46%">제목</th>
+					<th width="4%"></th>
 					<th width="4%"></th>
 					<th width="11%">작성일자</th>
 					<th width="11%">작성자</th>
@@ -60,6 +61,14 @@ td {
 				<tr>
 					<td class="view">${board.qnaNo }</td>					
 					<td class="view"><i class="fas fa-lock mr-2"></i>${board.title }</td>
+					<td>
+						<c:if test="${board.commentCnt eq 0}">
+						</c:if>
+						<c:if test="${board.commentCnt ne 0}">
+						<span class="badge badge-pill badge-secondary">댓글(${board.commentCnt})</span>				
+						</c:if>
+					</td>					
+					
 					<td class="view">
 						<c:if test="${board.asw_code ne null }">
 							<i class="fas fa-check ml-2"></i>

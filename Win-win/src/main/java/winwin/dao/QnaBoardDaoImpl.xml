@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="winwin.dao.QnaBoardDao">
+ 	<sql id="commentCnt">
+ 		SELECT count(*)
+ 		FROM qna_comment
+ 		WHERE qnano = #{qnaNo}
+ 	</sql> 	
  	<select id="list" parameterType="winwin.util.Paging" resultType="winwin.dto.QnaBoard">
  		SELECT
  			B.qnaNo,
@@ -17,7 +22,10 @@
  			B.asw_code,
  			B.asw_writer,
  			B.asw_content,
- 			B.asw_date
+ 			B.asw_date,
+ 			(SELECT count(*)
+ 			 FROM qna_comment
+ 			 WHERE qnano=B.qnaNo) commentCnt
  		FROM (
  			SELECT rownum rnum, A.*
  			FROM(
@@ -46,9 +54,7 @@
  			asw_writer,
  			asw_content,
  			asw_date,
- 			(SELECT count(*)
- 			FROM qna_comment
- 			WHERE qnano = #{qnaNo})commentCnt
+ 			(<include refid="commentCnt"/>) commentCnt
  		FROM qna
  		WHERE qnano = #{qnaNo}
  	</select>
@@ -80,4 +86,27 @@
  		SET hit = hit+1
  		WHERE qnaNo = #{qnaNo }
  	</update>
+ 	<insert id="insertComment" parameterType="winwin.dto.QnaComment">
+ 		INSERT INTO qna_comment
+ 		VALUES(qna_comment_seq.nextval,#{qnaNo},#{writer},#{id},#{content},default) 		
+ 	</insert>
+ 	<delete id="deleteComment" parameterType="winwin.dto.QnaComment">
+ 		DELETE FROM qna_comment
+ 		WHERE commentNo = #{commentNo} 		
+ 	</delete>
+ 	<select id="selectCommentByBoardNo" parameterType="winwin.dto.QnaBoard" resultType="winwin.dto.QnaComment">
+ 		SELECT 
+ 			commentno
+ 			,qnano
+ 			,writer
+ 			,id
+ 			,content
+ 			,writedate	 			
+ 		FROM qna_comment
+ 		WHERE qnano = #{qnaNo}
+ 		ORDER BY commentno DESC
+ 	</select>
+ 	<select id="getCommentCnt" parameterType="winwin.dto.QnaBoard" resultType="int">
+ 	 	<include refid="commentCnt"/>
+ 	</select>
  </mapper>

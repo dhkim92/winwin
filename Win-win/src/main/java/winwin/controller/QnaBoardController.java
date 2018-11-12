@@ -76,11 +76,27 @@ public class QnaBoardController {
 		
 	}
 	
+	//json-lib
 	@RequestMapping(value="/qna/view", method=RequestMethod.POST)
-	public void viewProc(QnaComment comment,QnaBoard board,Model m) {
-		service.deleteComment(comment);
-		service.insertComment(comment);
-		service.selectCommentByBoardNo(board);
+	public ModelAndView viewProc(QnaComment comment,ModelAndView mav,@RequestParam("word") String word) {		
+		
+		logger.info(comment.toString());
+		
+		if(word.equals("add")) {
+			service.insertComment(comment);
+		}else if(word.equals("del")) {
+			service.deleteComment(comment);
+		}		
+		QnaBoard board = new QnaBoard();
+		board.setQnaNo(comment.getQnaNo());
+		List<QnaComment> list = service.selectCommentByBoardNo(board);
+		int cnt = service.getCommentCnt(board); 
+		
+		mav.setViewName("jsonView");
+		mav.addObject("comments",list);
+		mav.addObject("commentCnt", cnt);
+		return mav;
+		
 	}
 	
 	@RequestMapping(value="/qna/write", method=RequestMethod.GET)
@@ -156,6 +172,8 @@ public class QnaBoardController {
 	//json-lib
 	@RequestMapping(value="/qna/asw",method=RequestMethod.POST)
 	public ModelAndView writeAsw(HttpServletResponse resp,QnaBoard board,@RequestParam("word") String word) {
+		//한글폰트 3
+		resp.setContentType("application/json;charset=utf-8");
 		
 		logger.info(word);
 		if(word.equals("del")) {

@@ -95,9 +95,13 @@ td{
 			</c:if>
 		</div>
 	</div>
-
+	
 	<input type="hidden" id="code" value="${sessionScope.admincode }"/>
 	<input type="hidden" id="writer" value="${sessionScope.adminname }"/>
+	
+	<input type="hidden" id="id" value="${sessionScope.id }" />
+	<input type="hidden" id="name" value="${sessionScope.name }" />	
+	<input type="hidden" id="switch" value="off" />
 	
 	<br>
 	<div id="btns" class="form-group d-flex justify-content-center">
@@ -108,8 +112,13 @@ td{
 	<br><br><br>
 	
 	<div class="col-12 mt-5" id="commentList">
-		<i class="far fa-comment-dots mr-2" onclick="onComment();"></i><label onclick="onComment();">댓글 목록(0)</label>
+		<span onclick="onComment();"><i class="far fa-comment-dots mr-2"></i><label id="commentCnt" >댓글 목록(${board.commentCnt })</label></span>
 		<hr class="mt-1">
+	</div>
+	
+	<div class="d-flex justify-content-center">
+		<div class="col-11 mt-3" id="commentsBox">
+		</div>		
 	</div>
 	
 	<div class="col-12 mt-5">
@@ -119,8 +128,8 @@ td{
 	
 	<div class="d-flex justify-content-center">
 		<div id="commentBox" class="form-inline col-12">
-			<textarea class="form-control col-md-11" placeholder="댓글을 남겨주세요" rows="4" cols="" style="display:inline-block;"></textarea>
-			<button class="btn btn-primary col-md-1" style="display:inline-block;height:100px">댓글등록</button>
+			<textarea class="form-control col-md-11" name="content" id="commentContent" placeholder="댓글을 남겨주세요" rows="4" cols="" style="display:inline-block;"></textarea>
+			<button class="btn btn-primary col-md-1" style="display:inline-block;height:100px" onclick="addComment();">댓글등록</button>
 		</div>
 	</div>
 </div>
@@ -206,7 +215,7 @@ function addAsw(){
 				$("#res").html("");
 				$("#res").append("<hr style='border: dotted #376092;'><p>[답변내용]<br><br>안녕하세요 ${board.writer }님,<br></p>");
 				$("#res").append("<div id='a'>"+data.board.asw_content+"</div>");
-				$("#res").append("<p>답변 내용에 대해 궁금하신 사항은 댓글로 남겨주시기 바랍니다.<br>감사합니다.</p>");
+				$("#res").append("<p>다른 궁금하신 사항은 댓글로 남겨주시기 바랍니다.<br>감사합니다.</p>");
 				$("#aswDate").html(formatDate(Date(data.board.asw_date)));
 				$("#aswWriter").html(data.board.asw_writer);
 				offAsw();
@@ -230,8 +239,62 @@ function formatDate(date) {
 }
 function onComment(){
 	console.log("댓글 열림");
+	$("#switch").val("on");
+	var qnaNo = $("#qnaNo").text();
+	dataArr ={"qnaNo":qnaNo,"word":"get"};
+	$.ajax({
+		type:"post"
+		,url:"/qna/view"
+		,data:dataArr
+		,dataType:"json"
+		,success:function(data){
+			printComments(data);
+		}
+		,error:function(){
+			alert("댓글 열람 오류");
+		}	
+	});
 }
 
+function addComment(){
+	var content = $("#commentContent").val();
+	var qnaNo = $("#qnaNo").text();
+	<% if(request.getSession().getAttribute("adminLogin") != null){%>	
+	console.log("관리자");
+	var id = "관리자_"+$("#code").val();
+	var writer = $("#writer").val();
+	<% } %>
+	<% if(request.getSession().getAttribute("login") != null){%>
+	console.log("사용자");
+	var id = $("#id").val();
+	var writer = $("#name").val();
+	<% } %>
+	
+	dataArr = {"qnaNo":qnaNo,"content":content,"id":id,"writer":writer,"word":"add"}
+	console.log(dataArr);
+	$.ajax({
+		type:"post"
+		,url:"/qna/view"
+		,data : dataArr
+		,dataType : "json"
+		,success : function(data){
+			console.log(data);
+			$("#commentCnt").html("댓글 목록("+data.commentCnt+")");
+			if($("#switch").val()=="on"){
+				printComments(data);
+			}
+		}
+		,error : function(){
+			alert("댓글 쓰기 오류")
+		}		
+	});
+}
+function printComments(data){
+	$(data.comments).each(function(){
+		
+		$("#commentsBox").append();
+	});
+}
 function onSe(){
 	nhn.husky.EZCreator.createInIFrame({
     	oAppRef: oEditors,

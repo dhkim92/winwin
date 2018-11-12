@@ -16,12 +16,12 @@
 <div class="container">
 <div class="container">
 	<div class="col-12 mt-5">
-		<p class="font-weight-bold h3">해당 페이지의 요청 권한이 없습니다</p>
+		<p class="font-weight-bold h3"><i class="fas fa-exclamation-triangle mr-2"></i>해당 페이지의 요청 권한이 없습니다</p>
 		<hr style="border: solid #376092;">
 		로그인 정보와 게시판 정보가 일치하지 않습니다.<br>
 		로그인 정보를 다시 한번 확인해 보세요.<br><br>
-		<a href="/qna/view?qnaNo=${board.qnaNo }">게시글로 이동</a><br>
-		<a href="/qna/list">목록으로</a><br>
+		<i class="far fa-hand-point-right mr-2"></i><a href="/qna/view?qnaNo=${board.qnaNo }">게시글로 이동</a><br>
+		<i class="far fa-hand-point-right mr-2"></i><a href="/qna/list">목록으로</a><br>
 	</div>
 </div>
 </div>
