@@ -166,7 +166,7 @@ $(document).ready(function() {
                   	</select>
                   </td>
                   <td class="align-middle"><input type="text" class="language" id="score" name="langArr[0].score" /></td>
-                  <td class="align-middle"><input type="date" class="language" id="lDate" name="langArr[0].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
+                  <td class="align-middle"><input type="date" class="language languageDate" id="lDate" name="langArr[0].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
                   <td class="align-middle"><input type="text" class="language" id="lOrgan" name="langArr[0].lOrgan" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
@@ -421,7 +421,7 @@ $(document).ready(function() {
 	})
 	
 	function addLangForm(i) {
-		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" class="language" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" class="language" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" class="language" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" class="language" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" class="language" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" class="language" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" class="language" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" class="language" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" class="language languageDate" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" class="language" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -621,7 +621,7 @@ $('#Btn').click(function() {
 			checkLang++;
 		}
 	}
-	
+		
 	console.log("checkLang : " + checkLang);
 	
 	//자격증 null validation _ class="license"
@@ -711,7 +711,55 @@ $('#Btn').click(function() {
 	console.log("checkPort : "+ checkPort);
 
 	
-	$('#career').submit();
+	
+	//-----------------------------------------------
+	
+	if(checkLang!=langVal.length && checkLang!=0) {
+		console.log("어학정보 빈칸있음");
+		alert("어학정보 항목을 모두 입력해주십시오.");
+	} else if(checkLic!=licVal.length && checkLic!=0) {
+		console.log("자격사항 빈칸있음");
+		alert("자격사항 항목을 모두 입력해주십시오.");		
+	} else if(checkCar!=carVal.length && checkCar!=0) {
+		console.log("회사경력 빈칸있음");
+		alert("회사경력 항목을 모두 입력해주십시오.");		
+	} else if(checkAct!=actVal.length && checkAct!=0) {
+		console.log("사회봉사 빈칸있음");
+		alert("사회봉사활동 항목을 모두 입력해주십시오.");		
+	} else if(checkExp!=expVal.length && checkExp!=0) {
+		console.log("연수경험 빈칸있음");
+		alert("연수경험 항목을 모두 입력해주십시오.");		
+	} else if(checkPort!=portVal.length && checkPort!=0) {
+		console.log("첨부파일 빈칸있음");
+		alert("첨부파일 항목을 모두 입력해주십시오.");		
+	} else {
+		langOk = true;
+		licOk = true;
+		carOk = true;
+		actOk = true;
+		expOk = true;
+		portOk = true;
+	}
+	
+	if(langOk == true && licOk == true && carOk == true && actOk == true && expOk == true && portOk == true){
+		var langCheck = false;
+		var licCheck = false;
+		var carCheck = false;
+		var actCheck = false;
+		var expCheck = false;
+		
+		var langDate = document.getElementsByClassName("languageDate");
+		for(var i=0; i<langDate.length;i++) {
+			var languageDate = langDate[i].value;
+			console.log("languageDate : " + languageDate);
+		}
+	}
+	
+	//-----------------------------------------------
+	
+	
+	
+// 	$('#career').submit();
 });
 
 $("#dgsdg").on("click", "대상", function() {
