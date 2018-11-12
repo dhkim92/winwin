@@ -29,30 +29,28 @@ public class ResultBoardController {
 	@RequestMapping(value = "/result/list", method = RequestMethod.GET)
 	public void list(Model model) {
 		
-		int curPage = 1;
+//		int curPage = 1;
 		List<JobopenBasic> title = service.getTitle();
 		
-		model.addAttribute("curPage", curPage);
+//		model.addAttribute("curPage", curPage);
 		model.addAttribute("title", title);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/result/search")
-	public Map<String, Object> listProcess(@RequestParam(required = false, defaultValue = "1") int curPage,
-			@RequestParam(required = false, defaultValue = "20") int listCount,
+	public Paging listProcess(@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "20") int limit,
 			@RequestParam(required = false, defaultValue = "5") int pageCount,
 			Map<String, Object> param) {
-		
-		Map<String, Object> map = new HashMap<>();
 
-		Paging paging = service.getPaging(curPage, listCount, pageCount, param);
+		Paging paging = service.getPaging(page, limit, pageCount, param);
 
 		List<SupportBoard> resultlist = service.resultlist(paging, param);
 		
-		map.put("paging", paging);
-		map.put("list", resultlist);
+		paging.setList(resultlist);
 		
-		return map;
+		return paging;
+		
 	}
 
 	@RequestMapping(value = "/result/send", method = RequestMethod.GET)

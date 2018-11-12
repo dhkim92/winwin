@@ -123,6 +123,7 @@
 			credit 			: $('#credit option:selected').val(), //학점
 			language 		: $('#language option:selected').val(), //토익
 			status 			: $('#status option:selected').val(), //처리상태
+// 			title			: $('#title').val(),
 			page 			: page,
 			limit 			: limit,
 			pageCount 		: pageCount,
@@ -174,12 +175,12 @@
 					$('#eName').text(result.eName);
 					$('#userId').text(result.userId);
 					$('#birth').text(result.birth);
-					$('#address').text(result.zipCode +  ', ' + result.address + ', ' + result.addressDetail);
+					$('#address').text(result.zipCode +  ', \t' + result.address + ', \t' + result.addressDetail);
 					$('#phoneNum').text(result.phoneNum);
 					$('#phone').text(result.phone);
-					$('#hsName').text(result.hsName + result.hsDay);
+					$('#hsName').text(result.hsName + '\t' + result.hsDay);
 					$('#hsMajor').text(result.hsMajor);
-					$('#hsEndDate').text(result.hsEndDate + result.hsGraduate);
+					$('#hsEndDate').text(result.hsEndDate + '\t' + result.hsGraduate);
 					$('#hsRegion').text(result.hsRegion);
 					$('#discharge').text(result.discharge);
 					$('#startDate').text(result.startDate + '~' + result.endDate);
@@ -195,16 +196,10 @@
 				});
 				
 				$('#checkModal').show();
-				//titleModal();
+				titleModal();
 			});
 		});
 	}
-
-	//페이징 버튼 클릭 시
-	$('.container .container').on("click", '.page-link', function() {
-		var curPage = $(this).attr('data-curpage');
-		supportList(curPage);
-	});
 
 	function portModal() {
 		// Get the modal

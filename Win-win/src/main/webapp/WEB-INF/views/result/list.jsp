@@ -83,7 +83,13 @@
 			</div>
 		</div>
 
-		<%@ include file="../util/supportpaging.jsp"%>
+		<div class="row">
+			<div class="col-12 d-flex justify-content-center">
+				<ul class="pagination" id="resultPagination">
+				</ul>
+			</div>
+		</div>
+<%-- 		<%@ include file="../util/supportpaging.jsp"%> --%>
 
 	</div>
 </div>
@@ -93,26 +99,29 @@
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
+	var page = 1; //현재 페이지
+	var limit = 20; //목록 갯수
+	var pageCount = 5; //페이지 수
 
-$(document).ready(function(){
-	resultList(${curPage});
-});
-
-
-function resultList(curPage) {
+	$(function() {
+		resultList(page);
+	});
 	
-	console.log(curPage)
-	
+function resultList(page) {
+	if (!page) {
+		page = 1;
+	}
+		
 	var param = {
-			curPage	: curPage
+			pass				: $('#pass').val(),
+			disqualification	: $('disqualification').val(),
+			page 				: page,
+			limit 				: limit,
+			pageCount 			: pageCount,
 	};
-	
-	console.log(param);
 	
 	//ajax 호출
 	$.getJSON('/result/search', param, function (result) {
-		
-		console.log(result.list);
 		
 		if (result) {
 			//목록 초기화
@@ -130,24 +139,81 @@ function resultList(curPage) {
 					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.emailSend + '</button></td>';
 					html += '</tr>';
 					
-					
-					
-					
 				$('#resultTable tbody').append(html);
-				
-				
 			});
 			
+			if (result.list.length == 0) {
+				$('#resultTable tbody').append('<tr><td colspan="7" class="text-center">정보가 없습니다.</td></tr>');
+			}
 		}
+		
+		//paging
+		paging(page, limit, result.totalCount, pageCount, resultList);
+			
+		});
+	}
+//ajax 페이징 처리 함수
+function paging (page, limit, totalCount, pageCount, callback) {
+	var firstPage 	= 1;
+	var lastPage 	= Math.ceil(totalCount / limit);
+	var endPage 	= Math.ceil(Number(page / pageCount)) * pageCount;
+		endPage 	= endPage > lastPage ? lastPage : endPage;
+	var startPage 	= (endPage - pageCount) + 1;
+		startPage	= startPage < firstPage ? firstPage : startPage;
+	
+	$('#resultPagination').empty();
+	
+	var html = '';
+	//Prev 있을 때
+	if (firstPage < startPage) {
+		html += '<li id="prevBtn">';
+		html += '	<button class="page-link" data-curPage="" aria-label="Next">';
+		html += '		<span aria-hidden="true">&laquo;</span>';
+		html += '	</button>';
+		html += '</li>';	
+	}
+	
+	for (var i = startPage; i <= endPage; i++) {
+		//현재 페이지
+		if (i == page) {
+			html += '<li class="page-item active page_btn">';
+			html += '	<button class="page-link" data-curPage="' + page + '">' + page + '</button>';
+			html += '</li>';
+		} else {
+			html += '<li class="page-item page_btn">';
+			html += '	<button class="page-link" data-curPage="' + i + '">' + i + '</button>';
+			html += '</li>';
+		}
+	}
+	
+	//Next 있을 때
+	if (endPage < lastPage) {
+		html += '<li id="nextBtn">';
+		html += '	<button class="page-link" data-curPage="" aria-label="Next">';
+		html += '		<span aria-hidden="true">&raquo;</span>';
+		html += '	</button>';
+		html += '</li>';		
+	}
+	
+	$('#resultPagination').append(html);
+	
+	$('.page_btn').unbind('click').click(function () {
+		page = $(this).find('button').attr('data-curPage');
+		callback(page);
 	});
 	
+	//Prev Event
+	$('#prevBtn').unbind('click').click(function () {
+		page = startPage == 1 ? 1 : startPage - 1;
+		callback(page);
+	});
+	
+	//Next Event
+	$('#nextBtn').unbind('click').click(function () {
+		page = endPage + 1;
+		callback(page);
+	});
 }
-
-//페이징 버튼 클릭 시
-$('.container .container').on("click", '.page-link', function() {
-	var curPage = $(this).attr('data-curpage');
-	resultList(curPage);	
-});
 
 //체크박스 전체 선택하기, 해제하기
 $("#resultTable").on("click", "[name=checkAll]", function(){
