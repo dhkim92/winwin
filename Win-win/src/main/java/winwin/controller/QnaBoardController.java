@@ -37,7 +37,7 @@ public class QnaBoardController {
 		
 		//관리자 초기 로그인 값
 		HttpSession session =  req.getSession();
-//		session.setAttribute("adminLogin", true);
+		session.setAttribute("adminLogin", true);
 		session.setAttribute("admincode", "444444");
 		session.setAttribute("adminname", "이현우");
 		
@@ -105,6 +105,12 @@ public class QnaBoardController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(value="/qna/error", method=RequestMethod.GET)
+	public void error(QnaBoard board, Model m) {
+		m.addAttribute("board",board);
+	}
+	
 	
 	@RequestMapping(value="/qna/delete", method=RequestMethod.GET)
 	public void delete(QnaBoard board,HttpServletResponse resp) {

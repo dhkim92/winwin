@@ -11,7 +11,8 @@
 
 	<interceptors>
 		<interceptor>
-			<mapping path="/qna/**" />
+			<mapping path="/qna/update" />
+			<mapping path="/qna/delete" />
 			<beans:bean class="winwin.interceptor.QnaInterceptor" />			
 		</interceptor>
 	</interceptors>
