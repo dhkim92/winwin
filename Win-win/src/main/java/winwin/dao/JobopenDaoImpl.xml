@@ -57,7 +57,7 @@
   	
 	<select id="CountBasic" resultType="int">
 		SELECT COUNT(*) CNT FROM (
-		 SELECT * FROM jobopenbasic
+		 SELECT * FROM jobopenbasic where status in ('채용 중', '결과 발표') and display=1
 		) CNT
 	</select>
 	
