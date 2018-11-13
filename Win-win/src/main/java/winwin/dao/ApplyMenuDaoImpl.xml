@@ -6,13 +6,13 @@
   
 <mapper namespace="winwin.dao.ApplyMenuDao">
 	<select id="getJobopenBasic" resultType="winwin.dto.JobopenBasic">
-		SELECT jobopenno, title, enddate, allopen, offer FROM JobOpenBasic
+		SELECT jobopenno, title, enddate, allopen, offer, status FROM JobOpenBasic
 		WHERE offer like '%신입%'
 		ORDER BY jobopenno DESC
 	</select>
 	
 	<select id="getJobopenBasic2" resultType="winwin.dto.JobopenBasic">
-		SELECT jobopenno, title, enddate, allopen, offer FROM JobOpenBasic
+		SELECT jobopenno, title, enddate, allopen, offer, status FROM JobOpenBasic
 		WHERE offer like '%경력%'
 		ORDER BY jobopenno DESC
 	</select>

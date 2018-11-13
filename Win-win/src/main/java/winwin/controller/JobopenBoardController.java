@@ -32,6 +32,8 @@ public class JobopenBoardController {
 		Paging paging = jobopenService.getPaging(curPage, listCount, pageCount);
 		model.addAttribute("paging", paging);
 		
+		String status = "메인";
+		paging.setStatus(status);
 		List<JobopenBasic> list = jobopenService.selectBasic(paging);
 		model.addAttribute("list", list);
 	}

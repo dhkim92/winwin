@@ -64,6 +64,12 @@
 		    modal.style.display = "block";
 		});
 		
+		$("table").on("click", ".liCancel", function() {
+			$("#iDiv").text($(this).attr('data-idx'));
+			var index = $("#iDiv").text();
+			$('#selectLicense'+index).val("");	
+		});
+		
 // 		for(var i=0; i<btn.length; i++) {
 // 			btn[i].onclick = function() {
 // 	 		    modal.style.display = "block";
@@ -108,7 +114,7 @@
 
 			
 	});	
-	
+
 </script>
 
 </head>

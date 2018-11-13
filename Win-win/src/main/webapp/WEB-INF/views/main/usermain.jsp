@@ -69,20 +69,11 @@
 					</c:if>	
 				</td>
 				<td>
-					<c:if test="${JobopenBasic.allOpen ne '0'}">
+					<c:if test="${JobopenBasic.status eq '채용 중' || JobopenBasic.allOpen ne '0'}">
 						<span class="badge badge-pill badge-primary  font-weight-bold">채용중</span>
 					</c:if>
-					
-					<jsp:useBean id="now" class="java.util.Date"/>
-					
-					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-					<fmt:formatDate value="${JobopenBasic.endDate }" pattern="yyyy-MM-dd" var="endDay"/>
-					
-					<c:if test="${today > endDay}">
-						<span class="badge badge-pill badge-secondary  font-weight-bold">채용완료</span>
-					</c:if>
-					<c:if test="${today <= endDay}">
-						<span class="badge badge-pill badge-primary  font-weight-bold">채용중</span>
+					<c:if test="${JobopenBasic.status eq '결과 발표'}">
+						<span class="badge badge-pill badge-secondary  font-weight-bold">결과발표</span>
 					</c:if>
 				</td>
 			</tr>

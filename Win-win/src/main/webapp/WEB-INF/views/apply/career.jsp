@@ -192,7 +192,7 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" class="license" id="selectLicense0" name="licArr[0].liName" class="mr-1" style="width:200px" /><input class="licenseAPI" data-idx="0" type="button" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td>
+                  <td class="align-middle"><input type="text" class="license" id="selectLicense0" name="licArr[0].liName" class="mr-1" style="width:200px" /><input class="licenseAPI" data-idx="0" type="button" style="margin-right: 3px;" value="검색"/><input id="liCancel0" data-idx="0" type="button" value="취소"/></td>
                   <td class="align-middle"><input type="date" class="license licenseDate" name="licArr[0].liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
                   <td class="align-middle"><input type="text" class="license" name="licArr[0].liOrgan" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
@@ -327,14 +327,14 @@ $(document).ready(function() {
                   <td class="align-middle"><input type="text" id="updateday" name="date" class="mr-1" style="width:200px;" disabled/></td>
                   <td class="align-middle"><input type="text" id="fileSize" name="filesize" class="mr-1" style="width:200px" disabled/></td>
                   <td class="align-middle"><input type="file" name="file" id="file" style="display:none"><input type="button" onclick='$("#file").click();' value="파일첨부"/></td>
-                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
+                  <td class="align-middle"><input type="button" id="DLBtn" value="삭제"/></td>
                 </tr>
-                <tr>
-                	<td colspan="8" class="text-center align-middle">파일 첨부시 파일첨부 버튼을 눌러주시기 바랍니다. 
-                	<span style="color:blue;">(최대 4개까지 가능)</span>
-                	<input type="button" name="matABtn" value="+ 추가" />
-                	</td>
-                </tr>
+<!--                 <tr> -->
+<!--                 	<td colspan="8" class="text-center align-middle">파일 첨부시 파일첨부 버튼을 눌러주시기 바랍니다.  -->
+<!--                 	<span style="color:blue;">(최대 4개까지 가능)</span> -->
+<!--                 	<input type="button" name="matABtn" value="+ 추가" /> -->
+<!--                 	</td> -->
+<!--                 </tr> -->
 			</tbody>
 		</table>
 	</div>
@@ -413,6 +413,7 @@ $(document).ready(function() {
          if( standard.length > 3 ) {
         	value.remove();
         }
+
     });
 	
 	$(document).on("click","[class=licenseAPI]",function(){
@@ -445,7 +446,7 @@ $(document).ready(function() {
  	});
 	
 	function addLiForm(i) {
-		var form = '<tr><td class="align-middle"><input type="text" class="license" id="selectLicense'+i+'" name="licArr['+i+'].liName" class="mr-1" style="width:200px" /><input class="licenseAPI" type="button" data-idx="'+i+'" style="margin-right: 3px;" value="검색"/><input id="liCancel" type="button" value="취소"/></td><td class="align-middle"><input type="date" class="license licenseDate" name="licArr['+i+'].liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" class="license" name="licArr['+i+'].liOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td class="align-middle"><input type="text" class="license" id="selectLicense'+i+'" name="licArr['+i+'].liName" class="mr-1" style="width:200px" /><input class="licenseAPI" type="button" data-idx="'+i+'" style="margin-right: 3px;" value="검색"/><input class="liCancel" type="button" data-idx="'+i+'" value="취소"/></td><td class="align-middle"><input type="date" class="license licenseDate" name="licArr['+i+'].liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" class="license" name="licArr['+i+'].liOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -543,33 +544,43 @@ $(document).ready(function() {
     	}
  	});
 	
+	$("#DLBtn").click(function(){
+		
+		$("#extFile").val("");
+		$("#originFile").val("");
+		$("#updateday").val("");
+		$("#fileSize").val("");
+		$("#file").val("");
+		
+	});
 	
-	function addMatForm(i) {
-		var form = '<tr><td class="align-middle"><input type="text" id="extFile" name="matArr['+i+'].extName" class="mr-1" style="width:150px;" disabled/></td><td class="align-middle"><input type="text" id="originFile" name="matArr['+i+'].originName" class="mr-1" style="width:300px;" disabled/></td><td class="align-middle"><input type="text" name="matArr['+i+'].date" class="mr-1" style="width:200px;" disabled/></td><td class="align-middle"><input type="text" id="fileSize" name="matArr['+i+'].filesize" class="mr-1" style="width:200px" disabled/></td><td class="align-middle"><input type="file" name="file" id="file'+i+'" style="display:none"><input type="button" onclick="$("#file'+i+'").click();" value="파일첨부"/></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
-		return form;
-	}
 	
-	var i=1;
-	$(document).on("click","[name=matABtn]",function(){
+// 	function addMatForm(i) {
+// 		var form = '<tr><td class="align-middle"><input type="text" id="extFile" name="matArr['+i+'].extName" class="mr-1" style="width:150px;" disabled/></td><td class="align-middle"><input type="text" id="originFile" name="matArr['+i+'].originName" class="mr-1" style="width:300px;" disabled/></td><td class="align-middle"><input type="text" name="matArr['+i+'].date" class="mr-1" style="width:200px;" disabled/></td><td class="align-middle"><input type="text" id="fileSize" name="matArr['+i+'].filesize" class="mr-1" style="width:200px" disabled/></td><td class="align-middle"><input type="file" name="file" id="file'+i+'" style="display:none"><input type="button" onclick="$("#file'+i+'").click();" value="파일첨부"/></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+// 		return form;
+// 	}
+	
+// 	var i=1;
+// 	$(document).on("click","[name=matABtn]",function(){
 		
 		
-		var test = $(this).parent().parent().parent().children().eq(1);
-		var standard = $(this).parent().parent().parent().children('tr');
+// 		var test = $(this).parent().parent().parent().children().eq(1);
+// 		var standard = $(this).parent().parent().parent().children('tr');
 		
-		$.trClone = test.clone().html();
-    	$.newTr = $("<tr>"+$.trClone+"</tr>");
+// 		$.trClone = test.clone().html();
+//     	$.newTr = $("<tr>"+$.trClone+"</tr>");
     	
 		
-		var a = addMatForm(i);
+// 		var a = addMatForm(i);
 
-		if( standard.length < 6 ) {
-			test.parent().children().last().before(a);
-			i++;
-    	}
- 	});
+// 		if( standard.length < 6 ) {
+// 			test.parent().children().last().before(a);
+// 			i++;
+//     	}
+//  	});
 	
-	$("#liCancel").click(function() {
-		$('#selectLicense').val("");	
+	$('#liCancel0').click(function() {
+		$('#selectLicense0').val("");	
 	});
   
 });
@@ -693,25 +704,8 @@ $('#Btn').click(function() {
 	
 	console.log("checkExp : " + checkExp);
 	
-	//첨부파일 null validation_class="portfolio"
-	var checkPort= 0;
-	var portOk = false;
-	
-	var portVal = document.getElementsByClassName("portfolio");
-	console.log("Portfolio 갯수 : " + portVal.length);
-	
-	for(var i=0; i<portVal.length; i++) {
-		var checkVal = portVal[i].value;
-		
-		if(checkVal=="" || checkVal==null || checkVal==0) {
-			checkPort++;
-		}
-	}
-	
-	console.log("checkPort : "+ checkPort);
 
-	
-	
+
 	//-----------------------------------------------
 	
 	if(checkLang!=langVal.length && checkLang!=0) {
@@ -729,19 +723,15 @@ $('#Btn').click(function() {
 	} else if(checkExp!=expVal.length && checkExp!=0) {
 		console.log("연수경험 빈칸있음");
 		alert("연수경험 항목을 모두 입력해주십시오.");		
-	} else if(checkPort!=portVal.length && checkPort!=0) {
-		console.log("첨부파일 빈칸있음");
-		alert("첨부파일 항목을 모두 입력해주십시오.");		
 	} else {
 		langOk = true;
 		licOk = true;
 		carOk = true;
 		actOk = true;
 		expOk = true;
-		portOk = true;
 	}
 	
-	if(langOk == true && licOk == true && carOk == true && actOk == true && expOk == true && portOk == true){
+	if(langOk == true && licOk == true && carOk == true && actOk == true && expOk == true){
 		var langCheck = false;
 		var licCheck = false;
 		var carCheck = false;
@@ -873,69 +863,6 @@ $('#Btn').click(function() {
 			
 		}
 		
-
-		//사회봉사활동 검증
-		var actStartDate = document.getElementsByClassName("actStartDate");
-		var actEndDate = document.getElementsByClassName("actEndDate");
-		
-		for(var i=0; i<actStartDate.length;i++) {
-			var activitySDate = actStartDate[i].value;
-			var activityEDate = actEndDate[i].value;
-			
-			console.log("activitySDate : " + activitySDate);
-			console.log("activityEDate : " + activityEDate);
-			
-			//사회봉사 start, endDate
-			var actSDateArr = activitySDate.split('-');
-			var act_SDay = new Date(actSDateArr[0], actSDateArr[1], actSDateArr[2]);
-			console.log("act_SDay"+act_SDay);
-			
-			var actEDateArr = activityEDate.split('-');
-			var act_EDay = new Date(actEDateArr[0], actEDateArr[1], actEDateArr[2]);
-			console.log("act_EDay" + act_EDay);
-
-			//오늘날짜 
-			var now = new Date();
-			console.log(now);
-			
-			//오늘날짜 - startDate
-			var sGap = now.getTime() - act_SDay.getTime();
-			var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
-			console.log("sResult : " + sResult);
-			
-			//오늘날짜 - endDate
-			var eGap = now.getTime() - act_EDay.getTime();
-			var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
-			console.log("eResult : " + eResult);
-
-			if(sResult>30) {
-				alert("사회봉사활동의 시작일을 확인해주십시오.");
-				
-				break;
-			} else if(eResult>30) {
-				alert("사회봉사활동의 종료일을 확인해주십시오.");
-				
-				break;
-			} else {
-				
-				//endDate-startDate
-				var gap = act_EDay.getTime() - act_SDay.getTime();
-				var result = Math.floor(gap/(1000*60*60*24)) * -1;
-
-				console.log("result : " + result);
-				
-				if(result>0) {
-					alert("사회봉사활동 기간을 확인해주십시오.");
-					actCheck = false;
-					
-					break;
-				} else {
-					actCheck = true;
-				}
-				
-			}
-			
-		}
 		
 		//사회봉사활동 검증
 		var actStartDate = document.getElementsByClassName("actStartDate");
@@ -1066,7 +993,6 @@ $('#Btn').click(function() {
 		
 		
 		if(langCheck==true && licCheck==true && carCheck==true && actCheck==true && expCheck==true) {
-			
 			console.log("마지막 if");
 			$('#career').submit();
 		}

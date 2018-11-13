@@ -233,8 +233,12 @@ public class Apply2Controller {
 		mat.setUserId((String)session.getId());
 		mat.setPortfolioId(jobopenBasic.getJobopenNo());
 		
+		System.out.println("파일 이름 " + mat.getOriginName());
 		
-		apply2Service.fileUpload(mat);
+		if(mat.getOriginName()!="") {
+			
+			apply2Service.fileUpload(mat);
+		}
 		//------------------------------------
 		return "redirect:/apply/introduce?jobopenNo="+jobopenBasic.getJobopenNo();
 
