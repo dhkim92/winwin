@@ -73,7 +73,7 @@ public class ApplyMenuController {
 		
 		map.put("result1", list1);
 		map.put("result2", list2);
-		return map;		
+		return map;	
 		
 	}
 	
