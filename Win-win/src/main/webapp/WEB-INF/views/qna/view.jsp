@@ -71,8 +71,8 @@ td{
 				</p>
 				<div id="a">
 				${board.asw_content }
-				</div><br>
-				<hr style="border: dotted #376092;">
+				</div>
+				<hr class="mt-4" style="border: dotted #376092;">
 				<p>
 				답변 내용에 대해 궁금하신 사항은 댓글로 남겨주시기 바랍니다.<br>
 				감사합니다.<br><br>
@@ -113,39 +113,12 @@ td{
 	
 	<div class="col-12 mt-5" id="commentList">
 		
-		<span onclick="onComment();"><i class="far fa-comment-dots mr-2"></i><label id="commentCnt" >댓글 목록(${board.commentCnt })</label></span>	
+		<span onclick="onComment();" id="change"><i class="far fa-comment-dots mr-2"></i><label id="commentCnt">댓글 목록(${board.commentCnt })</label></span>	
 		<hr class="mt-1">
 	</div>
 	
 	<div class="d-flex justify-content-center">
 		<div class="col-11 mt-3" id="commentsBox">
-			<label><ins>댓글 쓰기</ins></label>			
-			<table class="table mb-0">
-				<tr>
-					<td width="18%" class="text-center align-middle text-primary">관리자</td>
-					<td width="2%"></td>
-					<td width="70%" class="align-middle p-0">
-						<div class="text-muted"><small>2018년 10월 11일</small></div>
-						<p class="col-12 mb-0">안녕안녕<br>반가워, 이런 ...</p>
-					</td>
-					<td width="10%" class="align-middle"><div class="col-12 text-right"><button class="btn btn-primary">삭제</button></div>
-					</td>			
-				</tr>
-			</table>
-			<table class="table mb-0">
-				<tr>
-					<td width="18%" class="content-center align-middle">
-						<div style="font-weight:bold; margin-top: -10px" class="text-center">이현우</div>
-					</td>
-					<td width="2%"></td>
-					<td width="80%">
-						<div class="text-muted"><small>2018년 10월 11일</small></div>
-						<div class="col-12">안녕안녕</div>
-						<div style="font-weight: bold;" class="col-12 text-right"><button class="btn btn-primary">삭제</button></div>
-					</td>
-				</tr>
-			</table>
-			<hr class="mt-0">
 		</div>		
 	</div>
 	
@@ -179,6 +152,11 @@ $("#btnUpdate").click(function(){
 $("#btnDel").click(function(){
 	$(location).attr("href","/qna/delete?qnaNo="+${board.qnaNo});
 });
+$("#btnDel").click(function(){
+	$(location).attr("href","/qna/delete?qnaNo="+${board.qnaNo});
+});
+
+
 function onAsw(){
 	$("#onAsw").css("display","none");
 	$("#content").css("display","block");
@@ -242,8 +220,8 @@ function addAsw(){
 			,success : function(data){			
 				$("#res").html("");
 				$("#res").append("<hr style='border: dotted #376092;'><p>[답변내용]<br><br>안녕하세요 ${board.writer }님,<br></p>");
-				$("#res").append("<div id='a'>"+data.board.asw_content+"</div><br>");
-				$("#res").append("<hr style='border: dotted #376092;''>");
+				$("#res").append("<div id='a'>"+data.board.asw_content+"</div>");
+				$("#res").append("<hr class='mt-4' style='border: dotted #376092;''>");
 				$("#res").append("<p>다른 궁금하신 사항은 댓글로 남겨주시기 바랍니다.<br>감사합니다.<br><br></p>");
 				$("#aswDate").html(formatDate(Date(data.board.asw_date)));
 				$("#aswWriter").html(data.board.asw_writer);
@@ -253,6 +231,7 @@ function addAsw(){
 				alert("처리과정에 오류가 있습니다");
 			}			
 		});
+		$("#commentContent").html("");
 	}
 }
 function formatDate(date) {
@@ -267,7 +246,6 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 function onComment(){
-	console.log("댓글 열림");
 	$("#switch").val("on");
 	var qnaNo = $("#qnaNo").text();
 	dataArr ={"qnaNo":qnaNo,"word":"get"};
@@ -283,23 +261,27 @@ function onComment(){
 			alert("댓글 열람 오류");
 		}	
 	});
+	$("#change").attr("onclick","offComment();");
 }
-
+function offComment(){
+	$("#switch").val("off");
+	$("#change").attr("onclick","onComment();");
+	$("#commentsBox").html("");
+}
 function addComment(){
 	var content = $("#commentContent").val();
 	var qnaNo = $("#qnaNo").text();
 	<% if(request.getSession().getAttribute("adminLogin")!=null){ %>
-	console.log("관리자");
 	var id = "관리자_"+$("#code").val();
 	var writer = $("#writer").val();
-	<% } %>
-	<% if(request.getSession().getAttribute("login")!=null){ %>
-	console.log("사용자");
+	<% }else if(request.getSession().getAttribute("login")!=null){ %>
 	var id = $("#id").val();
 	var writer = $("#name").val();
+	<% }else{ %>
+	alert("로그인 하셔야 합니다");
+	return;
 	<% } %>
-	
-	dataArr = {"qnaNo":qnaNo,"content":content,"id":id,"writer":writer,"word":"add"}
+	dataArr = {"qnaNo":qnaNo,"content":content,"id":id,"writer":writer,"word":"add"};
 	console.log(dataArr);
 	$.ajax({
 		type:"post"
@@ -318,23 +300,37 @@ function addComment(){
 		}		
 	});
 }
+function delComment(event){
+	var commentNo = $(event.target).next().val();
+	var qnaNo = $("#qnaNo").text();
+	var dataArr = {"qnaNo":qnaNo,"commentNo":commentNo,"word":"del"};
+	$.ajax({
+		type:"post"
+		,url:"/qna/view"
+		,data:dataArr
+		,dataType:"json"
+		,success:function(data){
+			$("#commentCnt").html("댓글 목록("+data.commentCnt+")");
+			printComments(data);
+		},error:function(){
+			alert("댓글 삭제 오류");
+		}
+	});
+}
 function printComments(data){
+	$("#commentsBox").html("");
 	$(data.comments).each(function(){
-		var strArr = this.writer.split("_");
+		var strArr = this.id.split("_");
 		var date = formatDate(Date(this.writedate));
-		console.log(this.writedate);
-		console.log(date);
 		if(strArr[0]=="관리자"){
-			var content = "<table class='table mb-0'><tr><td width='18%' class='text-center align-middle text-primary font-weight-bold'>"+"관리자"+"</td><td width='2%'></td><td width='70%' class='align-middle p-0'><div class='text-muted'><small>"+date+"</small></div><p class='col-12 mb-0'>"+this.content+"</p></td><td width='10%' class='align-middle'><div class='col-12 text-right'><button class='btn btn-primary'>삭제</button></div></td></tr></table>";
+			var content = "<table class='table table-bordered mb-0'><tr><td width='10%' class='text-center align-middle text-primary font-weight-bold'>"+"관리자"+"</td><td width='85%' class='align-middle'><div class='text-muted'><small>"+date+"</small></div><p class='col-12 mb-0'>"+this.content+"</p></td><td width='5%' class='align-middle p-2'><div class='col-12 text-right p-0'><button class='btn btn-primary' onclick='delComment(event);'>삭제</button><input type='hidden' value='"+ this.commentNo+ "'/></div></td></tr></table>";
 		}else{
-			var content = "<table class='table mb-0'><tr><td width='18%' class='text-center align-middle font-weight-bold'>"+this.writer+"</td><td width='2%'></td><td width='70%' class='align-middle p-0'><div class='text-muted'><small>"+date+"</small></div><p class='col-12 mb-0'>"+this.content+"</p></td><td width='10%' class='align-middle'><div class='col-12 text-right'><button class='btn btn-primary'>삭제</button></div></td></tr></table>";
+			var content = "<table class='table table-bordered mb-0'><tr><td width='10%' class='text-center align-middle font-weight-bold'>"+this.writer+"</td><td width='85%' class='align-middle'><div class='text-muted'><small>"+date+"</small></div><p class='col-12 mb-0'>"+this.content+"</p></td><td width='5%' class='align-middle p-2'><div class='col-12 text-right p-0'><button class='btn btn-primary' onclick='delComment(event);'>삭제</button><input type='hidden' value='"+ this.commentNo+ "'/></div></td></tr></table>";
 		}
 		$("#commentsBox").append(content);
 	});
-	var line = "<hr class='mt-0'>";
-	$("#commentsBox").append(line);
-}
 
+}
 function onSe(){
 	nhn.husky.EZCreator.createInIFrame({
     	oAppRef: oEditors,
