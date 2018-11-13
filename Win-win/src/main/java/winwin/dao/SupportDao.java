@@ -5,6 +5,7 @@ import java.util.Map;
 
 import winwin.dto.JobopenBasic;
 import winwin.dto.SupportBoard;
+import winwin.util.Paging;
 
 public interface SupportDao {
 	
@@ -12,7 +13,7 @@ public interface SupportDao {
 	public int totalCnt(Map<String, Object> param);
 	
 	// result total Count
-	public int resultCnt();
+	public int resultCnt(Map<String, Object> param);
 	
 	public List<SupportBoard> list(Map<String, Object> param);
 	
@@ -21,20 +22,8 @@ public interface SupportDao {
 	public List<SupportBoard> resultlist(Map<String, Object> param);
 	
 	public List<JobopenBasic> getTitle();
-	
-	public SupportBoard view(SupportBoard board);
-	
-	public SupportBoard Search(String search);
-	
-	public SupportBoard status(SupportBoard board);
-	
-	public SupportBoard send(SupportBoard board);
 
 	public SupportBoard emailsend(SupportBoard board);
-
-	public SupportBoard pass(SupportBoard board);
-
-	public SupportBoard selectTitle(SupportBoard board);
 
 
 }

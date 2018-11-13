@@ -3,6 +3,93 @@
 
 <%@ include file="../include/CSSLoader.jsp"%>
 
+<style>
+/* The Modal (background) */
+.modalCheck {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	/*             overflow: auto; /* Enable scroll if needed */ */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-contentCheck {
+	background-color: #fefefe;
+	margin: 5% auto; /* 15% from the top and centered */
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 1px solid #888;
+	width: 80%; /* 모달 폭 지정 */
+	height: 100%;
+	max-height: 600px;
+	overflow-y: auto;
+}
+
+.modal-footerCheck {
+	border-top: none;
+}
+/* The Close Button */
+.closeCheck {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.closeCheck:hover, .closeCheck:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+</style>
+
+<!-- The portModal -->
+<div id="portModal" class="modal">
+
+	<!-- Modal content -->
+	<div class="modal-content">
+
+		<div class="row">
+			<div class="col-6">
+				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
+			</div>
+			<div class="col-6">
+				<span class="d-flex justify-content-end mt-1"><span
+					class="close">&times;</span></span>
+			</div>
+		</div>
+		<div class="mb-3" style="height: 4px; background-color: #376092"></div>
+
+		<!-- 모달 내용 입력하는 부분 -->
+		<div>
+			<div class="mt-4">
+				<p class="font-weight-bold text-center">이메일을 발송하시겠습니까?</p>
+				<!--         <select id="license" class="js-example-basic-single" > -->
+				<!-- 		</select> -->
+			</div>
+
+			<div class="modal-footer d-flex justify-content-center">
+				<div class="row">
+					<button type="button" id="btnOk"
+						class="font-weight-bold btn btn-primary mr-2 "
+						style="background-color: #376092">확인</button>
+					<button type="button" id="btnClose"
+						class="font-weight-bold btn btn-secondary">닫기</button>
+					<!-- 				<button type="button" id="btnPass" class="font-weight-bold btn btn-primary mr-2 " style="background-color: #376092">합격</button> -->
+					<!-- 				<button type="button" id="btnCancle" class="font-weight-bold btn btn-secondary">취소</button> -->
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
 
 <%@ include file="../include/adminHeader.jsp"%>
 <div class="container">
@@ -17,26 +104,26 @@
 			<div class="col-12 mt-5">
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="checkbox" id="pass"
-						value="option1" style="width: 20px; height: 20px;"> <label
+						value="합격" style="width: 20px; height: 20px;"> <label
 						class="form-check-label font-weight-bold" for="pass"
 						style="font-size: 15px">합격</label>
 				</div>
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="checkbox"
-						id="disqualification" value="option2"
+						id="fail" value="불합격"
 						style="width: 20px; height: 20px;"> <label
-						class="form-check-label font-weight-bold" for="disqualification"
+						class="form-check-label font-weight-bold" for="fail"
 						style="font-size: 15px">불합격</label>
 				</div>
 				<div class="mt-3">
 					<select class="custom-select" style="width: 457px; height: 40px;"
-						id="living" name="living">
+						id="title" name="title">
 						<option value="0" style="width: 457px;">공고명을 선택해 주십시오!</option>
 						<c:forEach items="${title }" var="job">
 							<option value="${job.title }">${job.title }</option>
 						</c:forEach>
 					</select>
-					<button class="btn float-right btn-primary	"
+					<button class="btn float-right btn-primary" id="emailsend"
 						style="margin-right: 15px; margin-top: 3px;">이메일 보내기</button>
 				</div>
 
@@ -105,7 +192,24 @@
 
 	$(function() {
 		resultList(page);
+		
+		$('#pass').val();
+		$('#fail').val();
+		$("#title").val("0").prop("selected", true);
+		
+		$('#pass').on('click').click(function (pass) {
+			resultList(1);
+		});
+		
+		$('#fail').on('click').click(function (fail) {
+			resultList(1);
+		});
+		$('#title').unbind('click').click(function (title) {
+			resultList(1);
 	});
+});
+	
+	
 	
 function resultList(page) {
 	if (!page) {
@@ -113,12 +217,14 @@ function resultList(page) {
 	}
 		
 	var param = {
-			pass				: $('#pass').val(),
-			disqualification	: $('disqualification').val(),
+			pass				: $('#pass:checked').val(),
+			fail				: $('#fail:checked').val(),
+			title				: $('#title').val(),
 			page 				: page,
 			limit 				: limit,
 			pageCount 			: pageCount,
 	};
+	
 	
 	//ajax 호출
 	$.getJSON('/result/search', param, function (result) {
@@ -237,6 +343,47 @@ $("#resultTable").on("click", "[name=checkOne]", function() {
 		$("[name=checkAll]").prop("checked", false);
 	}
 });
+
+portModal();
+
+function portModal() {
+	// Get the modal
+	var modal = document.getElementById("portModal");
+	// Get the button that opens the modal
+	var btn = document.getElementById("emailsend");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	var btnClose = document.getElementById("btnClose");
+
+	var btnOk = document.getElementById("btnOk");
+
+	// When the user clicks on the button, open the modal 
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	btnClose.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	btnOk.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+}
 	
 </script>
 

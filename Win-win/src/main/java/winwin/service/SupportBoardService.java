@@ -11,7 +11,7 @@ public interface SupportBoardService {
 
 	public int totalCnt(Map<String, Object> param);
 	
-	public int resultCnt();
+	public int resultCnt(Map<String, Object> param);
 	
 	public List<SupportBoard> list(Paging paging, Map<String, Object> param);
 	
@@ -23,17 +23,7 @@ public interface SupportBoardService {
 	
 	public Paging getPaging(int curPage, int listCount, int pageCount, Map<String, Object> param);
 	
-	public SupportBoard view(SupportBoard board);
-	
-	public SupportBoard Search(String search);
-	
-	public SupportBoard status(SupportBoard board);
-	
-	public SupportBoard send(SupportBoard board);
+	public Paging resultPaging(int curPage, int listCount, int pageCount, Map<String, Object> param);
 
 	public SupportBoard emailsend(SupportBoard board);
-
-	public SupportBoard pass(SupportBoard board);
-
-	public SupportBoard selectTitle(SupportBoard board);
 }

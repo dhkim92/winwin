@@ -22,8 +22,8 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	}
 
 	@Override
-	public int resultCnt() {
-		return dao.resultCnt();
+	public int resultCnt(Map<String, Object> param) {
+		return dao.resultCnt(param);
 	}
 	
 	@Override
@@ -56,13 +56,11 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	}
 
 	@Override
-	public SupportBoard view(SupportBoard board) {
-		return dao.view(board);
-	}
-
-	@Override
-	public SupportBoard Search(String search) {
-		return dao.Search(search);
+	public Paging resultPaging(int curPage, int listCount, int pageCount, Map<String, Object> param) {
+		
+		int resultCount = this.resultCnt(param);	
+		Paging paging = new Paging(resultCount, curPage, listCount, pageCount);	
+		return paging;	
 	}
 	
 	@Override
@@ -71,29 +69,11 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	}
 
 	@Override
-	public SupportBoard status(SupportBoard board) {
-		return dao.status(board);
-	}
-
-	@Override
-	public SupportBoard send(SupportBoard board) {
-		return dao.send(board);
-	}
-
-	@Override
 	public SupportBoard emailsend(SupportBoard board) {
 		return dao.emailsend(board);
 	}
 
-	@Override
-	public SupportBoard pass(SupportBoard board) {
-		return dao.pass(board);
-	}
 
-	@Override
-	public SupportBoard selectTitle(SupportBoard board) {
-		return dao.selectTitle(board);
-	}
 
 
 

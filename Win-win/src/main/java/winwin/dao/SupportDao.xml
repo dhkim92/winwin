@@ -75,16 +75,18 @@
 			</if>
 			
 			<!-- 토익 -->
-			<if test="score != null and language != ''">
+			<if test="language != null and language != ''">
 				AND job.language LIKE '%' || #{language} || '%'
 			</if>
 			<!-- 처리상태 -->
-			<if test="score != null and status != ''">
+			<if test="status != null and status != ''">
 				AND sup.status LIKE '%' || #{status} || '%'
 			</if>
 			<!-- 공고명 -->
+			<if test='title != "0"'>
 			<if test="title != null and title != ''">
-				AND job.title LIKE '%' || #{title} || '%'
+				AND job.title = #{title}
+			</if>
 			</if>
  		</where>
  	</sql>
@@ -131,12 +133,18 @@
  			mil.endDate,
  			mil.mCategory,
  			mil.mGrade,
- 			lang.lName,
- 			lang.grade,
- 			lang.testName,
- 			lang.score,
- 			lang.lDate,
- 			lang.lOrgan
+ 			intro.content1,
+ 			intro.content2,
+ 			intro.content3,
+ 			intro.content4,
+ 			intro.content5
+ 			
+<!--  			lang.lName, -->
+<!--  			lang.grade, -->
+<!--  			lang.testName, -->
+<!--  			lang.score, -->
+<!--  			lang.lDate, -->
+<!--  			lang.lOrgan -->
  			
 <!--  			col.colName, -->
 <!--  			col.colBranch, -->
@@ -153,7 +161,7 @@
  			
  		FROM 
  			support sup, jobopenbasic job, userdetail usr, material mat, member mem, 
- 			highschool high, military mil, language lang
+ 			highschool high, military mil, introduce intro
 <!--  			college col -->
  			
  		WHERE
@@ -163,7 +171,8 @@
 	 		AND usr.userid = mem.userid
 	 		AND usr.userid = high.userid
 	 		AND usr.userid = mil.userid
-	 		AND usr.userid = lang.userid
+	 		AND usr.userid = intro.userid
+<!-- 	 		AND usr.userid = lang.userid -->
 <!-- 	 		AND usr.userid = col.userid -->
 	 		
 	 		AND sup.passno = #{passNo}
@@ -187,12 +196,34 @@
 			sup.jobopenno = job.jobopenno
 			AND job.jobopenno = usr.jobopenno
 			AND usr.userId = mem.userId
+
+			<choose>
+				<when test="pass != null and pass != '' and fail != null and fail != ''">
+				AND sup.pass IN ( #{pass}, #{fail} )
+				</when>
+				<when test="pass != null and pass != ''">
+				AND sup.pass = #{pass}
+				</when>
+				<when test="fail != null and fail != ''">
+				AND sup.pass = #{fail}
+				</when>
+			</choose>			
+
+			<if test='title != "0"'>
+			<if test="title != null and title != ''">
+				AND job.title = #{title}
+			</if>
+			</if>
 		</where>
+		
+			
+			<!-- 고용형태 -->
+			
 
 	</sql>
 	
 	<select id="resultlist" resultMap="Result"
-		parameterType="winwin.util.Paging">
+		parameterType="map">
 		SELECT * FROM ( SELECT rownum rnum, T.* FROM(
 		<include refid="selectResultBoard" />
 		) T ORDER BY passNo DESC ) R WHERE R.rnum BETWEEN #{startNo} AND

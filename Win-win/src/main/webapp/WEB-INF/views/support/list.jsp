@@ -123,7 +123,7 @@
 			credit 			: $('#credit option:selected').val(), //학점
 			language 		: $('#language option:selected').val(), //토익
 			status 			: $('#status option:selected').val(), //처리상태
-// 			title			: $('#title').val(),
+			title			: $('#title').val(),
 			page 			: page,
 			limit 			: limit,
 			pageCount 		: pageCount,
@@ -183,15 +183,20 @@
 					$('#hsEndDate').text(result.hsEndDate + '\t' + result.hsGraduate);
 					$('#hsRegion').text(result.hsRegion);
 					$('#discharge').text(result.discharge);
-					$('#startDate').text(result.startDate + '~' + result.endDate);
+					$('#startDate').text(result.startDate + '\t~\t' + result.endDate);
 					$('#mCategory').text(result.mCategory);
 					$('#mGrade').text(result.mGrade);
-					$('#lName').text(result.lName);
-					$('#grade').text(result.grade);
-					$('#testName').text(result.testName);
-					$('#score').text(result.score);
-					$('#lDate').text(result.lDate);
-					$('#lOrgan').text(result.lOrgan);
+// 					$('#lName').text(result.lName);
+// 					$('#grade').text(result.grade);
+// 					$('#testName').text(result.testName);
+// 					$('#score').text(result.score);
+// 					$('#lDate').text(result.lDate);
+// 					$('#lOrgan').text(result.lOrgan);
+					$('#content1').text(result.content1);
+					$('#content2').text(result.content2);
+					$('#content3').text(result.content3);
+					$('#content4').text(result.content4);
+					$('#content5').text(result.content5);
 					
 				});
 				
@@ -1005,23 +1010,23 @@ function paging (page, limit, totalCount, pageCount, callback) {
 			<h6 class="mt-5 font-weight-bold">1. 성장과정 (자신에 대한 소개)</h6>
 			<br>
 			<textarea maxlength="500"
-				style="width: 100%; resize: none; height: 250px;" readonly>${introduce.content1 }</textarea>
+				style="width: 100%; resize: none; height: 250px;" readonly id="content1"></textarea>
 			<h6 class="mt-5 font-weight-bold">2. 지원동기 및 포부</h6>
 			<br>
 			<textarea maxlength="500"
-				style="width: 100%; resize: none; height: 250px;" readonly>${introduce.content2 }</textarea>
+				style="width: 100%; resize: none; height: 250px;" readonly id="content2"></textarea>
 			<h6 class="mt-5 font-weight-bold">3. 성격의 장단점</h6>
 			<br>
 			<textarea maxlength="500"
-				style="width: 100%; resize: none; height: 250px;" readonly>${introduce.content3 }</textarea>
+				style="width: 100%; resize: none; height: 250px;" readonly id="content3"></textarea>
 			<h6 class="mt-5 font-weight-bold">4. 살아오면서 중요했던 일</h6>
 			<br>
 			<textarea maxlength="500"
-				style="width: 100%; resize: none; height: 250px;" readonly>${introduce.content4 }</textarea>
+				style="width: 100%; resize: none; height: 250px;" readonly id="content4"></textarea>
 			<h6 class="mt-5 font-weight-bold">5. 보유기술 및 경험직무 (구체적으로 기술)</h6>
 			<br>
 			<textarea maxlength="500"
-				style="width: 100%; resize: none; height: 250px;" readonly>${introduce.content5 }</textarea>
+				style="width: 100%; resize: none; height: 250px;" readonly id="content5"></textarea>
 
 		</div>
 

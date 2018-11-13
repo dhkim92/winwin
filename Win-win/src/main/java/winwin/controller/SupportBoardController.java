@@ -52,6 +52,8 @@ public class SupportBoardController {
 			@RequestParam(required = false, defaultValue = "5") int pageCount,
 			@RequestParam Map<String, Object> param) {
 		
+		
+		
 		Paging paging = service.getPaging(page, limit, pageCount, param);
 		
 		List<SupportBoard> list = service.list(paging, param);
@@ -67,11 +69,5 @@ public class SupportBoardController {
 		SupportBoard detail = service.detail(param);
 		
 		return detail;
-	}
-
-	@RequestMapping(value = "/support/status", method = RequestMethod.GET)
-	public SupportBoard status(SupportBoard board) {
-
-		return board;
 	}
 }
