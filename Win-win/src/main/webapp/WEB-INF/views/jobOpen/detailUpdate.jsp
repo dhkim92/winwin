@@ -398,7 +398,6 @@ $("#btnCancel").click(function(){
 });
 
 var j=1;
-console.log("${detail[1].sector}");
 
 
 </script>

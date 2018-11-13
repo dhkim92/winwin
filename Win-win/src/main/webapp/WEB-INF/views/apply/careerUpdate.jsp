@@ -145,31 +145,44 @@ $(document).ready(function() {
 					<th class="text-center align-middle">주관처</th>
 					<th class="text-center align-middle">삭제</th>
 				</tr>
-				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" id="lName" name="langArr[0].lName" value="영어" style="width:80px;" readonly/></td>
-                  <td>
-                  	<select style="height:25px; width:70px;" class="language" id="grade" name="langArr[0].grade">
-                  		<option value="0">선택</option>
-                  		<option value="상">상</option>
-                  		<option value="중">중</option>
-                  		<option value="하">하</option>
-                  	</select>
-                  </td>
-                  <td>
-                  	<select style="height:26px; width:150px;" class="language" id="testName" name="langArr[0].testName">
-                  		<option value="0">선택</option>
-                  		<option value="TOEIC">TOEIC</option>
-                  		<option value="TOEFL">TOEFL</option>
-                  		<option value="TEPS">TEPS</option>
-                  		<option value="TOEIC Speaking">TOEIC Speaking</option>
-                  		<option value="OPIc">OPIc</option>
-                  	</select>
-                  </td>
-                  <td class="align-middle"><input type="text" class="language" id="score" name="langArr[0].score" /></td>
-                  <td class="align-middle"><input type="date" class="language languageDate" id="lDate" name="langArr[0].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
-                  <td class="align-middle"><input type="text" class="language" id="lOrgan" name="langArr[0].lOrgan" /></td>
-                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
-                </tr>
+				
+				<c:set var="i" value="0"/>
+				<c:forEach items="${language }" var="lang">
+					<tr style="line-height: 0.8em; height:10px;">
+	                  <td class="align-middle"><input type="text" id="lName" name="langArr[${i }].lName" value="영어" style="width:80px;" readonly/></td>
+	                  <td>
+	                  	<select style="height:25px; width:70px;" class="language" id="grade" name="langArr[${i }].grade">
+	                  		<option value="0">선택</option>
+	                  		<option value="상">상</option>
+	                  		<option value="중">중</option>
+	                  		<option value="하">하</option>
+	                  	</select>
+			                  	<script>
+			                  		$('select option[value="${lang.grade}"]:eq(${i})').prop("selected",true);
+			                  	</script>
+	                  </td>
+	                  <td>
+	                  	<select style="height:26px; width:150px;" class="language" id="testName" name="langArr[${i }].testName">
+	                  		<option value="0">선택</option>
+	                  		<option value="TOEIC">TOEIC</option>
+	                  		<option value="TOEFL">TOEFL</option>
+	                  		<option value="TEPS">TEPS</option>
+	                  		<option value="TOEIC Speaking">TOEIC Speaking</option>
+	                  		<option value="OPIc">OPIc</option>
+	                  	</select>
+	                  			<script>
+	                  				$('select option[value="${lang.testName}"]:eq(${i})').prop("selected", true);
+	                  			</script>
+	                  	
+	                  </td>
+	                  <td class="align-middle"><input type="text" class="language" id="score" name="langArr[${i } ].score" value=${lang.score } /></td>
+	                  <td class="align-middle"><input type="date" class="language languageDate" id="lDate" name="langArr[${i }].lDate" value="${lang.lDate }" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
+	                  <td class="align-middle"><input type="text" class="language" id="lOrgan" name="langArr[${i }].lOrgan" value="${lang.lOrgan }" /></td>
+	                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
+	                </tr>
+	                <c:set var="i" value="${i+1 }"/>
+                </c:forEach>
+                
                 <tr>
                 	<td colspan="7" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
