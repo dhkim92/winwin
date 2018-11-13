@@ -3,7 +3,8 @@
 <%@ include file="../include/CSSLoader.jsp"%>
 
 <link rel="stylesheet" href="/resources/jobopen.css" />
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <%@ include file="../include/adminHeader.jsp"%>
 
 
@@ -137,9 +138,9 @@
 			    			<a id="openCheck" style="cursor:pointer; text-decoration: underline;" class="m-2 text-black-50">날짜 지정하기</a>
 			    			<!-- 날짜지정 지웠다 켜졌다 하기 -->
 			    			<div id="open" style="visibility:hidden">
-			    				<input id="startOpen" name="startDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
+			    				<input id="startOpen" name="startDate" type="text" class="form-control input-sm openDate" readOnly style="height:30px; width:150px;"/>
 			    				~
-			    				<input name="endDate" name="endDate" type="date" class="form-control input-sm" style="height:30px; width:150px;"/>
+			    				<input id="endOpen" name="endDate" type="text" class="form-control input-sm openDate" readOnly style="height:30px; width:150px;"/>
 			    			</div>
 			    		</div>
 			    	</div>
@@ -189,6 +190,40 @@
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
+$(function(){
+	
+	$.datepicker.setDefaults($.datepicker.regional['ko']);
+	
+	$("#startOpen").datepicker(
+			{
+				showOn : "button", 
+				buttonImage : "/resources/image/cal.png", 
+				buttonImageOnly : true,
+				buttonText : "달력",
+				changeMonth : true,
+				changeYear : true,
+				minDate : 0,
+				maxDate : "+14d",
+				onClose:function(i){
+					$("#endOpen").datepicker("option","minDate",i);
+				}
+			});
+	
+	$("#startOpen").datepicker("option", "dateFormat", "yy-mm-dd");
+		
+	$("#endOpen").datepicker(
+			{
+				showOn : "button", 
+				buttonImage : "/resources/image/cal.png", 
+				buttonImageOnly : true, 
+				buttonText : "달력",
+				changeMonth : true,
+				changeYear : true,
+				minDate:0
+			});
+	
+	$("#endOpen").datepicker("option", "dateFormat", "yy-mm-dd");
+});
 
 $(document).ready(function(){
 	
@@ -253,6 +288,7 @@ $(document).ready(function(){
 			$('#open input').val("");
 		}
 	});
+	
 	
 	
 	

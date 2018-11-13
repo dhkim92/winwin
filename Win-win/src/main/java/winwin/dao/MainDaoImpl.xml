@@ -27,16 +27,19 @@
 	</select>
 	
 	<select id="getJobopenBasic" resultType="winwin.dto.JobopenBasic">
-		SELECT jobopenno, title FROM jobopenbasic
+		SELECT jobopenno, title FROM jobopenbasic where display=1
 		ORDER BY jobopenno DESC
 	</select>
 	
 	<select id="countSupport" resultType="winwin.dto.JobopenBasic">
-		select count(s.userid) as applicantCnt, j.title 
-		from support s
-		right outer join jobopenbasic j
-		on s.jobopenno=j.jobopenno
-		group by j.title
+	select A.* from(
+		select count(s.userid) as applicantCnt, j.title, j.display
+	    	from support s
+	    		right outer join jobopenbasic j
+	    	on s.jobopenno=j.jobopenno
+	    	group by j.title, j.display
+    	) A
+	where A.display =1
 	</select>
   
   </mapper>

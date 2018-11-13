@@ -45,7 +45,7 @@
 		WHERE RN BETWEEN #{startNo} AND #{endNo} AND status=#{status} AND display=1
 	</if>
 	<if test="status=='메인'">
-		WHERE RN BETWEEN #{startNo} AND #{endNo} and status in ('채용 중', '결과 발표')
+		WHERE RN BETWEEN #{startNo} AND #{endNo} and status in ('채용 중', '결과 발표') and display=1
 	</if>
   	</select>
   	

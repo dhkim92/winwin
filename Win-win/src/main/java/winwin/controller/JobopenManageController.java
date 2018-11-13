@@ -32,18 +32,7 @@ public class JobopenManageController {
 			@RequestParam(required=false, defaultValue="0") int curPage,
 			@RequestParam(required=false, defaultValue="15") int listCount,
 			@RequestParam(required=false, defaultValue="10") int pageCount) {			
-		
-//		
-//		Paging paging = jobopenService.getPaging(curPage, listCount, pageCount);
-//		model.addAttribute("paging", paging);
-//		
-//		List<JobopenBasic> list = jobopenService.selectBasic(paging);
-//		System.out.println("===============");
-//		logger.info(list.toString());
-//		System.out.println("===============");
-//
-//		
-//		model.addAttribute("list", list);
+
 		
 	}
 	
@@ -69,6 +58,7 @@ public class JobopenManageController {
 		
 		return paging;
 	}
+	
 	
 	@RequestMapping(value="/jo_delete", method=RequestMethod.POST)
 	public String manageDelete(int jobopenNo) {

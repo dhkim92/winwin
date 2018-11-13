@@ -24,7 +24,7 @@ td {
 		<hr style="border: solid #376092;">
 	</div>
 	<div class="mt-4">
-		<table class="table table-sm col-md-11 table-hover table-bordered" align="center">
+		<table class="table table-sm col-md-11 table-bordered"  align="center">
 			<thead class="thead-light">
 				<tr>
 					<th>공고 진행 검색</th>
@@ -33,16 +33,18 @@ td {
 			
 			<tbody>
 				<tr>
-					<td>
-						<select class="w-25 status">
+					<td class="d-flex justify-content-between">
+						<select class="w-25 status" style="height:min-content">
 							<option selected="selected">전체 확인</option>
 							<option value="채용 중">채용 중</option>
 							<option value="채용 마감">채용 마감</option>
 							<option value="결과 발표">결과 발표</option>
 							<option value="공고 종료">공고 종료</option>
 						</select>
+						<button class="bigbutton btn font-weight-bold text-white btn-lg" style="background: #376092;" onclick="location.href='/jobOpen/basicInfo'">채용 공고 등록하기</button>
 					</td>
 				</tr>
+				
 			</tbody>
 		</table>
 	
