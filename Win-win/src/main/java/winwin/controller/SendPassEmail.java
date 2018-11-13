@@ -51,7 +51,7 @@ public class SendPassEmail {
 			message.setSubject(title);
 			
 			//내용
-			message.setText(new StringBuffer().append("귀하의 합격을 진심으로 축하드립니다 \nn")
+			message.setText(new StringBuffer().append("귀하의 합격을 진심으로 축하드립니다 \n")
 					.append(content)
 					.append("<P><a href='http://localhost:8088/applyMenu/passfail'> 결과"
 							+ "확인하기</a> 링크를 통해서 "
@@ -62,7 +62,7 @@ public class SendPassEmail {
 	
 			//메세지 보내기
 			Transport.send(message);
-			System.out.println("메세지 전송 완료");
+//			System.out.println("메세지 전송 완료");
 			return true;
 			
 		} catch (AddressException e) {

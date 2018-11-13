@@ -69,9 +69,11 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	}
 
 	@Override
-	public SupportBoard emailsend(SupportBoard board) {
-		return dao.emailsend(board);
+	public void emailupdate(List<Integer> jobOpenNo, List<String> userId) {
+		dao.emailupdate(jobOpenNo, userId);
+		
 	}
+
 
 
 

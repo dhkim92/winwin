@@ -25,5 +25,5 @@ public interface SupportBoardService {
 	
 	public Paging resultPaging(int curPage, int listCount, int pageCount, Map<String, Object> param);
 
-	public SupportBoard emailsend(SupportBoard board);
+	public void emailupdate(List<Integer> jobOpenNo, List<String> userId);
 }

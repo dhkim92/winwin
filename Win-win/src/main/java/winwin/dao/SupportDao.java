@@ -23,7 +23,7 @@ public interface SupportDao {
 	
 	public List<JobopenBasic> getTitle();
 
-	public SupportBoard emailsend(SupportBoard board);
+	public void emailupdate(List<Integer> jobOpenNo, List<String> userId);
 
 
 }

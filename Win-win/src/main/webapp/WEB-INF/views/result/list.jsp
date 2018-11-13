@@ -69,7 +69,7 @@
 		<!-- 모달 내용 입력하는 부분 -->
 		<div>
 			<div class="mt-4">
-				<p class="font-weight-bold text-center">이메일을 발송하시겠습니까?</p>
+				<p class="font-weight-bold text-center" id="modalcontent"></p>
 				<!--         <select id="license" class="js-example-basic-single" > -->
 				<!-- 		</select> -->
 			</div>
@@ -147,6 +147,7 @@
 							<th class="text-center">지원자</th>
 							<th class="text-center">처리 상태</th>
 							<th class="text-center">이메일 발송</th>
+							<th hidden></th>
 							<th hidden></th>
 
 						</tr>
@@ -242,9 +243,10 @@ function resultList(page) {
 					html += '	<td class="text-center align-middle">' + item.task + '</td>';
 					html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
 					html += '	<td class="text-center align-middle username">' + item.username + '</td>';
-					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.pass + '</button></td>';
+					html += '	<td class="text-center pass"><button type="button" class="btn btn-secondary btn-sm">' + item.pass + '</button></td>';
 					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.emailSend + '</button></td>';
 					html += '	<td hidden class="userId">' + item.userId + '</td>';
+					html += '	<td hidden class="jobOpenNo">' + item.jobOpenNo + '</td>';
 					html += '</tr>';
 					
 				$('#resultTable tbody').append(html);
@@ -376,15 +378,21 @@ function portModal() {
 	btnClose.onclick = function() {
 		modal.style.display = "none";
 	}
-
-	btnOk.onclick = function() {
+	
+		$('#modalcontent').html("이메일을 전송하시겠습니까?");
+	
+		btnOk.onclick = function() {
 		var title = [];
 		var userId = [];
 		var username = [];
+		var pass = [];
+		var jobOpenNo = [];
 		
 		 var $title = $("input[name=checkOne]:checked").parents().children(".title");
 		 var $userId = $("input[name=checkOne]:checked").parents().children(".userId");
 		 var $username = $("input[name=checkOne]:checked").parents().children(".username");
+		 var $pass = $("input[name=checkOne]:checked").parents().children(".pass");
+		 var $jobOpenNo = $("input[name=checkOne]:checked").parents().children(".jobOpenNo");
 		 
 		 $title.each(function(i){
 			 title.push($(this).text());
@@ -398,12 +406,47 @@ function portModal() {
 			 username.push($(this).text()); 
 		 });
 		 
+		 $pass.each(function(i){
+			 pass.push($(this).text()); 
+		 });
+		 
+		 $jobOpenNo.each(function(i){
+			 jobOpenNo.push($(this).text()); 
+		 });
+		 
+		 	var modal = document.getElementById("portModal");
+		 	modal.style.display = "block";
+			var span = document.getElementsByClassName("close")[0];
+
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+			
+			$('#modalcontent').html("잠시만 기다려 주십시오. . . . ");
+			$('#btnClose').attr("disabled", "disabled");
+		 
 		 $.ajax({
 	         type:"post",
 	         url:"/result/emailsend",
-	         data:{"userId":userId, "title":title, "username":username},
+	         data:{"userId":userId, "title":title, "username":username, "pass":pass, "jobOpenNo":jobOpenNo},
 	         dataType:"text",
 	         success:function(data){  
+	        		var modal = document.getElementById("portModal");
+					modal.style.display = "block";
+	        		var span = document.getElementsByClassName("close")[0];
+	        		var btnClose = document.getElementById("btnClose");
+
+	        		span.onclick = function() {
+	        			modal.style.display = "none";
+	        		}
+
+	        		btnClose.onclick = function() {
+	        			modal.style.display = "none";
+	        		}
+	        		
+	        			$('#modalcontent').html("이메일 전송을 성공하였습니다.");
+	        			$("#btnClose").removeAttr("disabled");
+	        			$("#btnOk").remove();
 	         }
 	      });
 

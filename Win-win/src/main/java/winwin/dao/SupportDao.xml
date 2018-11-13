@@ -189,7 +189,8 @@
 		mem.username,
 		sup.pass,
 		sup.emailSend,
-		sup.userId
+		sup.userId,
+		sup.jobOpenNo
 		FROM
 		support sup, jobopenbasic job, userdetail usr, member mem
 

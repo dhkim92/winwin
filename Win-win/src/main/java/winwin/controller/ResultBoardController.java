@@ -62,19 +62,36 @@ public class ResultBoardController {
 	public Map<Object, Object> emailsend(
 					@RequestParam(value="userId[]") List<String> userId,
 					@RequestParam(value="title[]") List<String> title,
-					@RequestParam(value="username[]") List<String> username) {
+					@RequestParam(value="username[]") List<String> username,
+					@RequestParam(value="pass[]") List<String> pass,
+					@RequestParam(value="jobOpenNo[]") List<Integer> jobOpenNo) {
+			
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		
 		SendPassEmail SendPassEmail = new SendPassEmail();
+		SendFailEmail SendFailEmail = new SendFailEmail();
 		Mail mail = new Mail();
 		
+		System.out.println(jobOpenNo);
+		System.out.println(userId);
+		
 		for(int i=0; i<userId.size();i++) {
-			mail.setSender(userId.get(i));
-			mail.setTitle(username.get(i)+"님의 지원결과 메일입니다.");
-			mail.setContent(title.get(i));
-			
-			SendPassEmail.sendMail(mail);
+			if(pass.get(i).equals("합격")) {
+				mail.setSender(userId.get(i));
+				mail.setTitle(username.get(i)+"님의 지원결과 메일입니다.");
+				mail.setContent(title.get(i));
+				
+				SendPassEmail.sendMail(mail);
+				
+			} else if(pass.get(i).equals("불합격")) {
+				mail.setSender(userId.get(i));
+				mail.setTitle(username.get(i)+"님의 지원결과 메일입니다.");
+				mail.setContent(title.get(i));
+				
+				SendFailEmail.sendMail(mail);
+			} 
 		}
+		
 				
 		return map;
 	}
