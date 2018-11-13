@@ -255,37 +255,31 @@ public class Apply2Controller {
 		language.setUserId((String)session.getAttribute("id"));
 		language.setJobopenNo(Integer.parseInt(jobopenNo));
 		List<Language> lang = apply2Service.selectLanguage(language);
-		int langCnt = apply2Service.countLaguage(language);
 		
 		// license
 		license.setUserId((String)session.getAttribute("id"));
 		license.setJobopenNo(Integer.parseInt(jobopenNo));
 		List<License> lice = apply2Service.selectLicense(license);
-		int liceCnt = apply2Service.countLicense(license);
 		
 		// career
 		career.setUserId((String)session.getAttribute("id"));
 		career.setJobopenNo(Integer.parseInt(jobopenNo));
 		List<Career> car = apply2Service.selectCareer(career);
-		int carCnt = apply2Service.countCareer(career);
 		
 		// activity
 		activity.setUserId((String)session.getAttribute("id"));
 		activity.setJobopenNo(Integer.parseInt(jobopenNo));
 		List<Activity> act = apply2Service.selectActivity(activity);
-		int actCnt = apply2Service.countActivity(activity);
 		
 		//experience
 		experience.setUserId((String)session.getAttribute("id"));
 		experience.setJobopenNo(Integer.parseInt(jobopenNo));
 		List<Experience> exp = apply2Service.selectExperience(experience);
-		int expCnt = apply2Service.countExperience(experience);
 		
 		//material
 		material.setUserId((String)session.getAttribute("id"));
 		material.setPortfolioId(Integer.parseInt(jobopenNo));
 		List<Material> mat = apply2Service.selectMaterial(material);
-		int matCnt = apply2Service.countMaterial(material);
 		
 		model.addAttribute("language",lang);
 		model.addAttribute("license", lice);
@@ -294,12 +288,6 @@ public class Apply2Controller {
 		model.addAttribute("experience", exp);
 		model.addAttribute("material", mat);
 		
-		model.addAttribute("languageCnt",langCnt);
-		model.addAttribute("licenseCnt", liceCnt);
-		model.addAttribute("careerCnt", carCnt);
-		model.addAttribute("activityCnt", actCnt);
-		model.addAttribute("experienceCnt", expCnt);
-		model.addAttribute("materialCnt", matCnt);
 	}
 
 

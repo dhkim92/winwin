@@ -204,12 +204,17 @@ $(document).ready(function() {
 					<th class="text-center align-middle">주관처</th>
 					<th class="text-center align-middle">삭제</th>
 				</tr>
-				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" class="license" id="selectLicense0" name="licArr[0].liName" class="mr-1" style="width:200px" /><input class="licenseAPI" data-idx="0" type="button" style="margin-right: 3px;" value="검색"/><input id="liCancel0" data-idx="0" type="button" value="취소"/></td>
-                  <td class="align-middle"><input type="date" class="license licenseDate" name="licArr[0].liDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
-                  <td class="align-middle"><input type="text" class="license" name="licArr[0].liOrgan" /></td>
-                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
-                </tr>
+
+				<c:set var="i" value="0"/>
+				<c:forEach items="${license }" var="lic">				
+						<tr style="line-height: 0.8em; height:10px;">
+		                  <td class="align-middle"><input type="text" class="license" id="selectLicense0" name="licArr[${i }].liName" value="${lic.liName }" class="mr-1" style="width:200px" /><input class="licenseAPI" data-idx="0" type="button" style="margin-right: 3px;" value="검색"/><input id="liCancel0" data-idx="0" type="button" value="취소"/></td>
+		                  <td class="align-middle"><input type="date" class="license licenseDate" name="licArr[${i }].liDate" value="${lic.liDate }" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
+		                  <td class="align-middle"><input type="text" class="license" name="licArr[${i }].liOrgan" value="${lic.liOrgan }" /></td>
+		                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
+		                </tr>
+	                <c:set var="i" value="${i+1 }"/>
+                </c:forEach>                
                 <tr>
                 	<td colspan="7" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
@@ -234,16 +239,22 @@ $(document).ready(function() {
 					<th class="text-center align-middle">퇴직사유</th>
 					<th class="text-center align-middle">삭제</th>
 				</tr>
-				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="date" class="career carStartDate" name="carArr[0].cStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="date" class="career carEndDate" name="carArr[0].cEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="text" class="career" name="carArr[0].cName" class="mr-1" style="width:100px" /></td>
-                  <td class="align-middle"><input type="text" class="career" name="carArr[0].position" class="mr-1" style="width:50px" /></td>
-                  <td class="align-middle"><input type="text" class="career" name="carArr[0].task" class="mr-1" style="width:100px" /></td>
-                  <td class="align-middle"><input type="text" class="career" name="carArr[0].salary" class="mr-1" style="width:100px" /></td>
-                  <td class="align-middle"><input type="text" class="career" name="carArr[0].cContent" class="mr-1" style="width:300px" /></td>
-                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
-                </tr>
+				
+				<c:set var="i" value="0"/>
+				<c:forEach items="${career }" var="car">				
+						<tr style="line-height: 0.8em; height:10px;">
+		                  <td class="align-middle"><input type="date" class="career carStartDate" name="carArr[${i }].cStartDate" value="${car.cStartDate}" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+		                  <td class="align-middle"><input type="date" class="career carEndDate" name="carArr[${i }].cEndDate" value="${car.cEndDate}" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+		                  <td class="align-middle"><input type="text" class="career" name="carArr[${i }].cName" value="${car.cName}" class="mr-1" style="width:100px" /></td>
+		                  <td class="align-middle"><input type="text" class="career" name="carArr[${i }].position" value="${car.position}" class="mr-1" style="width:50px" /></td>
+		                  <td class="align-middle"><input type="text" class="career" name="carArr[${i }].task" value="${car.task}" class="mr-1" style="width:100px" /></td>
+		                  <td class="align-middle"><input type="text" class="career" name="carArr[${i }].salary" value="${car.salary}" class="mr-1" style="width:100px" /></td>
+		                  <td class="align-middle"><input type="text" class="career" name="carArr[${i }].cContent" value="${car.cContent}" class="mr-1" style="width:300px" /></td>
+		                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
+		                </tr>
+	                <c:set var="i" value="${i+1 }"/>
+                </c:forEach>                
+                
                 <tr>
                 	<td colspan="8" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
@@ -265,13 +276,19 @@ $(document).ready(function() {
 					<th class="text-center align-middle">설명</th>
 					<th class="text-center align-middle">삭제</th>
 				</tr>
-				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" class="activity" name="actArr[0].aName" class="mr-1" style="width:250px" /></td>
-                  <td class="align-middle"><input type="date" class="activity actStartDate" name="actArr[0].aStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="date" class="activity actEndDate" name="actArr[0].aEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="text" class="activity" name="actArr[0].aContent" class="mr-1" style="width:350px" /></td>
-                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
-                </tr>
+				
+				<c:set var="i" value="0"/>
+				<c:forEach items="${activity }" var="act">				
+					<tr style="line-height: 0.8em; height:10px;">
+	                  <td class="align-middle"><input type="text" class="activity" name="actArr[${i }].aName" value=${act.aName} class="mr-1" style="width:250px" /></td>
+	                  <td class="align-middle"><input type="date" class="activity actStartDate" name="actArr[${i }].aStartDate"  value=${act.aStartDate} max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+	                  <td class="align-middle"><input type="date" class="activity actEndDate" name="actArr[${i }].aEndDate" value=${act.aEndDate} max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+	                  <td class="align-middle"><input type="text" class="activity" name="actArr[${i }].aContent" value=${act.aContent} class="mr-1" style="width:350px" /></td>
+	                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
+	                </tr>
+	                <c:set var="i" value="${i+1 }"/>
+                </c:forEach>                
+                
                 <tr>
                 	<td colspan="8" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
@@ -294,23 +311,32 @@ $(document).ready(function() {
 					<th class="text-center align-middle">설명</th>
 					<th class="text-center align-middle">삭제</th>
 				</tr>
-				<tr style="line-height: 0.8em; height:10px;">
-                  <td>
-                  <select style="height:25px; width:80px;" class="experience" name="expArr[0].eOption">
-                  		<option value="0">선택</option>
-                  		<option value="봉사">봉사</option>
-                  		<option value="수상경력">수상경력</option>
-                  		<option value="어학연수">어학연수</option>
-                  		<option value="TOEIC Speaking">인턴</option>
-                  		<option value="기타">기타</option>
-                  	</select>
-                  </td>
-                  <td class="align-middle"><input type="text" class="experience" name="expArr[0].eOrgan" class="mr-1" style="width:250px" /></td>
-                  <td class="align-middle"><input type="date" class="experience expStartDate" name="expArr[0].eStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="date" class="experience expEndDate" name="expArr[0].eEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-                  <td class="align-middle"><input type="text" class="experience" name="expArr[0].eContent" class="mr-1" style="width:350px" /></td>
-                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
-                </tr>
+				
+				<c:set var="i" value="0"/>
+				<c:forEach items="${experience }" var="exp">				
+						<tr style="line-height: 0.8em; height:10px;">
+		                  <td>
+		                  <select style="height:25px; width:80px;" class="experience" name="expArr[${i }].eOption">
+		                  		<option value="0">선택</option>
+		                  		<option value="봉사">봉사</option>
+		                  		<option value="수상경력">수상경력</option>
+		                  		<option value="어학연수">어학연수</option>
+		                  		<option value="TOEIC Speaking">인턴</option>
+		                  		<option value="기타">기타</option>
+		                  	</select>
+	                  			<script>
+	                  				$('select option[value="${exp.eOption}"]:eq(${i})').prop("selected", true);
+	                  			</script>		                  	
+		                  </td>
+		                  <td class="align-middle"><input type="text" class="experience" name="expArr[${i }].eOrgan" value=${exp.eOrgan } class="mr-1" style="width:250px" /></td>
+		                  <td class="align-middle"><input type="date" class="experience expStartDate" name="expArr[${i }].eStartDate"  value=${exp.eStartDate } max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+		                  <td class="align-middle"><input type="date" class="experience expEndDate" name="expArr[${i }].eEndDate"  value=${exp.eEndDate } max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+		                  <td class="align-middle"><input type="text" class="experience" name="expArr[${i }].eContent" value=${exp.eContent } class="mr-1" style="width:350px" /></td>
+		                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
+		                </tr>
+ 	                <c:set var="i" value="${i+1 }"/>
+                </c:forEach>               
+                
                 <tr>
                 	<td colspan="8" class="text-center align-middle">항목 추가 시 버튼을 눌러주시기 바랍니다. 
                 	<span style="color:blue;">(최대 4개까지 가능)</span>
