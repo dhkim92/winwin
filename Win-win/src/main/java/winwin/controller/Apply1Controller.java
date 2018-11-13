@@ -1,7 +1,9 @@
 package winwin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,9 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import winwin.dto.Activity;
 import winwin.dto.Career;
@@ -20,6 +23,7 @@ import winwin.dto.College;
 import winwin.dto.Experience;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
+import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
 import winwin.dto.Language;
@@ -151,10 +155,39 @@ public class Apply1Controller {
 	}
 
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.POST)
-	public ModelAndView userDetailUpdateProc(UserDetail userDetail) {
+	public String userDetailUpdateProc(UserDetail userDetail, HighSchool highSchool, College college, University university, GSchool gSchool) {
 		
-//		apply1Service.updateUserDetail(userDetail);
-		return null;
+		//userDeail 업데이트
+		apply1Service.updateUserDetail(userDetail);
+		
+		//insert뷰 or update뷰 선택
+		highSchool.setJobopenNo(userDetail.getJobopenNo());
+		highSchool.setUserId(userDetail.getUserId());
+
+		college.setJobopenNo(userDetail.getJobopenNo());
+		college.setUserId(userDetail.getUserId());
+		
+		university.setJobopenNo(userDetail.getJobopenNo());
+		university.setUserId(userDetail.getUserId());
+		
+		gSchool.setJobopenNo(userDetail.getJobopenNo());
+		gSchool.setUserId(userDetail.getUserId());
+
+		int countH = apply1Service.countHighSchool(highSchool);
+		int countC = apply1Service.countCollege(college);
+		int countU = apply1Service.countUniversity(university);
+		int countG = apply1Service.countGSchool(gSchool);
+		
+		if(countH==1 || countC==1 || countU==1 || countG==1) {
+			logger.info("acaemicUpdate로 갑니다!!");
+			
+			return "redirect:/apply/academicUpdate?jobopenNo="+userDetail.getJobopenNo();
+		} else {
+			logger.info("academic으로 갈게여!!");
+			
+			return "redirect:/apply/academic?jobopenNo="+userDetail.getJobopenNo();
+		}
+		
 	}
 
 	
@@ -275,13 +308,105 @@ public class Apply1Controller {
 	}
 
 	@RequestMapping(value="/academicUpdate", method=RequestMethod.POST)
-	public ModelAndView academicUpdateProc() {
+	public String academicUpdateProc(HttpSession session ,HighSchool highSchool, College college, University university, GSchool gSchool, Military military) {
 		
-		return null;
+		logger.info("academicUpdate 활성화");
+		
+		String userId = (String)session.getAttribute("id");
+
+		if(!highSchool.getHsName().equals("")) {
+			
+			apply1Service.deleteHighSchool(highSchool);
+			apply1Service.insertHighSchool(highSchool);
+			
+			military.setUserId(highSchool.getUserId());
+			military.setJobopenNo(highSchool.getJobopenNo());
+			
+		} else {
+			apply1Service.deleteHighSchool(highSchool);
+			apply1Service.resetMemAcademic(userId);
+		}
+		
+		if(!college.getColName().equals("")) {
+			
+			apply1Service.deleteCollege(college);
+			apply1Service.insertCollege(college);
+
+			military.setUserId(college.getUserId());
+			military.setJobopenNo(college.getJobopenNo());
+		} else {
+			apply1Service.deleteCollege(college);
+			apply1Service.resetMemAcademic(userId);
+		}
+
+		if(!university.getUnivName().equals("")) {
+			
+			apply1Service.deleteUniversity(university);
+			apply1Service.insertUniversity(university);
+			
+			military.setUserId(university.getUserId());
+			military.setJobopenNo(university.getJobopenNo());
+			
+		} else {
+			apply1Service.deleteUniversity(university);
+			apply1Service.resetMemAcademic(userId);
+		}
+		
+		if(!gSchool.getGsName().equals("")) {
+			
+			apply1Service.deleteGSchool(gSchool);
+			apply1Service.insertGSchool(gSchool);
+			
+			military.setUserId(gSchool.getUserId());
+			military.setJobopenNo(gSchool.getJobopenNo());
+		} else {
+			apply1Service.deleteGSchool(gSchool);
+			apply1Service.resetMemAcademic(userId);
+		}
+		
+		
+		if(highSchool.getHsName().equals("") && college.getColName().equals("") && university.getUnivName().equals("") && gSchool.getGsName().equals("")) {
+			apply1Service.updateMemCountNone(userId);
+			
+			military.setUserId(highSchool.getUserId());
+			military.setJobopenNo(highSchool.getJobopenNo());
+		}
+		
+		
+		//member테이블에 count update
+		if(!highSchool.getHsName().equals("")) {
+			apply1Service.updateMemCountH(userId);
+		}	
+
+		if(!college.getColName().equals("")) {
+			apply1Service.updateMemCountC(userId);
+		}
+				
+		if(!university.getUnivName().equals("")) {
+			apply1Service.updateMemCountU(userId);
+		}
+		
+		if(!gSchool.getGsName().equals("")) {
+			apply1Service.updateMemCountGS(userId);
+		}
+		
+		
+		//military insert or update
+		int count = apply1Service.countMilitary(military);
+		
+		if(count==1) {
+			logger.info("militaryUpdate로 가요");
+			
+			return "redirect:/apply/militaryUpdate?jobopenNo="+highSchool.getJobopenNo();
+		} else {
+			logger.info("military로 갑니다");
+			
+			return "redirect:/apply/military?jobopenNo="+highSchool.getJobopenNo();
+		}
+
+		
 	}
 
-	
-	
 	
 	@RequestMapping(value="/military", method=RequestMethod.GET)
 	public void military(String jobopenNo, JobopenBasic jobopenBasic, HttpSession session, Model model) {
@@ -364,10 +489,176 @@ public class Apply1Controller {
 
 
 	@RequestMapping(value="/militaryUpdate", method=RequestMethod.POST)
-	public ModelAndView militaryUpdateProc(Military military) {
+	public String militaryUpdateProc(Military military, Language language, License license, Career career, Experience experience, Activity activity, Material material) {
 		
 		apply1Service.updateMilitary(military);
-		return null;
+		
+		//경력사항 insert or update
+		language.setJobopenNo(military.getJobopenNo());
+		language.setUserId(military.getUserId());
+		
+		license.setJobopenNo(military.getJobopenNo());
+		license.setUserId(military.getUserId());
+
+		career.setJobopenNo(military.getJobopenNo());
+		career.setUserId(military.getUserId());
+
+		experience.setJobopenNo(military.getJobopenNo());
+		experience.setUserId(military.getUserId());
+
+		activity.setJobopenNo(military.getJobopenNo());
+		activity.setUserId(military.getUserId());
+
+		material.setPortfolioId(military.getJobopenNo());
+		material.setUserId(military.getUserId());
+		
+		int langCount = apply1Service.countLanguage(language);
+		int licCount = apply1Service.countLicense(license);
+		int carCount = apply1Service.countCareer(career);
+		int expCount = apply1Service.countExperience(experience);
+		int actCount = apply1Service.countActivity(activity);
+		int matCount = apply1Service.countMaterial(material);
+		
+		if(langCount>0 ||licCount>0 ||carCount>0 ||expCount>0 ||actCount>0 ||matCount>0) {
+			logger.info("careerUpdate로 간다");
+			
+			return "redirect:/apply/careerUpdate?jobopenNo="+military.getJobopenNo();
+		} else {
+			logger.info("career페이지로 이동!!");
+			
+			return "redirect:/apply/career?jobopenNo="+military.getJobopenNo();
+		}
+		
 	}
 
-}
+	@RequestMapping(value="/checkUserD", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> checkuserD(HttpSession session, int jobopenNo, UserDetail userDetail) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String userId = (String)session.getAttribute("id");
+		
+		userDetail.setUserId(userId);
+		userDetail.setJobopenNo(jobopenNo);
+		
+		Object objUD = apply1Service.countUserDetail(userDetail);
+		
+		map.put("userDetail", objUD);
+		
+		return map;
+	}	
+	
+	@RequestMapping(value="/checkAca", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> checkAca(HttpSession session, int jobopenNo, HighSchool highSchool, College college, University university, GSchool gSchool) {
+		logger.info("ajax로 왔다!");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String userId = (String)session.getAttribute("id");
+		
+		highSchool.setUserId(userId);
+		highSchool.setJobopenNo(jobopenNo);
+		
+		college.setUserId(userId);
+		college.setJobopenNo(jobopenNo);
+
+		university.setUserId(userId);
+		university.setJobopenNo(jobopenNo);
+
+		gSchool.setUserId(userId);
+		gSchool.setJobopenNo(jobopenNo);
+
+		
+		Object objH = apply1Service.countHighSchool(highSchool);
+		Object objC = apply1Service.countCollege(college);
+		Object objU = apply1Service.countUniversity(university);
+		Object objG = apply1Service.countGSchool(gSchool);
+		
+		map.put("highSchool", objH);
+		map.put("college", objC);
+		map.put("university", objU);
+		map.put("gSchool", objG);
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/checkMil", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> checkMil(HttpSession session, Military military, int jobopenNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String userId = (String)session.getAttribute("id");
+		
+		military.setUserId(userId);
+		military.setJobopenNo(jobopenNo);
+		
+		Object objM = apply1Service.countMilitary(military);
+		
+		map.put("military", objM);
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/checkCar", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> checkCar(HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, Material material, int jobopenNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String userId = (String)session.getAttribute("id");
+		
+		language.setUserId(userId);
+		language.setJobopenNo(jobopenNo);
+		
+		license.setUserId(userId);
+		license.setJobopenNo(jobopenNo);
+
+		career.setUserId(userId);
+		career.setJobopenNo(jobopenNo);
+
+		activity.setUserId(userId);
+		activity.setJobopenNo(jobopenNo);
+
+		experience.setUserId(userId);
+		experience.setJobopenNo(jobopenNo);
+
+		material.setUserId(userId);
+		material.setPortfolioId(jobopenNo);
+
+		Object objLang = apply1Service.countLanguage(language);
+		Object objLic = apply1Service.countLicense(license);
+		Object objCar = apply1Service.countCareer(career);
+		Object objAct = apply1Service.countActivity(activity);
+		Object objExp = apply1Service.countExperience(experience);
+		Object objMat = apply1Service.countMaterial(material);
+		
+		map.put("language", objLang);
+		map.put("license", objLic);
+		map.put("career", objCar);
+		map.put("activity", objAct);
+		map.put("experience", objExp);
+		map.put("material", objMat);
+		
+		return map;
+	}
+	
+	
+	@RequestMapping(value="/checkIntro", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> checkIntro(HttpSession session, Introduce introduce, int jobopenNo) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String userId = (String)session.getAttribute("id");
+		
+		introduce.setUserId(userId);
+		introduce.setJobopenNo(jobopenNo);
+		
+		Object objIntro = apply1Service.countIntroduce(introduce);
+		
+		map.put("introduce", objIntro);
+		
+		return map;
+	}
+
+	
+	
+}	
+

@@ -58,23 +58,23 @@
   	</select>
   	
   	<update id="updateMemCountNone" parameterType="String">
-  		UPDATE member SET count='1' WHERE userId=#{userId}
+  		UPDATE member SET count=1 WHERE userId=#{userId}
   	</update>
 
   	<update id="updateMemCountH" parameterType="String">
-  		UPDATE member SET count='2' WHERE userId=#{userId}
+  		UPDATE member SET count=2 WHERE userId=#{userId}
   	</update>
 
   	<update id="updateMemCountC" parameterType="String">
-  		UPDATE member SET count='3' WHERE userId=#{userId}
+  		UPDATE member SET count=3 WHERE userId=#{userId}
   	</update>
 
   	<update id="updateMemCountU" parameterType="String">
-  		UPDATE member SET count='4' WHERE userId=#{userId}
+  		UPDATE member SET count=4 WHERE userId=#{userId}
   	</update>
 
   	<update id="updateMemCountGS" parameterType="String">
-  		UPDATE member SET count='5' WHERE userId=#{userId}
+  		UPDATE member SET count=5 WHERE userId=#{userId}
   	</update>
   	
 	<select id="selectHighSchool" parameterType="winwin.dto.HighSchool" resultType="winwin.dto.HighSchool">
@@ -145,6 +145,10 @@
 		SELECT count(*) FROM material WHERE userId=#{userId} AND portfolioId=#{portfolioId}
 	</select>
 	
+	<select id="countIntroduce" parameterType="winwin.dto.Introduce" resultType="int">
+		SELECT count(*) FROM introduce WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
+	</select>
+	
 	<update id="updateUserDetail" parameterType="winwin.dto.UserDetail">
 		UPDATE userDetail SET eName=#{eName}, birth=#{birth}, zipCode=#{zipCode}, address=#{address}, addressDetail=#{addressDetail}, phoneNum=#{phoneNum}, veteran=#{veteran}, disable=#{disable}, interest=#{interest}, task=#{task} WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
 	</update>
@@ -175,5 +179,25 @@
   	<update id="military" parameterType="winwin.dto.Military">
   		UPDATE military SET discharge=#{discharge}, startDate=#{startDate}, endDate=#{endDate}, mCategory=#{mCategory}, mGrade=#{mGrade} WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
   	</update>
+  	
+  	<delete id="deleteHighSchool" parameterType="winwin.dto.HighSchool">
+  		DELETE FROM highSchool WHERE jobopenNo=#{jobopenNo} AND userId=#{userId}
+  	</delete>
+  	
+  	<delete id="deleteCollege" parameterType="winwin.dto.College">
+  		DELETE FROM college WHERE jobopenNo=#{jobopenNo} AND userId=#{userId}
+  	</delete>
+  	
+  	<delete id="deleteUniversity" parameterType="winwin.dto.University">
+  		DELETE FROM university WHERE jobopenNo=#{jobopenNo} AND userId=#{userId}
+  	</delete>
 
-  </mapper>
+	<delete id="deleteGSchool" parameterType="winwin.dto.GSchool">
+		DELETE FROM gSchool WHERE jobopenNo=#{jobopenNo} AND userId=#{userId}
+	</delete>
+	
+	<update id="resetMemAcademic" parameterType="String">
+		UPDATE member SET count=1 WHERE userId=#{userId}
+	</update>
+	
+</mapper>

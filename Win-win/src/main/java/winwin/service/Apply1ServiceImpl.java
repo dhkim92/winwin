@@ -12,6 +12,7 @@ import winwin.dto.College;
 import winwin.dto.Experience;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
+import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
 import winwin.dto.Language;
@@ -226,6 +227,36 @@ public class Apply1ServiceImpl implements Apply1Service {
 	@Override
 	public int countMaterial(Material material) {
 		return dao.countMaterial(material);
+	}
+
+	@Override
+	public void deleteHighSchool(HighSchool highSchool) {
+		dao.deleteHighSchool(highSchool);
+	}
+
+	@Override
+	public void deleteCollege(College college) {
+		dao.deleteCollege(college);
+	}
+
+	@Override
+	public void deleteUniversity(University university) {
+		dao.deleteUniversity(university);
+	}
+
+	@Override
+	public void deleteGSchool(GSchool gSchool) {
+		dao.deleteGSchool(gSchool);
+	}
+
+	@Override
+	public void resetMemAcademic(String userId) {
+		dao.resetMemAcademic(userId);
+	}
+
+	@Override
+	public int countIntroduce(Introduce introduce) {
+		return dao.countIntroduce(introduce);
 	}
 
 }

@@ -8,6 +8,7 @@ import winwin.dto.College;
 import winwin.dto.Experience;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
+import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
 import winwin.dto.Language;
@@ -95,6 +96,19 @@ public interface Apply1Service {
 	public int countExperience(Experience experience);
 	
 	public int countMaterial(Material material);
+
+	public void deleteHighSchool(HighSchool highSchool);
+
+	public void deleteCollege(College college);
+	
+	public void deleteUniversity(University university);
+	
+	public void deleteGSchool(GSchool gSchool);
+
+	public void resetMemAcademic(String userId);
+
+	public int countIntroduce(Introduce introduce);
+	
 	
 	
 }

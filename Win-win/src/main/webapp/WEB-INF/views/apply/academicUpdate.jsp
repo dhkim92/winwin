@@ -144,7 +144,7 @@ $(document).ready(function() {
 		
 		if(hRegion==realHRegion) {
 			console.log("hRegion if문 입장");
-			$("#hsRegion").find("option[value="+realHRegion+"]").attr("selected", "selected");
+			$("#hsSelect").find("option[value="+realHRegion+"]").attr("selected", "selected");
 		}
 	}
 
@@ -173,7 +173,7 @@ $(document).ready(function() {
 		
 		console.log("cBranch : " + cBranch);
 		
-		if(cBranch==realCDay) {
+		if(cDay==realCDay) {
 			console.log("cDay if문 입장");
 			$("#colDay").find("option[value="+realCDay+"]").attr("selected", "selected");
 		}
@@ -324,7 +324,7 @@ $(document).ready(function() {
 		
 		console.log("gDay : " + gDay);
 		
-		if(uDay==realGDay) {
+		if(gDay==realGDay) {
 			console.log("gDay if문 입장");
 			$("#gsDay").find("option[value="+realGDay+"]").attr("selected", "selected");
 		}
@@ -400,20 +400,14 @@ $(document).ready(function() {
 
 	<h4 class="mt-4 mb-3 font-weight-bold">학력사항</h4>
 	<div class="row">
-		<a href="/apply/userDetailUpdate?jobopenNo=${jobopenBasic.jobopenNo}">
-			<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png">
-		</a>
+		<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png" onclick="checkUserD();">
 		<img class="img-fluid d-block" src="/resources/image/B_academic.png">
-		<a href="/apply/militaryUpdate?jobopenNo=${jobopenBasic.jobopenNo }">		
-			<img class="img-fluid d-block" src="/resources/image/G_military.png">
+		<img class="img-fluid d-block" src="/resources/image/G_military.png" onclick="checkMil();">
+		<img class="img-fluid d-block" src="/resources/image/G_career.png" onclick="checkCar();">
+		<img class="img-fluid d-block" src="/resources/image/G_introduce.png" onclick="checkIntro();">
+		<a href="/apply/finish?jobopeNo=${jobopenBasic.jobopenNo }">
+			<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 		</a>
-		<a href="/apply/careerUpdate?jobopenNo=${jobopenBasic.jobopenNo}">
-			<img class="img-fluid d-block" src="/resources/image/G_career.png">
-		</a>
-		<a href="/apply/introduceUpdate?jobopenNo=${jobopenBasic.jobopenNo}">
-			<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
-		</a>
-		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 	</div>
 	
 	<form action="/apply/academicUpdate" method="POST" id="acaForm" name="acaForm">
@@ -503,7 +497,7 @@ $(document).ready(function() {
                   	<input type="hidden" name="jobopenNo" id="colJobopenNo" value="${jobopenBasic.jobopenNo }" />
 					<input type="text" id="colName" name="colName" class="mr-1 colTxt colVal" style="width: 110px" value="${college.colName}" readonly/>
 					<input type="button" class="m-1 mr-1" id="colSearch" value="검색"><input type="button" class="ml-1 mr-1 cancelAPIS2" value="취소" />
-					<select style="height:24px; width:85px;" class="colselect colVal" id="colSelect" name="colBranch">
+					<select style="height:24px; width:85px;" class="colselect colVal" id="colBranch" name="colBranch">
 						<option value="0">본교/분교</option>
 						<option class="cBranchSelect" value="본교">본교</option>
 						<option class="cBranchSelect" value="분교">분교</option>
@@ -535,7 +529,7 @@ $(document).ready(function() {
                   	</select>                 	
                   </td>
                   <td class="align-middle">
-                    <select class="colselect colVal" id="colSelect" name="colRegion">
+                    <select class="colselect colVal" id="colRegion" name="colRegion">
                   		<option value="0">지역</option>
                   		<option class="cRegionSelect" value="서울">서울</option>
                   		<option class="cRegionSelect" value="인천">인천</option>
@@ -609,7 +603,7 @@ $(document).ready(function() {
                   		<option class="uTransferSelect" value="편입">편입</option>
                   	</select>
                   	<input class="univTxt univVal" type="date" id="univEndDate" name="univEndDate" value="${university.univEndDate }" min="2000-01-01" max="3000-12-31" style="height:24px; width: 120px;" />
-                   	<select style="height:24px; width: 75px;" class="univselect univVal" name="univGraduate">
+                   	<select style="height:24px; width: 75px;" class="univselect univVal" name="univGraduate" id="univGraduate">
                   		<option value="0">졸업구분</option>
                   		<option class="uGraduateSelect" value="졸업">졸업</option>
                   		<option class="uGraduateSelect" value="졸업예정">졸업예정</option>
@@ -770,6 +764,132 @@ $(document).ready(function() {
 	
 <%@ include file="../include/scriptLoader.jsp"%>
 <script>
+function checkUserD() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkUserD"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			
+			if(data.userDetail>0) {
+				location.href="/apply/userDetailUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/userDetail?jobopenNo="+jobopenNo;
+			}
+			
+		}, error: function() {
+			alert("error");
+		}
+	})
+
+	
+}
+
+
+
+function checkAca() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkAca"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			
+			if(data.highSchool>0 || data.college>0 || data.university>0 || data.gSchool>0) {
+				location.href="/apply/academicUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/academic?jobopenNo="+jobopenNo;
+			}
+			
+		}, error: function() {
+			alert("error");
+		}
+	})
+}
+
+function checkMil() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkMil"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			if(data.military>0) {
+				location.href="/apply/militaryUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/military?jobopenNo="+jobopenNo;
+			}
+			
+		}
+	})
+}
+
+function checkCar() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkCar"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			if(data.language>0 || data.license>0 || data.career>0 || data.activity>0 || data.experience>0 || data.material>0) {
+				location.href="/apply/careerUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/career?jobopenNo="+jobopenNo;
+			}
+			
+		}
+	})
+
+	
+}
+
+function checkIntro() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+			, url: "/apply/checkIntro"
+			, dataType: "json"
+			, data: {
+				"jobopenNo" : jobopenNo
+			}
+			, success: function( data ) {
+				if(data.introduce>0) {
+					location.href="/apply/introduceUpdate?jobopenNo="+jobopenNo;
+				} else {
+					location.href="/apply/introduce?jobopenNo="+jobopenNo;
+				}
+				
+			}
+		
+	})
+}
+
+
+
+
 $("#saveBtn").click(function() {
 	console.log("saveBtn 클릭");
 	
@@ -1053,10 +1173,10 @@ $("#gsResetBtn").click(function() {
 	
 });
 
-$("#saveBtn").click(function() {
-	console.log("save버튼 클릭");
-	$("#hsForm").submit();
-});
+// $("#saveBtn").click(function() {
+// 	console.log("save버튼 클릭");
+// 	$("#hsForm").submit();
+// });
 
 $(".cancelAPI").click(function() {
 	
