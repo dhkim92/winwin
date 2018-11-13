@@ -30,7 +30,7 @@ public class ApplyMenuController {
 	
 	@RequestMapping(value="/selectApply", method = RequestMethod.GET)
 	public void selectApply(Model model) {
-
+		
 		List<JobopenBasic> list = applyMenuService.getJobopenBasic();
 		model.addAttribute("list", list);
 		
@@ -58,7 +58,7 @@ public class ApplyMenuController {
 	
 	@RequestMapping(value="/passfail", method = RequestMethod.GET)
 	public void passfail(Model model) {		
-		List<JobopenBasic> list = applyMenuService.getJobopenBasic();
+		List<JobopenBasic> list = applyMenuService.getJobopenBasic3();
 		model.addAttribute("list", list);
 	}
 	
@@ -67,9 +67,9 @@ public class ApplyMenuController {
 		Map<String, List> map = new HashMap<String, List>();
 		
 		
-		List<JobopenBasic> list1 = applyMenuService.getJobopenBasic();
+		List<JobopenBasic> list1 = applyMenuService.getJobopenBasic3();
 		
-		List<JobopenBasic> list2 = applyMenuService.getJobopenBasic2();
+		List<JobopenBasic> list2 = applyMenuService.getJobopenBasic4();
 		
 		map.put("result1", list1);
 		map.put("result2", list2);

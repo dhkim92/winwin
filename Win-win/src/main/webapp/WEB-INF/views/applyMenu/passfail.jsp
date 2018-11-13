@@ -148,7 +148,7 @@
 		     
 			$.ajax({
 		          type:"post"
-		          , url:"/applyMenu/selectApply"
+		          , url:"/applyMenu/passfail"
 		          , dataType: "json"
 		          , success: function( data ) {
 		        	 
@@ -188,7 +188,7 @@
 		     
 			$.ajax({
 		          type:"post"
-		          , url:"/applyMenu/selectApply"
+		          , url:"/applyMenu/passfail"
 		          , dataType: "json"
 		          , success: function( data ) {
 		        	 
