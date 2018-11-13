@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import winwin.dto.JobopenBasic;
 import winwin.dto.Member;
 import winwin.dto.Support;
+import winwin.dto.UserDetail;
+import winwin.service.Apply1Service;
 import winwin.service.ApplyMenuService;
 
 @Controller
@@ -24,6 +26,7 @@ import winwin.service.ApplyMenuService;
 public class ApplyMenuController {
 	
 	@Autowired ApplyMenuService applyMenuService;
+	@Autowired Apply1Service apply1Service;
 	
 	@RequestMapping(value="/selectApply", method = RequestMethod.GET)
 	public void selectApply(Model model) {
@@ -167,6 +170,27 @@ public class ApplyMenuController {
 			Object obj2 = "지원결과없음";
 			map.put("result", obj2);
 		}
+		
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/cntUserD", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> cntUserD(HttpSession session, int jobopenNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		UserDetail userDetail = new UserDetail();
+		
+		
+		userDetail.setUserId((String)session.getAttribute("id"));
+		userDetail.setJobopenNo(jobopenNo);
+		
+		Object obj = apply1Service.countUserDetail(userDetail);
+
+			
+		map.put("result", obj);
+
 		
 		
 		return map;

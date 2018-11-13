@@ -317,7 +317,8 @@ function selectsubmit(){
 			        			
 			        			$("#ModalContent").html("이미 지원한 공고입니다.")
 			        	  } else {
-		        			  location.href = "/apply/userDetail?jobopenNo="+jobopenNo;
+// 		        			  location.href = "/apply/userDetail?jobopenNo="+jobopenNo;
+								cntUserDetail();
 			        	  }
 		        	  } else {
 		        			// Get the modal
@@ -346,7 +347,36 @@ function selectsubmit(){
 		          }
 		       })
 		  	
-}
+	}
+
+
+	function cntUserDetail(){
+		
+	       var jobopenNo = document.getElementById("jobopenNo").innerHTML;
+//	        var title = document.getElementById("title").innerHTML;
+
+			var applyData = { "jobopenNo": jobopenNo };
+
+		
+		$.ajax({
+	          type:"post"
+	          , url:"/applyMenu/cntUserD"
+	          , dataType: "json"
+	          , data: {
+		        	  "jobopenNo": jobopenNo }
+			  , success: function( data ) {
+	        	  
+	        	  if(data.result > 0) {
+	        		  location.href = "/apply/userDetailUpdate?jobopenNo="+jobopenNo;
+	        	  } else{
+	        		  location.href = "/apply/userDetail?jobopenNo="+jobopenNo;
+	        	  }
+		         	  
+	          }, error: function() {
+	             alert("error");
+	          }
+	       })
+	}
 
 </script>
 

@@ -82,5 +82,17 @@ public interface Apply2Dao {
 	public void insertSupport(Support support);
 
 	public void fileUpload(Material mat);
+
+	public int countLaguage(Language language);
+
+	public int countLicense(License license);
+
+	public int countCareer(Career career);
+
+	public int countActivity(Activity activity);
+
+	public int countExperience(Experience experience);
+
+	public int countMaterial(Material material);
 	
 }

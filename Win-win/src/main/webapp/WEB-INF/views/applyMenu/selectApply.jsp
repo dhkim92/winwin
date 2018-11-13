@@ -318,7 +318,8 @@
 				        			
 				        			$("#ModalContent").html("이미 지원한 공고입니다.")
 				        	  } else {
-			        			  location.href = "/apply/userDetail?jobopenNo="+jobopenNo;
+// 			        			  location.href = "/apply/userDetail?jobopenNo="+jobopenNo;
+								  cntUserDetail();
 				        	  }
 			        		  
 			        	  } else {
@@ -350,6 +351,31 @@
 			  	
 //         	  location.href = "/apply/userDetail?title="+title+"&jobopenNo="+jobopenNo;
 
+	}
+	
+	function cntUserDetail(){
+		var target = document.getElementById("jobTitle");
+      	var jobopenNo = target.options[target.selectedIndex].value;
+// 		var noData = {"jobopenNo": jobopenNo };	
+		
+		$.ajax({
+	          type:"post"
+	          , url:"/applyMenu/cntUserD"
+	          , dataType: "json"
+	          , data: {
+		        	  "jobopenNo": jobopenNo }
+			  , success: function( data ) {
+	        	  
+	        	  if(data.result > 0) {
+	        		  location.href = "/apply/userDetailUpdate?jobopenNo="+jobopenNo;
+	        	  } else{
+	        		  location.href = "/apply/userDetail?jobopenNo="+jobopenNo;
+	        	  }
+		         	  
+	          }, error: function() {
+	             alert("error");
+	          }
+	       })
 	}
 
 </script>

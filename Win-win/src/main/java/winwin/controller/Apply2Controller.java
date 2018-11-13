@@ -33,6 +33,7 @@ import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
+import winwin.dto.JobopenDetail;
 import winwin.dto.Language;
 import winwin.dto.LanguageArr;
 import winwin.dto.License;
@@ -245,17 +246,53 @@ public class Apply2Controller {
 	}
 		
 	@RequestMapping(value="/careerUpdate", method=RequestMethod.GET)
-	public void careerUpdate(JobopenBasic jobopenBasic, Model model, HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, Material material) {
+	public void careerUpdate(String jobopenNo, JobopenBasic jobopenBasic, Model model, HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, Material material) {
 		
-		jobopenBasic.setJobopenNo(3);	//수정
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
 		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
 		
-		apply2Service.selectLanguage(language);
-		apply2Service.selectLicense(license);
-		apply2Service.selectCareer(career);
-		apply2Service.selectActivity(activity);
-		apply2Service.selectExperience(experience);
-		apply2Service.selectMaterial(material);
+		// language		
+		language.setUserId((String)session.getAttribute("id"));
+		language.setJobopenNo(Integer.parseInt(jobopenNo));
+		List<Language> lang = apply2Service.selectLanguage(language);
+		int langCnt = apply2Service.countLaguage(language);
+		
+		// license
+		license.setUserId((String)session.getAttribute("id"));
+		license.setJobopenNo(Integer.parseInt(jobopenNo));
+		List<License> lice = apply2Service.selectLicense(license);
+		int liceCnt = apply2Service.countLicense(license);
+		
+		// career
+		career.setUserId((String)session.getAttribute("id"));
+		career.setJobopenNo(Integer.parseInt(jobopenNo));
+		List<Career> car = apply2Service.selectCareer(career);
+		int carCnt = apply2Service.countCareer(career);
+		
+		// activity
+		activity.setUserId((String)session.getAttribute("id"));
+		activity.setJobopenNo(Integer.parseInt(jobopenNo));
+		List<Activity> act = apply2Service.selectActivity(activity);
+		int actCnt = apply2Service.countActivity(activity);
+		
+		//experience
+		experience.setUserId((String)session.getAttribute("id"));
+		experience.setJobopenNo(Integer.parseInt(jobopenNo));
+		List<Experience> exp = apply2Service.selectExperience(experience);
+		int expCnt = apply2Service.countExperience(experience);
+		
+		//material
+		material.setUserId((String)session.getAttribute("id"));
+		material.setPortfolioId(Integer.parseInt(jobopenNo));
+		List<Material> mat = apply2Service.selectMaterial(material);
+		int matCnt = apply2Service.countMaterial(material);
+		
+		model.addAttribute("language",lang);
+		model.addAttribute("license", lice);
+		model.addAttribute("career", car);
+		model.addAttribute("activity", act);
+		model.addAttribute("experience", exp);
+		model.addAttribute("material", mat);
 		
 	}
 
@@ -292,15 +329,17 @@ public class Apply2Controller {
 
 
 	@RequestMapping(value="/introduceUpdate", method=RequestMethod.GET)
-	public void introduceUpdate(JobopenBasic jobopenBasic, Introduce introduce, HttpSession session, Model model) {
+	public void introduceUpdate(String jobopenNo, JobopenBasic jobopenBasic, Introduce introduce, HttpSession session, Model model) {
 		
-		jobopenBasic.setJobopenNo(3);	//수정
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
 		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
 		
+		// introduce 정보 가져오기 
 		introduce.setUserId((String)session.getAttribute("id"));
-		introduce.setJobopenNo(3);	//수정
-		model.addAttribute("intro", apply2Service.selectIntroduce(introduce));
-
+		introduce.setJobopenNo(Integer.parseInt(jobopenNo));
+		Introduce intro = apply2Service.selectIntroduce(introduce);
+		
+		model.addAttribute("intro", intro);
 	}
 
 	@RequestMapping(value="/introduceUpdate", method=RequestMethod.POST)
@@ -392,5 +431,5 @@ public class Apply2Controller {
 		return "redirect:/main/usermain";
 		
 	}
-
+	
 }

@@ -154,4 +154,34 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.fileUpload(mat);
 	}
 
+	@Override
+	public int countLaguage(Language language) {
+		return dao.countLaguage(language);
+	}
+
+	@Override
+	public int countLicense(License license) {
+		return dao.countLicense(license);
+	}
+
+	@Override
+	public int countCareer(Career career) {
+		return dao.countCareer(career);
+	}
+
+	@Override
+	public int countActivity(Activity activity) {
+		return dao.countActivity(activity);
+	}
+
+	@Override
+	public int countExperience(Experience experience) {
+		return dao.countExperience(experience);
+	}
+
+	@Override
+	public int countMaterial(Material material) {
+		return dao.countMaterial(material);
+	}
+
 }
