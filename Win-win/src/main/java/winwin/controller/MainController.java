@@ -1,5 +1,6 @@
 package winwin.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -38,6 +39,23 @@ public class MainController {
 		String status = "메인";
 		paging.setStatus(status);
 		List<JobopenBasic> list = jobopenService.selectBasic(paging);
+		
+		Date curDate = new Date();
+		
+		for(int i=0; i<list.size();i++) {
+			Date endDate = list.get(i).getEndDate();
+			int jobopenNo = list.get(i).getJobopenNo();
+			if(endDate!=null) {
+				int compare = curDate.compareTo(endDate);
+				
+				if( compare > 0 ) {
+					if(list.get(i).getStatus().equals("채용 중")){
+						jobopenService.updateStatusByDate(jobopenNo);
+					}
+				}
+			}
+		}
+		
 		model.addAttribute("list", list);
 	}
 	
@@ -47,6 +65,21 @@ public class MainController {
 		
 		//채용공고 리스트 띄우기
 		List<JobopenBasic> applylist = mainService.getJobopenBasic();
+		Date curDate = new Date();
+		
+		for(int i=0; i<applylist.size();i++) {
+			Date endDate = applylist.get(i).getEndDate();
+			if(endDate!=null) {
+				int compare = curDate.compareTo(endDate);
+				
+				if( compare > 0 ) {
+					if(applylist.get(i).getStatus().equals("채용 중")){
+						jobopenService.updateStatusByDate(applylist.get(i).getJobopenNo());
+					}
+				}
+			}
+		}
+		
 		model.addAttribute("applylist", applylist);
 		
 		//공지사항 리스트 띄우기

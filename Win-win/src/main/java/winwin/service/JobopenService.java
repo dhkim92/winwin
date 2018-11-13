@@ -108,5 +108,15 @@ public interface JobopenService {
 	 */
 	public void updateStatusByNo(JobopenBasic jobopenBasic);
 	
+	/**
+	 * jobOpenManage 전용 페이징 객체
+	 * @param curPage
+	 * @param listCount
+	 * @param pageCount
+	 * @param status
+	 * @return
+	 */
 	public Paging getStPaging(int curPage, int listCount, int pageCount, String status);
+	
+	public void updateStatusByDate(int jobopenNo);
 }

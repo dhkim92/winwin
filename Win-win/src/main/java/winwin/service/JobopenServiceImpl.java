@@ -113,4 +113,10 @@ public class JobopenServiceImpl implements JobopenService {
 		jobopenDao.updateStatus(jobopenBasic);
 	}
 
+	@Override
+	public void updateStatusByDate(int jobopenNo) {
+		jobopenDao.updateStatusByDate(jobopenNo);
+		
+	}
+
 }

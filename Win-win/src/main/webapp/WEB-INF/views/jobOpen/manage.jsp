@@ -170,10 +170,11 @@ td {
 		});
 		
 		
-		$('.container').on("click", '.page-link', function(){
-			var curPage = $(this).attr('data-curPage');
-			manageList(curPage);
-		});
+// 		$('.container').on("click", '.page-link', function(){
+// 			var curPage = $(this).attr('data-curPage');
+// 			console.log("컨테이너");
+// 			manageList(curPage);
+// 		});
 		
 	});
 	
@@ -215,9 +216,17 @@ td {
 					html +='</td>'
 						+'<td>'+item.hit+'</td>'
 						+'<td><strong class="text-success">'+item.applicantCnt+'</strong></td>'
-						+'<td>'
-						+'<span class="badge badge-pill badge-primary stat font-weight-bold" style="cursor:pointer" onclick="changeStatus('+item.jobopenNo+');">'+item.status+'</span>'
-						+'</td>'
+						+'<td>';
+					if(item.status=='채용 중'){
+						html+='<span class="badge badge-pill badge-primary stat font-weight-bold" style="cursor:pointer" onclick="changeStatus('+item.jobopenNo+');">'+item.status+'</span>';
+					} else if(item.status=='채용 마감'){
+						html+='<span class="badge badge-pill badge-danger stat font-weight-bold" style="cursor:pointer" onclick="changeStatus('+item.jobopenNo+');">'+item.status+'</span>';
+					} else if(item.status=='결과 발표'){
+						html+='<span class="badge badge-pill badge-success stat font-weight-bold" style="cursor:pointer" onclick="changeStatus('+item.jobopenNo+');">'+item.status+'</span>';
+					} else if(item.status=='공고 종료'){
+						html+='<span class="badge badge-pill badge-secondary stat font-weight-bold" style="cursor:pointer" onclick="changeStatus('+item.jobopenNo+');">'+item.status+'</span>';
+					}
+					html +='</td>'
 						+'<td><span class="badge badge-warning font-weight-bold" style="cursor: pointer;" onclick="jo_update('+item.jobopenNo+');">수정</span></td>'
 						+'<td><span class="badge badge-danger font-weight-bold" style="cursor: pointer;" onclick="jo_delete('+item.jobopenNo+');">삭제</span></td>'
 						+'</tr>';
@@ -225,14 +234,18 @@ td {
 						
 					$('.here').append(html);
 				});
+				
+				if (result.list.length == 0) {
+					$('.here').append('<tr><td colspan=9 class="text-center" style="height:150px; vertical-align:middle;">정보가 없습니다.</td></tr>');
+				}
 			}
-			console.log(result.totalCount);
 			paging(page, listCount, result.totalCount, pageCount, manageList);
 		},'json');
 		
 	}
 	
 	function paging (page, listCount, totalCount, pageCount, callback) {
+	
 		var firstPage 	= 1;
 		var lastPage 	= Math.ceil(totalCount / listCount);
 		var endPage 	= Math.ceil(Number(page / pageCount)) * pageCount;
@@ -306,8 +319,8 @@ td {
 		var $span = $(".close");
 		var $btnOk = $("#btnOkst");
 		var $btnNo = $("#btnNost");
-		var $sel = $("span.stat").val();
-		console.log($sel);
+		var $sel = $(num).closest('td');
+		console.log($sel.val());
 		
 		$('#stChecking').html($sel);
 		
@@ -319,11 +332,13 @@ td {
 		$span.on("click", function(){
 			$modal.css("display", "none");
 			$('#stChecking').html("");
+			$('.statusMo option:eq(0)').prop("selected",true);
 		});
 		
 		$btnNo.on("click", function(){
 			$modal.css("display", "none");
 			$('#stChecking').html("");
+			$('.statusMo option:eq(0)').prop("selected",true);
 		});
 		
 		$btnOk.on("click", function(){
@@ -335,7 +350,8 @@ td {
 				, data:{jobopenNo : num,
 						status : $sel }
 				, success : function(){
-					manageList();
+					$('.statusMo option:eq(0)').prop("selected",true);
+					manageList($('.active').children().attr("data-curPage"));
 				}
 			});
 		});
@@ -367,7 +383,7 @@ td {
 				, url:"/jobOpen/jo_delete"
 				, data: {jobopenNo : num}
 				, success:function(){
-					manageList(page);
+					manageList($('.active').children().attr("data-curPage"));
 				}
 			})
 			

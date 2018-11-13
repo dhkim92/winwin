@@ -1,9 +1,8 @@
 package winwin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import javax.print.attribute.standard.JobKOctetsProcessed;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +32,9 @@ public class JobopenManageController {
 			@RequestParam(required=false, defaultValue="15") int listCount,
 			@RequestParam(required=false, defaultValue="10") int pageCount) {			
 
-		
 	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/manage", method=RequestMethod.POST)
@@ -45,14 +45,10 @@ public class JobopenManageController {
 			@RequestParam(required=false, defaultValue="전체 확인") String status) {
 		
 		
-		
-		
 		Paging paging = jobopenService.getStPaging(curPage, listCount, pageCount, status);
 	
 		
-		System.out.println(paging);
 		List<JobopenBasic> list = jobopenService.selectBasic(paging);
-		
 		
 		paging.setList(list);
 		
@@ -62,8 +58,6 @@ public class JobopenManageController {
 	
 	@RequestMapping(value="/jo_delete", method=RequestMethod.POST)
 	public String manageDelete(int jobopenNo) {
-		System.out.println("에이젝스 성공");
-		System.out.println(jobopenNo);
 		
 		jobopenService.deleteJobopen(jobopenNo);
 		
@@ -72,8 +66,6 @@ public class JobopenManageController {
 	
 	@RequestMapping(value="/jo_status", method=RequestMethod.POST)
 	public String manageStatus(JobopenBasic jobopenBasic) {
-		System.out.println("에이젝스 성공");
-		System.out.println(jobopenBasic);
 		
 		jobopenService.updateStatusByNo(jobopenBasic);
 		

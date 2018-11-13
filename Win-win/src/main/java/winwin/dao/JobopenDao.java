@@ -42,4 +42,6 @@ public interface JobopenDao {
 	public void updateStatus(JobopenBasic jobopenBasic);
 	
 	public int countStBasic(Map<String, Object> map);
+	
+	public void updateStatusByDate(int jobopenNo);
 }

@@ -135,5 +135,9 @@
 		WHERE status=#{status} and display=1
 	</if>
 	</select>
+	
+	<update id="updateStatusByDate" parameterType="int">
+		update jobopenBasic set status='채용 마감' where jobopenNo=#{jobopenNo}
+	</update>
   
   </mapper>
