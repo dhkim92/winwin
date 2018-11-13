@@ -6,11 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import winwin.dao.Apply1Dao;
+import winwin.dto.Activity;
+import winwin.dto.Career;
 import winwin.dto.College;
+import winwin.dto.Experience;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
+import winwin.dto.Language;
+import winwin.dto.License;
+import winwin.dto.Material;
 import winwin.dto.Member;
 import winwin.dto.Military;
 import winwin.dto.University;
@@ -162,6 +168,64 @@ public class Apply1ServiceImpl implements Apply1Service {
 		
 	}
 
+	@Override
+	public int countUserDetail(UserDetail userDetail) {
+		return dao.countUserDetail(userDetail);
+	}
 
-	
+	@Override
+	public int countHighSchool(HighSchool highSchool) {
+		return dao.countHighSchool(highSchool);
+	}
+
+	@Override
+	public int countCollege(College college) {
+		return dao.countCollege(college);
+	}
+
+	@Override
+	public int countUniversity(University university) {
+		return dao.countUniversity(university);
+	}
+
+	@Override
+	public int countGSchool(GSchool gSchool) {
+		return dao.countGSchool(gSchool);
+	}
+
+	@Override
+	public int countMilitary(Military military) {
+		return dao.countMilitary(military);
+	}
+
+	@Override
+	public int countLanguage(Language language) {
+		return dao.countLanguage(language);
+	}
+
+	@Override
+	public int countLicense(License license) {
+		return dao.countLicense(license);
+	}
+
+	@Override
+	public int countCareer(Career career) {
+		return dao.countCareer(career);
+	}
+
+	@Override
+	public int countActivity(Activity activity) {
+		return dao.countActivity(activity);
+	}
+
+	@Override
+	public int countExperience(Experience experience) {
+		return dao.countExperience(experience);
+	}
+
+	@Override
+	public int countMaterial(Material material) {
+		return dao.countMaterial(material);
+	}
+
 }

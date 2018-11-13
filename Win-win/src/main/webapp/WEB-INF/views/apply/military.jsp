@@ -161,10 +161,10 @@ $(document).ready(function() {
 	<form action="/apply/military" method="POST" id="militaryForm">
 	<h4 class="mt-4 mb-3 font-weight-bold">병역사항<input type="hidden" name="jobopenNo" id="jobopenNo" value="${jobopenBasic.jobopenNo}" /><input type="hidden" name="userId" id="userId" value="${sessionScope.id }"/></h4>
 	<div class="row">
-		<a href="/apply/userDetailupdate">
+		<a href="/apply/userDetailupdate?jobopenNo=${jobopenBasic.jobopenNo }">
 			<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png">
 		</a>
-		<a href="/apply/academicUpdate">
+		<a href="/apply/academicUpdate?jobopenNo=${jobopenBasic.jobopenNo }">
 			<img class="img-fluid d-block" src="/resources/image/G_academic.png">		
 		</a>
 		<img class="img-fluid d-block" src="/resources/image/B_military.png">

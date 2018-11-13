@@ -2,11 +2,17 @@ package winwin.service;
 
 import java.util.List;
 
+import winwin.dto.Activity;
+import winwin.dto.Career;
 import winwin.dto.College;
+import winwin.dto.Experience;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
+import winwin.dto.Language;
+import winwin.dto.License;
+import winwin.dto.Material;
 import winwin.dto.Member;
 import winwin.dto.Military;
 import winwin.dto.University;
@@ -65,4 +71,30 @@ public interface Apply1Service {
 	public Military selectMilitary(Military military);
 	
 	public void updateMilitary(Military military);
+	
+	public int countUserDetail(UserDetail userDetail);
+	
+	public int countHighSchool(HighSchool highSchool);
+	
+	public int countCollege(College college);
+	
+	public int countUniversity(University university);
+	
+	public int countGSchool(GSchool gSchool);
+	
+	public int countMilitary(Military military);
+	
+	public int countLanguage(Language language);
+	
+	public int countLicense(License license);
+	
+	public int countCareer(Career career);
+	
+	public int countActivity(Activity activity);
+	
+	public int countExperience(Experience experience);
+	
+	public int countMaterial(Material material);
+	
+	
 }

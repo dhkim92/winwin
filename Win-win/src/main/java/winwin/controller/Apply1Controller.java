@@ -14,11 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import winwin.dto.Activity;
+import winwin.dto.Career;
 import winwin.dto.College;
+import winwin.dto.Experience;
 import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
+import winwin.dto.Language;
+import winwin.dto.License;
+import winwin.dto.Material;
 import winwin.dto.Member;
 import winwin.dto.Military;
 import winwin.dto.University;
@@ -65,17 +71,43 @@ public class Apply1Controller {
 	
 
 	@RequestMapping(value="/userDetail", method=RequestMethod.POST)
-	public String userDetailProc(UserDetail userDetail, HttpSession session, Model model) {
+	public String userDetailProc(UserDetail userDetail, HighSchool highSchool, College college, University university, GSchool gSchool, HttpSession session, Model model) {
 		
 		logger.info("userDetail 데이터 insert 활성화");
-//		userDetail.setUserId((String)session.getAttribute("id"));
 		
 		logger.info("Apply1Cont_userDetailProc() : " + userDetail);
 		apply1Service.insertUserDetail(userDetail);
 		
 		logger.info(userDetail.toString());
 		
-		return "redirect:/apply/academic?jobopenNo="+userDetail.getJobopenNo();
+		//insert뷰 or update뷰 선택
+		highSchool.setJobopenNo(userDetail.getJobopenNo());
+		highSchool.setUserId(userDetail.getUserId());
+
+		college.setJobopenNo(userDetail.getJobopenNo());
+		college.setUserId(userDetail.getUserId());
+		
+		university.setJobopenNo(userDetail.getJobopenNo());
+		university.setUserId(userDetail.getUserId());
+		
+		gSchool.setJobopenNo(userDetail.getJobopenNo());
+		gSchool.setUserId(userDetail.getUserId());
+
+		int countH = apply1Service.countHighSchool(highSchool);
+		int countC = apply1Service.countCollege(college);
+		int countU = apply1Service.countUniversity(university);
+		int countG = apply1Service.countGSchool(gSchool);
+		
+		if(countH==1 || countC==1 || countU==1 || countG==1) {
+			logger.info("acaemicUpdate로 갑니다!!");
+			
+			return "redirect:/apply/academicUpdate?jobopenNo="+userDetail.getJobopenNo();
+		} else {
+			logger.info("academic으로 갈게여!!");
+			
+			return "redirect:/apply/academic?jobopenNo="+userDetail.getJobopenNo();
+		}
+		
 	}
 
 	@RequestMapping(value="/userDetailUpdate", method=RequestMethod.GET)
@@ -144,7 +176,7 @@ public class Apply1Controller {
 	
 
 	@RequestMapping(value="/academic", method=RequestMethod.POST)
-	public String academicProc(HighSchool highSchool, College college, University university, GSchool gSchool, HttpSession session) {
+	public String academicProc(Military military,HighSchool highSchool, College college, University university, GSchool gSchool, HttpSession session) {
 		
 		
 		logger.info("academic POST 활성화");
@@ -158,29 +190,51 @@ public class Apply1Controller {
 		if(!highSchool.getHsName().equals("")) {
 			apply1Service.insertHighSchool(highSchool);
 			apply1Service.updateMemCountH(userId);
+			military.setUserId(highSchool.getUserId());
+			military.setJobopenNo(highSchool.getJobopenNo());
 		} 
 		
 		if(!college.getColName().equals("")) {
 			apply1Service.insertCollege(college);
 			apply1Service.updateMemCountC(userId);
+			military.setUserId(college.getUserId());
+			military.setJobopenNo(college.getJobopenNo());
 		}
 
 		if(!university.getUnivName().equals("")) {
 			apply1Service.insertUniversity(university);
 			apply1Service.updateMemCountU(userId);
+			military.setUserId(university.getUserId());
+			military.setJobopenNo(university.getJobopenNo());
 		}
 		
 		if(!gSchool.getGsName().equals("")) {
 			apply1Service.insertGSchool(gSchool);
 			apply1Service.updateMemCountGS(userId);
+			military.setUserId(gSchool.getUserId());
+			military.setJobopenNo(gSchool.getJobopenNo());
 		} 
 		
 		if(highSchool.getHsName().equals("") && college.getColName().equals("") && university.getUnivName().equals("") && gSchool.getGsName().equals("")) {
 			apply1Service.updateMemCountNone(userId);
+			military.setUserId(highSchool.getUserId());
+			military.setJobopenNo(highSchool.getJobopenNo());
 		}
 		
 		
-		return "redirect:/apply/military?jobopenNo="+highSchool.getJobopenNo();
+		//military insert or update
+		
+		int count = apply1Service.countMilitary(military);
+		
+		if(count==1) {
+			logger.info("militaryUpdate로 가요");
+			
+			return "redirect:/apply/militaryUpdate?jobopenNo="+highSchool.getJobopenNo();
+		} else {
+			logger.info("military로 갑니다");
+			
+			return "redirect:/apply/military?jobopenNo="+highSchool.getJobopenNo();
+		}
 	}
 	
 	@RequestMapping(value="/academicUpdate", method=RequestMethod.GET)
@@ -245,12 +299,47 @@ public class Apply1Controller {
 
 
 	@RequestMapping(value="/military", method=RequestMethod.POST)
-	public String militaryProc(Military military) {
+	public String militaryProc(Military military, Language language, License license, Career career, Experience experience, Activity activity, Material material) {
 		
 		logger.info("Apply1Controller_militaryProc : " + military);
 		apply1Service.insertMilitary(military);
 		
-		return "redirect:/apply/career?jobopenNo="+military.getJobopenNo();	
+		//경력사항 insert or update
+		language.setJobopenNo(military.getJobopenNo());
+		language.setUserId(military.getUserId());
+		
+		license.setJobopenNo(military.getJobopenNo());
+		license.setUserId(military.getUserId());
+
+		career.setJobopenNo(military.getJobopenNo());
+		career.setUserId(military.getUserId());
+
+		experience.setJobopenNo(military.getJobopenNo());
+		experience.setUserId(military.getUserId());
+
+		activity.setJobopenNo(military.getJobopenNo());
+		activity.setUserId(military.getUserId());
+
+		material.setPortfolioId(military.getJobopenNo());
+		material.setUserId(military.getUserId());
+		
+		int langCount = apply1Service.countLanguage(language);
+		int licCount = apply1Service.countLicense(license);
+		int carCount = apply1Service.countCareer(career);
+		int expCount = apply1Service.countExperience(experience);
+		int actCount = apply1Service.countActivity(activity);
+		int matCount = apply1Service.countMaterial(material);
+		
+		if(langCount>0 ||licCount>0 ||carCount>0 ||expCount>0 ||actCount>0 ||matCount>0) {
+			logger.info("careerUpdate로 간다");
+			
+			return "redirect:/apply/careerUpdate?jobopenNo="+military.getJobopenNo();
+		} else {
+			logger.info("career페이지로 이동!!");
+			
+			return "redirect:/apply/career?jobopenNo="+military.getJobopenNo();
+		}
+
 	}
 	
 	
