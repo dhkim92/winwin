@@ -27,8 +27,10 @@
    		 #{allOpen}, 0)
   	</insert>
   	
+  	
   	<select id="selectBasic" resultType="winwin.dto.JobopenBasic" parameterType="winwin.util.Paging">
 		SELECT *  FROM (
+		
      		SELECT ROWNUM RN, A.* FROM (    
         		select * from
         		(select j.title, count(s.userid) as applicantCnt
@@ -37,17 +39,21 @@
             	group by j.title) R LEFT JOIN jobopenBasic O
         	ON R.title = O.title
         order by jobopenNo desc) A 
-    )
+    
     <if test="status=='전체 확인'">
-    	WHERE RN BETWEEN #{startNo} AND #{endNo} AND display=1
+    	where display=1
     </if>
     <if test="status=='채용 중' || status=='채용 마감' || status=='결과 발표' || status=='공고 종료'">
-		WHERE RN BETWEEN #{startNo} AND #{endNo} AND status=#{status} AND display=1
+		where status=#{status} AND display=1
 	</if>
 	<if test="status=='메인'">
-		WHERE RN BETWEEN #{startNo} AND #{endNo} and status in ('채용 중', '결과 발표') and display=1
+		where status in ('채용 중', '결과 발표') and display=1
 	</if>
+	) WHERE RN BETWEEN #{startNo} AND #{endNo}
   	</select>
+  	
+  	
+  	
   	
 	<select id="CountBasic" resultType="int">
 		SELECT COUNT(*) CNT FROM (
@@ -120,5 +126,14 @@
 		update jobopenBasic set status=#{status} where jobopenNo = #{jobopenNo}
 	</update>
 	
+	<select id="countStBasic" parameterType="map" resultType="int">
+		select count(*) from jobopenBasic
+	<if test='status=="결과 확인"'>
+    	WHERE display=1
+    </if>
+    <if test='status=="채용 중" || status=="채용 마감" || status=="결과 발표" || status=="공고 종료"'>
+		WHERE status=#{status} and display=1
+	</if>
+	</select>
   
   </mapper>

@@ -226,6 +226,7 @@ td {
 					$('.here').append(html);
 				});
 			}
+			console.log(result.totalCount);
 			paging(page, listCount, result.totalCount, pageCount, manageList);
 		},'json');
 		

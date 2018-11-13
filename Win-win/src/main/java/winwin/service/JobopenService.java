@@ -108,4 +108,5 @@ public interface JobopenService {
 	 */
 	public void updateStatusByNo(JobopenBasic jobopenBasic);
 	
+	public Paging getStPaging(int curPage, int listCount, int pageCount, String status);
 }

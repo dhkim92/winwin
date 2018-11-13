@@ -47,8 +47,8 @@ public class JobopenManageController {
 		
 		
 		
-		Paging paging = jobopenService.getPaging(curPage, listCount, pageCount);
-		paging.setStatus(status);
+		Paging paging = jobopenService.getStPaging(curPage, listCount, pageCount, status);
+	
 		
 		System.out.println(paging);
 		List<JobopenBasic> list = jobopenService.selectBasic(paging);

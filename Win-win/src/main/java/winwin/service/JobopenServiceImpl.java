@@ -1,6 +1,8 @@
 package winwin.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,7 +65,12 @@ public class JobopenServiceImpl implements JobopenService {
 		return jobopenDao.selectBasic(paging);
 	}
 
-
+	public int countStBasic(String status) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("status", status);
+		return jobopenDao.countStBasic(map);
+	}
+	
 	@Override
 	public Paging getPaging(int curPage, int listCount, int pageCount) {
 
@@ -73,6 +80,14 @@ public class JobopenServiceImpl implements JobopenService {
 		
 		return paging;		
 	}
+	
+	public Paging getStPaging(int curPage, int listCount, int pageCount, String status) {
+		int totalCount = this.countStBasic(status);
+		Paging paging = new Paging(totalCount, curPage, listCount, pageCount);
+		paging.setStatus(status);
+		return paging;
+	}
+	
 
 	@Override
 	public void resetBasic(JobopenBasic jobopenBasic) {

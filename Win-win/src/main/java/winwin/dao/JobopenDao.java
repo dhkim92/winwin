@@ -1,6 +1,7 @@
 package winwin.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import winwin.dto.JobopenBasic;
 import winwin.dto.JobopenDetail;
@@ -39,4 +40,6 @@ public interface JobopenDao {
 	public void updateDetailDis(int jobopenNo);
 
 	public void updateStatus(JobopenBasic jobopenBasic);
+	
+	public int countStBasic(Map<String, Object> map);
 }
