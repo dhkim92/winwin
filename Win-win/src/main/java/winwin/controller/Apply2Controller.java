@@ -294,6 +294,12 @@ public class Apply2Controller {
 		model.addAttribute("experience", exp);
 		model.addAttribute("material", mat);
 		
+		model.addAttribute("languageCnt",langCnt);
+		model.addAttribute("licenseCnt", liceCnt);
+		model.addAttribute("careerCnt", carCnt);
+		model.addAttribute("activityCnt", actCnt);
+		model.addAttribute("experienceCnt", expCnt);
+		model.addAttribute("materialCnt", matCnt);
 	}
 
 

@@ -405,6 +405,7 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 $(document).ready(function() {
+	
 	$(document).on("click","[name=DBtn]",function(){
         
         var value = $(this).parent().parent();
@@ -425,7 +426,7 @@ $(document).ready(function() {
 		var form = '<tr><td class="align-middle a"><input type="text" name="langArr['+i+'].lName" value="영어" style="width:80px;" readonly/></td><td><select style="height:25px; width:70px;" class="language" name="langArr['+i+'].grade"><option value="0">선택</option><option value="상">상</option><option value="중">중</option><option value="하">하</option></select></td><td><select style="height:26px; width:150px;" class="language" name="langArr['+i+'].testName"><option value="0">선택</option><option value="TOEIC">TOEIC</option><option value="TOEFL">TOEFL</option><option value="TEPS">TEPS</option><option value="TOEIC Speaking">TOEIC Speaking</option><option value="OPIc">OPIc</option> </select></td><td class="align-middle"><input type="text" class="language" name="langArr['+i+'].score" /></td><td class="align-middle"><input type="date" class="language languageDate" name="langArr['+i+'].lDate" min="2000-01-01" max="3000-12-31" style="height:25px;"></td><td class="align-middle"><input type="text" class="language" name="langArr['+i+'].lOrgan" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
-	
+
 	var i=1;
 	$(document).on("click","[name=langABtn]",function(){
 		
