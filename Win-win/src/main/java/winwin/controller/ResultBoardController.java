@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import winwin.dto.JobopenBasic;
+import winwin.dto.Mail;
 import winwin.dto.SupportBoard;
 import winwin.service.SupportBoardService;
 import winwin.util.Paging;
@@ -56,11 +57,25 @@ public class ResultBoardController {
 		return paging;
 	}
 
+	@ResponseBody
 	@PostMapping(value = "/result/emailsend")
-	public Map<Object, Object> emailsend(SupportBoard support) {
+	public Map<Object, Object> emailsend(
+					@RequestParam(value="userId[]") List<String> userId,
+					@RequestParam(value="title[]") List<String> title,
+					@RequestParam(value="username[]") List<String> username) {
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		
+		SendPassEmail SendPassEmail = new SendPassEmail();
+		Mail mail = new Mail();
 		
+		for(int i=0; i<userId.size();i++) {
+			mail.setSender(userId.get(i));
+			mail.setTitle(username.get(i)+"님의 지원결과 메일입니다.");
+			mail.setContent(title.get(i));
+			
+			SendPassEmail.sendMail(mail);
+		}
+				
 		return map;
 	}
 }

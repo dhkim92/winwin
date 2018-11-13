@@ -147,6 +147,7 @@
 							<th class="text-center">지원자</th>
 							<th class="text-center">처리 상태</th>
 							<th class="text-center">이메일 발송</th>
+							<th hidden></th>
 
 						</tr>
 					</thead>
@@ -237,12 +238,13 @@ function resultList(page) {
 				var html  = '<tr>';
 					html += '<td scope="row" class="text-center align-middle"><input type="checkbox" name="checkOne" aria-label="Checkbox for following text input"style="width: 18px; height: 18px;" class="align-middle"></td>';
 					html += '	<th scope="row" class="text-center align-middle">' + (i+1) + '</th>';
-					html += '	<td class="text-center align-middle">' + item.title + '</td>';
+					html += '	<td class="text-center align-middle title">' + item.title + '</td>';
 					html += '	<td class="text-center align-middle">' + item.task + '</td>';
 					html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
-					html += '	<td class="text-center align-middle">' + item.username + '</td>';
+					html += '	<td class="text-center align-middle username">' + item.username + '</td>';
 					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.pass + '</button></td>';
 					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.emailSend + '</button></td>';
+					html += '	<td hidden class="userId">' + item.userId + '</td>';
 					html += '</tr>';
 					
 				$('#resultTable tbody').append(html);
@@ -340,9 +342,11 @@ $("#resultTable").on("click", "[name=checkOne]", function() {
 		}
 	} else {
 		// 하나라도 해제가 되면 전체 버튼은 해제
-		$("[name=checkAll]").prop("checked", false);
+		$("[name=checkAll]").prop("checked", false);	
 	}
+	console.log($(this).parent().parent().find("td").text());
 });
+
 
 portModal();
 
@@ -374,7 +378,35 @@ function portModal() {
 	}
 
 	btnOk.onclick = function() {
-		modal.style.display = "none";
+		var title = [];
+		var userId = [];
+		var username = [];
+		
+		 var $title = $("input[name=checkOne]:checked").parents().children(".title");
+		 var $userId = $("input[name=checkOne]:checked").parents().children(".userId");
+		 var $username = $("input[name=checkOne]:checked").parents().children(".username");
+		 
+		 $title.each(function(i){
+			 title.push($(this).text());
+		 });
+		 
+		 $userId.each(function(i){
+			 userId.push($(this).text()); 
+		 });
+		 
+		 $username.each(function(i){
+			 username.push($(this).text()); 
+		 });
+		 
+		 $.ajax({
+	         type:"post",
+	         url:"/result/emailsend",
+	         data:{"userId":userId, "title":title, "username":username},
+	         dataType:"text",
+	         success:function(data){  
+	         }
+	      });
+
 	}
 
 	// When the user clicks anywhere outside of the modal, close it
