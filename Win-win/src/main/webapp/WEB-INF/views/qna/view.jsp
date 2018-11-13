@@ -21,10 +21,10 @@ td{
 #content{
 	width : 99%;
 }
-
 #contentBox p{
 	margin-bottom: 0px;
 }
+
 </style>
 
 <c:if test="${empty adminLogin}">
@@ -71,10 +71,11 @@ td{
 				</p>
 				<div id="a">
 				${board.asw_content }
-				</div>
-				<p>			
+				</div><br>
+				<hr style="border: dotted #376092;">
+				<p>
 				답변 내용에 대해 궁금하신 사항은 댓글로 남겨주시기 바랍니다.<br>
-				감사합니다.<br>
+				감사합니다.<br><br>
 				</p>
 			</c:if>	
 			</div>
@@ -98,7 +99,6 @@ td{
 	
 	<input type="hidden" id="code" value="${sessionScope.admincode }"/>
 	<input type="hidden" id="writer" value="${sessionScope.adminname }"/>
-	
 	<input type="hidden" id="id" value="${sessionScope.id }" />
 	<input type="hidden" id="name" value="${sessionScope.name }" />	
 	<input type="hidden" id="switch" value="off" />
@@ -112,12 +112,40 @@ td{
 	<br><br><br>
 	
 	<div class="col-12 mt-5" id="commentList">
-		<span onclick="onComment();"><i class="far fa-comment-dots mr-2"></i><label id="commentCnt" >댓글 목록(${board.commentCnt })</label></span>
+		
+		<span onclick="onComment();"><i class="far fa-comment-dots mr-2"></i><label id="commentCnt" >댓글 목록(${board.commentCnt })</label></span>	
 		<hr class="mt-1">
 	</div>
 	
 	<div class="d-flex justify-content-center">
 		<div class="col-11 mt-3" id="commentsBox">
+			<label><ins>댓글 쓰기</ins></label>			
+			<table class="table mb-0">
+				<tr>
+					<td width="18%" class="text-center align-middle text-primary">관리자</td>
+					<td width="2%"></td>
+					<td width="70%" class="align-middle p-0">
+						<div class="text-muted"><small>2018년 10월 11일</small></div>
+						<p class="col-12 mb-0">안녕안녕<br>반가워, 이런 ...</p>
+					</td>
+					<td width="10%" class="align-middle"><div class="col-12 text-right"><button class="btn btn-primary">삭제</button></div>
+					</td>			
+				</tr>
+			</table>
+			<table class="table mb-0">
+				<tr>
+					<td width="18%" class="content-center align-middle">
+						<div style="font-weight:bold; margin-top: -10px" class="text-center">이현우</div>
+					</td>
+					<td width="2%"></td>
+					<td width="80%">
+						<div class="text-muted"><small>2018년 10월 11일</small></div>
+						<div class="col-12">안녕안녕</div>
+						<div style="font-weight: bold;" class="col-12 text-right"><button class="btn btn-primary">삭제</button></div>
+					</td>
+				</tr>
+			</table>
+			<hr class="mt-0">
 		</div>		
 	</div>
 	
@@ -214,8 +242,9 @@ function addAsw(){
 			,success : function(data){			
 				$("#res").html("");
 				$("#res").append("<hr style='border: dotted #376092;'><p>[답변내용]<br><br>안녕하세요 ${board.writer }님,<br></p>");
-				$("#res").append("<div id='a'>"+data.board.asw_content+"</div>");
-				$("#res").append("<p>다른 궁금하신 사항은 댓글로 남겨주시기 바랍니다.<br>감사합니다.</p>");
+				$("#res").append("<div id='a'>"+data.board.asw_content+"</div><br>");
+				$("#res").append("<hr style='border: dotted #376092;''>");
+				$("#res").append("<p>다른 궁금하신 사항은 댓글로 남겨주시기 바랍니다.<br>감사합니다.<br><br></p>");
 				$("#aswDate").html(formatDate(Date(data.board.asw_date)));
 				$("#aswWriter").html(data.board.asw_writer);
 				offAsw();
@@ -259,12 +288,12 @@ function onComment(){
 function addComment(){
 	var content = $("#commentContent").val();
 	var qnaNo = $("#qnaNo").text();
-	<% if(request.getSession().getAttribute("adminLogin") != null){%>	
+	<% if(request.getSession().getAttribute("adminLogin")!=null){ %>
 	console.log("관리자");
 	var id = "관리자_"+$("#code").val();
 	var writer = $("#writer").val();
 	<% } %>
-	<% if(request.getSession().getAttribute("login") != null){%>
+	<% if(request.getSession().getAttribute("login")!=null){ %>
 	console.log("사용자");
 	var id = $("#id").val();
 	var writer = $("#name").val();
@@ -291,10 +320,21 @@ function addComment(){
 }
 function printComments(data){
 	$(data.comments).each(function(){
-		
-		$("#commentsBox").append();
+		var strArr = this.writer.split("_");
+		var date = formatDate(Date(this.writedate));
+		console.log(this.writedate);
+		console.log(date);
+		if(strArr[0]=="관리자"){
+			var content = "<table class='table mb-0'><tr><td width='18%' class='text-center align-middle text-primary font-weight-bold'>"+"관리자"+"</td><td width='2%'></td><td width='70%' class='align-middle p-0'><div class='text-muted'><small>"+date+"</small></div><p class='col-12 mb-0'>"+this.content+"</p></td><td width='10%' class='align-middle'><div class='col-12 text-right'><button class='btn btn-primary'>삭제</button></div></td></tr></table>";
+		}else{
+			var content = "<table class='table mb-0'><tr><td width='18%' class='text-center align-middle font-weight-bold'>"+this.writer+"</td><td width='2%'></td><td width='70%' class='align-middle p-0'><div class='text-muted'><small>"+date+"</small></div><p class='col-12 mb-0'>"+this.content+"</p></td><td width='10%' class='align-middle'><div class='col-12 text-right'><button class='btn btn-primary'>삭제</button></div></td></tr></table>";
+		}
+		$("#commentsBox").append(content);
 	});
+	var line = "<hr class='mt-0'>";
+	$("#commentsBox").append(line);
 }
+
 function onSe(){
 	nhn.husky.EZCreator.createInIFrame({
     	oAppRef: oEditors,

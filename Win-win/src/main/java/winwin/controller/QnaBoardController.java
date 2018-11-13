@@ -2,7 +2,6 @@ package winwin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +77,10 @@ public class QnaBoardController {
 	
 	//json-lib
 	@RequestMapping(value="/qna/view", method=RequestMethod.POST)
-	public ModelAndView viewProc(QnaComment comment,ModelAndView mav,@RequestParam("word") String word) {		
+	public ModelAndView viewProc(QnaComment comment,ModelAndView mav,HttpServletResponse resp,@RequestParam("word") String word) {		
+		
+		//한글 폰트
+		resp.setContentType("application/json;charset=utf-8");
 		
 		logger.info(comment.toString());
 		
