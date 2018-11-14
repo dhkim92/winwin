@@ -124,12 +124,14 @@ $(document).ready(function() {
 	<form action="/apply/career" method="post" id="career" enctype="multipart/form-data">
 	<h4 class="mt-4 mb-3 font-weight-bold">경력사항</h4><input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
-		<a href="/apply/userDetailUpdate"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
-		<a href="/apply/academicUpdate"><img class="img-fluid d-block" src="/resources/image/G_academic.png"></a>
-		<a href="/apply/militaryUpdate"><img class="img-fluid d-block" src="/resources/image/G_military.png"></a>
+		<img style="cursor: pointer" class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png" onclick="checkUserD();">
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_academic.png" onclick="checkAca();">
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_military.png" onclick="checkMil();">
 		<img class="img-fluid d-block" src="/resources/image/B_career.png">
-		<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
-		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_introduce.png" onclick="checkIntro();">
+		<a href="/apply/finish?jobopenNo=${jobopenBasic.jobopenNo }">
+			<img class="img-fluid d-block" src="/resources/image/G_complete.png">
+		</a>
 	</div>
 
 	<h6 class="mt-5 font-weight-bold">어학정보</h6>
@@ -624,6 +626,131 @@ $(document).ready(function() {
 	});
   
 });
+
+
+function checkUserD() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkUserD"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			
+			if(data.userDetail>0) {
+				location.href="/apply/userDetailUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/userDetail?jobopenNo="+jobopenNo;
+			}
+			
+		}, error: function() {
+			alert("error");
+		}
+	})
+
+	
+}
+
+
+
+function checkAca() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkAca"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			
+			if(data.highSchool>0 || data.college>0 || data.university>0 || data.gSchool>0) {
+				location.href="/apply/academicUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/academic?jobopenNo="+jobopenNo;
+			}
+			
+		}, error: function() {
+			alert("error");
+		}
+	})
+}
+
+function checkMil() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	console.log("jobopenNo : " + jobopenNo);
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkMil"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			if(data.military>0) {
+				location.href="/apply/militaryUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/military?jobopenNo="+jobopenNo;
+			}
+			
+		}
+	})
+}
+
+function checkCar() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkCar"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			if(data.language>0 || data.license>0 || data.career>0 || data.activity>0 || data.experience>0 || data.material>0) {
+				location.href="/apply/careerUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/career?jobopenNo="+jobopenNo;
+			}
+			
+		}
+	})
+
+	
+}
+
+function checkIntro() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+			, url: "/apply/checkIntro"
+			, dataType: "json"
+			, data: {
+				"jobopenNo" : jobopenNo
+			}
+			, success: function( data ) {
+				if(data.introduce>0) {
+					location.href="/apply/introduceUpdate?jobopenNo="+jobopenNo;
+				} else {
+					location.href="/apply/introduce?jobopenNo="+jobopenNo;
+				}
+				
+			}
+		
+	})
+}
+
 
 $('#file').on('change', function(){
 	

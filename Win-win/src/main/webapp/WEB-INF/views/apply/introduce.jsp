@@ -142,10 +142,10 @@ $(document).ready(function() {
 
 	<h4 class="mt-4 mb-3 font-weight-bold">자기소개</h4><input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
-		<a href="/apply/userDetailUpdate"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
-		<a href="/apply/academicUpdate"><img class="img-fluid d-block" src="/resources/image/G_academic.png"></a>
-		<a href="/apply/militaryUpdate"><img class="img-fluid d-block" src="/resources/image/G_military.png"></a>
-		<a href="/apply/careerUpdate"><img class="img-fluid d-block" src="/resources/image/G_career.png"></a>
+		<a href="/apply/userDetailUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
+		<a href="/apply/academicUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block" src="/resources/image/G_academic.png"></a>
+		<a href="/apply/militaryUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block" src="/resources/image/G_military.png"></a>
+		<a href="/apply/careerUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block" src="/resources/image/G_career.png"></a>
 		<img class="img-fluid d-block" src="/resources/image/B_introduce.png">
 		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 	</div>

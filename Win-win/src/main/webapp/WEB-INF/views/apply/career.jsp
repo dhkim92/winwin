@@ -124,9 +124,9 @@ $(document).ready(function() {
 	<form action="/apply/career" method="post" id="career" enctype="multipart/form-data">
 	<h4 class="mt-4 mb-3 font-weight-bold">경력사항</h4><input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
-		<a href="/apply/userDetailUpdate"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
-		<a href="/apply/academicUpdate"><img class="img-fluid d-block" src="/resources/image/G_academic.png"></a>
-		<a href="/apply/militaryUpdate"><img class="img-fluid d-block" src="/resources/image/G_military.png"></a>
+		<a href="/apply/userDetailUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
+		<a href="/apply/academicUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block" src="/resources/image/G_academic.png"></a>
+		<a href="/apply/militaryUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block" src="/resources/image/G_military.png"></a>
 		<img class="img-fluid d-block" src="/resources/image/B_career.png">
 		<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
 		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
