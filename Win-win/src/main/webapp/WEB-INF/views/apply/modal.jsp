@@ -386,7 +386,7 @@ btn.onclick = function() {
 
 
 btnUpdate.onclick = function() {
-    location.href = "/apply/userDetailUpdate";
+    location.href = "/apply/userDetailUpdate?jobopenNo="+${userDetail.jobopenNo};
 }
 
 btnClose.onclick = function() {

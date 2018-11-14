@@ -225,11 +225,11 @@ $(document).ready(function() {
 
 	<h4 class="mt-4 mb-3 font-weight-bold">병역사항</h4>
 	<div class="row">
-		<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png" onclick="checkUserD();">
-		<img class="img-fluid d-block" src="/resources/image/G_academic.png" onclick="checkAca();">		
+		<img style="cursor: pointer" class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png" onclick="checkUserD();">
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_academic.png" onclick="checkAca();">		
 		<img class="img-fluid d-block" src="/resources/image/B_military.png">
-		<img class="img-fluid d-block" src="/resources/image/G_career.png" onclick="checkCar();">
-		<img class="img-fluid d-block" src="/resources/image/G_introduce.png" onclick="checkIntro">
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_career.png" onclick="checkCar();">
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_introduce.png" onclick="checkIntro">
 		<a href="/apply/finish?jobopenNo=${jobopenBasic.jobopenNo }">
 			<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 		</a>
