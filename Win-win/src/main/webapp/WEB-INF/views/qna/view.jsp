@@ -296,7 +296,7 @@ function addComment(){
 			}
 		}
 		,error : function(){
-			alert("댓글 쓰기 오류")
+			$(location).attr("href","/qna/error?qnaNo="+qnaNo);
 		}		
 	});
 	$("#commentContent").val("");
@@ -314,7 +314,7 @@ function delComment(event){
 			$("#commentCnt").html("댓글 목록("+data.commentCnt+")");
 			printComments(data);
 		},error:function(){
-			alert("댓글 삭제 오류");
+			$(location).attr("href","/qna/error?qnaNo="+qnaNo);
 		}
 	});
 }

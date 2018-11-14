@@ -36,8 +36,7 @@ public class NoticeBoardController {
 	@Autowired NoticeBoardService service;
 
 	@RequestMapping(value="/notice/list")
-	public void list(Model m,HttpServletRequest req) {
-		
+	public void list(Model m,HttpServletRequest req) {		
 //		//관리자 초기 로그인 값
 //		HttpSession session =  req.getSession();
 //		session.setAttribute("adminLogin", true);
@@ -55,7 +54,6 @@ public class NoticeBoardController {
 		List<NoticeBoard> list = service.list(paging);
 		m.addAttribute("list", list);
 		m.addAttribute("paging", paging);
-
 	}
 	
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
@@ -74,6 +72,11 @@ public class NoticeBoardController {
 		m.setViewName("download");
 		m.addObject("downFile",downfile);
 		return m;
+	}
+	
+	@RequestMapping(value="/notice/error", method=RequestMethod.GET)
+	public void error(NoticeBoard board,Model m){
+		m.addAttribute("board",board);
 	}
 	
 	@RequestMapping(value="/notice/write", method=RequestMethod.GET)
@@ -97,7 +100,6 @@ public class NoticeBoardController {
 			
 			logger.info("파일을 첨부할 경우");
 			
-
 			for (MultipartFile data : up) {
 															
 				String realpath = context.getRealPath("upload");				

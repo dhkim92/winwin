@@ -18,13 +18,13 @@
 	<div class="col-12 mt-5">
 		<p class="font-weight-bold h3"><i class="fas fa-exclamation-triangle mr-2"></i>해당 페이지의 요청 권한이 없습니다</p>
 		<hr style="border: solid #376092;">
-		<p style="font-weight: bold;">로그인 정보와 게시판 정보가 일치하지 않습니다.<br>
-		아래의 예외사항을 참고하여 로그인 정보를 다시 한번 확인해 보세요.<br></p>		 		 
+		<p style="font-weight: bold;">로그인 정보를 확인할 수 없습니다.<br>
+		아래의 예외사항을 참고하여 로그인 정보를 다시 한번 확인해 보세요.<br></p>
 		<p style="font-size: 14px;">
-		 &nbsp;&nbsp;- 게시글 작성자가 아닐 때 글 수정/삭제 요청<br>
+		 &nbsp;&nbsp;- 비로그인 상태 일 때 첨부파일 다운 요청<br>
 		 &nbsp;&nbsp;- 댓글 작성자가 아닐 때 댓글 삭제 요청<br>
 		 &nbsp;&nbsp;- 게시글 작성자가 아닐 때 댓글 등록 요청<p><br>
-		<i class="far fa-hand-point-right mr-2"></i><a href="/qna/view?qnaNo=${board.qnaNo }">게시글로 이동</a><br>
+		<i class="far fa-hand-point-right mr-2"></i><a href="/qna/notice?noticeNo=${board.noticeNo }">게시글로 이동</a><br>
 		<i class="far fa-hand-point-right mr-2"></i><a href="/qna/list">목록으로</a><br>
 	</div>
 </div>

@@ -52,8 +52,7 @@ tr{
 	<div class="p-5">
 		<textarea class="form-control" name="content" rows="20" id="content"></textarea>
 	</div>
-	</div>
-		
+	</div>		
 		<input type="hidden" name="userId" value="${sessionScope.id }"/>
 		<input type="hidden" name="writer" value="${sessionScope.name }"/>
 	</form>
@@ -81,8 +80,16 @@ $(document).ready(function() {
 		history.go(-1);
 	});
 	$("#btnWrite").click(function() {
-		submitContents($(this));
-		$("form").submit();
+		if($("#title").val()=""){
+			alert("제목을 입력하세요");
+		}else if($("#pw").val()=""){
+			alert("패스워드를 입력하세요");	
+		}else if($("#content").val()=""){
+			alert("내용을 입력하세요");			
+		}else{
+			submitContents($(this));		
+			$("form").submit();
+		}
 	});
 });
 </script>

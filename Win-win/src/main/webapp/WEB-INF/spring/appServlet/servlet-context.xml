@@ -11,9 +11,13 @@
 
 	<interceptors>
 		<interceptor>
+			<mapping path="/notice/download" />
+			<beans:bean class="winwin.interceptor.NoticeInterceptor" />			
+		</interceptor>
+		<interceptor>
 			<mapping path="/qna/update" />
 			<mapping path="/qna/delete" />
-			<mapping path="/qna/delete" />
+			<mapping path="/qna/view" />
 			<beans:bean class="winwin.interceptor.QnaInterceptor" />			
 		</interceptor>
 	</interceptors>

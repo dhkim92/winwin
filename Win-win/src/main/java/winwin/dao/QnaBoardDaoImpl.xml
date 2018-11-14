@@ -117,7 +117,7 @@
  			,id
  			,content
  			,writedate	
- 		FROM QnaComment
+ 		FROM qna_comment
  		WHERE commentno = #{commentNo }
  	</select>
  </mapper>

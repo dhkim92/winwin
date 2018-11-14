@@ -38,7 +38,7 @@
 		<div class="tablediv col-11 mt-3" style="border-bottom: 2px solid lightgrey">
 			<table class="table table-striped " style="border-bottom: 1px solid lightgrey">
 				<tr>
-					<th width="15%">글번호 <span class="ml-2">${board.noticeno }</span></th>
+					<th width="15%">글번호 <span class="ml-2" id="noticeNo">${board.noticeno }</span></th>
 					<th width="40%">제목 <span class="ml-3">${board.title }</span></th>
 					<th width="15%">작성자 <span class="ml-3">[관리자]</span></th>
 					<th width="10%">조회수<span class="ml-2">${board.hit }</span></th>
@@ -135,9 +135,10 @@ $("#btnDel").click(function(){
 	$(location).attr("href","/notice/delete?noticeno="+${board.noticeno});
 });
 $("#upTable").on("click",".upCol",function(){
+	var noticeno = $("#noticeNo").text();
 	var fileno = $(this).parent().children().eq(3).text();
 	console.log(fileno);
-	$(location).attr("href","/notice/download?fileNo="+fileno);	
+	$(location).attr("href","/notice/download?fileNo="+fileno+"&noticeno="+noticeno);	
 });
 
 

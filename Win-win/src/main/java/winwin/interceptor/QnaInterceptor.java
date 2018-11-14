@@ -49,14 +49,15 @@ public class QnaInterceptor extends HandlerInterceptorAdapter{
 				logger.info("delete 정상");
 				return true;
 			}
-			if((boolean)session.getAttribute("adminLogin")) {
+			if(session.getAttribute("adminLogin")!=null) {
 				logger.info("delete 정상");
 				return true;
 			}
 		}
 		if(uri.equals("/qna/view")) {
-			logger.info("view!");
-			if(request.getMethod().equals("get")) {
+			logger.info("view");
+			logger.info(request.getMethod());
+			if(request.getMethod().equals("GET")) {
 				return true;
 			}
 			String word = request.getParameter("word");
@@ -76,7 +77,7 @@ public class QnaInterceptor extends HandlerInterceptorAdapter{
 						return true;
 				if(session.getAttribute("adminLogin")!=null) {
 					String arr[] = resComment.getId().split("_");
-					if(arr[1].equals(String.valueOf(session.getAttribute("id")))) return true;
+					if(arr[1].equals(String.valueOf(session.getAttribute("admincode")))) return true;
 				}
 			}
 			if(word.equals("get")) {
