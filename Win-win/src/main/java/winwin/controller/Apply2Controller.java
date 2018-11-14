@@ -369,10 +369,10 @@ public class Apply2Controller {
 	public String introduceUpdateProc(Introduce introduce, HttpSession session, ModelAndView mav) {
 	
 		introduce.setUserId((String)session.getAttribute("id"));
-		introduce.setJobopenNo(3);	//수정
 		apply2Service.updateIntroduce(introduce);
 		
-		return "redirect:/apply/finish";
+		
+		return "redirect:/apply/finish?jobopenNo="+introduce.getJobopenNo();
 		
 	}
 	

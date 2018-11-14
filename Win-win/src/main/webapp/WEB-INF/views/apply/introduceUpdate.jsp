@@ -5,8 +5,12 @@
 </style>
 
 <script type="text/javascript">
+	history.pushState(null, null, location.href);
+	window.onpopstate = function () {
+	    history.go(1);
+	};
 $(document).ready(function() {
-	
+		
 	var tid;
 	var cnt = 1800;
 	
@@ -205,10 +209,12 @@ $(document).ready(function() {
             </tbody>
          </table>
    </div>
+   
+   <input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo}"/>
    </form>
    
    <div class="col-12 mt-5 p-0 d-flex justify-content-end">
-      <button class="btn btn-primary text-white">저장완료</button>
+      <button class="btn btn-primary text-white" id="saveBtn">저장완료</button>
    </div>
    
 </div>
