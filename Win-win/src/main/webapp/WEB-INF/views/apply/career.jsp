@@ -26,7 +26,7 @@ $(document).ready(function() {
 			
 			if(cnt < 0) {
 				clearInterval(tid);
-				logout();
+// 				logout();
 				
 			}
 		}, 1000);
@@ -739,264 +739,306 @@ $('#Btn').click(function() {
 		var expCheck = false;
 		
 		//어학 취득일 검증
-		var langDate = document.getElementsByClassName("languageDate");
-		for(var i=0; i<langDate.length;i++) {
-			var languageDate = langDate[i].value;
-			console.log("languageDate : " + languageDate);
+		
+		if(langCheck==false) {
 			
-			//오늘 날짜
-			var now = new Date();
-			console.log(now);
+			console.log("langCheck if문");
 			
-			//어학 취득일
-			var langDateArr = languageDate.split('-');
-			var lang_Day = new Date(langDateArr[0], langDateArr[1], langDateArr[2]);
-			
-			//오늘 날짜-어학 취득일
-			var gap = now.getTime() - lang_Day.getTime();
-			var result = Math.floor(gap/(1000*60*60*24)) * -1;
-
-			console.log("result : " + result);
-			
-			
-			if(result>30) {
-				alert("어학정보 취득일을 확인해주십시오.");
-				langCheck = false;
+			var langDate = document.getElementsByClassName("languageDate");
+			for(var i=0; i<langDate.length;i++) {
+				var languageDate = langDate[i].value;
+				console.log("languageDate : " + languageDate);
 				
-				break;
-			} else {
-				langCheck = true;
-			}
-			
-		}
-		
-		//자격증 취득일 검증
-		var licDate = document.getElementsByClassName("licenseDate");
-		
-		for(var i=0; i<licDate.length;i++) {
-			var licenseDate = licDate[i].value;
-			console.log("licenseDate : " + licenseDate);
-			
-			//오늘 날짜
-			var now = new Date();
-			console.log(now);
-			
-			//자격증 취득일
-			var licDateArr = licenseDate.split('-');
-			var lic_Day = new Date(licDateArr[0], licDateArr[1], licDateArr[2]);
-			
-			//오늘 날짜-어학 취득일
-			var gap = now.getTime() - lic_Day.getTime();
-			var result = Math.floor(gap/(1000*60*60*24)) * -1;
-
-			console.log("result : " + result);
-			
-			
-			if(result>30) {
-				alert("자격증 취득일을 확인해주십시오.");
-				licCheck = false;
+				//오늘 날짜
+				var now = new Date();
+				console.log(now);
 				
-				break;
-			} else {
-				licCheck = true;
-			}
-			
-		}
-		
-		//회사경력 검증
-		var carStartDate = document.getElementsByClassName("carStartDate");
-		var carEndDate = document.getElementsByClassName("carEndDate");
-		
-		for(var i=0; i<carStartDate.length;i++) {
-			var careerSDate = carStartDate[i].value;
-			var careerEDate = carEndDate[i].value;
-			
-			console.log("careerSDate : " + careerSDate);
-			console.log("careerEDate : " + careerEDate);
-			
-			//회사경력 start, endDate
-			var carSDateArr = careerSDate.split('-');
-			var car_SDay = new Date(carSDateArr[0], carSDateArr[1], carSDateArr[2]);
-			console.log("car_SDay"+car_SDay);
-			
-			var carEDateArr = careerEDate.split('-');
-			var car_EDay = new Date(carEDateArr[0], carEDateArr[1], carEDateArr[2]);
-			console.log("car_EDay" + car_EDay);
-
-			//오늘날짜 
-			var now = new Date();
-			console.log(now);
-			
-			//오늘날짜 - startDate
-			var sGap = now.getTime() - car_SDay.getTime();
-			var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
-			console.log("sResult : " + sResult);
-			
-			//오늘날짜 - endDate
-			var eGap = now.getTime() - car_EDay.getTime();
-			var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
-			console.log("eResult : " + eResult);
-
-			if(sResult>30) {
-				alert("회사경력 근무시작일을 확인해주십시오.");
-			} else if(eResult>30) {
-				alert("회사경력 근무종료일을 확인해주십시오.");
-			} else {
+				//어학 취득일
+				var langDateArr = languageDate.split('-');
+				var lang_Day = new Date(langDateArr[0], langDateArr[1], langDateArr[2]);
 				
-				//endDate-startDate
-				var gap = car_EDay.getTime() - car_SDay.getTime();
+				//오늘 날짜-어학 취득일
+				var gap = now.getTime() - lang_Day.getTime();
 				var result = Math.floor(gap/(1000*60*60*24)) * -1;
 
 				console.log("result : " + result);
 				
-				if(result>0) {
-					alert("회사경력 근무기간을 확인해주십시오.");
-					carCheck = false;
+				
+				if(result>30) {
+					alert("어학정보 취득일을 확인해주십시오.");
+					langCheck = false;
 					
 					break;
 				} else {
-					carCheck = true;
+					langCheck = true;
 				}
 				
 			}
-
 			
-		}
+			console.log("langCheck : " + langCheck);
+
+		} 
 		
 		
-		//사회봉사활동 검증
-		var actStartDate = document.getElementsByClassName("actStartDate");
-		var actEndDate = document.getElementsByClassName("actEndDate");
-		
-		for(var i=0; i<actStartDate.length;i++) {
-			var activitySDate = actStartDate[i].value;
-			var activityEDate = actEndDate[i].value;
+		if(langCheck==true && licCheck==false) {
 			
-			console.log("activitySDate : " + activitySDate);
-			console.log("activityEDate : " + activityEDate);
+			console.log("licCheck if문");
+						
+			//자격증 취득일 검증
+			var licDate = document.getElementsByClassName("licenseDate");
 			
-			//사회봉사 start, endDate
-			var actSDateArr = activitySDate.split('-');
-			var act_SDay = new Date(actSDateArr[0], actSDateArr[1], actSDateArr[2]);
-			console.log("act_SDay"+act_SDay);
-			
-			var actEDateArr = activityEDate.split('-');
-			var act_EDay = new Date(actEDateArr[0], actEDateArr[1], actEDateArr[2]);
-			console.log("act_EDay" + act_EDay);
-
-			//오늘날짜 
-			var now = new Date();
-			console.log(now);
-			
-			//오늘날짜 - startDate
-			var sGap = now.getTime() - act_SDay.getTime();
-			var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
-			console.log("sResult : " + sResult);
-			
-			//오늘날짜 - endDate
-			var eGap = now.getTime() - act_EDay.getTime();
-			var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
-			console.log("eResult : " + eResult);
-
-			if(sResult>30) {
-				alert("사회봉사활동의 시작일을 확인해주십시오.");
+			for(var i=0; i<licDate.length;i++) {
+				var licenseDate = licDate[i].value;
+				console.log("licenseDate : " + licenseDate);
 				
-				break;
-			} else if(eResult>30) {
-				alert("사회봉사활동의 종료일을 확인해주십시오.");
+				//오늘 날짜
+				var now = new Date();
+				console.log(now);
 				
-				break;
-			} else {
+				//자격증 취득일
+				var licDateArr = licenseDate.split('-');
+				var lic_Day = new Date(licDateArr[0], licDateArr[1], licDateArr[2]);
 				
-				//endDate-startDate
-				var gap = act_EDay.getTime() - act_SDay.getTime();
+				//오늘 날짜-어학 취득일
+				var gap = now.getTime() - lic_Day.getTime();
 				var result = Math.floor(gap/(1000*60*60*24)) * -1;
 
 				console.log("result : " + result);
 				
-				if(result>0) {
-					alert("사회봉사활동 기간을 확인해주십시오.");
-					actCheck = false;
+				
+				if(result>30) {
+					alert("자격증 취득일을 확인해주십시오.");
+					licCheck = false;
 					
 					break;
 				} else {
-					actCheck = true;
+					licCheck = true;
 				}
 				
 			}
 			
-		}
+			console.log("licCheck : " + licCheck);
+
+		} 
 		
-
-		//연수경험 검증
-		var expStartDate = document.getElementsByClassName("expStartDate");
-		var expEndDate = document.getElementsByClassName("expEndDate");
-		
-		for(var i=0; i<expStartDate.length;i++) {
-			var experienceSDate = expStartDate[i].value;
-			var experienceEDate = expEndDate[i].value;
+		if(langCheck==true && licCheck==true && carCheck==false) {
 			
-			console.log("experienceSDate : " + experienceSDate);
-			console.log("experienceEDate : " + experienceEDate);
+			console.log("carCheck if문")
 			
-			//사회봉사 start, endDate
-			var expSDateArr = experienceSDate.split('-');
-			var exp_SDay = new Date(expSDateArr[0], expSDateArr[1], expSDateArr[2]);
-			console.log("exp_SDay"+exp_SDay);
+			//회사경력 검증
+			var carStartDate = document.getElementsByClassName("carStartDate");
+			var carEndDate = document.getElementsByClassName("carEndDate");
 			
-			var expEDateArr = experienceEDate.split('-');
-			var exp_EDay = new Date(expEDateArr[0], expEDateArr[1], expEDateArr[2]);
-			console.log("exp_EDay" + exp_EDay);
-
-			//오늘날짜 
-			var now = new Date();
-			console.log(now);
-			
-			//오늘날짜 - startDate
-			var sGap = now.getTime() - exp_SDay.getTime();
-			var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
-			console.log("sResult : " + sResult);
-			
-			//오늘날짜 - endDate
-			var eGap = now.getTime() - exp_EDay.getTime();
-			var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
-			console.log("eResult : " + eResult);
-
-			if(sResult>30) {
-				alert("연수경험의 시작일을 확인해주십시오.");
+			for(var i=0; i<carStartDate.length;i++) {
+				var careerSDate = carStartDate[i].value;
+				var careerEDate = carEndDate[i].value;
 				
-				break;
-			} else if(eResult>30) {
-				alert("연수경험의 종료일을 확인해주십시오.");
+				console.log("careerSDate : " + careerSDate);
+				console.log("careerEDate : " + careerEDate);
 				
-				break;
-			} else {
+				//회사경력 start, endDate
+				var carSDateArr = careerSDate.split('-');
+				var car_SDay = new Date(carSDateArr[0], carSDateArr[1], carSDateArr[2]);
+				console.log("car_SDay"+car_SDay);
 				
-				//endDate-startDate
-				var gap = exp_EDay.getTime() - exp_SDay.getTime();
-				var result = Math.floor(gap/(1000*60*60*24)) * -1;
+				var carEDateArr = careerEDate.split('-');
+				var car_EDay = new Date(carEDateArr[0], carEDateArr[1], carEDateArr[2]);
+				console.log("car_EDay" + car_EDay);
 
-				console.log("result : " + result);
+				//오늘날짜 
+				var now = new Date();
+				console.log(now);
 				
-				if(result>0) {
-					alert("연수경험의 기간을 확인해주십시오.");
-					expCheck = false;
+				//오늘날짜 - startDate
+				var sGap = now.getTime() - car_SDay.getTime();
+				var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
+				console.log("sResult : " + sResult);
+				
+				//오늘날짜 - endDate
+				var eGap = now.getTime() - car_EDay.getTime();
+				var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
+				console.log("eResult : " + eResult);
+
+				if(sResult>30) {
+					alert("회사경력 근무시작일을 확인해주십시오.");
+					
+					break;
+				} else if(eResult>30) {
+					alert("회사경력 근무종료일을 확인해주십시오.");
 					
 					break;
 				} else {
-					expCheck = true;
+					
+					//endDate-startDate
+					var gap = car_EDay.getTime() - car_SDay.getTime();
+					var result = Math.floor(gap/(1000*60*60*24)) * -1;
+
+					console.log("result : " + result);
+					
+					if(result>0) {
+						alert("회사경력 근무기간을 확인해주십시오.");
+						carCheck = false;
+						
+						break;
+					} else {
+						carCheck = true;
+					}
+					
+				}
+
+				
+			}
+			
+			console.log("carCheck : " + carCheck);
+
+		} 
+		
+		if(langCheck==true && licCheck==true && carCheck==true && actCheck==false) {
+			
+			console.log("actCheck if문");
+			
+			//사회봉사활동 검증
+			var actStartDate = document.getElementsByClassName("actStartDate");
+			var actEndDate = document.getElementsByClassName("actEndDate");
+			
+			for(var i=0; i<actStartDate.length;i++) {
+				var activitySDate = actStartDate[i].value;
+				var activityEDate = actEndDate[i].value;
+				
+				console.log("activitySDate : " + activitySDate);
+				console.log("activityEDate : " + activityEDate);
+				
+				//사회봉사 start, endDate
+				var actSDateArr = activitySDate.split('-');
+				var act_SDay = new Date(actSDateArr[0], actSDateArr[1], actSDateArr[2]);
+				console.log("act_SDay"+act_SDay);
+				
+				var actEDateArr = activityEDate.split('-');
+				var act_EDay = new Date(actEDateArr[0], actEDateArr[1], actEDateArr[2]);
+				console.log("act_EDay" + act_EDay);
+
+				//오늘날짜 
+				var now = new Date();
+				console.log(now);
+				
+				//오늘날짜 - startDate
+				var sGap = now.getTime() - act_SDay.getTime();
+				var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
+				console.log("sResult : " + sResult);
+				
+				//오늘날짜 - endDate
+				var eGap = now.getTime() - act_EDay.getTime();
+				var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
+				console.log("eResult : " + eResult);
+
+				if(sResult>30) {
+					alert("사회봉사활동의 시작일을 확인해주십시오.");
+					
+					break;
+				} else if(eResult>30) {
+					alert("사회봉사활동의 종료일을 확인해주십시오.");
+					
+					break;
+				} else {
+					
+					//endDate-startDate
+					var gap = act_EDay.getTime() - act_SDay.getTime();
+					var result = Math.floor(gap/(1000*60*60*24)) * -1;
+
+					console.log("result : " + result);
+					
+					if(result>0) {
+						alert("사회봉사활동 기간을 확인해주십시오.");
+						actCheck = false;
+						
+						break;
+					} else {
+						actCheck = true;
+					}
+					
 				}
 				
 			}
 			
-		}
+			console.log("actCheck : " + actCheck);
+
+		} 
 		
+		if(langCheck==true && licCheck==true && actCheck==true && expCheck==false) {
+			
+			console.log("expCheck if문");
+			
+			//연수경험 검증
+			var expStartDate = document.getElementsByClassName("expStartDate");
+			var expEndDate = document.getElementsByClassName("expEndDate");
+			
+			for(var i=0; i<expStartDate.length;i++) {
+				var experienceSDate = expStartDate[i].value;
+				var experienceEDate = expEndDate[i].value;
+				
+				console.log("experienceSDate : " + experienceSDate);
+				console.log("experienceEDate : " + experienceEDate);
+				
+				//사회봉사 start, endDate
+				var expSDateArr = experienceSDate.split('-');
+				var exp_SDay = new Date(expSDateArr[0], expSDateArr[1], expSDateArr[2]);
+				console.log("exp_SDay"+exp_SDay);
+				
+				var expEDateArr = experienceEDate.split('-');
+				var exp_EDay = new Date(expEDateArr[0], expEDateArr[1], expEDateArr[2]);
+				console.log("exp_EDay" + exp_EDay);
+
+				//오늘날짜 
+				var now = new Date();
+				console.log(now);
+				
+				//오늘날짜 - startDate
+				var sGap = now.getTime() - exp_SDay.getTime();
+				var sResult = Math.floor(sGap/(1000*60*60*24)) * -1;
+				console.log("sResult : " + sResult);
+				
+				//오늘날짜 - endDate
+				var eGap = now.getTime() - exp_EDay.getTime();
+				var eResult = Math.floor(eGap/(1000*60*60*24)) * -1;
+				console.log("eResult : " + eResult);
+
+				if(sResult>30) {
+					alert("연수경험의 시작일을 확인해주십시오.");
+					
+					break;
+				} else if(eResult>30) {
+					alert("연수경험의 종료일을 확인해주십시오.");
+					
+					break;
+				} else {
+					
+					//endDate-startDate
+					var gap = exp_EDay.getTime() - exp_SDay.getTime();
+					var result = Math.floor(gap/(1000*60*60*24)) * -1;
+
+					console.log("result : " + result);
+					
+					if(result>0) {
+						alert("연수경험의 기간을 확인해주십시오.");
+						expCheck = false;
+						
+						break;
+					} else {
+						expCheck = true;
+					}
+					
+				}
+				
+			}
+			
+			console.log("expCheck : " + expCheck);
+
+		}
 		
 		if(langCheck==true && licCheck==true && carCheck==true && actCheck==true && expCheck==true) {
 			console.log("마지막 if");
-			$('#career').submit();
+// 			$('#career').submit();
 		}
-		
 		
 // 		console.log("expCheck : " + expCheck);
 // 		console.log("actCheck : " + actCheck);
