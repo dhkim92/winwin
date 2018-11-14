@@ -321,11 +321,20 @@ public class Apply2Controller {
 
 
 	@RequestMapping(value="/careerUpdate", method=RequestMethod.POST)
-	public String careerUpdateProc(LanguageArr langArr, LicenseArr licArr, CareerArr carArr, ActivityArr actArr, ExperienceArr expArr, MaterialArr matArr) {
-	
+	public String careerUpdateProc(HttpSession session, JobopenBasic jobopenBasic, LanguageArr langArr, LicenseArr licArr, CareerArr carArr, ActivityArr actArr, ExperienceArr expArr/*, MaterialArr matArr*/, MultipartFile file) {
 		
-		return "redirect:/apply/introduce";
-
+		
+		//introduce 카운트해서 redirect 정하기 
+		Introduce intro = new Introduce();
+		intro.setUserId((String)session.getAttribute("id"));
+		intro.setJobopenNo(jobopenBasic.getJobopenNo());
+		int countIntro = apply2Service.countIntro(intro);
+		
+		if(countIntro==1) {
+			return "redirect:/apply/intoduceUpdate?jobopenNo="+jobopenBasic.getJobopenNo();
+		} else {
+			return "redirect:/apply/intoduce?jobopenNo="+jobopenBasic.getJobopenNo();
+		}
 	}
 
 	

@@ -82,5 +82,7 @@ public interface Apply2Dao {
 	public void insertSupport(Support support);
 
 	public void fileUpload(Material mat);
+
+	public int countIntro(Introduce intro);
 	
 }

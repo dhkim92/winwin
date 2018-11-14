@@ -140,4 +140,13 @@
 		VALUES (material_SEQ.nextval, #{userId}, #{portfolioId}, #{originName}, #{storedName}, sysdate, #{filesize})
 	</insert>
 	
+  	<select id="countIntro" parameterType="winwin.dto.Introduce" resultType="int">
+  		SELECT count(*) FROM introduce
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+	
+	
+	
+	
   </mapper>

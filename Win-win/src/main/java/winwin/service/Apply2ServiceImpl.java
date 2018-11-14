@@ -154,4 +154,9 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.fileUpload(mat);
 	}
 
+	@Override
+	public int countIntro(Introduce intro) {
+		return dao.countIntro(intro);
+	}
+
 }
