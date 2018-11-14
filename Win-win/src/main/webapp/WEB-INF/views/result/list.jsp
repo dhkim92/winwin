@@ -188,6 +188,9 @@
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script>
+
+
+
 	var page = 1; //현재 페이지
 	var limit = 20; //목록 갯수
 	var pageCount = 5; //페이지 수
@@ -244,9 +247,9 @@ function resultList(page) {
 					html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
 					html += '	<td class="text-center align-middle username">' + item.username + '</td>';
 					html += '	<td class="text-center pass"><button type="button" class="btn btn-secondary btn-sm">' + item.pass + '</button></td>';
-					html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.emailSend + '</button></td>';
+					html += '	<td class="text-center emailsend"><button type="button" class="btn btn-secondary btn-sm">' + item.emailSend + '</button></td>';
 					html += '	<td hidden class="userId">' + item.userId + '</td>';
-					html += '	<td hidden class="jobOpenNo">' + item.jobOpenNo + '</td>';
+					html += '	<td hidden class="passNo">' + item.passNo + '</td>';
 					html += '</tr>';
 					
 				$('#resultTable tbody').append(html);
@@ -346,7 +349,6 @@ $("#resultTable").on("click", "[name=checkOne]", function() {
 		// 하나라도 해제가 되면 전체 버튼은 해제
 		$("[name=checkAll]").prop("checked", false);	
 	}
-	console.log($(this).parent().parent().find("td").text());
 });
 
 
@@ -367,6 +369,81 @@ function portModal() {
 
 	// When the user clicks on the button, open the modal 
 	btn.onclick = function() {
+		
+		var emailsend = [];
+		var pass = [];
+		
+		
+		var $emailsend = $("input[name=checkOne]:checked").parents().children(".emailsend");
+		
+		var $pass = $("input[name=checkOne]:checked").parents().children(".pass");
+		
+		$emailsend.each(function(i){
+			 emailsend.push($(this).text()); 
+		});
+		
+		$pass.each(function(){
+			pass.push($(this).text());
+		});
+		
+		for(var i=0; i<emailsend.length; i++){
+			if(emailsend[i]=='발송'){
+				var modald = document.getElementById("portModal");
+			 	modald.style.display = "block";
+				var spand = document.getElementsByClassName("close")[0];
+
+				spand.onclick = function() {
+					modald.style.display = "none";
+				}
+				
+				$("#btnOk").remove();
+				
+				$('#modalcontent').html("이미 발송 완료된 지원결과가 존재합니다.");
+				$('#btnClose').click(function(){
+					modald.style.display = "none";
+					location.href="/result/list";
+				});
+			}
+			
+			if(pass[i]=='처리 전'){
+				var modald = document.getElementById("portModal");
+			 	modald.style.display = "block";
+				var spand = document.getElementsByClassName("close")[0];
+
+				spand.onclick = function() {
+					modald.style.display = "none";
+				}
+				
+				$("#btnOk").remove();
+				
+				$('#modalcontent').html("합격 여부가 정해지지 않은 처리결과가 존재합니다.");
+				$('#btnClose').click(function(){
+					modald.style.display = "none";
+					location.href="/result/list";
+				});
+			}
+			
+			
+		}
+		
+		if(emailsend.length==0){
+			var modald = document.getElementById("portModal");
+		 	modald.style.display = "block";
+			var spand = document.getElementsByClassName("close")[0];
+
+			spand.onclick = function() {
+				modald.style.display = "none";
+			}
+			
+			$("#btnOk").remove();
+			
+			$('#modalcontent').html("선택한 지원결과가 없습니다.");
+			$('#btnClose').click(function(){
+				modald.style.display = "none";
+				location.href="/result/list";
+			});
+		}
+		
 		modal.style.display = "block";
 	}
 
@@ -386,13 +463,14 @@ function portModal() {
 		var userId = [];
 		var username = [];
 		var pass = [];
-		var jobOpenNo = [];
+		var passNo = [];
 		
 		 var $title = $("input[name=checkOne]:checked").parents().children(".title");
 		 var $userId = $("input[name=checkOne]:checked").parents().children(".userId");
 		 var $username = $("input[name=checkOne]:checked").parents().children(".username");
 		 var $pass = $("input[name=checkOne]:checked").parents().children(".pass");
-		 var $jobOpenNo = $("input[name=checkOne]:checked").parents().children(".jobOpenNo");
+		 var $passNo = $("input[name=checkOne]:checked").parents().children(".passNo");
+		 
 		 
 		 $title.each(function(i){
 			 title.push($(this).text());
@@ -410,8 +488,8 @@ function portModal() {
 			 pass.push($(this).text()); 
 		 });
 		 
-		 $jobOpenNo.each(function(i){
-			 jobOpenNo.push($(this).text()); 
+		 $passNo.each(function(i){
+			 passNo.push($(this).text()); 
 		 });
 		 
 		 	var modal = document.getElementById("portModal");
@@ -428,7 +506,7 @@ function portModal() {
 		 $.ajax({
 	         type:"post",
 	         url:"/result/emailsend",
-	         data:{"userId":userId, "title":title, "username":username, "pass":pass, "jobOpenNo":jobOpenNo},
+	         data:{"userId":userId, "title":title, "username":username, "pass":pass, "passNo" : passNo},
 	         dataType:"text",
 	         success:function(data){  
 	        		var modal = document.getElementById("portModal");
@@ -442,11 +520,13 @@ function portModal() {
 
 	        		btnClose.onclick = function() {
 	        			modal.style.display = "none";
+	        			location.href="/result/list";
 	        		}
 	        		
 	        			$('#modalcontent').html("이메일 전송을 성공하였습니다.");
 	        			$("#btnClose").removeAttr("disabled");
 	        			$("#btnOk").remove();
+	        			
 	         }
 	      });
 

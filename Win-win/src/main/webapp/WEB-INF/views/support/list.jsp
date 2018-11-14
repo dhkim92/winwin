@@ -84,6 +84,11 @@
 			$('#' + $(this).attr('forId') + ' option').prop('selected', false);
 			$(this).html('');
 			$(this).hide();
+			$("#title").val("0").prop("selected", true);
+			//property	속성 값 true / false
+			//attribute key, value 
+			$('.searchSelect option').prop('selected', false);
+			supportList(1);
 		});
 
 		$("#career option:selected").val();
@@ -211,6 +216,9 @@
 		var modal = document.getElementById("portModal");
 		// Get the button that opens the modal
 		var btn = document.getElementsByClassName("modalBtn");
+		
+		var $pModal = $('#pModal');
+		
 
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];
@@ -592,11 +600,18 @@ function paging (page, limit, totalCount, pageCount, callback) {
 
 		<!-- 모달 내용 입력하는 부분 -->
 		<div>
-			<div class="mt-4">
-				<p class="font-weight-bold text-center">모달 내용입력</p>
-				<!--         <select id="license" class="js-example-basic-single" > -->
-				<!-- 		</select> -->
+			<div class="mt-4" style="text-align:center;">
+				<span class="font-weight-bold" id="pModal">첨부파일 : </span>
+				<input type="text" value="${file.originName }" readOnly>
+				<button type="button" class="btn btn-secondary" onclick="downFile();">다운로드</button>
 			</div>
+			<script>
+			
+				function downFile(){
+					
+				}
+			
+			</script>
 
 			<div class="modal-footer d-flex justify-content-center">
 				<div class="row">

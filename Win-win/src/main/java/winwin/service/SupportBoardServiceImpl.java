@@ -69,8 +69,8 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	}
 
 	@Override
-	public void emailupdate(List<Integer> jobOpenNo, List<String> userId) {
-		dao.emailupdate(jobOpenNo, userId);
+	public void emailupdate(int passNo) {
+		dao.emailupdate(passNo);
 		
 	}
 

@@ -241,4 +241,34 @@
 	<select id="getTitle" resultType="winwin.dto.JobopenBasic">
 		SELECT title FROM jobopenbasic
 	</select>
+	
+	<update id="emailupdate" parameterType="int">
+		update support set emailsend='하이' where passno=#{passNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
  </mapper>

@@ -64,7 +64,7 @@ public class ResultBoardController {
 					@RequestParam(value="title[]") List<String> title,
 					@RequestParam(value="username[]") List<String> username,
 					@RequestParam(value="pass[]") List<String> pass,
-					@RequestParam(value="jobOpenNo[]") List<Integer> jobOpenNo) {
+					@RequestParam(value="passNo[]") List<String> passNo) {
 			
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		
@@ -72,7 +72,7 @@ public class ResultBoardController {
 		SendFailEmail SendFailEmail = new SendFailEmail();
 		Mail mail = new Mail();
 		
-		System.out.println(jobOpenNo);
+		System.out.println(passNo);
 		System.out.println(userId);
 		
 		for(int i=0; i<userId.size();i++) {
@@ -81,6 +81,7 @@ public class ResultBoardController {
 				mail.setTitle(username.get(i)+"님의 지원결과 메일입니다.");
 				mail.setContent(title.get(i));
 				
+				service.emailupdate(Integer.parseInt(passNo.get(i)));
 				SendPassEmail.sendMail(mail);
 				
 			} else if(pass.get(i).equals("불합격")) {
@@ -88,9 +89,11 @@ public class ResultBoardController {
 				mail.setTitle(username.get(i)+"님의 지원결과 메일입니다.");
 				mail.setContent(title.get(i));
 				
+				service.emailupdate(Integer.parseInt(passNo.get(i)));
 				SendFailEmail.sendMail(mail);
 			} 
 		}
+		
 		
 				
 		return map;
