@@ -361,10 +361,10 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" id="extFile" value="${mate.origin.originName }" name="extName" class="mr-1" style="width:150px;" readOnly/></td>
-                  <td class="align-middle"><input type="text" id="originFile" name="originName" class="mr-1" style="width:300px;" readOnly/></td>
+                  <td class="align-middle"><input type="text" id="extFile" value="${mate.split[1] }" name="extName" class="mr-1" style="width:150px;" readOnly/></td>
+                  <td class="align-middle"><input type="text" id="originFile" value="${mate.split[0] }" name="originName" class="mr-1" style="width:300px;" readOnly/></td>
                   <td class="align-middle"><input type="text" id="updateday" name="date" class="mr-1" style="width:200px;" readOnly/></td>
-                  <td class="align-middle"><input type="text" id="fileSize" name="filesize" class="mr-1" style="width:200px" readOnly/></td>
+                  <td class="align-middle"><input type="text" id="fileSize" value="${mate.mat.filesize }"name="filesize" class="mr-1" style="width:200px" readOnly/></td>
                   <td class="align-middle"><input type="file" name="file" id="file" style="display:none"><input type="button" onclick='$("#file").click();' value="파일첨부"/></td>
                   <td class="align-middle"><input type="button" id="DLBtn" value="삭제"/></td>
                 </tr>
@@ -392,7 +392,7 @@ $(document).ready(function() {
                      <strong><span class="text-danger">[퇴직사유 예 : 이직, 육아, 출산, 병가, 구조조정, 회사폐업 등]</span></strong>
                      <li><strong>연봉은 "( 월급여 X 12개월 ) + 상여"를 기준으로 작성하시기 바랍니다. (계약연봉기준)</strong></li>
                      <li><strong>해외연수의 경우 <span class="text-info">확인서 제출이 가능한 경우</span>에 한해서 기재하여 주시기 바랍니다.</strong></li>
-                     <li><strong>포트폴리오 파일 첨부는 최대 4개까지 가능하며 <span class="text-danger">등록 가능한 최대 용량은 총 10MB</span>입니다.</strong></li>
+                     <li><strong>포트폴리오 파일 첨부는 1개만 가능하며 <span class="text-danger">등록 가능한 최대 용량은 총 10MB</span>입니다.</strong></li>
                   </ul>
                   </td>
                </tr>

@@ -55,7 +55,7 @@ public interface Apply2Dao {
 
 	public void insertMaterial(Material material);
 
-	public List<Material> selectMaterial(Material material);
+	public Material selectMaterial(Material material);
 
 	public void updateMaterial(Material material);
 	

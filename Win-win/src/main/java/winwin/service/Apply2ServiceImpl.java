@@ -96,7 +96,7 @@ public class Apply2ServiceImpl implements Apply2Service{
 		dao.insertMaterial(material);
 	}
 	
-	public List<Material> selectMaterial(Material material) {
+	public Material selectMaterial(Material material) {
 		return dao.selectMaterial(material);
 	}
 	

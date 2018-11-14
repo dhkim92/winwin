@@ -282,10 +282,10 @@ public class Apply2Controller {
 		//material
 		material.setUserId((String)session.getAttribute("id"));
 		material.setPortfolioId(Integer.parseInt(jobopenNo));
-		List<Material> mat = apply2Service.selectMaterial(material);
-		
-		List<String> extFile = new ArrayList<>();
-		List<String> originFile = new ArrayList<>();
+		Material mat = apply2Service.selectMaterial(material);
+//		
+//		List<String> extFile = new ArrayList<>();
+//		List<String> originFile = new ArrayList<>();
 		
 //		for(int i=0; i<mat.size();i++) {
 //			
@@ -302,11 +302,13 @@ public class Apply2Controller {
 ////			extFile.add(extName);
 //		}
 		
-		Map<String, Object> map = new HashMap<>();
+		String[] split = mat.getOriginName().split("\\.");
 		
+		Map<String, Object> map = new HashMap<>();
+
 		map.put("mat", mat);
-		map.put("origin", originFile);
-		map.put("ext", extFile);
+		map.put("split", split);
+		
 		
 		model.addAttribute("language",lang);
 		model.addAttribute("license", lice);
