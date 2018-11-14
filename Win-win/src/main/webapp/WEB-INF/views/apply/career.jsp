@@ -322,10 +322,10 @@ $(document).ready(function() {
 					<th class="text-center align-middle">삭제</th>
 				</tr>
 				<tr style="line-height: 0.8em; height:10px;">
-                  <td class="align-middle"><input type="text" id="extFile" name="extName" class="mr-1" style="width:150px;" disabled/></td>
-                  <td class="align-middle"><input type="text" id="originFile" name="originName" class="mr-1" style="width:300px;" disabled/></td>
-                  <td class="align-middle"><input type="text" id="updateday" name="date" class="mr-1" style="width:200px;" disabled/></td>
-                  <td class="align-middle"><input type="text" id="fileSize" name="filesize" class="mr-1" style="width:200px" disabled/></td>
+                  <td class="align-middle"><input type="text" id="extFile" name="extName" class="mr-1" style="width:150px;" readOnly/></td>
+                  <td class="align-middle"><input type="text" id="originFile" name="originName" class="mr-1" style="width:300px;" readOnly/></td>
+                  <td class="align-middle"><input type="text" id="updateday" name="date" class="mr-1" style="width:200px;" readOnly/></td>
+                  <td class="align-middle"><input type="text" id="fileSize" name="filesize" class="mr-1" style="width:200px" readOnly/></td>
                   <td class="align-middle"><input type="file" name="file" id="file" style="display:none"><input type="button" onclick='$("#file").click();' value="파일첨부"/></td>
                   <td class="align-middle"><input type="button" id="DLBtn" value="삭제"/></td>
                 </tr>

@@ -177,7 +177,7 @@ $(document).ready(function() {
 	                  			</script>
 	                  	
 	                  </td>
-	                  <td class="align-middle"><input type="text" class="language" id="score" name="langArr[${i } ].score" value=${lang.score } /></td>
+	                  <td class="align-middle"><input type="text" class="language" id="score" name="langArr[${i } ].score" value="${lang.score }" /></td>
 	                  <td class="align-middle"><input type="date" class="language languageDate" id="lDate" name="langArr[${i }].lDate" value="${lang.lDate }" min="2000-01-01" max="3000-12-31" style="height:25px;"></td>
 	                  <td class="align-middle"><input type="text" class="language" id="lOrgan" name="langArr[${i }].lOrgan" value="${lang.lOrgan }" /></td>
 	                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
@@ -282,10 +282,10 @@ $(document).ready(function() {
 				<c:set var="i" value="0"/>
 				<c:forEach items="${activity }" var="act">				
 					<tr style="line-height: 0.8em; height:10px;">
-	                  <td class="align-middle"><input type="text" class="activity" name="actArr[${i }].aName" value=${act.aName} class="mr-1" style="width:250px" /></td>
-	                  <td class="align-middle"><input type="date" class="activity actStartDate" name="actArr[${i }].aStartDate"  value=${act.aStartDate} max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-	                  <td class="align-middle"><input type="date" class="activity actEndDate" name="actArr[${i }].aEndDate" value=${act.aEndDate} max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-	                  <td class="align-middle"><input type="text" class="activity" name="actArr[${i }].aContent" value=${act.aContent} class="mr-1" style="width:350px" /></td>
+	                  <td class="align-middle"><input type="text" class="activity" name="actArr[${i }].aName" value="${act.aName}" class="mr-1" style="width:250px" /></td>
+	                  <td class="align-middle"><input type="date" class="activity actStartDate" name="actArr[${i }].aStartDate"  value="${act.aStartDate}" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+	                  <td class="align-middle"><input type="date" class="activity actEndDate" name="actArr[${i }].aEndDate" value="${act.aEndDate}" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+	                  <td class="align-middle"><input type="text" class="activity" name="actArr[${i }].aContent" value="${act.aContent}" class="mr-1" style="width:350px" /></td>
 	                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
 	                </tr>
 	                <c:set var="i" value="${i+1 }"/>
@@ -330,10 +330,10 @@ $(document).ready(function() {
 	                  				$('select option[value="${exp.eOption}"]:eq(${i})').prop("selected", true);
 	                  			</script>		                  	
 		                  </td>
-		                  <td class="align-middle"><input type="text" class="experience" name="expArr[${i }].eOrgan" value=${exp.eOrgan } class="mr-1" style="width:250px" /></td>
-		                  <td class="align-middle"><input type="date" class="experience expStartDate" name="expArr[${i }].eStartDate"  value=${exp.eStartDate } max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-		                  <td class="align-middle"><input type="date" class="experience expEndDate" name="expArr[${i }].eEndDate"  value=${exp.eEndDate } max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
-		                  <td class="align-middle"><input type="text" class="experience" name="expArr[${i }].eContent" value=${exp.eContent } class="mr-1" style="width:350px" /></td>
+		                  <td class="align-middle"><input type="text" class="experience" name="expArr[${i }].eOrgan" value="${exp.eOrgan }" class="mr-1" style="width:250px" /></td>
+		                  <td class="align-middle"><input type="date" class="experience expStartDate" name="expArr[${i }].eStartDate"  value="${exp.eStartDate }" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+		                  <td class="align-middle"><input type="date" class="experience expEndDate" name="expArr[${i }].eEndDate"  value="${exp.eEndDate }" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td>
+		                  <td class="align-middle"><input type="text" class="experience" name="expArr[${i }].eContent" value="${exp.eContent }" class="mr-1" style="width:350px" /></td>
 		                  <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
 		                </tr>
  	                <c:set var="i" value="${i+1 }"/>

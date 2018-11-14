@@ -232,7 +232,7 @@ public class Apply2Controller {
 		mat.setOriginName(file.getOriginalFilename());
 		mat.setStoredName(stored);
 		mat.setFilesize(file.getSize());
-		mat.setUserId((String)session.getId());
+		mat.setUserId((String)session.getAttribute("id"));
 		mat.setPortfolioId(jobopenBasic.getJobopenNo());
 		
 		System.out.println("파일 이름 " + mat.getOriginName());
