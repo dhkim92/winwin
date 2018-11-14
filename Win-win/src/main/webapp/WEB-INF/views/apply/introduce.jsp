@@ -138,7 +138,6 @@ $(document).ready(function() {
    </table>
    	</div>
 
-	<form action="/apply/introduce" method="post" id="intro">
 
 	<h4 class="mt-4 mb-3 font-weight-bold">자기소개</h4><input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
@@ -150,6 +149,7 @@ $(document).ready(function() {
 		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 	</div>
 
+	<form action="/apply/introduce" method="post" id="intro">
 	<h6 class="mt-5 font-weight-bold">
 		1. 성장과정 (자신에 대한 소개)
 		<span style="color:red;"> *</span>

@@ -77,11 +77,9 @@ public class Apply2Controller {
 		while(langIter.hasNext()) {
 			Language l = langIter.next();
 
-			if(		(!(l.getgrade()==null) && !(l.getgrade()=="0")) 
-				&& (!(l.getTestName()==null) && !(l.getTestName()=="0"))
-				&& (!(l.getScore()==null) && !(l.getScore()==""))
-				&& (!(l.getlDate()==null) && !(l.getlDate()==""))
-				&& (!(l.getlOrgan()==null) && !(l.getlOrgan()==""))) {
+			if(	l.getTestName()!=null && l.getTestName().equals(0)) {
+				logger.info("getTestName if문에 들어옴");
+				
 				resLangList.add(l);
 			}
 		}
@@ -101,9 +99,9 @@ public class Apply2Controller {
 		while(licIter.hasNext()) {
 			License l = licIter.next();
 			
-			if(		(!(l.getLiName()==null) && !(l.getLiName()=="")) 
-					&& (!(l.getLiDate()==null) && !(l.getLiDate()=="0"))
-					&& (!(l.getLiOrgan()==null) && !(l.getLiOrgan()==""))) {
+			if(	l.getLiName()!=null && l.getLiName()!="") {
+				logger.info("getLiName if문에 들어옴");
+				
 				resLicList.add(l);
 			}
 		}
@@ -123,13 +121,7 @@ public class Apply2Controller {
 		while(carIter.hasNext()) {
 			Career c = carIter.next();
 			
-			if(		(!(c.getcStartDate()==null) && !(c.getcStartDate()=="")) 
-					&& (!(c.getcEndDate()==null) && !(c.getcEndDate()==""))
-					&& (!(c.getcName()==null) && !(c.getcName()==""))
-					&& (!(c.getPosition()==null) && !(c.getPosition()==""))
-					&& (!(c.getTask()==null) && !(c.getTask()==""))
-					&& (!(c.getSalary()==null) && !(c.getSalary()==""))
-					&& (!(c.getcContent()==null) && !(c.getcContent()==""))) {
+			if(c.getcName()!=null && c.getcName().equals("")) {
 				resCarList.add(c);
 			}
 		}
@@ -150,10 +142,7 @@ public class Apply2Controller {
 		while(actIter.hasNext()) {
 			Activity a = actIter.next();
 			
-			if(		(!(a.getaName()==null) && !(a.getaName()=="")) 
-					&& (!(a.getaStartDate()==null) && !(a.getaStartDate()==""))
-					&& (!(a.getaEndDate()==null) && !(a.getaEndDate()==""))
-					&& (!(a.getaContent()==null) && !(a.getaContent()==""))) {
+			if(a.getaName()!=null && a.getaName()!="") {
 				resActList.add(a);
 			}
 		}
@@ -164,7 +153,6 @@ public class Apply2Controller {
 			apply2Service.insertActivity(resActList.get(i));
 		}
 		
-		
 		Experience[] exp = expArr.getExpArr();
 		List<Experience> expList = new LinkedList<>(Arrays.asList(exp));
 		
@@ -174,11 +162,7 @@ public class Apply2Controller {
 		while(expIter.hasNext()) {
 			Experience e = expIter.next();
 			
-			if(		(!(e.geteOption()==null) && !(e.geteOption()=="0")) 
-					&& (!(e.geteOrgan()==null) && !(e.geteOption()==""))
-					&& (!(e.geteStartDate()==null) && !(e.geteStartDate()==""))
-					&& (!(e.geteEndDate()==null) && !(e.geteEndDate()==""))
-					&& (!(e.geteContent()==null) && !(e.geteContent()==""))) {
+			if(e.geteOption()!=null && e.geteOption().equals(0)) {
 				resExpList.add(e);
 			}
 		}
@@ -188,29 +172,6 @@ public class Apply2Controller {
 			resExpList.get(i).setUserId((String)session.getAttribute("id"));
 			apply2Service.insertExperience(resExpList.get(i));
 		}
-		
-		
-//		Material[] mat = matArr.getMatArr();
-//		List<Material> matList = new LinkedList<>(Arrays.asList(mat));
-//		
-//		List<Material> resMatList = new ArrayList<>();
-//		Iterator<Material> matIter = matList.iterator();
-//		System.out.println(mat);
-//		while(matIter.hasNext()) {
-//			Material m = matIter.next();
-//			
-////			if() {
-//				resMatList.add(m);
-////			}
-//		}
-//		
-//		for(int i=0; i<resMatList.size(); i++) {
-//			resMatList.get(i).setPortfolioId(jobopenBasic.getJobopenNo());
-//			resLicList.get(i).setUserId((String)session.getAttribute("id"));
-//			apply2Service.insertMaterial(resMatList.get(i));
-//		}
-//		
-		
 		
 		// ------------파일업로드----------------
 		

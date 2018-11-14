@@ -58,23 +58,23 @@
   	</select>
   	
   	<update id="updateMemCountNone" parameterType="String">
-  		UPDATE member SET count=1 WHERE userId=#{userId}
+  		UPDATE member SET count=1 WHERE userId=#{value}
   	</update>
 
   	<update id="updateMemCountH" parameterType="String">
-  		UPDATE member SET count=2 WHERE userId=#{userId}
+  		UPDATE member SET count=2 WHERE userId=#{value}
   	</update>
 
   	<update id="updateMemCountC" parameterType="String">
-  		UPDATE member SET count=3 WHERE userId=#{userId}
+  		UPDATE member SET count=3 WHERE userId=#{value}
   	</update>
 
   	<update id="updateMemCountU" parameterType="String">
-  		UPDATE member SET count=4 WHERE userId=#{userId}
+  		UPDATE member SET count=4 WHERE userId=#{value}
   	</update>
 
   	<update id="updateMemCountGS" parameterType="String">
-  		UPDATE member SET count=5 WHERE userId=#{userId}
+  		UPDATE member SET count=5 WHERE userId=#{value}
   	</update>
   	
 	<select id="selectHighSchool" parameterType="winwin.dto.HighSchool" resultType="winwin.dto.HighSchool">
@@ -197,7 +197,7 @@
 	</delete>
 	
 	<update id="resetMemAcademic" parameterType="String">
-		UPDATE member SET count=1 WHERE userId=#{userId}
+		UPDATE member SET count=1 WHERE userId=#{value}
 	</update>
 	
 </mapper>
