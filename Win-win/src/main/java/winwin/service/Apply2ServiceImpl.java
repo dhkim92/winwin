@@ -164,4 +164,59 @@ public class Apply2ServiceImpl implements Apply2Service{
 		return dao.countMaterial(material);
 	}
 
+	@Override
+	public int countLanguage(Language language) {
+		return dao.countLanguage(language);
+	}
+
+	@Override
+	public int countLicense(License license) {
+		return dao.countLicense(license);
+	}
+
+	@Override
+	public int countCareer(Career career) {
+		return dao.countCareer(career);
+	}
+
+	@Override
+	public int countActivity(Activity activity) {
+		return dao.countActivity(activity);
+	}
+
+	@Override
+	public int countExperience(Experience experience) {
+		return dao.countExperience(experience);
+	}
+
+	@Override
+	public void deleteLanguage(Language language) {
+		dao.deleteLanguage(language);
+	}
+
+	@Override
+	public void deleteLicense(Language language) {
+		dao.deleteLicense(language);
+	}
+
+	@Override
+	public void deleteCareer(Language language) {
+		dao.deleteCareer(language);
+	}
+
+	@Override
+	public void deleteActivity(Language language) {
+		dao.deleteActivity(language);
+	}
+
+	@Override
+	public void deleteExperience(Language language) {
+		dao.deleteExperience(language);
+	}
+
+	@Override
+	public void deleteMaterial(Material material) {
+		dao.deleteMaterial(material);
+	}
+
 }

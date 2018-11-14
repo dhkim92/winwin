@@ -176,10 +176,6 @@
   		UPDATE gSchool SET gsName=#{gsName}, gsBranch=#{gsBranch}, gsDay=#{gsDay}, gsMajor=#{gsMajor}, gsScore=#{gsScore}, gsTotalScore=#{gsTotalScore}, gsEndDate=#{gsEndDate}, gsGraduate=#{gsGraduate}, gsRegion=#{gsRegion} WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
   	</update>
   	
-  	<update id="military" parameterType="winwin.dto.Military">
-  		UPDATE military SET discharge=#{discharge}, startDate=#{startDate}, endDate=#{endDate}, mCategory=#{mCategory}, mGrade=#{mGrade} WHERE userId=#{userId} AND jobopenNo=#{jobopenNo}
-  	</update>
-  	
   	<delete id="deleteHighSchool" parameterType="winwin.dto.HighSchool">
   		DELETE FROM highSchool WHERE jobopenNo=#{jobopenNo} AND userId=#{userId}
   	</delete>
@@ -199,5 +195,9 @@
 	<update id="resetMemAcademic" parameterType="String">
 		UPDATE member SET count=1 WHERE userId=#{value}
 	</update>
+	
+	<delete id="deleteMilitary" parameterType="winwin.dto.Military">
+		DELETE FROM military WHERE jobopenNo=#{jobopenNo} AND userId=#{userId}
+	</delete>
 	
 </mapper>

@@ -149,6 +149,63 @@
   		SELECT count(*) FROM material
   		WHERE userId = #{userId } AND PORTFOLIOID = #{portfolioId }
   	</select>
+  	
+  	<select id="countLanguage" parameterType="winwin.dto.Language" resultType="int">
+  		SELECT count(*) FROM language
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="countLicense" parameterType="winwin.dto.License" resultType="int">
+  		SELECT count(*) FROM license
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="countCareer" parameterType="winwin.dto.Career" resultType="int">
+  		SELECT count(*) FROM career
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="countActivity" parameterType="winwin.dto.Activity" resultType="int">
+  		SELECT count(*) FROM activity
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+  	
+  	<select id="countExperience" parameterType="winwin.dto.Experience" resultType="int">
+  		SELECT count(*) FROM experience
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</select>
+
+  	
+  	<delete id="deleteLanguage" parameterType="winwin.dto.Language">
+ 		DELETE FROM language
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</delete>
+  	
+ 	<delete id="deleteLicense" parameterType="winwin.dto.Language" >
+  		DELETE FROM license
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</delete>
+  	
+  	<delete id="deleteCareer" parameterType="winwin.dto.Language" >
+  		DELETE FROM career
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</delete>
+  	
+  	<delete id="deleteActivity" parameterType="winwin.dto.Language" >
+  		DELETE FROM activity
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</delete>
+  	
+  	<delete id="deleteExperience" parameterType="winwin.dto.Language" >
+  		DELETE FROM experience
+  		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
+  	</delete>
+  	
+  	<delete id="deleteMaterial" parameterType="winwin.dto.Material" >
+  		DELETE FROM material
+  		WHERE userId = #{userId } AND PORTFOLIOID = #{portfolioId }
+  	</delete>
+  	
 	
 	
 	

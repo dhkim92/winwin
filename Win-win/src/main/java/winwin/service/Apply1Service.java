@@ -108,6 +108,8 @@ public interface Apply1Service {
 	public void resetMemAcademic(String userId);
 
 	public int countIntroduce(Introduce introduce);
+
+	public void deleteMilitary(Military military);
 	
 	
 	

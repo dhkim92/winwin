@@ -495,7 +495,10 @@ public class Apply1Controller {
 	@RequestMapping(value="/militaryUpdate", method=RequestMethod.POST)
 	public String militaryUpdateProc(Military military, Language language, License license, Career career, Experience experience, Activity activity, Material material) {
 		
-		apply1Service.updateMilitary(military);
+		logger.info("military jobopenNo : " + military.getJobopenNo());
+		
+		apply1Service.deleteMilitary(military);
+		apply1Service.insertMilitary(military);
 		
 		//경력사항 insert or update
 		language.setJobopenNo(military.getJobopenNo());

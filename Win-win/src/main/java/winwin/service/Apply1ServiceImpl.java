@@ -259,4 +259,9 @@ public class Apply1ServiceImpl implements Apply1Service {
 		return dao.countIntroduce(introduce);
 	}
 
+	@Override
+	public void deleteMilitary(Military military) {
+		dao.deleteMilitary(military);
+	}
+
 }

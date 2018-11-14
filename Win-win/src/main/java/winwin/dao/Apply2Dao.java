@@ -86,5 +86,27 @@ public interface Apply2Dao {
 	public int countIntro(Introduce intro);
 
 	public int countMaterial(Material material);
+
+	public int countLanguage(Language language);
+
+	public int countLicense(License license);
+
+	public int countCareer(Career career);
+
+	public int countActivity(Activity activity);
+
+	public int countExperience(Experience experience);
+
+	public void deleteLanguage(Language language);
+
+	public void deleteLicense(Language language);
+
+	public void deleteCareer(Language language);
+
+	public void deleteActivity(Language language);
+
+	public void deleteExperience(Language language);
+
+	public void deleteMaterial(Material material);
 	
 }

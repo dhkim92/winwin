@@ -109,4 +109,6 @@ public interface Apply1Dao {
 
 	public int countIntroduce(Introduce introduce);
 
+	public void deleteMilitary(Military military);
+
 }

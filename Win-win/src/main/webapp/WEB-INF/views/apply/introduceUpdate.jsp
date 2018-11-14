@@ -144,7 +144,7 @@ $(document).ready(function() {
 		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_academic.png" onclick="checkAca();">
 		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_military.png" onclick="checkMil();">
 		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_career.png" onclick="checkCar();">
-		<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
+		<img class="img-fluid d-block" src="/resources/image/B_introduce.png">
 		<a href="/apply/finish?jobopenNo=${jobopenBasic.jobopenNo }">
 			<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 		</a>
