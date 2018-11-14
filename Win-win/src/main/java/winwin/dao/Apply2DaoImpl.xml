@@ -145,7 +145,10 @@
   		WHERE userId = #{userId } AND jobopenNo = #{jobopenNo }
   	</select>
   	
-	
+  	<select id="countMaterial" parameterType="winwin.dto.Material" resultType="int">
+  		SELECT count(*) FROM material
+  		WHERE userId = #{userId } AND PORTFOLIOID = #{portfolioId }
+  	</select>
 	
 	
 	

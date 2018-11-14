@@ -147,7 +147,7 @@ $(document).ready(function() {
 					<th class="text-center align-middle">주관처</th>
 					<th class="text-center align-middle">삭제</th>
 				</tr>
-				
+                
 				<c:set var="i" value="0"/>
 				<c:forEach items="${language }" var="lang">
 					<tr style="line-height: 0.8em; height:10px;">

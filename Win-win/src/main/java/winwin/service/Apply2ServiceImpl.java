@@ -159,4 +159,9 @@ public class Apply2ServiceImpl implements Apply2Service{
 		return dao.countIntro(intro);
 	}
 
+	@Override
+	public int countMaterial(Material material) {
+		return dao.countMaterial(material);
+	}
+
 }

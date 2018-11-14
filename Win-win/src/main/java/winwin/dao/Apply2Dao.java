@@ -84,5 +84,7 @@ public interface Apply2Dao {
 	public void fileUpload(Material mat);
 
 	public int countIntro(Introduce intro);
+
+	public int countMaterial(Material material);
 	
 }

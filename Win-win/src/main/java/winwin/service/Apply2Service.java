@@ -84,5 +84,7 @@ public interface Apply2Service {
 	public void fileUpload(Material mat);
 
 	public int countIntro(Introduce intro);
+
+	public int countMaterial(Material material);
 	
 }
