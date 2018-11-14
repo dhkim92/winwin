@@ -1037,7 +1037,7 @@ $('#Btn').click(function() {
 		
 		if(langCheck==true && licCheck==true && carCheck==true && actCheck==true && expCheck==true) {
 			console.log("마지막 if");
-// 			$('#career').submit();
+			$('#career').submit();
 		}
 		
 // 		console.log("expCheck : " + expCheck);

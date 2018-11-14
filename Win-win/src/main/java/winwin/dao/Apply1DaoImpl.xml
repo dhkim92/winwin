@@ -28,7 +28,7 @@
   	</select>
   	
   	<select id="selectTask" parameterType="winwin.dto.JobopenDetail" resultType="winwin.dto.JobopenDetail">
-  		SELECT task FROM jobopenDetail WHERE jobopenNo=#{jobopenNo}
+  		SELECT DISTINCT task FROM jobopenDetail WHERE jobopenNo=#{jobopenNo}
   	</select>
   	
   	<insert id="insertHighSchool" parameterType="winwin.dto.HighSchool">
