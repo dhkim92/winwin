@@ -63,7 +63,6 @@
 	<div class="modal-contentCheck">
 	
 		<h3 class="mt-3 font-weight-bold">지원서 미리보기</h3><hr style="border: solid 2px #376092;"><br>
-		
 	<div class="container">
 		<h4 class="ml-2 font-weight-bold">개인사항</h4><hr class="ml-2 border-dark bg-dark" style="border: solid 1px;">
 		<h6 class="ml-4 mt-5 font-weight-bold">기본정보</h6><br>
@@ -386,7 +385,7 @@ btn.onclick = function() {
 
 
 btnUpdate.onclick = function() {
-    location.href = "/apply/userDetailUpdate?jobopenNo="+${userDetail.jobopenNo};
+    location.href = '/apply/userDetailUpdate?jobopenNo=${introduce.jobopenNo}';
 }
 
 btnClose.onclick = function() {

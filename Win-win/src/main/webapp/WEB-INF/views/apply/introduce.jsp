@@ -150,6 +150,7 @@ $(document).ready(function() {
 	</div>
 
 	<form action="/apply/introduce" method="post" id="intro">
+	<input type="text" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<h6 class="mt-5 font-weight-bold">
 		1. 성장과정 (자신에 대한 소개)
 		<span style="color:red;"> *</span>

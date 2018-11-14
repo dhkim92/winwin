@@ -673,13 +673,14 @@ public class Apply1Controller {
 	
 	
 	@RequestMapping(value="/introduce", method=RequestMethod.POST)
-	public String introduceProc(JobopenBasic jobopenBasic, Introduce introduce, HttpSession session) {
+	public String introduceProc(Introduce introduce, HttpSession session) {
 		
+		logger.info("jobopenNo : " + introduce.getJobopenNo());
+
 		introduce.setUserId((String)session.getAttribute("id"));
-		introduce.setJobopenNo(jobopenBasic.getJobopenNo());
 		apply2Service.insertIntroduce(introduce);
 		
-		return "redirect:/apply/finish?jobopenNo="+jobopenBasic.getJobopenNo();
+		return "redirect:/apply/finish?jobopenNo="+introduce.getJobopenNo();
 		
 	}
 

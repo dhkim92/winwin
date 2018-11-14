@@ -229,7 +229,7 @@ $(document).ready(function() {
 		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_academic.png" onclick="checkAca();">		
 		<img class="img-fluid d-block" src="/resources/image/B_military.png">
 		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_career.png" onclick="checkCar();">
-		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_introduce.png" onclick="checkIntro">
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_introduce.png" onclick="checkIntro();">
 		<a href="/apply/finish?jobopenNo=${jobopenBasic.jobopenNo }">
 			<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 		</a>
