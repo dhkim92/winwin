@@ -68,6 +68,7 @@ public class Apply2Controller {
 	@RequestMapping(value="/career", method=RequestMethod.POST) 
 	public String careerProc(HttpSession session, JobopenBasic jobopenBasic, LanguageArr langArr, LicenseArr licArr, CareerArr carArr, ActivityArr actArr, ExperienceArr expArr/*, MaterialArr matArr*/, MultipartFile file) {
 
+		//language
 		Language[] lang = langArr.getLangArr();
 		List<Language> langList = new LinkedList<>(Arrays.asList(lang));
 
@@ -77,7 +78,7 @@ public class Apply2Controller {
 		while(langIter.hasNext()) {
 			Language l = langIter.next();
 
-			if(	l.getTestName()!=null && l.getTestName().equals(0)) {
+			if(	l.getTestName()!=null && !l.getTestName().equals("0")) {
 				logger.info("getTestName if문에 들어옴");
 				
 				resLangList.add(l);
@@ -90,6 +91,7 @@ public class Apply2Controller {
 			apply2Service.insertLanguage(resLangList.get(i));
 		}
 		
+		//license
 		License[] lic = licArr.getLicArr();
 		List<License> licList = new LinkedList<>(Arrays.asList(lic));
 		
@@ -99,7 +101,7 @@ public class Apply2Controller {
 		while(licIter.hasNext()) {
 			License l = licIter.next();
 			
-			if(	l.getLiName()!=null && l.getLiName()!="") {
+			if(	l.getLiName()!=null && !l.getLiName().equals("")) {
 				logger.info("getLiName if문에 들어옴");
 				
 				resLicList.add(l);
@@ -112,6 +114,8 @@ public class Apply2Controller {
 			apply2Service.insertLicense(resLicList.get(i));
 		}
 		
+		
+		//career
 		Career[] car = carArr.getCarArr();
 		List<Career> carList = new LinkedList<>(Arrays.asList(car));
 		
@@ -121,7 +125,8 @@ public class Apply2Controller {
 		while(carIter.hasNext()) {
 			Career c = carIter.next();
 			
-			if(c.getcName()!=null && c.getcName().equals("")) {
+			if(c.getPosition()!=null && !c.getPosition().equals("")) {
+				
 				resCarList.add(c);
 			}
 		}
@@ -133,6 +138,7 @@ public class Apply2Controller {
 		}
 		
 		
+		//activity
 		Activity[] act = actArr.getActArr();
 		List<Activity> actList = new LinkedList<>(Arrays.asList(act));
 		
@@ -141,8 +147,9 @@ public class Apply2Controller {
 
 		while(actIter.hasNext()) {
 			Activity a = actIter.next();
+			logger.info("getaName : " + a.getaName());
 			
-			if(a.getaName()!=null && a.getaName()!="") {
+			if(a.getaName()!=null && !a.getaName().equals("")) {
 				resActList.add(a);
 			}
 		}
@@ -153,6 +160,7 @@ public class Apply2Controller {
 			apply2Service.insertActivity(resActList.get(i));
 		}
 		
+		//experience
 		Experience[] exp = expArr.getExpArr();
 		List<Experience> expList = new LinkedList<>(Arrays.asList(exp));
 		
@@ -162,7 +170,7 @@ public class Apply2Controller {
 		while(expIter.hasNext()) {
 			Experience e = expIter.next();
 			
-			if(e.geteOption()!=null && e.geteOption().equals(0)) {
+			if(e.geteOption()!=null && !e.geteOption().equals("0")) {
 				resExpList.add(e);
 			}
 		}
