@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.Activity;
 import winwin.dto.Career;
@@ -31,9 +32,11 @@ import winwin.dto.License;
 import winwin.dto.Material;
 import winwin.dto.Member;
 import winwin.dto.Military;
+import winwin.dto.Support;
 import winwin.dto.University;
 import winwin.dto.UserDetail;
 import winwin.service.Apply1Service;
+import winwin.service.Apply2Service;
 
 @Controller
 @RequestMapping(value="/apply")
@@ -42,6 +45,7 @@ public class Apply1Controller {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired Apply1Service apply1Service;
+	@Autowired Apply2Service apply2Service;
 	
 	@RequestMapping(value="/userDetail", method=RequestMethod.GET)
 	public void userDetail(String title, String jobopenNo, JobopenDetail jobopenDetail, JobopenBasic jobopenBasic, Member member, HttpSession session, Model model) {	
@@ -656,6 +660,133 @@ public class Apply1Controller {
 		map.put("introduce", objIntro);
 		
 		return map;
+	}
+	
+	
+	@RequestMapping(value="/introduce", method=RequestMethod.GET)
+	public void introduce(String jobopenNo, JobopenBasic jobopenBasic, Model model) {
+		
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
+		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
+	
+	}
+	
+	
+	@RequestMapping(value="/introduce", method=RequestMethod.POST)
+	public String introduceProc(JobopenBasic jobopenBasic, Introduce introduce, HttpSession session) {
+		
+		introduce.setUserId((String)session.getAttribute("id"));
+		introduce.setJobopenNo(jobopenBasic.getJobopenNo());
+		apply2Service.insertIntroduce(introduce);
+		
+		return "redirect:/apply/finish?jobopenNo="+jobopenBasic.getJobopenNo();
+		
+	}
+
+
+	@RequestMapping(value="/introduceUpdate", method=RequestMethod.GET)
+	public void introduceUpdate(String jobopenNo, JobopenBasic jobopenBasic, Introduce introduce, HttpSession session, Model model) {
+		
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
+		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
+		
+		// introduce 정보 가져오기 
+		introduce.setUserId((String)session.getAttribute("id"));
+		introduce.setJobopenNo(Integer.parseInt(jobopenNo));
+		Introduce intro = apply2Service.selectIntroduce(introduce);
+		
+		model.addAttribute("intro", intro);
+	}
+
+	@RequestMapping(value="/introduceUpdate", method=RequestMethod.POST)
+	public String introduceUpdateProc(Introduce introduce, HttpSession session, ModelAndView mav) {
+	
+		introduce.setUserId((String)session.getAttribute("id"));
+		apply2Service.updateIntroduce(introduce);
+		
+		
+		return "redirect:/apply/finish?jobopenNo="+introduce.getJobopenNo();
+		
+	}
+	
+	
+	
+	@RequestMapping(value="/finish", method=RequestMethod.GET)
+	public void finish(String jobopenNo, HttpSession session, JobopenBasic jobopenBasic, Member member, UserDetail userDetail, HighSchool highSchool, College college, University university, GSchool gSchool, 
+			Military military, Language language, License license, Career career, Activity activity, Experience experience, Introduce introduce, Model model) {
+		
+		
+		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
+		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
+
+		member.setUserid((String)session.getAttribute("id"));
+		model.addAttribute("member", apply2Service.selectMember(member));
+		
+		userDetail.setUserId((String)session.getAttribute("id"));
+		userDetail.setJobopenNo(jobopenBasic.getJobopenNo());
+		model.addAttribute("userDetail", apply2Service.selectUserDetail(userDetail));
+		
+		highSchool.setUserId((String)session.getAttribute("id"));
+		highSchool.setJobopenNo(jobopenBasic.getJobopenNo());
+		model.addAttribute("highSchool", apply2Service.selectHighSchool(highSchool));
+
+		college.setUserId((String)session.getAttribute("id"));
+		college.setJobopenNo(jobopenBasic.getJobopenNo());
+		model.addAttribute("college", apply2Service.selectCollege(college));
+		
+		university.setUserId((String)session.getAttribute("id"));
+		university.setJobopenNo(jobopenBasic.getJobopenNo());
+		model.addAttribute("university", apply2Service.selectUniversity(university));
+		
+		gSchool.setUserId((String)session.getAttribute("id"));
+		gSchool.setJobopenNo(jobopenBasic.getJobopenNo());
+		model.addAttribute("gSchool", apply2Service.selectGSchool(gSchool));
+		
+		military.setUserId((String)session.getAttribute("id"));
+		military.setJobopenNo(jobopenBasic.getJobopenNo());
+		model.addAttribute("military", apply2Service.selectMilitary(military));
+		
+		language.setUserId((String)session.getAttribute("id"));
+		language.setJobopenNo(jobopenBasic.getJobopenNo());
+		List<Language> langList = apply2Service.selectLanguage(language);
+		model.addAttribute("language", langList);
+
+		license.setUserId((String)session.getAttribute("id"));
+		license.setJobopenNo(jobopenBasic.getJobopenNo());
+		List<License> licList = apply2Service.selectLicense(license);
+		model.addAttribute("license", licList);
+
+		career.setUserId((String)session.getAttribute("id"));
+		career.setJobopenNo(jobopenBasic.getJobopenNo());
+		List<Career> carList = apply2Service.selectCareer(career);
+		model.addAttribute("career", carList);
+		
+		activity.setUserId((String)session.getAttribute("id"));
+		activity.setJobopenNo(jobopenBasic.getJobopenNo());
+		List<Activity> actList = apply2Service.selectActivity(activity);
+		model.addAttribute("activity", actList);
+
+		experience.setUserId((String)session.getAttribute("id"));
+		experience.setJobopenNo(jobopenBasic.getJobopenNo());
+		List<Experience> expList = apply2Service.selectExperience(experience);
+		model.addAttribute("experience", expList);
+		
+		introduce.setUserId((String)session.getAttribute("id"));
+		introduce.setJobopenNo(jobopenBasic.getJobopenNo());
+		model.addAttribute("introduce", apply2Service.selectIntroduce(introduce));
+		
+	}
+	
+	@RequestMapping(value="/submit", method=RequestMethod.GET)
+	public String finishProc(HttpSession session, JobopenBasic jobopenBasic, Support support) {
+		
+		support.setJobopenNo(jobopenBasic.getJobopenNo());
+		support.setUserId((String)session.getAttribute("id"));
+		
+		apply2Service.insertSupport(support);
+		
+		return "redirect:/main/usermain";
+		
 	}
 
 	

@@ -139,128 +139,128 @@ $(document).ready(function() {
 </div>
 
 <script type="text/javascript">
-function checkUserD() {
+// function checkUserD() {
 	
-	var jobopenNo = ${jobopenBasic.jobopenNo};
+// 	var jobopenNo = ${jobopenBasic.jobopenNo};
 	
-	$.ajax({
-		type:"get"
-		, url: "/apply/checkUserD"
-		, dataType: "json"
-		, data: {
-			"jobopenNo" : jobopenNo
-		}
-		, success: function( data ) {
+// 	$.ajax({
+// 		type:"get"
+// 		, url: "/apply/checkUserD"
+// 		, dataType: "json"
+// 		, data: {
+// 			"jobopenNo" : jobopenNo
+// 		}
+// 		, success: function( data ) {
 			
-			if(data.userDetail>0) {
-				location.href="/apply/userDetailUpdate?jobopenNo="+jobopenNo;
-			} else {
-				location.href="/apply/userDetail?jobopenNo="+jobopenNo;
-			}
+// 			if(data.userDetail>0) {
+// 				location.href="/apply/userDetailUpdate?jobopenNo="+jobopenNo;
+// 			} else {
+// 				location.href="/apply/userDetail?jobopenNo="+jobopenNo;
+// 			}
 			
-		}, error: function() {
-			alert("error");
-		}
-	})
+// 		}, error: function() {
+// 			alert("error");
+// 		}
+// 	})
 
 	
-}
+// }
 
 
 
-function checkAca() {
+// function checkAca() {
 	
-	var jobopenNo = ${jobopenBasic.jobopenNo};
+// 	var jobopenNo = ${jobopenBasic.jobopenNo};
 	
-	$.ajax({
-		type:"get"
-		, url: "/apply/checkAca"
-		, dataType: "json"
-		, data: {
-			"jobopenNo" : jobopenNo
-		}
-		, success: function( data ) {
+// 	$.ajax({
+// 		type:"get"
+// 		, url: "/apply/checkAca"
+// 		, dataType: "json"
+// 		, data: {
+// 			"jobopenNo" : jobopenNo
+// 		}
+// 		, success: function( data ) {
 			
-			if(data.highSchool>0 || data.college>0 || data.university>0 || data.gSchool>0) {
-				location.href="/apply/academicUpdate?jobopenNo="+jobopenNo;
-			} else {
-				location.href="/apply/academic?jobopenNo="+jobopenNo;
-			}
+// 			if(data.highSchool>0 || data.college>0 || data.university>0 || data.gSchool>0) {
+// 				location.href="/apply/academicUpdate?jobopenNo="+jobopenNo;
+// 			} else {
+// 				location.href="/apply/academic?jobopenNo="+jobopenNo;
+// 			}
 			
-		}, error: function() {
-			alert("error");
-		}
-	})
-}
+// 		}, error: function() {
+// 			alert("error");
+// 		}
+// 	})
+// }
 
-function checkMil() {
+// function checkMil() {
 	
-	var jobopenNo = ${jobopenBasic.jobopenNo};
+// 	var jobopenNo = ${jobopenBasic.jobopenNo};
 	
-	$.ajax({
-		type:"get"
-		, url: "/apply/checkMil"
-		, dataType: "json"
-		, data: {
-			"jobopenNo" : jobopenNo
-		}
-		, success: function( data ) {
-			if(data.military>0) {
-				location.href="/apply/militaryUpdate?jobopenNo="+jobopenNo;
-			} else {
-				location.href="/apply/military?jobopenNo="+jobopenNo;
-			}
+// 	$.ajax({
+// 		type:"get"
+// 		, url: "/apply/checkMil"
+// 		, dataType: "json"
+// 		, data: {
+// 			"jobopenNo" : jobopenNo
+// 		}
+// 		, success: function( data ) {
+// 			if(data.military>0) {
+// 				location.href="/apply/militaryUpdate?jobopenNo="+jobopenNo;
+// 			} else {
+// 				location.href="/apply/military?jobopenNo="+jobopenNo;
+// 			}
 			
-		}
-	})
-}
+// 		}
+// 	})
+// }
 
-function checkCar() {
+// function checkCar() {
 	
-	var jobopenNo = ${jobopenBasic.jobopenNo};
+// 	var jobopenNo = ${jobopenBasic.jobopenNo};
 	
-	$.ajax({
-		type:"get"
-		, url: "/apply/checkCar"
-		, dataType: "json"
-		, data: {
-			"jobopenNo" : jobopenNo
-		}
-		, success: function( data ) {
-			if(data.language>0 || data.license>0 || data.career>0 || data.activity>0 || data.experience>0 || data.material>0) {
-				location.href="/apply/careerUpdate?jobopenNo="+jobopenNo;
-			} else {
-				location.href="/apply/career?jobopenNo="+jobopenNo;
-			}
+// 	$.ajax({
+// 		type:"get"
+// 		, url: "/apply/checkCar"
+// 		, dataType: "json"
+// 		, data: {
+// 			"jobopenNo" : jobopenNo
+// 		}
+// 		, success: function( data ) {
+// 			if(data.language>0 || data.license>0 || data.career>0 || data.activity>0 || data.experience>0 || data.material>0) {
+// 				location.href="/apply/careerUpdate?jobopenNo="+jobopenNo;
+// 			} else {
+// 				location.href="/apply/career?jobopenNo="+jobopenNo;
+// 			}
 			
-		}
-	})
+// 		}
+// 	})
 
 	
-}
+// }
 
-function checkIntro() {
+// function checkIntro() {
 	
-	var jobopenNo = ${jobopenBasic.jobopenNo};
+// 	var jobopenNo = ${jobopenBasic.jobopenNo};
 	
-	$.ajax({
-		type:"get"
-			, url: "/apply/checkIntro"
-			, dataType: "json"
-			, data: {
-				"jobopenNo" : jobopenNo
-			}
-			, success: function( data ) {
-				if(data.introduce>0) {
-					location.href="/apply/introduceUpdate?jobopenNo="+jobopenNo;
-				} else {
-					location.href="/apply/introduce?jobopenNo="+jobopenNo;
-				}
+// 	$.ajax({
+// 		type:"get"
+// 			, url: "/apply/checkIntro"
+// 			, dataType: "json"
+// 			, data: {
+// 				"jobopenNo" : jobopenNo
+// 			}
+// 			, success: function( data ) {
+// 				if(data.introduce>0) {
+// 					location.href="/apply/introduceUpdate?jobopenNo="+jobopenNo;
+// 				} else {
+// 					location.href="/apply/introduce?jobopenNo="+jobopenNo;
+// 				}
 				
-			}
+// 			}
 		
-	})
-}
+// 	})
+// }
 
 
 var finishBtn = document.getElementById("finishBtn");
