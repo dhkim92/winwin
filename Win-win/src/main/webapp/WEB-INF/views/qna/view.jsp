@@ -299,6 +299,7 @@ function addComment(){
 			alert("댓글 쓰기 오류")
 		}		
 	});
+	$("#commentContent").val("");
 }
 function delComment(event){
 	var commentNo = $(event.target).next().val();

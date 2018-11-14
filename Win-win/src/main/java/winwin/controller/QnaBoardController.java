@@ -34,11 +34,17 @@ public class QnaBoardController {
 	@RequestMapping(value="/qna/list")
 	public void list(Model m,HttpServletRequest req) {
 		
+//		//관리자 초기 로그인 값
+//		HttpSession session =  req.getSession();
+//		session.setAttribute("adminLogin", true);
+//		session.setAttribute("admincode", "444444");
+//		session.setAttribute("adminname", "이현우");
+		
 		//관리자 초기 로그인 값
 		HttpSession session =  req.getSession();
-		session.setAttribute("adminLogin", true);
-		session.setAttribute("admincode", "444444");
-		session.setAttribute("adminname", "이현우");
+		session.setAttribute("login", true);
+		session.setAttribute("id", "test@naver.com");
+		session.setAttribute("name", "테스터");
 		
 		int total = service.totalCnt();
 		String curr =req.getParameter("curPage");

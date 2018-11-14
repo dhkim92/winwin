@@ -10,6 +10,8 @@ public interface QnaBoardDao {
 
 	public int totalCnt();
 	
+	public QnaComment getComment(QnaComment comment);
+	
 	public void hit(QnaBoard board);
 	
 	public List<QnaBoard> list(Paging paging);

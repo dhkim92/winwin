@@ -104,9 +104,20 @@
  			,writedate	 			
  		FROM qna_comment
  		WHERE qnano = #{qnaNo}
- 		ORDER BY commentno DESC
+ 		ORDER BY commentno
  	</select>
  	<select id="getCommentCnt" parameterType="winwin.dto.QnaBoard" resultType="int">
  	 	<include refid="commentCnt"/>
+ 	</select>
+ 	<select id="getComment" parameterType="winwin.dto.QnaComment" resultType="winwin.dto.QnaComment">
+ 		SELECT 
+ 		 	commentno
+ 			,qnano
+ 			,writer
+ 			,id
+ 			,content
+ 			,writedate	
+ 		FROM QnaComment
+ 		WHERE commentno = #{commentNo }
  	</select>
  </mapper>

@@ -32,6 +32,8 @@ public interface QnaBoardService{
 	
 	public void deleteCommentsByBoardNo(QnaBoard board);
 	
+	public QnaComment getComment(QnaComment comment);
+	
 	public void updateBoardAsw(QnaBoard board);
 	
 	public void deleteBoardAsw(QnaBoard board);

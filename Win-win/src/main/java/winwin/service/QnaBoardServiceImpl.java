@@ -73,4 +73,8 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	public int getCommentCnt(QnaBoard board) {
 		return dao.getCommentCnt(board);
 	}
+	@Override
+	public QnaComment getComment(QnaComment comment) {
+		return dao.getComment(comment);
+	}
 }

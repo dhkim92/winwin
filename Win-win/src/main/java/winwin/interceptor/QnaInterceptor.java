@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import winwin.dto.QnaBoard;
+import winwin.dto.QnaComment;
 import winwin.service.QnaBoardService;
 
 public class QnaInterceptor extends HandlerInterceptorAdapter{
@@ -42,7 +43,7 @@ public class QnaInterceptor extends HandlerInterceptorAdapter{
 			}
 		}
 		if(uri.equals("/qna/delete")) {
-			logger.info("delete!");
+			logger.info("delete!");			
 			QnaBoard resBoard = service.view(board);
 			if(session.getAttribute("id")!=null && session.getAttribute("id").equals(resBoard.getUserId())) {
 				logger.info("delete 정상");
@@ -52,6 +53,35 @@ public class QnaInterceptor extends HandlerInterceptorAdapter{
 				logger.info("delete 정상");
 				return true;
 			}
+		}
+		if(uri.equals("/qna/view")) {
+			logger.info("view!");
+			if(request.getMethod().equals("get")) {
+				return true;
+			}
+			String word = request.getParameter("word");
+			QnaBoard resBoard = service.view(board);
+			
+			if(word.equals("add")) {
+				if(session.getAttribute("login")!=null&&String.valueOf(session.getAttribute("id")).equals(resBoard.getUserId())) 
+						return true;
+				if(session.getAttribute("adminLogin")!=null) return true;
+			}
+			if(word.equals("del")) {
+				int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+				QnaComment comment = new QnaComment();
+				comment.setCommentNo(commentNo);
+				QnaComment resComment = service.getComment(comment);
+				if(session.getAttribute("login")!=null&&String.valueOf(session.getAttribute("id")).equals(resComment.getId())) 
+						return true;
+				if(session.getAttribute("adminLogin")!=null) {
+					String arr[] = resComment.getId().split("_");
+					if(arr[1].equals(String.valueOf(session.getAttribute("id")))) return true;
+				}
+			}
+			if(word.equals("get")) {
+				return true;
+			}	
 		}
         response.sendRedirect("/qna/error?qnaNo="+qnaNo);
 		return false;
