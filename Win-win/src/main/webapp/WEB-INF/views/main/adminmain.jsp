@@ -79,10 +79,10 @@ h6 {
 		<div class="box1 col-4 mt-4"">
 			<div class="row" >
 				<div class="col-6">
-					<h6 class="font-weight-bold mt-2 ml-2"><a href="/jobOpen/list">채용공고</a></h6>
+					<h6 class="font-weight-bold mt-2 ml-2"><a href="/jobOpen/manage">채용공고</a></h6>
 				</div>
 				<div class="col-6 text-right">
-					<p class="viewmore badge badge-pill font-weight-bold badge-light mt-2"><a href="/jobOpen/list">더보기 ></a></p>
+					<p class="viewmore badge badge-pill font-weight-bold badge-light mt-2"><a href="/jobOpen/manage">더보기 ></a></p>
 				</div>
 			</div>
 			<div class="underline mt-1" ></div>
