@@ -105,7 +105,7 @@ h6 {
 			<div class="underline mt-1" ></div>
 			<ul class="mt-3">
 				<c:forEach items="${noticelist }" var="NoticeBoard" begin="0" end="4">
-					<li class="mb-3" ><a href="/notice/view?boardNo=${NoticeBoard.noticeno}">${NoticeBoard.title}</a></li>
+					<li class="mb-3" ><a href="/notice/view?noticeno=${NoticeBoard.noticeno}">${NoticeBoard.title}</a></li>
 				</c:forEach>
 			</ul>
 		</div>
@@ -171,7 +171,7 @@ h6 {
 			<div class="underline mt-1"></div>
 			<ul class="mt-3">
 				<c:forEach items="${qnalist }" var="QnaBoard" begin="0" end="4">
-					<li class="mb-3" ><a href="/qna/view?boardNo=${QnaBoard.qnaNo}">${QnaBoard.title}</a></li>
+					<li class="mb-3" ><a href="/qna/view?qnaNo=${QnaBoard.qnaNo}">${QnaBoard.title}</a></li>
 				</c:forEach>
 			</ul>
 		</div>
