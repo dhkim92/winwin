@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -33,7 +35,6 @@ import winwin.dto.GSchool;
 import winwin.dto.HighSchool;
 import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
-import winwin.dto.JobopenDetail;
 import winwin.dto.Language;
 import winwin.dto.LanguageArr;
 import winwin.dto.License;
@@ -248,6 +249,8 @@ public class Apply2Controller {
 	@RequestMapping(value="/careerUpdate", method=RequestMethod.GET)
 	public void careerUpdate(String jobopenNo, JobopenBasic jobopenBasic, Model model, HttpSession session, Language language, License license, Career career, Activity activity, Experience experience, Material material) {
 		
+
+		
 		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
 		model.addAttribute("jobopenBasic", apply2Service.viewJobOpen(jobopenBasic));
 		
@@ -281,12 +284,36 @@ public class Apply2Controller {
 		material.setPortfolioId(Integer.parseInt(jobopenNo));
 		List<Material> mat = apply2Service.selectMaterial(material);
 		
+		List<String> extFile = new ArrayList<>();
+		List<String> originFile = new ArrayList<>();
+		
+//		for(int i=0; i<mat.size();i++) {
+//			
+//			System.out.println(mat.get(i).getOriginName());
+//			
+//			String[] split = mat.get(i).getOriginName().split("\\.");
+////			
+//			System.out.println(Arrays.toString(split));
+//			System.out.println(split[0]);
+//			System.out.println(split[1]);
+////			String originName = split[0];
+////			String extName = split[1];
+////			originFile.add(originName);
+////			extFile.add(extName);
+//		}
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("mat", mat);
+		map.put("origin", originFile);
+		map.put("ext", extFile);
+		
 		model.addAttribute("language",lang);
 		model.addAttribute("license", lice);
 		model.addAttribute("career", car);
 		model.addAttribute("activity", act);
 		model.addAttribute("experience", exp);
-		model.addAttribute("material", mat);
+		model.addAttribute("mate", map);
 		
 	}
 
