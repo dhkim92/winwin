@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ include file="../include/CSSLoader.jsp"%>
-    
 <style>
 #content{
 	width : 99%
@@ -48,7 +47,7 @@ td{
 				첨부할 파일
 			</td>
 			<td class="text-center">
-				<input type="file" multiple="multiple" name="files"/>
+				<input type="file" multiple="multiple" id="files" name="files"/>
 			</td>
 		</tr>
 		<tr>
@@ -100,7 +99,7 @@ td{
 <script>
 $(document).ready(function() {
 	var time = new Date();
-	var today = time.getFullYear()+"년 "+(time.getMonth()+1)+"월 "+time.getDate()+"일";
+	var today = time.getFullYear()+"년 "+(time.getMonth()+1)+"월 "+time.getDate()+"일";	
 	$("#today").text(today);
 	
 	$("#btnCancel").click(function() {
@@ -119,6 +118,21 @@ $(document).ready(function() {
 		}
 	});
 });
+function fileCheck(){
+	var files = document.getElementById("files");
+	var total = 10*1024*1024;
+	$(files.files).each(function(){
+		total -= this.size;
+	});
+	console.log(total);
+	if(total<0){
+		$("#message").text("파일 용량이 10MB를 초과하였습니다");
+		$("#btnWrite").attr("disabled",true);
+	}else{
+		$("#message").text("");
+		$("#btnWrite").attr("disabled",false);
+	}
+}
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
     oAppRef: oEditors,

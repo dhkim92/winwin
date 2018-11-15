@@ -47,10 +47,10 @@
 			</table>
 			<div class="text-right mb-2">
 				<c:if test="${board.filesCnt eq 0}">
-				<label style="cursor:pointer;"><i class="fas fa-download mr-2"></i>첨부된 파일(${board.filesCnt }</label>)
+					<label style="cursor:pointer;"><i class="fas fa-download mr-2"></i>첨부된 파일(${board.filesCnt }</label>)
 				</c:if>
 				<c:if test="${board.filesCnt ne 0}">
-				<label style="cursor:pointer;" onclick="onFiles();"><i class="fas fa-download mr-2"></i>첨부된 파일(${board.filesCnt }</label>)
+					<label style="cursor:pointer;" onclick="onFiles();"><i class="fas fa-download mr-2"></i>첨부된 파일(${board.filesCnt }</label>)
 				</c:if>		
 			</div>			
 		</div>

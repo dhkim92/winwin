@@ -41,7 +41,8 @@ td{
 			첨부파일
 			</td>
 			<td class="text-center">
-				<input type="file" multiple="multiple" name="files" />
+				<input type="file" multiple="multiple" id="files" name="files" onchange="fileCheck();"/>
+				<div id="message" style="color: red"></div>
 			</td>
 		</tr>
 	</table>
@@ -101,7 +102,21 @@ nhn.husky.EZCreator.createInIFrame({
     	bUseModeChanger: true //모드 탭
     }
 });
-
+function fileCheck(){
+	var files = document.getElementById("files");
+	var total = 10*1024*1024;
+	$(files.files).each(function(){
+		total -= this.size;
+	});
+	console.log(total);
+	if(total<0){
+		$("#message").text("파일 용량이 10MB를 초과하였습니다");
+		$("#btnWrite").attr("disabled",true);
+	}else{
+		$("#message").text("");
+		$("#btnWrite").attr("disabled",false);
+	}
+}
 
 //‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
 function submitContents(elClickedObj) {
