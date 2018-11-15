@@ -76,11 +76,11 @@ td {
 				</td>
 				<td>${JobopenBasic.hit }</td>
 				<td>
-					<c:if test="${JobopenBasic.status eq '채용 중' || JobopenBasic.allOpen ne '0'}">
-						<span class="badge badge-pill badge-primary  font-weight-bold">채용중</span>
+					<c:if test="${JobopenBasic.status eq '채용 중'}">
+						<span class="badge badge-pill badge-primary  font-weight-bold">${JobopenBasic.status }</span>
 					</c:if>
 					<c:if test="${JobopenBasic.status eq '결과 발표'}">
-						<span class="badge badge-pill badge-secondary  font-weight-bold">결과발표</span>
+						<span class="badge badge-pill badge-success  font-weight-bold">${JobopenBasic.status }</span>
 					</c:if>
 				</td>
 			</tr>

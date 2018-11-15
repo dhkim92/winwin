@@ -204,7 +204,7 @@ td {
 					moment(item.startDate).format('YYYY-MM-DD');
 					
 					var html = '<tr>'
-						+'<th>'+item.jobopenNo+'</th>'
+						+'<th class="jobopenno">'+item.jobopenNo+'</th>'
 						+'<td>'+item.offer+'</td>'
 						+'<td><a href="/jobOpen/view?boardNo='+item.jobopenNo+'" style="text-decoration: none;">'+item.title+'</a></td>'
 						+'<td>';
@@ -218,13 +218,13 @@ td {
 						+'<td><strong class="text-success">'+item.applicantCnt+'</strong></td>'
 						+'<td>';
 					if(item.status=='채용 중'){
-						html+='<span class="badge badge-pill badge-primary stat font-weight-bold" style="cursor:pointer" onclick="changeStatus('+item.jobopenNo+');">'+item.status+'</span>';
+						html+='<span class="badge badge-pill badge-primary stat font-weight-bold" style="cursor:pointer">'+item.status+'</span>';
 					} else if(item.status=='채용 마감'){
-						html+='<span class="badge badge-pill badge-danger stat font-weight-bold" style="cursor:pointer" onclick="changeStatus('+item.jobopenNo+');">'+item.status+'</span>';
+						html+='<span class="badge badge-pill badge-danger stat font-weight-bold" style="cursor:pointer">'+item.status+'</span>';
 					} else if(item.status=='결과 발표'){
-						html+='<span class="badge badge-pill badge-success stat font-weight-bold" style="cursor:pointer" onclick="changeStatus('+item.jobopenNo+');">'+item.status+'</span>';
+						html+='<span class="badge badge-pill badge-success stat font-weight-bold" style="cursor:pointer">'+item.status+'</span>';
 					} else if(item.status=='공고 종료'){
-						html+='<span class="badge badge-pill badge-secondary stat font-weight-bold" style="cursor:pointer" onclick="changeStatus('+item.jobopenNo+');">'+item.status+'</span>';
+						html+='<span class="badge badge-pill badge-secondary stat font-weight-bold" style="cursor:pointer">'+item.status+'</span>';
 					}
 					html +='</td>'
 						+'<td><span class="badge badge-warning font-weight-bold" style="cursor: pointer;" onclick="jo_update('+item.jobopenNo+');">수정</span></td>'
@@ -239,6 +239,43 @@ td {
 					$('.here').append('<tr><td colspan=9 class="text-center" style="height:150px; vertical-align:middle;">정보가 없습니다.</td></tr>');
 				}
 			}
+			var jobopenno = null;
+			$('.stat').on('click',function(){
+				$("#statusModal").css("display", "block");
+				var select = $(this).parent().parent().children().eq(6).text();
+				$("#stChecking").html(select);
+				jobopenno = $(this).parent().parent().children().eq(0).text();
+				
+			});
+			
+			$("#btnOkst").on("click", function(){
+				$("#statusModal").css("display", "none");
+				console.log(jobopenno);
+				var sel = $('.statusMo option:selected').val();
+				
+				if(sel=='전체 확인'){
+					sel = $('#stChecking').html();
+				}
+				
+				$.ajax({
+					method:"post"
+					, url:"/jobOpen/jo_status"
+					, data:{
+						jobopenNo : jobopenno,
+						status : sel
+						}
+					, success : function(){
+						$('.statusMo option:eq(0)').prop("selected",true);
+						manageList($('.active').children().attr("data-curPage"));
+					}
+				});
+				
+			});
+			
+			
+			
+			
+			
 			paging(page, listCount, result.totalCount, pageCount, manageList);
 		},'json');
 		
@@ -308,56 +345,38 @@ td {
 	}
 	
 	
+	
+	
+/* 여기부터 버튼 이벤트 */
+	
+	/* 공고 수정 */
 	function jo_update(num){
 		location.href="/jobOpen/basicUpdate?jobopenNo="+num;
 	}
 	
-	function changeStatus(num){
-		var $modal = $("#statusModal");
-		$modal.css("display", "block");
-		
-		var $span = $(".close");
-		var $btnOk = $("#btnOkst");
-		var $btnNo = $("#btnNost");
-		var $sel = $(num).closest('td');
-		console.log($sel.val());
-		
-		$('#stChecking').html($sel);
-		
+	
+	/* 상태 수정 */
+	$(document).ready(function(){
 		$('.statusMo').on("change", function(){
-			$sel = $('.statusMo option:selected').val();
+			var $sel = $('.statusMo option:selected').val();
 			$('#stChecking').html($sel);
 		});
 		
-		$span.on("click", function(){
-			$modal.css("display", "none");
+		$(".close").on("click", function(){
+			$("#statusModal").css("display", "none");
 			$('#stChecking').html("");
 			$('.statusMo option:eq(0)').prop("selected",true);
 		});
 		
-		$btnNo.on("click", function(){
-			$modal.css("display", "none");
+		$("#btnNost").on("click", function(){
+			$("#statusModal").css("display", "none");
 			$('#stChecking').html("");
 			$('.statusMo option:eq(0)').prop("selected",true);
 		});
-		
-		$btnOk.on("click", function(){
-			$modal.css("display", "none");
-			console.log($sel);
-			$.ajax({
-				method:"post"
-				, url:"/jobOpen/jo_status"
-				, data:{jobopenNo : num,
-						status : $sel }
-				, success : function(){
-					$('.statusMo option:eq(0)').prop("selected",true);
-					manageList($('.active').children().attr("data-curPage"));
-				}
-			});
-		});
-	}
+	})
+
 	
-	
+	/* 공고 삭제 */
 	function jo_delete(num){
 		var $modal = $("#myModal");
 		$modal.css("display", "block");
@@ -370,14 +389,21 @@ td {
 		
 		$span.on("click", function(){
 			$modal.css("display", "none");
+			num = null;
 		});
 		
 		$btnNo.on("click", function(){
 			$modal.css("display", "none");
+			num = null;
 		});
 		
 		$btnOk.on("click", function(){
 			$modal.css("display", "none");
+			
+			if(num==null){
+				continue;
+			}
+			
 			$.ajax({
 				method:"post"
 				, url:"/jobOpen/jo_delete"

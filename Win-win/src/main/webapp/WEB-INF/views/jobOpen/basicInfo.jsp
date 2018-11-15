@@ -106,7 +106,7 @@
 			    	</div>
 			    	<div class="col-3" >
 			    		<div class="form-check-inline">
-			    			<input type="checkbox" class="form-check-input" id="rulPay" name="rulePay" value="회사 내규에 따름" checked>
+			    			<input type="checkbox" class="form-check-input" id="rulePay" name="rulePay" value="회사 내규에 따름" checked>
 							<label class="form-check-label" for="rulePay">회사 내규에 따름</label>
 			    		</div>
 			    	</div>
@@ -115,9 +115,9 @@
 			    			<a id="payCheck" style="cursor:pointer; text-decoration: underline;" class="m-2 text-black-50">급여 지정하기</a>
 			    			<!-- 급여지정 지웠다 켜졌다 하기 -->
 			    			<div id="pay" style="visibility: hidden;">
-			    				<input type="number" name="startPay" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
+			    				<input type="number" id="startPay" name="startPay" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
 			    				~
-			    				<input type="number" name="endPay" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
+			    				<input type="number" id="endPay" name="endPay" class="form-control input-sm" style="height:30px; width:100px;"/> 만원
 			    			</div>
 			    		</div>
 			    	</div>
@@ -138,9 +138,9 @@
 			    			<a id="openCheck" style="cursor:pointer; text-decoration: underline;" class="m-2 text-black-50">날짜 지정하기</a>
 			    			<!-- 날짜지정 지웠다 켜졌다 하기 -->
 			    			<div id="open" style="visibility:hidden">
-			    				<input id="startOpen" name="startDate" type="text" class="form-control input-sm openDate" readOnly style="height:30px; width:150px;"/>
+			    				<input id="startOpen" name="startDate" type="text" class="form-control input-sm openDate" readOnly style="height:30px; width:150px;" required/>
 			    				~
-			    				<input id="endOpen" name="endDate" type="text" class="form-control input-sm openDate" readOnly style="height:30px; width:150px;"/>
+			    				<input id="endOpen" name="endDate" type="text" class="form-control input-sm openDate" readOnly style="height:30px; width:150px;" required/>
 			    			</div>
 			    		</div>
 			    	</div>
@@ -148,7 +148,7 @@
 			    
 			    
 			    <div class="form-inline mt-5 d-flex justify-content-center" >
-			    	<button id="btnOk" class="btn btn-info mr-3">저장하고 계속하기</button><button type="button" id="btnCancel" class="btn btn-secondary">취소</button>
+			    	<button type="button" id="btnOk" class="btn btn-info mr-3">저장하고 계속하기</button><button type="button" id="btnCancel" class="btn btn-secondary">취소</button>
 			    </div>
 			</form>
 		</div>
@@ -223,6 +223,8 @@ $(function(){
 			});
 	
 	$("#endOpen").datepicker("option", "dateFormat", "yy-mm-dd");
+	
+
 });
 
 $(document).ready(function(){
@@ -252,16 +254,16 @@ $(document).ready(function(){
 	$("#payCheck").click(function(){
 		if($('#pay').css('visibility') == 'hidden'){
 			    $('#pay').css('visibility','visible');
-			    $('#rulPay').prop("checked",false);
+			    $('#rulePay').prop("checked",false);
 			   
 		} else {
 			    $('#pay').css('visibility','hidden');
 			    $('#pay input').val("");
-			    $('#rulPay').prop("checked",true);
+			    $('#rulePay').prop("checked",true);
 		}
 	});
 	
-	$('input[type="checkbox"][id="rulPay"]').change(function(){
+	$('input[type="checkbox"][id="rulePay"]').change(function(){
 		if($(this).is(":checked")){
 			$('#pay').css('visibility','hidden');
 			$('#pay input').val("");
@@ -289,8 +291,45 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('input[type="checkbox"][id="rulePay"]').click(function(){
+		if(!$("#rulePay").is(":checked")){
+			$('#pay').css('visibility','visible');
+		} else {
+			$('#pay').css('visibility','hidden');
+			$('#pay input').val("");
+		}
+	});
+	
+	$('#allOpen').click(function(){
+		if(!$("#allOpen").is(":checked")){
+			$('#open').css('visibility','visible');
+		} else {
+			$('#open').css('visibility','hidden');
+			$('#open input').val("");
+		}
+	});
 	
 	
+	$('#btnOk').click(function(){
+		if($("#title").val()==''){
+			alert("공고 제목을 입력해주세요.");
+			return;
+		} else if(!$('#rulePay').is(':checked') && $('#startPay').val()==''){
+			alert("최저 급여를 지정해주세요.");
+			return;
+		} else if(!$('#rulePay').is(':checked') && $('#endPay').val()==''){
+			alert("최고 급여를 지정해주세요.");
+			return;
+		} else if(!$('#allOpen').is(':checked') && $('#startOpen').val()==''){
+			alert("시작 날짜를 입력해주세요.");
+			return;
+		} else if(!$('#allOpen').is(':checked') && $('#endOpen').val()==''){
+			alert("마감 날짜를 입력해주세요.");
+			return;
+		}
+		
+		$('#formId').submit();
+	});
 	
 	
 });
