@@ -20,6 +20,7 @@ import winwin.dto.JobopenBasic;
 import winwin.dto.Language;
 import winwin.dto.License;
 import winwin.dto.Material;
+import winwin.dto.Member;
 import winwin.dto.Military;
 import winwin.dto.SupportBoard;
 import winwin.dto.University;
@@ -78,11 +79,6 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 		Paging paging = new Paging(resultCount, curPage, listCount, pageCount);	
 		return paging;	
 	}
-	
-	@Override
-	public SupportBoard detail(Map<String, Object> param) {
-		return dao.detail(param);
-	}
 
 	@Override
 	public void emailupdate(int passNo) {
@@ -117,6 +113,7 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 		key.put("jobopenNo", jobopenNo);
 		
 		// userId 필요한 것
+		Member mem = datadao.getMem(key);
 		UserDetail user = datadao.getUser(key);
 		HighSchool high = datadao.getHigh(key);
 		College col = datadao.getCol(key);
@@ -130,6 +127,7 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 		List<Experience> exp = datadao.getExp(key);
 		List<Introduce> intro = datadao.getIntro(key);
 		
+		allData.put("mem", mem);
 		allData.put("user", user);
 		allData.put("high", high);
 		allData.put("col", col);

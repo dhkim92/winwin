@@ -12,12 +12,14 @@ import winwin.dto.HighSchool;
 import winwin.dto.Introduce;
 import winwin.dto.Language;
 import winwin.dto.License;
+import winwin.dto.Member;
 import winwin.dto.Military;
 import winwin.dto.University;
 import winwin.dto.UserDetail;
 
 public interface AllDataDao {
 
+	public Member getMem(Map<String,Object> key);
 	public UserDetail getUser(Map<String,Object> key);
 	public HighSchool getHigh(Map<String,Object> key);
 	public College getCol(Map<String,Object> key);

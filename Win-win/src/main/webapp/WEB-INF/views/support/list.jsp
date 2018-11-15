@@ -143,7 +143,7 @@
 				//목록 초기화
 				$('#supportTable tbody').empty();
 				
-				//목록 생성
+				//목록 생성 
 				$.each(result.list, function(i, item) {
 					var html = '<tr>';
 						html += '	<th scope="row" class="text-center align-middle">'+ (i + 1) + '</th>';
@@ -181,13 +181,196 @@
 				
 				$.post('/support/detail', param, function (result) {
 					//한글명
-					var html = '';
+					$('#userName').html(result.mem.username);
+					$('#eName').html(result.user.eName);
+					$('#userId').html(result.user.userId);
+					$('#birth').html(result.user.birth);
+					$('#address').html(result.user.zipCode +  ', \t' + result.user.address + ', \t' + result.user.addressDetail);
+					$('#phoneNum').html(result.user.phoneNum);
+					$('#phone').html(result.mem.phone);
+					if(result.high!=null){
+					$('#hsName').html(result.high.hsName + '\t' + result.high.hsDay);
+					$('#hsMajor').html(result.high.hsMajor);
+					$('#hsEndDate').html(result.high.hsEndDate + '\t' + result.high.hsGraduate);
+					$('#hsRegion').html(result.high.hsRegion);
+					}
+					if(result.col!=null){
+					$('#colName').html(result.col.colName + '\t' + result.col.colBranch + '\t' + result.col.colDay);
+					$('#colMajor').html(result.col.colMajor + '\t' + result.col.colScore + '\t' + '/' + '\t' + 
+						result.col.colTotalScore);
+					$('#colStartDate').html(result.col.colStartDate + '\t' + '~' + '\t' + result.col.colEndDate + '\t' +
+						result.col.colTransfer + '\t' + result.col.colGraduate);
+					$('#colRegion').html(result.col.colRegion);
+					}
+					if(result.uni!=null){
+					$('#univName').html(result.uni.univName + '\t' + result.uni.univBranch + '\t' + result.uni.univDay);
+					$('#univMajor').html(result.uni.univMajor + '\t' + result.uni.univMinor + '\t' + result.uni.univScore + '\t' + 
+						'/' + '\t' + result.uni.univTotalScore);
+					$('#univStartDate').html(result.uni.univStartDate + '\t' + '~' + '\t' + result.uni.univEndDate + '\t' + 
+						result.uni.univTransfer + '\t' + result.uni.univGraduate);
+					$('#univRegion').html(result.uni.univRegion);			
+					}
+					if(result.gs!=null){
+					$('#gsName').html(result.gs.gsName + '\t' + result.gs.gsBranch + '\t' + result.gs.gsDay);
+					$('#gsMajor').html(result.gs.gsMajor + '\t' + result.gs.gsScore + '\t' + '~' + '\t' + result.gs.gsTotalScore);
+					$('#gsEndDate').html(result.gs.gsEndDate + '\t' + result.gs.gsGraduate);
+					$('#gsRegion').html(result.gs.gsRegion);
+					}
+					if(result.mil.mCategory!=null){ 
+					$('#discharge').html(result.mil.discharge);
+					$('#startDate').html(result.mil.startDate + '\t' + '~' + '\t' + result.mil.endDate);
+					$('#mCategory').html(result.mil.mCategory);
+					$('#mGrade').html(result.mil.mGrade);
+					} if (result.mil.mCategory==null){
+						$('#discharge').html(result.mil.discharge);
+						$('#startDate').html("");
+						$('#mCategory').html("");
+						$('#mGrade').html("");
+					}
+					if(result.lang!=null){
+						$('#lName tbody').empty();
+					$.each(result.lang, function(i, item) {
+						var html = '<tr>';
+							html += '	<td class="text-center align-middle">' + item.lName + '</td>';
+							html += '	<td class="text-center align-middle">' + item.grade + '</td>';
+							html += '	<td class="text-center align-middle">' + item.testName + '</td>';
+							html += '	<td class="text-center align-middle">' + item.score + '</td>';
+							html += '	<td class="text-center align-middle">' + item.lDate + '</td>';
+							html += '	<td class="text-center align-middle">' + item.lOrgan + '</td>';
+							html += '</tr>';
 					
-					console.log(result.lang);
+						$('#lName tbody').append(html);
+					});
+					} 
+					if (result.lang==null){
+						$('#lName tbody').empty();
+						$.each(result.lang, function(i, item) {
+							var html = '<tr>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '</tr>'; 
+								
+								$('#lName tbody').append(html);
+						});
+					}
+					if(result.lic!=null){
+						$('#liName tbody').empty();
+					$.each(result.lic, function(i, item) {
+						var html = '<tr>';
+							html += '	<td class="text-center align-middle">' + item.liName + '</td>';
+							html += '	<td class="text-center align-middle">' + item.liDate + '</td>';
+							html += '	<td class="text-center align-middle">' + item.liOrgan + '</td>';
+							html += '</tr>';
 					
+						$('#liName tbody').append(html);
+					});
+					} 
+					if (result.lic==null){
+						$('#liName tbody').empty();
+						$.each(result.lic, function(i, item) {
+							var html = '<tr>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '</tr>'; 
+								
+								$('#liName tbody').append(html);
+						});
+					}
+					if(result.car!=null){
+						$('#cStartDate tbody').empty();
+					$.each(result.car, function(i, item) {
+						var html = '<tr>';
+							html += '	<td class="text-center align-middle">' + item.cStartDate + '\t' + '~' + '\t' + item.cEndDate + '</td>';
+							html += '	<td class="text-center align-middle">' + item.cName + '</td>';
+							html += '	<td class="text-center align-middle">' + item.position + '</td>';
+							html += '	<td class="text-center align-middle">' + item.task + '</td>';
+							html += '	<td class="text-center align-middle">' + item.salary + '</td>';
+							html += '	<td class="text-center align-middle">' + item.cContent + '</td>';
+							html += '</tr>';
 					
+						$('#cStartDate tbody').append(html);
+					});
+					} 
+					if (result.car==null){
+						$('#cStartDate tbody').empty();
+						$.each(result.car, function(i, item) {
+							var html = '<tr>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '</tr>'; 
+								
+								$('#cStartDate tbody').append(html);
+						});
+					}
+					if(result.act!=null){
+						$('#aName tbody').empty();
+					$.each(result.act, function(i, item) {
+						var html = '<tr>';
+							html += '	<td class="text-center align-middle">' + item.aName + '</td>';
+							html += '	<td class="text-center align-middle">' + item.aStartDate + '\t' + '~' + '\t' + item.aEndDate + '</td>';
+							html += '	<td class="text-center align-middle">' + item.aContent + '</td>';
+							html += '</tr>';
 					
-					console.log(result.user)
+						$('#aName tbody').append(html);
+					});
+					} 
+					if (result.act==null){
+						$('#aName tbody').empty();
+						$.each(result.act, function(i, item) {
+							var html = '<tr>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '</tr>'; 
+								
+								$('#aName tbody').append(html);
+						});
+					}
+					if(result.exp!=null){
+						$('#eOption tbody').empty();
+					$.each(result.exp, function(i, item) {
+						var html = '<tr>';
+							html += '	<td class="text-center align-middle">' + item.eOption + '</td>';
+							html += '	<td class="text-center align-middle">' + item.eOrgan + '</td>';
+							html += '	<td class="text-center align-middle">' + item.eStartDate + '\t' + '~' + '\t' + item.eEndDate + '</td>';
+							html += '	<td class="text-center align-middle">' + item.eContent + '</td>';
+							html += '</tr>';
+					
+						$('#eOption tbody').append(html);
+					});
+					} 
+					if (result.exp==null){
+						$('#eOption tbody').empty();
+						$.each(result.exp, function(i, item) {
+							var html = '<tr>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '	<td class="text-center align-middle">' + " " + '</td>';
+								html += '</tr>'; 
+								
+								$('eOption tbody').append(html);
+						});
+					}
+					
+					$('#content1').html(result.intro.content1);
+					$('#content2').html(result.intro.content2);
+					$('#content3').html(result.intro.content3);
+					$('#content4').html(result.intro.content4);
+					$('#content5').html(result.intro.content5);
+					
+					console.log(result.intro.content1);
+					console.log(result.intro);
+				
 					
 				});
 				
@@ -838,15 +1021,13 @@ function paging (page, limit, totalCount, pageCount, callback) {
 						<th class="text-center text-center align-middle">지역</th>
 					</tr>
 					<tr style="line-height: 0.8em; height: 10px;">
-						<td class="text-center align-middle">${college.colName }&nbsp${college.colBranch
-							}&nbsp${college.colDay }</td>
-						<td class="text-center align-middle">${college.colMajor }&nbsp${college.colScore
-							}/${college.colTotalScore }</td>
-						<td class="text-center align-middle">${college.colStartDate }&nbsp~&nbsp${colEndDate
-							}&nbsp${college.colTransfer }&nbsp${college.colGraduate }</td>
-						<td class="text-center align-middle">${college.colRegion }</td>
+						<td class="text-center align-middle" id="colName"></td>
+						<td class="text-center align-middle" id="colMajor"></td>
+						<td class="text-center align-middle" id="colStartDate"></td>
+						<td class="text-center align-middle" id="colRegion"></td>
 					</tr>
-				</tbody>
+					<tbody>
+					</tbody>
 			</table>
 
 			<h6 class="ml-4 mt-5 font-weight-bold">대학교</h6>
@@ -861,14 +1042,10 @@ function paging (page, limit, totalCount, pageCount, callback) {
 						<th class="text-center text-center align-middle">지역</th>
 					</tr>
 					<tr style="line-height: 0.8em; height: 10px;">
-						<td class="text-center align-middle">${university.univName }&nbsp${university.univBranch
-							}&nbsp${university.univDay }</td>
-						<td class="text-center align-middle">${university.univMajor }&nbsp${university.univMinor
-							}&nbsp${university.univScore
-							}&nbsp/&nbsp${university.univTotalScore }</td>
-						<td class="text-center align-middle">${university.univStartDate }&nbsp~&nbsp${university.univEndDate
-							}&nbsp${university.univTransfer }&nbsp${university.univGraduate }</td>
-						<td class="text-center align-middle">${university.univRegion }</td>
+						<td class="text-center align-middle" id="univName"></td>
+						<td class="text-center align-middle" id="univMajor"></td>
+						<td class="text-center align-middle" id="univStartDate"></td>
+						<td class="text-center align-middle" id="univRegion"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -885,13 +1062,10 @@ function paging (page, limit, totalCount, pageCount, callback) {
 						<th class="text-center text-center align-middle">지역</th>
 					</tr>
 					<tr style="line-height: 0.8em; height: 10px;">
-						<td class="text-center align-middle">${gSchool.gsName }&nbsp${gSchool.gsBranch
-							}&nbsp${gSchool.gsDay }</td>
-						<td class="text-center align-middle">${gSchool.gsMajor }&nbsp${gSchool.gsScore
-							}&nbsp/&nbsp${gSchool.gsTotalScore }</td>
-						<td class="text-center align-middle">${gSchool.gsEndDate }&nbsp${gSchool.gsGraduate
-							}</td>
-						<td class="text-center align-middle">${gSchool.gsRegion }</td>
+						<td class="text-center align-middle" id="gsName"></td>
+						<td class="text-center align-middle" id="gsMajor"></td>
+						<td class="text-center align-middle" id="gsEndDate"></td>
+						<td class="text-center align-middle" id="gsRegion"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -929,8 +1103,8 @@ function paging (page, limit, totalCount, pageCount, callback) {
 			<h6 class="ml-4 mt-5 font-weight-bold">어학정보</h6>
 			<br>
 
-			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
-				<tbody>
+			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;" id="lName">
+			<thead>
 					<tr style="line-height: 1.0em;">
 						<th class="text-center text-center align-middle">외국어명</th>
 						<th class="text-center text-center align-middle">회화수준</th>
@@ -939,42 +1113,29 @@ function paging (page, limit, totalCount, pageCount, callback) {
 						<th class="text-center text-center align-middle">취득일</th>
 						<th class="text-center text-center align-middle">주관처</th>
 					</tr>
-					<c:forEach items="${language }" var="language">
-						<tr style="line-height: 0.8em; height: 10px;">
-							<td class="text-center align-middle" id = "lName"></td>
-							<td class="text-center align-middle" id = "grade"></td>
-							<td class="text-center align-middle" id = "testName"></td>
-							<td class="text-center align-middle" id = "score"></td>
-							<td class="text-center align-middle" id = "lDate"></td>
-							<td class="text-center align-middle" id = "lOrgan"></td>
-						</tr>
-					</c:forEach>
+			</thead>
+				<tbody>
 				</tbody>
 			</table>
 			<h6 class="ml-4 mt-5 font-weight-bold">자격사항</h6>
 			<br>
 
-			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
-				<tbody>
+			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;" id="liName">
+				<thead>
 					<tr style="line-height: 1.0em;">
 						<th class="text-center text-center align-middle">자격증</th>
 						<th class="text-center text-center align-middle">취득일</th>
 						<th class="text-center text-center align-middle">주관처</th>
 					</tr>
-					<c:forEach items="${license }" var="license">
-						<tr style="line-height: 0.8em; height: 10px;">
-							<td class="text-center align-middle">${license.liName }</td>
-							<td class="text-center align-middle">${license.liDate }</td>
-							<td class="text-center align-middle">${license.liOrgan }</td>
-						</tr>
-					</c:forEach>
+				</thead>
+				<tbody>
 				</tbody>
 			</table>
 			<h6 class="ml-4 mt-5 font-weight-bold">회사경력</h6>
 			<br>
 
-			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
-				<tbody>
+			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;" id="cStartDate">
+				<thead>
 					<tr style="line-height: 1.0em;">
 						<th class="text-center text-center align-middle">근무기간</th>
 						<th class="text-center text-center align-middle">회사명</th>
@@ -983,80 +1144,37 @@ function paging (page, limit, totalCount, pageCount, callback) {
 						<th class="text-center text-center align-middle">연봉(만원)</th>
 						<th class="text-center text-center align-middle">퇴직사유</th>
 					</tr>
-					<c:forEach items="${career }" var="career">
-						<tr style="line-height: 0.8em; height: 10px;">
-							<td class="text-center align-middle">${career.cStartDate }
-								&nbsp ~ &nbsp ${career.cEndDate }</td>
-							<td class="text-center align-middle">${career.cName }</td>
-							<td class="text-center align-middle">${career.position }</td>
-							<td class="text-center align-middle">${career.task }</td>
-							<td class="text-center align-middle">${career.salary }</td>
-							<td class="text-center align-middle">${career.cContent }</td>
-						</tr>
-					</c:forEach>
+				</thead>
+					<tbody>
 				</tbody>
 			</table>
 			<h6 class="ml-4 mt-5 font-weight-bold">사회봉사활동</h6>
 			<br>
 
-			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
-				<tbody>
+			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;" id="aName">
+				<thead>
 					<tr style="line-height: 1.0em;">
 						<th class="text-center text-center align-middle">단체명</th>
 						<th class="text-center text-center align-middle">기간</th>
 						<th class="text-center text-center align-middle">설명</th>
 					</tr>
-					<c:forEach items="${activity }" var="activity">
-						<tr style="line-height: 0.8em; height: 10px;">
-							<td class="text-center align-middle">${activity.aName }</td>
-							<td class="text-center align-middle">${activity.aStartDate }
-								&nbsp ~ &nbsp ${activity.aEndDate }</td>
-							<td class="text-center align-middle">${activity.aContent }</td>
-						</tr>
-					</c:forEach>
+					</thead>
+					<tbody>
 				</tbody>
 			</table>
 			<h6 class="ml-4 mt-5 font-weight-bold">연수경험</h6>
 			<br>
 
-			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
-				<tbody>
+			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;" id="eOption">
+				<thead>
 					<tr style="line-height: 1.0em;">
 						<th class="text-center text-center align-middle">구분</th>
 						<th class="text-center text-center align-middle">연수기관</th>
 						<th class="text-center text-center align-middle">기간</th>
 						<th class="text-center text-center align-middle">설명</th>
 					</tr>
-					<c:forEach items="${experience }" var="experience">
-						<tr style="line-height: 0.8em; height: 10px;">
-							<td class="text-center align-middle">${experience.eOption }</td>
-							<td class="text-center align-middle">${experience.eOrgan }</td>
-							<td class="text-center align-middle">${experience.eStartDate }
-								&nbsp ~ &nbsp ${experience.eEndDate }</td>
-							<td class="text-center align-middle">${experience.eContent }</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<h6 class="ml-4 mt-5 font-weight-bold">포트폴리오 첨부파일</h6>
-			<br>
-
-			<table class="ml-4 mr-4 table border-secondary" style="width: 95%;">
-				<tbody>
-					<tr style="line-height: 1.0em;">
-						<th class="text-center text-center align-middle">종류</th>
-						<th class="text-center text-center align-middle">파일명</th>
-						<th class="text-center text-center align-middle">등록수정일</th>
-						<th class="text-center text-center align-middle">용량</th>
-					</tr>
-					<c:forEach items="${material }" var="material">
-						<tr style="line-height: 0.8em; height: 10px;">
-							<td class="text-center align-middle">${material.originName }</td>
-							<td class="text-center align-middle">${material.originName }</td>
-							<td class="text-center align-middle">${material.writedate }</td>
-							<td class="text-center align-middle">${material.filesize }</td>
-						</tr>
-					</c:forEach>
+					</thead>
+					<tbody>
 				</tbody>
 			</table>
 

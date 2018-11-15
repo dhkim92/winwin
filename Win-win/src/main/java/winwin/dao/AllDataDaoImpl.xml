@@ -5,6 +5,10 @@
   
  <mapper namespace="winwin.dao.AllDataDao">
  
+	 <select id="getMem" parameterType="map" resultType="winwin.dto.Member">
+ 		select * from member where userid=#{userId}
+ 	</select>
+ 
  	<select id="getUser" parameterType="map" resultType="winwin.dto.UserDetail">
  		select * from userdetail where userid=#{userId} and jobopenNo=#{jobopenNo}
  	</select>

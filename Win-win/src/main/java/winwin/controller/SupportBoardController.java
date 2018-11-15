@@ -88,15 +88,11 @@ public class SupportBoardController {
 	@PostMapping(value = "/support/detail")
 	public Map<String, Object> detail(@RequestParam Map<String, Object> param) {
 		
-		System.out.println(param.get("userId"));
-		
 		
 		String userId = (String)param.get("userId");
 		int jobopenNo = Integer.parseInt((String)param.get("jobopenNo"));
 		
 		Map<String, Object> allData = service.getAllData(userId, jobopenNo);
-		
-		System.out.println(allData.toString());
 		
 		return allData;
 	}

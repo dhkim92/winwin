@@ -16,8 +16,6 @@ public interface SupportBoardService {
 	
 	public List<SupportBoard> list(Paging paging, Map<String, Object> param);
 	
-	public SupportBoard detail(Map<String, Object> param);
-	
 	public List<SupportBoard> resultlist(Paging paging, Map<String, Object> param);
 	
 	public List<JobopenBasic> getTitle();

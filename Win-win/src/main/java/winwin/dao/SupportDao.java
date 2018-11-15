@@ -18,8 +18,6 @@ public interface SupportDao {
 	
 	public List<SupportBoard> list(Map<String, Object> param);
 	
-	public SupportBoard detail(Map<String, Object> param);
-	
 	public List<SupportBoard> resultlist(Map<String, Object> param);
 	
 	public List<JobopenBasic> getTitle();
