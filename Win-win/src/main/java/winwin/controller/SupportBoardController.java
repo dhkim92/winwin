@@ -1,5 +1,6 @@
 package winwin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +40,24 @@ public class SupportBoardController {
 		*/
 		model.addAttribute("title", title);
 	}
+	
+	@ResponseBody
+	@PostMapping(value="/support/list")
+	public Map<String, Material> listFile(
+			@RequestParam(value="userId") String userId,
+			@RequestParam(value="portfolioId") int portfolioId) {
+		
+		System.out.println(userId);
+		System.out.println(portfolioId);
+		
+		Material mat = service.getFile(userId, portfolioId);
+		
+		Map<String, Material> map = new HashMap<>();
+		System.out.println(mat);
+		map.put("file", mat);
+		
+		return map;
+	}
 
 	/**
 	 * 목록 ajax 호출 
@@ -66,20 +86,33 @@ public class SupportBoardController {
 	
 	@ResponseBody
 	@PostMapping(value = "/support/detail")
-	public SupportBoard detail(@RequestParam Map<String, Object> param) {
+	public Map<String, Object> detail(@RequestParam Map<String, Object> param) {
 		
-		SupportBoard detail = service.detail(param);
+		System.out.println(param.get("userId"));
 		
-		return detail;
+		
+		String userId = (String)param.get("userId");
+		int jobopenNo = Integer.parseInt((String)param.get("jobopenNo"));
+		
+		Map<String, Object> allData = service.getAllData(userId, jobopenNo);
+		
+		System.out.println(allData.toString());
+		
+		return allData;
 	}
 	
-	@PostMapping(value="/support/download")
+	@GetMapping(value="/support/download")
 	public ModelAndView download(ModelAndView m,Material file,
 				@RequestParam(value="userId") String userId,
 				@RequestParam(value="portfolioId") int portfolioId) {
 		
+		System.out.println(userId);
+		System.out.println(portfolioId);
+		
 		Material downfile = service.download(file);
-				
+		
+		System.out.println(downfile.toString());
+		
 		m.setViewName("download");
 		m.addObject("downFile",downfile);
 		

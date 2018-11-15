@@ -57,6 +57,7 @@
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
+	top:10px;
 }
 
 .closeCheck:hover, .closeCheck:focus {
@@ -64,6 +65,7 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+
 </style>
 
 <script>
@@ -71,6 +73,8 @@
 	var page = 1; //현재 페이지
 	var limit = 20; //목록 갯수
 	var pageCount = 5; //페이지 수
+	var portId=null;
+	var userId=null;
 
 	$(function() {
 		supportList(page);
@@ -143,7 +147,7 @@
 				$.each(result.list, function(i, item) {
 					var html = '<tr>';
 						html += '	<th scope="row" class="text-center align-middle">'+ (i + 1) + '</th>';
-						html += '	<td class="text-center align-middle titleBtn" passNo="' + item.passNo + '" jobNo="' + item.jobOpenNo + '" fileNo="' + item.fileNo + '" style="cursor:pointer">'+ item.title + '</td>';
+						html += '	<td class="text-center align-middle titleBtn" userId="' + item.userId + '" jobNo="' + item.jobOpenNo + '" style="cursor:pointer">'+ item.title + '</td>';
 						html += '	<td class="text-center align-middle">'+ item.task + '</td>';
 						html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
 						html += '	<td class="text-center align-middle">' + item.username + '</td>';
@@ -171,39 +175,19 @@
 			$('.titleBtn').unbind('click').click(function () {
 				
 				var param = {
-						passNo 	: $(this).attr('passNo'),
-						jobNo 	: $(this).attr('jobNo'),
-						fileNo 	: $(this).attr('fileNo'),
+						userId 	: $(this).attr('userId'),
+						jobopenNo 	: $(this).attr('jobNo')
 				};
 				
 				$.post('/support/detail', param, function (result) {
 					//한글명
-					$('#userName').text(result.username);
-					$('#eName').text(result.eName);
-					$('#userId').text(result.userId);
-					$('#birth').text(result.birth);
-					$('#address').text(result.zipCode +  ', \t' + result.address + ', \t' + result.addressDetail);
-					$('#phoneNum').text(result.phoneNum);
-					$('#phone').text(result.phone);
-					$('#hsName').text(result.hsName + '\t' + result.hsDay);
-					$('#hsMajor').text(result.hsMajor);
-					$('#hsEndDate').text(result.hsEndDate + '\t' + result.hsGraduate);
-					$('#hsRegion').text(result.hsRegion);
-					$('#discharge').text(result.discharge);
-					$('#startDate').text(result.startDate + '\t~\t' + result.endDate);
-					$('#mCategory').text(result.mCategory);
-					$('#mGrade').text(result.mGrade);
-// 					$('#lName').text(result.lName);
-// 					$('#grade').text(result.grade);
-// 					$('#testName').text(result.testName);
-// 					$('#score').text(result.score);
-// 					$('#lDate').text(result.lDate);
-// 					$('#lOrgan').text(result.lOrgan);
-					$('#content1').text(result.content1);
-					$('#content2').text(result.content2);
-					$('#content3').text(result.content3);
-					$('#content4').text(result.content4);
-					$('#content5').text(result.content5);
+					var html = '';
+					
+					console.log(result.lang);
+					
+					
+					
+					console.log(result.user)
 					
 				});
 				
@@ -230,40 +214,36 @@
 		var btnOk = document.getElementById("btnOk");
 
 		// When the user clicks on the button, open the modal 
-			for (var i = 0; i < btn.length; i++) {
-				btn[i].onclick = function() {				
-					modal.style.display = "block";
-					//1. portfolioId, userId 가저옴
-					var portfolioId = $(this).parent().parent().children(".portfolioId").html();
-					var userId = $(this).parent().parent().children(".userId").html();
-					console.log(portfolioId);
-					console.log(userId);
-					//console.log(jobOpenNo.html());
-					//2. ajax 처리 
-					$.ajax({
-						    type:"post",
-						    url:"/support/download",
-						    data:{"userId":userId, "portfolioId":portfolioId},
-						    dataType:"text",
-						    success:function(data){
-						    	var modal = document.getElementById("portModal");
-						    	modald.style.display = "block";
-						    	var btn = document.getElementsByClassName("modalBtn");
-								var span = document.getElementsByClassName("close")[0];
-								var btnClose = document.getElementById("btnClose");
-								
-								span.onclick = function() {
-				        			modal.style.display = "none";
-				        		}
+// 			for (var i = 0; i < btn.length; i++) {
+// 				btn[i].onclick = function() {				
+// 					modal.style.display = "block";
+					
+// 			}
+// 		}
 
-				        		btnClose.onclick = function() {
-				        			modal.style.display = "none";
-				        			location.href="/support/list";
-				        		}
-						    }
-						});	
-			}
-		}
+		
+		$('.modalBtn').click(function(){
+			portId = $(this).parent().parent().children().eq(7).text();
+			userId = $(this).parent().parent().children().eq(8).text();
+			
+			$.ajax({
+				type:'post',
+				url:'/support/list',
+				data:{
+					portfolioId : portId,
+					userId : userId
+				},
+				dataType:'json',
+				success: function(file){
+					
+					console.log(file.file.originName);
+					$('#portModal').css('display','block');
+					$('#fileName').val(file.file.originName);
+					
+				}
+			});
+		});
+		
 
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {
@@ -652,13 +632,19 @@ function paging (page, limit, totalCount, pageCount, callback) {
 		<div>
 			<div class="mt-4" style="text-align:center;">
 				<span class="font-weight-bold" id="pModal">첨부파일 : </span>
-				<input type="text" value="${file.originName }" readOnly>
+				<input type="text" id="fileName" value="${file.originName }" readOnly>
 				<button type="button" class="btn btn-secondary" onclick="downFile();">다운로드</button>
 			</div>
 			<script>
 			
 				function downFile(){
+					//1. portfolioId, userId 가저옴
 					
+					console.log(portId);
+					console.log(userId);
+					
+					location.href="/support/download?userId="+userId+"&portfolioId="+portId;
+
 				}
 			
 			</script>
@@ -767,7 +753,7 @@ function paging (page, limit, totalCount, pageCount, callback) {
 	<div class="col-6">
 		<h3 class="mt-3 font-weight-bold">지원서 미리보기</h3>
 		</div>
-			<div class="col-6" style="padding-right:0">
+			<div class="col-6" style="padding-right:0px" id="CloseMenu">
 				<span class="d-flex justify-content-end mt-1"><span
 					id="titleClose" class="closeCheck">&times;</span></span>
 			</div>

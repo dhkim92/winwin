@@ -248,14 +248,20 @@
 	</update>
 	
 	<select id="download" parameterType="winwin.dto.SupportBoard" resultType="winwin.dto.Material">
-		SELECT originName FROM material mat, support sup 
+		SELECT * FROM material mat, support sup 
             WHERE mat.PORTFOLIOID = sup.JOBOPENNO AND sup.userid = mat.userid 
             
             AND mat.portfolioId = ${portfolioId}
             AND sup.userid = #{userId}
 	</select>
 	
-	
+	<select id="getFile" parameterType="map" resultType="winwin.dto.Material">
+		SELECT originName FROM material mat, support sup 
+            WHERE mat.PORTFOLIOID = sup.JOBOPENNO AND sup.userid = mat.userid 
+            
+            AND mat.portfolioId = ${portfolioId}
+            AND sup.userid = #{userId}
+	</select>
 	
 	
 	

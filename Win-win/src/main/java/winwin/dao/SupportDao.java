@@ -27,6 +27,8 @@ public interface SupportDao {
 	public void emailupdate(int passNo);
 	
 	public Material download(Material file);
+	
+	public Material getFile(Map<String, Object> map);
 
 
 }

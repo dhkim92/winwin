@@ -1,21 +1,36 @@
 package winwin.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import winwin.dao.AllDataDao;
 import winwin.dao.SupportDao;
+import winwin.dto.Activity;
+import winwin.dto.Career;
+import winwin.dto.College;
+import winwin.dto.Experience;
+import winwin.dto.GSchool;
+import winwin.dto.HighSchool;
+import winwin.dto.Introduce;
 import winwin.dto.JobopenBasic;
+import winwin.dto.Language;
+import winwin.dto.License;
 import winwin.dto.Material;
+import winwin.dto.Military;
 import winwin.dto.SupportBoard;
+import winwin.dto.University;
+import winwin.dto.UserDetail;
 import winwin.util.Paging;
 
 @Service
 public class SupportBoardServiceImpl implements SupportBoardService{
 
 	@Autowired SupportDao dao;
+	@Autowired AllDataDao datadao;
 	
 	@Override
 	public int totalCnt(Map<String, Object> param) {
@@ -79,6 +94,56 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	public Material download(Material file) {
 		return dao.download(file);
 		
+	}
+
+	@Override
+	public Material getFile(String userId, int portfolioId) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("userId", userId);
+		map.put("portfolioId", portfolioId);
+		
+		return dao.getFile(map);
+		
+	}
+
+	@Override
+	public Map<String, Object> getAllData(String userId, int jobopenNo) {
+		
+		Map<String, Object> allData = new HashMap<>();
+		
+		Map<String, Object> key = new HashMap<>();
+		key.put("userId", userId);
+		key.put("jobopenNo", jobopenNo);
+		
+		// userId 필요한 것
+		UserDetail user = datadao.getUser(key);
+		HighSchool high = datadao.getHigh(key);
+		College col = datadao.getCol(key);
+		University uni = datadao.getUni(key);
+		GSchool gs = datadao.getGs(key);
+		Military mil = datadao.getMil(key);
+		List<Career> car = datadao.getCar(key);
+		List<Activity> act = datadao.getAct(key);
+		List<License> lic = datadao.getLic(key);
+		List<Language> lang = datadao.getLang(key);
+		List<Experience> exp = datadao.getExp(key);
+		List<Introduce> intro = datadao.getIntro(key);
+		
+		allData.put("user", user);
+		allData.put("high", high);
+		allData.put("col", col);
+		allData.put("uni", uni);
+		allData.put("gs", gs);
+		allData.put("mil", mil);
+		allData.put("car", car);
+		allData.put("act", act);
+		allData.put("lic", lic);
+		allData.put("lang", lang);
+		allData.put("exp", exp);
+		allData.put("intro", intro);
+		
+		return allData;
 	}
 
 

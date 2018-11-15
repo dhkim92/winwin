@@ -67,6 +67,8 @@ public class DownloadView extends AbstractView{
 		// 서버에 저장된 파일 객체 생성
 		File origin = new File(path, file.getStoredName());
 		
+		System.out.println(origin);
+		
 		// 서버의 파일 스트림
 		fis = new FileInputStream(origin);
 		

@@ -29,4 +29,8 @@ public interface SupportBoardService {
 	public void emailupdate(int passNo);
 	
 	public Material download(Material file);
+	
+	public Material getFile(String userId, int portfolioId);
+	
+	public Map<String, Object> getAllData(String userId, int jobopenNo);
 }
