@@ -123,6 +123,7 @@ $(document).ready(function() {
 
 	<form action="/apply/careerUpdate" method="post" id="career" enctype="multipart/form-data">
 	<h4 class="mt-4 mb-3 font-weight-bold">경력사항</h4><input type="hidden" name="jobNum" value="${jobopenBasic.jobopenNo }" />
+	<input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
 		<img style="cursor: pointer" class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png" onclick="checkUserD();">
 		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_academic.png" onclick="checkAca();">

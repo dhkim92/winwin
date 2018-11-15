@@ -125,7 +125,6 @@ $(document).ready(function() {
             <br><br><br>
             <ul class="mb-0">
             	<li style="line-height: 150%;"><strong>지원서 입력이 완료된 경우 최종접수가 가능하며 최종접수를 하시려면 아래의 최종접수 버튼을 클릭하시기 바랍니다.</strong></li>
-            	<li style="line-height: 150%;"><strong>본인이 입사지원서 작성 전 지정하셨던 <span class="text-danger">"비밀번호"</span>는 지원서 수정 및 합격자 확인시 필요하므로 반드시 기억해주시기 바랍니다.</strong></li>
 			</ul>
 			<br><br><br>
 			<div class="col-12 mt-5 p-0 d-flex justify-content-end">

@@ -227,7 +227,7 @@ $(document).ready(function() {
                   <td class="align-middle"><input type="text" class="career" name="carArr[0].cName" class="mr-1" style="width:100px" /></td>
                   <td class="align-middle"><input type="text" class="career" name="carArr[0].position" class="mr-1" style="width:50px" /></td>
                   <td class="align-middle"><input type="text" class="career" name="carArr[0].task" class="mr-1" style="width:100px" /></td>
-                  <td class="align-middle"><input type="text" class="career" name="carArr[0].salary" class="mr-1" style="width:100px" /></td>
+                  <td class="align-middle"><input type="text" class="career carSalary" name="carArr[0].salary" class="mr-1" style="width:100px" /></td>
                   <td class="align-middle"><input type="text" class="career" name="carArr[0].cContent" class="mr-1" style="width:300px" /></td>
                   <td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td>
                 </tr>
@@ -353,7 +353,7 @@ $(document).ready(function() {
                      <strong><span class="text-danger">[퇴직사유 예 : 이직, 육아, 출산, 병가, 구조조정, 회사폐업 등]</span></strong>
                      <li><strong>연봉은 "( 월급여 X 12개월 ) + 상여"를 기준으로 작성하시기 바랍니다. (계약연봉기준)</strong></li>
                      <li><strong>해외연수의 경우 <span class="text-info">확인서 제출이 가능한 경우</span>에 한해서 기재하여 주시기 바랍니다.</strong></li>
-                     <li><strong>포트폴리오 파일 첨부는 최대 4개까지 가능하며 <span class="text-danger">등록 가능한 최대 용량은 총 10MB</span>입니다.</strong></li>
+                     <li><strong>포트폴리오 파일 첨부는 1개만 가능하며 <span class="text-danger">등록 가능한 최대 용량은 총 10MB</span>입니다.</strong></li>
                   </ul>
                   </td>
                </tr>
@@ -471,7 +471,7 @@ $(document).ready(function() {
 	
 	
 	function addCarForm(i) {
-		var form = '<tr><td class="align-middle"><input type="date" class="career carStartDate" name="carArr['+i+'].cStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" class="career carEndDate" name="carArr['+i+'].cEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].cName" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].position" class="mr-1" style="width:50px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].task" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].salary" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].cContent" class="mr-1" style="width:300px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
+		var form = '<tr><td class="align-middle"><input type="date" class="career carStartDate" name="carArr['+i+'].cStartDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="date" class="career carEndDate" name="carArr['+i+'].cEndDate" max="3000-12-31" min="1900-01-01" style="height:25px; width:120px;"></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].cName" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].position" class="mr-1" style="width:50px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].task" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career carSalary" name="carArr['+i+'].salary" class="mr-1" style="width:100px" /></td><td class="align-middle"><input type="text" class="career" name="carArr['+i+'].cContent" class="mr-1" style="width:300px" /></td><td class="align-middle"><input type="button" name="DBtn" value="삭제"/></td></tr>';
 		return form;
 	}
 	
@@ -825,7 +825,7 @@ $('#Btn').click(function() {
 			
 			console.log("carCheck if문")
 			
-			//회사경력 검증
+			//회사경력 날짜 검증
 			var carStartDate = document.getElementsByClassName("carStartDate");
 			var carEndDate = document.getElementsByClassName("carEndDate");
 			
@@ -881,7 +881,23 @@ $('#Btn').click(function() {
 						
 						break;
 					} else {
-						carCheck = true;
+						
+						var patternNumber = /^[0-9]$/
+						var salaryVal = document.getElementsByClassName("carSalary");
+						console.log("salaryVal : " + salaryVal.length);
+						for(var i=0 ; i<salaryVal.length; i++) {
+							var checkSalary = salaryVal[i].value;
+							
+							if(!patternNumber.test(checkSalary)) {
+								alert("회사경력 연봉을 만 단위로 입력해주십시오.");
+								carCheck = false;
+								
+								return;
+							} else {
+								carCheck = true;
+							}
+						}
+						
 					}
 					
 				}

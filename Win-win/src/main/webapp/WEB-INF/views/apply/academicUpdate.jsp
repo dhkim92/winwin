@@ -405,7 +405,7 @@ $(document).ready(function() {
 		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_military.png" onclick="checkMil();">
 		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_career.png" onclick="checkCar();">
 		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_introduce.png" onclick="checkIntro();">
-		<a href="/apply/finish?jobopeNo=${jobopenBasic.jobopenNo }">
+		<a href="/apply/finish?jobopenNo=${jobopenBasic.jobopenNo }">
 			<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 		</a>
 	</div>

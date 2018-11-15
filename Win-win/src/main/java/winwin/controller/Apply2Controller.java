@@ -339,7 +339,7 @@ public class Apply2Controller {
 
 			if(	l.getTestName()!=null && !l.getTestName().equals("0")) {
 				logger.info("getTestName if문에 들어옴");
-				
+				logger.info("l.getJobopenNo : " + l.getJobopenNo());
 				resLangList.add(l);
 			}
 		}
