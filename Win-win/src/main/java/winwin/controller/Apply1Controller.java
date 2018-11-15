@@ -717,7 +717,7 @@ public class Apply1Controller {
 	
 	@RequestMapping(value="/finish", method=RequestMethod.GET)
 	public void finish(String jobopenNo, HttpSession session, JobopenBasic jobopenBasic, Member member, UserDetail userDetail, HighSchool highSchool, College college, University university, GSchool gSchool, 
-			Military military, Language language, License license, Career career, Activity activity, Experience experience, Introduce introduce, Model model) {
+			Military military, Language language, License license, Career career, Activity activity, Experience experience, Introduce introduce, Material material, Model model) {
 		
 		
 		jobopenBasic.setJobopenNo(Integer.parseInt(jobopenNo));
@@ -774,6 +774,11 @@ public class Apply1Controller {
 		experience.setJobopenNo(jobopenBasic.getJobopenNo());
 		List<Experience> expList = apply2Service.selectExperience(experience);
 		model.addAttribute("experience", expList);
+		
+		material.setUserId((String)session.getAttribute("id"));
+		material.setPortfolioId(jobopenBasic.getJobopenNo());
+		Material mat = apply2Service.selectMaterial(material);
+		model.addAttribute("material", mat);
 		
 		introduce.setUserId((String)session.getAttribute("id"));
 		introduce.setJobopenNo(jobopenBasic.getJobopenNo());

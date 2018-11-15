@@ -335,7 +335,7 @@ $(document).ready(function() {
 	
 </div>
 
-
+<!-- 로그아웃 모달 -->
  <div id="myModal" class="modal">
 	      <!-- Modal content -->
 	      <div class="modal-content">
@@ -364,7 +364,7 @@ $(document).ready(function() {
 	      </div>
 	 
 	    </div>
-    </div>	
+ </div>	
 	
 <%@ include file="../include/scriptLoader.jsp"%>
 <script type="text/javascript">

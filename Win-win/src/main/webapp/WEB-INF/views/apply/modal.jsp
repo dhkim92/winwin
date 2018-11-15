@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -133,7 +133,7 @@
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="text-center align-middle">${college.colName }&nbsp${college.colBranch }&nbsp${college.colDay }</td>
                   <td class="text-center align-middle">${college.colMajor }&nbsp${college.colScore }/${college.colTotalScore }</td>
-                  <td class="text-center align-middle">${college.colStartDate }&nbsp~&nbsp${colEndDate }&nbsp${college.colTransfer }&nbsp${college.colGraduate }</td>
+                  <td class="text-center align-middle">${college.colStartDate }&nbsp${college.colTransfer}&nbsp&nbsp${college.colEndDate }&nbsp${college.colGraduate }</td>
                   <td class="text-center align-middle">${college.colRegion }</td>
                 </tr>
 		</tbody>
@@ -152,7 +152,7 @@
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="text-center align-middle">${university.univName }&nbsp${university.univBranch }&nbsp${university.univDay }</td>
                   <td class="text-center align-middle">${university.univMajor }&nbsp${university.univMinor }&nbsp${university.univScore }&nbsp/&nbsp${university.univTotalScore }</td>
-                  <td class="text-center align-middle">${university.univStartDate }&nbsp~&nbsp${university.univEndDate }&nbsp${university.univTransfer }&nbsp${university.univGraduate }</td>
+                  <td class="text-center align-middle">${university.univStartDate }&nbsp${university.univTransfer}&nbsp&nbsp${university.univEndDate }&nbsp${university.univGraduate }</td>
                   <td class="text-center align-middle">${university.univRegion }</td>
                 </tr>
 		</tbody>
@@ -318,14 +318,12 @@
 					<th class="text-center text-center align-middle">등록수정일</th>
 					<th class="text-center text-center align-middle">용량</th>
 				</tr>
-				<c:forEach items="${material }" var="material">
 				<tr style="line-height: 0.8em; height:10px;">
                   <td class="text-center align-middle">${material.originName }</td>
                   <td class="text-center align-middle">${material.originName }</td>
-                  <td class="text-center align-middle">${material.writedate }</td>
+                  <td class="text-center align-middle"><fmt:formatDate value="${material.writedate }" pattern="yyyy/MM/dd" /></td>
                   <td class="text-center align-middle">${material.filesize }</td>
                 </tr>
-                </c:forEach>
 		</tbody>
 		</table>
 	

@@ -5,10 +5,10 @@
 </style>
 
 <script type="text/javascript">
-	history.pushState(null, null, location.href);
-	window.onpopstate = function () {
-	    history.go(1);
-	};
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+    history.go(1);
+};
 $(document).ready(function() {
 		
 	var tid;
@@ -74,6 +74,14 @@ $(document).ready(function() {
 		return ""+nHour+":"+nMin+":"+nSec;
 	}
 
+	var Dday = new Date('<fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" />');
+	var now = new Date();
+		
+	var gap = now.getTime() - Dday.getTime();
+	var result = Math.floor(gap/ (1000*60*60*24)) * -1;
+		
+	$("#dDay").val("(D- " + result + "일)");
+	
 	
 	$('#saveBtn').click(function(){
 		
@@ -91,15 +99,6 @@ $(document).ready(function() {
 		}
 
 	});
-	
-	
-	var Dday = new Date('<fmt:formatDate value="${jobopenBasic.endDate }" pattern="yyyy/MM/dd" />');
-	var now = new Date();
-		
-	var gap = now.getTime() - Dday.getTime();
-	var result = Math.floor(gap/ (1000*60*60*24)) * -1;
-		
-	$("#dDay").val("(D- " + result + "일)");
 	
 });
 
@@ -219,36 +218,36 @@ $(document).ready(function() {
    
 </div>
 
-
-	<div id="myModal" class="modal">
-	      <!-- Modal content -->
-	      <div class="modal-content">
-	      	
-	      	<div class="row">
-				<div class="col-6">
-				<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
-				</div>
-				<div class="col-6">
-				<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
-				</div>
+<!-- 로그아웃 모달 -->
+<div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+      	
+      	<div class="row">
+			<div class="col-6">
+			<span class="font-weight-bold h2 d-flex justify-content-start mt-3">WIN-WIN</span>
 			</div>
-	     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
-	     	
-	     	<!-- 모달 내용 입력하는 부분 -->
-	     	<div>
-		     	<div class="mt-4">
-			        <p class="font-weight-bold text-center" id="logoutModal"></p>
-				</div>
-			
-			<div class="modal-footer d-flex justify-content-center">
-				<div class="row">
-				<a href="/user/logout"><button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button></a>
-				</div>
+			<div class="col-6">
+			<span class="d-flex justify-content-end mt-1"><span class="close">&times;</span></span>
 			</div>
-	      </div>
-	 
-	    </div>
+		</div>
+     	<div class="mb-3" style="height:4px; background-color: #376092" ></div>
+     	
+     	<!-- 모달 내용 입력하는 부분 -->
+     	<div>
+	     	<div class="mt-4">
+		        <p class="font-weight-bold text-center" id="logoutModal"></p>
+			</div>
+		
+		<div class="modal-footer d-flex justify-content-center">
+			<div class="row">
+			<a href="/user/logout"><button type="button"  id="btnClose" class="font-weight-bold btn btn-primary" style="background-color: #376092">확인</button></a>
+			</div>
+		</div>
+      </div>
+ 
     </div>
+   </div>
 
 
 
