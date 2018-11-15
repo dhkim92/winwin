@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import winwin.dao.SupportDao;
 import winwin.dto.JobopenBasic;
+import winwin.dto.Material;
 import winwin.dto.SupportBoard;
 import winwin.util.Paging;
 
@@ -71,6 +72,12 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	@Override
 	public void emailupdate(int passNo) {
 		dao.emailupdate(passNo);
+		
+	}
+
+	@Override
+	public Material download(Material file) {
+		return dao.download(file);
 		
 	}
 

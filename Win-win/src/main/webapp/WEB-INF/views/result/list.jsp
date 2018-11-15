@@ -246,8 +246,8 @@ function resultList(page) {
 					html += '	<td class="text-center align-middle">' + item.task + '</td>';
 					html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
 					html += '	<td class="text-center align-middle username">' + item.username + '</td>';
-					html += '	<td class="text-center pass"><button type="button" class="btn btn-secondary btn-sm">' + item.pass + '</button></td>';
-					html += '	<td class="text-center emailsend"><button type="button" class="btn btn-secondary btn-sm">' + item.emailSend + '</button></td>';
+					html += '	<td class="text-center pass"><span class="badge badge-secondary" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.pass + '</span></td>';
+					html += '	<td class="text-center emailsend"><span class="badge badge-secondary" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.emailSend + '</span></td>';
 					html += '	<td hidden class="userId">' + item.userId + '</td>';
 					html += '	<td hidden class="passNo">' + item.passNo + '</td>';
 					html += '</tr>';

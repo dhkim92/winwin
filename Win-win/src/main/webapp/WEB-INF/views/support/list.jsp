@@ -67,6 +67,7 @@
 </style>
 
 <script>
+
 	var page = 1; //현재 페이지
 	var limit = 20; //목록 갯수
 	var pageCount = 5; //페이지 수
@@ -84,10 +85,8 @@
 			$('#' + $(this).attr('forId') + ' option').prop('selected', false);
 			$(this).html('');
 			$(this).hide();
-			$("#title").val("0").prop("selected", true);
 			//property	속성 값 true / false
 			//attribute key, value 
-			$('.searchSelect option').prop('selected', false);
 			supportList(1);
 		});
 
@@ -149,7 +148,10 @@
 						html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
 						html += '	<td class="text-center align-middle">' + item.username + '</td>';
 						html += '	<td class="text-center"><button type="button" class="btn btn-primary btn-sm modalBtn">포트폴리오</button></td>';
-						html += '	<td class="text-center"><button type="button" class="btn btn-secondary btn-sm">' + item.status + '</button></td>';
+						html += '	<td class="text-center"><span class="badge badge-secondary" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.status + '</span></td>';
+						html += '	<td hidden class="portfolioId">' + item.portfolioId + '</td>';
+						html += '	<td hidden class="userId">' + item.userId + '</td>';
+						
 						html += '</tr>';
 
 					$('#supportTable tbody').append(html);
@@ -211,7 +213,7 @@
 		});
 	}
 
-	function portModal() {
+		function portModal() {
 		// Get the modal
 		var modal = document.getElementById("portModal");
 		// Get the button that opens the modal
@@ -228,9 +230,38 @@
 		var btnOk = document.getElementById("btnOk");
 
 		// When the user clicks on the button, open the modal 
-		for (var i = 0; i < btn.length; i++) {
-			btn[i].onclick = function() {
-				modal.style.display = "block";
+			for (var i = 0; i < btn.length; i++) {
+				btn[i].onclick = function() {				
+					modal.style.display = "block";
+					//1. portfolioId, userId 가저옴
+					var portfolioId = $(this).parent().parent().children(".portfolioId").html();
+					var userId = $(this).parent().parent().children(".userId").html();
+					console.log(portfolioId);
+					console.log(userId);
+					//console.log(jobOpenNo.html());
+					//2. ajax 처리 
+					$.ajax({
+						    type:"post",
+						    url:"/support/download",
+						    data:{"userId":userId, "portfolioId":portfolioId},
+						    dataType:"text",
+						    success:function(data){
+						    	var modal = document.getElementById("portModal");
+						    	modald.style.display = "block";
+						    	var btn = document.getElementsByClassName("modalBtn");
+								var span = document.getElementsByClassName("close")[0];
+								var btnClose = document.getElementById("btnClose");
+								
+								span.onclick = function() {
+				        			modal.style.display = "none";
+				        		}
+
+				        		btnClose.onclick = function() {
+				        			modal.style.display = "none";
+				        			location.href="/support/list";
+				        		}
+						    }
+						});	
 			}
 		}
 
@@ -260,9 +291,11 @@
 		var modal = document.getElementById('checkModal');
 		// Get the button that opens the modal
 		var btn = document.getElementsByClassName("titleBtn");
+		
+// 		var span = document.getElementsByClassName("close")[0]
 
 		// Get the <span> element that closes the modal
-		// var span = document.getElementsByClassName("closeCheck")[0];                                          
+		var span = document.getElementById("titleClose");                                          
 
 		var modalPass = document.getElementById("modalPass");
 		var modalFail = document.getElementById("modalFail");
@@ -277,6 +310,9 @@
 			// span.onclick = function() {
 			//     modal.style.display = "none";
 			// }
+			span.onclick = function() 	{
+			modal.style.display = "none";
+			}
 
 			modalPass.onclick = function() {
 				passModal();
@@ -302,6 +338,7 @@
 
 		// Get the button that opens the modal
 		var btn = document.getElementById("modalPass");
+		var span = document.getElementById("passClose");   
 
 		// Get the <span> element that closes the modal    
 
@@ -311,6 +348,11 @@
 		// When the user clicks on the button, open the modal 
 
 		modal.style.display = "block";
+		
+		span.onclick = function() 	{
+			modal.style.display = "none";
+			}
+
 
 		btnCancle.onclick = function() {
 			modal.style.display = "none";
@@ -333,6 +375,7 @@
 
 		// Get the button that opens the modal
 		var btn = document.getElementById("modalFail");
+		var span = document.getElementById("failClose");  
 
 		// Get the <span> element that closes the modal    
 
@@ -341,6 +384,11 @@
 
 		// When the user clicks on the button, open the modal 
 		modal.style.display = "block";
+		
+		span.onclick = function() 	{
+			modal.style.display = "none";
+			}
+
 
 		btnCancle2.onclick = function() {
 			modal.style.display = "none";
@@ -563,6 +611,8 @@ function paging (page, limit, totalCount, pageCount, callback) {
 							<th class="text-center">지원자</th>
 							<th class="text-center">포트폴리오</th>
 							<th class="text-center">처리 상태</th>
+							<th hidden></th>
+							<th hidden></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -642,7 +692,7 @@ function paging (page, limit, totalCount, pageCount, callback) {
 			</div>
 			<div class="col-6">
 				<span class="d-flex justify-content-end mt-1"><span
-					class="close">&times;</span></span>
+					id="passClose" class="closeCheck">&times;</span></span>
 			</div>
 		</div>
 		<div class="mb-3" style="height: 4px; background-color: #376092"></div>
@@ -682,7 +732,7 @@ function paging (page, limit, totalCount, pageCount, callback) {
 			</div>
 			<div class="col-6">
 				<span class="d-flex justify-content-end mt-1"><span
-					class="close">&times;</span></span>
+					id="failClose" class="closeCheck">&times;</span></span>
 			</div>
 		</div>
 		<div class="mb-3" style="height: 4px; background-color: #376092"></div>
@@ -713,7 +763,15 @@ function paging (page, limit, totalCount, pageCount, callback) {
 <div class="modalCheck" id="checkModal">
 	<div class="modal-contentCheck">
 
+<div class="col-12 row" style="padding-right:0">
+	<div class="col-6">
 		<h3 class="mt-3 font-weight-bold">지원서 미리보기</h3>
+		</div>
+			<div class="col-6" style="padding-right:0">
+				<span class="d-flex justify-content-end mt-1"><span
+					id="titleClose" class="closeCheck">&times;</span></span>
+			</div>
+		</div>
 		<hr style="border: solid 2px #376092;">
 		<br>
 

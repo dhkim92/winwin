@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import winwin.dto.JobopenBasic;
+import winwin.dto.Material;
 import winwin.dto.SupportBoard;
 import winwin.util.Paging;
 
@@ -24,6 +25,8 @@ public interface SupportDao {
 	public List<JobopenBasic> getTitle();
 
 	public void emailupdate(int passNo);
+	
+	public Material download(Material file);
 
 
 }

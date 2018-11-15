@@ -36,7 +36,8 @@
  			job.title, 
  			usr.task, 
  			mem.username, 
- 			mat.portfolioId 
+ 			mat.portfolioId, 
+ 			usr.userId
  		FROM 
  			support sup, jobopenbasic job, userdetail usr, material mat, member mem
  		
@@ -243,8 +244,16 @@
 	</select>
 	
 	<update id="emailupdate" parameterType="int">
-		update support set emailsend='하이' where passno=#{passNo}
+		UPDATE support SET emailsend='발송' WHERE passno=#{passNo}
 	</update>
+	
+	<select id="download" parameterType="winwin.dto.SupportBoard" resultType="winwin.dto.Material">
+		SELECT originName FROM material mat, support sup 
+            WHERE mat.PORTFOLIOID = sup.JOBOPENNO AND sup.userid = mat.userid 
+            
+            AND mat.portfolioId = ${portfolioId}
+            AND sup.userid = #{userId}
+	</select>
 	
 	
 	

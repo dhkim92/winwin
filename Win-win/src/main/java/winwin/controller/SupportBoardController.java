@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import winwin.dto.JobopenBasic;
+import winwin.dto.Material;
 import winwin.dto.SupportBoard;
 import winwin.service.SupportBoardService;
 import winwin.util.Paging;
@@ -69,5 +71,21 @@ public class SupportBoardController {
 		SupportBoard detail = service.detail(param);
 		
 		return detail;
+	}
+	
+	@PostMapping(value="/support/download")
+	public ModelAndView download(ModelAndView m,Material file,
+				@RequestParam(value="userId") String userId,
+				@RequestParam(value="portfolioId") int portfolioId) {
+		
+		Material downfile = service.download(file);
+				
+		m.setViewName("download");
+		m.addObject("downFile",downfile);
+		
+		System.out.println(userId);
+		System.out.println(portfolioId);
+		
+		return m;
 	}
 }
