@@ -62,8 +62,8 @@
 	</select>
 	
 	<insert id="insertDetail" parameterType="winwin.dto.JobopenDetail">
-		insert into jobopenDetail(jobopenNo, sector, task, volume, location, special, title, display)
-		values(#{jobopenNo}, #{sector}, #{task}, #{volume}, #{location}, #{special}, #{title}, 0)
+		insert into jobopenDetail(jobopenNo, sector, task, volume, location, special, title)
+		values(#{jobopenNo}, #{sector}, #{task}, #{volume}, #{location}, #{special}, #{title})
 	
 	</insert>
 	
