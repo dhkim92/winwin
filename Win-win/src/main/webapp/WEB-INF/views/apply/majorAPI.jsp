@@ -9,7 +9,7 @@
 $(document).ready(function() {
       
 	var xhr = new XMLHttpRequest();
-	var url = "http://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=3d2366be6096ee283bd1d6eaede2a14f&svcType=api&svcCode=MAJOR&contentType=json&gubun=univ_list&univSe=univ&thisPage=1&perPage=318";
+	var url = "http://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=05a8dc0a047de2825ef6f84621e69b78&svcType=api&svcCode=MAJOR&contentType=json&gubun=univ_list&univSe=univ&perPage=295";
 	xhr.open('GET', url);
 	xhr.onreadystatechange = function () {
 		if (this.readyState == 4) {
@@ -19,7 +19,7 @@ $(document).ready(function() {
 			for(var i=0; i<data.length; i++){
 				value[i] = data[i].facilName;
 	         	         
-	         	var valarr = value[i].split(", ")
+	         	var valarr = value[i].split(",")
 	      	 	for(var k=0; k<valarr.length; k++){
 
 	      	 		$("#univMajorS").append(
