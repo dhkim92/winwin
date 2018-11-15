@@ -228,7 +228,7 @@ td {
 					}
 					html +='</td>'
 						+'<td><span class="badge badge-warning font-weight-bold" style="cursor: pointer;" onclick="jo_update('+item.jobopenNo+');">수정</span></td>'
-						+'<td><span class="badge badge-danger font-weight-bold" style="cursor: pointer;" onclick="jo_delete('+item.jobopenNo+');">삭제</span></td>'
+						+'<td><span class="badge badge-danger font-weight-bold deleteJob" style="cursor: pointer;">삭제</span></td>'
 						+'</tr>';
 						
 						
@@ -240,6 +240,8 @@ td {
 				}
 			}
 			var jobopenno = null;
+			
+			// 상태 수정 버튼 이벤트
 			$('.stat').on('click',function(){
 				$("#statusModal").css("display", "block");
 				var select = $(this).parent().parent().children().eq(6).text();
@@ -261,19 +263,36 @@ td {
 					method:"post"
 					, url:"/jobOpen/jo_status"
 					, data:{
-						jobopenNo : jobopenno,
-						status : sel
+						"jobopenNo" : jobopenno,
+						"status" : sel
 						}
 					, success : function(){
 						$('.statusMo option:eq(0)').prop("selected",true);
 						manageList($('.active').children().attr("data-curPage"));
 					}
 				});
-				
 			});
 			
+			// 공고 삭제 버튼 이벤트
+			$('.deleteJob').on('click', function(){
+				jobopenno = $(this).parent().parent().children().eq(0).text();
+				$("#myModal").css("display", "block");
+				$("#idChecking").html("정말 삭제하시겠습니까?");
+				console.log(jobopenno);
+			});
 			
-			
+			$("#btnOk").on("click", function(){
+				$("#myModal").css("display","none");
+				
+				$.ajax({
+					method:"post"
+					, url:"/jobOpen/jo_delete"
+					, data: {"jobopenNo" : jobopenno}
+					, success:function(){
+						manageList($('.active').children().attr("data-curPage"));
+					}
+				});
+			});
 			
 			
 			paging(page, listCount, result.totalCount, pageCount, manageList);
@@ -355,7 +374,7 @@ td {
 	}
 	
 	
-	/* 상태 수정 */
+	/* 모달 설정 */
 	$(document).ready(function(){
 		$('.statusMo').on("change", function(){
 			var $sel = $('.statusMo option:selected').val();
@@ -364,6 +383,7 @@ td {
 		
 		$(".close").on("click", function(){
 			$("#statusModal").css("display", "none");
+			$("#myModal").css("display", "none");
 			$('#stChecking').html("");
 			$('.statusMo option:eq(0)').prop("selected",true);
 		});
@@ -373,49 +393,13 @@ td {
 			$('#stChecking').html("");
 			$('.statusMo option:eq(0)').prop("selected",true);
 		});
+		
+		$("#btnNo").on("click", function(){
+			$("#myModal").css("display", "none");
+		})
+		
 	})
 
-	
-	/* 공고 삭제 */
-	function jo_delete(num){
-		var $modal = $("#myModal");
-		$modal.css("display", "block");
-		
-		var $span = $(".close");
-		var $btnOk = $("#btnOk");
-		var $btnNo = $("#btnNo");
-		
-		$('#idChecking').html("정말 삭제하시겠습니까?");
-		
-		$span.on("click", function(){
-			$modal.css("display", "none");
-			num = null;
-		});
-		
-		$btnNo.on("click", function(){
-			$modal.css("display", "none");
-			num = null;
-		});
-		
-		$btnOk.on("click", function(){
-			$modal.css("display", "none");
-			
-			if(num==null){
-				continue;
-			}
-			
-			$.ajax({
-				method:"post"
-				, url:"/jobOpen/jo_delete"
-				, data: {jobopenNo : num}
-				, success:function(){
-					manageList($('.active').children().attr("data-curPage"));
-				}
-			})
-			
-		});
-		
-	}
 	
 	
 </script>

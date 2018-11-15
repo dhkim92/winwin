@@ -100,7 +100,7 @@ public class JobopenServiceImpl implements JobopenService {
 	@Override
 	public void regiInfo(int jobopenNo) {
 		jobopenDao.updateBasicDis(jobopenNo);
-		jobopenDao.updateDetailDis(jobopenNo);
+//		jobopenDao.updateDetailDis(jobopenNo);
 	}
 
 	@Override
