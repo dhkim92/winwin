@@ -113,7 +113,7 @@ td{
 	
 	<div class="col-12 mt-5" id="commentList">
 		
-		<span onclick="onComment();" id="change"><i class="far fa-comment-dots mr-2"></i><label id="commentCnt">댓글 목록(${board.commentCnt })</label></span>	
+		<span style="cursor:pointer;" onclick="onComment();" id="change"><i class="far fa-comment-dots mr-2"></i><label style="cursor:pointer;" id="commentCnt">댓글 목록(${board.commentCnt })</label></span>	
 		<hr class="mt-1">
 	</div>
 	

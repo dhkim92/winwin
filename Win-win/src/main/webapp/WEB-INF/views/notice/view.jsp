@@ -47,10 +47,10 @@
 			</table>
 			<div class="text-right mb-2">
 				<c:if test="${board.filesCnt eq 0}">
-				<label><i class="fas fa-download mr-2"></i>첨부된 파일(${board.filesCnt }</label>)
+				<label style="cursor:pointer;"><i class="fas fa-download mr-2"></i>첨부된 파일(${board.filesCnt }</label>)
 				</c:if>
 				<c:if test="${board.filesCnt ne 0}">
-				<label onclick="onFiles();"><i class="fas fa-download mr-2"></i>첨부된 파일(${board.filesCnt }</label>)
+				<label style="cursor:pointer;" onclick="onFiles();"><i class="fas fa-download mr-2"></i>첨부된 파일(${board.filesCnt }</label>)
 				</c:if>		
 			</div>			
 		</div>
@@ -100,9 +100,9 @@
 			        		<table id="upTable" class="table table-hover table-sm">
 			        			<c:forEach items="${files}" var="file">
 			        	 			<tr>
-			        	 				<td class="upCol" width="10%"><i class="fas fa-file-download mr-2 ml-2"></i></td>
-			        	 				<td class="upCol" width="60%" class="truncated">${file.originName }</td>
-			        	 				<td class="upCol" width="30%" class="truncated">${file.filesize } bytes</td>
+			        	 				<td style="cursor:pointer;" class="upCol" width="10%"><i class="fas fa-file-download mr-2 ml-2"></i></td>
+			        	 				<td style="cursor:pointer;" class="upCol" width="60%" class="truncated">${file.originName }</td>
+			        	 				<td style="cursor:pointer;" class="upCol" width="30%" class="truncated">${file.filesize } bytes</td>
 			        	 				<td class="upCol" style="display :none;">${file.fileNo }</td>
 			        	 			</tr>
 			        			</c:forEach>

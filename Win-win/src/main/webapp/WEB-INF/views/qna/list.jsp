@@ -9,6 +9,7 @@ th {
 }
 td {
 	font-size: 14px;
+	cursor:pointer;
 }
 </style>
 
@@ -43,6 +44,18 @@ td {
 		</table>
 	</div>
 	
+	<c:if test="${sessionScope.login }">
+		<div class="mt-2">
+			<table class="table table-sm col-md-11 table-borderless mb-1" align="center">
+				<tr> 
+					<td class="text-right">
+						<button class="bigbutton btn font-weight-bold text-white btn-lg" style="background: #376092;" id="btnWrite">채용Q&A 문의하기</button>		
+					</td>
+				</tr>
+			</table>
+		</div>
+	</c:if>
+	
 	<div class="d-flex justify-content-center">
 		<table id="qnaTable" class="table table-sm col-md-11 table-hover text-center">
 			<thead class="thead-light">
@@ -60,7 +73,14 @@ td {
 			<c:forEach items="${list }" var="board">
 				<tr>
 					<td class="view">${board.qnaNo }</td>					
-					<td class="view"><i class="fas fa-lock mr-2"></i>${board.title }</td>
+					<td class="view">
+						<c:if test="${sessionScope.adminLogin}">
+							<a href="/qna/view?qnaNo=${board.qnaNo}">${board.title }</a>
+						</c:if>
+						<c:if test="${sessionScope.adminLogin ne true}">
+							<i class="fas fa-lock mr-2"></i>${board.title }
+						</c:if>	
+					</td>
 					<td>
 						<c:if test="${board.commentCnt eq 0}">
 						</c:if>
@@ -138,8 +158,12 @@ $("#btnWrite").click(function(){
 });
 $("#qnaTable").on("click",".view",function(){
 	var qnano = $(this).parent().children().eq(0).text();
-	$("#qnaNo").val(qnano);
-	onFiles();
+	if(${sessionScope.adminLogin}==true){
+		$(location).attr("href","/qna/view?qnaNo="+qnano);
+	}else{
+		$("#qnaNo").val(qnano);
+		onFiles();
+	}
 });
 
 function onFiles(){

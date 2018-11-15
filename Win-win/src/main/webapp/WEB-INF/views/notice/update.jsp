@@ -107,13 +107,18 @@ $(document).ready(function() {
 		$(location).attr("href","/notice/view?noticeno="+${board.noticeno});
 	});
 	$("#btnUpdate").click(function() {
-		submitContents($(this));
-		$("form").submit();
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		if($("#title").val()==""){
+			alert("제목을 입력하세요");
+			$("#title").focus();
+		}else if($("#content").val()=="<br>"||$("#content").val()==""){
+			alert("내용을 입력하세요");
+		}else{
+			submitContents($(this));
+			$("form").submit();
+		}
 	});
 });
-</script>
-
-<script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
     oAppRef: oEditors,

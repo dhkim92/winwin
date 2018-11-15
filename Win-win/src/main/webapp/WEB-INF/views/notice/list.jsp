@@ -10,6 +10,7 @@ th {
 }
 td {
 	font-size: 14px;
+	cursor:pointer;
 }
 </style>
 
@@ -27,6 +28,18 @@ td {
 		<p class="font-weight-bold h3">공지사항</p>
 		<hr style="border: solid #376092;">
 	</div>
+	
+	<c:if test="${adminLogin }">
+		<div class="mt-2">
+			<table class="table table-sm col-md-11 table-borderless mb-1" align="center">
+				<tr> 
+					<td class="text-right">
+						<button class="bigbutton btn font-weight-bold text-white btn-lg" style="background: #376092;" id="btnWrite">공지사항 작성하기</button>		
+					</td>
+				</tr>
+			</table>
+		</div>
+	</c:if>
 		
 	<div class="d-flex justify-content-center">
 		<table class="table table-sm col-md-11 table-hover text-center">
@@ -43,27 +56,21 @@ td {
 		<tbody>
 		<c:forEach items="${list }" var="board">
 		<tr>
-			<td>${board.noticeno }</td>
-			<td><a href="/notice/view?noticeno=${board.noticeno}" style="text-decoration: none">${board.title }</a></td>
-			<td>
+			<td class="view">${board.noticeno }</td>
+			<td class="view"><a href="/notice/view?noticeno=${board.noticeno}" style="text-decoration: none">${board.title }</a></td>
+			<td class="view">
 			<c:if test="${board.filesCnt ne 0 }">
 				<span class="badge badge-pill badge-secondary">파일첨부</span>
 			</c:if>
-			<td>
-			<td><fmt:formatDate value="${board.writedate}" pattern="yyyy-MM-dd" /></td>
-			<td>[관리자]</td>
-			<td>${board.hit }</td>	
+			<td class="view">
+			<td class="view"><fmt:formatDate value="${board.writedate}" pattern="yyyy-MM-dd" /></td>
+			<td class="view">[관리자]</td>
+			<td class="view">${board.hit }</td>	
 		</tr>
 		</c:forEach>
 		</tbody>
 		</table>
 	</div>
-	
-	<c:if test="${adminLogin }">
-		<div id="btn" class="text-right">
-			<button id="btnWrite" class="btn btn-primary mr-3">작성</button>
-		</div>
-	</c:if>
 	<br>
 	
 	<jsp:include page="/WEB-INF/views/util/noticepaging.jsp" />
@@ -76,6 +83,10 @@ td {
 <script>
 $("#btnWrite").click(function(){
 	$(location).attr("href","/notice/write");
+});
+$("table").on("click",".view",function(){
+	var noticeno = $(this).parent().children().eq(0).text();
+	$(location).attr("href","/notice/view?noticeno="+noticeno);
 });
 </script>
 

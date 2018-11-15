@@ -26,7 +26,7 @@ td{
 				<strong>제목</strong>
 			</td>
 			<td class="text-center" style="background-color: lightgray;">
-				<input type="text" class="form-control" name="title" placeholder="제목을 적으세요(66자 이내)"/>
+				<input type="text" id="title" class="form-control" name="title" placeholder="제목을 적으세요(66자 이내)"/>
 			</td>
 		</tr>
 		<tr>
@@ -77,12 +77,18 @@ $(document).ready(function() {
 		history.go(-1);
 	});
 	$("#btnWrite").click(function() {
-		submitContents($(this));
-		$("form").submit();
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		if($("#title").val()==""){
+			alert("제목을 입력하세요");
+			$("#title").focus();
+		}else if($("#content").val()=="<br>"||$("#content").val()==""){
+			alert("내용을 입력하세요");
+		}else{
+			submitContents($(this));
+			$("form").submit();
+		}
 	});
 });
-</script>
-<script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
     oAppRef: oEditors,

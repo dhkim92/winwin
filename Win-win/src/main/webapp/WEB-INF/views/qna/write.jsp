@@ -80,10 +80,13 @@ $(document).ready(function() {
 		history.go(-1);
 	});
 	$("#btnWrite").click(function() {
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		if($("#title").val()=""){
 			alert("제목을 입력하세요");
+			$("#title").focus();
 		}else if($("#pw").val()=""){
-			alert("패스워드를 입력하세요");	
+			alert("패스워드를 입력하세요");
+			$("#pw").focus();
 		}else if($("#content").val()=""){
 			alert("내용을 입력하세요");			
 		}else{
