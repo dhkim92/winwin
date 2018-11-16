@@ -67,7 +67,14 @@
 							</td>
 							<td class=form-inline>
 								<input type="email" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="userid" name="userid" placeholder="이메일을 입력하시오." required>
+								id="userid" name="userid" placeholder="이메일을 입력하시오." onkeyup="Lower(this);" required>
+								
+								<script>
+								function Lower(r){
+									r.value = r.value.toLowerCase();
+								}
+								</script>
+								
 								<button type="button" id="idConfirm" class="btn btn-primary btn-sm mr-3"
 									style="width: 70px;">중복확인</button>
 								<span style="color:#008CBA;">로그인 시 사용되는 이메일 주소입니다.</span>
@@ -242,7 +249,10 @@
 			
 				//userid 를 param.
 				var userid = $("#userid").val();
-
+	
+				
+				console.log(userid);
+				
 				if (userid == "") {
 					alert("이메일 주소를 입력하시오.");
 					$("#userid").addClass("is-invalid");

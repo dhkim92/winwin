@@ -16,7 +16,7 @@
 
 <%@ include file="../include/header.jsp"%>
 
-<div class="container">
+
 <div class="container">
 	<div class="row">
 		<div class="col-12 mt-5">
@@ -45,7 +45,13 @@
 							</td>
 							<td>
 								<input type="email" style="width: 300px;" class="form-control form-control-sm mr-sm-2"
-								id="userid" name="userid" placeholder="이메일을 입력하시오." required>
+								id="userid" name="userid" placeholder="이메일을 입력하시오." onkeyup="Lower(this);" required>
+								<script>
+									function Lower(r){
+										r.value = r.value.toLowerCase();
+									}
+								</script>
+								
 							</td>
 						</tr>
 						<tr>
@@ -110,8 +116,8 @@
 		</div>
 
 	</div>
-	</div>
 </div>
+
 
 
 <div id="myModal" class="modal">
