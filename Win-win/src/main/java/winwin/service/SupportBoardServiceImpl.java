@@ -125,7 +125,7 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 		List<License> lic = datadao.getLic(key);
 		List<Language> lang = datadao.getLang(key);
 		List<Experience> exp = datadao.getExp(key);
-		List<Introduce> intro = datadao.getIntro(key);
+		Introduce intro = datadao.getIntro(key);
 		
 		allData.put("mem", mem);
 		allData.put("user", user);
@@ -142,6 +142,12 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 		allData.put("intro", intro);
 		
 		return allData;
+	}
+
+	@Override
+	public void statusupdate(int jobOpenNo, String userId, String status) {
+		dao.statusupdate(jobOpenNo, userId, status);
+		
 	}
 
 

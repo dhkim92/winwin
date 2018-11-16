@@ -26,77 +26,70 @@
 		<result column="emailSend" property="emailSend" />
 	</resultMap>
  	
- 	<sql id="selectSupportBoard">
- 		SELECT 
- 			sup.passNo, 
- 			job.jobOpenNo,
- 			mat.fileNo,
- 			sup.supportDate, 
- 			sup.status, 
- 			job.title, 
- 			usr.task, 
- 			mem.username, 
- 			mat.portfolioId, 
- 			usr.userId
- 		FROM 
- 			support sup, jobopenbasic job, userdetail usr, material mat, member mem
- 		
- 		<where>
-	 		sup.jobopenno = job.jobopenno 
-	 		AND job.jobopenno = mat.portfolioId 
-	 		AND mat.userid = mem.userId
-	 		AND usr.userid = mem.userid
-	 		
-	 		<!-- 경력 ( 신입, 경력 ) -->
-			<if test="career != null and career != ''">
-				AND job.offer LIKE '%' || #{career} || '%'
-			</if> 		
-			<!-- 고용형태 -->
-			<if test="employment != null and employment != ''">
-				AND job.form LIKE '%' || #{employment} || '%'
-			</if>
-			<!-- 학력 -->
-			<if test="academiccareer != null and academiccareer != ''">
-				AND job.academic LIKE '%' || #{academiccareer} || '%'
-				<!-- 학점 -->
-				<choose>
-					<when test='"1".equals(academiccareer.toString())'>
-						<!-- 석사 이상 -->
-						AND TO_NUMBER((SELECT gsc.gstotalscore FROM gschool gsc WHERE gsc.userid = usr.userid)) <![CDATA[>=]]> #{credit}
-					</when>
-					<when test='"2".equals(academiccareer.toString())'>
-						<!-- 대학교 졸업 2~3년 -->
-						AND TO_NUMBER((SELECT col.gstotalscore FROM colege col WHERE gsc.userid = usr.userid)) <![CDATA[>=]]> #{credit}
-					</when>
-					<when test='"3".equals(academiccareer.toString())'>
-						<!-- 대학교 졸업 4년 -->
-						AND TO_NUMBER((SELECT uni.univtotalscore FROM university uni WHERE uni.userid = usr.userid)) <![CDATA[>=]]> #{credit}
-					</when>
-				</choose>
-			</if>
-			
-			<!-- 토익 -->
-			<if test="language != null and language != ''">
-				AND job.language LIKE '%' || #{language} || '%'
-			</if>
-			<!-- 처리상태 -->
-			<if test="status != null and status != ''">
-				AND sup.status LIKE '%' || #{status} || '%'
-			</if>
-			<!-- 공고명 -->
-			<if test='title != "0"'>
-			<if test="title != null and title != ''">
-				AND job.title = #{title}
-			</if>
-			</if>
- 		</where>
- 	</sql>
+ 	   <select id="list" resultMap="Support" parameterType="map">
+       SELECT * FROM ( SELECT rownum rnum, T.* FROM(
+       <include refid="selectSupportBoard"/>
+       ) T ORDER BY supportDate DESC ) R WHERE R.rnum BETWEEN #{startNo} AND #{endNo} ORDER BY rnum
+    </select>
+    
+    <sql id="selectSupportBoard">
+       SELECT 
+          job.jobOpenNo,
+          sup.supportDate,
+          sup.status, 
+          job.title,
+          mem.username,
+          mem.userId,
+          mem.count,
+          usr.task
+       FROM 
+          jobopenBasic job, support sup, member mem, userDetail usr, university univ, language lang
+       
+       <where>
+          usr.userid = mem.userid and
+          usr.userid = sup.userid and
+          usr.userid = univ.userid and
+          univ.jobopenno = job.jobopenno and
+          usr.jobopenno = job.jobopenno and
+          usr.jobopenno = lang.jobopenno and
+          lang.testname = 'TOEIC'
+          
+          <!-- 경력 ( 신입, 경력 ) -->
+         <if test="career != null and career != ''">
+            AND job.offer LIKE '%' || #{career} || '%'
+         </if>       
+         <!-- 고용형태 -->
+         <if test="employment != null and employment != ''">
+            AND job.form LIKE '%' || #{employment} || '%'
+         </if>
+         <!-- 학력 -->
+         <if test="academiccareer != null and academiccareer != ''">
+            AND mem.count=#{academiccareer}
+         </if>
+         <!-- 학점 -->
+         <if test="credit != null and credit !=''">
+            AND univ.univscore > #{credit}
+         </if>
+         <!-- 토익 -->
+         <if test="language != null and language != ''">
+            AND lang.score > #{language}
+         </if>
+         <!-- 처리상태 -->
+         <if test="status != null and status != ''">
+            AND sup.status = #{status}
+         </if>
+         <!-- 공고명 -->
+         <if test='title != "0"'>
+            <if test="title != null and title != ''">
+               AND job.title = #{title}
+            </if>
+         </if>
+       </where>
+    </sql>
  	
- 	<select id="list" resultMap="Support" parameterType="map">
- 		SELECT * FROM ( SELECT rownum rnum, T.* FROM(
- 		<include refid="selectSupportBoard"/>
- 		) T ORDER BY passNo DESC ) R WHERE R.rnum BETWEEN #{startNo} AND #{endNo} ORDER BY rnum
- 	</select>
+ 	
+ 	
+ 	
  	<select id="totalCnt" resultType="int" parameterType="map">
  		SELECT COUNT(*) CNT FROM (
  		<include refid="selectSupportBoard"/>
@@ -104,23 +97,24 @@
  	</select>
  	
  	<sql id="selectResultBoard">
-		SELECT
-		sup.passNo,
-		job.title,
-		usr.task,
-		sup.supportDate,
-		mem.username,
-		sup.pass,
-		sup.emailSend,
-		sup.userId,
-		sup.jobOpenNo
-		FROM
-		support sup, jobopenbasic job, userdetail usr, member mem
+		 select
+		    job.title,
+		    job.offer,
+		    sup.supportdate,
+		    mem.username,
+		    sup.pass,
+		    sup.emailsend,
+		    usr.task
+		from 
+		    jobopenBasic job,
+		    support sup,
+		    member mem,
+		    userDetail usr
 
 		<where>
-			sup.jobopenno = job.jobopenno
-			AND job.jobopenno = usr.jobopenno
-			AND usr.userId = mem.userId
+			mem.userid = sup.userid and
+    		job.jobopenno = sup.jobopenno and
+    		usr.userid = mem.userid
 
 			<choose>
 				<when test="pass != null and pass != '' and fail != null and fail != ''">
@@ -151,7 +145,7 @@
 		parameterType="map">
 		SELECT * FROM ( SELECT rownum rnum, T.* FROM(
 		<include refid="selectResultBoard" />
-		) T ORDER BY passNo DESC ) R WHERE R.rnum BETWEEN #{startNo} AND
+		) T ORDER BY supportDate DESC ) R WHERE R.rnum BETWEEN #{startNo} AND
 		#{endNo} ORDER BY rnum
 	</select>
 
@@ -170,11 +164,7 @@
 	</update>
 	
 	<select id="download" parameterType="winwin.dto.SupportBoard" resultType="winwin.dto.Material">
-		SELECT * FROM material mat, support sup 
-            WHERE mat.PORTFOLIOID = sup.JOBOPENNO AND sup.userid = mat.userid 
-            
-            AND mat.portfolioId = ${portfolioId}
-            AND sup.userid = #{userId}
+		SELECT * FROM material where portfolioId = #{portfolioId} and userid = #{userId}
 	</select>
 	
 	<select id="getFile" parameterType="map" resultType="winwin.dto.Material">

@@ -32,5 +32,5 @@ public interface AllDataDao {
 	public List<License> getLic(Map<String,Object> key);
 	public List<Language> getLang(Map<String,Object> key);
 	public List<Experience> getExp(Map<String,Object> key);
-	public List<Introduce> getIntro(Map<String,Object> key);
+	public Introduce getIntro(Map<String,Object> key);
 }

@@ -66,6 +66,8 @@
 	cursor: pointer;
 }
 
+
+
 </style>
 
 <script>
@@ -115,6 +117,11 @@
 			supportList(1);
 		});
 		
+		
+		// X버튼 위치 고정 
+		$(".modal-contentCheck").scroll(function() {
+			$("#CloseMenu").css("top", $(".modal-contentCheck").scrollTop());
+		});
 	});
 
 	function supportList(page) {
@@ -153,7 +160,6 @@
 						html += '	<td class="text-center align-middle">' + item.username + '</td>';
 						html += '	<td class="text-center"><button type="button" class="btn btn-primary btn-sm modalBtn">포트폴리오</button></td>';
 						html += '	<td class="text-center"><span class="badge badge-secondary" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.status + '</span></td>';
-						html += '	<td hidden class="portfolioId">' + item.portfolioId + '</td>';
 						html += '	<td hidden class="userId">' + item.userId + '</td>';
 						
 						html += '</tr>';
@@ -194,27 +200,51 @@
 					$('#hsEndDate').html(result.high.hsEndDate + '\t' + result.high.hsGraduate);
 					$('#hsRegion').html(result.high.hsRegion);
 					}
+					if(result.high==null){
+						$('#hsName').html("");
+						$('#hsMajor').html("");
+						$('#hsEndDate').html("");
+						$('#hsRegion').html("");
+					}
 					if(result.col!=null){
 					$('#colName').html(result.col.colName + '\t' + result.col.colBranch + '\t' + result.col.colDay);
 					$('#colMajor').html(result.col.colMajor + '\t' + result.col.colScore + '\t' + '/' + '\t' + 
 						result.col.colTotalScore);
-					$('#colStartDate').html(result.col.colStartDate + '\t' + '~' + '\t' + result.col.colEndDate + '\t' +
-						result.col.colTransfer + '\t' + result.col.colGraduate);
+					$('#colStartDate').html(result.col.colStartDate + '\t' + result.col.colTransfer + '\t' 
+							+ result.col.colEndDate + '\t' + result.col.colGraduate);
 					$('#colRegion').html(result.col.colRegion);
+					}
+					if(result.col==null){
+						$('#colName').html("");
+						$('#colMajor').html("");
+						$('#colStartDate').html("");
+						$('#colRegion').html("");
 					}
 					if(result.uni!=null){
 					$('#univName').html(result.uni.univName + '\t' + result.uni.univBranch + '\t' + result.uni.univDay);
 					$('#univMajor').html(result.uni.univMajor + '\t' + result.uni.univMinor + '\t' + result.uni.univScore + '\t' + 
 						'/' + '\t' + result.uni.univTotalScore);
-					$('#univStartDate').html(result.uni.univStartDate + '\t' + '~' + '\t' + result.uni.univEndDate + '\t' + 
-						result.uni.univTransfer + '\t' + result.uni.univGraduate);
+					$('#univStartDate').html(result.uni.univStartDate + '\t' + result.uni.univTransfer+ '\t' 
+							+ result.uni.univEndDate + '\t' + result.uni.univGraduate);
 					$('#univRegion').html(result.uni.univRegion);			
+					}
+					if(result.uni==null){
+						$('#univName').html("");
+						$('#univMajor').html("");
+						$('#univStartDate').html("");
+						$('#univRegion').html("");
 					}
 					if(result.gs!=null){
 					$('#gsName').html(result.gs.gsName + '\t' + result.gs.gsBranch + '\t' + result.gs.gsDay);
-					$('#gsMajor').html(result.gs.gsMajor + '\t' + result.gs.gsScore + '\t' + '~' + '\t' + result.gs.gsTotalScore);
+					$('#gsMajor').html(result.gs.gsMajor + '\t' + result.gs.gsScore + '\t' + '/' + '\t' + result.gs.gsTotalScore);
 					$('#gsEndDate').html(result.gs.gsEndDate + '\t' + result.gs.gsGraduate);
 					$('#gsRegion').html(result.gs.gsRegion);
+					}
+					if(result.gs==null){
+						$('#gsName').html("");
+						$('#gsMajor').html("");
+						$('#gsEndDate').html("");
+						$('#gsRegion').html("");
 					}
 					if(result.mil.mCategory!=null){ 
 					$('#discharge').html(result.mil.discharge);
@@ -367,9 +397,6 @@
 					$('#content3').html(result.intro.content3);
 					$('#content4').html(result.intro.content4);
 					$('#content5').html(result.intro.content5);
-					
-					console.log(result.intro.content1);
-					console.log(result.intro);
 				
 					
 				});
@@ -406,14 +433,14 @@
 
 		
 		$('.modalBtn').click(function(){
-			portId = $(this).parent().parent().children().eq(7).text();
-			userId = $(this).parent().parent().children().eq(8).text();
+			portId = $(this).parent().parent().children().eq(1).attr('jobNo');
+			userId = $(this).parent().parent().children().eq(7).text();
 			
 			$.ajax({
 				type:'post',
 				url:'/support/list',
 				data:{
-					portfolioId : portId,
+					jobOpenNo : portId,
 					userId : userId
 				},
 				dataType:'json',
@@ -676,11 +703,11 @@ function paging (page, limit, totalCount, pageCount, callback) {
 							<td class="text-center" style="width: 25%"><select multiple
 								class="form-control searchSelect" id="academiccareer"
 								forId="academiccareerbox" form="search" name="academiccareer">
-									<option value="대학교졸업(4년)">대학교졸업(4년)</option>
-									<option value="대학교졸업(2~3년)">대학교졸업(2~3년)</option>
-									<option value="석사 이상">석사 이상</option>
-									<option value="고등학교 졸업">고등학교 졸업</option>
-									<option value="학력 무관">학력 무관</option>
+									<option value="4">대학교졸업(4년)</option>
+									<option value="3">대학교졸업(2~3년)</option>
+									<option value="5">석사 이상</option>
+									<option value="2">고등학교 졸업</option>
+									<option value="1">학력 무관</option>
 							</select></td>
 							<td class="text-center" style="width: 10%"><select multiple
 								class="form-control searchSelect" id="credit" forId="creditbox"
@@ -694,14 +721,13 @@ function paging (page, limit, totalCount, pageCount, callback) {
 							<td class="text-center" style="width: 15%"><select multiple
 								class="form-control searchSelect" id="language"
 								forId="languagebox" form="search" name="language">
-									<option value="500~550">500~550</option>
-									<option value="550~600">550~600</option>
-									<option value="600~650">600~650</option>
-									<option value="650~700">650~700</option>
-									<option value="750~800">750~800</option>
-									<option value="800~850">800~850</option>
-									<option value="850~900">850~900</option>
-									<option value="900 이상">900 이상</option>
+									<option value="500">500이상</option>
+									<option value="600">600이상</option>
+									<option value="700">700이상</option>
+									<option value="800">800이상</option>
+									<option value="850">850이상</option>
+									<option value="900">900 이상</option>
+									<option value="950">950 이상</option>
 							</select></td>
 							<td class="text-center" style="width: 10%"><select multiple
 								class="form-control searchSelect" forId="statusbox" id="status"
@@ -775,7 +801,6 @@ function paging (page, limit, totalCount, pageCount, callback) {
 							<th class="text-center">포트폴리오</th>
 							<th class="text-center">처리 상태</th>
 							<th hidden></th>
-							<th hidden></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -822,10 +847,7 @@ function paging (page, limit, totalCount, pageCount, callback) {
 			
 				function downFile(){
 					//1. portfolioId, userId 가저옴
-					
-					console.log(portId);
-					console.log(userId);
-					
+
 					location.href="/support/download?userId="+userId+"&portfolioId="+portId;
 
 				}
@@ -932,19 +954,15 @@ function paging (page, limit, totalCount, pageCount, callback) {
 <div class="modalCheck" id="checkModal">
 	<div class="modal-contentCheck">
 
-<div class="col-12 row" style="padding-right:0">
-	<div class="col-6">
+<div class="col-12 row ml-1" id="CloseMenu">
 		<h3 class="mt-3 font-weight-bold">지원서 미리보기</h3>
-		</div>
-			<div class="col-6" style="padding-right:0px" id="CloseMenu">
-				<span class="d-flex justify-content-end mt-1"><span
+				<span class="d-flex justify-content-end mt-1" id="fixedSpan" style="width:565px"><span
 					id="titleClose" class="closeCheck">&times;</span></span>
-			</div>
+		<hr class="ml-1" style="border: solid 2px #376092;"> 
 		</div>
-		<hr style="border: solid 2px #376092;">
 		<br>
 
-		<div class="container">
+		<div class="container mt-5">
 			<h4 class="ml-2 font-weight-bold">개인사항</h4>
 			<hr class="ml-2 border-dark bg-dark" style="border: solid 1px;">
 			<h6 class="ml-4 mt-5 font-weight-bold">기본정보</h6>

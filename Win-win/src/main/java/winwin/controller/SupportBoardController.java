@@ -45,12 +45,12 @@ public class SupportBoardController {
 	@PostMapping(value="/support/list")
 	public Map<String, Material> listFile(
 			@RequestParam(value="userId") String userId,
-			@RequestParam(value="portfolioId") int portfolioId) {
+			@RequestParam(value="jobOpenNo") int jobOpenNo) {
 		
 		System.out.println(userId);
-		System.out.println(portfolioId);
+		System.out.println(jobOpenNo);
 		
-		Material mat = service.getFile(userId, portfolioId);
+		Material mat = service.getFile(userId, jobOpenNo);
 		
 		Map<String, Material> map = new HashMap<>();
 		System.out.println(mat);
