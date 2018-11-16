@@ -239,60 +239,8 @@ td {
 					$('.here').append('<tr><td colspan=9 class="text-center" style="height:150px; vertical-align:middle;">정보가 없습니다.</td></tr>');
 				}
 			}
-			var jobopenno = null;
 			
-			// 상태 수정 버튼 이벤트
-			$('.stat').on('click',function(){
-				$("#statusModal").css("display", "block");
-				var select = $(this).parent().parent().children().eq(6).text();
-				$("#stChecking").html(select);
-				jobopenno = $(this).parent().parent().children().eq(0).text();
-				
-			});
 			
-			$("#btnOkst").on("click", function(){
-				$("#statusModal").css("display", "none");
-				console.log(jobopenno);
-				var sel = $('.statusMo option:selected').val();
-				
-				if(sel=='전체 확인'){
-					sel = $('#stChecking').html();
-				}
-				
-				$.ajax({
-					method:"post"
-					, url:"/jobOpen/jo_status"
-					, data:{
-						"jobopenNo" : jobopenno,
-						"status" : sel
-						}
-					, success : function(){
-						$('.statusMo option:eq(0)').prop("selected",true);
-						manageList($('.active').children().attr("data-curPage"));
-					}
-				});
-			});
-			
-			// 공고 삭제 버튼 이벤트
-			$('.deleteJob').on('click', function(){
-				jobopenno = $(this).parent().parent().children().eq(0).text();
-				$("#myModal").css("display", "block");
-				$("#idChecking").html("정말 삭제하시겠습니까?");
-				console.log(jobopenno);
-			});
-			
-			$("#btnOk").on("click", function(){
-				$("#myModal").css("display","none");
-				
-				$.ajax({
-					method:"post"
-					, url:"/jobOpen/jo_delete"
-					, data: {"jobopenNo" : jobopenno}
-					, success:function(){
-						manageList($('.active').children().attr("data-curPage"));
-					}
-				});
-			});
 			
 			
 			paging(page, listCount, result.totalCount, pageCount, manageList);
@@ -398,8 +346,65 @@ td {
 			$("#myModal").css("display", "none");
 		})
 		
+		var jobopenno;
+		// 상태 수정 버튼 이벤트
+		$('.here').on('click',".stat",function(){
+			$("#statusModal").css("display", "block");
+			var select = $(this).parent().parent().children().eq(6).text();
+			$("#stChecking").html(select);
+			jobopenno = $(this).parent().parent().children().eq(0).text();
+			
+		});
+		
+		$("#btnOkst").on("click", function(){
+			$("#statusModal").css("display", "none");
+			console.log(jobopenno);
+			var sel = $('.statusMo option:selected').val();
+			
+			if(sel=='전체 확인'){
+				sel = $('#stChecking').html();
+			}
+			
+			$.ajax({
+				method:"post"
+				, url:"/jobOpen/jo_status"
+				, data:{
+					"jobopenNo" : jobopenno,
+					"status" : sel
+					}
+				, success : function(){
+					$('.statusMo option:eq(0)').prop("selected",true);
+					jobopenno = null;
+					manageList($('.active').children().attr("data-curPage"));
+				}
+			});
+		});
+		
+		// 공고 삭제 버튼 이벤트
+		$('.deleteJob').on('click', function(){
+			jobopenno = $(this).parent().parent().children().eq(0).text();
+			$("#myModal").css("display", "block");
+			$("#idChecking").html("정말 삭제하시겠습니까?");
+			console.log(jobopenno);
+		});
+		
+		$("#btnOk").on("click", function(){
+			$("#myModal").css("display","none");
+			
+			$.ajax({
+				method:"post"
+				, url:"/jobOpen/jo_delete"
+				, data: {"jobopenNo" : jobopenno}
+				, success:function(){
+					manageList($('.active').children().attr("data-curPage"));
+				}
+			});
+		});
+		
+		
 	})
 
+	2.2
 	
 	
 </script>

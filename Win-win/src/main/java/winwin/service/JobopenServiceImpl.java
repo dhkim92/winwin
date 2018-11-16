@@ -119,4 +119,9 @@ public class JobopenServiceImpl implements JobopenService {
 		
 	}
 
+	@Override
+	public JobopenBasic getBasic(JobopenBasic basic) {
+		return jobopenDao.selectByBasic(basic);
+	}
+
 }

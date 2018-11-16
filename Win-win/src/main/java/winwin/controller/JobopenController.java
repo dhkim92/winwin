@@ -79,7 +79,7 @@ public class JobopenController {
 		JobopenBasic basic = new JobopenBasic();
 		basic.setJobopenNo(jobopenNo);
 		
-		model.addAttribute("basic", jobopenService.viewBasic(basic));
+		model.addAttribute("basic", jobopenService.getBasic(basic));
 		
 	}
 	
@@ -122,7 +122,7 @@ public class JobopenController {
 	@RequestMapping(value="/detailInfo", method=RequestMethod.POST)
 	public String detailProc(JobopenArr detail, JobopenBasic jobopenBasic) {
 		
-		String title = jobopenService.viewBasic(jobopenBasic).getTitle();
+		String title = jobopenService.getBasic(jobopenBasic).getTitle();
 		
 		JobopenDetail[] d = detail.getDetail();
 		List<JobopenDetail> e = new LinkedList<JobopenDetail>(Arrays.asList(d));
@@ -159,10 +159,8 @@ public class JobopenController {
 		jobopenDetail.setJobopenNo(jobopenNo);
 		List<JobopenDetail> detail = jobopenService.selectDetail(jobopenDetail);
 		
-		System.out.println(jobopenService.viewBasic(basic));
-		System.out.println(detail);
 		
-		model.addAttribute("basic", jobopenService.viewBasic(basic));
+		model.addAttribute("basic", jobopenService.getBasic(basic));
 		model.addAttribute("detail", detail);
 	}
 	
@@ -206,7 +204,7 @@ public class JobopenController {
 		int jobopenNo = (int)session.getAttribute("jobopen");
 		JobopenBasic jobopenBasic = new JobopenBasic();
 		jobopenBasic.setJobopenNo(jobopenNo);
-		JobopenBasic basic = jobopenService.viewBasic(jobopenBasic);
+		JobopenBasic basic = jobopenService.getBasic(jobopenBasic);
 		
 		JobopenDetail jobopenDetail = new JobopenDetail();
 		jobopenDetail.setJobopenNo(jobopenNo);

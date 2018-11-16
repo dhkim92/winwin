@@ -118,5 +118,16 @@ public interface JobopenService {
 	 */
 	public Paging getStPaging(int curPage, int listCount, int pageCount, String status);
 	
+	/**
+	 * no로 공고 진행상태 업데이트
+	 * @param jobopenNo
+	 */
 	public void updateStatusByDate(int jobopenNo);
+	
+	/**
+	 * basic 가져오기
+	 * @param jobopenBasic
+	 * @return
+	 */
+	public JobopenBasic getBasic(JobopenBasic jobopenBasic);
 }
