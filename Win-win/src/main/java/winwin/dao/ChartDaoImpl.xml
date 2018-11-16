@@ -6,28 +6,28 @@
  <mapper namespace="winwin.dao.ChartDao">
  	<select id="ages20Cho" resultType="int">
  		SELECT count(*)
- 		FROM( SELECT userid, to_NUMBER(SUBSTR(birth,0,3)) birth
+ 		FROM( SELECT userid, to_NUMBER(SUBSTR(birth,0,4)) birth
  			FROM support 
  			JOIN userdetail USING(userid)) a
  		WHERE a.birth BETWEEN (to_char(sysdate,'YYYY')-24) AND (to_char(sysdate,'YYYY')-19)
  	</select>
- 	<select id="ages20hu" resultType="int">
+ 	<select id="ages20Hu" resultType="int">
  		SELECT count(*)
- 		FROM( SELECT userid, to_NUMBER(SUBSTR(birth,0,3)) birth
+ 		FROM( SELECT userid, to_NUMBER(SUBSTR(birth,0,4)) birth
  			FROM support 
  			JOIN userdetail USING(userid)) a
  		WHERE a.birth BETWEEN (to_char(sysdate,'YYYY')-28) AND (to_char(sysdate,'YYYY')-25)
  	</select>
  	<select id="ages30s" resultType="int">
  		SELECT count(*)
- 		FROM( SELECT userid, to_NUMBER(SUBSTR(birth,0,3)) birth
+ 		FROM( SELECT userid, to_NUMBER(SUBSTR(birth,0,4)) birth
  			FROM support 
  			JOIN userdetail USING(userid)) a
  		WHERE a.birth BETWEEN (to_char(sysdate,'YYYY')-38) AND (to_char(sysdate,'YYYY')-29)
  	</select>
  	<select id="ages40s" resultType="int">
  		SELECT count(*)
- 		FROM( SELECT userid, to_NUMBER(SUBSTR(birth,0,3)) birth
+ 		FROM( SELECT userid, to_NUMBER(SUBSTR(birth,0,4)) birth
  			FROM support 
  			JOIN userdetail USING(userid)) a
  		WHERE a.birth BETWEEN (to_char(sysdate,'YYYY')-48) AND (to_char(sysdate,'YYYY')-39)
@@ -64,5 +64,4 @@
  		SELECT count(*)
  		FROM support
  	</select>
- 	
  </mapper>

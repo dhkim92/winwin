@@ -48,7 +48,7 @@ tr,td{
 					20대 초반(20~25세)
 					</td>
 					<td>
-					57
+					${map.age20e }
 					</td>
 				</tr>
 				<tr>
@@ -56,7 +56,7 @@ tr,td{
 					20대 후반(26~29세)
 					</td>
 					<td>
-					102
+					${map.age20l }
 					</td>
 				</tr>
 				<tr>
@@ -64,7 +64,7 @@ tr,td{
 					30대
 					</td>
 					<td>
-					38
+					${map.age30s }
 					</td>
 				</tr>
 				<tr>
@@ -72,7 +72,7 @@ tr,td{
 					40대
 					</td>
 					<td>
-					13
+					${map.age40s }
 					</td>
 				</tr>
 			</table>
@@ -92,7 +92,7 @@ tr,td{
 					고등학교 졸업
 					</td>
 					<td>
-					57
+					${map.eduhigh }
 					</td>
 				</tr>
 				<tr>
@@ -100,7 +100,7 @@ tr,td{
 					대학교 2년제
 					</td>
 					<td>
-					102
+					${map.educoll }
 					</td>
 				</tr>
 				<tr>
@@ -108,7 +108,7 @@ tr,td{
 					대학교 4년제
 					</td>
 					<td>
-					38
+					${map.eduuniv }
 					</td>
 				</tr>
 				<tr>
@@ -116,7 +116,7 @@ tr,td{
 					석/박사
 					</td>
 					<td>
-					13
+					${map.edumd }
 					</td>
 				</tr>
 			</table>
@@ -176,7 +176,7 @@ tr,td{
 					2018년 하반기
 					</td>
 					<td>
-					1582
+					${map.sec18 }
 					</td>
 				</tr>
 			</table>
@@ -214,10 +214,10 @@ function drawChart1() {
         // Create the data table.
         var data = new google.visualization.arrayToDataTable([
             ["연령대", "지원자수", { role: "style" } ],
-            ["20대 초,중반", 57, "#184b9b"],
-            ["20대 후반", 102, "#184b9b"],
-            ["30대", 38, "#184b9b"],
-            ["40대", 13, "#184b9b"]
+            ["20대 초,중반", ${mag.age20e}, "#184b9b"],
+            ["20대 후반", ${mag.age20l}, "#184b9b"],
+            ["30대", ${mag.age30s}, "#184b9b"],
+            ["40대", ${mag.age40s}, "#184b9b"]
           ]);
 
         var view = new google.visualization.DataView(data);
@@ -250,10 +250,10 @@ function drawChart2() {
     data.addColumn('string', '학력');
     data.addColumn('number', '지원자수');
     data.addRows([
-      ['고등학교 졸업', 57],
-      ['대학 2년제', 102],
-      ['대학 4년제', 38],
-      ['석/박사', 13],
+      ['고등학교 졸업', ${mag.eduhigh}],
+      ['대학 2년제', ${mag.educoll}],
+      ['대학 4년제', ${mag.eduuniv}],
+      ['석/박사', ${mag.edumd}]
     ]);
 
     // Set chart options
@@ -286,7 +286,7 @@ function drawChart3() {
       ['2017년 상반기', 860,860],
       ['2017년 하반기', 1307,1307],
       ['2018년 상반기', 923,923],
-      ['2018년 하반기', 1582,1582],
+      ['2018년 하반기', ${map.sec18},${map.sec18}]
     ]);
 
     // Set chart options
