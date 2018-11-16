@@ -882,19 +882,31 @@ $('#Btn').click(function() {
 						break;
 					} else {
 						
-						var patternNumber = /^[0-9]$/
+						var patternNumber = /^[0-9]*$/
 						var salaryVal = document.getElementsByClassName("carSalary");
 						console.log("salaryVal : " + salaryVal.length);
 						for(var i=0 ; i<salaryVal.length; i++) {
 							var checkSalary = salaryVal[i].value;
+							console.log("checkSalary : " + checkSalary);
+							console.log("typeof : " + typeof(checkSalary));	
 							
-							if(!patternNumber.test(checkSalary)) {
-								alert("회사경력 연봉을 만 단위로 입력해주십시오.");
-								carCheck = false;
+							if(checkSalary!="") {
+								checkSalary*=1;
+								console.log("int_typeof : " + typeof(checkSalary));
+
 								
-								return;
+								if(!patternNumber.test(checkSalary)) {
+									alert("회사경력 연봉을 만 단위 숫자로 입력해주십시오.");
+									carCheck = false;
+									
+									return;
+								} else {
+									carCheck = true;
+								}
+
 							} else {
 								carCheck = true;
+								
 							}
 						}
 						
