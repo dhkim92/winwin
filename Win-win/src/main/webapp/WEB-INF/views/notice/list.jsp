@@ -8,7 +8,7 @@
 th {
 	font-size: 15px;
 }
-td {
+.view {
 	font-size: 14px;
 	cursor:pointer;
 }

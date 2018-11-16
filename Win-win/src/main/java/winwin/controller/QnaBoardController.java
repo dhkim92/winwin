@@ -32,7 +32,7 @@ public class QnaBoardController {
 	@Autowired QnaBoardService service;
 	
 	@RequestMapping(value="/qna/list")
-	public void list(Model m,HttpServletRequest req) {		
+	public void list(Model m,HttpServletRequest req) {
 		
 		int total = service.totalCnt();
 		String curr =req.getParameter("curPage");
@@ -92,13 +92,9 @@ public class QnaBoardController {
 		mav.addObject("comments",list);
 		mav.addObject("commentCnt", cnt);
 		return mav;
-		
 	}
-	
 	@RequestMapping(value="/qna/write", method=RequestMethod.GET)
-	public void write() {
-		
-	}
+	public void write() {}
 	
 	@RequestMapping(value="/qna/write", method=RequestMethod.POST)
 	public void writeProc(QnaBoard board,HttpServletResponse resp) {

@@ -7,7 +7,7 @@
 th {
 	font-size: 15px;
 }
-td {
+.view {
 	font-size: 14px;
 	cursor:pointer;
 }
@@ -38,7 +38,7 @@ td {
 			
 			<tbody>
 				<tr>
-					<td>&nbsp;<i class="fas fa-lightbulb text-danger"></i>&nbsp;문의사항 게시판 작성가이드</td>
+					<td>&nbsp;<i class="fas fa-lightbulb text-danger"></i>&nbsp;<a href="/notice/view?noticeno=2">문의사항 게시판 작성가이드</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -103,13 +103,6 @@ td {
 		</table>
 	</div>
 	
-	<c:if test="${login }">
-		<div id="btn" class="text-right">
-			<button id="btnWrite" class="btn btn-primary mr-3">작성</button>
-		</div>
-	</c:if>
-	
-	
 	<jsp:include page="/WEB-INF/views/util/qnapaging.jsp" />
 	
 	</div>
@@ -158,12 +151,12 @@ $("#btnWrite").click(function(){
 });
 $("#qnaTable").on("click",".view",function(){
 	var qnano = $(this).parent().children().eq(0).text();
-	if(${sessionScope.adminLogin}==true){
+	<% if(session.getAttribute("adminLogin")!=null){ %>
 		$(location).attr("href","/qna/view?qnaNo="+qnano);
-	}else{
+	<% }else{ %>
 		$("#qnaNo").val(qnano);
 		onFiles();
-	}
+	<% } %>
 });
 
 function onFiles(){

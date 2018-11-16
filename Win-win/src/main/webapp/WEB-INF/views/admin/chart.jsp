@@ -136,7 +136,7 @@ tr,td{
 					2016년 상반기
 					</td>
 					<td>
-					780
+					82
 					</td>
 				</tr>
 				<tr>
@@ -144,7 +144,7 @@ tr,td{
 					2016년 하반기
 					</td>
 					<td>
-					 997
+					78
 					</td>
 				</tr>
 				<tr>
@@ -152,7 +152,7 @@ tr,td{
 					2017년 상반기
 					</td>
 					<td>
-					860
+					144
 					</td>
 				</tr>
 				<tr>
@@ -160,7 +160,7 @@ tr,td{
 					2017년 하반기
 					</td>
 					<td>
-					1307
+					121
 					</td>
 				</tr>
 				<tr>
@@ -168,7 +168,7 @@ tr,td{
 					2018년 상반기
 					</td>
 					<td>
-					923
+					158
 					</td>
 				</tr>
 				<tr>
@@ -211,7 +211,6 @@ function drawChart1() {
 		var age20l = ${map.age20l};
 		var age30s = ${map.age30s};
 		var age40s = ${map.age40s};
-		console.log(age20e);
 		
         // Create the data table.
         var data = new google.visualization.arrayToDataTable([
@@ -289,11 +288,11 @@ function drawChart3() {
     data.addColumn('number', '지원자수');
     data.addColumn({type:'number', role: 'annotation'});
     data.addRows([
-      ['2016년 상반기', 780,780],
-      ['2016년 하반기', 997,997],
-      ['2017년 상반기', 860,860],
-      ['2017년 하반기', 1307,1307],
-      ['2018년 상반기', 923,923],
+      ['2016년 상반기', 82,82],
+      ['2016년 하반기', 78,78],
+      ['2017년 상반기', 144,144],
+      ['2017년 하반기', 121,121],
+      ['2018년 상반기', 158,158],
       ['2018년 하반기',${map.sec18},${map.sec18}]
     ]);
 
@@ -301,10 +300,10 @@ function drawChart3() {
     var options = {title:'WIN-WIN 분기별 지원자 현황',
                    width:330,
                    height:270,
-    				vAxis:{minValue:0, maxValue:1800},
+    				vAxis:{minValue:0, maxValue:200},
                     titleTextStyle:{color: 'black', fontSize: 20,bold: true},
                     legend: {position: 'none'},
-                    chartArea:{left:40,top:70,width:'80%',height:'60%'},
+                    chartArea:{left:40,top:50,width:'80%',height:'70%'},
                     areaOpacity:0.0,
                     annotations: {
                     	stem: {

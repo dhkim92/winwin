@@ -123,9 +123,7 @@ public class NoticeBoardController {
 				file.setOriginName(data.getOriginalFilename());
 				
 				service.insertFile(file);
-				
 			}
-			
 			service.write(board);
 			
 		}
@@ -149,8 +147,7 @@ public class NoticeBoardController {
 		//첨부파일 삭제	
 		List<Material> list = service.filesByBoardNo(board);
 		String path = context.getRealPath("upload");
-		logger.info(path);
-		
+		logger.info(path);	
 		for (Material material : list) {
 			String filename = material.getStoredName();
 			File delFile = new File(path, filename);
@@ -184,7 +181,12 @@ public class NoticeBoardController {
 		NoticeBoard resBoard = service.view(board);
 		resBoard.setFilesCnt(service.getFilesCnt(board));
 		List<Material> files = service.filesByBoardNo(board);
+		long size=0;
+		for (Material material : files) {
+			size += material.getFilesize();
+		}
 		m.addAttribute("board", resBoard);
+		m.addAttribute("size", size);
 		m.addAttribute("files", files);
 	}
 	
@@ -229,13 +231,9 @@ public class NoticeBoardController {
 				file.setOriginName(data.getOriginalFilename());
 				
 				service.insertFile(file);
-				
 			}
-			
 			service.updateBoard(board);
-			
 		}
-		
 		resp.setContentType("text/html;charset=utf-8");
 		try {
 			PrintWriter out = resp.getWriter();
@@ -264,5 +262,5 @@ public class NoticeBoardController {
 		}
 		//db데이터 삭제
 		service.deleteFile(file);
-	}
+		}
 }

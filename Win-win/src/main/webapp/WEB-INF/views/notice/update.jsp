@@ -20,7 +20,6 @@ td{
 </style>
 
 <%@ include file="../include/adminHeader.jsp"%>
-
 <div class = "container">
 	<form action="/notice/update" method="post" enctype="multipart/form-data">
 	<div class="p-5">
@@ -32,7 +31,7 @@ td{
 				<strong>제목</strong>
 			</td>
 			<td class="text-center" style="background-color: lightgray">
-				<input type="text" class="form-control" name="title" value="${board.title }" placeholder="제목을 적으세요(66자 이내)"/>
+				<input type="text" class="form-control" id="title" name="title" value="${board.title }" placeholder="제목을 적으세요(66자 이내)"/>
 			</td>
 		</tr>
 		<tr>
@@ -44,10 +43,11 @@ td{
 		</tr>
 		<tr>
 			<td class="text-center">
-				첨부할 파일
+				첨부할 파일	
 			</td>
 			<td class="text-center">
-				<input type="file" multiple="multiple" id="files" name="files"/>
+				<input type="file" multiple="multiple" id="files" name="files" onchange="fileCheck();"/>
+				<div id="message" style="color: red"></div>				
 			</td>
 		</tr>
 		<tr>
@@ -62,7 +62,7 @@ td{
 						<c:forEach items="${files }" var="file">
 							<tr>
 								<td width="10%"><i class="fas fa-save mr-2 ml-2"></i></td>
-								<td width="50%">${file.originName}</td>
+								<td width="60%">${file.originName}</td>
 								<td width="20%">${file.filesize } bytes</td>
 								<td width="10%"><span class="badge badge-danger" onclick="delFile(event);">파일삭제</span></td>
 								<td style="display:none">${file.fileNo }</td>
@@ -74,12 +74,13 @@ td{
 			</td>
 		</tr>
 	</table>
+
 	<div class="p-5">
 		<textarea class="form-control" rows="20" name="content" id="content">${board.content }</textarea>
 	</div>
 	</div>
 	
-	<input type="hidden" name="noticeno" value="${board.noticeno }"/>
+	<input type="hidden" name="noticeno" value="${board.noticeno }"/>	
 	
 	</form>
 	<div class="form-group d-flex justify-content-center">
@@ -87,8 +88,8 @@ td{
 		<button type="button" id="btnCancel" class="btn btn-primary ml-2">취소</button>
 	</div>	
 </div>
-<img src="C:/Users/user2/eclipse-workspace_spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Win-win/upload/2018_11_01_185456.png"/>
 
+<input type="hidden" id="size" value="${size }"/>	
 
 <%@ include file="../include/scriptLoader.jsp"%>
 
@@ -100,7 +101,7 @@ td{
 $(document).ready(function() {
 	var time = new Date();
 	var today = time.getFullYear()+"년 "+(time.getMonth()+1)+"월 "+time.getDate()+"일";	
-	$("#today").text(today);
+	$("#today").text(today);	
 	
 	$("#btnCancel").click(function() {
 		$(location).attr("href","/notice/view?noticeno="+${board.noticeno});
@@ -119,18 +120,19 @@ $(document).ready(function() {
 	});
 });
 function fileCheck(){
-	var files = document.getElementById("files");
 	var total = 10*1024*1024;
+	var files = document.getElementById("files");
 	$(files.files).each(function(){
 		total -= this.size;
 	});
-	console.log(total);
+	var storedSize = $("#size").val();
+	total -= storedSize;
 	if(total<0){
 		$("#message").text("파일 용량이 10MB를 초과하였습니다");
-		$("#btnWrite").attr("disabled",true);
+		$("#btnUpdate").attr("disabled",true);
 	}else{
 		$("#message").text("");
-		$("#btnWrite").attr("disabled",false);
+		$("#btnUpdate").attr("disabled",false);
 	}
 }
 var oEditors = [];
@@ -150,7 +152,6 @@ nhn.husky.EZCreator.createInIFrame({
 function submitContents(elClickedObj) {
     // 에디터의 내용이 textarea에 적용된다.
     oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-
     // 에디터의 내용에 대한 값 검증은 이곳에서
     // document.getElementById("ir1").value를 이용해서 처리한다.
     try {
@@ -162,7 +163,11 @@ function delFile(event){
 	var target = event.currentTarget;
 	$(target).parent().parent().attr("style","display:none");
 	var fileno = $(target).parent().next().text();
-	console.log(fileno);
+	var size = $(target).parent().parent().children().eq(2).text();
+	var arr = size.split(" ");
+	size = $("#size").val()-arr[0];
+	$("#size").val(size);
+	fileCheck();
 	$.ajax({
 		type:"post",
 		url:"/notice/updateFile",

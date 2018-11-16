@@ -281,6 +281,11 @@ function addComment(){
 	alert("로그인 하셔야 합니다");
 	return;
 	<% } %>
+	if(content==""){
+		alert("내용을 입력하세요");
+		$("#commentContent").focus();
+		return;
+	}
 	dataArr = {"qnaNo":qnaNo,"content":content,"id":id,"writer":writer,"word":"add"};
 	console.log(dataArr);
 	$.ajax({
