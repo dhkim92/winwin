@@ -164,9 +164,7 @@ $(document).ready(function() {
 		<a href="/apply/userDetailUpdate?jobopenNo=${jobopenBasic.jobopenNo }">
 			<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png">
 		</a>
-		<a href="/apply/academicUpdate?jobopenNo=${jobopenBasic.jobopenNo }">
-			<img class="img-fluid d-block" src="/resources/image/G_academic.png">		
-		</a>
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_academic.png" onclick="checkAca();">		
 		<img class="img-fluid d-block" src="/resources/image/B_military.png">
 		<img class="img-fluid d-block" src="/resources/image/G_career.png">
 		<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
@@ -304,6 +302,31 @@ $(document).ready(function() {
 	
 <%@ include file="../include/scriptLoader.jsp"%>
 <script type="text/javascript">
+function checkAca() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkAca"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			
+			if(data.highSchool>0 || data.college>0 || data.university>0 || data.gSchool>0) {
+				location.href="/apply/academicUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/academic?jobopenNo="+jobopenNo;
+			}
+			
+		}, error: function() {
+			alert("error");
+		}
+	})
+}
+
 $("#discharge").change(function(){ 
 	
 	  console.log("discharge");

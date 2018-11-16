@@ -141,10 +141,14 @@ $(document).ready(function() {
 
 	<h4 class="mt-4 mb-3 font-weight-bold">자기소개</h4><input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
-		<a href="/apply/userDetailUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
-		<img class="img-fluid d-block" src="/resources/image/G_academic.png">
-		<a href="/apply/militaryUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block" src="/resources/image/G_military.png"></a>
-		<img class="img-fluid d-block" src="/resources/image/G_career.png">
+		<a href="/apply/userDetailUpdate?jobopenNo=${jobopenBasic.jobopenNo }">
+			<img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png">
+		</a>
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_academic.png" onclick="checkAca();">
+		<a href="/apply/militaryUpdate?jobopenNo=${jobopenBasic.jobopenNo }">
+			<img class="img-fluid d-block" src="/resources/image/G_military.png">
+		</a>
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_career.png" onclick="checkCar();">
 		<img class="img-fluid d-block" src="/resources/image/B_introduce.png">
 		<img class="img-fluid d-block" src="/resources/image/G_complete.png">
 	</div>
@@ -253,6 +257,59 @@ $(document).ready(function() {
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script type="text/javascript">
+function checkAca() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkAca"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			
+			if(data.highSchool>0 || data.college>0 || data.university>0 || data.gSchool>0) {
+				location.href="/apply/academicUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/academic?jobopenNo="+jobopenNo;
+			}
+			
+		}, error: function() {
+			alert("error");
+		}
+	})
+}
+
+
+
+function checkCar() {
+	
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkCar"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			if(data.language>0 || data.license>0 || data.career>0 || data.activity>0 || data.experience>0 || data.material>0) {
+				location.href="/apply/careerUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/career?jobopenNo="+jobopenNo;
+			}
+			
+		}
+	})
+
+	
+}
+
+
+
 $(function() {
     $('#content1').keyup(function (e){
         var content = $(this).val();

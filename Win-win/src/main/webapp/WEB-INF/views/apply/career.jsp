@@ -125,7 +125,7 @@ $(document).ready(function() {
 	<h4 class="mt-4 mb-3 font-weight-bold">경력사항</h4><input type="hidden" name="jobopenNo" value="${jobopenBasic.jobopenNo }" />
 	<div class="row">
 		<a href="/apply/userDetailUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block ml-3" src="/resources/image/G_userDetail.png"></a>
-		<a href="/apply/academicUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block" src="/resources/image/G_academic.png"></a>
+		<img style="cursor: pointer" class="img-fluid d-block" src="/resources/image/G_academic.png" onclick="checkAca();">
 		<a href="/apply/militaryUpdate?jobopenNo=${jobopenBasic.jobopenNo }"><img class="img-fluid d-block" src="/resources/image/G_military.png"></a>
 		<img class="img-fluid d-block" src="/resources/image/B_career.png">
 		<img class="img-fluid d-block" src="/resources/image/G_introduce.png">
@@ -891,7 +891,6 @@ $('#Btn').click(function() {
 							console.log("typeof : " + typeof(checkSalary));	
 							
 							if(checkSalary!="") {
-								checkSalary*=1;
 								console.log("int_typeof : " + typeof(checkSalary));
 
 								
@@ -1082,9 +1081,31 @@ $('#Btn').click(function() {
 	
 });
 
-$("#dgsdg").on("click", "대상", function() {
+
+function checkAca() {
 	
-});
+	var jobopenNo = ${jobopenBasic.jobopenNo};
+	
+	$.ajax({
+		type:"get"
+		, url: "/apply/checkAca"
+		, dataType: "json"
+		, data: {
+			"jobopenNo" : jobopenNo
+		}
+		, success: function( data ) {
+			
+			if(data.highSchool>0 || data.college>0 || data.university>0 || data.gSchool>0) {
+				location.href="/apply/academicUpdate?jobopenNo="+jobopenNo;
+			} else {
+				location.href="/apply/academic?jobopenNo="+jobopenNo;
+			}
+			
+		}, error: function() {
+			alert("error");
+		}
+	})
+}
 </script>
 
 <%@ include file="../apply/licenseAPI.jsp"%>
