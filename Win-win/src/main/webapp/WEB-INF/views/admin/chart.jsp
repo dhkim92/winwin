@@ -188,7 +188,6 @@ tr,td{
 <br><br>
 
 
-
 <%@ include file="../include/scriptLoader.jsp"%>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -198,26 +197,29 @@ tr,td{
 google.charts.load('current', {'packages':['bar']});
 google.charts.load('current', {'packages':['corechart']});
 
-
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(drawChart1);
 google.charts.setOnLoadCallback(drawChart2);
 google.charts.setOnLoadCallback(drawChart3);
 
-
-
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
 function drawChart1() {
-
+		
+		var age20e = ${map.age20e};
+		var age20l = ${map.age20l};
+		var age30s = ${map.age30s};
+		var age40s = ${map.age40s};
+		console.log(age20e);
+		
         // Create the data table.
         var data = new google.visualization.arrayToDataTable([
             ["연령대", "지원자수", { role: "style" } ],
-            ["20대 초,중반", ${mag.age20e}, "#184b9b"],
-            ["20대 후반", ${mag.age20l}, "#184b9b"],
-            ["30대", ${mag.age30s}, "#184b9b"],
-            ["40대", ${mag.age40s}, "#184b9b"]
+            ["20대 초,중반",age20e, "#184b9b"],
+            ["20대 후반",age20l, "#184b9b"],
+            ["30대",age30s, "#184b9b"],
+            ["40대",age40s, "#184b9b"]
           ]);
 
         var view = new google.visualization.DataView(data);
@@ -249,11 +251,17 @@ function drawChart2() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', '학력');
     data.addColumn('number', '지원자수');
+    
+    var eduhigh = ${map.eduhigh};
+    var educoll = ${map.educoll};
+    var eduuniv = ${map.eduuniv};
+    var edumd = ${map.edumd};
+
     data.addRows([
-      ['고등학교 졸업', ${mag.eduhigh}],
-      ['대학 2년제', ${mag.educoll}],
-      ['대학 4년제', ${mag.eduuniv}],
-      ['석/박사', ${mag.edumd}]
+      ['고등학교 졸업',eduhigh],
+      ['대학 2년제',educoll],
+      ['대학 4년제',eduuniv],
+      ['석/박사',edumd]
     ]);
 
     // Set chart options
@@ -286,7 +294,7 @@ function drawChart3() {
       ['2017년 상반기', 860,860],
       ['2017년 하반기', 1307,1307],
       ['2018년 상반기', 923,923],
-      ['2018년 하반기', ${map.sec18},${map.sec18}]
+      ['2018년 하반기',${map.sec18},${map.sec18}]
     ]);
 
     // Set chart options
@@ -320,7 +328,5 @@ function drawChart3() {
     chart.draw(data, options);
   }
 </script>
-
-
 
 <%@ include file="../include/footer.jsp"%>
