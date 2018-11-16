@@ -285,6 +285,10 @@ function addComment(){
 		alert("내용을 입력하세요");
 		$("#commentContent").focus();
 		return;
+	}else if(content.length >250){
+		alert("글자 제한 수를 초과했습니다.댓글(250자 이내)");
+		$("#commentContent").focus();
+		return;
 	}
 	dataArr = {"qnaNo":qnaNo,"content":content,"id":id,"writer":writer,"word":"add"};
 	console.log(dataArr);

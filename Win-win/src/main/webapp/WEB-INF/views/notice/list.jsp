@@ -57,7 +57,7 @@ th {
 		<c:forEach items="${list }" var="board">
 		<tr>
 			<td class="view">${board.noticeno }</td>
-			<td class="view"><a href="/notice/view?noticeno=${board.noticeno}" style="text-decoration: none">${board.title }</a></td>
+			<td class="text-left view"><a href="/notice/view?noticeno=${board.noticeno}" style="text-decoration: none">${board.title }</a></td>
 			<td class="view">
 			<c:if test="${board.filesCnt ne 0 }">
 				<span class="badge badge-pill badge-secondary">파일첨부</span>

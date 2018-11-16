@@ -89,6 +89,11 @@ $(document).ready(function() {
 			$("#pw").focus();
 		}else if($("#content").val()==""){
 			alert("내용을 입력하세요");			
+		}else if($("#title").val().length > 100){	
+			alert("글자 제한 수를 초과했습니다.제목(100자 이내)");
+			$("#title").focus();
+		}else if($("#content").val().length > 1333){			
+			alert("글자 제한 수를 초과했습니다.본문(1333자 이내)")
 		}else{
 			submitContents($(this));		
 			$("form").submit();

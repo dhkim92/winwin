@@ -38,7 +38,7 @@ th {
 			
 			<tbody>
 				<tr>
-					<td>&nbsp;<i class="fas fa-lightbulb text-danger"></i>&nbsp;<a href="/notice/view?noticeno=2">문의사항 게시판 작성가이드</a></td>
+					<td>&nbsp;<i class="fas fa-lightbulb text-danger"></i>&nbsp;<a href="/notice/view?noticeno=1">문의사항 게시판 작성가이드</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -73,7 +73,7 @@ th {
 			<c:forEach items="${list }" var="board">
 				<tr>
 					<td class="view">${board.qnaNo }</td>					
-					<td class="view">
+					<td class="text-left view">
 						<c:if test="${sessionScope.adminLogin}">
 							<a href="/qna/view?qnaNo=${board.qnaNo}">${board.title }</a>
 						</c:if>

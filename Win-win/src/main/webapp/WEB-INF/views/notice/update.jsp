@@ -112,7 +112,14 @@ $(document).ready(function() {
 			alert("제목을 입력하세요");
 			$("#title").focus();
 		}else if($("#content").val()=="<br>"||$("#content").val()==""){
-			alert("내용을 입력하세요");
+			alert("내용을 입력하세요");			
+		}else if($("#title").val().length > 100){	
+			alert("글자 제한 수를 초과했습니다.제목(100자 이내)");
+			$("#title").focus();
+		}else if($("#content").val().length > 1333){
+			console.log($("#content").val().length);
+			console.log($("#content").val());
+			alert("글자 제한 수를 초과했습니다.본문(1333자 이내)");
 		}else{
 			submitContents($(this));
 			$("form").submit();
