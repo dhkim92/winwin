@@ -1,8 +1,8 @@
 package winwin.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +30,9 @@ public class JobopenManageController {
 	public void manage(Model model,
 			@RequestParam(required=false, defaultValue="0") int curPage,
 			@RequestParam(required=false, defaultValue="15") int listCount,
-			@RequestParam(required=false, defaultValue="10") int pageCount) {			
-
+			@RequestParam(required=false, defaultValue="10") int pageCount,
+			HttpSession session) {			
+		session.setAttribute("insertDetail", true);
 	}
 	
 	

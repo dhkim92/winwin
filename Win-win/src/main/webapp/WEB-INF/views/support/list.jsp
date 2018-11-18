@@ -764,11 +764,11 @@ function paging (page, limit, totalCount, pageCount, callback) {
 							<td class="text-center" style="width: 25%"><select multiple
 								class="form-control searchSelect" id="academiccareer"
 								forId="academiccareerbox" form="search" name="academiccareer">
-									<option value="4">대학교졸업(4년)</option>
-									<option value="3">대학교졸업(2~3년)</option>
-									<option value="5">석사 이상</option>
-									<option value="2">고등학교 졸업</option>
-									<option value="1">학력 무관</option>
+									<option value="대학교졸업(4년)">대학교졸업(4년)</option>
+									<option value="대학교졸업(2~3년)">대학교졸업(2~3년)</option>
+									<option value="석사 이상">석사 이상</option>
+									<option value="고등학교 졸업">고등학교 졸업</option>
+									<option value="학력 무관">학력 무관</option>
 							</select></td>
 							<td class="text-center" style="width: 10%"><select multiple
 								class="form-control searchSelect" id="credit" forId="creditbox"

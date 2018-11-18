@@ -83,7 +83,6 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	@Override
 	public void emailupdate(int passNo) {
 		dao.emailupdate(passNo);
-		System.out.println("됨?");
 		
 	}
 

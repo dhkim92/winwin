@@ -33,7 +33,7 @@
     </select>
     
     <sql id="selectSupportBoard">
-       SELECT 
+       SELECT distinct
           job.jobOpenNo,
           sup.supportDate,
           sup.status, 
@@ -52,6 +52,7 @@
           univ.jobopenno = job.jobopenno and
           usr.jobopenno = job.jobopenno and
           usr.jobopenno = lang.jobopenno and
+          usr.userid = lang.userid and
           lang.testname = 'TOEIC'
           
           <!-- 경력 ( 신입, 경력 ) -->
@@ -68,11 +69,11 @@
          </if>
          <!-- 학점 -->
          <if test="credit != null and credit !=''">
-            AND univ.univscore > #{credit}
+            AND univ.univscore >= #{credit}
          </if>
          <!-- 토익 -->
          <if test="language != null and language != ''">
-            AND lang.score > #{language}
+            AND lang.score >= #{language}
          </if>
          <!-- 처리상태 -->
          <if test="status != null and status != ''">
