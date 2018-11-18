@@ -74,9 +74,10 @@ public class JobopenController {
 	}
 	
 	@RequestMapping(value="/basicUpdate", method=RequestMethod.GET)
-	public void basicUpdate(int jobopenNo, Model model) {
+	public void basicUpdate(int jobopenNo, Model model, HttpSession session) {
 		
 		JobopenBasic basic = new JobopenBasic();
+		session.setAttribute("jobopen", jobopenNo);
 		basic.setJobopenNo(jobopenNo);
 		
 		model.addAttribute("basic", jobopenService.getBasic(basic));

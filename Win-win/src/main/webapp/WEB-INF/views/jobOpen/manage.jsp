@@ -381,7 +381,7 @@ td {
 		});
 		
 		// 공고 삭제 버튼 이벤트
-		$('.deleteJob').on('click', function(){
+		$('.here').on('click','.deleteJob', function(){
 			jobopenno = $(this).parent().parent().children().eq(0).text();
 			$("#myModal").css("display", "block");
 			$("#idChecking").html("정말 삭제하시겠습니까?");
