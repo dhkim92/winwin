@@ -76,7 +76,7 @@ $(document).ready(function() {
 			if($('#college').val() == "학교명을 선택하세요") {
 				$('#colName').val(write);
 				modal.style.display = "none";
-				$("#colName").val('');
+				$("#writeCollege").val('');
 				
 			} else {
 				$('#colName').val(select);
