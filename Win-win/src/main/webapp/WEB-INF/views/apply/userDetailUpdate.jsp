@@ -113,26 +113,26 @@ $(document).ready(function() {
 	
 	for(var i=0; i<taskClass.length; i++) {
 		var task1 = taskClass[i]. value;
-// 		console.log("task1 : " + task1);
+		console.log("task1 : " + task1);
 		
 		if(task1==realTask) {
-// 			console.log("입장");
-			$("#taskSel").find("option[value="+realTask+"]").attr("selected","selected");
+			console.log("입장");
+			$("#taskSel").find("option[value='${userDetail.task}']").attr("selected","selected");
 		}
 		
 	}
 	
 	//보훈, 비보훈
 	var realVeteran = "${userDetail.veteran}";
-// 	console.log("realVeteran : " + realVeteran);
+	console.log("realVeteran : " + realVeteran);
 	
-	$('input:radio[name="veteran"][value="'+realVeteran+'"]').prop('checked', true);
+	$('input:radio[name="veteran"][value="${userDetail.veteran}"]').prop('checked', true);
 	
 	//장애, 비장애
 	var realDisable = "${userDetail.disable}";
-// 	console.log("realDisable : " + realDisable);
+	console.log("realDisable : " + realDisable);
 	
-	$('input:radio[name="disable"][value="'+realDisable+'"]').prop('checked', true);
+	$('input:radio[name="disable"][value="${userDetail.disable}"]').prop('checked', true);
 	
 
 	//저장버튼 클릭 시 validation & submit

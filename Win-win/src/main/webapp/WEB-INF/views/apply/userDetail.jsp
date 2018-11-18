@@ -99,6 +99,8 @@ $(document).ready(function() {
 		var zipCode = $("#zipCode").val();
 		var address = $("#address").val();
 		var addressDetail = $("#addressDetail").val();
+		var phoneNum2 = $("#phoneNum2").val();
+		var phoneNum3 = $("#phoneNum3").val();
 		var phoneNum = $("#phoneNum").val();
 		var veteran = $("#veteran").val();
 		var notVeteran = $("#notVeteran").val();
@@ -115,9 +117,12 @@ $(document).ready(function() {
 		} else if(zipCode == "" || address == "" || addressDetail == "" ) {
 			alert("주소 입력사항을 모두 입력하세요.");
 			$("#addressDetail").focus();
-		} else if(phoneNum) {
+		} else if(phoneNum1 == "") {
 			alert("긴급연락처를 입력하세요.");
-			$("#phoneNum").focus();
+			$("#phoneNum1").focus();
+		} else if(phoneNum2 == "") {
+			alert("긴급연락처를 입력하세요.");
+			$("#phoneNum2").focus();
 		} else if(document.getElementById("veteran").checked!=true && document.getElementById("notVeteran").checked!=true) {
 			alert("보훈여부를 입력하세요.");
 			$("#veteran").focus();
