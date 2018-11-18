@@ -175,7 +175,9 @@
             AND sup.userid = #{userId}
 	</select>
 	
-	
+	<update id="statusupdate" parameterType="map">
+	update support set pass=#{status}, status='처리 후' where userId=#{userId} and jobopenNo=#{jobopenNo}
+	</update>
 	
 	
 	

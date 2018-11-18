@@ -26,7 +26,7 @@ public interface SupportBoardService {
 
 	public void emailupdate(int passNo);
 	
-	public void statusupdate(int jobOpenNo, String userId, String status);
+	public void statusupdate(int jobopenNo, String userId, String status);
 	
 	public Material download(Material file);
 	

@@ -145,8 +145,15 @@ public class SupportBoardServiceImpl implements SupportBoardService{
 	}
 
 	@Override
-	public void statusupdate(int jobOpenNo, String userId, String status) {
-		dao.statusupdate(jobOpenNo, userId, status);
+	public void statusupdate(int jobopenNo, String userId, String status) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("jobopenNo", jobopenNo);
+		map.put("userId", userId);
+		map.put("status", status);
+		
+		dao.statusupdate(map);
 		
 	}
 

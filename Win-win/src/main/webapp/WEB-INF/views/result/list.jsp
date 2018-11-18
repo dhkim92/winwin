@@ -246,8 +246,20 @@ function resultList(page) {
 					html += '	<td class="text-center align-middle">' + item.task + '</td>';
 					html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
 					html += '	<td class="text-center align-middle username">' + item.username + '</td>';
+					if(item.pass=='합격'){
+					html += '	<td class="text-center pass"><span class="badge badge-success" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.pass + '</span></td>';
+					} else if(item.pass=='불합격'){
+					html += '	<td class="text-center pass"><span class="badge badge-danger" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.pass + '</span></td>';
+					} else {
 					html += '	<td class="text-center pass"><span class="badge badge-secondary" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.pass + '</span></td>';
+					}
+					if(item.emailSend=='발송'){
+					html += '	<td class="text-center emailsend"><span class="badge badge-info" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.emailSend + '</span></td>';
+					} else if(item.emailSend=='미발송'){
+					html += '	<td class="text-center emailsend"><span class="badge badge-warning" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.emailSend + '</span></td>';
+					} else {
 					html += '	<td class="text-center emailsend"><span class="badge badge-secondary" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.emailSend + '</span></td>';
+					}
 					html += '	<td hidden class="userId">' + item.userId + '</td>';
 					html += '	<td hidden class="passNo">' + item.passNo + '</td>';
 					html += '</tr>';

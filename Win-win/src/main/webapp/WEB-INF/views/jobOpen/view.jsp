@@ -225,14 +225,16 @@
 				<c:if test="${adminLogin}">
 				<a href="/jobOpen/delete?boardNo=${basic.jobopenNo}"><button id="btnDel" type="button" class="btn btn-sm btn-primary ml-3">삭제</button></a>
 				</c:if>
-				<c:if test="${today > end}">
-				<button type="button" class="btn btn-secondary btn-sm ml-3" onclick="selectsubmit();" disabled="disabled">지원하기</button>
-				</c:if>
-				<c:if test="${today <= end}">
-				<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();" >지원하기</button>
-				</c:if>
-				<c:if test="${basic.allOpen ne '0'}">
-				<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();" >지원하기</button>
+				<c:if test="${empty adminLogin }">
+					<c:if test="${today > end}">
+					<button type="button" class="btn btn-secondary btn-sm ml-3" onclick="selectsubmit();" disabled="disabled">지원하기</button>
+					</c:if>
+					<c:if test="${today <= end}">
+					<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();" >지원하기</button>
+					</c:if>
+					<c:if test="${basic.allOpen ne '0'}">
+					<button type="button" class="btn btn-primary btn-sm ml-3" onclick="selectsubmit();" >지원하기</button>
+					</c:if>
 				</c:if>
 			</div>
 		</div>
@@ -338,6 +340,7 @@ function selectsubmit(){
 		        			
 		        			btnClose.onclick = function() {
 		        			    modal.style.display = "none";
+		        			    location.href="/user/login";
 		        			}
 		        			
 		        			$("#ModalContent").html("로그인이 필요합니다")

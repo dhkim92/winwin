@@ -117,4 +117,36 @@ public class SupportBoardController {
 		
 		return m;
 	}
+	
+	@ResponseBody
+	@PostMapping(value="/support/pass")
+	public Map<String, Object> pass(
+			@RequestParam(value="userId") String userId,
+			@RequestParam(value="jobopenNo") int jobopenNo,
+			@RequestParam(value="status") String status) {
+		
+		System.out.println(userId);
+		System.out.println(jobopenNo);
+		System.out.println(status);
+		Map<String, Object> map = new HashMap<>();
+		service.statusupdate(jobopenNo, userId, status);
+		
+		return map;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

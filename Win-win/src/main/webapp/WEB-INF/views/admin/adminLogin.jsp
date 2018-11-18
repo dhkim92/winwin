@@ -15,34 +15,6 @@
 
 </style>
 
-<div class="container">
-	<div class="mt-4">	
-		<p class="font-weight-bold h1"><a href="/main/adminmain" style="color:black; text-decoration: none">WIN-WIN</a></p>
-		
-		<ul class="nav justify-content-end mb-2" >	
-		  <li class="nav-item">
-		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="/support/list" style="text-decoration: none; color: black;">지원현황</a></div>
-		  </li>
-		  <li class="nav-item">
-		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="/admin/chart" style="text-decoration: none; color: black;">통계관리</a></div>
-		  </li>
-		  <li class="nav-item">
-		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="/result/list" style="text-decoration: none; color: black;">지원결과관리</a></div>
-		  </li>
-		  <li class="nav-item">
-		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="/notice/list" style="text-decoration: none; color: black;">공지사항관리</a></div>
-		  </li>
-		  <li class="nav-item">
-		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="#" style="text-decoration: none; color: black;">채용공고관리</a></div>
-		  </li>
-		  <li class="nav-item">
-		    <div class="font-weight-bold ml-3" style="cursor: pointer"><a href="/qna/list" style="text-decoration: none; color: black;">문의사항관리</a></div>
-		  </li>
-		</ul>
-		
-		<div style="height:5px; background-color: #376092" ></div>
-	</div>
-</div>
 
 <div class="container">
 <div class="container">

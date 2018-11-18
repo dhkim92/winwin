@@ -154,7 +154,7 @@
 				$.each(result.list, function(i, item) {
 					var html = '<tr>';
 						html += '	<th scope="row" class="text-center align-middle">'+ (i + 1) + '</th>';
-						html += '	<td class="text-center align-middle titleBtn" userId="' + item.userId + '" jobNo="' + item.jobOpenNo + '" style="cursor:pointer">'+ item.title + '</td>';
+						html += '	<td class="text-center align-middle titleBtn" status="'+item.status+'" userId="' + item.userId + '" jobNo="' + item.jobOpenNo + '" style="cursor:pointer">'+ item.title + '</td>';
 						html += '	<td class="text-center align-middle">'+ item.task + '</td>';
 						html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
 						html += '	<td class="text-center align-middle">' + item.username + '</td>';
@@ -182,7 +182,8 @@
 				
 				var param = {
 						userId 	: $(this).attr('userId'),
-						jobopenNo 	: $(this).attr('jobNo')
+						jobopenNo 	: $(this).attr('jobNo'),
+						status : $(this).attr('status')
 				};
 				
 				$.post('/support/detail', param, function (result) {
@@ -402,7 +403,7 @@
 				});
 				
 				$('#checkModal').show();
-				titleModal();
+				titleModal(param);
 			});
 		});
 	}
@@ -476,8 +477,10 @@
 		}
 	}
 
-	function titleModal() {
+	function titleModal(param) {
 		//Get the modal
+		
+		
 		var modal = document.getElementById('checkModal');
 		// Get the button that opens the modal
 		var btn = document.getElementsByClassName("titleBtn");
@@ -490,6 +493,16 @@
 		var modalPass = document.getElementById("modalPass");
 		var modalFail = document.getElementById("modalFail");
 
+		if(param.status=='처리 후'){
+			modalPass.disabled = true;
+			modalFail.disabled = true;
+			$('#afterCheck').html('이미 처리된 지원입니다.');
+		} else {
+			modalPass.disabled = false;
+			modalFail.disabled = false;
+			
+		}
+		
 		// When the user clicks on the button, open the modal 
 		for (var i = 0; i < btn.length; i++) {
 			btn[i].onclick = function() {
@@ -505,12 +518,12 @@
 			}
 
 			modalPass.onclick = function() {
-				passModal();
+				passModal(param);
 
 			}
 
 			modalFail.onclick = function() {
-				failModal();
+				failModal(param);
 			}
 
 			// When the user clicks anywhere outside of the modal, close it
@@ -522,7 +535,7 @@
 		}
 	}
 
-	function passModal() {
+	function passModal(param) {
 		// Get the modal
 		var modal = document.getElementById("passModal");
 
@@ -549,7 +562,26 @@
 		}
 
 		btnPass.onclick = function() {
-			modal.style.display = "none";
+			console.log("합격 버튼");
+			$.ajax({
+				type:'post',
+				url:'/support/pass',
+				data:{
+					userId : param.userId,
+					jobopenNo : param.jobopenNo,
+					status : '합격'
+				},
+				success:function(res){
+					console.log("합격처리 완료");
+					alert("합격 처리되었습니다!!");
+					modal.style.display = "none";
+					document.getElementById('checkModal').style.display='none';
+					
+					supportList();
+				}
+			});
+			
+			
 		}
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
@@ -559,7 +591,7 @@
 		}
 	}
 
-	function failModal() {
+	function failModal(param) {
 		// Get the modal
 		var modal = document.getElementById("failModal");
 
@@ -585,7 +617,26 @@
 		}
 
 		btnFail.onclick = function() {
-			modal.style.display = "none";
+			console.log("불합격");
+			
+			$.ajax({
+				type:'post',
+				url:'/support/pass',
+				data:{
+					userId : param.userId,
+					jobopenNo : param.jobopenNo,
+					status : '불합격'
+				},
+				success:function(res){
+					console.log("불합격 처리 완료");
+					alert("불합격 처리되었습니다!!");
+					modal.style.display = "none";
+					document.getElementById('checkModal').style.display='none';
+					supportList();
+				}
+			});
+			
+			
 		}
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
@@ -954,12 +1005,25 @@ function paging (page, limit, totalCount, pageCount, callback) {
 <div class="modalCheck" id="checkModal">
 	<div class="modal-contentCheck">
 
-<div class="col-12 row ml-1" id="CloseMenu">
-		<h3 class="mt-3 font-weight-bold">지원서 미리보기</h3>
-				<span class="d-flex justify-content-end mt-1" id="fixedSpan" style="width:565px"><span
-					id="titleClose" class="closeCheck">&times;</span></span>
-		<hr class="ml-1" style="border: solid 2px #376092;"> 
+<div class="col-12 row ml-1" style="border-bottom: solid 2px #376092; background-color: white;" id="CloseMenu">
+		
+				<div class="d-flex justify-content-between mt-1" id="fixedSpan" style="width:100%">
+					<h3 class="mt-3 font-weight-bold float">지원서 미리보기</h3>
+					<span id="titleClose" class="closeCheck">&times; </span>
+				</div>
+		<div class="container">
+			<div class="col-12 p-0 d-flex justify-content-center">
+				<button class="btn btn-primary font-weight-bold mr-4"
+					style="width: 80px; background-color: #376092" id="modalPass">합격</button>
+				<button class="btn btn-danger font-weight-bold" style="width: 80px;"
+					id="modalFail">불합격</button>
+			</div>
+			<div id="afterCheck" class="text-center mt-1 text-bold">
+				
+			</div>
 		</div>
+<!-- 		<hr class="ml-1" style="border: solid 2px #376092;">  -->
+</div>
 		<br>
 
 		<div class="container mt-5">
@@ -1221,19 +1285,21 @@ function paging (page, limit, totalCount, pageCount, callback) {
 			<h6 class="mt-5 font-weight-bold">5. 보유기술 및 경험직무 (구체적으로 기술)</h6>
 			<br>
 			<textarea maxlength="500"
-				style="width: 100%; resize: none; height: 250px;" readonly id="content5"></textarea>
+				style="width: 100%; resize: none; height: 250px;" readonly id="content5" class="mb-5"></textarea>
 
 		</div>
 
-		<div class="container">
-			<div class="col-12 mt-5 p-0 d-flex justify-content-center">
-				<button class="btn btn-primary font-weight-bold mr-4"
-					style="width: 80px; background-color: #376092" id="modalPass">합격</button>
-				<button class="btn btn-danger font-weight-bold" style="width: 80px;"
-					id="modalFail">불합격</button>
-			</div>
-			<br> <br> <br>
-		</div>
+<!-- 		<div class="container"> -->
+<!-- 			<div class="col-12 mt-5 p-0 d-flex justify-content-center"> -->
+<!-- 				<button class="btn btn-primary font-weight-bold mr-4" -->
+<!-- 					style="width: 80px; background-color: #376092" id="modalPass">합격</button> -->
+<!-- 				<button class="btn btn-danger font-weight-bold" style="width: 80px;" -->
+<!-- 					id="modalFail">불합격</button> -->
+<!-- 			</div> -->
+<!-- 			<div id="afterCheck" class="text-center mt-3 text-bold"> -->
+				
+<!-- 			</div> -->
+<!-- 		</div> -->
 
 	</div>
 </div>
