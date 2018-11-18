@@ -419,6 +419,31 @@
 			}
 		});
 	});
+	
+	$(function() {
+		$("#pwdSuccess").hide();
+		$("#pwdFail").hide();
+		$("#pwd").keyup(function() {
+			var pwd1 = $("#pwd").val();
+			var pwd2 = $("#pwConfirm").val();
+			if (pwd2 == "") {
+				$("#pwdSuccess").hide();
+				$("#pwdFail").hide();
+			} else if (pwd1 != "" || pwd2 != "") {
+				if (pwd1 == pwd2) {
+					$("#pwdSuccess").show();
+					$("#pwdFail").hide();
+					$("#pwConfirm").removeClass("is-invalid")
+					$("#joinOk").removeAttr("disabled");
+				} else {
+					$("#pwdSuccess").hide();
+					$("#pwdFail").show();
+					$("#pwConfirm").addClass("is-invalid")
+					$("#joinOk").attr("disabled", "disabled");
+				}
+			}
+		});
+	});
 
 
 	function han(obj) {
