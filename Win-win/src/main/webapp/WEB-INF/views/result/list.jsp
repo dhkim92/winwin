@@ -238,6 +238,7 @@ function resultList(page) {
 			//목록 초기화
 			$('#resultTable tbody').empty();
 			//목록 생성
+			console.log(result.list);
 			$.each(result.list, function (i, item) {
 				var html  = '<tr>';
 					html += '<td scope="row" class="text-center align-middle"><input type="checkbox" name="checkOne" aria-label="Checkbox for following text input"style="width: 18px; height: 18px;" class="align-middle"></td>';
@@ -246,16 +247,16 @@ function resultList(page) {
 					html += '	<td class="text-center align-middle">' + item.task + '</td>';
 					html += '	<td class="text-center align-middle">' + item.supportDate + '</td>';
 					html += '	<td class="text-center align-middle username">' + item.username + '</td>';
-					if(item.pass=='합격'){
+					if(item.pass=="합격"){
 					html += '	<td class="text-center pass"><span class="badge badge-success" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.pass + '</span></td>';
-					} else if(item.pass=='불합격'){
+					} else if(item.pass=="불합격"){
 					html += '	<td class="text-center pass"><span class="badge badge-danger" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.pass + '</span></td>';
 					} else {
 					html += '	<td class="text-center pass"><span class="badge badge-secondary" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.pass + '</span></td>';
 					}
-					if(item.emailSend=='발송'){
+					if(item.emailSend=="발송"){
 					html += '	<td class="text-center emailsend"><span class="badge badge-info" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.emailSend + '</span></td>';
-					} else if(item.emailSend=='미발송'){
+					} else if(item.emailSend=="미발송"){
 					html += '	<td class="text-center emailsend"><span class="badge badge-warning" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.emailSend + '</span></td>';
 					} else {
 					html += '	<td class="text-center emailsend"><span class="badge badge-secondary" style="height:32px; padding-top:0.8em; font-size: 0.8203125rem;">' + item.emailSend + '</span></td>';
@@ -263,7 +264,6 @@ function resultList(page) {
 					html += '	<td hidden class="userId">' + item.userId + '</td>';
 					html += '	<td hidden class="passNo">' + item.passNo + '</td>';
 					html += '</tr>';
-					
 				$('#resultTable tbody').append(html);
 			});
 			
@@ -416,8 +416,8 @@ function portModal() {
 					location.href="/result/list";
 				});
 			}
-			
-			if(pass[i]=='처리 전'){
+			console.log(pass[i]);
+			if(pass[i]=='처리 전 '){
 				var modald = document.getElementById("portModal");
 			 	modald.style.display = "block";
 				var spand = document.getElementsByClassName("close")[0];
@@ -514,7 +514,8 @@ function portModal() {
 			
 			$('#modalcontent').html("잠시만 기다려 주십시오. . . . ");
 			$('#btnClose').attr("disabled", "disabled");
-		 
+		
+			
 		 $.ajax({
 	         type:"post",
 	         url:"/result/emailsend",

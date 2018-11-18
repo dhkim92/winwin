@@ -446,10 +446,20 @@
 				},
 				dataType:'json',
 				success: function(file){
+					console.log(file);
+					if(file.file==null){
+						$('#portModal').css('display','block');
+						$('#fileName').val("포트폴리오 없음.");
+						$('#btnDown').prop('disabled', true);
+					} else {
+
+						console.log(file.file.originName);
+						$('#portModal').css('display','block');
+						$('#fileName').val(file.file.originName);
+						$('#btnDown').prop('disabled', false);
+					}
 					
-					console.log(file.file.originName);
-					$('#portModal').css('display','block');
-					$('#fileName').val(file.file.originName);
+					
 					
 				}
 			});
@@ -500,7 +510,7 @@
 		} else {
 			modalPass.disabled = false;
 			modalFail.disabled = false;
-			
+			$('#afterCheck').html('');
 		}
 		
 		// When the user clicks on the button, open the modal 
@@ -892,7 +902,7 @@ function paging (page, limit, totalCount, pageCount, callback) {
 			<div class="mt-4" style="text-align:center;">
 				<span class="font-weight-bold" id="pModal">첨부파일 : </span>
 				<input type="text" id="fileName" value="${file.originName }" readOnly>
-				<button type="button" class="btn btn-secondary" onclick="downFile();">다운로드</button>
+				<button type="button" id="btnDown"class="btn btn-secondary" onclick="downFile();">다운로드</button>
 			</div>
 			<script>
 			

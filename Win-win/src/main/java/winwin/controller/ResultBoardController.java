@@ -76,6 +76,8 @@ public class ResultBoardController {
 		System.out.println(userId);
 		
 		for(int i=0; i<userId.size();i++) {
+			System.out.println("들어옴?");
+			System.out.println(pass.get(i));
 			if(pass.get(i).equals("합격")) {
 				mail.setSender(userId.get(i));
 				mail.setTitle(username.get(i)+"님의 지원결과 메일입니다.");

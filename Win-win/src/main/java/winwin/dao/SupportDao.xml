@@ -104,7 +104,10 @@
 		    mem.username,
 		    sup.pass,
 		    sup.emailsend,
-		    usr.task
+		    usr.task,
+		    sup.userid,
+		    sup.jobopenno,
+		    sup.passNo
 		from 
 		    jobopenBasic job,
 		    support sup,
