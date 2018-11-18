@@ -3,7 +3,8 @@ package winwin.controller;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import winwin.dao.ChartDao;
 import winwin.dto.JobopenBasic;
 import winwin.dto.NoticeBoard;
 import winwin.dto.QnaBoard;
 import winwin.service.ApplyMenuService;
-import winwin.service.ChartService;
 import winwin.service.JobopenService;
 import winwin.service.MainService;
 import winwin.util.Paging;
@@ -34,10 +33,11 @@ public class MainController {
 			Model model,
 			@RequestParam(required=false, defaultValue="0") int curPage,
 			@RequestParam(required=false, defaultValue="10") int listCount,
-			@RequestParam(required=false, defaultValue="10") int pageCount) {			
+			@RequestParam(required=false, defaultValue="10") int pageCount,
+			HttpSession session) {			
 		Paging paging = jobopenService.getPaging(curPage, listCount, pageCount);
 		model.addAttribute("paging", paging);
-		
+		session.removeAttribute("adminLogin");
 		String status = "메인";
 		paging.setStatus(status);
 		List<JobopenBasic> list = jobopenService.selectBasic(paging);
@@ -62,8 +62,8 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/adminmain", method=RequestMethod.GET)
-	public void adminmain(Model model) { 
-		
+	public void adminmain(Model model, HttpSession session) { 
+		session.removeAttribute("login");
 		
 		//채용공고 리스트 띄우기
 		List<JobopenBasic> applylist = mainService.getJobopenBasic();

@@ -118,7 +118,8 @@
 		<where>
 			mem.userid = sup.userid and
     		job.jobopenno = sup.jobopenno and
-    		usr.userid = mem.userid
+    		usr.userid = mem.userid and
+    		job.display = 1
 
 			<choose>
 				<when test="pass != null and pass != '' and fail != null and fail != ''">
@@ -160,7 +161,7 @@
 	</select>
 	
 	<select id="getTitle" resultType="winwin.dto.JobopenBasic">
-		SELECT title FROM jobopenbasic
+		SELECT title FROM jobopenbasic where display=1
 	</select>
 	
 	<update id="emailupdate" parameterType="int">

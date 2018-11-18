@@ -417,7 +417,7 @@ function portModal() {
 				});
 			}
 			console.log(pass[i]);
-			if(pass[i]=='처리 전 '){
+			if(pass[i]=='처리 전'){
 				var modald = document.getElementById("portModal");
 			 	modald.style.display = "block";
 				var spand = document.getElementsByClassName("close")[0];
