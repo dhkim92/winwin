@@ -206,19 +206,19 @@ function drawChart3() {
     data.addColumn('number', '지원자수');
     data.addColumn({type:'number', role: 'annotation'});
     data.addRows([
-      ['2016년 상반기', 780,780],
-      ['2016년 하반기', 997,997],
-      ['2017년 상반기', 860,860],
-      ['2017년 하반기', 1307,1307],
-      ['2018년 상반기', 923,923],
-      ['2018년 하반기', 1582,1582],
+        ['2016년 상반기', 82,82],
+        ['2016년 하반기', 78,78],
+        ['2017년 상반기', 144,144],
+        ['2017년 하반기', 121,121],
+        ['2018년 상반기', 158,158],
+        ['2018년 하반기',${sec18},${sec18}]
     ]);
 
     // Set chart options
     var options = {title:'분기별 지원자 현황',
                    width:330,
                    height:270,
-    				vAxis:{minValue:0, maxValue:1800},
+    				vAxis:{minValue:0, maxValue:200},
                     titleTextStyle:{color: '#376092', fontSize: 12, bold: true},
                     legend: {position: 'none'},
                     chartArea:{left:80,top:50,width:'70%',height:'50%'},

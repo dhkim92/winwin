@@ -23,6 +23,7 @@ public class ChartController {
 		map.put("age20l", service.ages20Hu());
 		map.put("age30s", service.ages30s());
 		map.put("age40s", service.ages40s());
+		map.put("eduno", service.eduno());
 		map.put("eduhigh", service.eduHigh());
 		map.put("educoll", service.eduColl());
 		map.put("eduuniv", service.eduUniv());

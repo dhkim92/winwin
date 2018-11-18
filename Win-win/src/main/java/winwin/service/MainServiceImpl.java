@@ -46,5 +46,10 @@ public class MainServiceImpl implements MainService {
 		return mainDao.countSupport();
 	}
 
+	@Override
+	public int getSec18() {
+		return mainDao.getSec18();
+	}
+
 	
 }

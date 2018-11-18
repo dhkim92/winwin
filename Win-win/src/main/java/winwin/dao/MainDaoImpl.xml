@@ -41,5 +41,9 @@
     	) A
 	where A.display =1
 	</select>
+	<select id="getSec18" resultType="int">
+	 	SELECT count(*)
+ 		FROM support
+	</select>
   
   </mapper>

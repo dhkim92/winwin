@@ -41,7 +41,7 @@ td {
 			
 			<tbody>
 				<tr>
-					<td>&nbsp;<i class="fas fa-lightbulb text-danger"></i>&nbsp;입사지원 작성가이드</td>
+					<td>&nbsp;<i class="fas fa-lightbulb text-danger"></i>&nbsp;<a href="/notice/view?noticeno=2">입사지원 작성가이드</a></td>
 				</tr>
 			</tbody>
 		</table>

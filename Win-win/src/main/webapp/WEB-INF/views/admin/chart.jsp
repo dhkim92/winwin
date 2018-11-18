@@ -89,6 +89,14 @@ tr,td{
 				</tr>
 				<tr>
 					<td>
+					학력무관
+					</td>
+				 	<td>
+				 	${map.eduno }
+					</td>
+				</tr>
+				<tr>
+					<td>
 					고등학교 졸업
 					</td>
 					<td>
@@ -233,7 +241,7 @@ function drawChart1() {
                 title: "WIN-WIN 연령별 지원자 현황",
                 width: 330,
                 height: 270,
-    			vAxis : {maxValue : 110 },
+    			vAxis : {maxValue : 80 },
                 bar: {groupWidth: "50%"},
                 legend: { position: "none" },
                 titleTextStyle:{color: 'black', fontSize: 20,bold: true},
@@ -250,13 +258,15 @@ function drawChart2() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', '학력');
     data.addColumn('number', '지원자수');
-    
+   
+    var eduno = ${map.eduno};
     var eduhigh = ${map.eduhigh};
     var educoll = ${map.educoll};
     var eduuniv = ${map.eduuniv};
     var edumd = ${map.edumd};
 
     data.addRows([
+      ['무관',eduno],
       ['고등학교 졸업',eduhigh],
       ['대학 2년제',educoll],
       ['대학 4년제',eduuniv],
@@ -269,7 +279,7 @@ function drawChart2() {
                    'height':270,
                    	'is3D':false,
                     'pieSliceText': 'label',
-                    'pieStartAngle': 100,
+                    'pieStartAngle': 90,
                     'chartArea':{left:20,top:50,width:'100%',height:'100%'},
                     'legend':{position: 'none', textStyle: {color: 'black', fontSize: 11},alignment : 'end'},
                     'titleTextStyle':{color: 'black', fontSize: 20,bold: true},

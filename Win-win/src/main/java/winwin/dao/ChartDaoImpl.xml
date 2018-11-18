@@ -32,36 +32,44 @@
  			JOIN userdetail USING(userid)) a
  		WHERE a.birth BETWEEN (to_char(sysdate,'YYYY')-48) AND (to_char(sysdate,'YYYY')-39)
  	</select>
+ 	<select id="eduno" resultType="int">
+ 	 	SELECT count(*)
+ 		FROM ( SELECT userid, count
+ 			FROM support 
+ 			JOIN member USING(userid)) a
+ 		WHERE SUBSTR(a.count,0,2) = '학력'
+ 	</select>
  	<select id="eduHigh" resultType="int">
  		SELECT count(*)
  		FROM ( SELECT userid, count
  			FROM support 
  			JOIN member USING(userid)) a
- 		WHERE a.count = 2		
+ 		WHERE SUBSTR(a.count,0,2) = '고등'		
  	</select>
  	 <select id="eduColl" resultType="int">
  		SELECT count(*)
  		FROM ( SELECT userid, count
  			FROM support 
  			JOIN member USING(userid)) a
- 		WHERE a.count = 3	
+ 		WHERE SUBSTR(a.count,0,2) = '대학' AND a.count LIKE '%2%'
  	</select>
  	 <select id="eduUniv" resultType="int">
  		SELECT count(*)
  		FROM ( SELECT userid, count
  			FROM support 
  			JOIN member USING(userid)) a
- 		WHERE a.count = 4	
+ 		WHERE SUBSTR(a.count,0,2) = '대학' AND a.count LIKE '%4%'
  	</select>
  	 <select id="eduMD" resultType="int">
  		SELECT count(*)
  		FROM ( SELECT userid, count
  			FROM support 
  			JOIN member USING(userid)) a
- 		WHERE a.count = 5		
+ 		WHERE SUBSTR(a.count,0,2) = '석사'		
  	</select>
  	<select id="second_18" resultType="int">
  		SELECT count(*)
  		FROM support
  	</select>
+
  </mapper>

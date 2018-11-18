@@ -80,4 +80,9 @@ public class ChartServiceImpl implements ChartService{
 		return dao.second_18();
 	}
 
+	@Override
+	public int eduno() {
+		return dao.eduno();
+	}
+
 }

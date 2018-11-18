@@ -9,7 +9,6 @@ import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,7 +110,6 @@ public class NoticeBoardController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
 				
 				//DB 업로드
 				Material file = new Material();

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import winwin.dao.ChartDao;
 import winwin.dto.JobopenBasic;
 import winwin.dto.NoticeBoard;
 import winwin.dto.QnaBoard;
 import winwin.service.ApplyMenuService;
+import winwin.service.ChartService;
 import winwin.service.JobopenService;
 import winwin.service.MainService;
 import winwin.util.Paging;
@@ -89,6 +91,11 @@ public class MainController {
 		//문의사항 리스트 띄우기 
 		List<QnaBoard> qnalist = mainService.getQnaBoard();
 		model.addAttribute("qnalist", qnalist);
+		
+		//차트 값 받기
+		int sec18 = mainService.getSec18();
+		model.addAttribute("sec18",sec18);
+
 
 		//Q&A 답변이 완료되지않은 문의사항 갯수세기 
 		 int commentCnt = mainService.countQnAUnanswered();
@@ -97,6 +104,7 @@ public class MainController {
 		 // 공고별 지원자 수
 		 List<JobopenBasic> jobopenbasic = mainService.countSupport();
 		 model.addAttribute("supportCnt", jobopenbasic);
+		 
 		 System.out.println(jobopenbasic);
 		
 	}

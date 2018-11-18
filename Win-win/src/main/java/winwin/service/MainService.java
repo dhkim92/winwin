@@ -15,5 +15,7 @@ public interface MainService {
 	public List getJobopenBasic();
 
 	public List countSupport();
+	
+	public int getSec18();
 
 }

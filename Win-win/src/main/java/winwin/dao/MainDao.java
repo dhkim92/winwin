@@ -16,4 +16,6 @@ public interface MainDao {
 
 	public List countSupport();
 	
+	public int getSec18();
+	
 }

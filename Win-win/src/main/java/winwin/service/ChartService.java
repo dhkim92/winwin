@@ -7,6 +7,7 @@ public interface ChartService {
 	public int ages30s();
 	public int ages40s();
 	
+	public int eduno();
 	public int eduHigh();
 	public int eduColl();
 	public int eduUniv();
