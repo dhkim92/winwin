@@ -26,7 +26,7 @@ $(document).ready(function() {
 			
 			if(cnt < 0) {
 				clearInterval(tid);
-// 				logout();
+				logout();
 			}
 		}, 1000);
 	}

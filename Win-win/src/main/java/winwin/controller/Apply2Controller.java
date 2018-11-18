@@ -211,8 +211,19 @@ public class Apply2Controller {
 			apply2Service.fileUpload(mat);
 		}
 		//------------------------------------
-		return "redirect:/apply/introduce?jobopenNo="+jobopenBasic.getJobopenNo();
-
+		
+		//introduce 카운트해서 redirect 정하기 
+		Introduce intro = new Introduce();
+		intro.setUserId((String)session.getAttribute("id"));
+		intro.setJobopenNo(jobopenBasic.getJobopenNo());
+		int countIntro = apply2Service.countIntro(intro);
+		
+		if(countIntro==1) {
+			return "redirect:/apply/introduceUpdate?jobopenNo="+jobopenBasic.getJobopenNo();
+		} else {
+			return "redirect:/apply/introduce?jobopenNo="+jobopenBasic.getJobopenNo();
+		}
+	
 	}
 		
 	@RequestMapping(value="/careerUpdate", method=RequestMethod.GET)

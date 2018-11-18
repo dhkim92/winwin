@@ -22,7 +22,6 @@ $(document).ready(function() {
 		tid = setInterval(function counter_run() {
 			document.all.counter.innerText = time_format(cnt);
 			cnt--;
-// 			console.log(cnt);
 			
 			if(cnt < 0) {
 				clearInterval(tid);

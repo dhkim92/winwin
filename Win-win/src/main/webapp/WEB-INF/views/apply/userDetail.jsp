@@ -118,10 +118,10 @@ $(document).ready(function() {
 		} else if(phoneNum) {
 			alert("긴급연락처를 입력하세요.");
 			$("#phoneNum").focus();
-		} else if(veteran == "" && notVeteran == "") {
+		} else if(document.getElementById("veteran").checked!=true && document.getElementById("notVeteran").checked!=true) {
 			alert("보훈여부를 입력하세요.");
-			$("#disable").focus();
-		} else if(disable == "" && notDisable == ""){
+			$("#veteran").focus();
+		} else if(document.getElementById("disable").checked!=true && document.getElementById("notDisable").checked!=true){
 			alert("장애여부를 입력하세요.");
 			$("#disable").focus();
 		} else if(task == "0") {
@@ -132,12 +132,12 @@ $(document).ready(function() {
 			var phoneNum2 = $("#phoneNum2").val();
 			var phoneNum3 = $("#phoneNum3").val();
 			
-			var patternE = /^[a-zA-Z\s]$/ // 영문, 띄어쓰기만 허용
+			var patternE = /^[a-zA-Z\s]*$/ // 영문, 띄어쓰기만 허용
 			var patternN = /^[0-9]{8}$/ //숫자 8자리만 가능
 			var patternP = /^[0-9]{3,4}$/ //숫자 3~4자리만 가능
 			
 			console.log(eName);
-			if(patternE.test(eName)) {
+			if(!patternE.test(eName)) {
 				alert("성명을 영어로 기재하십시오.");
 				$("#eName").val('');
 				$("#eName").focus();
@@ -167,6 +167,8 @@ $(document).ready(function() {
 				
 				$("#task").val(task);
 				
+				console.log("veteran : " + veteran);
+				console.log("notVeteran : " + notVeteran);
 				$("#userDetailForm").submit();	
 				
 			}
@@ -330,7 +332,7 @@ $(document).ready(function() {
 			<div style="width: 50%;" class="input-group">
      			<input name="disable" id="disable" class="m-1 align-middle" type="radio" value="장애" aria-label="Radio button for following text input" />
   				<label for="disable" class="mr-5 mb-0" style="width: 100px ;">장애</label>
-     			<input name="disable" id="notDisable" class="m-1 align-middle" type="radio" value="비장애" aria-label="Radio button for following text input" />
+     			<input name="disable" id="notDisable" class="m-1 align-middle" type="radio" value="비장애" aria-label="Radio button for following text input"/>
 				<label for="notDisable" class="mr-5 mb-0" style="width: 100px ;">비장애</label>	
 			</div>
 		</td>		
