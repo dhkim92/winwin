@@ -331,7 +331,9 @@ function printComments(data){
 	$("#commentsBox").html("");
 	$(data.comments).each(function(){
 		var strArr = this.id.split("_");
+		console.log(this.writedate);
 		var date = formatDate(Date(this.writedate));
+		console.log(date);
 		if(strArr[0]=="관리자"){
 			var content = "<table class='table table-bordered mb-0'><tr><td width='10%' class='text-center align-middle text-primary font-weight-bold'>"+"관리자"+"</td><td width='85%' class='align-middle'><div class='text-muted'><small>"+date+"</small></div><p class='col-12 mb-0'>"+this.content+"</p></td><td width='5%' class='align-middle p-2'><div class='col-12 text-right p-0'><button class='btn btn-primary' onclick='delComment(event);'>삭제</button><input type='hidden' value='"+ this.commentNo+ "'/></div></td></tr></table>";
 		}else{
