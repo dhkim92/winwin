@@ -158,7 +158,7 @@ function validateEmail(userid) {
 
 //비밀번호 형식 체크
 function validatePwd(chpwd) {
-	var filter = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,16}$/;
+	var filter = /(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*]).{8,16}$/;
 	if (filter.test(chpwd)) {
 	return true;
 } else {
