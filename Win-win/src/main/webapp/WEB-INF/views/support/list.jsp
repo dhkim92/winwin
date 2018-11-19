@@ -738,7 +738,7 @@ function paging (page, limit, totalCount, pageCount, callback) {
 							<th class="text-center">경력</th>
 							<th class="text-center">고용형태</th>
 							<th class="text-center">학력</th>
-							<th class="text-center">학점</th>
+							<th class="text-center">대학 학점</th>
 							<th class="text-center">TOEIC</th>
 							<th class="text-center">처리상태</th>
 
