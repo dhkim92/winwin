@@ -48,7 +48,6 @@
        <where>
           usr.userid = mem.userid and
           usr.userid = sup.userid and
-          usr.userid = univ.userid and
           univ.jobopenno = job.jobopenno and
           usr.jobopenno = job.jobopenno and
           usr.jobopenno = lang.jobopenno and
