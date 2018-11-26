@@ -1,10 +1,10 @@
-"# Win-win" 
+# Win-win 
 
 **Reqruit Web Solution for small business
-
 from KH-Final project
 
-**Dev Env.
+---------------
+## 개발환경 
 
 - Server
    - window 10 pro
@@ -29,7 +29,7 @@ from KH-Final project
    - MyBatis 3
    - JSP
 
-**Contacts
+## Contacts
 
 - Team Win-win
 - Leader : Donghyun Kim dhkim9294@gmail.com
