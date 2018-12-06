@@ -3,7 +3,7 @@
 **Reqruit Web Solution for small business
 from KH-Final project
 
----------------
+--------------- 
 ```
 최대한 실무중심의 기술을 많이 이용하는 것을 목표로 프로젝트를 진행하였습니다. 
 AJAX를 적극 활용하였고 다중 검색을 구현함에 쿼리에 대한 자신감이 많이 생겼습니다. 
