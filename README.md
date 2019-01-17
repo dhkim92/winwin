@@ -3,9 +3,16 @@
 **Reqruit Web Solution for small business
 from KH-Final project
 
----------------  
+---------------
+기업용 채용 웹 사이트입니다.
+관리자(인사담당자)는 채용공고를 직접 등록할 수 있고 지원자의 입사지원서를 확인하여 합, 불합격까지 이메일로 보낼 수 있습니다.
+사용자(지원자)는 입사지원서를 양식에 맞게 작성 뒤 입사지원할 수 있습니다.
+---------------
+
+// 첨부사진1
 ![winwin1](https://user-images.githubusercontent.com/41541789/51312205-19ada780-1a8e-11e9-92f2-d491f6f52a1d.png)
 
+// 첨부사진2
 ![winwin2](https://user-images.githubusercontent.com/41541789/51312214-1dd9c500-1a8e-11e9-93e0-f3d073f9e508.png)
 
 ``` 
